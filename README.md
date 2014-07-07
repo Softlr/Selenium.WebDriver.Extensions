@@ -21,5 +21,5 @@ using By = Selenium.WebDriver.Extensions.By;
 
 Invoke jQuery selectors on the WebDriver.
 ```
-Driver.FindElements(By.JQuerySelector("input:visible"))
+driver.FindElements(By.JQuerySelector("input:visible"))
 ```
