@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Selenium.WebDriver.Extensions</id>
+        <version>0.1</version>
+        <title>Selenium WebDriver Extensions</title>
+        <authors>Lukasz Rajchel</authors>
+        <licenseUrl>https://github.com/RaYell/selenium-webdriver-extensions/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/RaYell/selenium-webdriver-extensions</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Extensions for Selenium WebDriver including jQuery selector support for FindElement and FindElements methods.</description>
+        <tags>selenium, webdriver, jquery</tags>
+    </metadata>
+    <files>
+        <file src="Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\Selenium.WebDriver.Extensions.dll" />
+    </files>
+</package>
