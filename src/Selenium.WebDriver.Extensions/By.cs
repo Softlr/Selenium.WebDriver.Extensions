@@ -1,4 +1,4 @@
-﻿namespace SeleniumHelpers
+﻿namespace Selenium.WebDriver.Extensions
 {
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/>.

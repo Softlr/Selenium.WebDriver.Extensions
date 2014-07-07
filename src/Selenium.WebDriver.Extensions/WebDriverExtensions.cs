@@ -1,4 +1,4 @@
-﻿namespace SeleniumHelpers
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;

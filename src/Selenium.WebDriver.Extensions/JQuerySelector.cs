@@ -1,4 +1,4 @@
-﻿namespace SeleniumHelpers
+﻿namespace Selenium.WebDriver.Extensions
 {
     /// <summary>
     /// The Selenium selector for jQuery.
