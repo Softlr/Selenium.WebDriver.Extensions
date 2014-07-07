@@ -10,9 +10,9 @@
         /// </summary>
         /// <param name="selector">The jQuery selector.</param>
         /// <returns>The selenium selector.</returns>
-        public static JQueryBy JQuery(string selector)
+        public static JQuerySelector JQuerySelector(string selector)
         {
-            return new JQueryBy(selector);
+            return new JQuerySelector(selector);
         }
     }
 }

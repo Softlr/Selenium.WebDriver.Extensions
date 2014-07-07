@@ -53,7 +53,7 @@
         /// <returns>The DOM elements matching given jQuery selector.</returns>
         public static IWebElement FindElement(
             this IWebDriver driver,
-            JQueryBy by)
+            JQuerySelector by)
         {
             if (by == null)
             {
@@ -82,7 +82,7 @@
         /// <returns>The first DOM element matching given jQuery selector</returns>
         public static ReadOnlyCollection<IWebElement> FindElements(
             this IWebDriver driver,
-            JQueryBy by)
+            JQuerySelector by)
         {
             if (by == null)
             {

@@ -3,13 +3,13 @@
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
-    public class JQueryBy
+    public class JQuerySelector
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="JQueryBy"/> class.
+        /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
         /// <param name="selector">The jQuery selector.</param>
-        public JQueryBy(string selector)
+        public JQuerySelector(string selector)
         {
             this.Selector = selector;
         }
