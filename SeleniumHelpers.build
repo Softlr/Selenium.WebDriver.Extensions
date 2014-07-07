@@ -1,12 +1,12 @@
 <?xml version="1.0" ?>
-<project name="SeleniumHelpers" default="compile" xmlns="http://nant.sf.net/schemas/nant.xsd">
+<project name="Selenium.WebDriver.Extensions" default="compile" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<property name="nant.settings.currentframework" value="net-4.5"/>
 	<property name="project.config" value="debug"/>
 	<property name="vs.version" value="12.0"/>
 	
 	<target name="compile">
 		<loadtasks assembly="src/packages/NAnt.Contrib.Portable.0.92/tools/NAnt.Contrib.Tasks.dll" />
-		<msbuild project="src/SeleniumHelpers.sln">
+		<msbuild project="src/Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config}"/>
 			<property name="VisualStudioVersion" value="${vs.version}"/>
 		</msbuild>

@@ -1,6 +1,6 @@
 build:
-  project: src/SeleniumHelpers.sln
+  project: src/Selenium.WebDriver.Extensions.sln
 before_build:
   - nuget install src/.nuget/packages.config -o src/packages
-  - nuget restore src/SeleniumHelpers.sln
+  - nuget restore src/Selenium.WebDriver.Extensions.sln
   - xcopy /Y src\.nuget\NAnt.exe.config src\packages\NAnt.Portable.0.92\
