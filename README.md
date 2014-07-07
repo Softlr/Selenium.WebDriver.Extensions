@@ -2,7 +2,7 @@
 
 ### Description
 
-Extensions for Selenium WebDriver including jQuery selector support for FindElement and FindElements methods.
+Extensions for Selenium WebDriver including jQuery selector support for `FindElement` and `FindElements` methods.
 
 ### Installation
 
