@@ -6,10 +6,10 @@
     public class By : OpenQA.Selenium.By
     {
         /// <summary>
-        /// Returns the jQuery Selenium selector.
+        /// Gets a mechanism to find elements matching jQuery selector.
         /// </summary>
         /// <param name="selector">The jQuery selector.</param>
-        /// <returns>The selenium selector.</returns>
+        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
         public static JQuerySelector JQuerySelector(string selector)
         {
             return new JQuerySelector(selector);
