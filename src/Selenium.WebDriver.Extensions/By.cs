@@ -3,6 +3,10 @@
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/>.
     /// </summary>
+    /// <remarks>
+    /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By"/>. The reason for that is
+    /// to avoid warnings that the code is accessing static members of the base class.
+    /// </remarks>
     public class By : OpenQA.Selenium.By
     {
         /// <summary>
