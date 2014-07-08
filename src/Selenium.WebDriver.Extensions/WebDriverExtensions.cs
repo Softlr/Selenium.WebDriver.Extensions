@@ -26,23 +26,22 @@
             var exists = (bool)javaScriptDriver.ExecuteScript(CheckScript);
             if (exists)
             {
-                var path = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "jq.src = '//code.jquery.com/jquery-{0}.min.js';",
-                    version);
-                var loadScript = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}{1}{2}",
-                    "var jq = document.createElement('script');",
-                    path,
-                    "document.getElementsByTagName('head')[0].appendChild(jq);");
-                javaScriptDriver.ExecuteScript(loadScript);
-                var wait = new WebDriverWait(driver, timeout ?? TimeSpan.FromSeconds(3));
-                wait.Until(d =>
-                {
-                    return ((IJavaScriptExecutor)d).ExecuteScript(CheckScript);
-                });
+                return;
             }
+
+            var path = string.Format(
+                CultureInfo.InvariantCulture,
+                "jq.src = '//code.jquery.com/jquery-{0}.min.js';",
+                version);
+            var loadScript = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}{1}{2}",
+                "var jq = document.createElement('script');",
+                path,
+                "document.getElementsByTagName('head')[0].appendChild(jq);");
+            javaScriptDriver.ExecuteScript(loadScript);
+            var wait = new WebDriverWait(driver, timeout ?? TimeSpan.FromSeconds(3));
+            wait.Until(d => javaScriptDriver.ExecuteScript(CheckScript));
         }
 
         /// <summary>

@@ -1,6 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
-    using System;
     using System.Globalization;
 
     /// <summary>
@@ -213,7 +212,8 @@
         /// Remove elements from the set of matched elements.
         /// </summary>
         /// <param name="selector">
-        /// A string containing a selector expression, a DOM element, or an array of elements to match against the set.
+        /// A string containing a selector expression, a DOM element, or an array of elements to match against the 
+        /// set.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Not(string selector = null)
@@ -267,9 +267,10 @@
         }
 
         /// <summary>
-        /// Get the immediately preceding sibling of each element in the set of matched elements, optionally filtered by a selector.
+        /// Get the immediately preceding sibling of each element in the set of matched elements, optionally filtered 
+        /// by a selector.
         /// </summary>
-        /// <param name="selector"></param>
+        /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Prev(string selector = null)
         {
@@ -277,7 +278,8 @@
         }
 
         /// <summary>
-        /// Get all preceding siblings of each element in the set of matched elements, optionally filtered by a selector.
+        /// Get all preceding siblings of each element in the set of matched elements, optionally filtered by a 
+        /// selector.
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
@@ -287,9 +289,12 @@
         }
 
         /// <summary>
-        /// Get all preceding siblings of each element up to but not including the element matched by the selector, DOM node, or jQuery object.
+        /// Get all preceding siblings of each element up to but not including the element matched by the selector, 
+        /// DOM node, or jQuery object.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression to indicate where to stop matching preceding sibling elements.</param>
+        /// <param name="selector">
+        /// A string containing a selector expression to indicate where to stop matching preceding sibling elements.
+        /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector PrevUntil(string selector = null, string filter = null)
@@ -311,8 +316,14 @@
         /// <summary>
         /// Reduce the set of matched elements to a subset specified by a range of indices.
         /// </summary>
-        /// <param name="start">An integer indicating the 0-based position at which the elements begin to be selected. If negative, it indicates an offset from the end of the set.</param>
-        /// <param name="end">An integer indicating the 0-based position at which the elements stop being selected. If negative, it indicates an offset from the end of the set. If omitted, the range continues until the end of the set.</param>
+        /// <param name="start">
+        /// An integer indicating the 0-based position at which the elements begin to be selected. If negative, it 
+        /// indicates an offset from the end of the set.
+        /// </param>
+        /// <param name="end">
+        /// An integer indicating the 0-based position at which the elements stop being selected. If negative, it 
+        /// indicates an offset from the end of the set. If omitted, the range continues until the end of the set.
+        /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Slice(int start, int? end = null)
         {
@@ -340,14 +351,9 @@
             var data = string.Empty;
             if (!string.IsNullOrWhiteSpace(selector))
             {
-                if (string.IsNullOrWhiteSpace(filter))
-                {
-                    data = string.Format(CultureInfo.InvariantCulture, "'{0}'", selector);
-                }
-                else
-                {
-                    data = string.Format(CultureInfo.InvariantCulture, "'{0}', '{1}'", selector, filter);
-                }
+                data = string.IsNullOrWhiteSpace(filter) 
+                    ? string.Format(CultureInfo.InvariantCulture, "'{0}'", selector) 
+                    : string.Format(CultureInfo.InvariantCulture, "'{0}', '{1}'", selector, filter);
             }
 
             return data;
@@ -358,15 +364,15 @@
         /// </summary>
         /// <param name="name">The jQuery method name.</param>
         /// <param name="selector">The jQuery method selector.</param>
-        /// <param name="dontWrap">
+        /// <param name="noWrap">
         /// <c>true</c> to not to wrap the selector into quotes; otherwise, <c>false</c>.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        private JQuerySelector Chain(string name, string selector = null, bool dontWrap = false)
+        private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
             selector = string.IsNullOrWhiteSpace(selector)
                 ? string.Empty
-                : (dontWrap ? selector.Trim() : string.Format(CultureInfo.InvariantCulture, "'{0}'", selector.Trim()));
+                : (noWrap ? selector.Trim() : string.Format(CultureInfo.InvariantCulture, "'{0}'", selector.Trim()));
 
             var newSelector = string.Format(
                 CultureInfo.InvariantCulture,

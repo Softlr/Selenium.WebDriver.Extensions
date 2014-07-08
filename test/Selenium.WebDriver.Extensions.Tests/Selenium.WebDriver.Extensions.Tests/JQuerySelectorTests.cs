@@ -14,7 +14,7 @@
         /// <summary>
         /// Gets the selector test cases.
         /// </summary>
-        private IEnumerable SelectorTestCases
+        private static IEnumerable SelectorTestCases
         {
             get
             {
