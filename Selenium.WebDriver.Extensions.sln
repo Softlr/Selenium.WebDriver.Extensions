@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions", "Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj", "{F10536EC-8FBF-437A-840D-55CE6BF44161}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions", "src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj", "{F10536EC-8FBF-437A-840D-55CE6BF44161}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{707EC0FD-B5A2-4F28-8FB8-D1D2C25258EF}"
 	ProjectSection(SolutionItems) = preProject
@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{707EC0
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,6 +25,10 @@ Global
 		{F10536EC-8FBF-437A-840D-55CE6BF44161}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F10536EC-8FBF-437A-840D-55CE6BF44161}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F10536EC-8FBF-437A-840D-55CE6BF44161}.Release|Any CPU.Build.0 = Release|Any CPU
+		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

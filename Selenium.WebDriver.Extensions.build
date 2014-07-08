@@ -5,8 +5,8 @@
 	<property name="vs.version" value="12.0"/>
 	
 	<target name="compile">
-		<loadtasks assembly="src/packages/NAnt.Contrib.Portable.0.92/tools/NAnt.Contrib.Tasks.dll" />
-		<msbuild project="src/Selenium.WebDriver.Extensions.sln">
+		<loadtasks assembly="packages/NAnt.Contrib.Portable.0.92/tools/NAnt.Contrib.Tasks.dll" />
+		<msbuild project="Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config}"/>
 			<property name="VisualStudioVersion" value="${vs.version}"/>
 		</msbuild>
