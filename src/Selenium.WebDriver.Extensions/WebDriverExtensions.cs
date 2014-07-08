@@ -63,7 +63,7 @@
             driver.LoadJQuery();
 
             var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, "return jQuery('{0}').get(0);", by.Selector);
+            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.get(0);", by.Selector);
             var result = javaScriptDriver.ExecuteScript(script) as IWebElement;
 
             if (result == null)
@@ -92,7 +92,7 @@
             driver.LoadJQuery();
 
             var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, "return jQuery('{0}').get();", by.Selector);
+            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.get();", by.Selector);
             return javaScriptDriver.ExecuteScript(script) as ReadOnlyCollection<IWebElement>
                 ?? new ReadOnlyCollection<IWebElement>(new List<IWebElement>());
         }
