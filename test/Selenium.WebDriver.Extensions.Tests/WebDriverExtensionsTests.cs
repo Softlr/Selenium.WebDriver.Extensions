@@ -1,9 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
+    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
@@ -17,121 +19,103 @@
     public class WebDriverExtensionsTests
     {
         /// <summary>
-        /// Tests jQuery loading in already-loaded scenario.
+        /// Gets the load jQuery test cases.
         /// </summary>
-        [Test]
-        public void LoadExistingJQuery()
+        private static IEnumerable LoadJQueryTestCases
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
-            mock.Object.LoadJQuery();
+            get
+            {
+                yield return new TestCaseData("latest", null, new object[] { true });
+                yield return new TestCaseData("1.11.0", null, new object[] { false, true, true });
+                yield return new TestCaseData("latest", TimeSpan.FromSeconds(1), new object[] { false })
+                    .Throws(typeof(WebDriverTimeoutException));
+            }
         }
 
         /// <summary>
-        /// Tests jQuery loading in not-already-loaded scenario.
+        /// Gets the find element test cases.
         /// </summary>
-        [Test]
-        public void LoadJQuery()
+        private static IEnumerable FindElementTestCases
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(false)
-                .Returns(true).Returns(true);
-            mock.Object.LoadJQuery("1.11.0");
+            get
+            {
+                var element = new Mock<IWebElement>();
+                element.Setup(x => x.TagName).Returns("div");
+                element.Setup(x => x.GetAttribute("class")).Returns("testClass");
+                yield return new TestCaseData(element.Object, By.JQuerySelector("div.testClass"))
+                    .Returns(element.Object).SetName("Element found");
+                yield return new TestCaseData(element.Object, null).Throws(typeof(ArgumentNullException))
+                    .SetName("ArgumentNullException");
+                yield return new TestCaseData(null, By.JQuerySelector("div.testClass"))
+                    .Throws(typeof(NoSuchElementException)).SetName("NoSuchElementException");
+            }
         }
 
         /// <summary>
-        /// Tests jQuery loading timeout.
+        /// Gets the find elements test cases.
         /// </summary>
-        [Test]
-        [ExpectedException(typeof(WebDriverTimeoutException))]
-        public void LoadJQueryWithTimeout()
+        private static IEnumerable FindElementsTestCases
+        {
+            get
+            {
+                var element = new Mock<IWebElement>();
+                element.Setup(x => x.TagName).Returns("div");
+                element.Setup(x => x.GetAttribute("class")).Returns("testClass");
+                var results = new ReadOnlyCollection<IWebElement>(new List<IWebElement> { element.Object });
+                yield return new TestCaseData(results, By.JQuerySelector("div.testClass")).Returns(1)
+                    .SetName("Elements found");
+                yield return new TestCaseData(results, null).Throws(typeof(ArgumentNullException))
+                    .SetName("ArgumentNullException");
+                yield return new TestCaseData(null, By.JQuerySelector("div.testClass")).Returns(0)
+                    .SetName("Elements not found");
+            }
+        }
+        
+        /// <summary>
+        /// Tests jQuery loading.
+        /// </summary>
+        /// <param name="version">The version of jQuery to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <param name="mockValueSequence">
+        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
+        /// </param>
+        [TestCaseSource(typeof(WebDriverExtensionsTests), "LoadJQueryTestCases")]
+        public void LoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(false);
-            mock.Object.LoadJQuery("latest", TimeSpan.FromSeconds(1));
+            var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
+            mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
+            mock.Object.LoadJQuery(version, timeout);
         }
 
         /// <summary>
         /// Tests finding an element.
         /// </summary>
-        [Test]
-        public void FindElement()
+        /// <param name="elementMock">A mock for an element that will be returned by DOM search.</param>
+        /// <param name="by">A Selenium jQuery selector.</param>
+        /// <returns>Search results.</returns>
+        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindElementTestCases")]
+        public IWebElement FindElement(IWebElement elementMock, JQuerySelector by)
         {
-            var element = new Mock<IWebElement>();
-            element.Setup(x => x.TagName).Returns("div");
-            element.Setup(x => x.GetAttribute("class")).Returns("testClass");
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
-                .Returns(element.Object);
-            var item = mock.Object.FindElement(By.JQuerySelector("div.testClass"));
-
-            Assert.IsNotNull(item);
-        }
-
-        /// <summary>
-        /// Tests finding an element with null selector.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementNullSelector()
-        {
-            var mock = new Mock<IWebDriver>();
-            WebDriverExtensions.FindElement(mock.Object, null);
-        }
-
-        /// <summary>
-        /// Tests finding an element which doesn't match given selector.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(NoSuchElementException))]
-        public void FindNonExistingElement()
-        {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
-            mock.Object.FindElement(By.JQuerySelector("div.testClass"));
+                .Returns(elementMock);
+            return mock.Object.FindElement(@by);
         }
 
         /// <summary>
         /// Tests finding elements.
         /// </summary>
-        [Test]
-        public void FindElements()
+        /// <param name="resultsMock">A mock for elements that will be returned by DOM search.</param>
+        /// <param name="by">A Selenium jQuery selector.</param>
+        /// <returns>A results count.</returns>
+        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindElementsTestCases")]
+        public int FindElements(ReadOnlyCollection<IWebElement> resultsMock, JQuerySelector by)
         {
-            var element = new Mock<IWebElement>();
-            element.Setup(x => x.TagName).Returns("div");
-            element.Setup(x => x.GetAttribute("class")).Returns("testClass");
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
-                .Returns(new ReadOnlyCollection<IWebElement>(new List<IWebElement> { element.Object }));
-            var item = mock.Object.FindElements(By.JQuerySelector("div.testClass"));
-
-            Assert.IsNotNull(item);
-            Assert.AreEqual(1, item.Count);
-        }
-
-        /// <summary>
-        /// Tests finding elements with null selector.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsNullSelector()
-        {
-            var mock = new Mock<IWebDriver>();
-            WebDriverExtensions.FindElements(mock.Object, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements which doesn't match given selector.
-        /// </summary>
-        [Test]
-        public void FindNonExistingElements()
-        {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
-            var item = mock.Object.FindElements(By.JQuerySelector("div.testClass"));
-
-            Assert.IsNotNull(item);
-            Assert.AreEqual(0, item.Count);
+                .Returns(resultsMock);
+            return mock.Object.FindElements(by).Count;
         }
     }
 }
