@@ -55,6 +55,7 @@
         /// Add the previous set of elements on the stack to the current set.
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <remarks>While this method is obsolete in jQuery 1.8+ we will support it.</remarks>
         public JQuerySelector AndSelf()
         {
             return this.Chain("andSelf");
