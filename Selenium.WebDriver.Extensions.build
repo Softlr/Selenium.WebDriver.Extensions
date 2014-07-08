@@ -3,6 +3,7 @@
 	<property name="nant.settings.currentframework" value="net-4.5"/>
 	<property name="nunit.path" value="packages\NUnit.Runners.2.6.3\tools\nunit-console.exe"/>
 	<property name="opencover.path" value="packages\OpenCover.4.5.2506\OpenCover.Console.exe"/>
+	<property name="raportgenerator.path" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
 	<property name="project.config" value="debug"/>
 	<property name="vs.version" value="12.0"/>
 	<property name="build.output.dir" value="../AutomatedBuildOutput"/>
@@ -45,13 +46,21 @@
 		</exec>
 	</target>
 	
-	<target name="coverage" depends="setup.build.process, move.assemblies.for.tests">
+	<target name="generate.coverage.xml" depends="setup.build.process, move.assemblies.for.tests">
 		<exec program="${opencover.path}">
 			<arg value="-register:user"/>
 			<arg value="-target:&quot;${nunit.path}&quot;"/>
 			<arg value="-targetargs:&quot;/noshadow ${assemblies.output.dir}\Selenium.WebDriver.Extensions.Tests.dll /framework:${nant.settings.currentframework} /work:${tests.output.dir} /result:Selenium.WebDriver.Extensions.Tests.xml /nologo&quot;"/>
 			<arg value="-filter:&quot;+[*]*&quot;"/>
 			<arg value="-output:&quot;${assemblies.output.dir}\coverage.xml&quot;"/>
+		</exec>
+	</target>
+	
+	<target name="coverage" depends="generate.coverage.xml">
+		<exec program="${raportgenerator.path}">
+			<arg value="-reports:&quot;${assemblies.output.dir}\coverage.xml&quot;"/>
+			<arg value="-targetdir:&quot;${assemblies.output.dir}\CoverateReport&quot;"/>
+			<arg value="-reporttypes:Html"/>
 		</exec>
 	</target>
 </project>
