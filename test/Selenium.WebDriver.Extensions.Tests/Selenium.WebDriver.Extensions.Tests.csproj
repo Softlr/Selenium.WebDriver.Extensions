@@ -59,7 +59,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj">
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj">
       <Project>{f10536ec-8fbf-437a-840d-55ce6bf44161}</Project>
       <Name>Selenium.WebDriver.Extensions</Name>
     </ProjectReference>

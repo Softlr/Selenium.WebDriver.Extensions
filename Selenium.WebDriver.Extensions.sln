@@ -13,7 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{707EC0
 		.nuget\packages.config = .nuget\packages.config
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
