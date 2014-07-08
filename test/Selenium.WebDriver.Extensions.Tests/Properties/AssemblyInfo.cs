@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Selenium.WebDriver.Extensions.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Unic AG")]
+[assembly: AssemblyCompany("Lukasz Rajchel")]
 [assembly: AssemblyProduct("Selenium.WebDriver.Extensions.Tests")]
-[assembly: AssemblyCopyright("Copyright © Unic AG 2014")]
+[assembly: AssemblyCopyright("Copyright © Lukasz Rajchel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
