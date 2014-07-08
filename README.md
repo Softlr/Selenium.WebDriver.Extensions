@@ -23,3 +23,7 @@ Invoke jQuery selectors on the WebDriver.
 ```
 driver.FindElements(By.JQuerySelector("input:visible"))
 ```
+
+### Known Issues
+ 
+Only the basic traversing methods are implemented. This means that only string selectors will work. Also methods like `.map()` or `.each()` are not implemented. You also cannot use JavaScript functions which can be accepted as parameters to some of the methods. And finally you cannot pass an additional parameter as a context (all selectors will be executed in global context).
