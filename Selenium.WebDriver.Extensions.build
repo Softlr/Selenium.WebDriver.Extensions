@@ -1,8 +1,13 @@
 <?xml version="1.0" ?>
-<project name="Selenium.WebDriver.Extensions" default="compile" xmlns="http://nant.sf.net/schemas/nant.xsd">
+<project name="Selenium.WebDriver.Extensions" default="full" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<property name="nant.settings.currentframework" value="net-4.5"/>
+	<property name="nunit.path" value="packages\NUnit.Runners.2.6.3\tools\nunit-console.exe"/>
+	<property name="opencover.path" value="packages\OpenCover.4.5.2506\OpenCover.Console.exe"/>
 	<property name="project.config" value="debug"/>
 	<property name="vs.version" value="12.0"/>
+	<property name="build.output.dir" value="../AutomatedBuildOutput"/>
+	<property name="tests.output.dir" value="${build.output.dir}/UnitTestsOutput-${project::get-name()}-${nant.settings.currentframework}.${platform::get-name()}-${project.config}"/>
+	<property name="assemblies.output.dir" value="${build.output.dir}/${project::get-name()}-${nant.settings.currentframework}.${platform::get-name()}-${project.config}"/>
 	
 	<target name="compile">
 		<loadtasks assembly="packages/NAnt.Contrib.Portable.0.92/tools/NAnt.Contrib.Tasks.dll" />
@@ -10,6 +15,44 @@
 			<property name="Configuration" value="${project.config}"/>
 			<property name="VisualStudioVersion" value="${vs.version}"/>
 		</msbuild>
+	</target>
+	
+	<target name="full" depends="compile, test, coverage"/>
+    
+	<target name="setup.build.process">
+		<delete dir="${build.output.dir}" failonerror="false"/>
+		<mkdir dir="${build.output.dir}"/>
+		<mkdir dir="${tests.output.dir}"/>
+	</target>
+	
+	<target name="move.assemblies.for.tests">
+		<property name="test.dir" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
+		<copy todir="${assemblies.output.dir}" flatten="true">
+			<fileset basedir="${test.dir}">
+				<include name="*.dll"/>
+				<include name="*.pdb"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="test" depends="setup.build.process, move.assemblies.for.tests">
+		<exec program="${nunit.path}">
+			<arg value="${assemblies.output.dir}\Selenium.WebDriver.Extensions.Tests.dll"/>
+			<arg value="/framework:${nant.settings.currentframework}"/>
+			<arg value="/work:${tests.output.dir}"/>
+			<arg value="/result:Selenium.WebDriver.Extensions.Tests.xml"/>
+			<arg value="/nologo"/>
+		</exec>
+	</target>
+	
+	<target name="coverage" depends="setup.build.process, move.assemblies.for.tests">
+		<exec program="${opencover.path}">
+			<arg value="-register:user"/>
+			<arg value="-target:&quot;${nunit.path}&quot;"/>
+			<arg value="-targetargs:&quot;/noshadow ${assemblies.output.dir}\Selenium.WebDriver.Extensions.Tests.dll /framework:${nant.settings.currentframework} /work:${tests.output.dir} /result:Selenium.WebDriver.Extensions.Tests.xml /nologo&quot;"/>
+			<arg value="-filter:&quot;+[*]*&quot;"/>
+			<arg value="-output:&quot;${assemblies.output.dir}\coverage.xml&quot;"/>
+		</exec>
 	</target>
 </project>
 
