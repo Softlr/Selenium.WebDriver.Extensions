@@ -35,7 +35,7 @@ driver.FindElement(selector);
 ```
 
 #### jQuery loading
-If the site that you are testing with Selenium does not include jQuery this extension will automatically load the latest version when you run FindElement or FindElements method. If you want you can choose to load a different version of jQuery.
+If the site that you are testing with Selenium does not include jQuery this extension will automatically load the latest version when you run `FindElement` or `FindElements` method. If you want you can choose to load a different version of jQuery.
 
 ```csharp
 var driver = new ChromeDriver();
@@ -51,7 +51,7 @@ var selector = By.JQuerySelector("div", jQueryVariable: "myJQuery");
 ```
 
 #### jQuery context switch
-Last but not least, you can use one JQuerySelector as a context in another JQuerySelector.
+Last but not least, you can use one `JQuerySelector` as a context of another `JQuerySelector`.
 
 ```csharp
 var driver = new ChromeDriver();
@@ -62,4 +62,4 @@ driver.FindElements(selector);
 
 # Known Issues
  
-Only the basic traversing methods are implemented. This means that only string selectors will work. Also methods like `.map()` or `.each()` are not implemented. You also cannot use JavaScript functions which can be accepted as parameters to some of the methods. And finally you cannot pass an additional parameter as a context (all selectors will be executed in global context).
+Only the basic traversing methods are implemented. This means that only string selectors will work. Also methods like `.map()` or `.each()` are not implemented. You also cannot use JavaScript functions which can be accepted as parameters to some of the methods.
