@@ -1,11 +1,20 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu)](https://ci.appveyor.com/project/RaYell/selenium-helpers)
 
 # Description
-
 Extensions for Selenium WebDriver including jQuery selector support for `FindElement` and `FindElements` methods.
 
-# Installation
+# Features
+Some of the most important features of this library include:
+* Generates jQuery selectors that can be used by Selenium WebDrivers to perform searches that CSS can't do
+* Allows jQuery selectors to be used even on sites that don't use jQuery as it can load before performing a first search
+* Very easy setup: install package with NuGet, include a namespace and start using it
+* Supports jQuery traversing methods for generation of complex selector chains
+* Supports jQuery context switching
+* CI with Appveyor
+* 100% code coverage with nUnit tests
+* Well documented code following strict StyleCop and FxCop rules.
 
+# Installation
 Run the following command in Visual Studio Packet Manager Console.
 ```posh
 Install-Package Selenium.WebDriver.Extensions
