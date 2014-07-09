@@ -6,7 +6,7 @@ Extensions for Selenium WebDriver including jQuery selector support for `FindEle
 
 ### Installation
 
-Run the following command in Visual Studio's Packet Manager Console.
+Run the following command in Visual Studio Packet Manager Console.
 ```posh
 Install-Package Selenium.WebDriver.Extensions
 ```
@@ -28,7 +28,7 @@ driver.FindElements(By.JQuerySelector("input:visible"))
 You can also chain jQuery traversing methods.
 ```csharp
 var driver = new ChromeDriver();
-var selector = By.JQuerySelector("div.myclass").Parents('.someClass').NextAll();
+var selector = By.JQuerySelector("div.myclass").Parents(".someClass").NextAll();
 driver.FindElement(selector);
 ```
 
