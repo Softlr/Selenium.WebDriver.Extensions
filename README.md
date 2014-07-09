@@ -52,7 +52,7 @@ driver.LoadJQuery("1.11.0");
 ```
 
 #### jQuery variable name
-When you create a jQuery selector using By helper class the resulting selector will use jQuery as library variable. If you site is using a different variable name for this purpose you can also customize this behavior.
+When you create a jQuery selector using `By` helper class the resulting selector will use `jQuery` as library variable name. If you site is using a different variable name for this purpose you can pass this value as an optional parameter.
 
 ```csharp
 var driver = new ChromeDriver();
@@ -60,7 +60,7 @@ var selector = By.JQuerySelector("div", jQueryVariable: "myJQuery");
 ```
 
 #### jQuery context switch
-Last but not least, you can use one `JQuerySelector` as a context of another `JQuerySelector`.
+You can use one `JQuerySelector` as a context of another `JQuerySelector`.
 
 ```csharp
 var driver = new ChromeDriver();
