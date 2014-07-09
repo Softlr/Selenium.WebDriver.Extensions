@@ -21,6 +21,10 @@
                 // basic tests
                 yield return new TestCaseData(By.JQuerySelector("div"))
                     .Returns("jQuery('div')").SetName("jQuery('div')");
+                yield return new TestCaseData(By.JQuerySelector("div", jQueryVariable: "$"))
+                    .Returns("$('div')").SetName("$('div')");
+                yield return new TestCaseData(By.JQuerySelector("div", By.JQuerySelector("article")))
+                    .Returns("jQuery('div', jQuery('article'))").SetName("jQuery('div', jQuery('article'))");
 
                 // functions tests
                 yield return new TestCaseData(By.JQuerySelector("div").Add("span"))

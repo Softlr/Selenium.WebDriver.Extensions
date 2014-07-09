@@ -12,11 +12,16 @@
         /// <summary>
         /// Gets a mechanism to find elements matching jQuery selector.
         /// </summary>
-        /// <param name="selector">The jQuery selector.</param>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
-        public static JQuerySelector JQuerySelector(string selector)
+        public static JQuerySelector JQuerySelector(
+            string selector, 
+            JQuerySelector context = null, 
+            string jQueryVariable = "jQuery")
         {
-            return new JQuerySelector(selector);
+            return new JQuerySelector(selector, context, jQueryVariable);
         }
 
         /// <summary>

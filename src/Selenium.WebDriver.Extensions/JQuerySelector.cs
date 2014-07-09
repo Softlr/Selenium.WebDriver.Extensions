@@ -10,21 +10,51 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">The jQuery selector.</param>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <param name="append">
         /// <c>true</c> if the new object is created based on existing selector; otherwise, <c>false</c>.
         /// </param>
-        public JQuerySelector(string selector, bool append = false)
+        public JQuerySelector(
+            string selector, 
+            JQuerySelector context = null, 
+            string jQueryVariable = "jQuery",
+            bool append = false)
         {
-            this.Selector = append
-                ? selector
-                : string.Format(CultureInfo.InvariantCulture, "jQuery('{0}')", selector);
+            if (append)
+            {
+                this.Selector = selector;
+                return;
+            }
+
+            var selectorFormat = "{0}('{1}')";
+            if (context != null)
+            {
+                selectorFormat = "{0}('{1}', {2})";
+            }
+
+            this.Selector = string.Format(
+                CultureInfo.InvariantCulture, 
+                selectorFormat,
+                jQueryVariable,
+                selector, 
+                context);
         }
 
         /// <summary>
         /// Gets or sets the jQuery selector.
         /// </summary>
         public string Selector { get; set; }
+
+        /// <summary>
+        /// Returns a string that represents the current object.
+        /// </summary>
+        /// <returns>A string that represents the current object.</returns>
+        public override string ToString()
+        {
+            return this.Selector;
+        }
 
         /// <summary>
         /// Adds elements to the set of matched elements.
@@ -381,7 +411,7 @@
                 this.Selector,
                 name,
                 selector);
-            return new JQuerySelector(newSelector, true);
+            return new JQuerySelector(newSelector, append: true);
         }
     }
 }
