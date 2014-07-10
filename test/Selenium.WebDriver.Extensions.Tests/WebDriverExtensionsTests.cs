@@ -70,6 +70,42 @@
                     .SetName("Elements not found");
             }
         }
+
+        /// <summary>
+        /// Gets the find text test cases.
+        /// </summary>
+        private static IEnumerable FindTextTestCases
+        {
+            get
+            {
+                var element = new Mock<IWebElement>();
+                element.Setup(x => x.Text).Returns("test");
+                yield return new TestCaseData(element.Object.Text, By.JQuerySelector("div.testClass"))
+                    .Returns(element.Object.Text).SetName("Element found");
+                yield return new TestCaseData(element.Object.Text, null).Throws(typeof(ArgumentNullException))
+                    .SetName("ArgumentNullException");
+                yield return new TestCaseData(null, By.JQuerySelector("div.testClass"))
+                    .Throws(typeof(NoSuchElementException)).SetName("NoSuchElementException");
+            }
+        }
+
+        /// <summary>
+        /// Gets the find text test cases.
+        /// </summary>
+        private static IEnumerable FindHtmlTestCases
+        {
+            get
+            {
+                var element = new Mock<IWebElement>();
+                element.Setup(x => x.Text).Returns("<p>test</p>");
+                yield return new TestCaseData(element.Object.Text, By.JQuerySelector("div.testClass"))
+                    .Returns(element.Object.Text).SetName("Element found");
+                yield return new TestCaseData(element.Object.Text, null).Throws(typeof(ArgumentNullException))
+                    .SetName("ArgumentNullException");
+                yield return new TestCaseData(null, By.JQuerySelector("div.testClass"))
+                    .Throws(typeof(NoSuchElementException)).SetName("NoSuchElementException");
+            }
+        }
         
         /// <summary>
         /// Tests jQuery loading.
@@ -116,6 +152,36 @@
             mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
                 .Returns(resultsMock);
             return mock.Object.FindElements(by).Count;
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        /// <param name="innerText">A mock for an inner text that will be returned by DOM search.</param>
+        /// <param name="by">A Selenium jQuery selector.</param>
+        /// <returns>Search results.</returns>
+        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindTextTestCases")]
+        public string FindText(string innerText, JQuerySelector by)
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
+                .Returns(innerText);
+            return mock.Object.FindText(@by);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        /// <param name="innerText">A mock for an inner text that will be returned by DOM search.</param>
+        /// <param name="by">A Selenium jQuery selector.</param>
+        /// <returns>Search results.</returns>
+        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindHtmlTestCases")]
+        public string FindHtml(string innerText, JQuerySelector by)
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
+                .Returns(innerText);
+            return mock.Object.FindHtml(@by);
         }
     }
 }

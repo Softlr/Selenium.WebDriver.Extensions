@@ -95,5 +95,63 @@
             return javaScriptDriver.ExecuteScript(script) as ReadOnlyCollection<IWebElement>
                 ?? new ReadOnlyCollection<IWebElement>(new List<IWebElement>());
         }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and returns it's inner text.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>The inner text of DOM elements matching given jQuery selector.</returns>
+        public static string FindText(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            driver.LoadJQuery();
+
+            var javaScriptDriver = (IJavaScriptExecutor)driver;
+            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.text();", by.Selector);
+            var result = javaScriptDriver.ExecuteScript(script) as string;
+
+            if (result == null)
+            {
+                throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
+            }
+
+            return result;
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and returns it's inner HTML.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>The inner HTML of DOM elements matching given jQuery selector.</returns>
+        public static string FindHtml(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            driver.LoadJQuery();
+
+            var javaScriptDriver = (IJavaScriptExecutor)driver;
+            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.html();", by.Selector);
+            var result = javaScriptDriver.ExecuteScript(script) as string;
+
+            if (result == null)
+            {
+                throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
+            }
+
+            return result;
+        }
     }
 }
