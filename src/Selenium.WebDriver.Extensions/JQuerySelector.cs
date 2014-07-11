@@ -18,14 +18,15 @@
             JQuerySelector context = null, 
             string jQueryVariable = "jQuery")
         {
+            this.Context = context;
+            this.JQueryVariable = jQueryVariable;    
+
             var selectorFormat = "{0}('{1}')";
-            if (context != null)
+            if (this.Context != null)
             {
-                this.Context = context;
                 selectorFormat = "{0}('{1}', {2})";
             }
 
-            this.JQueryVariable = jQueryVariable;
             this.Selector = string.Format(
                 CultureInfo.InvariantCulture, 
                 selectorFormat,
@@ -37,10 +38,8 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        protected JQuerySelector(string selector)
+        protected JQuerySelector()
         {
-            this.Selector = selector;
         }
 
         /// <summary>
@@ -422,7 +421,12 @@
                 this.Selector,
                 name,
                 selector);
-            return new JQuerySelector(newSelector);
+            return new JQuerySelector
+                       {
+                           Selector = newSelector, 
+                           Context = this.Context, 
+                           JQueryVariable = this.JQueryVariable
+                       };
         }
     }
 }
