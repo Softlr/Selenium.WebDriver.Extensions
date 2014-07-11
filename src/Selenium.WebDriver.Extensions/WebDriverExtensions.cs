@@ -54,17 +54,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            if (by == null)
-            {
-                throw new ArgumentNullException("by");
-            }
-
-            driver.LoadJQuery();
-
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.get(0);", by.Selector);
-            var result = javaScriptDriver.ExecuteScript(script) as IWebElement;
-
+            var result = driver.Find<IWebElement>(by, "return {0}.get(0);");
             if (result == null)
             {
                 throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
@@ -83,17 +73,8 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            if (by == null)
-            {
-                throw new ArgumentNullException("by");
-            }
-
-            driver.LoadJQuery();
-
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.get();", by.Selector);
-            return javaScriptDriver.ExecuteScript(script) as ReadOnlyCollection<IWebElement>
-                ?? new ReadOnlyCollection<IWebElement>(new List<IWebElement>());
+            var result = driver.Find<ReadOnlyCollection<IWebElement>>(by, "return {0}.get();");
+            return result ?? new ReadOnlyCollection<IWebElement>(new List<IWebElement>());
         }
 
         /// <summary>
@@ -106,23 +87,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            if (by == null)
-            {
-                throw new ArgumentNullException("by");
-            }
-
-            driver.LoadJQuery();
-
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.text();", by.Selector);
-            var result = javaScriptDriver.ExecuteScript(script) as string;
-
-            if (result == null)
-            {
-                throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
-            }
-
-            return result;
+            return driver.Find<string>(by, "return {0}.text();");
         }
 
         /// <summary>
@@ -135,6 +100,20 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
+            return driver.Find<string>(by, "return {0}.html();");
+        }
+
+        /// <summary>
+        /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
+        /// and script format string.
+        /// </summary>
+        /// <typeparam name="T">The type of the result to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="scriptFormat">The format string of the script to be invoked.</param>
+        /// <returns>Result of invoking the script.</returns>
+        private static T Find<T>(this IWebDriver driver, JQuerySelector by, string scriptFormat) where T : class 
+        {
             if (by == null)
             {
                 throw new ArgumentNullException("by");
@@ -143,15 +122,8 @@
             driver.LoadJQuery();
 
             var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, "return {0}.html();", by.Selector);
-            var result = javaScriptDriver.ExecuteScript(script) as string;
-
-            if (result == null)
-            {
-                throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
-            }
-
-            return result;
+            var script = string.Format(CultureInfo.InvariantCulture, scriptFormat, by.Selector);
+            return javaScriptDriver.ExecuteScript(script) as T;
         }
     }
 }
