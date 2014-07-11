@@ -112,6 +112,23 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element 
+        /// in the set of matched elements.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="attributeName">The name of the attribute to get.</param>
+        /// <returns>The value of an attribute for the first element in the set of matched elements.</returns>
+        public static string FindAttribute(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string attributeName)
+        {
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.attr({0});", attributeName);
+            return driver.Find<string>(by, formatString);
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>
