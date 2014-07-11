@@ -33,81 +33,6 @@
         }
 
         /// <summary>
-        /// Gets the find element test cases.
-        /// </summary>
-        private static IEnumerable FindElementTestCases
-        {
-            get
-            {
-                var element = new Mock<IWebElement>();
-                element.Setup(x => x.TagName).Returns("div");
-                element.Setup(x => x.GetAttribute("class")).Returns("testClass");
-                yield return new TestCaseData(element.Object, By.JQuerySelector("div.testClass"))
-                    .Returns(element.Object).SetName("Element found");
-                yield return new TestCaseData(element.Object, null).Throws(typeof(ArgumentNullException))
-                    .SetName("ArgumentNullException");
-                yield return new TestCaseData(null, By.JQuerySelector("div.testClass"))
-                    .Throws(typeof(NoSuchElementException)).SetName("NoSuchElementException");
-            }
-        }
-
-        /// <summary>
-        /// Gets the find elements test cases.
-        /// </summary>
-        private static IEnumerable FindElementsTestCases
-        {
-            get
-            {
-                var element = new Mock<IWebElement>();
-                element.Setup(x => x.TagName).Returns("div");
-                element.Setup(x => x.GetAttribute("class")).Returns("testClass");
-                var results = new ReadOnlyCollection<IWebElement>(new List<IWebElement> { element.Object });
-                yield return new TestCaseData(results, By.JQuerySelector("div.testClass")).Returns(1)
-                    .SetName("Elements found");
-                yield return new TestCaseData(results, null).Throws(typeof(ArgumentNullException))
-                    .SetName("ArgumentNullException");
-                yield return new TestCaseData(null, By.JQuerySelector("div.testClass")).Returns(0)
-                    .SetName("Elements not found");
-            }
-        }
-
-        /// <summary>
-        /// Gets the find text test cases.
-        /// </summary>
-        private static IEnumerable FindTextTestCases
-        {
-            get
-            {
-                var element = new Mock<IWebElement>();
-                element.Setup(x => x.Text).Returns("test");
-                yield return new TestCaseData(element.Object.Text, By.JQuerySelector("div.testClass"))
-                    .Returns(element.Object.Text).SetName("Element found");
-                yield return new TestCaseData(element.Object.Text, null).Throws(typeof(ArgumentNullException))
-                    .SetName("ArgumentNullException");
-                yield return new TestCaseData(null, By.JQuerySelector("div.testClass")).Returns(null)
-                    .SetName("Element not found");
-            }
-        }
-
-        /// <summary>
-        /// Gets the find text test cases.
-        /// </summary>
-        private static IEnumerable FindHtmlTestCases
-        {
-            get
-            {
-                var element = new Mock<IWebElement>();
-                element.Setup(x => x.Text).Returns("<p>test</p>");
-                yield return new TestCaseData(element.Object.Text, By.JQuerySelector("div.testClass"))
-                    .Returns(element.Object.Text).SetName("Element found");
-                yield return new TestCaseData(element.Object.Text, null).Throws(typeof(ArgumentNullException))
-                    .SetName("ArgumentNullException");
-                yield return new TestCaseData(null, By.JQuerySelector("div.testClass")).Returns(null)
-                    .SetName("Element not found");
-            }
-        }
-        
-        /// <summary>
         /// Tests jQuery loading.
         /// </summary>
         /// <param name="version">The version of jQuery to load if it's not already loaded on the tested page.</param>
@@ -127,61 +52,115 @@
         /// <summary>
         /// Tests finding an element.
         /// </summary>
-        /// <param name="elementMock">A mock for an element that will be returned by DOM search.</param>
-        /// <param name="by">A Selenium jQuery selector.</param>
-        /// <returns>Search results.</returns>
-        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindElementTestCases")]
-        public IWebElement FindElement(IWebElement elementMock, JQuerySelector by)
+        [Test]
+        public void FindElement()
+        {
+            var element = new Mock<IWebElement>();
+            element.Setup(x => x.TagName).Returns("div");
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsIn("return jQuery('div').get(0);")))
+                .Returns(element.Object);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').get(0);")))
+                .Returns(true);
+
+            var result = mock.Object.FindElement(By.JQuerySelector("div"));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("div", result.TagName);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindElementArgumentNull()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
-                .Returns(elementMock);
-            return mock.Object.FindElement(by);
+            mock.Object.FindElement((JQuerySelector)null);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(NoSuchElementException))]
+        public void FindElementNoSuchElement()
+        {
+            var element = new Mock<IWebElement>();
+            element.Setup(x => x.TagName).Returns("div");
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsIn("return jQuery('div').get(0);")))
+                .Returns(null);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').get(0);")))
+                .Returns(true);
+
+            mock.Object.FindElement(By.JQuerySelector("div"));
         }
 
         /// <summary>
         /// Tests finding elements.
         /// </summary>
-        /// <param name="resultsMock">A mock for elements that will be returned by DOM search.</param>
-        /// <param name="by">A Selenium jQuery selector.</param>
-        /// <returns>A results count.</returns>
-        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindElementsTestCases")]
-        public int FindElements(ReadOnlyCollection<IWebElement> resultsMock, JQuerySelector by)
+        [Test]
+        public void FindElements()
         {
+            var element1 = new Mock<IWebElement>();
+            element1.Setup(x => x.TagName).Returns("div");
+            element1.Setup(x => x.GetAttribute("class")).Returns("test");
+
+            var element2 = new Mock<IWebElement>();
+            element2.Setup(x => x.TagName).Returns("span");
+            element2.Setup(x => x.GetAttribute("class")).Returns("test");
+
+            var list = new List<IWebElement> { element1.Object, element2.Object };
+
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
-                .Returns(resultsMock);
-            return mock.Object.FindElements(by).Count;
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsIn("return jQuery('.test').get();")))
+                .Returns(new ReadOnlyCollection<IWebElement>(list));
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('.test').get();")))
+                .Returns(true);
+
+            var result = mock.Object.FindElements(By.JQuerySelector(".test"));
+
+            Assert.AreEqual(2, result.Count);
+
+            Assert.AreEqual("div", result[0].TagName);
+            Assert.AreEqual("test", result[0].GetAttribute("class"));
+
+            Assert.AreEqual("span", result[1].TagName);
+            Assert.AreEqual("test", result[1].GetAttribute("class"));
         }
 
         /// <summary>
-        /// Tests finding an element.
+        /// Tests finding an element text.
         /// </summary>
-        /// <param name="innerText">A mock for an inner text that will be returned by DOM search.</param>
-        /// <param name="by">A Selenium jQuery selector.</param>
-        /// <returns>Search results.</returns>
-        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindTextTestCases")]
-        public string FindText(string innerText, JQuerySelector by)
+        [Test]
+        public void FindText()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
-                .Returns(innerText);
-            return mock.Object.FindText(by);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsIn("return jQuery('div').text();")))
+                .Returns("test");
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').text();")))
+                .Returns(true);
+            var result = mock.Object.FindText(By.JQuerySelector("div"));
+
+            Assert.AreEqual("test", result);
         }
 
         /// <summary>
-        /// Tests finding an element.
+        /// Tests finding an element inner HTML.
         /// </summary>
-        /// <param name="innerText">A mock for an inner text that will be returned by DOM search.</param>
-        /// <param name="by">A Selenium jQuery selector.</param>
-        /// <returns>Search results.</returns>
-        [TestCaseSource(typeof(WebDriverExtensionsTests), "FindHtmlTestCases")]
-        public string FindHtml(string innerText, JQuerySelector by)
+        [Test]
+        public void FindHtml()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
-                .Returns(innerText);
-            return mock.Object.FindHtml(by);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsIn("return jQuery('div').html();")))
+                .Returns("<p>test</p>");
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').html();")))
+                .Returns(true);
+            var result = mock.Object.FindHtml(By.JQuerySelector("div"));
+
+            Assert.AreEqual("<p>test</p>", result);
         }
     }
 }
