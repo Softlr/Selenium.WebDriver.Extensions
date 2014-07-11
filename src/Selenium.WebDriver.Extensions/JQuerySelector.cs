@@ -35,7 +35,6 @@
         }
 
         /// <summary>
-        /// Gets or sets the jQuery selector.
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
@@ -45,18 +44,19 @@
         }
 
         /// <summary>
+        /// Gets the jQuery selector.
         /// </summary>
-        public string Selector { get; set; }
+        public string Selector { get; private set; }
 
         /// <summary>
-        /// Gets or sets the DOM Element, Document, or jQuery to use as context.
+        /// Gets the DOM Element, Document, or jQuery to use as context.
         /// </summary>
-        public JQuerySelector Context { get; set; }
+        public JQuerySelector Context { get; private set; }
 
         /// <summary>
-        /// Gets or sets the variable that has been assigned to jQuery.
+        /// Gets the variable that has been assigned to jQuery.
         /// </summary>
-        public string JQueryVariable { get; set; }
+        public string JQueryVariable { get; private set; }
 
         /// <summary>
         /// Returns a string that represents the current object.
