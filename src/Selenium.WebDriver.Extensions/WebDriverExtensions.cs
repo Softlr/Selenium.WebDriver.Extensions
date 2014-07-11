@@ -29,16 +29,10 @@
                 return;
             }
 
-            var path = string.Format(
-                CultureInfo.InvariantCulture,
-                "jq.src = '//code.jquery.com/jquery-{0}.min.js';",
-                version);
-            var loadScript = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}{1}{2}",
-                "var jq = document.createElement('script');",
-                path,
-                "document.getElementsByTagName('head')[0].appendChild(jq);");
+            var loadScript = "var jq = document.createElement('script');" +
+                "jq.src = '//code.jquery.com/jquery-" + version + ".min.js';" +
+                "document.getElementsByTagName('head')[0].appendChild(jq);";
+
             javaScriptDriver.ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout ?? TimeSpan.FromSeconds(3));
             wait.Until(d => javaScriptDriver.ExecuteScript(CheckScript));
@@ -54,7 +48,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<IWebElement>(by, "return {0}.get(0);");
+            var result = driver.Find<IWebElement>(by, "get(0)");
             if (result == null)
             {
                 throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
@@ -73,7 +67,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<ReadOnlyCollection<IWebElement>>(by, "return {0}.get();");
+            var result = driver.Find<ReadOnlyCollection<IWebElement>>(by, "get()");
             return result ?? new ReadOnlyCollection<IWebElement>(new List<IWebElement>());
         }
 
@@ -91,7 +85,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.text();");
+            return driver.Find<string>(by, "text()");
         }
 
         /// <summary>
@@ -108,7 +102,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.html();");
+            return driver.Find<string>(by, "html()");
         }
 
         /// <summary>
@@ -124,8 +118,7 @@
             JQuerySelector by,
             string attributeName)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.attr('{0}');", attributeName);
-            return driver.Find<string>(by, formatString);
+            return driver.Find<string>(by, "attr('" + attributeName + "')");
         }
 
         /// <summary>
@@ -141,8 +134,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.prop('{0}');", propertyName);
-            return driver.Find<string>(by, formatString);
+            return driver.Find<string>(by, "prop('" + propertyName + "')");
         }
 
         /// <summary>
@@ -156,7 +148,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.val();");
+            return driver.Find<string>(by, "val()");
         }
 
         /// <summary>
@@ -175,8 +167,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.css('{0}');", propertyName);
-            return driver.Find<string>(by, formatString);
+            return driver.Find<string>(by, "css('" + propertyName + "')");
         }
 
         /// <summary>
@@ -193,7 +184,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "return {0}.width();");
+            var result = driver.Find<string>(by, "width()");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -211,7 +202,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "return {0}.height();");
+            var result = driver.Find<string>(by, "height()");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -230,7 +221,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "return {0}.innerWidth();");
+            var result = driver.Find<string>(by, "innerWidth()");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -249,7 +240,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "return {0}.innerHeight();");
+            var result = driver.Find<string>(by, "innerHeight()");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -271,11 +262,7 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
-            var formatString = string.Format(
-                CultureInfo.InvariantCulture,
-                "return {{0}}.outerWidth({0});",
-                includeMargin ? "true" : string.Empty);
-            var result = driver.Find<string>(by, formatString);
+            var result = driver.Find<string>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -297,11 +284,7 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
-            var formatString = string.Format(
-                CultureInfo.InvariantCulture,
-                "return {{0}}.outerHeight({0});",
-                includeMargin ? "true" : string.Empty);
-            var result = driver.Find<string>(by, formatString);
+            var result = driver.Find<string>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -319,8 +302,8 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<string>(by, "return {0}.position().top;");
-            var left = driver.Find<string>(by, "return {0}.position().left;");
+            var top = driver.Find<string>(by, "position().top");
+            var left = driver.Find<string>(by, "position().left");
             return new Position(
                 int.Parse(top, CultureInfo.InvariantCulture), 
                 int.Parse(left, CultureInfo.InvariantCulture));
@@ -339,8 +322,8 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<string>(by, "return {0}.offset().top;");
-            var left = driver.Find<string>(by, "return {0}.offset().left;");
+            var top = driver.Find<string>(by, "offset().top");
+            var left = driver.Find<string>(by, "offset().left");
             return new Position(
                 int.Parse(top, CultureInfo.InvariantCulture),
                 int.Parse(left, CultureInfo.InvariantCulture));
@@ -361,7 +344,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "return {0}.scrollLeft();");
+            var result = driver.Find<string>(by, "scrollLeft()");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -380,7 +363,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "return {0}.scrollTop();");
+            var result = driver.Find<string>(by, "scrollTop()");
             return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
@@ -401,8 +384,7 @@
             JQuerySelector by,
             string key)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.data('{0}');", key);
-            return driver.Find<string>(by, formatString);
+            return driver.Find<string>(by, "data('" + key + "')");
         }
 
         /// <summary>
@@ -424,7 +406,7 @@
             driver.LoadJQuery();
 
             var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = string.Format(CultureInfo.InvariantCulture, scriptFormat, by.Selector);
+            var script = "return " + by + "." + scriptFormat + ";";
             return javaScriptDriver.ExecuteScript(script) as T;
         }
     }
