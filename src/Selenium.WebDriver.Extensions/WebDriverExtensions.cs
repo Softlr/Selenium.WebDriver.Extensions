@@ -78,11 +78,15 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and returns it's inner text.
+        /// Searches for DOM element using jQuery selector and gets the combined text contents of each element in the 
+        /// set of matched elements, including their descendants, or set the text contents of the matched elements.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The inner text of DOM elements matching given jQuery selector.</returns>
+        /// <returns>
+        /// The combined text contents of each element in the set of matched elements, including their descendants, or 
+        /// set the text contents of the matched elements.
+        /// </returns>
         public static string FindText(
             this IWebDriver driver,
             JQuerySelector by)
@@ -91,11 +95,15 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and returns it's inner HTML.
+        /// Searches for DOM elements using jQuery selector and gets the HTML contents of the first element in the set 
+        /// of matched elements or set the HTML contents of every matched element.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The inner HTML of DOM elements matching given jQuery selector.</returns>
+        /// <returns>
+        /// The HTML contents of the first element in the set of matched elements or set the HTML contents of every 
+        /// matched element.
+        /// </returns>
         public static string FindHtml(
             this IWebDriver driver,
             JQuerySelector by)
