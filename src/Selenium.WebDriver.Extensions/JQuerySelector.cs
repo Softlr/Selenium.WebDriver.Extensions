@@ -40,7 +40,7 @@
                 CultureInfo.InvariantCulture, 
                 selectorFormat,
                 jQueryVariable,
-                selector, 
+                selector.Replace('\'', '"'), 
                 context);
         }
 

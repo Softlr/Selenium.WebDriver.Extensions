@@ -111,6 +111,8 @@
                     .Returns("jQuery('div').addBack()").SetName("whitespace selector");
                 yield return new TestCaseData(By.JQuerySelector("div").AddBack(" span "))
                     .Returns("jQuery('div').addBack('span')").SetName("trim");
+                yield return new TestCaseData(By.JQuerySelector("input[type='text']"))
+                    .Returns("jQuery('input[type=\"text\"]')").SetName("escape single quotes");
             }
         }
 
