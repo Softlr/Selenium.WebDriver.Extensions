@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lukasz Rajchel")]
-[assembly: AssemblyProduct("SeleniumHelpers")]
+[assembly: AssemblyProduct("Selenium WebDriver Extensions")]
 [assembly: AssemblyCopyright("Copyright © Lukasz Rajchel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
