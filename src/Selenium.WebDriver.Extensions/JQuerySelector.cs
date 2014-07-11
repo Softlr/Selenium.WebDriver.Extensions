@@ -18,21 +18,14 @@
             JQuerySelector context = null, 
             string jQueryVariable = "jQuery")
         {
+            // escape single quotes in selector
+            selector = selector.Replace('\'', '"');
+
             this.Context = context;
             this.JQueryVariable = jQueryVariable;    
-
-            var selectorFormat = "{0}('{1}')";
-            if (this.Context != null)
-            {
-                selectorFormat = "{0}('{1}', {2})";
-            }
-
-            this.Selector = string.Format(
-                CultureInfo.InvariantCulture, 
-                selectorFormat,
-                jQueryVariable,
-                selector.Replace('\'', '"'), 
-                context);
+            this.Selector = this.Context == null 
+                ? this.JQueryVariable + "('" + selector + "')"
+                : this.JQueryVariable + "('" + selector + "', " + this.Context + ")";
         }
 
         /// <summary>
@@ -368,16 +361,9 @@
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Slice(int start, int? end = null)
         {
-            var data = start.ToString(CultureInfo.InvariantCulture);
-            if (end.HasValue)
-            {
-                data = string.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}, {1}",
-                    start,
-                    end.Value);
-            }
-
+            var data = end.HasValue
+                ? start + ", " + end
+                : start.ToString(CultureInfo.InvariantCulture);
             return this.Chain("slice", data, true);
         }
 
@@ -393,8 +379,8 @@
             if (!string.IsNullOrWhiteSpace(selector))
             {
                 data = string.IsNullOrWhiteSpace(filter) 
-                    ? string.Format(CultureInfo.InvariantCulture, "'{0}'", selector) 
-                    : string.Format(CultureInfo.InvariantCulture, "'{0}', '{1}'", selector, filter);
+                    ? "'" + selector + "'"
+                    : "'" + selector + "', '" + filter + "'";
             }
 
             return data;
@@ -413,17 +399,11 @@
         {
             selector = string.IsNullOrWhiteSpace(selector)
                 ? string.Empty
-                : (noWrap ? selector.Trim() : string.Format(CultureInfo.InvariantCulture, "'{0}'", selector.Trim()));
+                : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
 
-            var newSelector = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}.{1}({2})",
-                this.Selector,
-                name,
-                selector);
             return new JQuerySelector
                        {
-                           Selector = newSelector, 
+                           Selector = this.Selector + "." + name + "(" + selector + ")", 
                            Context = this.Context, 
                            JQueryVariable = this.JQueryVariable
                        };
