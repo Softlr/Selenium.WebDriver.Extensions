@@ -160,6 +160,146 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and get the value of a style property for the first 
+        /// element in the set of matched elements or set one or more CSS properties for every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="propertyName">The CSS property name.</param>
+        /// <returns>
+        /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
+        /// properties for every matched element.
+        /// </returns>
+        public static string FindCss(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string propertyName)
+        {
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.css({0});", propertyName);
+            return driver.Find<string>(by, formatString);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element 
+        /// in the set of matched elements or set the width of every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current computed width for the first element in the set of matched elements or set the width of every 
+        /// matched element.
+        /// </returns>
+        public static string FindWidth(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.width();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
+        /// in the set of matched elements or set the width of every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current computed height for the first element in the set of matched elements or set the height of 
+        /// every matched element.
+        /// </returns>
+        public static string FindHeight(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.height();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current computed inner width (including 
+        /// padding but not border) for the first element in the set of matched elements or set the inner width of 
+        /// every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current computed inner width (including padding but not border) for the first element in the set of 
+        /// matched elements or set the inner width of every matched element.
+        /// </returns>
+        public static string FindInnerWidth(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.innerWidth();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current computed inner height (including 
+        /// padding but not border) for the first element in the set of matched elements or set the inner width of 
+        /// every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current computed inner height (including padding but not border) for the first element in the set of 
+        /// matched elements or set the inner width of every matched element.
+        /// </returns>
+        public static string FindInnerHeight(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.innerHeight();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element 
+        /// in the set of matched elements, including padding and border.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="includeMargin">
+        /// A flag indicating whether to include the element's margin in the calculation.
+        /// </param>
+        /// <returns>
+        /// The current computed width for the first element in the set of matched elements, including padding and 
+        /// border.
+        /// </returns>
+        public static string FindOuterWidth(
+            this IWebDriver driver,
+            JQuerySelector by,
+            bool includeMargin = false)
+        {
+            var formatString = string.Format(
+                CultureInfo.InvariantCulture,
+                "return {{0}}.outerWidth({0});",
+                includeMargin ? "true" : string.Empty);
+            return driver.Find<string>(by, formatString);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
+        /// in the set of matched elements, including padding and border.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="includeMargin">
+        /// A flag indicating whether to include the element's margin in the calculation.
+        /// </param>
+        /// <returns>
+        /// The current computed height for the first element in the set of matched elements, including padding and 
+        /// border.
+        /// </returns>
+        public static string FindOuterHeight(
+            this IWebDriver driver,
+            JQuerySelector by,
+            bool includeMargin = false)
+        {
+            var formatString = string.Format(
+                CultureInfo.InvariantCulture,
+                "return {{0}}.outerHeight({0});",
+                includeMargin ? "true" : string.Empty);
+            return driver.Find<string>(by, formatString);
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>
