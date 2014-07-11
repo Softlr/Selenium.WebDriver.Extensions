@@ -84,8 +84,8 @@
                     .Returns(element.Object.Text).SetName("Element found");
                 yield return new TestCaseData(element.Object.Text, null).Throws(typeof(ArgumentNullException))
                     .SetName("ArgumentNullException");
-                yield return new TestCaseData(null, By.JQuerySelector("div.testClass"))
-                    .Throws(typeof(NoSuchElementException)).SetName("NoSuchElementException");
+                yield return new TestCaseData(null, By.JQuerySelector("div.testClass")).Returns(null)
+                    .SetName("Element not found");
             }
         }
 
@@ -102,8 +102,8 @@
                     .Returns(element.Object.Text).SetName("Element found");
                 yield return new TestCaseData(element.Object.Text, null).Throws(typeof(ArgumentNullException))
                     .SetName("ArgumentNullException");
-                yield return new TestCaseData(null, By.JQuerySelector("div.testClass"))
-                    .Throws(typeof(NoSuchElementException)).SetName("NoSuchElementException");
+                yield return new TestCaseData(null, By.JQuerySelector("div.testClass")).Returns(null)
+                    .SetName("Element not found");
             }
         }
         
