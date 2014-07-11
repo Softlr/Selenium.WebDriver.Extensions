@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System;
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
@@ -148,6 +149,16 @@
             var by = By.JQuerySelector("div", jQueryVariable: "$");
 
             Assert.AreEqual(by.JQueryVariable, "$");
+        }
+
+        /// <summary>
+        /// Tests if the null selector is handled properly.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullSelector()
+        {
+            By.JQuerySelector(null);
         }
     }
 }

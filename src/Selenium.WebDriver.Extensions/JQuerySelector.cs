@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
+    using System;
     using System.Globalization;
 
     /// <summary>
@@ -18,6 +19,11 @@
             JQuerySelector context = null, 
             string jQueryVariable = "jQuery")
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
             // escape single quotes in selector
             selector = selector.Replace('\'', '"');
 

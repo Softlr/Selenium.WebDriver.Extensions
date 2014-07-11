@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="By.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="JQuerySelector.cs" />
     <Compile Include="Position.cs" />
     <Compile Include="WebDriverExtensions.cs" />
