@@ -163,6 +163,7 @@
         /// Searches for DOM elements using jQuery selector and get the value of a style property for the first 
         /// element in the set of matched elements or set one or more CSS properties for every matched element.
         /// </summary>
+        /// <typeparam name="T">The type of the value returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="propertyName">The CSS property name.</param>
@@ -170,13 +171,13 @@
         /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
         /// properties for every matched element.
         /// </returns>
-        public static string FindCss(
+        public static T FindCss<T>(
             this IWebDriver driver,
             JQuerySelector by,
-            string propertyName)
+            string propertyName) where T : class
         {
             var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.css('{0}');", propertyName);
-            return driver.Find<string>(by, formatString);
+            return driver.Find<T>(by, formatString);
         }
 
         /// <summary>
@@ -189,11 +190,12 @@
         /// The current computed width for the first element in the set of matched elements or set the width of every 
         /// matched element.
         /// </returns>
-        public static string FindWidth(
+        public static int FindWidth(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.width();");
+            var result = driver.Find<string>(by, "return {0}.width();");
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -206,11 +208,12 @@
         /// The current computed height for the first element in the set of matched elements or set the height of 
         /// every matched element.
         /// </returns>
-        public static string FindHeight(
+        public static int FindHeight(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.height();");
+            var result = driver.Find<string>(by, "return {0}.height();");
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -224,11 +227,12 @@
         /// The current computed inner width (including padding but not border) for the first element in the set of 
         /// matched elements or set the inner width of every matched element.
         /// </returns>
-        public static string FindInnerWidth(
+        public static int FindInnerWidth(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.innerWidth();");
+            var result = driver.Find<string>(by, "return {0}.innerWidth();");
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -242,11 +246,12 @@
         /// The current computed inner height (including padding but not border) for the first element in the set of 
         /// matched elements or set the inner width of every matched element.
         /// </returns>
-        public static string FindInnerHeight(
+        public static int FindInnerHeight(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.innerHeight();");
+            var result = driver.Find<string>(by, "return {0}.innerHeight();");
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -262,7 +267,7 @@
         /// The current computed width for the first element in the set of matched elements, including padding and 
         /// border.
         /// </returns>
-        public static string FindOuterWidth(
+        public static int FindOuterWidth(
             this IWebDriver driver,
             JQuerySelector by,
             bool includeMargin = false)
@@ -271,7 +276,8 @@
                 CultureInfo.InvariantCulture,
                 "return {{0}}.outerWidth({0});",
                 includeMargin ? "true" : string.Empty);
-            return driver.Find<string>(by, formatString);
+            var result = driver.Find<string>(by, formatString);
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -287,7 +293,7 @@
         /// The current computed height for the first element in the set of matched elements, including padding and 
         /// border.
         /// </returns>
-        public static string FindOuterHeight(
+        public static int FindOuterHeight(
             this IWebDriver driver,
             JQuerySelector by,
             bool includeMargin = false)
@@ -296,7 +302,8 @@
                 CultureInfo.InvariantCulture,
                 "return {{0}}.outerHeight({0});",
                 includeMargin ? "true" : string.Empty);
-            return driver.Find<string>(by, formatString);
+            var result = driver.Find<string>(by, formatString);
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -309,11 +316,15 @@
         /// The current coordinates of the first element in the set of matched elements, relative to the offset 
         /// parent.
         /// </returns>
-        public static string FindPosition(
+        public static Position FindPosition(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.position();");
+            var top = driver.Find<string>(by, "return {0}.position().top;");
+            var left = driver.Find<string>(by, "return {0}.position().left;");
+            return new Position(
+                int.Parse(top, CultureInfo.InvariantCulture), 
+                int.Parse(left, CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -325,11 +336,15 @@
         /// <returns>
         /// The current coordinates of the first element in the set of matched elements, relative to the document.
         /// </returns>
-        public static string FindOffset(
+        public static Position FindOffset(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.offset();");
+            var top = driver.Find<string>(by, "return {0}.offset().top;");
+            var left = driver.Find<string>(by, "return {0}.offset().left;");
+            return new Position(
+                int.Parse(top, CultureInfo.InvariantCulture),
+                int.Parse(left, CultureInfo.InvariantCulture));
         }
 
         /// <summary>
@@ -343,11 +358,12 @@
         /// The current horizontal position of the scroll bar for the first element in the set of matched elements or 
         /// set the horizontal position of the scroll bar for every matched element.
         /// </returns>
-        public static string FindScrollLeft(
+        public static int FindScrollLeft(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.scrollLeft();");
+            var result = driver.Find<string>(by, "return {0}.scrollLeft();");
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -361,11 +377,12 @@
         /// The current vertical position of the scroll bar for the first element in the set of matched elements or 
         /// set the vertical position of the scroll bar for every matched element.
         /// </returns>
-        public static string FindScrollTop(
+        public static int FindScrollTop(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<string>(by, "return {0}.scrollTop();");
+            var result = driver.Find<string>(by, "return {0}.scrollTop();");
+            return int.Parse(result, CultureInfo.InvariantCulture);
         }
 
         /// <summary>
@@ -373,6 +390,7 @@
         /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-* 
         /// attribute.
         /// </summary>
+        /// <typeparam name="T">The type of the value returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="key">The name of the data stored.</param>
@@ -380,13 +398,13 @@
         /// The value at the named data store for the first element in the jQuery collection, as set by 
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
-        public static string FindData(
+        public static T FindData<T>(
             this IWebDriver driver,
             JQuerySelector by,
-            string key)
+            string key) where T : class
         {
             var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.data('{0}');", key);
-            return driver.Find<string>(by, formatString);
+            return driver.Find<T>(by, formatString);
         }
 
         /// <summary>

@@ -136,7 +136,7 @@
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
                 .Returns(elementMock);
-            return mock.Object.FindElement(@by);
+            return mock.Object.FindElement(by);
         }
 
         /// <summary>
@@ -166,7 +166,7 @@
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
                 .Returns(innerText);
-            return mock.Object.FindText(@by);
+            return mock.Object.FindText(by);
         }
 
         /// <summary>
@@ -181,7 +181,7 @@
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>())).Returns(true)
                 .Returns(innerText);
-            return mock.Object.FindHtml(@by);
+            return mock.Object.FindHtml(by);
         }
     }
 }
