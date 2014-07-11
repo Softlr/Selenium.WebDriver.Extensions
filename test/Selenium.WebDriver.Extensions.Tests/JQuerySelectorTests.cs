@@ -136,5 +136,16 @@
             Assert.AreEqual(by.Selector, "jQuery('div', jQuery('article'))");
             Assert.AreEqual(by.Context.Selector, "jQuery('article')");
         }
+
+        /// <summary>
+        /// Tests if the jQuery variable property is handled properly.
+        /// </summary>
+        [Test]
+        public void JQueryVariable()
+        {
+            var by = By.JQuerySelector("div", jQueryVariable: "$");
+
+            Assert.AreEqual(by.JQueryVariable, "$");
+        }
     }
 }

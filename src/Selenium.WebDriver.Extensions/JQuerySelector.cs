@@ -35,6 +35,7 @@
                 selectorFormat = "{0}('{1}', {2})";
             }
 
+            this.JQueryVariable = jQueryVariable;
             this.Selector = string.Format(
                 CultureInfo.InvariantCulture, 
                 selectorFormat,
@@ -52,6 +53,11 @@
         /// Gets or sets the DOM Element, Document, or jQuery to use as context.
         /// </summary>
         public JQuerySelector Context { get; set; }
+
+        /// <summary>
+        /// Gets or sets the variable that has been assigned to jQuery.
+        /// </summary>
+        public string JQueryVariable { get; set; }
 
         /// <summary>
         /// Returns a string that represents the current object.
