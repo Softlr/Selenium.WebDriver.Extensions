@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Globalization;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
@@ -162,12 +161,40 @@
         /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
         /// properties for every matched element.
         /// </returns>
+        /// <remarks>
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
+        /// and <see cref="string"/>.
+        /// </remarks>
         public static string FindCss(
             this IWebDriver driver,
             JQuerySelector by,
             string propertyName)
         {
-            return driver.Find<string>(by, "css('" + propertyName + "')");
+            return driver.FindCss<string>(by, propertyName);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and get the value of a style property for the first 
+        /// element in the set of matched elements or set one or more CSS properties for every matched element.
+        /// </summary>
+        /// <typeparam name="T">The type of the value to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="propertyName">The CSS property name.</param>
+        /// <returns>
+        /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
+        /// properties for every matched element.
+        /// </returns>
+        /// <remarks>
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
+        /// and <see cref="string"/>.
+        /// </remarks>
+        public static T FindCss<T>(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string propertyName)
+        {
+            return driver.Find<T>(by, "css('" + propertyName + "')");
         }
 
         /// <summary>
@@ -184,8 +211,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "width()");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "width()");
         }
 
         /// <summary>
@@ -202,8 +228,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "height()");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "height()");
         }
 
         /// <summary>
@@ -221,8 +246,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "innerWidth()");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "innerWidth()");
         }
 
         /// <summary>
@@ -240,8 +264,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "innerHeight()");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "innerHeight()");
         }
 
         /// <summary>
@@ -262,8 +285,7 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
-            var result = driver.Find<string>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -284,8 +306,7 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
-            var result = driver.Find<string>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -302,11 +323,9 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<string>(by, "position().top");
-            var left = driver.Find<string>(by, "position().left");
-            return new Position(
-                int.Parse(top, CultureInfo.InvariantCulture), 
-                int.Parse(left, CultureInfo.InvariantCulture));
+            var top = driver.Find<int>(by, "position().top");
+            var left = driver.Find<int>(by, "position().left");
+            return new Position(top, left);
         }
 
         /// <summary>
@@ -322,11 +341,9 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<string>(by, "offset().top");
-            var left = driver.Find<string>(by, "offset().left");
-            return new Position(
-                int.Parse(top, CultureInfo.InvariantCulture),
-                int.Parse(left, CultureInfo.InvariantCulture));
+            var top = driver.Find<int>(by, "offset().top");
+            var left = driver.Find<int>(by, "offset().left");
+            return new Position(top, left);
         }
 
         /// <summary>
@@ -344,8 +361,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "scrollLeft()");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "scrollLeft()");
         }
 
         /// <summary>
@@ -363,8 +379,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<string>(by, "scrollTop()");
-            return int.Parse(result, CultureInfo.InvariantCulture);
+            return driver.Find<int>(by, "scrollTop()");
         }
 
         /// <summary>
@@ -396,7 +411,11 @@
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="scriptFormat">The format string of the script to be invoked.</param>
         /// <returns>Result of invoking the script.</returns>
-        private static T Find<T>(this IWebDriver driver, JQuerySelector by, string scriptFormat) where T : class 
+        /// <remarks>
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
+        /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="ReadOnlyCollection{IWebElement}"/>.
+        /// </remarks>
+        private static T Find<T>(this IWebDriver driver, JQuerySelector by, string scriptFormat)
         {
             if (by == null)
             {
@@ -407,7 +426,7 @@
 
             var javaScriptDriver = (IJavaScriptExecutor)driver;
             var script = "return " + by + "." + scriptFormat + ";";
-            return javaScriptDriver.ExecuteScript(script) as T;
+            return (T)javaScriptDriver.ExecuteScript(script);
         }
     }
 }

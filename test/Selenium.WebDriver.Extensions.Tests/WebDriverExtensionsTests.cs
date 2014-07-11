@@ -203,9 +203,11 @@
         public void FindAttributeNotExists()
         {
             var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('a').attr('href');"))
+                .Returns(null);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('a').attr('href');")))
                 .Returns(true);
-            var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "class");
+            var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
 
             Assert.IsNull(result);
         }
@@ -260,7 +262,7 @@
         /// Tests finding an element CSS property.
         /// </summary>
         [Test]
-        public void FindCss()
+        public void FindCssString()
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>()
@@ -274,6 +276,23 @@
         }
 
         /// <summary>
+        /// Tests finding an element CSS property.
+        /// </summary>
+        [Test]
+        public void FindCssInt()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('input').css('z-index');"))
+                .Returns(1);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').css('z-index');"))).Returns(true);
+            var result = mock.Object.FindCss<int>(By.JQuerySelector("input"), "z-index");
+
+            Assert.AreEqual(1, result);
+        }
+
+        /// <summary>
         /// Tests finding an element CSS property that doesn't exist.
         /// </summary>
         [Test]
@@ -284,7 +303,7 @@
                 .Returns(null);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').css('display');"))).Returns(true);
-            var result = mock.Object.FindCss(By.JQuerySelector("input"), "display");
+            var result = mock.Object.FindCss<string>(By.JQuerySelector("input"), "display");
 
             Assert.IsNull(result);
         }
@@ -297,7 +316,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').width();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').width();"))).Returns(true);
             var result = mock.Object.FindWidth(By.JQuerySelector("input"));
@@ -313,7 +332,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').height();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').height();"))).Returns(true);
             var result = mock.Object.FindHeight(By.JQuerySelector("input"));
@@ -329,7 +348,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').innerWidth();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').innerWidth();"))).Returns(true);
             var result = mock.Object.FindInnerWidth(By.JQuerySelector("input"));
@@ -345,7 +364,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').innerHeight();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').innerHeight();"))).Returns(true);
             var result = mock.Object.FindInnerHeight(By.JQuerySelector("input"));
@@ -361,7 +380,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerWidth();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerWidth();"))).Returns(true);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"));
@@ -377,7 +396,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerHeight();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerHeight();"))).Returns(true);
             var result = mock.Object.FindOuterHeight(By.JQuerySelector("input"));
@@ -393,7 +412,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerWidth(true);"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerWidth(true);"))).Returns(true);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"), true);
@@ -409,7 +428,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerHeight(true);"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerHeight(true);"))).Returns(true);
             var result = mock.Object.FindOuterHeight(By.JQuerySelector("input"), true);
@@ -425,9 +444,9 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().left;"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().top;"))
-                .Returns("200");
+                .Returns(200);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn(
                     "return jQuery('input').position().left;", 
@@ -447,9 +466,9 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().left;"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().top;"))
-                .Returns("200");
+                .Returns(200);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn(
                     "return jQuery('input').offset().left;", 
@@ -469,7 +488,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').scrollLeft();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').scrollLeft();"))).Returns(true);
             var result = mock.Object.FindScrollLeft(By.JQuerySelector("input"));
@@ -485,7 +504,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').scrollTop();"))
-                .Returns("100");
+                .Returns(100);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').scrollTop();"))).Returns(true);
             var result = mock.Object.FindScrollTop(By.JQuerySelector("input"));
