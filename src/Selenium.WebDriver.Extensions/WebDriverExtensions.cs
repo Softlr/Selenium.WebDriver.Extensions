@@ -129,6 +129,23 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the value of a property for the first element in 
+        /// the set of matched elements.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="propertyName">The name of the property to get.</param>
+        /// <returns>The value of a property for the first element in the set of matched elements.</returns>
+        public static string FindProperty(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string propertyName)
+        {
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.prop({0});", propertyName);
+            return driver.Find<string>(by, formatString);
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>
