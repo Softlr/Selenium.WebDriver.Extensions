@@ -146,6 +146,20 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current value of the first element in the set 
+        /// of matched elements.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>The current value of the first element in the set of matched elements.</returns>
+        public static string FindValue(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.val();");
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>
