@@ -31,6 +31,7 @@
             var selectorFormat = "{0}('{1}')";
             if (context != null)
             {
+                this.Context = context;
                 selectorFormat = "{0}('{1}', {2})";
             }
 
@@ -46,6 +47,11 @@
         /// Gets or sets the jQuery selector.
         /// </summary>
         public string Selector { get; set; }
+
+        /// <summary>
+        /// Gets or sets the DOM Element, Document, or jQuery to use as context.
+        /// </summary>
+        public JQuerySelector Context { get; set; }
 
         /// <summary>
         /// Returns a string that represents the current object.

@@ -124,5 +124,17 @@
         {
             return selector.Selector;
         }
+
+        /// <summary>
+        /// Tests if the context property is handled properly.
+        /// </summary>
+        [Test]
+        public void Context()
+        {
+            var by = By.JQuerySelector("div", By.JQuerySelector("article"));
+
+            Assert.AreEqual(by.Selector, "jQuery('div', jQuery('article'))");
+            Assert.AreEqual(by.Context.Selector, "jQuery('article')");
+        }
     }
 }
