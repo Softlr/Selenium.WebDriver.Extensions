@@ -300,6 +300,96 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current coordinates of the first element in 
+        /// the set of matched elements, relative to the offset parent.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current coordinates of the first element in the set of matched elements, relative to the offset 
+        /// parent.
+        /// </returns>
+        public static string FindPosition(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.position();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current coordinates of the first element in 
+        /// the set of matched elements, relative to the document.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current coordinates of the first element in the set of matched elements, relative to the document.
+        /// </returns>
+        public static string FindOffset(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.offset();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current horizontal position of the scroll bar
+        /// for the first element in the set of matched elements or set the horizontal position of the scroll bar for 
+        /// every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current horizontal position of the scroll bar for the first element in the set of matched elements or 
+        /// set the horizontal position of the scroll bar for every matched element.
+        /// </returns>
+        public static string FindScrollLeft(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.scrollLeft();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the current vertical position of the scroll bar 
+        /// for the first element in the set of matched elements or set the vertical position of the scroll bar for 
+        /// every matched element.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>
+        /// The current vertical position of the scroll bar for the first element in the set of matched elements or 
+        /// set the vertical position of the scroll bar for every matched element.
+        /// </returns>
+        public static string FindScrollTop(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "return {0}.scrollTop();");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and returns the value at the named data store for the 
+        /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-* 
+        /// attribute.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="key">The name of the data stored.</param>
+        /// <returns>
+        /// The value at the named data store for the first element in the jQuery collection, as set by 
+        /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
+        /// </returns>
+        public static string FindData(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string key)
+        {
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.data('{0}');", key);
+            return driver.Find<string>(by, formatString);
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>
