@@ -163,7 +163,6 @@
         /// Searches for DOM elements using jQuery selector and get the value of a style property for the first 
         /// element in the set of matched elements or set one or more CSS properties for every matched element.
         /// </summary>
-        /// <typeparam name="T">The type of the value returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="propertyName">The CSS property name.</param>
@@ -171,13 +170,13 @@
         /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
         /// properties for every matched element.
         /// </returns>
-        public static T FindCss<T>(
+        public static string FindCss(
             this IWebDriver driver,
             JQuerySelector by,
-            string propertyName) where T : class
+            string propertyName)
         {
             var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.css('{0}');", propertyName);
-            return driver.Find<T>(by, formatString);
+            return driver.Find<string>(by, formatString);
         }
 
         /// <summary>
@@ -390,7 +389,6 @@
         /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-* 
         /// attribute.
         /// </summary>
-        /// <typeparam name="T">The type of the value returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="key">The name of the data stored.</param>
@@ -398,13 +396,13 @@
         /// The value at the named data store for the first element in the jQuery collection, as set by 
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
-        public static T FindData<T>(
+        public static string FindData(
             this IWebDriver driver,
             JQuerySelector by,
-            string key) where T : class
+            string key)
         {
             var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.data('{0}');", key);
-            return driver.Find<T>(by, formatString);
+            return driver.Find<string>(by, formatString);
         }
 
         /// <summary>
