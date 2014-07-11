@@ -124,7 +124,7 @@
             JQuerySelector by,
             string attributeName)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.attr({0});", attributeName);
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.attr('{0}');", attributeName);
             return driver.Find<string>(by, formatString);
         }
 
@@ -141,7 +141,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.prop({0});", propertyName);
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.prop('{0}');", propertyName);
             return driver.Find<string>(by, formatString);
         }
 
@@ -175,7 +175,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.css({0});", propertyName);
+            var formatString = string.Format(CultureInfo.InvariantCulture, "return {{0}}.css('{0}');", propertyName);
             return driver.Find<string>(by, formatString);
         }
 
