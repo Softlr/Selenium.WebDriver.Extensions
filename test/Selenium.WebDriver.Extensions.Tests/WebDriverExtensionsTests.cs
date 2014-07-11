@@ -392,10 +392,10 @@
         public void FindOuterWidthWithMargin()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerHeight(true);"))
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerWidth(true);"))
                 .Returns("100");
             mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerHeight(true);"))).Returns(true);
+                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerWidth(true);"))).Returns(true);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"), true);
 
             Assert.AreEqual(100, result);
