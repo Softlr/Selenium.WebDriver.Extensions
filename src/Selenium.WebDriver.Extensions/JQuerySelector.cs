@@ -13,21 +13,11 @@
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
-        /// <param name="append">
-        /// <c>true</c> if the new object is created based on existing selector; otherwise, <c>false</c>.
-        /// </param>
         public JQuerySelector(
             string selector, 
             JQuerySelector context = null, 
-            string jQueryVariable = "jQuery",
-            bool append = false)
+            string jQueryVariable = "jQuery")
         {
-            if (append)
-            {
-                this.Selector = selector;
-                return;
-            }
-
             var selectorFormat = "{0}('{1}')";
             if (context != null)
             {
@@ -46,6 +36,15 @@
 
         /// <summary>
         /// Gets or sets the jQuery selector.
+        /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression</param>
+        protected JQuerySelector(string selector)
+        {
+            this.Selector = selector;
+        }
+
+        /// <summary>
         /// </summary>
         public string Selector { get; set; }
 
@@ -423,7 +422,7 @@
                 this.Selector,
                 name,
                 selector);
-            return new JQuerySelector(newSelector, append: true);
+            return new JQuerySelector(newSelector);
         }
     }
 }
