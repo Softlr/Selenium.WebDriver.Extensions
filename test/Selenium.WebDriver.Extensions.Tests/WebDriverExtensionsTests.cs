@@ -57,12 +57,7 @@
         {
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').get(0);"))
-                .Returns(element.Object);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').get(0);")))
-                .Returns(true);
-
+            var mock = MockWebDriver("return jQuery('div').get(0);", element.Object);
             var result = mock.Object.FindElement(By.JQuerySelector("div"));
 
             Assert.IsNotNull(result);
@@ -89,11 +84,7 @@
         {
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').get(0);"))
-                .Returns(null);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').get(0);")))
-                .Returns(true);
+            var mock = MockWebDriver();
 
             mock.Object.FindElement(By.JQuerySelector("div"));
         }
@@ -114,12 +105,7 @@
 
             var list = new List<IWebElement> { element1.Object, element2.Object };
 
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('.test').get();"))
-                .Returns(new ReadOnlyCollection<IWebElement>(list));
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('.test').get();")))
-                .Returns(true);
-
+            var mock = MockWebDriver("return jQuery('.test').get();", new ReadOnlyCollection<IWebElement>(list));
             var result = mock.Object.FindElements(By.JQuerySelector(".test"));
 
             Assert.AreEqual(2, result.Count);
@@ -137,12 +123,7 @@
         [Test]
         public void FindElementsNotExists()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('.test').get();"))
-                .Returns(null);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('.test').get();")))
-                .Returns(true);
-
+            var mock = MockWebDriver();
             var result = mock.Object.FindElements(By.JQuerySelector(".test"));
 
             Assert.AreEqual(0, result.Count);
@@ -154,14 +135,11 @@
         [Test]
         public void FindText()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').text();"))
-                .Returns("test");
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').text();")))
-                .Returns(true);
+            const string Result = "test";
+            var mock = MockWebDriver("return jQuery('div').text();", Result);
             var result = mock.Object.FindText(By.JQuerySelector("div"));
 
-            Assert.AreEqual("test", result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -170,14 +148,11 @@
         [Test]
         public void FindHtml()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').html();"))
-                .Returns("<p>test</p>");
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('div').html();")))
-                .Returns(true);
+            const string Result = "<p>test</p>";
+            var mock = MockWebDriver("return jQuery('div').html();", Result);
             var result = mock.Object.FindHtml(By.JQuerySelector("div"));
 
-            Assert.AreEqual("<p>test</p>", result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -186,14 +161,11 @@
         [Test]
         public void FindAttribute()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('a').attr('href');"))
-                .Returns("http://github.com");
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('a').attr('href');")))
-                .Returns(true);
+            const string Result = "http://github.com";
+            var mock = MockWebDriver("return jQuery('a').attr('href');", Result);
             var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
 
-            Assert.AreEqual("http://github.com", result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -202,11 +174,7 @@
         [Test]
         public void FindAttributeNotExists()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('a').attr('href');"))
-                .Returns(null);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('a').attr('href');")))
-                .Returns(true);
+            var mock = MockWebDriver();
             var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
 
             Assert.IsNull(result);
@@ -218,14 +186,11 @@
         [Test]
         public void FindProperty()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').prop('checked');"))
-                .Returns("true");
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').prop('checked');"))).Returns(true);
+            const string Result = "prop";
+            var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
             var result = mock.Object.FindProperty(By.JQuerySelector("input"), "checked");
 
-            Assert.AreEqual("true", result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -234,9 +199,7 @@
         [Test]
         public void FindPropertyNotExists()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').prop('checked');"))).Returns(true);
+            var mock = MockWebDriver();
             var result = mock.Object.FindProperty(By.JQuerySelector("input"), "checked");
 
             Assert.IsNull(result);
@@ -248,14 +211,11 @@
         [Test]
         public void FindValue()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').val();"))
-                .Returns("test");
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').val();"))).Returns(true);
+            const string Result = "test";
+            var mock = MockWebDriver("return jQuery('input').val();", Result);
             var result = mock.Object.FindValue(By.JQuerySelector("input"));
 
-            Assert.AreEqual("test", result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -264,15 +224,11 @@
         [Test]
         public void FindCssString()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').css('display');"))
-                .Returns("hidden");
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').css('display');"))).Returns(true);
+            const string Result = "hidden";
+            var mock = MockWebDriver("return jQuery('input').css('display');", Result);
             var result = mock.Object.FindCss(By.JQuerySelector("input"), "display");
 
-            Assert.AreEqual("hidden", result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -281,15 +237,11 @@
         [Test]
         public void FindCssInt()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').css('z-index');"))
-                .Returns(1);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').css('z-index');"))).Returns(true);
+            const int Result = 1;
+            var mock = MockWebDriver("return jQuery('input').css('z-index');", Result);
             var result = mock.Object.FindCss<int>(By.JQuerySelector("input"), "z-index");
 
-            Assert.AreEqual(1, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -298,11 +250,7 @@
         [Test]
         public void FindCssNotExists()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').css('display');"))
-                .Returns(null);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').css('display');"))).Returns(true);
+            var mock = MockWebDriver();
             var result = mock.Object.FindCss<string>(By.JQuerySelector("input"), "display");
 
             Assert.IsNull(result);
@@ -314,14 +262,11 @@
         [Test]
         public void FindWidth()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').width();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').width();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').width();", Result);
             var result = mock.Object.FindWidth(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -330,14 +275,11 @@
         [Test]
         public void FindHeight()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').height();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').height();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').height();", Result);
             var result = mock.Object.FindHeight(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -346,14 +288,11 @@
         [Test]
         public void FindInnerWidth()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').innerWidth();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').innerWidth();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').innerWidth();", Result);
             var result = mock.Object.FindInnerWidth(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -362,14 +301,11 @@
         [Test]
         public void FindInnerHeight()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').innerHeight();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').innerHeight();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').innerHeight();", Result);
             var result = mock.Object.FindInnerHeight(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -378,14 +314,11 @@
         [Test]
         public void FindOuterWidth()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerWidth();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerWidth();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').outerWidth();", Result);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -394,14 +327,11 @@
         [Test]
         public void FindOuterHeight()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerHeight();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerHeight();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').outerHeight();", Result);
             var result = mock.Object.FindOuterHeight(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -410,14 +340,11 @@
         [Test]
         public void FindOuterWidthWithMargin()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerWidth(true);"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerWidth(true);"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').outerWidth(true);", Result);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"), true);
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -426,14 +353,11 @@
         [Test]
         public void FindOuterHeightWithMargin()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerHeight(true);"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').outerHeight(true);"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').outerHeight(true);", Result);
             var result = mock.Object.FindOuterHeight(By.JQuerySelector("input"), true);
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -442,20 +366,21 @@
         [Test]
         public void FindPosition()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().left;"))
-                .Returns(100);
+            const int Result1 = 100;
+            const int Result2 = 200;
+            var mock = MockWebDriver();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().top;"))
-                .Returns(200);
+                .Returns(Result1);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().left;"))
+                .Returns(Result2);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn(
-                    "return jQuery('input').position().left;", 
-                    "return jQuery('input').position().top;")))
-                .Returns(true);
+                    "return jQuery('input').position().left;",
+                    "return jQuery('input').position().top;"))).Returns(true);
             var position = mock.Object.FindPosition(By.JQuerySelector("input"));
 
-            Assert.AreEqual(200, position.Top);
-            Assert.AreEqual(100, position.Left);
+            Assert.AreEqual(Result1, position.Top);
+            Assert.AreEqual(Result2, position.Left);
         }
 
         /// <summary>
@@ -464,20 +389,21 @@
         [Test]
         public void FindOffset()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().left;"))
-                .Returns(100);
+            const int Result1 = 100;
+            const int Result2 = 200;
+            var mock = MockWebDriver();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().top;"))
+                .Returns(100);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().left;"))
                 .Returns(200);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn(
-                    "return jQuery('input').offset().left;", 
-                    "return jQuery('input').offset().top;")))
-                .Returns(true);
+                    "return jQuery('input').offset().left;",
+                    "return jQuery('input').offset().top;"))).Returns(true);
             var offset = mock.Object.FindOffset(By.JQuerySelector("input"));
 
-            Assert.AreEqual(200, offset.Top);
-            Assert.AreEqual(100, offset.Left);
+            Assert.AreEqual(Result1, offset.Top);
+            Assert.AreEqual(Result2, offset.Left);
         }
 
         /// <summary>
@@ -486,14 +412,11 @@
         [Test]
         public void FindScrollLeft()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').scrollLeft();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').scrollLeft();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').scrollLeft();", Result);
             var result = mock.Object.FindScrollLeft(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -502,14 +425,11 @@
         [Test]
         public void FindScrollTop()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').scrollTop();"))
-                .Returns(100);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').scrollTop();"))).Returns(true);
+            const int Result = 100;
+            var mock = MockWebDriver("return jQuery('input').scrollTop();", Result);
             var result = mock.Object.FindScrollTop(By.JQuerySelector("input"));
 
-            Assert.AreEqual(100, result);
+            Assert.AreEqual(Result, result);
         }
 
         /// <summary>
@@ -518,14 +438,30 @@
         [Test]
         public void FindData()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').data('test');"))
-                .Returns("val");
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').data('test');"))).Returns(true);
+            const string Result = "val";
+            var mock = MockWebDriver("return jQuery('input').data('test');", Result);
             var result = mock.Object.FindData(By.JQuerySelector("input"), "test");
 
-            Assert.AreEqual("val", result);
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Mocks the Selenium web driver.
+        /// </summary>
+        /// <param name="script">Script to mock to return value.</param>
+        /// <param name="value">A value to return by the script.</param>
+        /// <returns>Mocked Selenium web driver.</returns>
+        private static Mock<IWebDriver> MockWebDriver(string script = null, object value = null)
+        {
+            var mock = new Mock<IWebDriver>();
+            if (script != null)
+            {
+                mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(script)).Returns(value);
+            }
+
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery !== 'function'"))
+                .Returns(true);
+            return mock;
         }
     }
 }
