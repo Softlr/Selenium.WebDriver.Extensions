@@ -258,7 +258,7 @@
         }
 
         /// <summary>
-        /// Tests finding an element CSS property.
+        /// Tests finding an element string CSS property.
         /// </summary>
         [Test]
         public void FindCssString()
@@ -271,10 +271,10 @@
         }
 
         /// <summary>
-        /// Tests finding an element CSS property.
+        /// Tests finding an element integer CSS property.
         /// </summary>
         [Test]
-        public void FindCssInt()
+        public void FindCssInteger()
         {
             const int Result = 1;
             var mock = MockWebDriver("return jQuery('input').css('z-index');", Result);
