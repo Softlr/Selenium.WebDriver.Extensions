@@ -437,6 +437,19 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the number of elements in the jQuery object.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>The number of elements in the jQuery object.</returns>
+        public static int FindCount(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<int>(by, "length");
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>

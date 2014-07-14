@@ -485,6 +485,19 @@
         }
 
         /// <summary>
+        /// Tests finding an element count.
+        /// </summary>
+        [Test]
+        public void FindCount()
+        {
+            const int Result = 2;
+            var mock = MockWebDriver("return jQuery('input').length;", Result);
+            var result = mock.Object.FindCount(By.JQuerySelector("input"));
+
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>
