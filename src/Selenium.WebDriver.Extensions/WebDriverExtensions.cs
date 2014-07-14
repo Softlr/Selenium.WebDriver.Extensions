@@ -117,7 +117,24 @@
             JQuerySelector by,
             string attributeName)
         {
-            return driver.Find<string>(by, "attr('" + attributeName + "')");
+            return driver.FindAttribute<string>(by, attributeName);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element 
+        /// in the set of matched elements.
+        /// </summary>
+        /// <typeparam name="T">The type of the value to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="attributeName">The name of the attribute to get.</param>
+        /// <returns>The value of an attribute for the first element in the set of matched elements.</returns>
+        public static T FindAttribute<T>(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string attributeName)
+        {
+            return driver.Find<T>(by, "attr('" + attributeName + "')");
         }
 
         /// <summary>
@@ -133,7 +150,24 @@
             JQuerySelector by,
             string propertyName)
         {
-            return driver.Find<string>(by, "prop('" + propertyName + "')");
+            return driver.FindProperty<string>(by, propertyName);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the value of a property for the first element in 
+        /// the set of matched elements.
+        /// </summary>
+        /// <typeparam name="T">The type of the value to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="propertyName">The name of the property to get.</param>
+        /// <returns>The value of a property for the first element in the set of matched elements.</returns>
+        public static T FindProperty<T>(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string propertyName)
+        {
+            return driver.Find<T>(by, "prop('" + propertyName + "')");
         }
 
         /// <summary>

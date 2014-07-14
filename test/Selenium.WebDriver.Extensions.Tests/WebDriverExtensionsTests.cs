@@ -156,14 +156,40 @@
         }
 
         /// <summary>
-        /// Tests finding an element attribute.
+        /// Tests finding an element string attribute.
         /// </summary>
         [Test]
-        public void FindAttribute()
+        public void FindAttributeString()
         {
             const string Result = "http://github.com";
             var mock = MockWebDriver("return jQuery('a').attr('href');", Result);
             var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
+
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Tests finding an element boolean attribute.
+        /// </summary>
+        [Test]
+        public void FindAttributeBoolean()
+        {
+            const bool Result = true;
+            var mock = MockWebDriver("return jQuery('a').attr('data-test');", Result);
+            var result = mock.Object.FindAttribute<bool>(By.JQuerySelector("a"), "data-test");
+
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Tests finding an element integer attribute.
+        /// </summary>
+        [Test]
+        public void FindAttributeInteger()
+        {
+            const int Result = 123;
+            var mock = MockWebDriver("return jQuery('a').attr('data-test');", Result);
+            var result = mock.Object.FindAttribute<int>(By.JQuerySelector("a"), "data-test");
 
             Assert.AreEqual(Result, result);
         }
@@ -181,14 +207,27 @@
         }
 
         /// <summary>
-        /// Tests finding an element property.
+        /// Tests finding an element string property.
         /// </summary>
         [Test]
-        public void FindProperty()
+        public void FindPropertyString()
         {
             const string Result = "prop";
             var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
             var result = mock.Object.FindProperty(By.JQuerySelector("input"), "checked");
+
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Tests finding an element boolean property.
+        /// </summary>
+        [Test]
+        public void FindPropertyBoolean()
+        {
+            const bool Result = true;
+            var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
+            var result = mock.Object.FindProperty<bool>(By.JQuerySelector("input"), "checked");
 
             Assert.AreEqual(Result, result);
         }
