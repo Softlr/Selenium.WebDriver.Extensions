@@ -498,6 +498,32 @@
         }
 
         /// <summary>
+        /// Tests finding a serialized element.
+        /// </summary>
+        [Test]
+        public void FindSerialized()
+        {
+            const string Result = "search=test";
+            var mock = MockWebDriver("return jQuery('form').serialize();", Result);
+            var result = mock.Object.FindSerialized(By.JQuerySelector("form"));
+
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Tests finding a serialized element array.
+        /// </summary>
+        [Test]
+        public void FindSerializedArray()
+        {
+            const string Result = "[{\"name\":\"s\",\"value\":\"\"}]";
+            var mock = MockWebDriver("return JSON.stringify(jQuery('form').serializeArray());", Result);
+            var result = mock.Object.FindSerializedArray(By.JQuerySelector("form"));
+
+            Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>

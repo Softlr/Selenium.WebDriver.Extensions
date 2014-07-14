@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Globalization;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
@@ -450,6 +451,34 @@
         }
 
         /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the encoded set of form elements as a string 
+        /// for submission.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>The encoded set of form elements as a string for submission.</returns>
+        public static string FindSerialized(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "serialize()");
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and gets the set of form elements as a string representing
+        /// encoded array of names and values.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>The encoded set of form elements as a string representing array of names and values.</returns>
+        public static string FindSerializedArray(
+            this IWebDriver driver,
+            JQuerySelector by)
+        {
+            return driver.Find<string>(by, "serializeArray()", "JSON.stringify({0})");
+        }
+
+        /// <summary>
         /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
         /// and script format string.
         /// </summary>
@@ -457,12 +486,19 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="scriptFormat">The format string of the script to be invoked.</param>
+        /// <param name="wrapperFormat">
+        /// The wrapper format string for the purpose of wrap the jQuery selection result.
+        /// </param>
         /// <returns>Result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
         /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="ReadOnlyCollection{IWebElement}"/>.
         /// </remarks>
-        private static T Find<T>(this IWebDriver driver, JQuerySelector by, string scriptFormat)
+        private static T Find<T>(
+            this IWebDriver driver,
+            JQuerySelector by, 
+            string scriptFormat,
+            string wrapperFormat = null)
         {
             if (by == null)
             {
@@ -472,7 +508,13 @@
             driver.LoadJQuery();
 
             var javaScriptDriver = (IJavaScriptExecutor)driver;
-            var script = "return " + by + "." + scriptFormat + ";";
+            var script = by + "." + scriptFormat;
+            if (wrapperFormat != null)
+            {
+                script = string.Format(CultureInfo.InvariantCulture, wrapperFormat, script);
+            }
+
+            script = "return " + script + ";";
             return (T)javaScriptDriver.ExecuteScript(script);
         }
     }
