@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Selenium.WebDriver.Extensions</id>
-        <version>0.4</version>
+        <version>0.5</version>
         <title>Selenium WebDriver Extensions</title>
         <authors>Lukasz Rajchel</authors>
         <licenseUrl>https://github.com/RaYell/selenium-webdriver-extensions/blob/master/LICENSE</licenseUrl>
