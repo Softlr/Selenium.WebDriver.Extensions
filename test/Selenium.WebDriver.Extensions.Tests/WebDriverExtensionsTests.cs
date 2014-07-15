@@ -33,6 +33,22 @@
         }
 
         /// <summary>
+        /// Gets the load jQuery test cases.
+        /// </summary>
+        private static IEnumerable LoadJQueryWithUriTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(new Uri("http://my.com/jquery.js"), null, new object[] { true });
+                yield return new TestCaseData(null, null, new object[] { false, true, true });
+                yield return new TestCaseData(
+                    new Uri("http://my.com/jquery.js"), 
+                    TimeSpan.FromSeconds(1), 
+                    new object[] { false }).Throws(typeof(WebDriverTimeoutException));
+            }
+        }
+
+        /// <summary>
         /// Tests jQuery loading.
         /// </summary>
         /// <param name="version">The version of jQuery to load if it's not already loaded on the tested page.</param>
@@ -47,6 +63,23 @@
             var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
             mock.Object.LoadJQuery(version, timeout);
+        }
+
+        /// <summary>
+        /// Tests jQuery loading.
+        /// </summary>
+        /// <param name="jQueryUri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <param name="mockValueSequence">
+        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
+        /// </param>
+        [TestCaseSource(typeof(WebDriverExtensionsTests), "LoadJQueryWithUriTestCases")]
+        public void LoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
+        {
+            var mock = new Mock<IWebDriver>();
+            var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
+            mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
+            mock.Object.LoadJQuery(jQueryUri, timeout);
         }
 
         /// <summary>

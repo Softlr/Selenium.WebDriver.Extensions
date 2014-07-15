@@ -20,22 +20,24 @@
         /// <param name="timeout">The timeout value for the jQuery load.</param>
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
+            driver.LoadJQuery("//code.jquery.com/jquery-" + version + ".min.js", timeout ?? TimeSpan.FromSeconds(3));
+        }
 
-            const string CheckScript = "return typeof window.jQuery !== 'function'";
-            var exists = (bool)javaScriptDriver.ExecuteScript(CheckScript);
-            if (exists)
+        /// <summary>
+        /// Checks if jQuery is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="jQueryUri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        public static void LoadJQuery(this IWebDriver driver, Uri jQueryUri, TimeSpan? timeout = null)
+        {
+            if (jQueryUri == null)
             {
+                driver.LoadJQuery();
                 return;
             }
 
-            var loadScript = "var jq = document.createElement('script');" +
-                "jq.src = '//code.jquery.com/jquery-" + version + ".min.js';" +
-                "document.getElementsByTagName('head')[0].appendChild(jq);";
-
-            javaScriptDriver.ExecuteScript(loadScript);
-            var wait = new WebDriverWait(driver, timeout ?? TimeSpan.FromSeconds(3));
-            wait.Until(d => javaScriptDriver.ExecuteScript(CheckScript));
+            driver.LoadJQuery(jQueryUri.OriginalString, timeout ?? TimeSpan.FromSeconds(3));
         }
 
         /// <summary>
@@ -476,6 +478,32 @@
             JQuerySelector by)
         {
             return driver.Find<string>(by, "serializeArray()", "JSON.stringify({0})");
+        }
+
+        /// <summary>
+        /// Checks if jQuery is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="jQueryUri">The URI for jQuery to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        private static void LoadJQuery(this IWebDriver driver, string jQueryUri, TimeSpan timeout)
+        {
+            var javaScriptDriver = (IJavaScriptExecutor)driver;
+
+            const string CheckScript = "return typeof window.jQuery !== 'function'";
+            var exists = (bool)javaScriptDriver.ExecuteScript(CheckScript);
+            if (exists)
+            {
+                return;
+            }
+
+            var loadScript = "var jq = document.createElement('script');" +
+                "jq.src = '" + jQueryUri + "';" +
+                "document.getElementsByTagName('head')[0].appendChild(jq);";
+
+            javaScriptDriver.ExecuteScript(loadScript);
+            var wait = new WebDriverWait(driver, timeout);
+            wait.Until(d => javaScriptDriver.ExecuteScript(CheckScript));
         }
 
         /// <summary>
