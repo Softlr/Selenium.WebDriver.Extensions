@@ -21,7 +21,7 @@
         /// <param name="timeout">The timeout value for the jQuery load.</param>
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            driver.LoadJQuery("//code.jquery.com/jquery-" + version + ".min.js", timeout ?? TimeSpan.FromSeconds(3));
+            driver.LoadJQuery(new Uri("//code.jquery.com/jquery-" + version + ".min.js"), timeout);
         }
 
         /// <summary>
@@ -34,7 +34,7 @@
         {
             if (jQueryUri == null)
             {
-                driver.LoadJQuery();
+                driver.LoadJQuery(timeout: timeout);
                 return;
             }
 
