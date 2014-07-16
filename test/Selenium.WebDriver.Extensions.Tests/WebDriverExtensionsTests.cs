@@ -136,8 +136,8 @@
             element2.Setup(x => x.TagName).Returns("span");
             element2.Setup(x => x.GetAttribute("class")).Returns("test");
 
-            var list = new List<object> { element1.Object, element2.Object };
-            var mock = MockWebDriver("return jQuery('.test').get();", new ReadOnlyCollection<object>(list));
+            var list = new List<IWebElement> { element1.Object, element2.Object };
+            var mock = MockWebDriver("return jQuery('.test').get();", new ReadOnlyCollection<IWebElement>(list));
             var result = mock.Object.FindElements(By.JQuerySelector(".test"));
 
             Assert.AreEqual(2, result.Count);
