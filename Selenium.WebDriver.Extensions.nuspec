@@ -12,6 +12,6 @@
         <tags>selenium, webdriver, jquery</tags>
     </metadata>
     <files>
-        <file src="Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\Selenium.WebDriver.Extensions.dll" />
+        <file src="src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\Selenium.WebDriver.Extensions.dll" />
     </files>
 </package>
