@@ -1,9 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
-    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
+    using System.Linq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 
@@ -69,8 +69,9 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<ReadOnlyCollection<IWebElement>>(by, "get()");
-            return result ?? new ReadOnlyCollection<IWebElement>(new List<IWebElement>());
+            var result = driver.Find<ReadOnlyCollection<object>>(by, "get()");
+            var list = result.Cast<IWebElement>().ToList();
+            return new ReadOnlyCollection<IWebElement>(list);
         }
 
         /// <summary>
@@ -520,7 +521,7 @@
         /// <returns>Result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
-        /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="ReadOnlyCollection{IWebElement}"/>.
+        /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="ReadOnlyCollection{Object}"/>.
         /// </remarks>
         private static T Find<T>(
             this IWebDriver driver,
