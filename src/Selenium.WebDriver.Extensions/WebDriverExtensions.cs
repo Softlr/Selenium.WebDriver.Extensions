@@ -70,8 +70,8 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<ReadOnlyCollection<object>>(by, "get()") ?? Enumerable.Empty<object>();
-            return new ReadOnlyCollection<IWebElement>(result.Cast<IWebElement>().ToList());
+            var result = driver.Find<IEnumerable<IWebElement>>(by, "get()") ?? Enumerable.Empty<IWebElement>();
+            return new ReadOnlyCollection<IWebElement>(result.ToList());
         }
 
         /// <summary>
@@ -521,7 +521,7 @@
         /// <returns>Result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
-        /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="ReadOnlyCollection{Object}"/>.
+        /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="IEnumerable{IWebElement}"/>.
         /// </remarks>
         private static T Find<T>(
             this IWebDriver driver,
