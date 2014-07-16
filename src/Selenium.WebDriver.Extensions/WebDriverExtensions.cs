@@ -17,8 +17,18 @@
         /// Checks if jQuery is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="version">The version of jQuery to load if it's not already loaded on the tested page.</param>
+        /// <param name="version">
+        /// The version of jQuery to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://code.jquery.com/jquery"/>. The default value will
+        /// get the latest stable version.
+        /// </param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
+        /// HTTP or HTTPS protocol.
+        /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
             driver.LoadJQuery(new Uri("//code.jquery.com/jquery-" + version + ".min.js"), timeout);
@@ -30,6 +40,12 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="jQueryUri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
+        /// HTTP or HTTPS protocol.
+        /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, Uri jQueryUri, TimeSpan? timeout = null)
         {
             if (jQueryUri == null)
@@ -487,6 +503,12 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="jQueryUri">The URI for jQuery to load if it's not already loaded on the tested page.</param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
+        /// HTTP or HTTPS protocol.
+        /// </remarks>
         private static void LoadJQuery(this IWebDriver driver, string jQueryUri, TimeSpan timeout)
         {
             var javaScriptDriver = (IJavaScriptExecutor)driver;
