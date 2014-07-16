@@ -70,8 +70,7 @@
             JQuerySelector by)
         {
             var result = driver.Find<ReadOnlyCollection<object>>(by, "get()");
-            var list = result.Cast<IWebElement>().ToList();
-            return new ReadOnlyCollection<IWebElement>(list);
+            return new ReadOnlyCollection<IWebElement>(result.Cast<IWebElement>().ToList());
         }
 
         /// <summary>
