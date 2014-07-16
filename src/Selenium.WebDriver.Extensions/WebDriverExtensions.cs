@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Globalization;
     using System.Linq;
@@ -69,7 +70,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<ReadOnlyCollection<object>>(by, "get()");
+            var result = driver.Find<ReadOnlyCollection<object>>(by, "get()") ?? Enumerable.Empty<object>();
             return new ReadOnlyCollection<IWebElement>(result.Cast<IWebElement>().ToList());
         }
 

@@ -155,8 +155,7 @@
         [Test]
         public void FindElementsNotExists()
         {
-            var list = new List<object>();
-            var mock = MockWebDriver("return jQuery('.test').get();", new ReadOnlyCollection<object>(list));
+            var mock = MockWebDriver();
             var result = mock.Object.FindElements(By.JQuerySelector(".test"));
 
             Assert.AreEqual(0, result.Count);
