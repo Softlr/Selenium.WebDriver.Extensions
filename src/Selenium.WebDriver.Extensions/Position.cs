@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="top">The top coordinate of DOM element position.</param>
         /// <param name="left">The left coordinate of DOM element position.</param>
-        public Position(int top, int left)
+        public Position(long top, long left)
         {
             this.Top = top;
             this.Left = left;
@@ -19,11 +19,11 @@
         /// <summary>
         /// Gets the top coordinate of DOM element position.
         /// </summary>
-        public int Top { get; private set; }
+        public long Top { get; private set; }
 
         /// <summary>
         /// Gets the left coordinate of a DOM element position.
         /// </summary>
-        public int Left { get; private set; }
+        public long Left { get; private set; }
     }
 }

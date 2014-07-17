@@ -219,9 +219,9 @@
         [Test]
         public void FindAttributeInteger()
         {
-            const int Result = 123;
+            const long Result = 123;
             var mock = MockWebDriver("return jQuery('a').attr('data-test');", Result);
-            var result = mock.Object.FindAttribute<int>(By.JQuerySelector("a"), "data-test");
+            var result = mock.Object.FindAttribute<long>(By.JQuerySelector("a"), "data-test");
 
             Assert.AreEqual(Result, result);
         }
@@ -236,6 +236,17 @@
             var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
 
             Assert.IsNull(result);
+        }
+
+        /// <summary>
+        /// Tests finding an element attribute with invalid type parameter.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(TypeArgumentException))]
+        public void FindAttributeInvalidType()
+        {
+            var mock = MockWebDriver();
+            mock.Object.FindAttribute<int>(By.JQuerySelector("a"), "href");
         }
 
         /// <summary>
@@ -277,6 +288,17 @@
         }
 
         /// <summary>
+        /// Tests finding an element property with invalid type parameter.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(TypeArgumentException))]
+        public void FindPropertyInvalidType()
+        {
+            var mock = MockWebDriver();
+            mock.Object.FindProperty<int>(By.JQuerySelector("input"), "checked");
+        }
+
+        /// <summary>
         /// Tests finding an element value.
         /// </summary>
         [Test]
@@ -308,9 +330,9 @@
         [Test]
         public void FindCssInteger()
         {
-            const int Result = 1;
+            const long Result = 1;
             var mock = MockWebDriver("return jQuery('input').css('z-index');", Result);
-            var result = mock.Object.FindCss<int>(By.JQuerySelector("input"), "z-index");
+            var result = mock.Object.FindCss<long>(By.JQuerySelector("input"), "z-index");
 
             Assert.AreEqual(Result, result);
         }
@@ -328,12 +350,23 @@
         }
 
         /// <summary>
+        /// Tests finding an element CSS property with invalid type parameter.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(TypeArgumentException))]
+        public void FindCssInvalidType()
+        {
+            var mock = MockWebDriver();
+            mock.Object.FindCss<int>(By.JQuerySelector("input"), "display");
+        }
+
+        /// <summary>
         /// Tests finding an element width.
         /// </summary>
         [Test]
         public void FindWidth()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').width();", Result);
             var result = mock.Object.FindWidth(By.JQuerySelector("input"));
 
@@ -346,7 +379,7 @@
         [Test]
         public void FindHeight()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').height();", Result);
             var result = mock.Object.FindHeight(By.JQuerySelector("input"));
 
@@ -359,7 +392,7 @@
         [Test]
         public void FindInnerWidth()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').innerWidth();", Result);
             var result = mock.Object.FindInnerWidth(By.JQuerySelector("input"));
 
@@ -372,7 +405,7 @@
         [Test]
         public void FindInnerHeight()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').innerHeight();", Result);
             var result = mock.Object.FindInnerHeight(By.JQuerySelector("input"));
 
@@ -385,7 +418,7 @@
         [Test]
         public void FindOuterWidth()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerWidth();", Result);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"));
 
@@ -398,7 +431,7 @@
         [Test]
         public void FindOuterHeight()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerHeight();", Result);
             var result = mock.Object.FindOuterHeight(By.JQuerySelector("input"));
 
@@ -411,7 +444,7 @@
         [Test]
         public void FindOuterWidthWithMargin()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerWidth(true);", Result);
             var result = mock.Object.FindOuterWidth(By.JQuerySelector("input"), true);
 
@@ -424,7 +457,7 @@
         [Test]
         public void FindOuterHeightWithMargin()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerHeight(true);", Result);
             var result = mock.Object.FindOuterHeight(By.JQuerySelector("input"), true);
 
@@ -437,8 +470,8 @@
         [Test]
         public void FindPosition()
         {
-            const int Result1 = 100;
-            const int Result2 = 200;
+            const long Result1 = 100;
+            const long Result2 = 200;
             var mock = MockWebDriver();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().top;"))
                 .Returns(Result1);
@@ -460,13 +493,13 @@
         [Test]
         public void FindOffset()
         {
-            const int Result1 = 100;
-            const int Result2 = 200;
+            const long Result1 = 100;
+            const long Result2 = 200;
             var mock = MockWebDriver();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().top;"))
-                .Returns(100);
+                .Returns(Result1);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().left;"))
-                .Returns(200);
+                .Returns(Result2);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn(
                     "return jQuery('input').offset().left;",
@@ -483,7 +516,7 @@
         [Test]
         public void FindScrollLeft()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').scrollLeft();", Result);
             var result = mock.Object.FindScrollLeft(By.JQuerySelector("input"));
 
@@ -496,7 +529,7 @@
         [Test]
         public void FindScrollTop()
         {
-            const int Result = 100;
+            const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').scrollTop();", Result);
             var result = mock.Object.FindScrollTop(By.JQuerySelector("input"));
 
@@ -522,7 +555,7 @@
         [Test]
         public void FindCount()
         {
-            const int Result = 2;
+            const long Result = 2;
             var mock = MockWebDriver("return jQuery('input').length;", Result);
             var result = mock.Object.FindCount(By.JQuerySelector("input"));
 

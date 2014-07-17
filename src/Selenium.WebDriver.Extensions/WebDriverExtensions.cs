@@ -154,6 +154,11 @@
             JQuerySelector by,
             string attributeName)
         {
+            if (!new[] { typeof(bool), typeof(long), typeof(string) }.Contains(typeof(T)))
+            {
+                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
+            }
+
             return driver.Find<T>(by, "attr('" + attributeName + "')");
         }
 
@@ -187,6 +192,11 @@
             JQuerySelector by,
             string propertyName)
         {
+            if (!new[] { typeof(bool), typeof(long), typeof(string) }.Contains(typeof(T)))
+            {
+                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
+            }
+
             return driver.Find<T>(by, "prop('" + propertyName + "')");
         }
 
@@ -215,10 +225,6 @@
         /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
         /// properties for every matched element.
         /// </returns>
-        /// <remarks>
-        /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
-        /// and <see cref="string"/>.
-        /// </remarks>
         public static string FindCss(
             this IWebDriver driver,
             JQuerySelector by,
@@ -240,14 +246,19 @@
         /// properties for every matched element.
         /// </returns>
         /// <remarks>
-        /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
-        /// and <see cref="string"/>.
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
+        /// <see cref="bool"/> and <see cref="string"/>.
         /// </remarks>
         public static T FindCss<T>(
             this IWebDriver driver,
             JQuerySelector by,
             string propertyName)
         {
+            if (!new[] { typeof(bool), typeof(long), typeof(string) }.Contains(typeof(T)))
+            {
+                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
+            }
+
             return driver.Find<T>(by, "css('" + propertyName + "')");
         }
 
@@ -261,11 +272,11 @@
         /// The current computed width for the first element in the set of matched elements or set the width of every 
         /// matched element.
         /// </returns>
-        public static int FindWidth(
+        public static long FindWidth(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "width()");
+            return driver.Find<long>(by, "width()");
         }
 
         /// <summary>
@@ -278,11 +289,11 @@
         /// The current computed height for the first element in the set of matched elements or set the height of 
         /// every matched element.
         /// </returns>
-        public static int FindHeight(
+        public static long FindHeight(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "height()");
+            return driver.Find<long>(by, "height()");
         }
 
         /// <summary>
@@ -296,11 +307,11 @@
         /// The current computed inner width (including padding but not border) for the first element in the set of 
         /// matched elements or set the inner width of every matched element.
         /// </returns>
-        public static int FindInnerWidth(
+        public static long FindInnerWidth(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "innerWidth()");
+            return driver.Find<long>(by, "innerWidth()");
         }
 
         /// <summary>
@@ -314,11 +325,11 @@
         /// The current computed inner height (including padding but not border) for the first element in the set of 
         /// matched elements or set the inner width of every matched element.
         /// </returns>
-        public static int FindInnerHeight(
+        public static long FindInnerHeight(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "innerHeight()");
+            return driver.Find<long>(by, "innerHeight()");
         }
 
         /// <summary>
@@ -334,12 +345,12 @@
         /// The current computed width for the first element in the set of matched elements, including padding and 
         /// border.
         /// </returns>
-        public static int FindOuterWidth(
+        public static long FindOuterWidth(
             this IWebDriver driver,
             JQuerySelector by,
             bool includeMargin = false)
         {
-            return driver.Find<int>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
+            return driver.Find<long>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -355,12 +366,12 @@
         /// The current computed height for the first element in the set of matched elements, including padding and 
         /// border.
         /// </returns>
-        public static int FindOuterHeight(
+        public static long FindOuterHeight(
             this IWebDriver driver,
             JQuerySelector by,
             bool includeMargin = false)
         {
-            return driver.Find<int>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
+            return driver.Find<long>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -377,8 +388,8 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<int>(by, "position().top");
-            var left = driver.Find<int>(by, "position().left");
+            var top = driver.Find<long>(by, "position().top");
+            var left = driver.Find<long>(by, "position().left");
             return new Position(top, left);
         }
 
@@ -395,8 +406,8 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<int>(by, "offset().top");
-            var left = driver.Find<int>(by, "offset().left");
+            var top = driver.Find<long>(by, "offset().top");
+            var left = driver.Find<long>(by, "offset().left");
             return new Position(top, left);
         }
 
@@ -411,11 +422,11 @@
         /// The current horizontal position of the scroll bar for the first element in the set of matched elements or 
         /// set the horizontal position of the scroll bar for every matched element.
         /// </returns>
-        public static int FindScrollLeft(
+        public static long FindScrollLeft(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "scrollLeft()");
+            return driver.Find<long>(by, "scrollLeft()");
         }
 
         /// <summary>
@@ -429,11 +440,11 @@
         /// The current vertical position of the scroll bar for the first element in the set of matched elements or 
         /// set the vertical position of the scroll bar for every matched element.
         /// </returns>
-        public static int FindScrollTop(
+        public static long FindScrollTop(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "scrollTop()");
+            return driver.Find<long>(by, "scrollTop()");
         }
 
         /// <summary>
@@ -462,11 +473,11 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <returns>The number of elements in the jQuery object.</returns>
-        public static int FindCount(
+        public static long FindCount(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<int>(by, "length");
+            return driver.Find<long>(by, "length");
         }
 
         /// <summary>
@@ -542,8 +553,9 @@
         /// </param>
         /// <returns>Result of invoking the script.</returns>
         /// <remarks>
-        /// Because of the limitations of the Selenium the only valid types are: <see cref="int"/>, <see cref="bool"/> 
-        /// and <see cref="string"/>, <see cref="IWebElement"/> and <see cref="IEnumerable{IWebElement}"/>.
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
+        /// <see cref="bool"/>, <see cref="string"/>, <see cref="IWebElement"/> and 
+        /// <see cref="IEnumerable{IWebElement}"/>.
         /// </remarks>
         private static T Find<T>(
             this IWebDriver driver,

@@ -56,6 +56,7 @@
     </Compile>
     <Compile Include="JQuerySelector.cs" />
     <Compile Include="Position.cs" />
+    <Compile Include="TypeArgumentException.cs" />
     <Compile Include="WebDriverExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
