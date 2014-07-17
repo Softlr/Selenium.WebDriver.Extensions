@@ -86,8 +86,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var result = driver.Find<IEnumerable<IWebElement>>(by, "get()") ?? Enumerable.Empty<IWebElement>();
-            return new ReadOnlyCollection<IWebElement>(result.ToList());
+            return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by, "get()").ToList());
         }
 
         /// <summary>
@@ -556,6 +555,9 @@
         /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
         /// <see cref="bool"/>, <see cref="string"/>, <see cref="IWebElement"/> and 
         /// <see cref="IEnumerable{IWebElement}"/>.
+        /// Selenium returns different types depending if element has been found or not. If there's a match a
+        /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
+        /// an empty <see cref="ReadOnlyCollection{Object}"/>.
         /// </remarks>
         private static T Find<T>(
             this IWebDriver driver,
@@ -578,7 +580,14 @@
             }
 
             script = "return " + script + ";";
-            return (T)javaScriptDriver.ExecuteScript(script);
+
+            var result = javaScriptDriver.ExecuteScript(script);
+            if (typeof(T) == typeof(IEnumerable<IWebElement>) && result.GetType() == typeof(ReadOnlyCollection<object>))
+            {
+                result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
+            }
+
+            return (T)result;
         }
     }
 }
