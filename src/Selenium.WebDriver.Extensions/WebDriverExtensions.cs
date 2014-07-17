@@ -582,7 +582,8 @@
             script = "return " + script + ";";
 
             var result = javaScriptDriver.ExecuteScript(script);
-            if (typeof(T) == typeof(IEnumerable<IWebElement>) && result.GetType() == typeof(ReadOnlyCollection<object>))
+            if (typeof(T) == typeof(IEnumerable<IWebElement>) 
+                && result.GetType() == typeof(ReadOnlyCollection<object>))
             {
                 result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
             }
