@@ -6,7 +6,7 @@
         <title>Selenium WebDriver Extensions</title>
         <authors>Lukasz Rajchel</authors>
         <licenseUrl>https://github.com/RaYell/selenium-webdriver-extensions/blob/master/LICENSE</licenseUrl>
-        <projectUrl>https://github.com/RaYell/selenium-webdriver-extensions</projectUrl>
+        <projectUrl>https://rayell.github.io/selenium-webdriver-extensions</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Extensions for Selenium WebDriver including jQuery selector support for FindElement and FindElements methods.</description>
         <tags>selenium, webdriver, jquery</tags>
