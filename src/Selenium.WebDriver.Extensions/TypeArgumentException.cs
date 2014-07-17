@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The exception that is thrown when one of the type arguments provided to a method is not valid.
@@ -14,6 +15,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="TypeArgumentException"/> class.
         /// </summary>
+        [UsedImplicitly]
         public TypeArgumentException()
         {
         }
@@ -23,6 +25,7 @@
         /// message.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
+        [UsedImplicitly]
         public TypeArgumentException(string message)
             : base(message)
         {
@@ -37,6 +40,7 @@
         /// The exception that is the cause of the current exception. If the innerException parameter is not a null 
         /// reference, the current exception is raised in a catch block that handles the inner exception.
         /// </param>
+        [UsedImplicitly]
         public TypeArgumentException(string message, Exception innerException)
             : base(message, innerException)
         {
@@ -64,6 +68,7 @@
         /// The exception that is the cause of the current exception. If the innerException parameter is not a null 
         /// reference, the current exception is raised in a catch block that handles the inner exception.
         /// </param>
+        [UsedImplicitly]
         public TypeArgumentException(string message, string typeParameterName, Exception innerException)
             : base(message, typeParameterName, innerException)
         {
