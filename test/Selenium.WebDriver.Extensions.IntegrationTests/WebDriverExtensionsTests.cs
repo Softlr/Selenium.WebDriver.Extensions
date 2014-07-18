@@ -64,7 +64,7 @@
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindDivByIdThatDoesntExist()
         {
-            this.Browser.FindElement(By.JQuerySelector("#id2"));
+            this.Browser.FindElement(By.JQuerySelector("#id-not"));
         }
 
         /// <summary>
@@ -83,8 +83,32 @@
         [Test]
         public void FindDivByClassThatDoesntExist()
         {
-            var elements = this.Browser.FindElements(By.JQuerySelector("div.main1"));
+            var elements = this.Browser.FindElements(By.JQuerySelector("div.mainNot"));
             Assert.AreEqual(0, elements.Count);
+        }
+
+        /// <summary>
+        /// Tests finding element text.
+        /// </summary>
+        [Test]
+        public void FindDivText()
+        {
+            var text = this.Browser.FindText(By.JQuerySelector("#id1"));
+            var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
+            StringAssert.StartsWith("a", trimmedText);
+            StringAssert.EndsWith("b", trimmedText);
+        }
+
+        /// <summary>
+        /// Tests finding element HTML.
+        /// </summary>
+        [Test]
+        public void FindDivHtml()
+        {
+            var text = this.Browser.FindHtml(By.JQuerySelector("#id1"));
+            var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
+            StringAssert.StartsWith("<span>a</span>", trimmedText);
+            StringAssert.EndsWith("<span>b</span>", trimmedText);
         }
     }
 }
