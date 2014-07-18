@@ -336,9 +336,15 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<long?>(by, "position().top");
-            var left = driver.Find<long?>(by, "position().left");
-            return top.HasValue && left.HasValue ? new Position(top.Value, left.Value) : null;
+            var position = driver.Find<IDictionary<string, object>>(by, "position()");
+            if (position == null)
+            {
+                return null;
+            }
+
+            var top = long.Parse(position["top"].ToString());
+            var left = long.Parse(position["left"].ToString());
+            return new Position(top, left);
         }
 
         /// <summary>
@@ -354,9 +360,15 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<long?>(by, "offset().top");
-            var left = driver.Find<long?>(by, "offset().left");
-            return top.HasValue && left.HasValue ? new Position(top.Value, left.Value) : null;
+            var position = driver.Find<IDictionary<string, object>>(by, "offset()");
+            if (position == null)
+            {
+                return null;
+            }
+
+            var top = long.Parse(position["top"].ToString());
+            var left = long.Parse(position["left"].ToString());
+            return new Position(top, left);
         }
 
         /// <summary>

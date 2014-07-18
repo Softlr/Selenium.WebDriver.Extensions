@@ -411,21 +411,16 @@
         [Test]
         public void FindPosition()
         {
-            const long Result1 = 100;
-            const long Result2 = 200;
+            var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
             var mock = MockWebDriver();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().top;"))
-                .Returns(Result1);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position().left;"))
-                .Returns(Result2);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position();"))
+                .Returns(dict);
             mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn(
-                    "return jQuery('input').position().left;",
-                    "return jQuery('input').position().top;"))).Returns(true);
+                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
             var position = mock.Object.FindPosition(By.JQuerySelector("input"));
 
-            Assert.AreEqual(Result1, position.Top);
-            Assert.AreEqual(Result2, position.Left);
+            Assert.AreEqual(dict["top"], position.Top);
+            Assert.AreEqual(dict["left"], position.Left);
         }
 
         /// <summary>
@@ -434,21 +429,16 @@
         [Test]
         public void FindOffset()
         {
-            const long Result1 = 100;
-            const long Result2 = 200;
+            var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
             var mock = MockWebDriver();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().top;"))
-                .Returns(Result1);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset().left;"))
-                .Returns(Result2);
-            mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsNotIn(
-                    "return jQuery('input').offset().left;",
-                    "return jQuery('input').offset().top;"))).Returns(true);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset();"))
+                .Returns(dict);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').offset();")))
+                .Returns(true);
             var offset = mock.Object.FindOffset(By.JQuerySelector("input"));
 
-            Assert.AreEqual(Result1, offset.Top);
-            Assert.AreEqual(Result2, offset.Left);
+            Assert.AreEqual(dict["top"], offset.Top);
+            Assert.AreEqual(dict["left"], offset.Left);
         }
 
         /// <summary>
