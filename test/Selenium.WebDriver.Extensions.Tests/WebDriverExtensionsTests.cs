@@ -481,6 +481,17 @@
         }
 
         /// <summary>
+        /// Tests finding an element scroll left.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(TypeArgumentException))]
+        public void FindDataInvalidType()
+        {
+            var mock = MockWebDriver();
+            mock.Object.FindData<int>(By.JQuerySelector("input"), "test");
+        }
+
+        /// <summary>
         /// Tests finding an element count.
         /// </summary>
         [Test]
