@@ -171,7 +171,7 @@
         {
             if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
+                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
             }
 
             return driver.Find<T>(by, "prop('" + propertyName + "')");
@@ -342,8 +342,8 @@
                 return null;
             }
 
-            var top = long.Parse(positionDict["top"].ToString(), CultureInfo.InvariantCulture);
-            var left = long.Parse(positionDict["left"].ToString(), CultureInfo.InvariantCulture);
+            var top = int.Parse(positionDict["top"].ToString(), CultureInfo.InvariantCulture);
+            var left = int.Parse(positionDict["left"].ToString(), CultureInfo.InvariantCulture);
             return new Position(top, left);
         }
 
@@ -366,8 +366,8 @@
                 return null;
             }
 
-            var top = long.Parse(offsetDict["top"].ToString(), CultureInfo.InvariantCulture);
-            var left = long.Parse(offsetDict["left"].ToString(), CultureInfo.InvariantCulture);
+            var top = int.Parse(offsetDict["top"].ToString(), CultureInfo.InvariantCulture);
+            var left = int.Parse(offsetDict["left"].ToString(), CultureInfo.InvariantCulture);
             return new Position(top, left);
         }
 
@@ -447,7 +447,7 @@
         {
             if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
+                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
             }
 
             return driver.Find<T>(by, "data('" + key + "')");
@@ -540,8 +540,8 @@
         /// <returns>Result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
-        /// <see cref="bool"/>, <see cref="string"/>, <see cref="IWebElement"/> and 
-        /// <see cref="IEnumerable{IWebElement}"/>.
+        /// <see cref="Nullable{Long}"/>, <see cref="bool"/>, <see cref="Nullable{Boolean}"/>, <see cref="string"/>, 
+        /// <see cref="IWebElement"/> and <see cref="IEnumerable{IWebElement}"/>.
         /// Selenium returns different types depending if element has been found or not. If there's a match a
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{Object}"/>.
