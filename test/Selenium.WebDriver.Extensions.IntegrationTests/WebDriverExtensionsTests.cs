@@ -159,7 +159,7 @@
         public void FindValue()
         {
             var value = this.Browser.FindValue(By.JQuerySelector("input:first"));
-            Assert.AreEqual("test-val", value);
+            Assert.AreEqual("v1", value);
         }
 
         /// <summary>
@@ -425,6 +425,66 @@
             var value = this.Browser.FindData<bool?>(By.JQuerySelector("form"), "mybool");
             Assert.IsNotNull(value);
             Assert.IsTrue(value.Value);
+        }
+
+        /// <summary>
+        /// Tests finding element count.
+        /// </summary>
+        [Test]
+        public void FindCount()
+        {
+            var count = this.Browser.FindCount(By.JQuerySelector("div.main"));
+            Assert.AreEqual(2, count);
+        }
+
+        /// <summary>
+        /// Tests finding element count that doesn't exist.
+        /// </summary>
+        [Test]
+        public void FindCountThatDoesntExist()
+        {
+            var count = this.Browser.FindCount(By.JQuerySelector("div.mainNot"));
+            Assert.AreEqual(0, count);
+        }
+
+        /// <summary>
+        /// Tests finding serialized element.
+        /// </summary>
+        [Test]
+        public void FindSerialized()
+        {
+            var value = this.Browser.FindSerialized(By.JQuerySelector("form"));
+            Assert.AreEqual("i1=v1&i3=v3", value);
+        }
+
+        /// <summary>
+        /// Tests finding serialized element that doesn't exist.
+        /// </summary>
+        [Test]
+        public void FindSerializedThatDoesntExist()
+        {
+            var value = this.Browser.FindSerialized(By.JQuerySelector("form.test"));
+            Assert.IsEmpty(value);
+        }
+
+        /// <summary>
+        /// Tests finding serialized array element.
+        /// </summary>
+        [Test]
+        public void FindSerializedArray()
+        {
+            var value = this.Browser.FindSerializedArray(By.JQuerySelector("form"));
+            Assert.AreEqual("[{\"name\":\"i1\",\"value\":\"v1\"},{\"name\":\"i3\",\"value\":\"v3\"}]", value);
+        }
+
+        /// <summary>
+        /// Tests finding serialized array element that doesn't exist.
+        /// </summary>
+        [Test]
+        public void FindSerializedArrayThatDoesntExist()
+        {
+            var value = this.Browser.FindSerializedArray(By.JQuerySelector("form.test"));
+            Assert.AreEqual("[]", value);
         }
     }
 }
