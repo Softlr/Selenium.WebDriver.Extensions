@@ -336,14 +336,14 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var position = driver.Find<IDictionary<string, object>>(by, "position()");
-            if (position == null)
+            var positionDict = driver.Find<IDictionary<string, object>>(by, "position()");
+            if (positionDict == null || !positionDict.ContainsKey("top") || !positionDict.ContainsKey("left"))
             {
                 return null;
             }
 
-            var top = long.Parse(position["top"].ToString());
-            var left = long.Parse(position["left"].ToString());
+            var top = long.Parse(positionDict["top"].ToString(), CultureInfo.InvariantCulture);
+            var left = long.Parse(positionDict["left"].ToString(), CultureInfo.InvariantCulture);
             return new Position(top, left);
         }
 
@@ -360,14 +360,14 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var position = driver.Find<IDictionary<string, object>>(by, "offset()");
-            if (position == null)
+            var offsetDict = driver.Find<IDictionary<string, object>>(by, "offset()");
+            if (offsetDict == null || !offsetDict.ContainsKey("top") || !offsetDict.ContainsKey("left"))
             {
                 return null;
             }
 
-            var top = long.Parse(position["top"].ToString());
-            var left = long.Parse(position["left"].ToString());
+            var top = long.Parse(offsetDict["top"].ToString(), CultureInfo.InvariantCulture);
+            var left = long.Parse(offsetDict["left"].ToString(), CultureInfo.InvariantCulture);
             return new Position(top, left);
         }
 
