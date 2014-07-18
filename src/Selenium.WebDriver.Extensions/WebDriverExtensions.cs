@@ -136,29 +136,7 @@
             JQuerySelector by,
             string attributeName)
         {
-            return driver.FindAttribute<string>(by, attributeName);
-        }
-
-        /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element 
-        /// in the set of matched elements.
-        /// </summary>
-        /// <typeparam name="T">The type of the value to be returned.</typeparam>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium jQuery selector.</param>
-        /// <param name="attributeName">The name of the attribute to get.</param>
-        /// <returns>The value of an attribute for the first element in the set of matched elements.</returns>
-        public static T FindAttribute<T>(
-            this IWebDriver driver,
-            JQuerySelector by,
-            string attributeName)
-        {
-            if (!new[] { typeof(bool), typeof(long), typeof(string) }.Contains(typeof(T)))
-            {
-                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
-            }
-
-            return driver.Find<T>(by, "attr('" + attributeName + "')");
+            return driver.Find<string>(by, "attr('" + attributeName + "')");
         }
 
         /// <summary>
@@ -169,12 +147,12 @@
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <param name="propertyName">The name of the property to get.</param>
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
-        public static string FindProperty(
+        public static bool? FindProperty(
             this IWebDriver driver,
             JQuerySelector by,
             string propertyName)
         {
-            return driver.FindProperty<string>(by, propertyName);
+            return driver.FindProperty<bool?>(by, propertyName);
         }
 
         /// <summary>
@@ -191,7 +169,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            if (!new[] { typeof(bool), typeof(long), typeof(string) }.Contains(typeof(T)))
+            if (!new[] { typeof(bool?), typeof(long), typeof(string) }.Contains(typeof(T)))
             {
                 throw new TypeArgumentException("Only bool, long and string types are supported", "T");
             }
@@ -229,36 +207,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            return driver.FindCss<string>(by, propertyName);
-        }
-
-        /// <summary>
-        /// Searches for DOM elements using jQuery selector and get the value of a style property for the first 
-        /// element in the set of matched elements or set one or more CSS properties for every matched element.
-        /// </summary>
-        /// <typeparam name="T">The type of the value to be returned.</typeparam>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium jQuery selector.</param>
-        /// <param name="propertyName">The CSS property name.</param>
-        /// <returns>
-        /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
-        /// properties for every matched element.
-        /// </returns>
-        /// <remarks>
-        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
-        /// <see cref="bool"/> and <see cref="string"/>.
-        /// </remarks>
-        public static T FindCss<T>(
-            this IWebDriver driver,
-            JQuerySelector by,
-            string propertyName)
-        {
-            if (!new[] { typeof(long), typeof(string) }.Contains(typeof(T)))
-            {
-                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
-            }
-
-            return driver.Find<T>(by, "css('" + propertyName + "')");
+            return driver.Find<string>(by, "css('" + propertyName + "')");
         }
 
         /// <summary>
@@ -271,11 +220,11 @@
         /// The current computed width for the first element in the set of matched elements or set the width of every 
         /// matched element.
         /// </returns>
-        public static long FindWidth(
+        public static long? FindWidth(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<long>(by, "width()");
+            return driver.Find<long?>(by, "width()");
         }
 
         /// <summary>
@@ -288,11 +237,11 @@
         /// The current computed height for the first element in the set of matched elements or set the height of 
         /// every matched element.
         /// </returns>
-        public static long FindHeight(
+        public static long? FindHeight(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<long>(by, "height()");
+            return driver.Find<long?>(by, "height()");
         }
 
         /// <summary>
@@ -306,11 +255,11 @@
         /// The current computed inner width (including padding but not border) for the first element in the set of 
         /// matched elements or set the inner width of every matched element.
         /// </returns>
-        public static long FindInnerWidth(
+        public static long? FindInnerWidth(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<long>(by, "innerWidth()");
+            return driver.Find<long?>(by, "innerWidth()");
         }
 
         /// <summary>
@@ -324,11 +273,11 @@
         /// The current computed inner height (including padding but not border) for the first element in the set of 
         /// matched elements or set the inner width of every matched element.
         /// </returns>
-        public static long FindInnerHeight(
+        public static long? FindInnerHeight(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<long>(by, "innerHeight()");
+            return driver.Find<long?>(by, "innerHeight()");
         }
 
         /// <summary>
@@ -344,12 +293,12 @@
         /// The current computed width for the first element in the set of matched elements, including padding and 
         /// border.
         /// </returns>
-        public static long FindOuterWidth(
+        public static long? FindOuterWidth(
             this IWebDriver driver,
             JQuerySelector by,
             bool includeMargin = false)
         {
-            return driver.Find<long>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
+            return driver.Find<long?>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -365,12 +314,12 @@
         /// The current computed height for the first element in the set of matched elements, including padding and 
         /// border.
         /// </returns>
-        public static long FindOuterHeight(
+        public static long? FindOuterHeight(
             this IWebDriver driver,
             JQuerySelector by,
             bool includeMargin = false)
         {
-            return driver.Find<long>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
+            return driver.Find<long?>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -387,9 +336,9 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<long>(by, "position().top");
-            var left = driver.Find<long>(by, "position().left");
-            return new Position(top, left);
+            var top = driver.Find<long?>(by, "position().top");
+            var left = driver.Find<long?>(by, "position().left");
+            return top.HasValue && left.HasValue ? new Position(top.Value, left.Value) : null;
         }
 
         /// <summary>
@@ -405,9 +354,9 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            var top = driver.Find<long>(by, "offset().top");
-            var left = driver.Find<long>(by, "offset().left");
-            return new Position(top, left);
+            var top = driver.Find<long?>(by, "offset().top");
+            var left = driver.Find<long?>(by, "offset().left");
+            return top.HasValue && left.HasValue ? new Position(top.Value, left.Value) : null;
         }
 
         /// <summary>
@@ -421,11 +370,11 @@
         /// The current horizontal position of the scroll bar for the first element in the set of matched elements or 
         /// set the horizontal position of the scroll bar for every matched element.
         /// </returns>
-        public static long FindScrollLeft(
+        public static long? FindScrollLeft(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<long>(by, "scrollLeft()");
+            return driver.Find<long?>(by, "scrollLeft()");
         }
 
         /// <summary>
@@ -439,11 +388,11 @@
         /// The current vertical position of the scroll bar for the first element in the set of matched elements or 
         /// set the vertical position of the scroll bar for every matched element.
         /// </returns>
-        public static long FindScrollTop(
+        public static long? FindScrollTop(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return driver.Find<long>(by, "scrollTop()");
+            return driver.Find<long?>(by, "scrollTop()");
         }
 
         /// <summary>
@@ -582,6 +531,11 @@
             script = "return " + script + ";";
 
             var result = javaScriptDriver.ExecuteScript(script);
+            if (result == null)
+            {
+                return default(T);
+            }
+
             if (typeof(T) == typeof(IEnumerable<IWebElement>) 
                 && result.GetType() == typeof(ReadOnlyCollection<object>))
             {

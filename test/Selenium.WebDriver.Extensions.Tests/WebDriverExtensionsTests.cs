@@ -192,37 +192,11 @@
         /// Tests finding an element string attribute.
         /// </summary>
         [Test]
-        public void FindAttributeString()
+        public void FindAttribute()
         {
             const string Result = "http://github.com";
             var mock = MockWebDriver("return jQuery('a').attr('href');", Result);
             var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
-
-            Assert.AreEqual(Result, result);
-        }
-
-        /// <summary>
-        /// Tests finding an element boolean attribute.
-        /// </summary>
-        [Test]
-        public void FindAttributeBoolean()
-        {
-            const bool Result = true;
-            var mock = MockWebDriver("return jQuery('a').attr('data-test');", Result);
-            var result = mock.Object.FindAttribute<bool>(By.JQuerySelector("a"), "data-test");
-
-            Assert.AreEqual(Result, result);
-        }
-
-        /// <summary>
-        /// Tests finding an element integer attribute.
-        /// </summary>
-        [Test]
-        public void FindAttributeInteger()
-        {
-            const long Result = 123;
-            var mock = MockWebDriver("return jQuery('a').attr('data-test');", Result);
-            var result = mock.Object.FindAttribute<long>(By.JQuerySelector("a"), "data-test");
 
             Assert.AreEqual(Result, result);
         }
@@ -243,11 +217,12 @@
         /// Tests finding an element attribute with invalid type parameter.
         /// </summary>
         [Test]
-        [ExpectedException(typeof(TypeArgumentException))]
         public void FindAttributeInvalidType()
         {
             var mock = MockWebDriver();
-            mock.Object.FindAttribute<int>(By.JQuerySelector("a"), "href");
+            var result = mock.Object.FindAttribute(By.JQuerySelector("a"), "href");
+            
+            Assert.IsNull(result);
         }
 
         /// <summary>
@@ -258,7 +233,7 @@
         {
             const string Result = "prop";
             var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
-            var result = mock.Object.FindProperty(By.JQuerySelector("input"), "checked");
+            var result = mock.Object.FindProperty<string>(By.JQuerySelector("input"), "checked");
 
             Assert.AreEqual(Result, result);
         }
@@ -271,9 +246,10 @@
         {
             const bool Result = true;
             var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
-            var result = mock.Object.FindProperty<bool>(By.JQuerySelector("input"), "checked");
+            var result = mock.Object.FindProperty(By.JQuerySelector("input"), "checked");
 
-            Assert.AreEqual(Result, result);
+            Assert.IsNotNull(result);
+            Assert.AreEqual(Result, result.Value);
         }
 
         /// <summary>
@@ -313,52 +289,16 @@
         }
 
         /// <summary>
-        /// Tests finding an element string CSS property.
+        /// Tests finding an element CSS property.
         /// </summary>
         [Test]
-        public void FindCssString()
+        public void FindCss()
         {
             const string Result = "hidden";
             var mock = MockWebDriver("return jQuery('input').css('display');", Result);
             var result = mock.Object.FindCss(By.JQuerySelector("input"), "display");
 
             Assert.AreEqual(Result, result);
-        }
-
-        /// <summary>
-        /// Tests finding an element integer CSS property.
-        /// </summary>
-        [Test]
-        public void FindCssInteger()
-        {
-            const long Result = 1;
-            var mock = MockWebDriver("return jQuery('input').css('z-index');", Result);
-            var result = mock.Object.FindCss<long>(By.JQuerySelector("input"), "z-index");
-
-            Assert.AreEqual(Result, result);
-        }
-
-        /// <summary>
-        /// Tests finding an element CSS property that doesn't exist.
-        /// </summary>
-        [Test]
-        public void FindCssNotExists()
-        {
-            var mock = MockWebDriver();
-            var result = mock.Object.FindCss<string>(By.JQuerySelector("input"), "display");
-
-            Assert.IsNull(result);
-        }
-
-        /// <summary>
-        /// Tests finding an element CSS property with invalid type parameter.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(TypeArgumentException))]
-        public void FindCssInvalidType()
-        {
-            var mock = MockWebDriver();
-            mock.Object.FindCss<int>(By.JQuerySelector("input"), "display");
         }
 
         /// <summary>
