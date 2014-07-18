@@ -351,5 +351,49 @@
             var value = this.Browser.FindOuterHeight(By.JQuerySelector("h6"), true);
             Assert.IsNull(value);
         }
+
+        /// <summary>
+        /// Tests finding element position.
+        /// </summary>
+        [Test]
+        public void FindPosition()
+        {
+            var position = this.Browser.FindPosition(By.JQuerySelector("h1"));
+            Assert.IsNotNull(position);
+            Assert.AreEqual(3, position.Top);
+            Assert.AreEqual(8, position.Left);
+        }
+
+        /// <summary>
+        /// Tests finding element position that doesn't exist.
+        /// </summary>
+        [Test]
+        public void FindPositionThatDoesntExist()
+        {
+            var position = this.Browser.FindPosition(By.JQuerySelector("h6"));
+            Assert.IsNull(position);
+        }
+
+        /// <summary>
+        /// Tests finding element offset.
+        /// </summary>
+        [Test]
+        public void FindOffset()
+        {
+            var position = this.Browser.FindOffset(By.JQuerySelector("h1"));
+            Assert.IsNotNull(position);
+            Assert.AreEqual(8, position.Top);
+            Assert.AreEqual(13, position.Left);
+        }
+
+        /// <summary>
+        /// Tests finding element offset that doesn't exist.
+        /// </summary>
+        [Test]
+        public void FindOffsetThatDoesntExist()
+        {
+            var position = this.Browser.FindOffset(By.JQuerySelector("h6"));
+            Assert.IsNull(position);
+        }
     }
 }
