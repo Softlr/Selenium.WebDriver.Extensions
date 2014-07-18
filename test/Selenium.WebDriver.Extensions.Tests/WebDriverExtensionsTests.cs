@@ -56,7 +56,7 @@
         /// <param name="mockValueSequence">
         /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
         /// </param>
-        [TestCaseSource(typeof(WebDriverExtensionsTests), "LoadJQueryTestCases")]
+        [TestCaseSource("LoadJQueryTestCases")]
         public void LoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var mock = new Mock<IWebDriver>();
@@ -73,7 +73,7 @@
         /// <param name="mockValueSequence">
         /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
         /// </param>
-        [TestCaseSource(typeof(WebDriverExtensionsTests), "LoadJQueryWithUriTestCases")]
+        [TestCaseSource("LoadJQueryWithUriTestCases")]
         public void LoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var mock = new Mock<IWebDriver>();

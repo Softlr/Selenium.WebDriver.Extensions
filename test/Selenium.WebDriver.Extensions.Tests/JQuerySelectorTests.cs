@@ -122,7 +122,7 @@
         /// </summary>
         /// <param name="selector">The jQuery selector.</param>
         /// <returns>The generated jQuery selector.</returns>
-        [TestCaseSource(typeof(JQuerySelectorTests), "SelectorTestCases")]
+        [TestCaseSource("SelectorTestCases")]
         public string Selector(JQuerySelector selector)
         {
             return selector.Selector;
