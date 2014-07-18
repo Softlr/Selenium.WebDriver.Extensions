@@ -253,7 +253,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            if (!new[] { typeof(bool), typeof(long), typeof(string) }.Contains(typeof(T)))
+            if (!new[] { typeof(long), typeof(string) }.Contains(typeof(T)))
             {
                 throw new TypeArgumentException("Only bool, long and string types are supported", "T");
             }
