@@ -395,5 +395,36 @@
             var position = this.Browser.FindOffset(By.JQuerySelector("h6"));
             Assert.IsNull(position);
         }
+
+        /// <summary>
+        /// Tests finding element string data.
+        /// </summary>
+        [Test]
+        public void FindStringData()
+        {
+            var value = this.Browser.FindData(By.JQuerySelector("form"), "mystring");
+            Assert.AreEqual("str", value);
+        }
+
+        /// <summary>
+        /// Tests finding element integer data.
+        /// </summary>
+        [Test]
+        public void FindIntegerData()
+        {
+            var value = this.Browser.FindData<long?>(By.JQuerySelector("form"), "myint");
+            Assert.AreEqual(123, value);
+        }
+
+        /// <summary>
+        /// Tests finding element boolean data.
+        /// </summary>
+        [Test]
+        public void FindBooleanData()
+        {
+            var value = this.Browser.FindData<bool?>(By.JQuerySelector("form"), "mybool");
+            Assert.IsNotNull(value);
+            Assert.IsTrue(value.Value);
+        }
     }
 }

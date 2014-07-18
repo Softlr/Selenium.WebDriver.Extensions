@@ -169,7 +169,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            if (!new[] { typeof(bool?), typeof(long), typeof(string) }.Contains(typeof(T)))
+            if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
             {
                 throw new TypeArgumentException("Only bool, long and string types are supported", "T");
             }
@@ -424,7 +424,33 @@
             JQuerySelector by,
             string key)
         {
-            return driver.Find<string>(by, "data('" + key + "')");
+            return driver.FindData<string>(by, key);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using jQuery selector and returns the value at the named data store for the 
+        /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-* 
+        /// attribute.
+        /// </summary>
+        /// <typeparam name="T">The type of the result to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="key">The name of the data stored.</param>
+        /// <returns>
+        /// The value at the named data store for the first element in the jQuery collection, as set by 
+        /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
+        /// </returns>
+        public static T FindData<T>(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string key)
+        {
+            if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
+            {
+                throw new TypeArgumentException("Only bool, long and string types are supported", "T");
+            }
+
+            return driver.Find<T>(by, "data('" + key + "')");
         }
 
         /// <summary>
