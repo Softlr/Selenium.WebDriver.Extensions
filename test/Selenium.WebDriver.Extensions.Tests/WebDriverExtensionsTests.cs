@@ -544,7 +544,7 @@
                 mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(script)).Returns(value);
             }
 
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery !== 'function'"))
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery === 'function'"))
                 .Returns(true);
             return mock;
         }
