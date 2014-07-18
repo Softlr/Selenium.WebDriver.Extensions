@@ -6,4 +6,4 @@ before_build:
   - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
 test:
   assemblies:
-    - Selenium.WebDriver.Extensions.dll
+    - Selenium.WebDriver.Extensions.Tests.dll
