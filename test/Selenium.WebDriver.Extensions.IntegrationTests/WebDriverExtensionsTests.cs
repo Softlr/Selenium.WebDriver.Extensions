@@ -11,10 +11,25 @@
     /// <summary>
     /// JQuery selector tests.
     /// </summary>
-    [TestFixture]
+    [TestFixture("TestCase.html")]
+    [TestFixture("TestCaseNoJQuery.html")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebDriverExtensionsTests"/> class.
+        /// </summary>
+        /// <param name="testCaseFileName">The test case file name.</param>
+        public WebDriverExtensionsTests(string testCaseFileName)
+        {
+            this.TestCaseFileName = testCaseFileName;
+        }
+
+        /// <summary>
+        /// Gets or sets the test case file name.
+        /// </summary>
+        private string TestCaseFileName { get; set; }
+
         /// <summary>
         /// Gets or sets the selenium web driver.
         /// </summary>
@@ -27,15 +42,18 @@
         public void SetUp()
         {
             this.Browser = new FirefoxDriver();
-            
             var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo == null)
             {
                 return;
             }
 
-            var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + "TestCase.html");
+            var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
+            if (this.TestCaseFileName == "TestCaseNoJQuery.html")
+            {
+                this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js "));
+            }
         }
 
         /// <summary>

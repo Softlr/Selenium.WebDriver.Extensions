@@ -510,7 +510,7 @@
         {
             var javaScriptDriver = (IJavaScriptExecutor)driver;
 
-            const string CheckScript = "return typeof window.jQuery !== 'function'";
+            const string CheckScript = "return typeof window.jQuery === 'function'";
             var exists = (bool)javaScriptDriver.ExecuteScript(CheckScript);
             if (exists)
             {
