@@ -6,6 +6,7 @@
 	<property name="path.nunit" value="packages\NUnit.Runners.2.6.3\tools\nunit-console.exe"/>
 	<property name="path.cover" value="packages\OpenCover.4.5.2506\OpenCover.Console.exe"/>
 	<property name="path.report" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
+	<property name="path.doxygen" value="docs\doxygen.exe"/>
 	<property name="dir.build" value="../Build"/>
 	<property name="dir.test" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
 	<property name="dir.work" value="${dir.build}/${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
@@ -22,7 +23,7 @@
 		</msbuild>
 	</target>
 	
-	<target name="full" depends="compile, test, coverage"/>
+	<target name="full" depends="compile, test, coverage, docs"/>
     
 	<target name="setup.build.process">
 		<delete dir="${dir.build}" failonerror="false"/>
@@ -64,5 +65,9 @@
 			<arg value="-targetdir:&quot;${dir.report}&quot;"/>
 			<arg value="-reporttypes:Html"/>
 		</exec>
+	</target>
+	
+	<target name="docs">
+		<exec program="${path.doxygen}"/>
 	</target>
 </project>
