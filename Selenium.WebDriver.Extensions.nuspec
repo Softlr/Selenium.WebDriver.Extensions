@@ -10,6 +10,10 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Extensions for Selenium WebDriver including jQuery selector support for FindElement and FindElements methods.</description>
         <tags>selenium, webdriver, jquery</tags>
+		<dependencies>
+			<dependency id="Selenium.WebDriver" />
+			<dependency id="Selenium.Support" />
+		</dependencies> 
     </metadata>
     <files>
         <file src="src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\Selenium.WebDriver.Extensions.dll" />
