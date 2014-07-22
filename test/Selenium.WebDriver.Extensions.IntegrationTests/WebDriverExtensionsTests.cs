@@ -5,25 +5,38 @@
     using System.IO;
     using NUnit.Framework;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.PhantomJS;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
     /// JQuery selector tests.
     /// </summary>
-    [TestFixture("TestCase.html")]
-    [TestFixture("TestCaseNoJQuery.html")]
+    [TestFixture("PhantomJS", "TestCase.html")]
+    [TestFixture("PhantomJS", "TestCaseNoJQuery.html")]
+    [TestFixture("Firefox", "TestCase.html")]
+    [TestFixture("Firefox", "TestCaseNoJQuery.html")]
+    [TestFixture("Chrome", "TestCase.html")]
+    [TestFixture("Chrome", "TestCaseNoJQuery.html")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="WebDriverExtensionsTests"/> class.
         /// </summary>
+        /// <param name="driverName">The web driver name.</param>
         /// <param name="testCaseFileName">The test case file name.</param>
-        public WebDriverExtensionsTests(string testCaseFileName)
+        public WebDriverExtensionsTests(string driverName, string testCaseFileName)
         {
+            this.DriverName = driverName;
             this.TestCaseFileName = testCaseFileName;
         }
+
+        /// <summary>
+        /// Gets or sets the driver name.
+        /// </summary>
+        private string DriverName { get; set; }
 
         /// <summary>
         /// Gets or sets the test case file name.
@@ -41,7 +54,21 @@
         [TestFixtureSetUp]
         public void SetUp()
         {
-            this.Browser = new FirefoxDriver();
+            switch (this.DriverName)
+            {
+                case "PhantomJS":
+                    this.Browser = new PhantomJSDriver();
+                    break;
+                case "Firefox":
+                    this.Browser = new FirefoxDriver();
+                    break;
+                case "Chrome":
+                    this.Browser = new ChromeDriver();
+                    break;
+                default:
+                    return;
+            }
+            
             var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo == null)
             {
