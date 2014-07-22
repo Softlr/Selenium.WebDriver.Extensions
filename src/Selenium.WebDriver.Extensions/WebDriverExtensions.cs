@@ -545,7 +545,7 @@
         /// <param name="wrapperFormat">
         /// The wrapper format string for the purpose of wrap the jQuery selection result.
         /// </param>
-        /// <returns>Result of invoking the script.</returns>
+        /// <returns>Parsed result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
         /// <see cref="Nullable{Long}"/>, <see cref="bool"/>, <see cref="Nullable{Boolean}"/>, <see cref="string"/>, 
@@ -566,7 +566,25 @@
             }
 
             driver.LoadJQuery();
+            return ParseResult<T>(driver.ExecuteScript(by, scriptFormat, wrapperFormat));
+        }
 
+        /// <summary>
+        /// Executes jQuery script.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="scriptFormat">The format string of the script to be invoked.</param>
+        /// <param name="wrapperFormat">
+        /// The wrapper format string for the purpose of wrap the jQuery selection result.
+        /// </param>
+        /// <returns>Result of invoking the script.</returns>
+        private static object ExecuteScript(
+            this IWebDriver driver, 
+            JQuerySelector by, 
+            string scriptFormat,
+            string wrapperFormat)
+        {
             var javaScriptDriver = (IJavaScriptExecutor)driver;
             var script = by + "." + scriptFormat;
             if (wrapperFormat != null)
@@ -576,13 +594,23 @@
 
             script = "return " + script + ";";
 
-            var result = javaScriptDriver.ExecuteScript(script);
+            return javaScriptDriver.ExecuteScript(script);
+        }
+
+        /// <summary>
+        /// Parses the result of executed jQuery script.
+        /// </summary>
+        /// <typeparam name="T">The type of the result to be returned.</typeparam>
+        /// <param name="result">The result of jQuery script.</param>
+        /// <returns>Parsed result of invoking the script.</returns>
+        private static T ParseResult<T>(object result)
+        {
             if (result == null)
             {
                 return default(T);
             }
 
-            if (typeof(T) == typeof(IEnumerable<IWebElement>) 
+            if (typeof(T) == typeof(IEnumerable<IWebElement>)
                 && result.GetType() == typeof(ReadOnlyCollection<object>))
             {
                 result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
