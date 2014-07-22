@@ -50,14 +50,19 @@
 
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
-            if (this.TestCaseFileName == "TestCaseNoJQuery.html")
+            
+            if (this.TestCaseFileName != "TestCaseNoJQuery.html")
             {
-                this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js "));
-
-                // set the scrolls for tests
-                var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
-                javaScriptDriver.ExecuteScript("$('div.scroll').scrollTop(100).scrollLeft(200);");
+                // no additional setup needed
+                return;
             }
+
+            // load jQuery
+            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js "));
+
+            // set the scrolls for tests
+            var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
+            javaScriptDriver.ExecuteScript("$('div.scroll').scrollTop(100).scrollLeft(200);");
         }
 
         /// <summary>
