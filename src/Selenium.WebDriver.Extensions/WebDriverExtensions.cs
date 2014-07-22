@@ -508,22 +508,30 @@
         /// </remarks>
         private static void LoadJQuery(this IWebDriver driver, string jQueryUri, TimeSpan timeout)
         {
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
-
-            const string CheckScript = "return typeof window.jQuery === 'function'";
-            var exists = (bool)javaScriptDriver.ExecuteScript(CheckScript);
-            if (exists)
+            if (CheckJQuery(driver))
             {
                 return;
             }
 
             var loadScript = "var jq = document.createElement('script');" +
                 "jq.src = '" + jQueryUri + "';" +
-                "document.getElementsByTagName('head')[0].appendChild(jq);";
+                "document.getElementsByTagName('body')[0].appendChild(jq);";
 
-            javaScriptDriver.ExecuteScript(loadScript);
+            ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => javaScriptDriver.ExecuteScript(CheckScript));
+            wait.Until(d => CheckJQuery(driver));
+        }
+
+        /// <summary>
+        /// Checks if jQuery has been loaded.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <returns><c>true</c> if jQuery is loaded; otherwise, <c>false</c></returns>
+        private static bool CheckJQuery(this IWebDriver driver)
+        {
+            const string CheckScript = "return typeof window.jQuery === 'function';";
+            var result = (bool?)((IJavaScriptExecutor)driver).ExecuteScript(CheckScript);
+            return result.HasValue && result.Value;
         }
 
         /// <summary>
