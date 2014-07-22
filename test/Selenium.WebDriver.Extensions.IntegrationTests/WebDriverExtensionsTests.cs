@@ -7,18 +7,25 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
     using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
     /// JQuery selector tests.
     /// </summary>
+    /// <remarks>
+    /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
+    /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
+    /// </remarks>
     [TestFixture("PhantomJS", "TestCase.html")]
     [TestFixture("PhantomJS", "TestCaseNoJQuery.html")]
     [TestFixture("Firefox", "TestCase.html")]
     [TestFixture("Firefox", "TestCaseNoJQuery.html")]
     [TestFixture("Chrome", "TestCase.html")]
     [TestFixture("Chrome", "TestCaseNoJQuery.html")]
+    [TestFixture("IE", "TestCase.html")]
+    [TestFixture("IE", "TestCaseNoJQuery.html")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
@@ -64,6 +71,9 @@
                     break;
                 case "Chrome":
                     this.Browser = new ChromeDriver();
+                    break;
+                case "IE":
+                    this.Browser = new InternetExplorerDriver();
                     break;
                 default:
                     return;
