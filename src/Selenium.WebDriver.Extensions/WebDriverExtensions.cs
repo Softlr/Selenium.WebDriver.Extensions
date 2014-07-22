@@ -603,6 +603,10 @@
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="result">The result of jQuery script.</param>
         /// <returns>Parsed result of invoking the script.</returns>
+        /// <remarks>
+        /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
+        /// to long integer type.
+        /// </remarks>
         private static T ParseResult<T>(object result)
         {
             if (result == null)
@@ -614,6 +618,11 @@
                 && result.GetType() == typeof(ReadOnlyCollection<object>))
             {
                 result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
+            }
+
+            if (result is double)
+            {
+                result = (long?)(double)result;
             }
 
             return (T)result;
