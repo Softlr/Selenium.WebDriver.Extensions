@@ -2,67 +2,65 @@
 <project name="Selenium.WebDriver.Extensions" default="full" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<property name="project.framework" value="net-4.5"/>
 	<property name="project.config" value="debug"/>
-	<property name="project.vsversion" value="12.0"/>
+	<property name="project.visual.studio.version" value="12.0"/>
 	<property name="path.nunit" value="packages\NUnit.Runners.2.6.3\tools\nunit-console.exe"/>
-	<property name="path.cover" value="packages\OpenCover.4.5.2506\OpenCover.Console.exe"/>
-	<property name="path.report" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
+	<property name="path.opencover" value="packages\OpenCover.4.5.2506\OpenCover.Console.exe"/>
+	<property name="path.report.generator" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
 	<property name="path.doxygen" value="docs\doxygen.exe"/>
 	<property name="dir.build" value="../Build"/>
-	<property name="dir.test" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
 	<property name="dir.work" value="${dir.build}/${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
-	<property name="dir.report" value="${dir.work}\CoverageReport"/>
-	<property name="file.tests" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
-	<property name="file.testresult" value="Selenium.WebDriver.Extensions.Tests.xml"/>
-	<property name="file.coverage" value="${dir.work}\coverage.xml"/>
+	<property name="dir.unit.tests" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
+	<property name="dir.coverage.report" value="${dir.work}\CoverageReport"/>
+	<property name="file.unit.tests" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
+	<property name="file.test.results" value="Selenium.WebDriver.Extensions.Tests.xml"/>
+	<property name="file.coverage.report" value="${dir.work}\coverage.xml"/>
 	
 	<target name="compile">
 		<loadtasks assembly="packages\NAnt.Contrib.Portable.0.92\tools\NAnt.Contrib.Tasks.dll" />
 		<msbuild project="Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config}"/>
-			<property name="VisualStudioVersion" value="${project.vsversion}"/>
+			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
 		</msbuild>
 	</target>
 	
-	<target name="full" depends="compile, test, coverage, docs"/>
-    
 	<target name="setup.build.process">
 		<delete dir="${dir.build}" failonerror="false"/>
 		<mkdir dir="${dir.build}"/>
 	</target>
 	
-	<target name="move.assemblies.for.tests">
+	<target name="move.assemblies.for.unit.tests">
 		<copy todir="${dir.work}" flatten="true">
-			<fileset basedir="${dir.test}">
+			<fileset basedir="${dir.unit.tests}">
 				<include name="*.dll"/>
 				<include name="*.pdb"/>
 			</fileset>
 		</copy>
 	</target>
 	
-	<target name="test" depends="setup.build.process, move.assemblies.for.tests">
+	<target name="test" depends="setup.build.process, move.assemblies.for.unit.tests">
 		<exec program="${path.nunit}">
-			<arg value="${file.tests}"/>
+			<arg value="${file.unit.tests}"/>
 			<arg value="/framework:${project.framework}"/>
 			<arg value="/work:${dir.work}"/>
-			<arg value="/result:${file.testresult}"/>
+			<arg value="/result:${file.test.results}"/>
 			<arg value="/nologo"/>
 		</exec>
 	</target>
 	
-	<target name="analyse.coverage" depends="setup.build.process, move.assemblies.for.tests">
-		<exec program="${path.cover}">
+	<target name="analyse.code.coverage" depends="setup.build.process, move.assemblies.for.unit.tests">
+		<exec program="${path.opencover}">
 			<arg value="-register:user"/>
 			<arg value="-target:&quot;${path.nunit}&quot;"/>
-			<arg value="-targetargs:&quot;/noshadow ${file.tests} /framework:${project.framework} /work:${dir.work} /result:${file.testresult} /nologo&quot;"/>
+			<arg value="-targetargs:&quot;/noshadow ${file.unit.tests} /framework:${project.framework} /work:${dir.work} /result:${file.test.results} /nologo&quot;"/>
 			<arg value="-filter:&quot;+[*]*&quot;"/>
-			<arg value="-output:&quot;${file.coverage}&quot;"/>
+			<arg value="-output:&quot;${file.coverage.report}&quot;"/>
 		</exec>
 	</target>
 	
-	<target name="coverage" depends="analyse.coverage">
-		<exec program="${path.report}">
-			<arg value="-reports:&quot;${file.coverage}&quot;"/>
-			<arg value="-targetdir:&quot;${dir.report}&quot;"/>
+	<target name="coverage" depends="analyse.code.coverage">
+		<exec program="${path.report.generator}">
+			<arg value="-reports:&quot;${file.coverage.report}&quot;"/>
+			<arg value="-targetdir:&quot;${dir.coverage.report}&quot;"/>
 			<arg value="-reporttypes:Html"/>
 		</exec>
 	</target>
@@ -70,4 +68,6 @@
 	<target name="docs">
 		<exec program="${path.doxygen}"/>
 	</target>
+	
+	<target name="full" depends="compile, test, coverage, docs"/>
 </project>
