@@ -53,6 +53,10 @@
             if (this.TestCaseFileName == "TestCaseNoJQuery.html")
             {
                 this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js "));
+
+                // set the scrolls for tests
+                var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
+                javaScriptDriver.ExecuteScript("$('div.scroll').scrollTop(100).scrollLeft(200);");
             }
         }
 
@@ -443,6 +447,28 @@
             var value = this.Browser.FindData<bool?>(By.JQuerySelector("form"), "mybool");
             Assert.IsNotNull(value);
             Assert.IsTrue(value.Value);
+        }
+
+        /// <summary>
+        /// Tests finding element scroll top value.
+        /// </summary>
+        [Test]
+        public void FindScrollTop()
+        {
+            var scroll = this.Browser.FindScrollTop(By.JQuerySelector("div.scroll"));
+            Assert.IsNotNull(scroll);
+            Assert.AreEqual(100, scroll);
+        }
+
+        /// <summary>
+        /// Tests finding element scroll left value.
+        /// </summary>
+        [Test]
+        public void FindScrollLeft()
+        {
+            var scroll = this.Browser.FindScrollLeft(By.JQuerySelector("div.scroll"));
+            Assert.IsNotNull(scroll);
+            Assert.AreEqual(200, scroll);
         }
 
         /// <summary>
