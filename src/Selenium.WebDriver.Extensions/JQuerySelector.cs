@@ -24,14 +24,10 @@
                 throw new ArgumentNullException("selector");
             }
 
-            // escape single quotes in selector
-            selector = selector.Replace('\'', '"');
-
             this.Context = context;
-            this.JQueryVariable = jQueryVariable;    
-            this.Selector = this.Context == null 
-                ? this.JQueryVariable + "('" + selector + "')"
-                : this.JQueryVariable + "('" + selector + "', " + this.Context + ")";
+            this.JQueryVariable = jQueryVariable;
+            this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'" 
+                + (this.Context != null ? ", " + this.Context : string.Empty) + ")";
         }
 
         /// <summary>
