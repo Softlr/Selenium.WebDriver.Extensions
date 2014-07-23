@@ -4,7 +4,7 @@
 Extensions for Selenium WebDriver including jQuery selector support.
 
 # Features
-Some of the most important features of this library include:
+Some of the features of this library are:
 * Generates jQuery selectors that can be used by Selenium WebDrivers to perform selections that CSS can't do
 * Allows jQuery selectors to be used even on sites that don't use jQuery as it can load before performing a first search
 * Very easy setup: install package with NuGet, include a namespace and start using it
@@ -18,6 +18,9 @@ Run the following command in Visual Studio Packet Manager Console.
 ```posh
 Install-Package Selenium.WebDriver.Extensions
 ```
+
+# Documentation
+API documentation can be found [here](https://rayell.github.io/selenium-webdriver-extensions/api).
 
 # Usage
 
@@ -57,7 +60,7 @@ var selector = By.JQuerySelector("div", jQueryVariable: "myJQuery");
 ```
 
 #### jQuery context switch
-You can use one `JQuerySelector` as a context of another `JQuerySelector`.
+You can use one `JQuerySelector` instance as a context of another `JQuerySelector`.
 
 ```csharp
 var context = By.JQuerySelector("div.myClass");
