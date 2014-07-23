@@ -172,4 +172,6 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
-docs/html/
+
+# SandCastle build documentation
+docs/Help/
