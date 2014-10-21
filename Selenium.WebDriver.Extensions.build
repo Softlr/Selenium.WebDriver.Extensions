@@ -4,7 +4,7 @@
 	<property name="project.config" value="debug"/>
 	<property name="project.visual.studio.version" value="12.0"/>
 	<property name="path.nunit" value="packages\NUnit.Runners.2.6.3\tools\nunit-console.exe"/>
-	<property name="path.opencover" value="packages\OpenCover.4.5.2506\OpenCover.Console.exe"/>
+	<property name="path.opencover" value="packages\OpenCover.4.5.3207\OpenCover.Console.exe"/>
 	<property name="path.report.generator" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
 	<property name="dir.build" value="../Build"/>
 	<property name="dir.work" value="${dir.build}/${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
