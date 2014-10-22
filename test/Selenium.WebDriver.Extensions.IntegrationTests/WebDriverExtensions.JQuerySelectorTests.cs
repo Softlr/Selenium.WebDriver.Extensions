@@ -18,23 +18,23 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("PhantomJS", "TestCase.html")]
+    [TestFixture("PhantomJS", "TestCaseJQuery.html")]
     [TestFixture("PhantomJS", "TestCaseNoJQuery.html")]
-    [TestFixture("Firefox", "TestCase.html")]
+    [TestFixture("Firefox", "TestCaseJQuery.html")]
     [TestFixture("Firefox", "TestCaseNoJQuery.html")]
-    [TestFixture("Chrome", "TestCase.html")]
+    [TestFixture("Chrome", "TestCaseJQuery.html")]
     [TestFixture("Chrome", "TestCaseNoJQuery.html")]
-    [TestFixture("IE", "TestCase.html")]
+    [TestFixture("IE", "TestCaseJQuery.html")]
     [TestFixture("IE", "TestCaseNoJQuery.html")]
     [ExcludeFromCodeCoverage]
-    public class WebDriverExtensionsTests
+    public class WebDriverExtensionsJQuerySelectorTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebDriverExtensionsTests"/> class.
+        /// Initializes a new instance of the <see cref="WebDriverExtensionsJQuerySelectorTests"/> class.
         /// </summary>
         /// <param name="driverName">The web driver name.</param>
         /// <param name="testCaseFileName">The test case file name.</param>
-        public WebDriverExtensionsTests(string driverName, string testCaseFileName)
+        public WebDriverExtensionsJQuerySelectorTests(string driverName, string testCaseFileName)
         {
             this.DriverName = driverName;
             this.TestCaseFileName = testCaseFileName;
@@ -95,7 +95,7 @@
             }
 
             // load jQuery
-            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js "));
+            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js"));
 
             // set the scrolls for tests
             var javaScriptDriver = (IJavaScriptExecutor)this.Browser;

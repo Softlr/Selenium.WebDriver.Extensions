@@ -49,6 +49,36 @@
         }
 
         /// <summary>
+        /// Gets the load Sizzle test cases.
+        /// </summary>
+        private static IEnumerable LoadSizzleTestCases
+        {
+            get
+            {
+                yield return new TestCaseData("master", null, new object[] { true });
+                yield return new TestCaseData("1.11.1", null, new object[] { false, true, true });
+                yield return new TestCaseData("master", TimeSpan.FromSeconds(1), new object[] { false })
+                    .Throws(typeof(WebDriverTimeoutException));
+            }
+        }
+
+        /// <summary>
+        /// Gets the load Sizzle test cases.
+        /// </summary>
+        private static IEnumerable LoadSizzleWithUriTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(new Uri("http://my.com/sizzle.js"), null, new object[] { true });
+                yield return new TestCaseData(null, null, new object[] { false, true, true });
+                yield return new TestCaseData(
+                    new Uri("http://my.com/sizzle.js"),
+                    TimeSpan.FromSeconds(1),
+                    new object[] { false }).Throws(typeof(WebDriverTimeoutException));
+            }
+        }
+
+        /// <summary>
         /// Tests jQuery loading.
         /// </summary>
         /// <param name="version">The version of jQuery to load if it's not already loaded on the tested page.</param>
@@ -80,6 +110,40 @@
             var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
             mock.Object.LoadJQuery(jQueryUri, timeout);
+        }
+
+        /// <summary>
+        /// Tests Sizzle loading.
+        /// </summary>
+        /// <param name="version">The version of Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <param name="mockValueSequence">
+        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
+        /// </param>
+        [TestCaseSource("LoadSizzleTestCases")]
+        public void LoadSizzle(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
+        {
+            var mock = new Mock<IWebDriver>();
+            var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
+            mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
+            mock.Object.LoadSizzle(version, timeout);
+        }
+
+        /// <summary>
+        /// Tests Sizzle loading.
+        /// </summary>
+        /// <param name="sizzleUri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <param name="mockValueSequence">
+        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
+        /// </param>
+        [TestCaseSource("LoadSizzleWithUriTestCases")]
+        public void LoadSizzleWithUri(Uri sizzleUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
+        {
+            var mock = new Mock<IWebDriver>();
+            var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
+            mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
+            mock.Object.LoadSizzle(sizzleUri, timeout);
         }
 
         /// <summary>
@@ -123,6 +187,47 @@
         }
 
         /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        public void FindElementWithSizzle()
+        {
+            var element = new Mock<IWebElement>();
+            element.Setup(x => x.TagName).Returns("div");
+            var list = new List<IWebElement> { element.Object };
+            var mock = MockWebDriver("return Sizzle('div');", new ReadOnlyCollection<IWebElement>(list));
+            var result = mock.Object.FindElement(By.SizzleSelector("div"));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("div", result.TagName);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindElementWithSizzleArgumentNull()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.Object.FindElement((SizzleSelector)null);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(NoSuchElementException))]
+        public void FindElementWithSizzleNoSuchElement()
+        {
+            var element = new Mock<IWebElement>();
+            element.Setup(x => x.TagName).Returns("div");
+            var mock = MockWebDriver();
+
+            mock.Object.FindElement(By.SizzleSelector("div"));
+        }
+
+        /// <summary>
         /// Tests finding elements.
         /// </summary>
         [Test]
@@ -158,6 +263,46 @@
             var list = new List<object>();
             var mock = MockWebDriver("return jQuery('.test').get();", new ReadOnlyCollection<object>(list));
             var result = mock.Object.FindElements(By.JQuerySelector(".test"));
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindElementsWithSizzle()
+        {
+            var element1 = new Mock<IWebElement>();
+            element1.Setup(x => x.TagName).Returns("div");
+            element1.Setup(x => x.GetAttribute("class")).Returns("test");
+
+            var element2 = new Mock<IWebElement>();
+            element2.Setup(x => x.TagName).Returns("span");
+            element2.Setup(x => x.GetAttribute("class")).Returns("test");
+
+            var list = new List<IWebElement> { element1.Object, element2.Object };
+            var mock = MockWebDriver("return Sizzle('.test');", new ReadOnlyCollection<IWebElement>(list));
+            var result = mock.Object.FindElements(By.SizzleSelector(".test"));
+
+            Assert.AreEqual(2, result.Count);
+
+            Assert.AreEqual("div", result[0].TagName);
+            Assert.AreEqual("test", result[0].GetAttribute("class"));
+
+            Assert.AreEqual("span", result[1].TagName);
+            Assert.AreEqual("test", result[1].GetAttribute("class"));
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindElementsWithSizzleNotExists()
+        {
+            var list = new List<object>();
+            var mock = MockWebDriver("return Sizzle('.test');", new ReadOnlyCollection<object>(list));
+            var result = mock.Object.FindElements(By.SizzleSelector(".test"));
 
             Assert.AreEqual(0, result.Count);
         }
@@ -591,6 +736,8 @@
             }
 
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery === 'function';"))
+                .Returns(true);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
                 .Returns(true);
             return mock;
         }
