@@ -1,7 +1,7 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu)](https://ci.appveyor.com/project/RaYell/selenium-helpers)
 
 # Description
-Extensions for Selenium WebDriver including jQuery selector support.
+Extensions for Selenium WebDriver including jQuery and Sizzle selector support.
 
 # Features
 Some of the features of this library are:
