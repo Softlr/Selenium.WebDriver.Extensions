@@ -82,7 +82,7 @@ driver.LoadSizzle("1.11.1"); // load specific version from default CDN
 driver.LoadSizzle(new Uri("http://some.server/sizzle.js")); // load a library from other source
 ```
 
-#### jQuery context switch
+#### Sizzle context switch
 You can use one `SizzleSelector` instance as a context of another `SizzleSelector`. Contrary to jQuery equivalent of this method, only first element from the context is used. This is because it's a limitation of Sizzle.
 
 ```csharp
