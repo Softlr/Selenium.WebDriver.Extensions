@@ -95,7 +95,7 @@
             }
 
             // load jQuery
-            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js "));
+            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js"));
 
             // set the scrolls for tests
             var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
