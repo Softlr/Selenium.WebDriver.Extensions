@@ -424,6 +424,22 @@
         }
 
         /// <summary>
+        /// Tests finding an element position that does not exist.
+        /// </summary>
+        [Test]
+        public void FindPositionNotExists()
+        {
+            var mock = MockWebDriver();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').position();"))
+                .Returns(null);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
+            var position = mock.Object.FindPosition(By.JQuerySelector("input"));
+
+            Assert.IsNull(position);
+        }
+
+        /// <summary>
         /// Tests finding an element offset.
         /// </summary>
         [Test]
@@ -439,6 +455,22 @@
 
             Assert.AreEqual(dict["top"], offset.Top);
             Assert.AreEqual(dict["left"], offset.Left);
+        }
+
+        /// <summary>
+        /// Tests finding an element offset that does not exist.
+        /// </summary>
+        [Test]
+        public void FindOffsetNotExists()
+        {
+            var mock = MockWebDriver();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset();"))
+                .Returns(null);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').offset();")))
+                .Returns(true);
+            var offset = mock.Object.FindOffset(By.JQuerySelector("input"));
+
+            Assert.IsNull(offset);
         }
 
         /// <summary>
@@ -528,6 +560,20 @@
             var result = mock.Object.FindSerializedArray(By.JQuerySelector("form"));
 
             Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Tests numbers casting in IE.
+        /// </summary>
+        [Test]
+        public void NumbersCastingInInternetExplorer()
+        {
+            const double MockedWidth = 100d;
+            var mock = MockWebDriver("return jQuery('input').width();", MockedWidth);
+            var result = mock.Object.FindWidth(By.JQuerySelector("input"));
+
+            Assert.AreEqual(MockedWidth, result);
+            Assert.IsInstanceOf<long?>(result);
         }
 
         /// <summary>
