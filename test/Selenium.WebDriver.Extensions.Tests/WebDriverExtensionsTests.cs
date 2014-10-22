@@ -194,7 +194,8 @@
         {
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
-            var mock = MockWebDriver("return Sizzle('div');", element.Object);
+            var list = new List<IWebElement> { element.Object };
+            var mock = MockWebDriver("return Sizzle('div');", new ReadOnlyCollection<IWebElement>(list));
             var result = mock.Object.FindElement(By.SizzleSelector("div"));
 
             Assert.IsNotNull(result);

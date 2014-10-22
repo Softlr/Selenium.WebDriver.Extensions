@@ -553,13 +553,13 @@
             this IWebDriver driver,
             SizzleSelector by)
         {
-            var result = driver.Find<IEnumerable<IWebElement>>(by).FirstOrDefault();
+            var result = driver.Find<IEnumerable<IWebElement>>(by);
             if (result == null)
             {
                 throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
             }
 
-            return result;
+            return result.FirstOrDefault();
         }
 
         /// <summary>
