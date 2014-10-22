@@ -42,8 +42,6 @@
                     .Returns("jQuery('div').children('span')").SetName("jQuery('div').children('span')");
                 yield return new TestCaseData(By.JQuerySelector("div").Closest("span"))
                     .Returns("jQuery('div').closest('span')").SetName("jQuery('div').closest('span')");
-                yield return new TestCaseData(By.JQuerySelector("div").Closest("span"))
-                    .Returns("jQuery('div').closest('span')").SetName("jQuery('div').closest('span')");
                 yield return new TestCaseData(By.JQuerySelector("div").Contents())
                     .Returns("jQuery('div').contents()").SetName("jQuery('div').contents()");
                 yield return new TestCaseData(By.JQuerySelector("div").End())

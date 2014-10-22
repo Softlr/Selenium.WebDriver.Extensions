@@ -28,6 +28,19 @@
         }
 
         /// <summary>
+        /// Gets a mechanism to find elements matching Sizzle selector.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        /// <returns>A <see cref="SizzleSelector"/> object the driver can use to find the elements.</returns>
+        public static SizzleSelector SizzleSelector(
+            string selector,
+            SizzleSelector context = null)
+        {
+            return new SizzleSelector(selector, context);
+        }
+
+        /// <summary>
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>

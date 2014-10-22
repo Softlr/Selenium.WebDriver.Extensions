@@ -49,7 +49,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WebDriverExtensionsTests.cs" />
+    <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
+    <Compile Include="WebDriverExtensions.JQuerySelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -77,8 +78,11 @@
     <Content Include="phantomjs-license.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="sizzle.min.js" />
+    <Content Include="TestCaseNoSizzle.html" />
+    <Content Include="TestCaseSizzle.html" />
     <Content Include="TestCaseNoJQuery.html" />
-    <Content Include="TestCase.html" />
+    <Content Include="TestCaseJQuery.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

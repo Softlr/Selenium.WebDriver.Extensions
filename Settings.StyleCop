@@ -3,6 +3,7 @@
     <CollectionProperty Name="RecognizedWords">
       <Value>Cookieless</Value>
       <Value>Elmah</Value>
+      <Value>Git</Value>
       <Value>Lucene</Value>
     </CollectionProperty>
   </GlobalSettings>
