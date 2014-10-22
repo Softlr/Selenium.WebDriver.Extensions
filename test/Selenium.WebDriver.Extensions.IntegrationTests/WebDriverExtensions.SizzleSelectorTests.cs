@@ -95,11 +95,7 @@
             }
 
             // load Sizzle
-            this.Browser.LoadSizzle(new Uri("sizzle.min.js"));
-
-            // set the scrolls for tests
-            var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
-            javaScriptDriver.ExecuteScript("$('div.scroll').scrollTop(100).scrollLeft(200);");
+            this.Browser.LoadSizzle(new Uri("http://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js"));
         }
 
         /// <summary>
