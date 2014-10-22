@@ -63,8 +63,7 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="version">
         /// The version of Sizzle to load if it's not already loaded on the tested page. It must be the full version
-        /// number matching one of the versions at <see href="https://github.com/jquery/sizzle"/>. The default value 
-        /// will get the version from the master branch.
+        /// number matching one of the versions at <see href="https://github.com/jquery/sizzle"/>.
         /// </param>
         /// <param name="timeout">The timeout value for the Sizzle load.</param>
         /// <remarks>
@@ -75,10 +74,10 @@
         /// There's no a CDN available for Sizzle and fetching the library directly from GitHub is not the most
         /// efficient way. You should consider hosting the library on your own CDN.
         /// </remarks>
-        public static void LoadSizzle(this IWebDriver driver, string version = "master", TimeSpan? timeout = null)
+        public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
         {
             driver.LoadSizzle(
-                new Uri("//raw.githubusercontent.com/jquery/sizzle/" + version + "/dist/sizzle.min.js"),
+                new Uri("//cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
                 timeout);
         }
 
@@ -86,7 +85,7 @@
         /// Checks if Sizzle is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="jQueryUri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <param name="sizzleUri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
         /// <remarks>
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
@@ -96,15 +95,15 @@
         /// There's no a CDN available for Sizzle and fetching the library directly from GitHub is not the most
         /// efficient way. You should consider hosting the library on your own CDN.
         /// </remarks>
-        public static void LoadSizzle(this IWebDriver driver, Uri jQueryUri, TimeSpan? timeout = null)
+        public static void LoadSizzle(this IWebDriver driver, Uri sizzleUri, TimeSpan? timeout = null)
         {
-            if (jQueryUri == null)
+            if (sizzleUri == null)
             {
                 driver.LoadSizzle(timeout: timeout);
                 return;
             }
 
-            driver.LoadSizzle(jQueryUri.OriginalString, timeout ?? TimeSpan.FromSeconds(3));
+            driver.LoadSizzle(sizzleUri.OriginalString, timeout ?? TimeSpan.FromSeconds(3));
         }
 
         /// <summary>
@@ -554,7 +553,7 @@
             this IWebDriver driver,
             SizzleSelector by)
         {
-            var result = driver.Find<IWebElement>(by);
+            var result = driver.Find<IEnumerable<IWebElement>>(by).FirstOrDefault();
             if (result == null)
             {
                 throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
