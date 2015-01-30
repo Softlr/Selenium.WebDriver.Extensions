@@ -9,6 +9,7 @@
     /// Sizzle selector tests.
     /// </summary>
     [TestFixture]
+    [Category("Unit Tests")]
     [ExcludeFromCodeCoverage]
     public class SizzleSelectorTests
     {

@@ -26,6 +26,7 @@
     [TestFixture("Chrome", "TestCaseNoJQuery.html")]
     [TestFixture("IE", "TestCaseJQuery.html")]
     [TestFixture("IE", "TestCaseNoJQuery.html")]
+    [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsJQuerySelectorTests
     {

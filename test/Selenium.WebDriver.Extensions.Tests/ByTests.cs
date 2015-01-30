@@ -8,6 +8,7 @@
     /// Web driver extensions tests.
     /// </summary>
     [TestFixture]
+    [Category("Unit Tests")]
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
