@@ -551,13 +551,13 @@
         /// <returns>The DOM elements matching given Sizzle selector.</returns>
         public static IWebElement FindElement(this IWebDriver driver, SizzleSelector by)
         {
-            var result = driver.Find<IEnumerable<IWebElement>>(by);
-            if (result == null)
+            var results = driver.Find<IEnumerable<IWebElement>>(by).ToList();
+            if (!results.Any())
             {
                 throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
             }
 
-            return result.FirstOrDefault();
+            return results.FirstOrDefault();
         }
 
         /// <summary>
