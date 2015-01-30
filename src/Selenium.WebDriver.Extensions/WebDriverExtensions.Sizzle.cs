@@ -1,0 +1,179 @@
+﻿namespace Selenium.WebDriver.Extensions
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
+
+    /// <summary>
+    /// Web driver extensions.
+    /// </summary>
+    public static partial class WebDriverExtensions
+    {
+        /// <summary>
+        /// Checks if Sizzle is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="version">
+        /// The version of Sizzle to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://github.com/jquery/sizzle"/>.
+        /// </param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
+        /// HTTP or HTTPS protocol.
+        /// There's no a CDN available for Sizzle and fetching the library directly from GitHub is not the most
+        /// efficient way. You should consider hosting the library on your own CDN.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
+        {
+            driver.LoadSizzle(
+                new Uri("//cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
+                timeout);
+        }
+
+        /// <summary>
+        /// Checks if Sizzle is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="sizzleUri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
+        /// HTTP or HTTPS protocol.
+        /// There's no a CDN available for Sizzle and fetching the library directly from GitHub is not the most
+        /// efficient way. You should consider hosting the library on your own CDN.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver, Uri sizzleUri, TimeSpan? timeout = null)
+        {
+            if (sizzleUri == null)
+            {
+                driver.LoadSizzle(timeout: timeout);
+                return;
+            }
+
+            driver.LoadSizzle(sizzleUri.OriginalString, timeout ?? TimeSpan.FromSeconds(3));
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using Sizzle selector.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <returns>The DOM elements matching given Sizzle selector.</returns>
+        public static IWebElement FindElement(this IWebDriver driver, SizzleSelector by)
+        {
+            var results = driver.Find<IEnumerable<IWebElement>>(by);
+            if (results == null)
+            {
+                throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
+            }
+
+            var list = results.ToList();
+            if (list.Count > 0)
+            {
+                return list.First();
+            }
+
+            throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
+        }
+
+        /// <summary>
+        /// Searches for DOM element using Sizzle selector.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <returns>The first DOM element matching given Sizzle selector</returns>
+        public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, SizzleSelector by)
+        {
+            return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by).ToList());
+        }
+
+        /// <summary>
+        /// Checks if Sizzle is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="sizzleUri">The URI for Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
+        /// HTTP or HTTPS protocol.
+        /// </remarks>
+        private static void LoadSizzle(this IWebDriver driver, string sizzleUri, TimeSpan timeout)
+        {
+            if (CheckSizzle(driver))
+            {
+                return;
+            }
+
+            var loadScript = "var jq = document.createElement('script');" +
+                "jq.src = '" + sizzleUri + "';" +
+                "document.getElementsByTagName('body')[0].appendChild(jq);";
+
+            ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
+            var wait = new WebDriverWait(driver, timeout);
+            wait.Until(d => CheckSizzle(driver));
+        }
+
+        /// <summary>
+        /// Checks if Sizzle has been loaded.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <returns><c>true</c> if Sizzle is loaded; otherwise, <c>false</c></returns>
+        private static bool CheckSizzle(this IWebDriver driver)
+        {
+            const string CheckScript = "return typeof window.Sizzle === 'function';";
+            var result = (bool?)((IJavaScriptExecutor)driver).ExecuteScript(CheckScript);
+            return result.HasValue && result.Value;
+        }
+
+        /// <summary>
+        /// Performs a Sizzle search on the <see cref="IWebDriver"/> using given <see cref="SizzleSelector"/> selector 
+        /// and script format string.
+        /// </summary>
+        /// <typeparam name="T">The type of the result to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <returns>Parsed result of invoking the script.</returns>
+        /// <remarks>
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
+        /// <see cref="Nullable{Long}"/>, <see cref="bool"/>, <see cref="Nullable{Boolean}"/>, <see cref="string"/>, 
+        /// <see cref="IWebElement"/> and <see cref="IEnumerable{IWebElement}"/>.
+        /// Selenium returns different types depending if element has been found or not. If there's a match a
+        /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
+        /// an empty <see cref="ReadOnlyCollection{Object}"/>.
+        /// </remarks>
+        private static T Find<T>(this IWebDriver driver, SizzleSelector by)
+        {
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            driver.LoadSizzle();
+            return ParseResult<T>(driver.ExecuteScript(by));
+        }
+
+        /// <summary>
+        /// Executes Sizzle script.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <returns>Result of invoking the script.</returns>
+        private static object ExecuteScript(
+            this IWebDriver driver,
+            SizzleSelector by)
+        {
+            var javaScriptDriver = (IJavaScriptExecutor)driver;
+            return javaScriptDriver.ExecuteScript("return " + by.Selector + ";");
+        }
+    }
+}
