@@ -22,6 +22,7 @@
     [TestFixture("Firefox", "TestCaseQuerySelector.html")]
     [TestFixture("Chrome", "TestCaseQuerySelector.html")]
     [TestFixture("IE", "TestCaseQuerySelector.html")]
+    [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsQuerySelectorTests
     {

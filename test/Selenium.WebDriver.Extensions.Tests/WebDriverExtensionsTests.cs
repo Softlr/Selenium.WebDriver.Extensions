@@ -239,6 +239,57 @@
         }
 
         /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        public void FindElementWithQuerySelector()
+        {
+            var element = new Mock<IWebElement>();
+            element.Setup(x => x.TagName).Returns("div");
+            var list = new List<IWebElement> { element.Object };
+            var mock = MockWebDriver("return document.querySelectorAll('div');", new ReadOnlyCollection<IWebElement>(list));
+            var result = mock.Object.FindElement(By.QuerySelector("div"));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("div", result.TagName);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindElementWithQuerySelectorArgumentNull()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.Object.FindElement((QuerySelector)null);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(NoSuchElementException))]
+        public void FindElementWithQuerySelectorNoSuchElement()
+        {
+            var mock = MockWebDriver();
+
+            mock.Object.FindElement(By.QuerySelector("div"));
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(NoSuchElementException))]
+        public void FindElementWithQuerySelectorNoSuchElementEmptyResult()
+        {
+            var mock = MockWebDriver("return document.querySelectorAll('div');", Enumerable.Empty<IWebElement>());
+            
+            mock.Object.FindElement(By.QuerySelector("div"));
+        }
+
+        /// <summary>
         /// Tests finding elements.
         /// </summary>
         [Test]
@@ -349,7 +400,7 @@
         /// Tests finding elements.
         /// </summary>
         [Test]
-        public void FindElementsWithQuerySelector()
+        public void FindElementsWithQuerySelectorNotExists()
         {
             var list = new List<object>();
             var mock = MockWebDriver("return document.querySelectorAll('.test');", new ReadOnlyCollection<object>(list));
