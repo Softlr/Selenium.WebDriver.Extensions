@@ -18,14 +18,14 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("PhantomJS", "TestCaseJQuery.html")]
-    [TestFixture("PhantomJS", "TestCaseNoJQuery.html")]
-    [TestFixture("Firefox", "TestCaseJQuery.html")]
-    [TestFixture("Firefox", "TestCaseNoJQuery.html")]
-    [TestFixture("Chrome", "TestCaseJQuery.html")]
-    [TestFixture("Chrome", "TestCaseNoJQuery.html")]
-    [TestFixture("IE", "TestCaseJQuery.html")]
-    [TestFixture("IE", "TestCaseNoJQuery.html")]
+    [TestFixture("PhantomJS", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("PhantomJS", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("Firefox", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("Firefox", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("Chrome", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("Chrome", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("IE", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("IE", "TestCases\\JQuery\\Unloaded.html")]
     [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsJQuerySelectorTests
@@ -89,7 +89,7 @@
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
             
-            if (this.TestCaseFileName != "TestCaseNoJQuery.html")
+            if (this.TestCaseFileName.Contains("JQuery") && this.TestCaseFileName.Contains("Unloaded"))
             {
                 // no additional setup needed
                 return;

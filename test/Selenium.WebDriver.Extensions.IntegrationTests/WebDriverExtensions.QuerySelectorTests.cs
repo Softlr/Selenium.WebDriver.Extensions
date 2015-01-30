@@ -18,10 +18,10 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("PhantomJS", "TestCaseQuerySelector.html")]
-    [TestFixture("Firefox", "TestCaseQuerySelector.html")]
-    [TestFixture("Chrome", "TestCaseQuerySelector.html")]
-    [TestFixture("IE", "TestCaseQuerySelector.html")]
+    [TestFixture("PhantomJS", "TestCases\\QuerySelector\\TestCase.html")]
+    [TestFixture("Firefox", "TestCases\\QuerySelector\\TestCase.html")]
+    [TestFixture("Chrome", "TestCases\\QuerySelector\\TestCase.html")]
+    [TestFixture("IE", "TestCases\\QuerySelector\\TestCase.html")]
     [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsQuerySelectorTests
