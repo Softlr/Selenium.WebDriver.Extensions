@@ -62,30 +62,42 @@
         [TestFixtureSetUp]
         public void SetUp()
         {
-            switch (this.DriverName)
-            {
-                case "PhantomJS":
-                    this.Browser = new PhantomJSDriver();
-                    break;
-                case "Firefox":
-                    this.Browser = new FirefoxDriver();
-                    break;
-                case "Chrome":
-                    this.Browser = new ChromeDriver();
-                    break;
-                case "IE":
-                    this.Browser = new InternetExplorerDriver();
-                    break;
-                default:
-                    return;
-            }
-            
             var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo == null)
             {
                 return;
             }
 
+#if DEBUG
+            const string BuildConfig = "Debug";
+#else
+            const string BuildConfig = "Release";
+#endif
+
+            var driversPath = directoryInfo.FullName + Path.DirectorySeparatorChar + "bin"
+                + Path.DirectorySeparatorChar + BuildConfig
+                + Path.DirectorySeparatorChar + "Drivers"
+                + Path.DirectorySeparatorChar;
+
+            switch (this.DriverName)
+            {
+                case "PhantomJS":
+                    var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
+                    this.Browser = new PhantomJSDriver(phantomJsService);
+                    break;
+                case "Firefox":
+                    this.Browser = new FirefoxDriver();
+                    break;
+                case "Chrome":
+                    this.Browser = new ChromeDriver(driversPath);
+                    break;
+                case "IE":
+                    this.Browser = new InternetExplorerDriver(driversPath);
+                    break;
+                default:
+                    return;
+            }
+            
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
             
