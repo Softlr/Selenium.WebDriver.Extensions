@@ -579,13 +579,19 @@
         /// <returns>The DOM elements matching given JavaScript query selector.</returns>
         public static IWebElement FindElement(this IWebDriver driver, QuerySelector by)
         {
-            var results = driver.Find<IEnumerable<IWebElement>>(by).ToList();
-            if (!results.Any())
+            var results = driver.Find<IEnumerable<IWebElement>>(by);
+            if (results == null)
             {
                 throw new NoSuchElementException("No element found with JavaScript query selector: " + by.Selector);
             }
-            
-            return results.FirstOrDefault();
+
+            var list = results.ToList();
+            if (list.Count > 0)
+            {
+                return list.First();
+            }
+
+            throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
         }
 
         /// <summary>
