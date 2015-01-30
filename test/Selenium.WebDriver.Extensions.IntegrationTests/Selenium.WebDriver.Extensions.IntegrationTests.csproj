@@ -49,6 +49,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="WebDriverExtensions.QuerySelectorTests.cs" />
     <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
     <Compile Include="WebDriverExtensions.JQuerySelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -79,6 +80,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="sizzle.min.js" />
+    <Content Include="TestCaseQuerySelector.html" />
     <Content Include="TestCaseNoSizzle.html" />
     <Content Include="TestCaseSizzle.html" />
     <Content Include="TestCaseNoJQuery.html" />
