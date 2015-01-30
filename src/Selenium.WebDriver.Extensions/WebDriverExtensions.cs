@@ -548,10 +548,8 @@
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium Sizzle selector.</param>
-        /// <returns>The DOM elements matching given jQuery selector.</returns>
-        public static IWebElement FindElement(
-            this IWebDriver driver,
-            SizzleSelector by)
+        /// <returns>The DOM elements matching given Sizzle selector.</returns>
+        public static IWebElement FindElement(this IWebDriver driver, SizzleSelector by)
         {
             var result = driver.Find<IEnumerable<IWebElement>>(by);
             if (result == null)
@@ -567,10 +565,8 @@
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium Sizzle selector.</param>
-        /// <returns>The first DOM element matching given jQuery selector</returns>
-        public static ReadOnlyCollection<IWebElement> FindElements(
-            this IWebDriver driver,
-            SizzleSelector by)
+        /// <returns>The first DOM element matching given Sizzle selector</returns>
+        public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, SizzleSelector by)
         {
             return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by).ToList());
         }
@@ -719,7 +715,7 @@
         }
 
         /// <summary>
-        /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="SizzleSelector"/> selector 
+        /// Performs a Sizzle search on the <see cref="IWebDriver"/> using given <see cref="SizzleSelector"/> selector 
         /// and script format string.
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
