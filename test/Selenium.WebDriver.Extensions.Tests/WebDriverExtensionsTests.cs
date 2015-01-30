@@ -308,6 +308,46 @@
         }
 
         /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindElementsWithQuerySelector()
+        {
+            var element1 = new Mock<IWebElement>();
+            element1.Setup(x => x.TagName).Returns("div");
+            element1.Setup(x => x.GetAttribute("class")).Returns("test");
+
+            var element2 = new Mock<IWebElement>();
+            element2.Setup(x => x.TagName).Returns("span");
+            element2.Setup(x => x.GetAttribute("class")).Returns("test");
+
+            var list = new List<IWebElement> { element1.Object, element2.Object };
+            var mock = MockWebDriver("return document.querySelectorAll('.test');", new ReadOnlyCollection<IWebElement>(list));
+            var result = mock.Object.FindElements(By.QuerySelector(".test"));
+
+            Assert.AreEqual(2, result.Count);
+
+            Assert.AreEqual("div", result[0].TagName);
+            Assert.AreEqual("test", result[0].GetAttribute("class"));
+
+            Assert.AreEqual("span", result[1].TagName);
+            Assert.AreEqual("test", result[1].GetAttribute("class"));
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindElementsWithQuerySelector()
+        {
+            var list = new List<object>();
+            var mock = MockWebDriver("return document.querySelectorAll('.test');", new ReadOnlyCollection<object>(list));
+            var result = mock.Object.FindElements(By.QuerySelector(".test"));
+
+            Assert.AreEqual(0, result.Count);
+        }
+
+        /// <summary>
         /// Tests finding an element text.
         /// </summary>
         [Test]
