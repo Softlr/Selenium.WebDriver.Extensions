@@ -175,3 +175,4 @@ FakesAssemblies/
 
 # SandCastle build documentation
 docs/Help/
+*.DotSettings
