@@ -56,11 +56,11 @@
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
-    <Compile Include="QuerySelector.cs" />
-    <Compile Include="SizzleSelector.cs" />
-    <Compile Include="JQuerySelector.cs" />
-    <Compile Include="Position.cs" />
-    <Compile Include="TypeArgumentException.cs" />
+    <Compile Include="Selectors\QuerySelector.cs" />
+    <Compile Include="Selectors\SizzleSelector.cs" />
+    <Compile Include="Selectors\JQuerySelector.cs" />
+    <Compile Include="Models\Position.cs" />
+    <Compile Include="Exceptions\TypeArgumentException.cs" />
     <Compile Include="WebDriverExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
