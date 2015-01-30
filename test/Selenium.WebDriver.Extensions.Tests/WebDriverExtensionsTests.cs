@@ -233,9 +233,7 @@
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithSizzleNoSuchElementEmptyResult()
         {
-            var element = new Mock<IWebElement>();
-            element.Setup(x => x.TagName).Returns("div");
-            var mock = MockWebDriver();
+            var mock = MockWebDriver("return Sizzle('div');", Enumerable.Empty<IWebElement>());
 
             mock.Object.FindElement(By.SizzleSelector("div"));
         }
