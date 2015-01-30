@@ -56,6 +56,7 @@
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="QuerySelector.cs" />
     <Compile Include="SizzleSelector.cs" />
     <Compile Include="JQuerySelector.cs" />
     <Compile Include="Position.cs" />

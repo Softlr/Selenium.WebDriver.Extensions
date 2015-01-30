@@ -41,6 +41,16 @@
         }
 
         /// <summary>
+        /// Gets a mechanism to find elements matching JavaScript query selector.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <returns>A <see cref="QuerySelector"/> object the driver can use to find the elements.</returns>
+        public static QuerySelector QuerySelector(string selector)
+        {
+            return new QuerySelector(selector);
+        }
+
+        /// <summary>
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
