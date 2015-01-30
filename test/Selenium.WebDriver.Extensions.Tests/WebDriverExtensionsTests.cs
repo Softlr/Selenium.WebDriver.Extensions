@@ -151,7 +151,7 @@
         /// Tests finding an element.
         /// </summary>
         [Test]
-        public void FindElement()
+        public void FindElementWithJQuery()
         {
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
@@ -167,7 +167,7 @@
         /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementArgumentNull()
+        public void FindElementWithJQueryArgumentNull()
         {
             var mock = new Mock<IWebDriver>();
             mock.Object.FindElement((JQuerySelector)null);
@@ -178,7 +178,7 @@
         /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
-        public void FindElementNoSuchElement()
+        public void FindElementWithJQueryNoSuchElement()
         {
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
@@ -232,7 +232,7 @@
         /// Tests finding elements.
         /// </summary>
         [Test]
-        public void FindElements()
+        public void FindElementsWithJQuery()
         {
             var element1 = new Mock<IWebElement>();
             element1.Setup(x => x.TagName).Returns("div");
@@ -259,7 +259,7 @@
         /// Tests finding elements.
         /// </summary>
         [Test]
-        public void FindElementsNotExists()
+        public void FindElementsWithJQueryNotExists()
         {
             var list = new List<object>();
             var mock = MockWebDriver("return jQuery('.test').get();", new ReadOnlyCollection<object>(list));
