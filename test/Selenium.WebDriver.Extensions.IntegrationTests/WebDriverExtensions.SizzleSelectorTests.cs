@@ -26,6 +26,7 @@
     [TestFixture("Chrome", "TestCaseNoSizzle.html")]
     [TestFixture("IE", "TestCaseSizzle.html")]
     [TestFixture("IE", "TestCaseNoSizzle.html")]
+    [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsSizzleSelectorTests
     {
