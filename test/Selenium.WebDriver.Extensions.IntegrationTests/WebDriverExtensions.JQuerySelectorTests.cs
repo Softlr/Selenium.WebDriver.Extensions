@@ -101,16 +101,6 @@
             
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
-            
-            if (this.TestCaseFileName.Contains("JQuery") && this.TestCaseFileName.Contains("Loaded"))
-            {
-                // no additional setup needed
-                return;
-            }
-
-            // set the scrolls for tests
-            var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
-            javaScriptDriver.ExecuteScript("document.getElementsByClassName('scroll')[0].scrollTop = 100; document.getElementsByClassName('scroll')[0].scrollLeft = 200");
         }
 
         /// <summary>
