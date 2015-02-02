@@ -6,8 +6,13 @@
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
-    public class JQuerySelector
+    public class JQuerySelector : ISelector
     {
+        /// <summary>
+        /// The JavaScript to check if jQuery has been loaded.
+        /// </summary>
+        private const string Script = "return typeof window.jQuery === 'function';";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
@@ -35,6 +40,29 @@
         /// </summary>
         protected JQuerySelector()
         {
+        }
+
+        /// <summary>
+        /// Gets the empty jQuery selector.
+        /// </summary>
+        public static JQuerySelector Empty
+        {
+            get
+            {
+                return new JQuerySelector();
+            }
+        }
+        
+        /// <summary>
+        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
+        /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
+        /// </summary>
+        public string CheckScript
+        {
+            get
+            {
+                return Script;
+            }
         }
 
         /// <summary>
