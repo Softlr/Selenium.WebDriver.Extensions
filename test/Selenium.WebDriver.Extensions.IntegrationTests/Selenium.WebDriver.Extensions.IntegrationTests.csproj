@@ -76,7 +76,6 @@
       <Link>Drivers\IEDriverServer.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="sizzle.min.js" />
     <Content Include="TestCases\QuerySelector\TestCase.html" />
     <Content Include="TestCases\Sizzle\Unloaded.html" />
     <Content Include="TestCases\Sizzle\Loaded.html" />
