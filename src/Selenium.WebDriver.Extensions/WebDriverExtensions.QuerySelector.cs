@@ -12,6 +12,18 @@
     public static partial class WebDriverExtensions
     {
         /// <summary>
+        /// Checks if query selector is supported by the browser.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        public static void CheckQuerySelectorSupport(this IWebDriver driver)
+        {
+            if (!driver.CheckSelectorPrerequisites(QuerySelector.Empty))
+            {
+                throw new QuerySelectorNotSupportedException();
+            }
+        }
+
+        /// <summary>
         /// Searches for DOM elements using JavaScript query selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -68,6 +80,7 @@
                 throw new ArgumentNullException("by");
             }
 
+            driver.CheckQuerySelectorSupport();
             return ParseResult<T>(driver.ExecuteScript(by));
         }
 

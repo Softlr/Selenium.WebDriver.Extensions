@@ -101,7 +101,7 @@
         /// </remarks>
         private static void LoadSizzle(this IWebDriver driver, string sizzleUri, TimeSpan timeout)
         {
-            if (CheckSizzle(driver))
+            if (CheckSelectorPrerequisites(driver, SizzleSelector.Empty))
             {
                 return;
             }
@@ -112,19 +112,7 @@
 
             ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => CheckSizzle(driver));
-        }
-
-        /// <summary>
-        /// Checks if Sizzle has been loaded.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <returns><c>true</c> if Sizzle is loaded; otherwise, <c>false</c></returns>
-        private static bool CheckSizzle(this IWebDriver driver)
-        {
-            const string CheckScript = "return typeof window.Sizzle === 'function';";
-            var result = (bool?)((IJavaScriptExecutor)driver).ExecuteScript(CheckScript);
-            return result.HasValue && result.Value;
+            wait.Until(d => CheckSelectorPrerequisites(driver, SizzleSelector.Empty));
         }
 
         /// <summary>

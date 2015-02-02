@@ -11,6 +11,18 @@
     public static partial class WebDriverExtensions
     {
         /// <summary>
+        /// Checks if prerequisites for the selector has been met.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="selector">The selector that is to be executed.</param>
+        /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
+        private static bool CheckSelectorPrerequisites(this IWebDriver driver, ISelector selector)
+        {
+            var result = (bool?)((IJavaScriptExecutor)driver).ExecuteScript(selector.CheckScript);
+            return result.HasValue && result.Value;
+        }
+
+        /// <summary>
         /// Parses the result of executed jQuery script.
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>

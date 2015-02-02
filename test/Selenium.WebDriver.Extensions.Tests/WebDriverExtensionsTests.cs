@@ -824,6 +824,19 @@
         }
 
         /// <summary>
+        /// Tests finding element by class that doesn't exist.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(QuerySelectorNotSupportedException))]
+        public void QuerySelectorNotSupported()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
+                .Returns(false);
+            mock.Object.CheckQuerySelectorSupport();
+        }
+
+        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>
@@ -840,6 +853,8 @@
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery === 'function';"))
                 .Returns(true);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
+                .Returns(true);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
                 .Returns(true);
             return mock;
         }
