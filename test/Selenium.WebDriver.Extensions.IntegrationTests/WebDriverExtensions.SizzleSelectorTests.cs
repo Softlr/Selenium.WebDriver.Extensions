@@ -83,7 +83,6 @@
             {
                 case "PhantomJS":
                     var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
-                    phantomJsService.IgnoreSslErrors = true;
                     phantomJsService.SslProtocol = "any";
                     this.Browser = new PhantomJSDriver(phantomJsService);
                     break;

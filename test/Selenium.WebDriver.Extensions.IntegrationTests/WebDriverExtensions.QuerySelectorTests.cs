@@ -78,10 +78,7 @@
             switch (this.DriverName)
             {
                 case "PhantomJS":
-                    var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
-                    phantomJsService.IgnoreSslErrors = true;
-                    phantomJsService.SslProtocol = "any";
-                    this.Browser = new PhantomJSDriver(phantomJsService);
+                    this.Browser = new PhantomJSDriver(driversPath);
                     break;
                 case "Firefox":
                     this.Browser = new FirefoxDriver();
