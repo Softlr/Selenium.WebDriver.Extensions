@@ -1,10 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Linq;
     using OpenQA.Selenium;
-    
+    using OpenQA.Selenium.Support.UI;
+
     /// <summary>
     /// Web driver extensions.
     /// </summary>
@@ -20,6 +23,33 @@
         {
             var result = (bool?)((IJavaScriptExecutor)driver).ExecuteScript(selector.CheckScript);
             return result.HasValue && result.Value;
+        }
+
+        /// <summary>
+        /// Loads the prerequisites for the selector.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="selector">The selector that is to be executed.</param>
+        /// <param name="timeout">The timeout value for the prerequisites load.</param>
+        /// <param name="loadParams">The additional parameters for load script.</param>
+        private static void LoadPrerequisites(
+            this IWebDriver driver,
+            ISelector selector, 
+            TimeSpan timeout, 
+            params string[] loadParams)
+        {
+            if (driver.CheckSelectorPrerequisites(selector))
+            {
+                return;
+            }
+
+            var loadScript = selector.LoadScript(loadParams);
+
+            Debug.Assert(loadScript != null, "Load script not resolved");
+            
+            ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
+            var wait = new WebDriverWait(driver, timeout);
+            wait.Until(d => driver.CheckSelectorPrerequisites(selector));
         }
 
         /// <summary>

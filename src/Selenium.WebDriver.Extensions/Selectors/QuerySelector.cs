@@ -10,7 +10,7 @@
         /// <summary>
         /// The JavaScript to check if query selector is supported by the browser.
         /// </summary>
-        private const string Script = "return typeof document.querySelectorAll === 'function';";
+        private const string DetectScriptCode = "return typeof document.querySelectorAll === 'function';";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
@@ -52,7 +52,7 @@
         {
             get
             {
-                return Script;
+                return DetectScriptCode;
             }
         }
 
@@ -60,6 +60,16 @@
         /// Gets the jQuery selector.
         /// </summary>
         public string Selector { get; private set; }
+
+        /// <summary>
+        /// Gets the JavaScript to load the prerequisites for the selector.
+        /// </summary>
+        /// <param name="args">Load script arguments.</param>
+        /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
+        public string LoadScript(params string[] args)
+        {
+            return null;
+        }
 
         /// <summary>
         /// Returns a string that represents the current object.

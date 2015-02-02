@@ -1,7 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
+    using System.Diagnostics;
     using System.Globalization;
+    using System.Linq;
 
     /// <summary>
     /// The Selenium selector for jQuery.
@@ -11,7 +13,13 @@
         /// <summary>
         /// The JavaScript to check if jQuery has been loaded.
         /// </summary>
-        private const string Script = "return typeof window.jQuery === 'function';";
+        private const string DetectScriptCode = "return typeof window.jQuery === 'function';";
+
+        /// <summary>
+        /// The JavaScript to load jQuery.
+        /// </summary>
+        private const string LoadScriptCode = "var jq = document.createElement('script');jq.src = '{0}';"
+            + "document.getElementsByTagName('body')[0].appendChild(jq);";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
@@ -61,7 +69,7 @@
         {
             get
             {
-                return Script;
+                return DetectScriptCode;
             }
         }
 
@@ -79,6 +87,18 @@
         /// Gets the variable that has been assigned to jQuery.
         /// </summary>
         public string JQueryVariable { get; private set; }
+
+        /// <summary>
+        /// Gets the JavaScript to load the prerequisites for the selector.
+        /// </summary>
+        /// <param name="args">Load script arguments.</param>
+        /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
+        public string LoadScript(params string[] args)
+        {
+            Debug.Assert(args.Length > 0, "No jQuery URI given");
+
+            return string.Format(LoadScriptCode, args.First());
+        }
 
         /// <summary>
         /// Returns a string that represents the current object.

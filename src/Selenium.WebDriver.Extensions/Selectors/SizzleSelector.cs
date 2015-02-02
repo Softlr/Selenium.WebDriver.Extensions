@@ -1,7 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
-    
+    using System.Diagnostics;
+    using System.Linq;
+
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
@@ -10,7 +12,13 @@
         /// <summary>
         /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
-        private const string Script = "return typeof window.Sizzle === 'function';";
+        private const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
+
+        /// <summary>
+        /// The JavaScript to check if Sizzle has been loaded.
+        /// </summary>
+        private const string LoadScriptCode = "var sizzle = document.createElement('script');sizzle.src = '{0}';" +
+            "document.getElementsByTagName('body')[0].appendChild(sizzle);";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
@@ -62,7 +70,7 @@
         {
             get
             {
-                return Script;
+                return DetectScriptCode;
             }
         }
 
@@ -75,6 +83,18 @@
         /// Gets the DOM Element or Document to use as context.
         /// </summary>
         public SizzleSelector Context { get; private set; }
+
+        /// <summary>
+        /// Gets the JavaScript to load the prerequisites for the selector.
+        /// </summary>
+        /// <param name="args">Load script arguments.</param>
+        /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
+        public string LoadScript(params string[] args)
+        {
+            Debug.Assert(args.Length > 0, "No Sizzle URI given");
+
+            return string.Format(LoadScriptCode, args.First());
+        }
 
         /// <summary>
         /// Returns a string that represents the current object.

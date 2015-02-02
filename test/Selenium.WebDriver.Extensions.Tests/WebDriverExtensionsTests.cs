@@ -824,7 +824,7 @@
         }
 
         /// <summary>
-        /// Tests finding element by class that doesn't exist.
+        /// Tests query selector support check.
         /// </summary>
         [Test]
         [ExpectedException(typeof(QuerySelectorNotSupportedException))]
@@ -834,6 +834,16 @@
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
                 .Returns(false);
             mock.Object.CheckQuerySelectorSupport();
+        }
+
+        /// <summary>
+        /// Tests script loading.
+        /// </summary>
+        [Test]
+        public void LoadScript()
+        {
+            var loadScript = By.QuerySelector("div").LoadScript();
+            Assert.IsNull(loadScript);
         }
 
         /// <summary>

@@ -101,18 +101,7 @@
         /// </remarks>
         private static void LoadSizzle(this IWebDriver driver, string sizzleUri, TimeSpan timeout)
         {
-            if (CheckSelectorPrerequisites(driver, SizzleSelector.Empty))
-            {
-                return;
-            }
-
-            var loadScript = "var sizzle = document.createElement('script');" +
-                "sizzle.src = '" + sizzleUri + "';" +
-                "document.getElementsByTagName('body')[0].appendChild(sizzle);";
-
-            ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
-            var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => CheckSelectorPrerequisites(driver, SizzleSelector.Empty));
+            driver.LoadPrerequisites(SizzleSelector.Empty, timeout, new[] { sizzleUri });
         }
 
         /// <summary>

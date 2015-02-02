@@ -504,18 +504,7 @@
         /// </remarks>
         private static void LoadJQuery(this IWebDriver driver, string jQueryUri, TimeSpan timeout)
         {
-            if (CheckSelectorPrerequisites(driver, JQuerySelector.Empty))
-            {
-                return;
-            }
-
-            var loadScript = "var jq = document.createElement('script');" +
-                "jq.src = '" + jQueryUri + "';" +
-                "document.getElementsByTagName('body')[0].appendChild(jq);";
-
-            ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
-            var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => CheckSelectorPrerequisites(driver, JQuerySelector.Empty));
+            driver.LoadPrerequisites(JQuerySelector.Empty, timeout, new[] { jQueryUri });
         }
 
         /// <summary>
