@@ -58,28 +58,42 @@
         [TestFixtureSetUp]
         public void SetUp()
         {
+            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
+            if (directoryInfo == null)
+            {
+                return;
+            }
+
+#if DEBUG
+            const string BuildConfig = "Debug";
+#else
+            const string BuildConfig = "Release";
+#endif
+
+            var driversPath = directoryInfo.FullName + Path.DirectorySeparatorChar + "bin"
+                + Path.DirectorySeparatorChar + BuildConfig
+                + Path.DirectorySeparatorChar + "Drivers"
+                + Path.DirectorySeparatorChar;
+
             switch (this.DriverName)
             {
                 case "PhantomJS":
-                    this.Browser = new PhantomJSDriver();
+                    var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
+                    phantomJsService.IgnoreSslErrors = true;
+                    phantomJsService.SslProtocol = "any";
+                    this.Browser = new PhantomJSDriver(phantomJsService);
                     break;
                 case "Firefox":
                     this.Browser = new FirefoxDriver();
                     break;
                 case "Chrome":
-                    this.Browser = new ChromeDriver();
+                    this.Browser = new ChromeDriver(driversPath);
                     break;
                 case "IE":
-                    this.Browser = new InternetExplorerDriver();
+                    this.Browser = new InternetExplorerDriver(driversPath);
                     break;
                 default:
                     return;
-            }
-            
-            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
-            if (directoryInfo == null)
-            {
-                return;
             }
 
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
