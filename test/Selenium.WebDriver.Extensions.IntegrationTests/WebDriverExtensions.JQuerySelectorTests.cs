@@ -83,6 +83,8 @@
             {
                 case "PhantomJS":
                     var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
+                    phantomJsService.IgnoreSslErrors = true;
+                    phantomJsService.SslProtocol = "any";
                     this.Browser = new PhantomJSDriver(phantomJsService);
                     break;
                 case "Firefox":
@@ -101,18 +103,15 @@
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
             
-            if (this.TestCaseFileName.Contains("JQuery") && this.TestCaseFileName.Contains("Unloaded"))
+            if (this.TestCaseFileName.Contains("JQuery") && this.TestCaseFileName.Contains("Loaded"))
             {
                 // no additional setup needed
                 return;
             }
 
-            // load jQuery
-            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js"));
-
             // set the scrolls for tests
             var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
-            javaScriptDriver.ExecuteScript("$('div.scroll').scrollTop(100).scrollLeft(200);");
+            javaScriptDriver.ExecuteScript("document.getElementsByClassName('scroll')[0].scrollTop = 100; document.getElementsByClassName('scroll')[0].scrollLeft = 200");
         }
 
         /// <summary>
