@@ -6,8 +6,7 @@
     using System.Globalization;
     using System.Linq;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.UI;
-
+    
     /// <summary>
     /// Web driver extensions.
     /// </summary>
@@ -558,7 +557,6 @@
             string scriptFormat,
             string wrapperFormat)
         {
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
             var script = by + "." + scriptFormat;
             if (wrapperFormat != null)
             {
@@ -567,7 +565,7 @@
 
             script = "return " + script + ";";
 
-            return javaScriptDriver.ExecuteScript(script);
+            return driver.ExecuteScript<object>(script);
         }
     }
 }

@@ -141,8 +141,7 @@
             this IWebDriver driver,
             SizzleSelector by)
         {
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
-            return javaScriptDriver.ExecuteScript("return " + by.Selector + ";");
+            return driver.ExecuteScript<object>("return " + by.Selector + ";");
         }
     }
 }

@@ -14,6 +14,39 @@
     public static partial class WebDriverExtensions
     {
         /// <summary>
+        /// Executes JavaScript in the context of the currently selected frame or window.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="script">The script to be </param>
+        /// <param name="args">The arguments to the script.</param>
+        public static void ExecuteScript(this IWebDriver driver, string script, params object[] args)
+        {
+            driver.ExecuteScript<object>(script, args);
+        }
+
+        /// <summary>
+        /// Executes JavaScript in the context of the currently selected frame or window.
+        /// </summary>
+        /// <typeparam name="T">The type of the result.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="script">The script to be </param>
+        /// <param name="args">The arguments to the script.</param>
+        /// <returns>The value returned by the script.</returns>
+        /// <remarks>
+        /// For an HTML element, this method returns a <see cref="IWebElement"/>.
+        /// For a number, a <see cref="Int64"/> is returned.
+        /// For a boolean, a <see cref="Boolean"/> is returned.
+        /// For all other cases a <see cref="String"/> is returned.
+        /// For an array,we check the first element, and attempt to return a 
+        /// <see cref="T:System.Collections.Generic.List`1"/> of that type, following the rules above. Nested lists 
+        /// are not supported.
+        /// </remarks>
+        public static T ExecuteScript<T>(this IWebDriver driver, string script, params object[] args)
+        {
+            return (T)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
+        }
+
+        /// <summary>
         /// Checks if prerequisites for the selector has been met.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -21,7 +54,7 @@
         /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
         private static bool CheckSelectorPrerequisites(this IWebDriver driver, ISelector selector)
         {
-            var result = (bool?)((IJavaScriptExecutor)driver).ExecuteScript(selector.CheckScript);
+            var result = driver.ExecuteScript<bool?>(selector.CheckScript);
             return result.HasValue && result.Value;
         }
 
@@ -46,8 +79,8 @@
             var loadScript = selector.LoadScript(loadParams);
 
             Debug.Assert(loadScript != null, "Load script not resolved");
-            
-            ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
+
+            driver.ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout);
             wait.Until(d => driver.CheckSelectorPrerequisites(selector));
         }

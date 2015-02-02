@@ -92,8 +92,7 @@
         /// <returns>Result of invoking the script.</returns>
         private static object ExecuteScript(this IWebDriver driver, QuerySelector by)
         {
-            var javaScriptDriver = (IJavaScriptExecutor)driver;
-            return javaScriptDriver.ExecuteScript("return " + by.Selector + ";");
+            return driver.ExecuteScript<object>("return " + by.Selector + ";");
         }
     }
 }
