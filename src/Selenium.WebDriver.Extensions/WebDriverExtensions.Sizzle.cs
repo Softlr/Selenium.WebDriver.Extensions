@@ -24,15 +24,11 @@
         /// <remarks>
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
-        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
-        /// HTTP or HTTPS protocol.
-        /// There's no a CDN available for Sizzle and fetching the library directly from GitHub is not the most
-        /// efficient way. You should consider hosting the library on your own CDN.
         /// </remarks>
         public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
         {
             driver.LoadSizzle(
-                new Uri("//cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
+                new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
                 timeout);
         }
 
@@ -45,10 +41,6 @@
         /// <remarks>
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
-        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
-        /// HTTP or HTTPS protocol.
-        /// There's no a CDN available for Sizzle and fetching the library directly from GitHub is not the most
-        /// efficient way. You should consider hosting the library on your own CDN.
         /// </remarks>
         public static void LoadSizzle(this IWebDriver driver, Uri sizzleUri, TimeSpan? timeout = null)
         {
@@ -114,9 +106,9 @@
                 return;
             }
 
-            var loadScript = "var jq = document.createElement('script');" +
-                "jq.src = '" + sizzleUri + "';" +
-                "document.getElementsByTagName('body')[0].appendChild(jq);";
+            var loadScript = "var sizzle = document.createElement('script');" +
+                "sizzle.src = '" + sizzleUri + "';" +
+                "document.getElementsByTagName('body')[0].appendChild(sizzle);";
 
             ((IJavaScriptExecutor)driver).ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout);

@@ -26,12 +26,10 @@
         /// <remarks>
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
-        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
-        /// HTTP or HTTPS protocol.
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            driver.LoadJQuery(new Uri("//code.jquery.com/jquery-" + version + ".min.js"), timeout);
+            driver.LoadJQuery(new Uri("https://code.jquery.com/jquery-" + version + ".min.js"), timeout);
         }
 
         /// <summary>
@@ -43,8 +41,6 @@
         /// <remarks>
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
-        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
-        /// HTTP or HTTPS protocol.
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, Uri jQueryUri, TimeSpan? timeout = null)
         {
