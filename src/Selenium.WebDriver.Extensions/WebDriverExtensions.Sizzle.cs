@@ -5,8 +5,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.UI;
-
+    
     /// <summary>
     /// Web driver extensions.
     /// </summary>
@@ -101,7 +100,7 @@
         /// </remarks>
         private static void LoadSizzle(this IWebDriver driver, string sizzleUri, TimeSpan timeout)
         {
-            driver.LoadPrerequisites(SizzleSelector.Empty, timeout, new[] { sizzleUri });
+            driver.LoadPrerequisites(SizzleSelector.Empty, timeout, sizzleUri);
         }
 
         /// <summary>

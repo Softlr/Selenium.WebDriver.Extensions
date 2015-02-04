@@ -503,7 +503,7 @@
         /// </remarks>
         private static void LoadJQuery(this IWebDriver driver, string jQueryUri, TimeSpan timeout)
         {
-            driver.LoadPrerequisites(JQuerySelector.Empty, timeout, new[] { jQueryUri });
+            driver.LoadPrerequisites(JQuerySelector.Empty, timeout, jQueryUri);
         }
 
         /// <summary>
