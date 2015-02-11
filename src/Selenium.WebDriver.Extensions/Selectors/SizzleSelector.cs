@@ -5,7 +5,7 @@
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
-    public class SizzleSelector : ISelector
+    public class SizzleSelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.

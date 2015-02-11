@@ -6,7 +6,7 @@
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
-    public class QuerySelector : ISelector
+    public class QuerySelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.

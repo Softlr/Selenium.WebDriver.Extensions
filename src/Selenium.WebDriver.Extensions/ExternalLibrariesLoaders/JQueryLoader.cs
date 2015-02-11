@@ -1,7 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
-    using System.Diagnostics;
+    using System.Globalization;
     using System.Linq;
     
     /// <summary>
@@ -50,9 +50,17 @@
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
         public string LoadScript(params string[] args)
         {
-            Debug.Assert(args.Length > 0, "No jQuery URI given");
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
 
-            return string.Format(LoadScriptCode, args.First());
+            if (args.Length == 0)
+            {
+                throw new ExternalLibraryLoadException("No jQuery URI given");
+            }
+
+            return string.Format(CultureInfo.InvariantCulture, LoadScriptCode, args.First());
         }
     }
 }

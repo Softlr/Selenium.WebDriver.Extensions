@@ -6,7 +6,7 @@
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
-    public class JQuerySelector : ISelector
+    public class JQuerySelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.

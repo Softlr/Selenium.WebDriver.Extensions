@@ -3,7 +3,6 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics;
     using System.Linq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
@@ -104,9 +103,11 @@
             }
 
             var loadScript = externalLibraryLoader.LoadScript(loadParams);
-
-            Debug.Assert(loadScript != null, "Load script not resolved");
-
+            if (loadScript == null)
+            {
+                return;
+            }
+            
             driver.ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout);
             wait.Until(d => driver.CheckSelectorPrerequisites(externalLibraryLoader));
