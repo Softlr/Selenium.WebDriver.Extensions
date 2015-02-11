@@ -24,6 +24,12 @@
                     .Returns("document.querySelectorAll('div')").SetName("document.querySelectorAll('div')");
                 yield return new TestCaseData(By.QuerySelector("input[type='text']"))
                     .Returns("document.querySelectorAll('input[type=\"text\"]')").SetName("escape single quotes");
+                yield return new TestCaseData(By.QuerySelector("div", "document.body"))
+                    .Returns("document.body.querySelectorAll('div')")
+                    .SetName("document.body.querySelectorAll('div')");
+                yield return new TestCaseData(By.QuerySelector("span", By.QuerySelector("div")))
+                    .Returns("document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span')")
+                    .SetName("document.querySelectorAll('div')[0].querySelectorAll('span')");
             }
         }
 
@@ -47,6 +53,36 @@
         public void NullSelector()
         {
             By.QuerySelector(null);
+        }
+
+        /// <summary>
+        /// Tests if the null selector is handled properly.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullBaseElementSelector()
+        {
+            By.QuerySelector("div", (string)null);
+        }
+
+        /// <summary>
+        /// Tests if the null selector is handled properly.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullSelectorWithBaseSelector()
+        {
+            By.QuerySelector(null, By.QuerySelector("div"));
+        }
+
+        /// <summary>
+        /// Tests if the null selector is handled properly.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullBaseSelector()
+        {
+            By.QuerySelector("div", (QuerySelector)null);
         }
     }
 }
