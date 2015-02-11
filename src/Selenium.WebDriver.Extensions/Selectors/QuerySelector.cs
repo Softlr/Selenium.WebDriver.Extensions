@@ -28,11 +28,7 @@
             }
 
             this.BaseElement = baseElement;
-            this.Selector = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}.querySelectorAll('{1}')",
-                this.BaseElement,
-                selector.Replace('\'', '"'));
+            this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
         /// <summary>
@@ -58,11 +54,8 @@
             }
 
             this.BaseSelector = baseSelector;
-            this.Selector = string.Format(
-                CultureInfo.InvariantCulture,
-                "{0}.length === 0 ? [] : {0}[0].querySelectorAll('{1}')",
-                this.BaseSelector,
-                selector.Replace('\'', '"'));
+            this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
+                + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
         /// <summary>
