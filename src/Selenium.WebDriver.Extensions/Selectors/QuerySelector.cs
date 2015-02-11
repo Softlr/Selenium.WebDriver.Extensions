@@ -57,7 +57,7 @@
         }
 
         /// <summary>
-        /// Gets the jQuery selector.
+        /// Gets the query selector.
         /// </summary>
         public string Selector { get; private set; }
 
