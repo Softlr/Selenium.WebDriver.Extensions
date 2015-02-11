@@ -837,26 +837,6 @@
         }
 
         /// <summary>
-        /// Tests script loading.
-        /// </summary>
-        [Test]
-        public void LoadScript()
-        {
-            var loadScript = new QuerySelectorLoader().LoadScript();
-            Assert.IsNull(loadScript);
-        }
-
-        /// <summary>
-        /// Tests default library URL.
-        /// </summary>
-        [Test]
-        public void DefaultLibraryUrl()
-        {
-            var url = new QuerySelectorLoader().LibraryUri;
-            Assert.IsNull(url);
-        }
-
-        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>

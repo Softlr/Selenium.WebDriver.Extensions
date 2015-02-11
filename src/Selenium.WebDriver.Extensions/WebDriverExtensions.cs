@@ -102,13 +102,7 @@
                 return;
             }
 
-            var loadScript = externalLibraryLoader.LoadScript(loadParams);
-            if (loadScript == null)
-            {
-                return;
-            }
-            
-            driver.ExecuteScript(loadScript);
+            driver.ExecuteScript(externalLibraryLoader.LoadScript(loadParams));
             var wait = new WebDriverWait(driver, timeout);
             wait.Until(d => driver.CheckSelectorPrerequisites(externalLibraryLoader));
         }

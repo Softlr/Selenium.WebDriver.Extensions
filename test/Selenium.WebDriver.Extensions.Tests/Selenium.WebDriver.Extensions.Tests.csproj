@@ -48,6 +48,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="QuerySelectorLoaderTests.cs" />
+    <Compile Include="SizzleLoaderTests.cs" />
+    <Compile Include="JQueryLoaderTests.cs" />
     <Compile Include="QuerySelectorTests.cs" />
     <Compile Include="SizzleSelectorTests.cs" />
     <Compile Include="JQuerySelectorTests.cs" />
