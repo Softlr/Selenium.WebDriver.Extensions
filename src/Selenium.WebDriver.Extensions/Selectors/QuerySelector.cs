@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
+    using System.Globalization;
 
     /// <summary>
     /// The Selenium JavaScript query selector.
@@ -16,14 +17,57 @@
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
-        public QuerySelector(string selector)
+        /// <param name="baseElement">
+        /// A string defining the base element on which base element the selector should be invoked.
+        /// </param>
+        public QuerySelector(string selector, string baseElement = "document")
         {
             if (selector == null)
             {
                 throw new ArgumentNullException("selector");
             }
 
-            this.Selector = "document.querySelectorAll('" + selector.Replace('\'', '"') + "')";
+            if (baseElement == null)
+            {
+                throw new ArgumentNullException("baseElement");
+            }
+
+            this.BaseElement = baseElement;
+            this.Selector = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}.querySelectorAll('{1}')",
+                this.BaseElement,
+                selector.Replace('\'', '"'));
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="QuerySelector"/> class.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
+        /// <remarks>
+        /// Because the <see cref="QuerySelector"/> operates always on collection of results, the new selector 
+        /// generated on its base will be invoked on the first match of the base selector. There's also a check to make
+        /// sure that the base selector has actually return any results.
+        /// </remarks>
+        public QuerySelector(string selector, QuerySelector baseSelector)
+        {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (baseSelector == null)
+            {
+                throw new ArgumentNullException("baseSelector");
+            }
+
+            this.BaseSelector = baseSelector;
+            this.Selector = string.Format(
+                CultureInfo.InvariantCulture,
+                "{0}.length === 0 ? [] : {0}[0].querySelectorAll('{1}')",
+                this.BaseSelector,
+                selector.Replace('\'', '"'));
         }
 
         /// <summary>
@@ -60,6 +104,16 @@
         /// Gets the query selector.
         /// </summary>
         public string Selector { get; private set; }
+
+        /// <summary>
+        /// Gets the base element for the query selector.
+        /// </summary>
+        public string BaseElement { get; private set; }
+
+        /// <summary>
+        /// Gets the base query selector for the query selector.
+        /// </summary>
+        public QuerySelector BaseSelector { get; private set; }
 
         /// <summary>
         /// Gets the JavaScript to load the prerequisites for the selector.
