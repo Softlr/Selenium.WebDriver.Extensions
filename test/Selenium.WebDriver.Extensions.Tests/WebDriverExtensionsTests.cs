@@ -842,8 +842,18 @@
         [Test]
         public void LoadScript()
         {
-            var loadScript = By.QuerySelector("div").LoadScript();
+            var loadScript = new QuerySelectorLoader().LoadScript();
             Assert.IsNull(loadScript);
+        }
+
+        /// <summary>
+        /// Tests default library URL.
+        /// </summary>
+        [Test]
+        public void DefaultLibraryUrl()
+        {
+            var url = new QuerySelectorLoader().LibraryUri;
+            Assert.IsNull(url);
         }
 
         /// <summary>

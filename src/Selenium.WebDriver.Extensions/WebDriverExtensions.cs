@@ -50,39 +50,66 @@
         /// Checks if prerequisites for the selector has been met.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector that is to be executed.</param>
+        /// <param name="externalLibraryLoader">The external library loader.</param>
         /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
-        private static bool CheckSelectorPrerequisites(this IWebDriver driver, ISelector selector)
+        private static bool CheckSelectorPrerequisites(
+            this IWebDriver driver, 
+            IExternalLibraryLoader externalLibraryLoader)
         {
-            var result = driver.ExecuteScript<bool?>(selector.CheckScript);
+            var result = driver.ExecuteScript<bool?>(externalLibraryLoader.CheckScript);
             return result.HasValue && result.Value;
+        }
+
+        /// <summary>
+        /// Checks if external library is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="externalLibraryLoader">The external library loader.</param>
+        /// <param name="libraryUri">
+        /// The URI of external library to load if it's not already loaded on the tested page.
+        /// </param>
+        /// <param name="timeout">The timeout value for the external library load.</param>
+        /// <remarks>
+        /// If external library is already loaded on a page this method will do nothing, even if the loaded version 
+        /// and version requested by invoking this method have different versions.
+        /// </remarks>
+        private static void LoadExternalLibrary(
+            this IWebDriver driver, 
+            IExternalLibraryLoader externalLibraryLoader,
+            Uri libraryUri, 
+            TimeSpan? timeout = null)
+        {
+            driver.LoadPrerequisites(
+                externalLibraryLoader,
+                timeout ?? TimeSpan.FromSeconds(3),
+                libraryUri == null ? externalLibraryLoader.LibraryUri.OriginalString : libraryUri.OriginalString);
         }
 
         /// <summary>
         /// Loads the prerequisites for the selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector that is to be executed.</param>
+        /// <param name="externalLibraryLoader">The external library loader.</param>
         /// <param name="timeout">The timeout value for the prerequisites load.</param>
         /// <param name="loadParams">The additional parameters for load script.</param>
         private static void LoadPrerequisites(
             this IWebDriver driver,
-            ISelector selector, 
-            TimeSpan timeout, 
+            IExternalLibraryLoader externalLibraryLoader,
+            TimeSpan timeout,
             params string[] loadParams)
         {
-            if (driver.CheckSelectorPrerequisites(selector))
+            if (driver.CheckSelectorPrerequisites(externalLibraryLoader))
             {
                 return;
             }
 
-            var loadScript = selector.LoadScript(loadParams);
+            var loadScript = externalLibraryLoader.LoadScript(loadParams);
 
             Debug.Assert(loadScript != null, "Load script not resolved");
 
             driver.ExecuteScript(loadScript);
             var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => driver.CheckSelectorPrerequisites(selector));
+            wait.Until(d => driver.CheckSelectorPrerequisites(externalLibraryLoader));
         }
 
         /// <summary>

@@ -28,7 +28,10 @@
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            driver.LoadJQuery(new Uri("https://code.jquery.com/jquery-" + version + ".min.js"), timeout);
+            driver.LoadExternalLibrary(
+                new JQueryLoader(),
+                new Uri("https://code.jquery.com/jquery-" + version + ".min.js"), 
+                timeout);
         }
 
         /// <summary>
@@ -43,13 +46,7 @@
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, Uri jQueryUri, TimeSpan? timeout = null)
         {
-            if (jQueryUri == null)
-            {
-                driver.LoadJQuery(timeout: timeout);
-                return;
-            }
-
-            driver.LoadJQuery(jQueryUri.OriginalString, timeout ?? TimeSpan.FromSeconds(3));
+            driver.LoadExternalLibrary(new JQueryLoader(), jQueryUri, timeout);
         }
 
         /// <summary>
@@ -487,23 +484,6 @@
             JQuerySelector by)
         {
             return driver.Find<string>(by, "serializeArray()", "JSON.stringify({0})");
-        }
-
-        /// <summary>
-        /// Checks if jQuery is loaded and loads it if needed.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="jQueryUri">The URI for jQuery to load if it's not already loaded on the tested page.</param>
-        /// <param name="timeout">The timeout value for the jQuery load.</param>
-        /// <remarks>
-        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
-        /// requested by invoking this method have different versions.
-        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
-        /// HTTP or HTTPS protocol.
-        /// </remarks>
-        private static void LoadJQuery(this IWebDriver driver, string jQueryUri, TimeSpan timeout)
-        {
-            driver.LoadPrerequisites(JQuerySelector.Empty, timeout, jQueryUri);
         }
 
         /// <summary>

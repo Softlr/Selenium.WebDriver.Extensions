@@ -26,7 +26,8 @@
         /// </remarks>
         public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
         {
-            driver.LoadSizzle(
+            driver.LoadExternalLibrary(
+                new SizzleLoader(),
                 new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
                 timeout);
         }
@@ -43,13 +44,7 @@
         /// </remarks>
         public static void LoadSizzle(this IWebDriver driver, Uri sizzleUri, TimeSpan? timeout = null)
         {
-            if (sizzleUri == null)
-            {
-                driver.LoadSizzle(timeout: timeout);
-                return;
-            }
-
-            driver.LoadSizzle(sizzleUri.OriginalString, timeout ?? TimeSpan.FromSeconds(3));
+            driver.LoadExternalLibrary(new SizzleLoader(), sizzleUri, timeout);
         }
 
         /// <summary>
@@ -84,23 +79,6 @@
         public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, SizzleSelector by)
         {
             return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by).ToList());
-        }
-
-        /// <summary>
-        /// Checks if Sizzle is loaded and loads it if needed.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="sizzleUri">The URI for Sizzle to load if it's not already loaded on the tested page.</param>
-        /// <param name="timeout">The timeout value for the jQuery load.</param>
-        /// <remarks>
-        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
-        /// requested by invoking this method have different versions.
-        /// The protocol is not specified in the URL so that it can be determined by the browser if the page is using
-        /// HTTP or HTTPS protocol.
-        /// </remarks>
-        private static void LoadSizzle(this IWebDriver driver, string sizzleUri, TimeSpan timeout)
-        {
-            driver.LoadPrerequisites(SizzleSelector.Empty, timeout, sizzleUri);
         }
 
         /// <summary>

@@ -1,26 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
-    using System.Diagnostics;
     using System.Globalization;
-    using System.Linq;
-
+    
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
     public class JQuerySelector : ISelector
     {
-        /// <summary>
-        /// The JavaScript to check if jQuery has been loaded.
-        /// </summary>
-        private const string DetectScriptCode = "return typeof window.jQuery === 'function';";
-
-        /// <summary>
-        /// The JavaScript to load jQuery.
-        /// </summary>
-        private const string LoadScriptCode = "var jq = document.createElement('script');jq.src = '{0}';"
-            + "document.getElementsByTagName('body')[0].appendChild(jq);";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
@@ -51,29 +38,6 @@
         }
 
         /// <summary>
-        /// Gets the empty jQuery selector.
-        /// </summary>
-        public static JQuerySelector Empty
-        {
-            get
-            {
-                return new JQuerySelector();
-            }
-        }
-        
-        /// <summary>
-        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
-        /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
-        /// </summary>
-        public string CheckScript
-        {
-            get
-            {
-                return DetectScriptCode;
-            }
-        }
-
-        /// <summary>
         /// Gets the jQuery selector.
         /// </summary>
         public string Selector { get; private set; }
@@ -87,18 +51,6 @@
         /// Gets the variable that has been assigned to jQuery.
         /// </summary>
         public string JQueryVariable { get; private set; }
-
-        /// <summary>
-        /// Gets the JavaScript to load the prerequisites for the selector.
-        /// </summary>
-        /// <param name="args">Load script arguments.</param>
-        /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
-        public string LoadScript(params string[] args)
-        {
-            Debug.Assert(args.Length > 0, "No jQuery URI given");
-
-            return string.Format(LoadScriptCode, args.First());
-        }
 
         /// <summary>
         /// Returns a string that represents the current object.

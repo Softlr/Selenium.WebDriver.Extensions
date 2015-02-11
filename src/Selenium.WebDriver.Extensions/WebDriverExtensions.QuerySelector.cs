@@ -17,7 +17,7 @@
         /// <param name="driver">The Selenium web driver.</param>
         public static void CheckQuerySelectorSupport(this IWebDriver driver)
         {
-            if (!driver.CheckSelectorPrerequisites(QuerySelector.Empty))
+            if (!driver.CheckSelectorPrerequisites(new QuerySelectorLoader()))
             {
                 throw new QuerySelectorNotSupportedException();
             }

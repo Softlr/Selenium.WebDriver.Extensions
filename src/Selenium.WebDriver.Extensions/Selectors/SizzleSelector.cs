@@ -1,25 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
-    using System.Diagnostics;
-    using System.Linq;
-
+    
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
     public class SizzleSelector : ISelector
     {
-        /// <summary>
-        /// The JavaScript to check if Sizzle has been loaded.
-        /// </summary>
-        private const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
-
-        /// <summary>
-        /// The JavaScript to check if Sizzle has been loaded.
-        /// </summary>
-        private const string LoadScriptCode = "var sizzle = document.createElement('script');sizzle.src = '{0}';" +
-            "document.getElementsByTagName('body')[0].appendChild(sizzle);";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
         /// </summary>
@@ -45,36 +32,6 @@
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
-        /// </summary>
-        protected SizzleSelector()
-        {
-        }
-
-        /// <summary>
-        /// Gets the empty Sizzle selector.
-        /// </summary>
-        public static SizzleSelector Empty
-        {
-            get
-            {
-                return new SizzleSelector();
-            }
-        }
-
-        /// <summary>
-        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
-        /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
-        /// </summary>
-        public string CheckScript
-        {
-            get
-            {
-                return DetectScriptCode;
-            }
-        }
-
-        /// <summary>
         /// Gets the jQuery selector.
         /// </summary>
         public string Selector { get; private set; }
@@ -83,18 +40,6 @@
         /// Gets the DOM Element or Document to use as context.
         /// </summary>
         public SizzleSelector Context { get; private set; }
-
-        /// <summary>
-        /// Gets the JavaScript to load the prerequisites for the selector.
-        /// </summary>
-        /// <param name="args">Load script arguments.</param>
-        /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
-        public string LoadScript(params string[] args)
-        {
-            Debug.Assert(args.Length > 0, "No Sizzle URI given");
-
-            return string.Format(LoadScriptCode, args.First());
-        }
 
         /// <summary>
         /// Returns a string that represents the current object.
