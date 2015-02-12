@@ -425,8 +425,8 @@
         {
             var position = this.Browser.FindPosition(By.JQuerySelector("h1"));
             Assert.IsNotNull(position);
-            Assert.AreEqual(3, position.Top);
-            Assert.AreEqual(8, position.Left);
+            Assert.AreEqual(3, position.Value.Top);
+            Assert.AreEqual(8, position.Value.Left);
         }
 
         /// <summary>
@@ -447,8 +447,8 @@
         {
             var position = this.Browser.FindOffset(By.JQuerySelector("h1"));
             Assert.IsNotNull(position);
-            Assert.AreEqual(8, position.Top);
-            Assert.AreEqual(13, position.Left);
+            Assert.AreEqual(8, position.Value.Top);
+            Assert.AreEqual(13, position.Value.Left);
         }
 
         /// <summary>
