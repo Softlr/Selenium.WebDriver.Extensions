@@ -1,8 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Selectors
 {
     using System;
-    using System.Globalization;
-
+    
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
