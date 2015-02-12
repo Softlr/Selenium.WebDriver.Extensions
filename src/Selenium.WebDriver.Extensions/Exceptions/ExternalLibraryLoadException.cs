@@ -6,7 +6,7 @@
     using JetBrains.Annotations;
 
     /// <summary>
-    /// The exception that is thrown when external library loading failes.
+    /// The exception that is thrown when external library loading fails.
     /// </summary>
     [Serializable]
     [ExcludeFromCodeCoverage]
