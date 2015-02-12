@@ -5,7 +5,8 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using OpenQA.Selenium;
-    
+    using Selenium.WebDriver.Extensions.ExternalLibraryLoaders;
+
     /// <summary>
     /// Web driver extensions.
     /// </summary>

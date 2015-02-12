@@ -2,6 +2,7 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
+    using Selenium.WebDriver.Extensions.ExternalLibraryLoaders;
 
     /// <summary>
     /// Query selector loader tests.

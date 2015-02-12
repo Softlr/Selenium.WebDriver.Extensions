@@ -56,10 +56,10 @@
     <Compile Include="By.cs" />
     <Compile Include="Exceptions\ExternalLibraryLoadException.cs" />
     <Compile Include="Exceptions\QuerySelectorNotSupportedException.cs" />
-    <Compile Include="ExternalLibrariesLoaders\IExternalLibraryLoader.cs" />
-    <Compile Include="ExternalLibrariesLoaders\JQueryLoader.cs" />
-    <Compile Include="ExternalLibrariesLoaders\QuerySelectorLoader.cs" />
-    <Compile Include="ExternalLibrariesLoaders\SizzleLoader.cs" />
+    <Compile Include="ExternalLibraryLoaders\IExternalLibraryLoader.cs" />
+    <Compile Include="ExternalLibraryLoaders\JQueryLoader.cs" />
+    <Compile Include="ExternalLibraryLoaders\QuerySelectorLoader.cs" />
+    <Compile Include="ExternalLibraryLoaders\SizzleLoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>

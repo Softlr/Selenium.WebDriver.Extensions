@@ -6,7 +6,8 @@
     using System.Globalization;
     using System.Linq;
     using OpenQA.Selenium;
-    
+    using Selenium.WebDriver.Extensions.ExternalLibraryLoaders;
+
     /// <summary>
     /// Web driver extensions.
     /// </summary>
