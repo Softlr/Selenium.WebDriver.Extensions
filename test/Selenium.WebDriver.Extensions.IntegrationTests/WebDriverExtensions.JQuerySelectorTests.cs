@@ -18,14 +18,14 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("PhantomJS", "TestCaseJQuery.html")]
-    [TestFixture("PhantomJS", "TestCaseNoJQuery.html")]
-    [TestFixture("Firefox", "TestCaseJQuery.html")]
-    [TestFixture("Firefox", "TestCaseNoJQuery.html")]
-    [TestFixture("Chrome", "TestCaseJQuery.html")]
-    [TestFixture("Chrome", "TestCaseNoJQuery.html")]
-    [TestFixture("IE", "TestCaseJQuery.html")]
-    [TestFixture("IE", "TestCaseNoJQuery.html")]
+    [TestFixture("PhantomJS", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("PhantomJS", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("Firefox", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("Firefox", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("Chrome", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("Chrome", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("IE", "TestCases\\JQuery\\Loaded.html")]
+    [TestFixture("IE", "TestCases\\JQuery\\Unloaded.html")]
     [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsJQuerySelectorTests
@@ -62,45 +62,45 @@
         [TestFixtureSetUp]
         public void SetUp()
         {
-            switch (this.DriverName)
-            {
-                case "PhantomJS":
-                    this.Browser = new PhantomJSDriver();
-                    break;
-                case "Firefox":
-                    this.Browser = new FirefoxDriver();
-                    break;
-                case "Chrome":
-                    this.Browser = new ChromeDriver();
-                    break;
-                case "IE":
-                    this.Browser = new InternetExplorerDriver();
-                    break;
-                default:
-                    return;
-            }
-            
             var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
             if (directoryInfo == null)
             {
                 return;
             }
 
+#if DEBUG
+            const string BuildConfig = "Debug";
+#else
+            const string BuildConfig = "Release";
+#endif
+
+            var driversPath = directoryInfo.FullName + Path.DirectorySeparatorChar + "bin"
+                + Path.DirectorySeparatorChar + BuildConfig
+                + Path.DirectorySeparatorChar + "Drivers"
+                + Path.DirectorySeparatorChar;
+
+            switch (this.DriverName)
+            {
+                case "PhantomJS":
+                    var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
+                    phantomJsService.SslProtocol = "any";
+                    this.Browser = new PhantomJSDriver(phantomJsService);
+                    break;
+                case "Firefox":
+                    this.Browser = new FirefoxDriver();
+                    break;
+                case "Chrome":
+                    this.Browser = new ChromeDriver(driversPath);
+                    break;
+                case "IE":
+                    this.Browser = new InternetExplorerDriver(driversPath);
+                    break;
+                default:
+                    return;
+            }
+            
             var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
             this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
-            
-            if (this.TestCaseFileName != "TestCaseNoJQuery.html")
-            {
-                // no additional setup needed
-                return;
-            }
-
-            // load jQuery
-            this.Browser.LoadJQuery(new Uri("http://code.jquery.com/jquery-latest.min.js"));
-
-            // set the scrolls for tests
-            var javaScriptDriver = (IJavaScriptExecutor)this.Browser;
-            javaScriptDriver.ExecuteScript("$('div.scroll').scrollTop(100).scrollLeft(200);");
         }
 
         /// <summary>

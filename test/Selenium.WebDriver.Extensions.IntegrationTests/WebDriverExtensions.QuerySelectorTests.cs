@@ -12,30 +12,26 @@
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
-    /// Sizzle selector tests.
+    /// Query selector tests.
     /// </summary>
     /// <remarks>
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("PhantomJS", "TestCases\\Sizzle\\Loaded.html")]
-    [TestFixture("PhantomJS", "TestCases\\Sizzle\\Unloaded.html")]
-    [TestFixture("Firefox", "TestCases\\Sizzle\\Loaded.html")]
-    [TestFixture("Firefox", "TestCases\\Sizzle\\Unloaded.html")]
-    [TestFixture("Chrome", "TestCases\\Sizzle\\Loaded.html")]
-    [TestFixture("Chrome", "TestCases\\Sizzle\\Unloaded.html")]
-    [TestFixture("IE", "TestCases\\Sizzle\\Loaded.html")]
-    [TestFixture("IE", "TestCases\\Sizzle\\Unloaded.html")]
+    [TestFixture("PhantomJS", "TestCases\\QuerySelector\\TestCase.html")]
+    [TestFixture("Firefox", "TestCases\\QuerySelector\\TestCase.html")]
+    [TestFixture("Chrome", "TestCases\\QuerySelector\\TestCase.html")]
+    [TestFixture("IE", "TestCases\\QuerySelector\\TestCase.html")]
     [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
-    public class WebDriverExtensionsSizzleSelectorTests
+    public class WebDriverExtensionsQuerySelectorTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebDriverExtensionsSizzleSelectorTests"/> class.
+        /// Initializes a new instance of the <see cref="WebDriverExtensionsQuerySelectorTests"/> class.
         /// </summary>
         /// <param name="driverName">The web driver name.</param>
         /// <param name="testCaseFileName">The test case file name.</param>
-        public WebDriverExtensionsSizzleSelectorTests(string driverName, string testCaseFileName)
+        public WebDriverExtensionsQuerySelectorTests(string driverName, string testCaseFileName)
         {
             this.DriverName = driverName;
             this.TestCaseFileName = testCaseFileName;
@@ -82,9 +78,7 @@
             switch (this.DriverName)
             {
                 case "PhantomJS":
-                    var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
-                    phantomJsService.SslProtocol = "any";
-                    this.Browser = new PhantomJSDriver(phantomJsService);
+                    this.Browser = new PhantomJSDriver(driversPath);
                     break;
                 case "Firefox":
                     this.Browser = new FirefoxDriver();
@@ -118,7 +112,7 @@
         [Test]
         public void FindElement()
         {
-            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var element = this.Browser.FindElement(By.QuerySelector("#id1"));
             Assert.IsNotNull(element);
         }
 
@@ -129,7 +123,7 @@
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementThatDoesntExist()
         {
-            this.Browser.FindElement(By.SizzleSelector("#id-not"));
+            this.Browser.FindElement(By.QuerySelector("#id-not"));
         }
 
         /// <summary>
@@ -138,7 +132,7 @@
         [Test]
         public void FindElements()
         {
-            var elements = this.Browser.FindElements(By.SizzleSelector("div.main"));
+            var elements = this.Browser.FindElements(By.QuerySelector("div.main"));
             Assert.AreEqual(2, elements.Count);
         }
 
@@ -148,7 +142,7 @@
         [Test]
         public void FindElementsThatDoesntExist()
         {
-            var elements = this.Browser.FindElements(By.SizzleSelector("div.mainNot"));
+            var elements = this.Browser.FindElements(By.QuerySelector("div.mainNot"));
             Assert.AreEqual(0, elements.Count);
         }
     }

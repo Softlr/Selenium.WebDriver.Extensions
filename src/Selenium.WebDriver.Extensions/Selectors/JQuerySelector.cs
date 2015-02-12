@@ -2,7 +2,7 @@
 {
     using System;
     using System.Globalization;
-
+    
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
