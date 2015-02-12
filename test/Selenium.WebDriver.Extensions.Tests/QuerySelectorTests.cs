@@ -4,6 +4,7 @@
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
+    using Selenium.WebDriver.Extensions.Selectors;
 
     /// <summary>
     /// Query selector tests.

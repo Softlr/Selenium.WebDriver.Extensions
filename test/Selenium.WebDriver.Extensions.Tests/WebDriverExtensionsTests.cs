@@ -9,6 +9,7 @@
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.Selectors;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>

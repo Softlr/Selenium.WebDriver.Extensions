@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+﻿namespace Selenium.WebDriver.Extensions.Models
 {
     /// <summary>
     /// The position of DOM element on a page.

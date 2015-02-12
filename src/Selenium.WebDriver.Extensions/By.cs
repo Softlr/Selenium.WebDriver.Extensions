@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using JetBrains.Annotations;
+    using Selenium.WebDriver.Extensions.Selectors;
 
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
@@ -44,7 +45,7 @@
         /// Gets a mechanism to find elements matching JavaScript query selector.
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
-        /// <returns>A <see cref="Extensions.QuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
         public static QuerySelector QuerySelector(string selector)
         {
             return new QuerySelector(selector);
@@ -57,7 +58,7 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        /// <returns>A <see cref="Extensions.QuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
         public static QuerySelector QuerySelector(string selector, string baseElement)
         {
             return new QuerySelector(selector, baseElement);
@@ -68,7 +69,7 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
-        /// <returns>A <see cref="Extensions.QuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
         public static QuerySelector QuerySelector(string selector, QuerySelector baseSelector)
         {
             return new QuerySelector(selector, baseSelector);
