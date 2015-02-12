@@ -10,7 +10,7 @@
     [TestFixture]
     [Category("Unit Tests")]
     [ExcludeFromCodeCoverage]
-    class QuerySelectorLoaderTests
+    public class QuerySelectorLoaderTests
     {
         /// <summary>
         /// Tests script loading.
