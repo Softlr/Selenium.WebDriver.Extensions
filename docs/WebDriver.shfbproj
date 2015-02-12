@@ -18,8 +18,8 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.dll" xmlns="" />
-<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.43.1\lib\net40\WebDriver.xml" xmlns="" /></DocumentationSources>
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll" />
+<DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.xml" /></DocumentationSources>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->

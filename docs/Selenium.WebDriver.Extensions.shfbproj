@@ -25,9 +25,8 @@
     <CppCommentsFixup>False</CppCommentsFixup>
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" xmlns="" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.xml" xmlns="" />
-    </DocumentationSources>
+      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.dll" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.xml" /></DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" xmlns="" />
       <NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True" xmlns="">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
