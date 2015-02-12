@@ -667,8 +667,13 @@
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
             var position = mock.Object.FindPosition(By.JQuerySelector("input"));
 
-            Assert.AreEqual(dict["top"], position.Top);
-            Assert.AreEqual(dict["left"], position.Left);
+            if (position == null)
+            {
+                Assert.Fail();
+            }
+
+            Assert.AreEqual(dict["top"], position.Value.Top);
+            Assert.AreEqual(dict["left"], position.Value.Left);
         }
 
         /// <summary>
@@ -701,8 +706,13 @@
                 .Returns(true);
             var offset = mock.Object.FindOffset(By.JQuerySelector("input"));
 
-            Assert.AreEqual(dict["top"], offset.Top);
-            Assert.AreEqual(dict["left"], offset.Left);
+            if (offset == null)
+            {
+                Assert.Fail();
+            }
+
+            Assert.AreEqual(dict["top"], offset.Value.Top);
+            Assert.AreEqual(dict["left"], offset.Value.Left);
         }
 
         /// <summary>
