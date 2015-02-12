@@ -327,7 +327,7 @@
         /// The current coordinates of the first element in the set of matched elements, relative to the offset 
         /// parent.
         /// </returns>
-        public static Position FindPosition(
+        public static Position? FindPosition(
             this IWebDriver driver,
             JQuerySelector by)
         {
@@ -351,7 +351,7 @@
         /// <returns>
         /// The current coordinates of the first element in the set of matched elements, relative to the document.
         /// </returns>
-        public static Position FindOffset(
+        public static Position? FindOffset(
             this IWebDriver driver,
             JQuerySelector by)
         {
