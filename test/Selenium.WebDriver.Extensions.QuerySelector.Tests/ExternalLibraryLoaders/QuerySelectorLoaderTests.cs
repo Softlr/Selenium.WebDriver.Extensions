@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests.ExternalLibraryLoaders
 {
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;

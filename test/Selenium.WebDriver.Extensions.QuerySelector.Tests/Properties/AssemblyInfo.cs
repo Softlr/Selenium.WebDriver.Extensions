@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Selenium.WebDriver.Extensions.Sizzle")]
+[assembly: AssemblyTitle("Selenium.WebDriver.Extensions.QuerySelector.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lukasz Rajchel")]
-[assembly: AssemblyProduct("Selenium.WebDriver.Extensions.Sizzle")]
+[assembly: AssemblyProduct("Selenium.WebDriver.Extensions.QuerySelector.Tests")]
 [assembly: AssemblyCopyright("Copyright © Lukasz Rajchel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("5aec0781-a068-489b-8323-4bc8ff76ec57")]
+[assembly: Guid("a002140d-5417-458a-814f-1fa22ac5074d")]
 
 // Version information for an assembly consists of the following four values:
 //
