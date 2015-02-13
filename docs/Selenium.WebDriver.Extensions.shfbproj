@@ -26,6 +26,14 @@
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.dll" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.JQuery.dll" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.JQuery.xml" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.QuerySelector.dll" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.QuerySelector.xml" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.Shared.dll" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.Shared.xml" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.Sizzle.dll" />
+<DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.Sizzle.xml" />
 <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Debug\Selenium.WebDriver.Extensions.xml" /></DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" xmlns="" />
