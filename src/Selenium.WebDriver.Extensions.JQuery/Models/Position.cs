@@ -51,6 +51,28 @@
         }
 
         /// <summary>
+        /// Checks if two objects are equal.
+        /// </summary>
+        /// <param name="position1">The first object to be checked.</param>
+        /// <param name="position2">The second object to be checked.</param>
+        /// <returns><c>true</c> if the objects are equal; otherwise, <c>false</c>.</returns>
+        public static bool operator ==(Position position1, Position position2)
+        {
+            return position1.Equals(position2);
+        }
+
+        /// <summary>
+        /// Checks if two objects are not equal.
+        /// </summary>
+        /// <param name="position1">The first object to be checked.</param>
+        /// <param name="position2">The second object to be checked.</param>
+        /// <returns><c>true</c> if the objects are not equal; otherwise, <c>false</c>.</returns>
+        public static bool operator !=(Position position1, Position position2)
+        {
+            return !position1.Equals(position2);
+        }    
+
+        /// <summary>
         /// Determines whether the specified object is equal to the current object.
         /// </summary>
         /// <param name="obj">The object to compare with the current object.</param>
