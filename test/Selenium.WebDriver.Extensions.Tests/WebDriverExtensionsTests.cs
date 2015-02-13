@@ -9,7 +9,10 @@
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Selectors;
+    using Selenium.WebDriver.Extensions.JQuery.Selectors;
+    using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.Shared;
+    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
@@ -263,7 +266,7 @@
         public void FindElementWithQuerySelectorArgumentNull()
         {
             var mock = new Mock<IWebDriver>();
-            mock.Object.FindElement((QuerySelector)null);
+            mock.Object.FindElement((QuerySelector.Selectors.QuerySelector)null);
         }
 
         /// <summary>

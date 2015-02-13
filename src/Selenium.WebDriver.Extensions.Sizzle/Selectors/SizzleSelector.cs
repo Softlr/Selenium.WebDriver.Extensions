@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Selectors
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Selectors
 {
     using System;
     
@@ -13,7 +13,7 @@
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <remarks>
-        /// Contrary to <see cref="JQuerySelector"/>, the <see cref="SizzleSelector"/> only works when single element
+        /// Contrary to jQuery selectors, the <see cref="SizzleSelector"/> only works when single element
         /// is given as context. Therefore only the first match is added to the selector if the context parameters
         /// is used.
         /// </remarks>

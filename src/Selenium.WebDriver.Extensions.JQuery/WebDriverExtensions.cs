@@ -1,15 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions
+﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Globalization;
+    using System.Linq;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.JQuery.ExternalLibraryLoaders;
     using Selenium.WebDriver.Extensions.JQuery.Models;
     using Selenium.WebDriver.Extensions.JQuery.Selectors;
-    
+    using Selenium.WebDriver.Extensions.Shared;
+    using Selenium.WebDriver.Extensions.Shared.Utils;
+
     /// <summary>
     /// Web driver extensions.
     /// </summary>
-    public static partial class WebDriverExtensions
+    public static class WebDriverExtensions
     {
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
@@ -27,7 +33,10 @@
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            JQuery.WebDriverExtensions.LoadJQuery(driver, version, timeout);
+            driver.LoadExternalLibrary(
+                new JQueryLoader(),
+                new Uri("https://code.jquery.com/jquery-" + version + ".min.js"),
+                timeout);
         }
 
         /// <summary>
@@ -42,7 +51,7 @@
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, Uri jQueryUri, TimeSpan? timeout = null)
         {
-            JQuery.WebDriverExtensions.LoadJQuery(driver, jQueryUri, timeout);
+            driver.LoadExternalLibrary(new JQueryLoader(), jQueryUri, timeout);
         }
 
         /// <summary>
@@ -55,7 +64,13 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindElement(driver, by);
+            var result = driver.Find<IWebElement>(by, "get(0)");
+            if (result == null)
+            {
+                throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
+            }
+
+            return result;
         }
 
         /// <summary>
@@ -68,7 +83,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindElements(driver, by);
+            return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by, "get()").ToList());
         }
 
         /// <summary>
@@ -85,7 +100,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindText(driver, by);
+            return driver.Find<string>(by, "text()");
         }
 
         /// <summary>
@@ -102,7 +117,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindHtml(driver, by);
+            return driver.Find<string>(by, "html()");
         }
 
         /// <summary>
@@ -118,7 +133,7 @@
             JQuerySelector by,
             string attributeName)
         {
-            return JQuery.WebDriverExtensions.FindAttribute(driver, by, attributeName);
+            return driver.Find<string>(by, "attr('" + attributeName + "')");
         }
 
         /// <summary>
@@ -134,7 +149,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            return JQuery.WebDriverExtensions.FindProperty(driver, by, propertyName);
+            return driver.FindProperty<bool?>(by, propertyName);
         }
 
         /// <summary>
@@ -151,7 +166,12 @@
             JQuerySelector by,
             string propertyName)
         {
-            return JQuery.WebDriverExtensions.FindProperty<T>(driver, by, propertyName);
+            if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
+            {
+                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
+            }
+
+            return driver.Find<T>(by, "prop('" + propertyName + "')");
         }
 
         /// <summary>
@@ -165,7 +185,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindValue(driver, by);
+            return driver.Find<string>(by, "val()");
         }
 
         /// <summary>
@@ -184,7 +204,7 @@
             JQuerySelector by,
             string propertyName)
         {
-            return JQuery.WebDriverExtensions.FindCss(driver, by, propertyName);
+            return driver.Find<string>(by, "css('" + propertyName + "')");
         }
 
         /// <summary>
@@ -201,7 +221,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindWidth(driver, by);
+            return driver.Find<long?>(by, "width()");
         }
 
         /// <summary>
@@ -218,7 +238,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindHeight(driver, by);
+            return driver.Find<long?>(by, "height()");
         }
 
         /// <summary>
@@ -236,7 +256,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindInnerWidth(driver, by);
+            return driver.Find<long?>(by, "innerWidth()");
         }
 
         /// <summary>
@@ -254,7 +274,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindInnerHeight(driver, by);
+            return driver.Find<long?>(by, "innerHeight()");
         }
 
         /// <summary>
@@ -275,7 +295,7 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
-            return JQuery.WebDriverExtensions.FindOuterWidth(driver, by, includeMargin);
+            return driver.Find<long?>(by, "outerWidth(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -296,7 +316,7 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
-            return JQuery.WebDriverExtensions.FindOuterHeight(driver, by, includeMargin);
+            return driver.Find<long?>(by, "outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
         }
 
         /// <summary>
@@ -313,7 +333,15 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindPosition(driver, by);
+            var positionDict = driver.Find<IDictionary<string, object>>(by, "position()");
+            if (positionDict == null || !positionDict.ContainsKey("top") || !positionDict.ContainsKey("left"))
+            {
+                return null;
+            }
+
+            var top = int.Parse(positionDict["top"].ToString(), CultureInfo.InvariantCulture);
+            var left = int.Parse(positionDict["left"].ToString(), CultureInfo.InvariantCulture);
+            return new Position(top, left);
         }
 
         /// <summary>
@@ -329,7 +357,15 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindOffset(driver, by);
+            var offsetDict = driver.Find<IDictionary<string, object>>(by, "offset()");
+            if (offsetDict == null || !offsetDict.ContainsKey("top") || !offsetDict.ContainsKey("left"))
+            {
+                return null;
+            }
+
+            var top = int.Parse(offsetDict["top"].ToString(), CultureInfo.InvariantCulture);
+            var left = int.Parse(offsetDict["left"].ToString(), CultureInfo.InvariantCulture);
+            return new Position(top, left);
         }
 
         /// <summary>
@@ -347,7 +383,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindScrollLeft(driver, by);
+            return driver.Find<long?>(by, "scrollLeft()");
         }
 
         /// <summary>
@@ -365,7 +401,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindScrollTop(driver, by);
+            return driver.Find<long?>(by, "scrollTop()");
         }
 
         /// <summary>
@@ -385,7 +421,7 @@
             JQuerySelector by,
             string key)
         {
-            return JQuery.WebDriverExtensions.FindData(driver, by, key);
+            return driver.FindData<string>(by, key);
         }
 
         /// <summary>
@@ -406,7 +442,12 @@
             JQuerySelector by,
             string key)
         {
-            return JQuery.WebDriverExtensions.FindData<T>(driver, by, key);
+            if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
+            {
+                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
+            }
+
+            return driver.Find<T>(by, "data('" + key + "')");
         }
 
         /// <summary>
@@ -419,7 +460,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindCount(driver, by);
+            return driver.Find<long>(by, "length");
         }
 
         /// <summary>
@@ -433,7 +474,7 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindSerialized(driver, by);
+            return driver.Find<string>(by, "serialize()");
         }
 
         /// <summary>
@@ -447,7 +488,69 @@
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return JQuery.WebDriverExtensions.FindSerializedArray(driver, by);
+            return driver.Find<string>(by, "serializeArray()", "JSON.stringify({0})");
+        }
+
+        /// <summary>
+        /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
+        /// and script format string.
+        /// </summary>
+        /// <typeparam name="T">The type of the result to be returned.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="scriptFormat">The format string of the script to be invoked.</param>
+        /// <param name="wrapperFormat">
+        /// The wrapper format string for the purpose of wrap the jQuery selection result.
+        /// </param>
+        /// <returns>Parsed result of invoking the script.</returns>
+        /// <remarks>
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
+        /// <see cref="Nullable{Long}"/>, <see cref="bool"/>, <see cref="Nullable{Boolean}"/>, <see cref="string"/>, 
+        /// <see cref="IWebElement"/> and <see cref="IEnumerable{IWebElement}"/>.
+        /// Selenium returns different types depending if element has been found or not. If there's a match a
+        /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
+        /// an empty <see cref="ReadOnlyCollection{Object}"/>.
+        /// </remarks>
+        private static T Find<T>(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string scriptFormat,
+            string wrapperFormat = null)
+        {
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            driver.LoadJQuery();
+            return ParseUtil.ParseResult<T>(driver.ExecuteScript(by, scriptFormat, wrapperFormat));
+        }
+
+        /// <summary>
+        /// Executes jQuery script.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="scriptFormat">The format string of the script to be invoked.</param>
+        /// <param name="wrapperFormat">
+        /// The wrapper format string for the purpose of wrap the jQuery selection result.
+        /// </param>
+        /// <returns>Result of invoking the script.</returns>
+        private static object ExecuteScript(
+            this IWebDriver driver,
+            JQuerySelector by,
+            string scriptFormat,
+            string wrapperFormat)
+        {
+            var script = by + "." + scriptFormat;
+            if (wrapperFormat != null)
+            {
+                script = string.Format(CultureInfo.InvariantCulture, wrapperFormat, script);
+            }
+
+            script = "return " + script + ";";
+
+            return driver.ExecuteScript<object>(script);
         }
     }
 }

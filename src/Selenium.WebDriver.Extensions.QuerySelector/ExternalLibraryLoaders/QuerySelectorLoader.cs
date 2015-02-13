@@ -1,7 +1,8 @@
-﻿namespace Selenium.WebDriver.Extensions.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector.ExternalLibraryLoaders
 {
     using System;
-    
+    using Selenium.WebDriver.Extensions.Shared.ExternalLibraryLoaders;
+
     /// <summary>
     /// The query selector loader.
     /// </summary>

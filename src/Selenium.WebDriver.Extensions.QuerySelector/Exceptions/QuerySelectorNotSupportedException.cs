@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

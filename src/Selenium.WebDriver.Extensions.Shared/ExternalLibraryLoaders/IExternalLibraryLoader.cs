@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.Shared.ExternalLibraryLoaders
 {
     using System;
 

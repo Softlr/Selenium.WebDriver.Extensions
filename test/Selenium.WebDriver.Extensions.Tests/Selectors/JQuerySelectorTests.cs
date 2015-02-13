@@ -4,7 +4,7 @@
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.Selectors;
+    using Selenium.WebDriver.Extensions.JQuery.Selectors;
 
     /// <summary>
     /// JQuery selector tests.

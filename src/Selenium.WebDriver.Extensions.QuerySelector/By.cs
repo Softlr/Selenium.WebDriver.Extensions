@@ -1,8 +1,7 @@
-﻿namespace Selenium.WebDriver.Extensions
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.JQuery.Selectors;
-    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
+    using Selenium.WebDriver.Extensions.QuerySelector.Selectors;
 
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
@@ -15,49 +14,16 @@
     public class By : OpenQA.Selenium.By
     {
         /// <summary>
-        /// Gets a mechanism to find elements matching jQuery selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
-        /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
-        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
-        public static JQuerySelector JQuerySelector(
-            string selector, 
-            JQuerySelector context = null, 
-            string jQueryVariable = "jQuery")
-        {
-            return JQuery.By.JQuerySelector(selector, context, jQueryVariable);
-        }
-
-        /// <summary>
-        /// Gets a mechanism to find elements matching Sizzle selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
-        /// <returns>A <see cref="SizzleSelector"/> object the driver can use to find the elements.</returns>
-        public static SizzleSelector SizzleSelector(
-            string selector,
-            SizzleSelector context = null)
-        {
-            return Sizzle.By.SizzleSelector(selector, context);
-        }
-
-        /// <summary>
         /// Gets a mechanism to find elements matching JavaScript query selector.
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.QuerySelector.Selectors.QuerySelector"/> object the driver can 
-        /// use to find the elements.
-        /// </returns>
-        public static QuerySelector.Selectors.QuerySelector QuerySelector(
-            string selector, 
-            string baseElement = "document")
+        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
+        public static QuerySelector QuerySelector(string selector, string baseElement = "document")
         {
-            return Extensions.QuerySelector.By.QuerySelector(selector, baseElement);
+            return new QuerySelector(selector, baseElement);
         }
 
         /// <summary>
@@ -65,15 +31,10 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
-        /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.QuerySelector.Selectors.QuerySelector"/> object the driver can 
-        /// use to find the elements.
-        /// </returns>
-        public static QuerySelector.Selectors.QuerySelector QuerySelector(
-            string selector, 
-            QuerySelector.Selectors.QuerySelector baseSelector)
+        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
+        public static QuerySelector QuerySelector(string selector, QuerySelector baseSelector)
         {
-            return Extensions.QuerySelector.By.QuerySelector(selector, baseSelector);
+            return new QuerySelector(selector, baseSelector);
         }
 
         /// <summary>

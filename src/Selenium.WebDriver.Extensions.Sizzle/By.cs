@@ -1,7 +1,6 @@
-﻿namespace Selenium.WebDriver.Extensions
+﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.JQuery.Selectors;
     using Selenium.WebDriver.Extensions.Sizzle.Selectors;
 
     /// <summary>
@@ -15,21 +14,6 @@
     public class By : OpenQA.Selenium.By
     {
         /// <summary>
-        /// Gets a mechanism to find elements matching jQuery selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
-        /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
-        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
-        public static JQuerySelector JQuerySelector(
-            string selector, 
-            JQuerySelector context = null, 
-            string jQueryVariable = "jQuery")
-        {
-            return JQuery.By.JQuerySelector(selector, context, jQueryVariable);
-        }
-
-        /// <summary>
         /// Gets a mechanism to find elements matching Sizzle selector.
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
@@ -39,41 +23,7 @@
             string selector,
             SizzleSelector context = null)
         {
-            return Sizzle.By.SizzleSelector(selector, context);
-        }
-
-        /// <summary>
-        /// Gets a mechanism to find elements matching JavaScript query selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        /// <param name="baseElement">
-        /// A string defining the base element on which base element the selector should be invoked.
-        /// </param>
-        /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.QuerySelector.Selectors.QuerySelector"/> object the driver can 
-        /// use to find the elements.
-        /// </returns>
-        public static QuerySelector.Selectors.QuerySelector QuerySelector(
-            string selector, 
-            string baseElement = "document")
-        {
-            return Extensions.QuerySelector.By.QuerySelector(selector, baseElement);
-        }
-
-        /// <summary>
-        /// Gets a mechanism to find elements matching JavaScript query selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
-        /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.QuerySelector.Selectors.QuerySelector"/> object the driver can 
-        /// use to find the elements.
-        /// </returns>
-        public static QuerySelector.Selectors.QuerySelector QuerySelector(
-            string selector, 
-            QuerySelector.Selectors.QuerySelector baseSelector)
-        {
-            return Extensions.QuerySelector.By.QuerySelector(selector, baseSelector);
+            return new SizzleSelector(selector, context);
         }
 
         /// <summary>

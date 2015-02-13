@@ -59,6 +59,18 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.csproj">
+      <Project>{e62ebb89-ae2a-4675-a56a-259b17a513e7}</Project>
+      <Name>Selenium.WebDriver.Extensions.JQuery</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.csproj">
+      <Project>{a0d4c735-e4c6-449d-b2db-e0423e5eed5a}</Project>
+      <Name>Selenium.WebDriver.Extensions.QuerySelector</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.csproj">
+      <Project>{b0f5e6ec-6f3b-4c84-a852-3f21ad9b9c22}</Project>
+      <Name>Selenium.WebDriver.Extensions.Sizzle</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj">
       <Project>{f10536ec-8fbf-437a-840d-55ce6bf44161}</Project>
       <Name>Selenium.WebDriver.Extensions</Name>

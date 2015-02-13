@@ -4,7 +4,7 @@
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.Selectors;
+    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
 
     /// <summary>
     /// Sizzle selector tests.

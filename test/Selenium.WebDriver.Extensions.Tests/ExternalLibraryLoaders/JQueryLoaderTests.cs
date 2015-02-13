@@ -4,7 +4,8 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.ExternalLibraryLoaders;
+    using Selenium.WebDriver.Extensions.JQuery.ExternalLibraryLoaders;
+    using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// JQuery loader tests.

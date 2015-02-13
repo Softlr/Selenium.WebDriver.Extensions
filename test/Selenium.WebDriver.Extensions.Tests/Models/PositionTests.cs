@@ -2,8 +2,8 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.Models;
-
+    using Selenium.WebDriver.Extensions.JQuery.Models;
+    
     [TestFixture]
     [Category("Unit Tests")]
     [ExcludeFromCodeCoverage]

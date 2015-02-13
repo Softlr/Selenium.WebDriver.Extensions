@@ -4,8 +4,7 @@
     using System.Collections;
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.Selectors;
-
+    
     /// <summary>
     /// Query selector tests.
     /// </summary>
@@ -40,7 +39,7 @@
         /// <param name="selector">The query selector.</param>
         /// <returns>The generated query selector.</returns>
         [TestCaseSource("SelectorTestCases")]
-        public string Selector(QuerySelector selector)
+        public string Selector(QuerySelector.Selectors.QuerySelector selector)
         {
             Assert.AreEqual(selector.Selector, selector.ToString());
             return selector.Selector;
@@ -83,7 +82,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullBaseSelector()
         {
-            By.QuerySelector("div", (QuerySelector)null);
+            By.QuerySelector("div", (QuerySelector.Selectors.QuerySelector)null);
         }
     }
 }

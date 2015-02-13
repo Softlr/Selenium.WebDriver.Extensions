@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Selectors
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Selectors
 {
     using System;
     
