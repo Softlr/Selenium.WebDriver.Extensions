@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests.ExternalLibraryLoaders
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

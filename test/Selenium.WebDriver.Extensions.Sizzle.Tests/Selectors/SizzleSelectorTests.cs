@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests.Selectors
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests.Selectors
 {
     using System;
     using System.Collections;
