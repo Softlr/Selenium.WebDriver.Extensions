@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests.ExternalLibraryLoaders
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -7,12 +7,12 @@
     using Selenium.WebDriver.Extensions.ExternalLibraryLoaders;
 
     /// <summary>
-    /// Sizzle loader tests.
+    /// JQuery loader tests.
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
     [ExcludeFromCodeCoverage]
-    public class SizzleLoaderTests
+    public class JQueryLoaderTests
     {
         /// <summary>
         /// Script loading test.
@@ -21,7 +21,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void LoadScriptArgumentsNull()
         {
-            var loader = new SizzleLoader();
+            var loader = new JQueryLoader();
             loader.LoadScript(null);
         }
 
@@ -32,7 +32,7 @@
         [ExpectedException(typeof(ExternalLibraryLoadException))]
         public void LoadScriptArgumentsEmpty()
         {
-            var loader = new SizzleLoader();
+            var loader = new JQueryLoader();
             loader.LoadScript(Enumerable.Empty<string>().ToArray());
         }
     }
