@@ -5,6 +5,9 @@
     using System.Linq;
     using OpenQA.Selenium;
 
+    /// <summary>
+    /// The parse utility.
+    /// </summary>
     public static class ParseUtil
     {
         /// <summary>

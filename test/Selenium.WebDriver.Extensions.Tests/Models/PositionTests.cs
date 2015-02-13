@@ -4,6 +4,9 @@
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.JQuery.Models;
     
+    /// <summary>
+    /// Position tests.
+    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
     [ExcludeFromCodeCoverage]
