@@ -56,9 +56,6 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebDriverExtensions.Sizzle.cs" />
-    <Compile Include="WebDriverExtensions.QuerySelector.cs" />
-    <Compile Include="WebDriverExtensions.JQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="CustomDictionary.xml">

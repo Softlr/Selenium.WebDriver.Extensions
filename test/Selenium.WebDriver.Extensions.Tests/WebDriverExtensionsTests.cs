@@ -9,11 +9,15 @@
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.JQuery;
     using Selenium.WebDriver.Extensions.JQuery.Selectors;
     using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.QuerySelector.Selectors;
     using Selenium.WebDriver.Extensions.Shared;
+    using Selenium.WebDriver.Extensions.Sizzle;
     using Selenium.WebDriver.Extensions.Sizzle.Selectors;
     using By = Selenium.WebDriver.Extensions.By;
+    using WebDriverExtensions = Selenium.WebDriver.Extensions.QuerySelector.WebDriverExtensions;
 
     /// <summary>
     /// Web driver extensions tests.
@@ -262,11 +266,27 @@
         /// Tests finding an element.
         /// </summary>
         [Test]
+        public void FindElementWithNestedQuerySelector()
+        {
+            var element = new Mock<IWebElement>();
+            element.Setup(x => x.TagName).Returns("span");
+            var list = new List<IWebElement> { element.Object };
+            var mock = MockWebDriver("return document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span');", new ReadOnlyCollection<IWebElement>(list));
+            var result = mock.Object.FindElement(By.QuerySelector("span", By.QuerySelector("div")));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("span", result.TagName);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementWithQuerySelectorArgumentNull()
         {
             var mock = new Mock<IWebDriver>();
-            mock.Object.FindElement((QuerySelector.Selectors.QuerySelector)null);
+            mock.Object.FindElement((QuerySelector)null);
         }
 
         /// <summary>
@@ -848,6 +868,19 @@
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
                 .Returns(false);
             mock.Object.CheckQuerySelectorSupport();
+        }
+
+        /// <summary>
+        /// Tests query selector support check.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(QuerySelectorNotSupportedException))]
+        public void QuerySelectorNotSupportedDirect()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
+                .Returns(false);
+            WebDriverExtensions.CheckQuerySelectorSupport(mock.Object);
         }
 
         /// <summary>
