@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions", "src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj", "{F10536EC-8FBF-437A-840D-55CE6BF44161}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.IntegrationTests", "test\Selenium.WebDriver.Extensions.IntegrationTests\Selenium.WebDriver.Extensions.IntegrationTests.csproj", "{6394128B-6A58-482E-936E-D298726BA7F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8CA6CE5-A741-4B80-8B9F-689B2301492A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -38,5 +40,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{41458FC5-B67A-456D-A085-8F6012E59A0C} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
+		{6394128B-6A58-482E-936E-D298726BA7F0} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 	EndGlobalSection
 EndGlobal
