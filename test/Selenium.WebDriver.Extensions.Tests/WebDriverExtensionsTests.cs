@@ -17,8 +17,7 @@
     using Selenium.WebDriver.Extensions.Sizzle;
     using Selenium.WebDriver.Extensions.Sizzle.Selectors;
     using By = Selenium.WebDriver.Extensions.By;
-    using WebDriverExtensions = Selenium.WebDriver.Extensions.QuerySelector.WebDriverExtensions;
-
+    
     /// <summary>
     /// Web driver extensions tests.
     /// </summary>
@@ -868,19 +867,6 @@
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
                 .Returns(false);
             mock.Object.CheckQuerySelectorSupport();
-        }
-
-        /// <summary>
-        /// Tests query selector support check.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(QuerySelectorNotSupportedException))]
-        public void QuerySelectorNotSupportedDirect()
-        {
-            var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
-                .Returns(false);
-            WebDriverExtensions.CheckQuerySelectorSupport(mock.Object);
         }
 
         /// <summary>
