@@ -54,7 +54,9 @@
   <ItemGroup>
     <Compile Include="By.cs" />
     <Compile Include="ExternalLibraryLoaders\JQueryLoader.cs" />
-    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="GlobalSuppressions.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Selectors\JQuerySelector.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
