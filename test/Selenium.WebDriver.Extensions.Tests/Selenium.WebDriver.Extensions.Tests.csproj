@@ -52,6 +52,7 @@
     <Compile Include="ExternalLibraryLoaders\QuerySelectorLoaderTests.cs" />
     <Compile Include="ExternalLibraryLoaders\SizzleLoaderTests.cs" />
     <Compile Include="ExternalLibraryLoaders\JQueryLoaderTests.cs" />
+    <Compile Include="Models\PositionTests.cs" />
     <Compile Include="Selectors\QuerySelectorTests.cs" />
     <Compile Include="Selectors\SizzleSelectorTests.cs" />
     <Compile Include="Selectors\JQuerySelectorTests.cs" />
