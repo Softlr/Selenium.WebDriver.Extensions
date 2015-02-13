@@ -53,6 +53,11 @@
             this IWebDriver driver,
             IExternalLibraryLoader externalLibraryLoader)
         {
+            if (externalLibraryLoader == null)
+            {
+                throw new ArgumentNullException("externalLibraryLoader");
+            }
+
             var result = driver.ExecuteScript<bool?>(externalLibraryLoader.CheckScript);
             return result.HasValue && result.Value;
         }
@@ -76,6 +81,11 @@
             Uri libraryUri,
             TimeSpan? timeout = null)
         {
+            if (externalLibraryLoader == null)
+            {
+                throw new ArgumentNullException("externalLibraryLoader");
+            }
+
             driver.LoadPrerequisites(
                 externalLibraryLoader,
                 timeout ?? TimeSpan.FromSeconds(3),
