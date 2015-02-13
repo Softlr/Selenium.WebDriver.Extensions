@@ -27,6 +27,14 @@
             Assert.IsTrue(position1.Equals(position3));
             Assert.IsFalse(position1.Equals(position4));
 
+            Assert.IsFalse(position1 == position2);
+            Assert.IsTrue(position1 == position3);
+            Assert.IsFalse(position1 == position4);
+
+            Assert.IsTrue(position1 != position2);
+            Assert.IsFalse(position1 != position3);
+            Assert.IsTrue(position1 != position4);
+
             Assert.IsFalse(position1.Equals((object)position2));
             Assert.IsTrue(position1.Equals((object)position3));
             Assert.IsFalse(position1.Equals((object)position4));

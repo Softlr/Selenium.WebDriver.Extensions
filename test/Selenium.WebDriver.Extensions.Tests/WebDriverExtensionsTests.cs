@@ -870,6 +870,28 @@
         }
 
         /// <summary>
+        /// Tests checking selector prerequisites.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CheckSelectorPrerequisitesWithoutLoader()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.Object.CheckSelectorPrerequisites(null);
+        }
+
+        /// <summary>
+        /// Tests loading external libraries.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void LoadExternalLibraryWithoutLoader()
+        {
+            var mock = new Mock<IWebDriver>();
+            mock.Object.LoadExternalLibrary(null, null);
+        }
+
+        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>
