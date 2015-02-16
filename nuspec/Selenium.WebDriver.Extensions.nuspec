@@ -13,9 +13,9 @@
 		<dependencies>
 			<dependency id="Selenium.WebDriver" version="2.44.0" />
 			<dependency id="Selenium.Support" version="2.44.0" />
-            <dependency id="Selenium.WebDriver.Extensions.JQuery" version="1.0.0-alpha1" />
-            <dependency id="Selenium.WebDriver.Extensions.Sizzle" version="1.0.0-alpha1" />
-            <dependency id="Selenium.WebDriver.Extensions.QuerySelector" version="1.0.0-alpha1" />
+            <dependency id="Selenium.WebDriver.Extensions.JQuery" version="1.1.0-alpha1" />
+            <dependency id="Selenium.WebDriver.Extensions.Sizzle" version="1.1.0-alpha1" />
+            <dependency id="Selenium.WebDriver.Extensions.QuerySelector" version="1.1.0-alpha1" />
 		</dependencies> 
     </metadata>
     <files>
