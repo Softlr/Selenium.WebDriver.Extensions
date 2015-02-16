@@ -5,6 +5,13 @@ branches:
 version: 1.1.{build}-alpha
  
 configuration: Release
+
+assembly_info:
+  patch: true
+  file: AssemblyInfo.*
+  assembly_version: "{version}"
+  assembly_file_version: "{version}"
+  assembly_informational_version: "{version}"
   
 build:
   project: Selenium.WebDriver.Extensions.sln
@@ -13,7 +20,7 @@ before_build:
   - nuget install .nuget/packages.config -o packages
   - nuget restore Selenium.WebDriver.Extensions.sln
   - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
-
+  
 environment:
   COVERALLS_REPO_TOKEN:
     secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
