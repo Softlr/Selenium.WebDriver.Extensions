@@ -135,7 +135,7 @@
 		</exec>
 	</target>
 	
-	<target name="docs">
+	<target name="docs" depends="build">
 		<msbuild project="docs/Selenium.WebDriver.Extensions.shfbproj">
 			<property name="Configuration" value="${project.config}"/>
 			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
