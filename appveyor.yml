@@ -2,7 +2,7 @@ branches:
   only:
     - master
 
-version: 1.1.{build}
+version: 1.1.{build}-alpha
  
 configuration: Release
   
