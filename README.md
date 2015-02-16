@@ -5,14 +5,23 @@
 Extensions for Selenium WebDriver.
 
 # Features
-Some of the features of this library are:
-* **jQuery support** 
-  * jQuery and Sizzle selectors support for Selenium WebDrivers to perform selections that CSS can't do
-* Query selector support to allow simple queries in modern browsers
-* Allows jQuery and Sizzle selectors to be used even on sites that don't use jQuery or Sizzle as it can load the library before performing the first search
-* Very easy setup: install packages with NuGet, include a namespace and start using it with your existing Selenium solution
+## jQuery support
+* jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
+* jQuery auto-load on pages on sites that don't use jQuery
+* Supports jQuery context switching
 * Supports all jQuery traversing methods for generation of complex selector chains
-* Supports jQuery and Sizzle context switching
+
+## Sizzle support
+* Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
+* Sizzle auto-load on pages on sites that don't use Sizzle
+* Supports Sizzle context switching
+
+## Query selector support
+* Query selector support for Selenium WebDriver to easily invoke queries in modern browsers
+* Query selector support detection
+
+## Other
+* Very easy setup: install packages with NuGet, include a namespace and start using it with your existing Selenium solution
 * High quality ensured by continous integration setup with Appveyor, unit and integration tests and 100% code coverage
 * Well documented code following strict StyleCop and FxCop rules
 
