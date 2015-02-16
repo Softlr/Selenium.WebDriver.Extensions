@@ -8,9 +8,15 @@
 	<property name="path.report.generator" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
 	<property name="dir.build" value="../Build"/>
 	<property name="dir.work" value="${dir.build}/${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
-	<property name="dir.unit.tests" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
+	<property name="dir.unit.tests.jquery" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.sizzle" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.queryselector" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.combined" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
 	<property name="dir.coverage.report" value="${dir.work}\CoverageReport"/>
-	<property name="file.unit.tests" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
+	<property name="file.unit.tests.jquery" value="${dir.work}\Selenium.WebDriver.Extensions.JQuery.Tests.dll"/>
+    <property name="file.unit.tests.sizzle" value="${dir.work}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll"/>
+    <property name="file.unit.tests.queryselector" value="${dir.work}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
+    <property name="file.unit.tests.combined" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
 	<property name="file.test.results" value="Selenium.WebDriver.Extensions.Tests.xml"/>
 	<property name="file.coverage.report" value="${dir.work}\coverage.xml"/>
 	
@@ -30,16 +36,34 @@
 	
 	<target name="move.assemblies.for.unit.tests">
 		<copy todir="${dir.work}" flatten="true">
-			<fileset basedir="${dir.unit.tests}">
+			<fileset basedir="${dir.unit.tests.jquery}">
 				<include name="*.dll"/>
-				<include name="*.pdb"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work}" flatten="true">
+            <fileset basedir="${dir.unit.tests.sizzle}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work}" flatten="true">
+            <fileset basedir="${dir.unit.tests.queryselector}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work}" flatten="true">
+            <fileset basedir="${dir.unit.tests.combined}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
 			</fileset>
 		</copy>
 	</target>
 	
 	<target name="test" depends="setup.build.process, move.assemblies.for.unit.tests">
 		<exec program="${path.nunit}">
-			<arg value="${file.unit.tests}"/>
+			<arg value="${file.unit.tests.jquery} ${file.unit.tests.sizzle} ${file.unit.tests.queryselector} ${file.unit.tests.combined}"/>
 			<arg value="/framework:${project.framework}"/>
 			<arg value="/work:${dir.work}"/>
 			<arg value="/result:${file.test.results}"/>
@@ -51,9 +75,9 @@
 		<exec program="${path.opencover}">
 			<arg value="-register:user"/>
 			<arg value="-target:&quot;${path.nunit}&quot;"/>
-			<arg value="-targetargs:&quot;/noshadow ${file.unit.tests} /framework:${project.framework} /work:${dir.work} /result:${file.test.results} /nologo&quot;"/>
-			<arg value="-filter:&quot;+[*]*&quot;"/>
-			<arg value="-output:&quot;${file.coverage.report}&quot;"/>
+			<arg value="-targetargs:&quot;/noshadow ${file.unit.tests.jquery} ${file.unit.tests.sizzle} ${file.unit.tests.queryselector} ${file.unit.tests.combined} /framework:${project.framework} /work:${dir.work} /result:${file.test.results} /nologo&quot;"/>
+			<arg value="-filter:&quot;+[*]* -[*]*Exception* -[*.Tests]*&quot;"/>
+            <arg value="-output:&quot;${file.coverage.report}&quot;"/>
 		</exec>
 	</target>
 	
