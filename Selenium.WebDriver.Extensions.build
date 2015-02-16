@@ -64,7 +64,10 @@
 	
 	<target name="test" depends="setup.build.process, move.assemblies.for.unit.tests">
 		<exec program="${path.nunit}">
-			<arg value="${file.unit.tests.jquery} ${file.unit.tests.sizzle} ${file.unit.tests.queryselector} ${file.unit.tests.combined}"/>
+			<arg value="${file.unit.tests.jquery}"/>
+            <arg value="${file.unit.tests.sizzle}"/>
+            <arg value="${file.unit.tests.queryselector}"/>
+            <arg value="${file.unit.tests.combined}"/>
 			<arg value="/framework:${project.framework}"/>
 			<arg value="/work:${dir.work}"/>
 			<arg value="/result:${file.test.results}"/>
