@@ -20,7 +20,6 @@
   before_build:
     - nuget install .nuget/packages.config -o packages
     - nuget restore Selenium.WebDriver.Extensions.sln
-    - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
   
   environment:
     COVERALLS_REPO_TOKEN:
@@ -74,7 +73,6 @@
   before_build:
     - nuget install .nuget/packages.config -o packages
     - nuget restore Selenium.WebDriver.Extensions.sln
-    - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
   
   environment:
     COVERALLS_REPO_TOKEN:
@@ -109,7 +107,6 @@
   before_build:
     - nuget install .nuget/packages.config -o packages
     - nuget restore Selenium.WebDriver.Extensions.sln
-    - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
   
   environment:
     COVERALLS_REPO_TOKEN:
