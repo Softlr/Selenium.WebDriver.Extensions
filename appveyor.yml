@@ -42,7 +42,7 @@ before_deploy:
   - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
   - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
   - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-  - ps: Get-ChildItem . -Filter *.nupkg -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  - ps: Get-ChildItem .\src -Filter *.nupkg -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 deploy:
   - provider: NuGet
