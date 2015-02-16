@@ -5,13 +5,13 @@
 Extensions for Selenium WebDriver.
 
 # Features
-## jQuery support
+#### jQuery support
 * jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
 * jQuery auto-load on pages on sites that don't use jQuery
 * Supports jQuery context switching
 * Supports all jQuery traversing methods for generation of complex selector chains
 
-## Sizzle support
+### Sizzle support
 * Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
 * Sizzle auto-load on pages on sites that don't use Sizzle
 * Supports Sizzle context switching
