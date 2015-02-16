@@ -1,12 +1,20 @@
 build:
   project: Selenium.WebDriver.Extensions.sln
+configuration: Release
 before_build:
   - nuget install .nuget/packages.config -o packages
   - nuget restore Selenium.WebDriver.Extensions.sln
   - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
+environment:
+  COVERALLS_REPO_TOKEN:
+    secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 test:
   assemblies:
     - Selenium.WebDriver.Extensions.Tests.dll
     - Selenium.WebDriver.Extensions.JQuery.Tests.dll
     - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
     - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
+    
+after_test:
+    - packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
+    - packages\coveralls.io.1.1.86\tools\coveralls.net.exe --opencover coverage.xml
