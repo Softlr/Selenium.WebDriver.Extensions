@@ -1,13 +1,16 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu)](https://ci.appveyor.com/project/RaYell/selenium-helpers)
+[![Coverage Status](https://coveralls.io/repos/RaYell/selenium-webdriver-extensions/badge.svg?branch=master)](https://coveralls.io/r/RaYell/selenium-webdriver-extensions?branch=master)
 
 # Description
-Extensions for Selenium WebDriver including jQuery and Sizzle selector support.
+Extensions for Selenium WebDriver.
 
 # Features
 Some of the features of this library are:
-* Generates jQuery and Sizzle selectors that can be used by Selenium WebDrivers to perform selections that CSS can't do
-* Allows jQuery and Sizzle selectors to be used even on sites that don't use jQuery or Sizzle as it can load the library before performing a first search
-* Very easy setup: install package with NuGet, include a namespace and start using it
+* **jQuery support** 
+  * jQuery and Sizzle selectors support for Selenium WebDrivers to perform selections that CSS can't do
+* Query selector support to allow simple queries in modern browsers
+* Allows jQuery and Sizzle selectors to be used even on sites that don't use jQuery or Sizzle as it can load the library before performing the first search
+* Very easy setup: install packages with NuGet, include a namespace and start using it with your existing Selenium solution
 * Supports all jQuery traversing methods for generation of complex selector chains
 * Supports jQuery and Sizzle context switching
 * High quality ensured by continous integration setup with Appveyor, unit and integration tests and 100% code coverage
