@@ -1,13 +1,17 @@
+configuration: Release
+  
 build:
   project: Selenium.WebDriver.Extensions.sln
-configuration: Release
+
 before_build:
   - nuget install .nuget/packages.config -o packages
   - nuget restore Selenium.WebDriver.Extensions.sln
   - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
+
 environment:
   COVERALLS_REPO_TOKEN:
     secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+
 test:
   assemblies:
     - Selenium.WebDriver.Extensions.Tests.dll
