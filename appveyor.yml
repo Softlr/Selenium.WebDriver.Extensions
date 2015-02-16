@@ -7,3 +7,6 @@ before_build:
 test:
   assemblies:
     - Selenium.WebDriver.Extensions.Tests.dll
+    - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+    - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+    - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
