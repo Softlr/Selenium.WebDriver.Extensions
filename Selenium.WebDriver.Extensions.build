@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <project name="Selenium.WebDriver.Extensions" default="full" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<property name="project.framework" value="net-4.5"/>
-	<property name="project.config" value="debug"/>
+	<property name="project.config" value="release"/>
     <property name="project.version" value="1.1.0-alpha"/>
 	<property name="project.visual.studio.version" value="12.0"/>
     <property name="path.nuget" value=".nuget\NuGet.exe"/>

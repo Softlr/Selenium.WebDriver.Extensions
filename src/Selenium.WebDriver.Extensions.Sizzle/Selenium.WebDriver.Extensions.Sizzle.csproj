@@ -32,6 +32,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Selenium.WebDriver.Extensions.Sizzle.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="JetBrains.Annotations">
