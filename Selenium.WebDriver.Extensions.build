@@ -2,7 +2,9 @@
 <project name="Selenium.WebDriver.Extensions" default="full" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<property name="project.framework" value="net-4.5"/>
 	<property name="project.config" value="debug"/>
+    <property name="project.version" value="1.1.0-alpha"/>
 	<property name="project.visual.studio.version" value="12.0"/>
+    <property name="path.nuget" value=".nuget\NuGet.exe"/>
 	<property name="path.nunit" value="packages\NUnit.Runners.2.6.4\tools\nunit-console.exe"/>
 	<property name="path.opencover" value="packages\OpenCover.4.5.3522\OpenCover.Console.exe"/>
 	<property name="path.report.generator" value="packages\ReportGenerator.2.1.1.0\ReportGenerator.exe"/>
@@ -23,7 +25,7 @@
 	
 	<loadtasks assembly="packages\NAnt.Contrib.Portable.0.92\tools\NAnt.Contrib.Tasks.dll" />
 		
-	<target name="compile">
+	<target name="build">
 		<msbuild project="Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config}"/>
 			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
@@ -62,7 +64,7 @@
 		</copy>
 	</target>
 	
-	<target name="test" depends="setup.build.process, move.assemblies.for.unit.tests">
+	<target name="test" depends="build, setup.build.process, move.assemblies.for.unit.tests">
 		<exec program="${path.nunit}">
 			<arg value="${file.unit.tests.jquery}"/>
             <arg value="${file.unit.tests.sizzle}"/>
@@ -75,7 +77,7 @@
 		</exec>
 	</target>
 	
-	<target name="analyse.code.coverage" depends="setup.build.process, move.assemblies.for.unit.tests">
+	<target name="analyse.code.coverage" depends="build, setup.build.process, move.assemblies.for.unit.tests">
 		<exec program="${path.opencover}">
 			<arg value="-register:user"/>
 			<arg value="-target:&quot;${path.nunit}&quot;"/>
@@ -99,6 +101,39 @@
 			<arg value="${file.coverage.report}"/>
 		</exec>
 	</target>
+    
+    <target name="pack" depends="build">
+		<exec program="${path.nuget}">
+            <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+	</target>
 	
 	<target name="docs">
 		<msbuild project="docs/Selenium.WebDriver.Extensions.shfbproj">
@@ -107,5 +142,5 @@
 		</msbuild>
 	</target>
 	
-	<target name="full" depends="compile, test, coverage, docs"/>
+	<target name="full" depends="build, test, coverage, pack, docs"/>
 </project>
