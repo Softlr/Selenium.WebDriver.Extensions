@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>Selenium.WebDriver.Extensions.Shared</id>
+        <version>1.1.0-alpha1</version>
+        <title>Selenium WebDriver Extensions Shared Components</title>
+        <authors>Lukasz Rajchel</authors>
+        <licenseUrl>https://github.com/rayell/selenium-webdriver-extensions/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://rayell.github.io/selenium-webdriver-extensions</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Shared components for for Selenium WebDriver extensions.</description>
+        <tags>selenium, extension, extensions, web, driver, webdriver</tags>
+		<dependencies>
+			<dependency id="Selenium.WebDriver" version="2.44.0" />
+			<dependency id="Selenium.Support" version="2.44.0" />
+		</dependencies> 
+    </metadata>
+    <files>
+        <file src="..\src\Selenium.WebDriver.Extensions.Shared\bin\Release\Selenium.WebDriver.Extensions.Shared.dll" target="lib\Selenium.WebDriver.Extensions.Shared.dll" />
+    </files>
+</package>
