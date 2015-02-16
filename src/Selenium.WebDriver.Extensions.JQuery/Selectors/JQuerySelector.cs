@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Selectors
+﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
     using System.Globalization;

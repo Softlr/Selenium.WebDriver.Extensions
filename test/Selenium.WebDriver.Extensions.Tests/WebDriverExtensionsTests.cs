@@ -10,12 +10,9 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.JQuery;
-    using Selenium.WebDriver.Extensions.JQuery.Selectors;
     using Selenium.WebDriver.Extensions.QuerySelector;
-    using Selenium.WebDriver.Extensions.QuerySelector.Selectors;
     using Selenium.WebDriver.Extensions.Shared;
     using Selenium.WebDriver.Extensions.Sizzle;
-    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
     using By = Selenium.WebDriver.Extensions.By;
     
     /// <summary>

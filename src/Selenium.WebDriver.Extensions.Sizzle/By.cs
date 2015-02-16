@@ -1,8 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
-
+    
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
     /// </summary>

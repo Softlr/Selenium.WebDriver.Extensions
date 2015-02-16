@@ -6,12 +6,8 @@
     using System.Globalization;
     using System.Linq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.JQuery.ExternalLibraryLoaders;
-    using Selenium.WebDriver.Extensions.JQuery.Models;
-    using Selenium.WebDriver.Extensions.JQuery.Selectors;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Shared.Utils;
-
+    
     /// <summary>
     /// Web driver extensions.
     /// </summary>

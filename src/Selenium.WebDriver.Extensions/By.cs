@@ -1,8 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.JQuery.Selectors;
-    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
+    using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions.Sizzle;
+    using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
 
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
@@ -50,12 +51,10 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.QuerySelector.Selectors.QuerySelector"/> object the driver can 
+        /// A <see cref="QS"/> object the driver can 
         /// use to find the elements.
         /// </returns>
-        public static QuerySelector.Selectors.QuerySelector QuerySelector(
-            string selector, 
-            string baseElement = "document")
+        public static QS QuerySelector(string selector, string baseElement = "document")
         {
             return Extensions.QuerySelector.By.QuerySelector(selector, baseElement);
         }
@@ -66,12 +65,10 @@
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.QuerySelector.Selectors.QuerySelector"/> object the driver can 
+        /// A <see cref="QS"/> object the driver can 
         /// use to find the elements.
         /// </returns>
-        public static QuerySelector.Selectors.QuerySelector QuerySelector(
-            string selector, 
-            QuerySelector.Selectors.QuerySelector baseSelector)
+        public static QS QuerySelector(string selector, QS baseSelector)
         {
             return Extensions.QuerySelector.By.QuerySelector(selector, baseSelector);
         }

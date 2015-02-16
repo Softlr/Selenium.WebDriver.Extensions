@@ -1,8 +1,8 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.QuerySelector.Selectors;
-
+    using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
+    
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
     /// </summary>
@@ -20,7 +20,7 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
         public static QuerySelector QuerySelector(string selector, string baseElement = "document")
         {
             return new QuerySelector(selector, baseElement);
@@ -31,7 +31,7 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
-        /// <returns>A <see cref="Selectors.QuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
         public static QuerySelector QuerySelector(string selector, QuerySelector baseSelector)
         {
             return new QuerySelector(selector, baseSelector);

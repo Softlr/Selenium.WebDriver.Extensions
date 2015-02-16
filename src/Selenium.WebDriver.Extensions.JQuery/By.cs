@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.JQuery.Selectors;
     
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.

@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Models
+﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
 

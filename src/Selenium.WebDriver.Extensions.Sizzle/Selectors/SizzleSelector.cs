@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Sizzle.Selectors
+﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
     

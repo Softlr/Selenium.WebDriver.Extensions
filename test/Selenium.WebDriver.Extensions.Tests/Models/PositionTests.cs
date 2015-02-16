@@ -2,7 +2,7 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.JQuery.Models;
+    using Selenium.WebDriver.Extensions.JQuery;
     
     /// <summary>
     /// Position tests.

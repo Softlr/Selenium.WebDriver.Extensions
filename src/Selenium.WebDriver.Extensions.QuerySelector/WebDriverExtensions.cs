@@ -5,11 +5,8 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.QuerySelector.ExternalLibraryLoaders;
-    using Selenium.WebDriver.Extensions.QuerySelector.Selectors;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Shared.Utils;
-
+    
     /// <summary>
     /// Web driver extensions.
     /// </summary>

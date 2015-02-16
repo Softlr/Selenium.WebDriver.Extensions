@@ -6,9 +6,6 @@
     using System.Linq;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Shared.Utils;
-    using Selenium.WebDriver.Extensions.Sizzle.ExternalLibraryLoaders;
-    using Selenium.WebDriver.Extensions.Sizzle.Selectors;
     
     /// <summary>
     /// Web driver extensions.

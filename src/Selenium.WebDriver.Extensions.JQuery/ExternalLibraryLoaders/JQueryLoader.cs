@@ -1,11 +1,10 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
     using System.Globalization;
     using System.Linq;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Shared.ExternalLibraryLoaders;
-
+    
     /// <summary>
     /// The jQuery loader.
     /// </summary>

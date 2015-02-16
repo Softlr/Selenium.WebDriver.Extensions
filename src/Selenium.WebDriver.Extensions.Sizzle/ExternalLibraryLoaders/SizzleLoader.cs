@@ -1,11 +1,10 @@
-﻿namespace Selenium.WebDriver.Extensions.Sizzle.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
     using System.Globalization;
     using System.Linq;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Shared.ExternalLibraryLoaders;
-
+    
     /// <summary>
     /// The Sizzle loader.
     /// </summary>

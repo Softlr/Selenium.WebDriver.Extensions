@@ -3,8 +3,7 @@
     using System;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
-    using Selenium.WebDriver.Extensions.Shared.ExternalLibraryLoaders;
-
+    
     /// <summary>
     /// Web driver extensions.
     /// </summary>
