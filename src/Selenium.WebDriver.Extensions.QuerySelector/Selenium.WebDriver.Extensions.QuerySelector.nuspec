@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <metadata>
         <id>Selenium.WebDriver.Extensions.QuerySelector</id>
-        <version>1.1.0-alpha1</version>
+        <version>$version$</version>
         <title>Selenium WebDriver Extensions Query Selector Support</title>
         <authors>Lukasz Rajchel</authors>
         <licenseUrl>https://github.com/rayell/selenium-webdriver-extensions/blob/master/LICENSE</licenseUrl>
@@ -11,12 +11,12 @@
         <description>Query selector support for Selenium WebDriver.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, queryselector, selector, selectors</tags>
 		<dependencies>
-			<dependency id="Selenium.WebDriver" version="2.44.0" />
-			<dependency id="Selenium.Support" version="2.44.0" />
-            <dependency id="Selenium.WebDriver.Extensions.Shared" version="1.1.0-alpha1" />
+			<dependency id="Selenium.WebDriver" />
+			<dependency id="Selenium.Support" />
+            <dependency id="Selenium.WebDriver.Extensions.Shared" />
 		</dependencies> 
     </metadata>
     <files>
-        <file src="..\src\Selenium.WebDriver.Extensions.QuerySelector\bin\Release\Selenium.WebDriver.Extensions.QuerySelector.dll" target="lib\Selenium.WebDriver.Extensions.QuerySelector.dll" />
+        <file src="bin\Release\Selenium.WebDriver.Extensions.QuerySelector.dll" target="lib\Selenium.WebDriver.Extensions.QuerySelector.dll" />
     </files>
 </package>
