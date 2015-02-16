@@ -1,5 +1,6 @@
 branches:
   only:
+    - develop
     - master
 
 version: 1.1.{build}-alpha
