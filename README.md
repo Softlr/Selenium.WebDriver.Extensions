@@ -1,22 +1,39 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu)](https://ci.appveyor.com/project/RaYell/selenium-helpers)
+[![Coverage Status](https://coveralls.io/repos/RaYell/selenium-webdriver-extensions/badge.svg?branch=master)](https://coveralls.io/r/RaYell/selenium-webdriver-extensions?branch=master)
 
 # Description
-Extensions for Selenium WebDriver including jQuery and Sizzle selector support.
+Extensions for Selenium WebDriver.
 
 # Features
-Some of the features of this library are:
-* Generates jQuery and Sizzle selectors that can be used by Selenium WebDrivers to perform selections that CSS can't do
-* Allows jQuery and Sizzle selectors to be used even on sites that don't use jQuery or Sizzle as it can load the library before performing a first search
-* Very easy setup: install package with NuGet, include a namespace and start using it
-* Supports all jQuery traversing methods for generation of complex selector chains
-* Supports jQuery and Sizzle context switching
-* High quality ensured by continous integration setup with Appveyor, unit and integration tests and 100% code coverage
-* Well documented code following strict StyleCop and FxCop rules
+* jQuery support
+ * jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
+ * jQuery auto-load on pages on sites that don't use jQuery
+ * Supports jQuery context switching
+ * Supports all jQuery traversing methods for generation of complex selector chains
+* Sizzle support
+ * Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
+ * Sizzle auto-load on pages on sites that don't use Sizzle
+ * Supports Sizzle context switching
+* Query selector support
+ * Query selector support for Selenium WebDriver to easily invoke queries in modern browsers
+ * Query selector support detection
+* Other
+ * Very easy setup: install packages with NuGet, include a namespace and start using it with your existing Selenium solution
+ * High quality ensured by continous integration setup with Appveyor, unit and integration tests and 100% code coverage
+ * Well documented code following strict StyleCop and FxCop rules
 
 # Installation
 Run the following command in Visual Studio Packet Manager Console.
 ```posh
 Install-Package Selenium.WebDriver.Extensions
+```
+
+This will install the full package containing jQuery, Sizzle and query selector support. If you want to use only specific extensions you can do this by installing a specific package in Packet Manager Console.
+
+```posh
+Install-Package Selenium.WebDriver.Extensions.JQuery
+Install-Package Selenium.WebDriver.Extensions.Sizzle
+Install-Package Selenium.WebDriver.Extensions.QuerySelector
 ```
 
 # Documentation
@@ -29,6 +46,13 @@ Include extensions namespace and set the derived `By` to be used.
 ```csharp
 using Selenium.WebDriver.Extensions;
 using By = Selenium.WebDriver.Extensions.By;
+```
+
+If you have installed support for just some of the extensions you need to adjust the namespace of the `By` type accordingly.
+
+```csharp
+using Selenium.WebDriver.Extensions.JQuery;
+using By = Selenium.WebDriver.Extensions.JQuery.By;
 ```
 
 #### Basic jQuery example
@@ -89,4 +113,10 @@ You can use one `SizzleSelector` instance as a context of another `SizzleSelecto
 var context = By.SizzleSelector("div.myClass");
 var selector = By.SizzleSelector("ol li", context);
 driver.FindElements(selector);
+```
+
+#### Basic query selector example
+Invoke query selectors on the WebDriver.
+```csharp
+driver.FindElements(By.QuerySelector("div input"))
 ```
