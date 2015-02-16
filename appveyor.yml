@@ -1,50 +1,136 @@
-branches:
-  only:
-    - master
+# master branch configuration
+-
+  branches:
+    only:
+      - master
 
-version: 1.1.{build}-alpha
- 
-configuration: Release
+  version: 1.1.{build}
+  configuration: Release
 
-assembly_info:
-  patch: true
-  file: AssemblyInfo.*
-  assembly_version: "{version}"
-  assembly_file_version: "{version}"
-  assembly_informational_version: "{version}"
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
   
-build:
-  project: Selenium.WebDriver.Extensions.sln
+  build:
+    project: Selenium.WebDriver.Extensions.sln
 
-before_build:
-  - nuget install .nuget/packages.config -o packages
-  - nuget restore Selenium.WebDriver.Extensions.sln
-  - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
+  before_build:
+    - nuget install .nuget/packages.config -o packages
+    - nuget restore Selenium.WebDriver.Extensions.sln
+    - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
   
-environment:
-  COVERALLS_REPO_TOKEN:
-    secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+  environment:
+    COVERALLS_REPO_TOKEN:
+      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
-test:
-  assemblies:
-    - Selenium.WebDriver.Extensions.Tests.dll
-    - Selenium.WebDriver.Extensions.JQuery.Tests.dll
-    - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
-    - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
+  test:
+    assemblies:
+      - Selenium.WebDriver.Extensions.Tests.dll
+      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+      - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
     
-after_test:
-  - packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-  - packages\coveralls.io.1.1.86\tools\coveralls.net.exe --opencover coverage.xml
+  after_test:
+    - packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
+    - packages\coveralls.io.1.1.86\tools\coveralls.net.exe --opencover coverage.xml
   
-before_deploy:
-  - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-  - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-  - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-  - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-  - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-  - ps: Get-ChildItem .\src -Filter *.nupkg -Recurse | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+  before_deploy:
+    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
-deploy:
-  - provider: NuGet
-    api_key:
-      secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
+  deploy:
+    - provider: NuGet
+      api_key:
+        secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
+
+# develop, feature & bugfix branches
+-
+  branches:
+    only:
+      - develop
+      - /feature.*/
+      - /bugfix.*/
+
+  version: 1.1.{build}-dev
+  configuration: Release
+
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
+  
+  build:
+    project: Selenium.WebDriver.Extensions.sln
+
+  before_build:
+    - nuget install .nuget/packages.config -o packages
+    - nuget restore Selenium.WebDriver.Extensions.sln
+    - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
+  
+  environment:
+    COVERALLS_REPO_TOKEN:
+      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+
+  test:
+    assemblies:
+      - Selenium.WebDriver.Extensions.Tests.dll
+      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+      - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
+
+# release branch configuration
+-
+  branches:
+    only:
+      - /release.*/
+
+  version: 1.1.{build}-preview
+  configuration: Release
+
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "{version}"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}"
+  
+  build:
+    project: Selenium.WebDriver.Extensions.sln
+
+  before_build:
+    - nuget install .nuget/packages.config -o packages
+    - nuget restore Selenium.WebDriver.Extensions.sln
+    - xcopy /Y .nuget\NAnt.exe.config packages\NAnt.Portable.0.92\
+  
+  environment:
+    COVERALLS_REPO_TOKEN:
+      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+
+  test:
+    assemblies:
+      - Selenium.WebDriver.Extensions.Tests.dll
+      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+      - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
+    
+  before_deploy:
+    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+
+  deploy:
+    - provider: NuGet
+      api_key:
+        secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
