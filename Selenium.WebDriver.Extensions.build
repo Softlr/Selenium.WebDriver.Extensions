@@ -6,6 +6,7 @@
 	<property name="path.nunit" value="packages\NUnit.Runners.2.6.3\tools\nunit-console.exe"/>
 	<property name="path.opencover" value="packages\OpenCover.4.5.3207\OpenCover.Console.exe"/>
 	<property name="path.report.generator" value="packages\ReportGenerator.1.9.1.0\ReportGenerator.exe"/>
+    <property name="path.report.coveralls" value="packages\coveralls.io.1.1.86\tools\coveralls.net.exe"/>
 	<property name="dir.build" value="../Build"/>
 	<property name="dir.work" value="${dir.build}/${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
 	<property name="dir.unit.tests.jquery" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}"/>
@@ -86,6 +87,12 @@
 			<arg value="-reports:&quot;${file.coverage.report}&quot;"/>
 			<arg value="-targetdir:&quot;${dir.coverage.report}&quot;"/>
 			<arg value="-reporttypes:Html"/>
+		</exec>
+	</target>
+    
+    <target name="coveralls" depends="analyse.code.coverage">
+		<exec program="${path.report.coveralls}">
+			<arg value="${file.coverage.report}"/>
 		</exec>
 	</target>
 	
