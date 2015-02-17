@@ -29,6 +29,8 @@
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
   test:
+    assemblies:
+      - **\*.Tests.dll
     categories:
       - Unit Tests
     
@@ -85,6 +87,8 @@
       secure: 78me83ttZJXqwmtSTL5Eq5HxkBdY07/+eluhsCpq+kIi7NG93vd5piWMNEmL7VgY
 
   test:
+    assemblies:
+      - **\*.Tests.dll
     categories:
       - Unit Tests
   
@@ -131,6 +135,8 @@
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
   test:
+    assemblies:
+      - **\*.Tests.dll
     categories:
       - Unit Tests
     
