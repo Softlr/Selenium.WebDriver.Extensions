@@ -27,8 +27,6 @@
   environment:
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
-    GITHUB_ACCESS_TOKEN:
-      secure: 78me83ttZJXqwmtSTL5Eq5HxkBdY07/+eluhsCpq+kIi7NG93vd5piWMNEmL7VgY
 
   test:
     categories:
@@ -80,6 +78,7 @@
     - nuget restore
   
   environment:
+    SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     GITHUB_ACCESS_TOKEN:
@@ -90,11 +89,11 @@
       - Unit Tests
   
   on_success:
-    - git clone -b gh-pages git@github.com:RaYell/selenium-webdriver-extensions.git docs\gh-pages
+    - git clone -q -b gh-pages git://github.com/RaYell/selenium-webdriver-extensions.git docs\gh-pages
     - cd docs\gh-pages
     - git config --global credential.helper store
     - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GITHUB_ACCESS_TOKEN):x-oauth-basic@github.com`n"
-    - git rm api -r
+    - git rm -r api 
     - xcopy ..\Help api /s /i
     - git add api
     - git commit -a -m "Documentation updated"
@@ -130,8 +129,6 @@
   environment:
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
-    GITHUB_ACCESS_TOKEN:
-      secure: 78me83ttZJXqwmtSTL5Eq5HxkBdY07/+eluhsCpq+kIi7NG93vd5piWMNEmL7VgY
 
   test:
     categories:
