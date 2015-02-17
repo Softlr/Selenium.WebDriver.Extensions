@@ -22,8 +22,7 @@
     project: Selenium.WebDriver.Extensions.sln
 
   before_build:
-    - nuget install .nuget/packages.config -o packages
-    - nuget restore Selenium.WebDriver.Extensions.sln
+    - nuget restore
   
   environment:
     COVERALLS_REPO_TOKEN:
@@ -76,8 +75,7 @@
     project: Selenium.WebDriver.Extensions.sln
 
   before_build:
-    - nuget install .nuget/packages.config -o packages
-    - nuget restore Selenium.WebDriver.Extensions.sln
+    - nuget restore
   
   environment:
     COVERALLS_REPO_TOKEN:
@@ -111,8 +109,7 @@
     project: Selenium.WebDriver.Extensions.sln
 
   before_build:
-    - nuget install .nuget/packages.config -o packages
-    - nuget restore Selenium.WebDriver.Extensions.sln
+    - nuget restore
   
   environment:
     COVERALLS_REPO_TOKEN:
