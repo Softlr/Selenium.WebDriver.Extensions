@@ -3,6 +3,10 @@
   branches:
     only:
       - master
+      
+  skip_tags: true
+  skip_commits:
+    message: /Update*\.md/
 
   version: 1.1.{build}
   configuration: Release
@@ -56,6 +60,10 @@
       - develop
       - /feature.*/
       - /bugfix.*/
+      
+  skip_tags: true
+  skip_commits:
+    message: /Update*\.md/
 
   version: 1.1.{build}-dev
   configuration: Release
@@ -90,6 +98,10 @@
   branches:
     only:
       - /release.*/
+      
+  skip_tags: true
+  skip_commits:
+    message: /Update*\.md/
 
   version: 1.1.{build}-preview
   configuration: Release
