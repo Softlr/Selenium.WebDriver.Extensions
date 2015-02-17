@@ -27,6 +27,8 @@
   environment:
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+    access_token:
+      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   test:
     assemblies:
@@ -51,6 +53,20 @@
     - provider: NuGet
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
+        
+  on_success:
+    - git clone -q -b gh-pages https://github.com/RaYell/selenium-webdriver-extensions.git docs\gh-pages
+    - cd docs\gh-pages
+    - git config --global credential.helper store
+    - git config user.email "agent@appveyor.com"
+    - git config user.name "AppVeyor Agent"
+    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+    - git rm -r api 
+    - xcopy ..\Help api /s /i
+    - git add api
+    - git commit -a -m "Documentation updated"
+    - git push
+    - cd ../..
 
 # develop, feature & bugfix branches
 -
@@ -84,8 +100,6 @@
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
-    access_token:
-      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   test:
     assemblies:
@@ -93,20 +107,6 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
-  
-  on_success:
-    - git clone -q -b gh-pages https://github.com/RaYell/selenium-webdriver-extensions.git docs\gh-pages
-    - cd docs\gh-pages
-    - git config --global credential.helper store
-    - git config user.email "agent@appveyor.com"
-    - git config user.name "AppVeyor Agent"
-    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
-    - git rm -r api 
-    - xcopy ..\Help api /s /i
-    - git add api
-    - git commit -a -m "Documentation updated"
-    - git push
-    - cd ../..
 
 # release branch configuration
 -
