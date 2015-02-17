@@ -30,9 +30,10 @@
 
   test:
     assemblies:
-      - '**\*.Tests.dll'
-    categories:
-      - Unit Tests
+      - Selenium.WebDriver.Extensions.Tests.dll
+      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+      - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
     
   after_test:
     - packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
@@ -88,9 +89,10 @@
 
   test:
     assemblies:
-      - '**\*.Tests.dll'
-    categories:
-      - Unit Tests
+      - Selenium.WebDriver.Extensions.Tests.dll
+      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+      - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
   
   on_success:
     - git clone -q -b gh-pages git://github.com/RaYell/selenium-webdriver-extensions.git docs\gh-pages
@@ -136,9 +138,10 @@
 
   test:
     assemblies:
-      - '**\*.Tests.dll'
-    categories:
-      - Unit Tests
+      - Selenium.WebDriver.Extensions.Tests.dll
+      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
+      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
+      - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
