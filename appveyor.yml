@@ -30,7 +30,7 @@
 
   test:
     assemblies:
-      - **\*.Tests.dll
+      - '**\*.Tests.dll'
     categories:
       - Unit Tests
     
@@ -88,7 +88,7 @@
 
   test:
     assemblies:
-      - **\*.Tests.dll
+      - '**\*.Tests.dll'
     categories:
       - Unit Tests
   
@@ -136,7 +136,7 @@
 
   test:
     assemblies:
-      - **\*.Tests.dll
+      - '**\*.Tests.dll'
     categories:
       - Unit Tests
     
