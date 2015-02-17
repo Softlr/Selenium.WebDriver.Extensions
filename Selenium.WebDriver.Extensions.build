@@ -24,8 +24,12 @@
 	<property name="file.coverage.report" value="${dir.work}\coverage.xml"/>
 	
 	<loadtasks assembly="packages\NAnt.Contrib.Portable.0.92\tools\NAnt.Contrib.Tasks.dll" />
-		
-	<target name="build">
+    
+    <setenv>
+        <variable name="SHFBROOT" dir="packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"/>
+    </setenv>
+    
+    <target name="build">
 		<msbuild project="Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config}"/>
 			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
