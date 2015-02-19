@@ -94,7 +94,7 @@
     file: AssemblyInfo.*
     assembly_version: "{version}"
     assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_informational_version: "{version}-dev"
   
   environment:
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
@@ -132,7 +132,7 @@
     file: AssemblyInfo.*
     assembly_version: "{version}"
     assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_informational_version: "{version}-preview"
   
   environment:
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
