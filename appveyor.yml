@@ -17,6 +17,11 @@
     assembly_version: "{version}"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
+    
+  nuget:
+    account_feed: true
+    project_feed: true
+    disable_publish_on_pr: true
   
   environment:
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
@@ -95,6 +100,11 @@
     assembly_version: "{version}"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-dev"
+    
+  nuget:
+    account_feed: true
+    project_feed: true
+    disable_publish_on_pr: true
   
   environment:
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
@@ -133,6 +143,11 @@
     assembly_version: "{version}"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-preview"
+    
+  nuget:
+    account_feed: true
+    project_feed: true
+    disable_publish_on_pr: true
   
   environment:
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
