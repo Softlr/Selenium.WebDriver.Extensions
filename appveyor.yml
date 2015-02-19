@@ -55,6 +55,7 @@
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
       release: $(appveyor_build_version)
+      artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
         
@@ -163,6 +164,7 @@
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
       release: $(appveyor_build_version)
+      artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       prerelease: true
