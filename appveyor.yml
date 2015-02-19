@@ -22,7 +22,7 @@
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
-    access_token:
+    GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   before_build:
@@ -66,7 +66,7 @@
     - git config --global credential.helper store
     - git config user.email "agent@appveyor.com"
     - git config user.name "AppVeyor Agent"
-    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:access_token):x-oauth-basic@github.com`n"
+    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GH_ACCESS_TOKEN):x-oauth-basic@github.com`n"
     - git rm -r api 
     - xcopy ..\Help api /s /i
     - git add api
