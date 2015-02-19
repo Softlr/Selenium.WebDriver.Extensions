@@ -18,17 +18,17 @@
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
   
-  build:
-    project: Selenium.WebDriver.Extensions.sln
-
-  before_build:
-    - nuget restore
-  
   environment:
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     access_token:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+
+  before_build:
+    - nuget restore
+  
+  build:
+    project: Selenium.WebDriver.Extensions.sln
 
   test:
     assemblies:
@@ -94,16 +94,16 @@
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
   
-  build:
-    project: Selenium.WebDriver.Extensions.sln
-
-  before_build:
-    - nuget restore
-  
   environment:
     SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+
+  before_build:
+    - nuget restore
+  
+  build:
+    project: Selenium.WebDriver.Extensions.sln
 
   test:
     assemblies:
@@ -132,15 +132,15 @@
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
   
-  build:
-    project: Selenium.WebDriver.Extensions.sln
+  environment:
+    COVERALLS_REPO_TOKEN:
+      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
   before_build:
     - nuget restore
   
-  environment:
-    COVERALLS_REPO_TOKEN:
-      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+  build:
+    project: Selenium.WebDriver.Extensions.sln
 
   test:
     assemblies:
