@@ -11,6 +11,9 @@
   version: 1.1.{build}
   configuration: Release
 
+  install:  
+    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
+  
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -42,6 +45,7 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
+      - Selenium.WebDriver.Extensions.IntegrationTests.dll
     
   after_test:
     - packages\OpenCover.4.5.3522\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
@@ -94,15 +98,15 @@
   version: 1.1.{build}-dev
   configuration: Release
 
+  install:  
+    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
+  
   assembly_info:
     patch: true
     file: AssemblyInfo.*
     assembly_version: "{version}"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
-  
-  install:  
-    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
   
   nuget:
     account_feed: true
@@ -148,6 +152,9 @@
 
   version: 1.1.{build}-preview
   configuration: Release
+  
+  install:  
+    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
 
   assembly_info:
     patch: true
@@ -155,7 +162,7 @@
     assembly_version: "{version}"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
-    
+  
   nuget:
     account_feed: true
     project_feed: true
@@ -178,6 +185,7 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
+      - Selenium.WebDriver.Extensions.IntegrationTests.dll
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
