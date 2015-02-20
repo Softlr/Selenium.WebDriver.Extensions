@@ -2,12 +2,8 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.IO;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Chrome;
-    using OpenQA.Selenium.Firefox;
-    using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
     using Selenium.WebDriver.Extensions.JQuery;
     using By = Selenium.WebDriver.Extensions.By;
@@ -19,14 +15,8 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("PhantomJS", "TestCases\\JQuery\\Loaded.html")]
-    [TestFixture("PhantomJS", "TestCases\\JQuery\\Unloaded.html")]
-    [TestFixture("Firefox", "TestCases\\JQuery\\Loaded.html")]
-    [TestFixture("Firefox", "TestCases\\JQuery\\Unloaded.html")]
-    [TestFixture("Chrome", "TestCases\\JQuery\\Loaded.html")]
-    [TestFixture("Chrome", "TestCases\\JQuery\\Unloaded.html")]
-    [TestFixture("IE", "TestCases\\JQuery\\Loaded.html")]
-    [TestFixture("IE", "TestCases\\JQuery\\Unloaded.html")]
+    [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+    [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
     [Category("Integration Tests")]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsJQuerySelectorTests
@@ -34,23 +24,16 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="WebDriverExtensionsJQuerySelectorTests"/> class.
         /// </summary>
-        /// <param name="driverName">The web driver name.</param>
-        /// <param name="testCaseFileName">The test case file name.</param>
-        public WebDriverExtensionsJQuerySelectorTests(string driverName, string testCaseFileName)
+        /// <param name="testCaseUrl">The test case URL.</param>
+        public WebDriverExtensionsJQuerySelectorTests(string testCaseUrl)
         {
-            this.DriverName = driverName;
-            this.TestCaseFileName = testCaseFileName;
+            this.TestCaseUrl = testCaseUrl;
         }
 
         /// <summary>
-        /// Gets or sets the driver name.
+        /// Gets or sets the test case URL.
         /// </summary>
-        private string DriverName { get; set; }
-
-        /// <summary>
-        /// Gets or sets the test case file name.
-        /// </summary>
-        private string TestCaseFileName { get; set; }
+        private string TestCaseUrl { get; set; }
 
         /// <summary>
         /// Gets or sets the selenium web driver.
@@ -63,45 +46,10 @@
         [TestFixtureSetUp]
         public void SetUp()
         {
-            var directoryInfo = Directory.GetParent(Directory.GetCurrentDirectory()).Parent;
-            if (directoryInfo == null)
-            {
-                return;
-            }
-
-#if DEBUG
-            const string BuildConfig = "Debug";
-#else
-            const string BuildConfig = "Release";
-#endif
-
-            var driversPath = directoryInfo.FullName + Path.DirectorySeparatorChar + "bin"
-                + Path.DirectorySeparatorChar + BuildConfig
-                + Path.DirectorySeparatorChar + "Drivers"
-                + Path.DirectorySeparatorChar;
-
-            switch (this.DriverName)
-            {
-                case "PhantomJS":
-                    var phantomJsService = PhantomJSDriverService.CreateDefaultService(driversPath);
-                    phantomJsService.SslProtocol = "any";
-                    this.Browser = new PhantomJSDriver(phantomJsService);
-                    break;
-                case "Firefox":
-                    this.Browser = new FirefoxDriver();
-                    break;
-                case "Chrome":
-                    this.Browser = new ChromeDriver(driversPath);
-                    break;
-                case "IE":
-                    this.Browser = new InternetExplorerDriver(driversPath);
-                    break;
-                default:
-                    return;
-            }
-            
-            var uri = new Uri(directoryInfo.FullName + Path.DirectorySeparatorChar + this.TestCaseFileName);
-            this.Browser.Navigate().GoToUrl(uri.AbsoluteUri);
+            var phantomJsService = PhantomJSDriverService.CreateDefaultService();
+            phantomJsService.SslProtocol = "any";
+            this.Browser = new PhantomJSDriver(phantomJsService);
+            this.Browser.Navigate().GoToUrl(this.TestCaseUrl);
         }
 
         /// <summary>
