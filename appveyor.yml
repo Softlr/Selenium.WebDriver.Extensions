@@ -102,7 +102,7 @@
     assembly_informational_version: "{version}"
   
   install:  
-    - cmd: SET PATH=C:\projects\selenium-helpers\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
   
   nuget:
     account_feed: true
@@ -126,11 +126,7 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
-      
-  after_test:
-    - nunit-console test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll /result:.\int-tests.xml
-    - ps: $wc = New-Object 'System.Net.WebClient'
-    - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\int-tests.xml))
+      - Selenium.WebDriver.Extensions.IntegrationTests.dll
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
