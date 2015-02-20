@@ -11,12 +11,12 @@
         <description>jQuery selector support for Selenium WebDriver.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, jquery, selector, selectors</tags>
 		<dependencies>
-			<dependency id="Selenium.WebDriver" />
-			<dependency id="Selenium.Support" />
-            <dependency id="Selenium.WebDriver.Extensions.Shared" />
+			<dependency id="Selenium.WebDriver" version="2.44.0"/>
+			<dependency id="Selenium.Support" version="2.44.0"/>
+            <dependency id="Selenium.WebDriver.Extensions.Shared" version="1.1.0"/>
 		</dependencies> 
     </metadata>
     <files>
-        <file src="bin\Release\Selenium.WebDriver.Extensions.JQuery.dll" target="lib\Selenium.WebDriver.Extensions.JQuery.dll" />
+        <file src="bin\Release\Selenium.WebDriver.Extensions.JQuery.dll" target="lib\net40\Selenium.WebDriver.Extensions.JQuery.dll" />
     </files>
 </package>

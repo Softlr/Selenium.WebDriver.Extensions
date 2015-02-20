@@ -11,14 +11,14 @@
         <description>Contains all Selenium WebDriver extensions including jQuery, Sizzle and query selector support..</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, queryselector, selector, selectors</tags>
 		<dependencies>
-			<dependency id="Selenium.WebDriver" />
-			<dependency id="Selenium.Support" />
-            <dependency id="Selenium.WebDriver.Extensions.JQuery" />
-            <dependency id="Selenium.WebDriver.Extensions.Sizzle" />
-            <dependency id="Selenium.WebDriver.Extensions.QuerySelector" />
+			<dependency id="Selenium.WebDriver" version="2.44.0"/>
+			<dependency id="Selenium.Support" version="2.44.0"/>
+            <dependency id="Selenium.WebDriver.Extensions.JQuery" version="1.1.0"/>
+            <dependency id="Selenium.WebDriver.Extensions.Sizzle" version="1.1.0"/>
+            <dependency id="Selenium.WebDriver.Extensions.QuerySelector" version="1.1.0"/>
 		</dependencies> 
     </metadata>
     <files>
-        <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\Selenium.WebDriver.Extensions.dll" />
+        <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\net40\Selenium.WebDriver.Extensions.dll" />
     </files>
 </package>
