@@ -128,10 +128,9 @@
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
       
   after_test:
-    - ps: >-
-      nunit-console test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll /result:.\int-tests.xml
-      $wc = New-Object 'System.Net.WebClient'
-      $wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\int-tests.xml))
+    - nunit-console test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll /result:.\int-tests.xml
+    - ps: $wc = New-Object 'System.Net.WebClient'
+    - ps: $wc.UploadFile("https://ci.appveyor.com/api/testresults/xunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\int-tests.xml))
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
