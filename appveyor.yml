@@ -12,7 +12,7 @@
   configuration: Release
 
   install:  
-    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
+    - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
   assembly_info:
     patch: true
@@ -27,7 +27,7 @@
     disable_publish_on_pr: true
   
   environment:
-    SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
+    SHFBROOT: %APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     GH_ACCESS_TOKEN:
@@ -99,7 +99,7 @@
   configuration: Release
 
   install:  
-    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
+    - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
   assembly_info:
     patch: true
@@ -114,7 +114,7 @@
     disable_publish_on_pr: true
   
   environment:
-    SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
+    SHFBROOT: %APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
@@ -154,7 +154,7 @@
   configuration: Release
   
   install:  
-    - cmd: SET PATH=C:\projects\selenium-helpers\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Drivers;%PATH%
+    - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
@@ -169,7 +169,7 @@
     disable_publish_on_pr: true
   
   environment:
-    SHFBROOT: C:\projects\selenium-helpers\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
+    SHFBROOT: %APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
