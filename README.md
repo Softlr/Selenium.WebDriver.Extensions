@@ -23,12 +23,12 @@ Extensions for Selenium WebDriver.
  * Well documented code following strict StyleCop and FxCop rules
 
 # Installation
-Run the following command in Visual Studio Packet Manager Console.
+Run the following command in Visual Studio Package Manager Console.
 ```posh
 Install-Package Selenium.WebDriver.Extensions
 ```
 
-This will install the full package containing jQuery, Sizzle and query selector support. If you want to use only specific extensions you can do this by installing a specific package in Packet Manager Console.
+This will install the full package containing jQuery, Sizzle and query selector support. If you want to use only specific extensions you can do this by installing a specific package in Package Manager Console.
 
 ```posh
 Install-Package Selenium.WebDriver.Extensions.JQuery
