@@ -40,8 +40,8 @@
     project: Selenium.WebDriver.Extensions.sln
     
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
     assemblies:
@@ -129,8 +129,8 @@
     project: Selenium.WebDriver.Extensions.sln
     
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
     assemblies:
@@ -188,8 +188,8 @@
     project: Selenium.WebDriver.Extensions.sln
     
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
     assemblies:
