@@ -3,6 +3,7 @@
 	<property name="project.framework" value="net-4.5"/>
 	<property name="project.config" value="Release"/>
     <property name="project.config.net40" value="Release-Net40"/>
+    <property name="project.config.net35" value="Release-Net35"/>
     <property name="project.config.docs" value="Docs"/>
     <property name="project.version" value="1.1.0-alpha"/>
 	<property name="project.visual.studio.version" value="12.0"/>
@@ -44,6 +45,13 @@
     <target name="build.net40">
 		<msbuild project="Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config.net40}"/>
+			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
+		</msbuild>
+	</target>
+    
+    <target name="build.net35">
+		<msbuild project="Selenium.WebDriver.Extensions.sln">
+			<property name="Configuration" value="${project.config.net35}"/>
 			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
 		</msbuild>
 	</target>
@@ -160,7 +168,7 @@
 		</exec>
 	</target>
     
-    <target name="pack" depends="build build.net40">
+    <target name="pack" depends="build build.net40 build.net35">
 		<exec program="${path.nuget}">
             <arg value="pack"/>
 			<arg value="src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec"/>
