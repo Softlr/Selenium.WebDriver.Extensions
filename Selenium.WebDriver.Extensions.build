@@ -3,6 +3,7 @@
 	<property name="project.framework" value="net-4.5"/>
 	<property name="project.config" value="release"/>
     <property name="project.config.net40" value="release-net40"/>
+    <property name="project.config.docs" value="docs"/>
     <property name="project.version" value="1.1.0-alpha"/>
 	<property name="project.visual.studio.version" value="12.0"/>
     <property name="path.nuget" value=".nuget\NuGet.exe"/>
@@ -43,6 +44,13 @@
     <target name="build.net40">
 		<msbuild project="Selenium.WebDriver.Extensions.sln">
 			<property name="Configuration" value="${project.config.net40}"/>
+			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
+		</msbuild>
+	</target>
+    
+    <target name="build.docs">
+		<msbuild project="Selenium.WebDriver.Extensions.sln">
+			<property name="Configuration" value="${project.config.docs}"/>
 			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
 		</msbuild>
 	</target>
@@ -185,5 +193,5 @@
 		</exec>
 	</target>
 	
-	<target name="full" depends="build, test, integration, coverage, pack"/>
+	<target name="full" depends="build, test, integration, coverage, build.docs, pack"/>
 </project>
