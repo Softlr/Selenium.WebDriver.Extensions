@@ -16,6 +16,7 @@
 		</dependencies> 
     </metadata>
     <files>
+        <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.Shared.dll" target="lib\net35\Selenium.WebDriver.Extensions.Shared.dll" />
         <file src="bin\Release-Net40\Selenium.WebDriver.Extensions.Shared.dll" target="lib\net40\Selenium.WebDriver.Extensions.Shared.dll" />
         <file src="bin\Release\Selenium.WebDriver.Extensions.Shared.dll" target="lib\net45\Selenium.WebDriver.Extensions.Shared.dll" />
     </files>
