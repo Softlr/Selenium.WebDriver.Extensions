@@ -9,13 +9,8 @@
     message: /Update*\.md/
 
   version: 1.1.{build}
-  configuration:
-    - Release
-    - Release-Net40
+  configuration: Release
     
-  matrix:
-    fast_finish: true
-
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
@@ -43,6 +38,10 @@
   
   build:
     project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs
 
   test:
     assemblies:
@@ -101,13 +100,8 @@
     message: /Update*\.md/
 
   version: 1.1.{build}
-  configuration:
-    - Release
-    - Release-Net40
+  configuration: Release
     
-  matrix:
-    fast_finish: true
-
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
@@ -133,6 +127,10 @@
   
   build:
     project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs
 
   test:
     assemblies:
@@ -161,13 +159,8 @@
     message: /Update*\.md/
 
   version: 1.1.{build}
-  configuration:
-    - Release
-    - Release-Net40
+  configuration: Release
     
-  matrix:
-    fast_finish: true
-  
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
 
@@ -193,6 +186,10 @@
   
   build:
     project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs
 
   test:
     assemblies:
