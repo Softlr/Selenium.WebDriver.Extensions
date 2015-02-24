@@ -17,7 +17,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "{version}"
+    assembly_version: "1.1"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
     
@@ -95,7 +95,7 @@
   skip_commits:
     message: /Update*\.md/
 
-  version: 1.1.{build}-dev
+  version: 1.1.{build}
   configuration: Release
 
   install:  
@@ -104,9 +104,9 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "{version}"
+    assembly_version: "1.1"
     assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_informational_version: "{version}-dev"
   
   nuget:
     account_feed: true
@@ -150,7 +150,7 @@
   skip_commits:
     message: /Update*\.md/
 
-  version: 1.1.{build}-preview
+  version: 1.1.{build}
   configuration: Release
   
   install:  
@@ -159,9 +159,9 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "{version}"
+    assembly_version: "1.1"
     assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_informational_version: "{version}-preview"
   
   nuget:
     account_feed: true
