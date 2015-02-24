@@ -41,6 +41,7 @@
     
   after_build:
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
@@ -130,6 +131,7 @@
     
   after_build:
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
@@ -189,6 +191,7 @@
     
   after_build:
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
