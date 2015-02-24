@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
     using JetBrains.Annotations;
 
@@ -10,7 +9,7 @@
     /// </summary>
     [Serializable]
 #if !NET35
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class ExternalLibraryLoadException : Exception
     {

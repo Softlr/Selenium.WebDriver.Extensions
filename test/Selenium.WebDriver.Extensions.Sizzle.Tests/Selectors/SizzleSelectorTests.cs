@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
 
     /// <summary>
@@ -11,7 +10,7 @@
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
-    [ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class SizzleSelectorTests
     {
