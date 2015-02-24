@@ -38,11 +38,12 @@
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Shared" isDocumented="True">Contains the functionalities shared across extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Shared" isDocumented="True">Contains the functionalities shared across extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
@@ -80,6 +81,12 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release-Net40' ">
+    <OutputPath>bin\Release-Net40\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net40' ">
+    <OutputPath>bin\Debug-Net40\</OutputPath>
   </PropertyGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
