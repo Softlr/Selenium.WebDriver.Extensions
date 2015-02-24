@@ -18,14 +18,14 @@
     <property name="dir.unit.tests.sizzle" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}"/>
     <property name="dir.unit.tests.queryselector" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config}"/>
     <property name="dir.unit.tests.combined" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
-    <property name="dir.unit.tests.integration" value="test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}"/>
-    <property name="dir.unit.tests.drivers" value="${dir.unit.tests.integration}\Drivers"/>
-	<property name="dir.coverage.report" value="${dir.work}\CoverageReport"/>
+    <property name="dir.integration.tests" value="test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}"/>
+    <property name="dir.integration.tests.phantomjs" value="packages\PhantomJS.2.0.0\tools\phantomjs"/>
+    <property name="dir.coverage.report" value="${dir.work}\CoverageReport"/>
 	<property name="file.unit.tests.jquery" value="${dir.work}\Selenium.WebDriver.Extensions.JQuery.Tests.dll"/>
     <property name="file.unit.tests.sizzle" value="${dir.work}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll"/>
     <property name="file.unit.tests.queryselector" value="${dir.work}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
     <property name="file.unit.tests.combined" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
-    <property name="file.unit.tests.integration" value="${dir.work}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
+    <property name="file.integration.tests" value="${dir.work}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
 	<property name="file.test.results" value="Selenium.WebDriver.Extensions.Tests.xml"/>
 	<property name="file.coverage.report" value="${dir.work}\coverage.xml"/>
 	
@@ -94,7 +94,7 @@
 			</fileset>
 		</copy>
         <copy todir="${dir.work}" flatten="true">
-            <fileset basedir="${dir.unit.tests.integration}">
+            <fileset basedir="${dir.integration.tests}">
 				<include name="*.dll"/>
                 <include name="*.pdb"/>
 			</fileset>
@@ -116,26 +116,26 @@
     
     <target name="move.assemblies.for.integration.tests">
 		<copy todir="${dir.work}" flatten="true">
-            <fileset basedir="${dir.unit.tests.integration}">
+            <fileset basedir="${dir.integration.tests}">
 				<include name="*.dll"/>
                 <include name="*.pdb"/>
 			</fileset>
         </copy>
-        <copy todir="${dir.work}" flatten="true">
-            <fileset basedir="${dir.unit.tests.drivers}">
-				<include name="phantomjs.exe"/>
-			</fileset>
-		</copy>
         <copy todir="${dir.work}\TestCases">
-            <fileset basedir="${dir.unit.tests.integration}\TestCases">
+            <fileset basedir="${dir.integration.tests}\TestCases">
 				<include name="**/*.*"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work}" flatten="true">
+            <fileset basedir="${dir.integration.tests.phantomjs}">
+				<include name="phantomjs.exe"/>
 			</fileset>
         </copy>
 	</target>
     
     <target name="integration" depends="build, setup.build.process, move.assemblies.for.integration.tests">
 		<exec program="${path.nunit}">
-			<arg value="${file.unit.tests.integration}"/>
+			<arg value="${file.integration.tests}"/>
             <arg value="/framework:${project.framework}"/>
 			<arg value="/work:${dir.work}"/>
 			<arg value="/result:${file.test.results}"/>
