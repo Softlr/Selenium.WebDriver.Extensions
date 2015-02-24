@@ -212,7 +212,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: $(APPVEYOR_BUILD_VERSION)
+      release: $(APPVEYOR_BUILD_VERSION)-preview
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
