@@ -109,8 +109,6 @@
                 // additional tests
                 yield return new TestCaseData(By.JQuerySelector("div").AddBack(string.Empty))
                     .Returns("jQuery('div').addBack()").SetName("empty selector");
-                yield return new TestCaseData(By.JQuerySelector("div").AddBack(" "))
-                    .Returns("jQuery('div').addBack()").SetName("whitespace selector");
                 yield return new TestCaseData(By.JQuerySelector("div").AddBack(" span "))
                     .Returns("jQuery('div').addBack('span')").SetName("trim");
                 yield return new TestCaseData(By.JQuerySelector("input[type='text']"))
