@@ -9,7 +9,12 @@
     message: /Update*\.md/
 
   version: 1.1.{build}
-  configuration: Release
+  configuration:
+    - Release
+    - Release-Net40
+    
+  matrix:
+    fast_finish: true
 
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
@@ -96,7 +101,12 @@
     message: /Update*\.md/
 
   version: 1.1.{build}
-  configuration: Release
+  configuration:
+    - Release
+    - Release-Net40
+    
+  matrix:
+    fast_finish: true
 
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
@@ -151,7 +161,12 @@
     message: /Update*\.md/
 
   version: 1.1.{build}
-  configuration: Release
+  configuration:
+    - Release
+    - Release-Net40
+    
+  matrix:
+    fast_finish: true
   
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
