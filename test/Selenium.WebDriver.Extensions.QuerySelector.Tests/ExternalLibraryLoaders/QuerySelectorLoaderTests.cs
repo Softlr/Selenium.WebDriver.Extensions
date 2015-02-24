@@ -8,7 +8,9 @@
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
+#if !NET35
     [ExcludeFromCodeCoverage]
+#endif
     public class QuerySelectorLoaderTests
     {
         /// <summary>

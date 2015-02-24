@@ -18,7 +18,9 @@
     [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
     [Category("Integration Tests")]
+#if !NET35
     [ExcludeFromCodeCoverage]
+#endif
     public class WebDriverExtensionsJQuerySelectorTests
     {
         /// <summary>

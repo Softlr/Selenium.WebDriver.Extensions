@@ -91,6 +91,12 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Docs' ">
     <OutputPath>bin\Docs\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release-Net35' ">
+    <OutputPath>bin\Release-Net35\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net35' ">
+    <OutputPath>bin\Debug-Net35\</OutputPath>
+  </PropertyGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
 </Project>

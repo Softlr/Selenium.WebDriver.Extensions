@@ -17,7 +17,9 @@
     /// </remarks>
     [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
     [Category("Integration Tests")]
+#if !NET35
     [ExcludeFromCodeCoverage]
+#endif
     public class WebDriverExtensionsQuerySelectorTests
     {
         /// <summary>

@@ -9,7 +9,9 @@
     /// The exception that is thrown when external library loading fails.
     /// </summary>
     [Serializable]
+#if !NET35
     [ExcludeFromCodeCoverage]
+#endif
     public class ExternalLibraryLoadException : Exception
     {
         /// <summary>

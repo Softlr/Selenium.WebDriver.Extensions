@@ -9,7 +9,9 @@
     /// The exception that is thrown when one of the type arguments provided to a method is not valid.
     /// </summary>
     [Serializable]
+#if !NET35
     [ExcludeFromCodeCoverage]
+#endif
     public class QuerySelectorNotSupportedException : NotSupportedException
     {
         /// <summary>
