@@ -143,11 +143,11 @@
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
       
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 # release branch configuration
@@ -203,11 +203,11 @@
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
     
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
   deploy:
