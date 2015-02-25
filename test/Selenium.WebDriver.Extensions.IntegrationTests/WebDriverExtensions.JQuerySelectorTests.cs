@@ -543,7 +543,7 @@
         public void FindInnerElement()
         {
             var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
-            var element = root.FindElement(By.JQuerySelector("span")) ;
+            var element = root.FindElement(By.JQuerySelector("span"));
             Assert.IsNotNull(element);
         }
 

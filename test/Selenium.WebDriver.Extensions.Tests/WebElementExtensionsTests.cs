@@ -5,6 +5,9 @@
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Shared;
     
+    /// <summary>
+    /// Web element extensions tests.
+    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
