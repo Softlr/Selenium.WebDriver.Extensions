@@ -28,9 +28,15 @@
             }
 
             this.Context = context;
+            this.RawSelector = selector;
             this.Selector = "Sizzle('" + selector.Replace('\'', '"') + "'" 
                 + (this.Context != null ? ", " + this.Context + "[0]" : string.Empty) + ")";
         }
+
+        /// <summary>
+        /// Gets the raw selector.
+        /// </summary>
+        public string RawSelector { get; private set; }
 
         /// <summary>
         /// Gets the selector.

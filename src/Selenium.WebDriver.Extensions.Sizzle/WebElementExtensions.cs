@@ -46,7 +46,7 @@
         {
             var path = webElement.GetPath();
             var rootSelector = new SizzleSelector(path);
-            return new SizzleSelector(by.Selector, rootSelector);
+            return new SizzleSelector(by.RawSelector, rootSelector);
         }
     }
 }

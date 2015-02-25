@@ -45,8 +45,8 @@
         private static QuerySelector CreateSelector(this WebElement webElement, QuerySelector by)
         {
             var path = webElement.GetPath();
-            var rootSelector = new QuerySelector(path);
-            return new QuerySelector(by.Selector, rootSelector);
+            var rootSelector = new QuerySelector(path, by.BaseElement);
+            return new QuerySelector(by.RawSelector, rootSelector);
         }
     }
 }

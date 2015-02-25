@@ -27,6 +27,7 @@
 
             this.Context = context;
             this.JQueryVariable = jQueryVariable;
+            this.RawSelector = selector;
             this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'"
                 + (this.Context != null ? ", " + this.Context : string.Empty) + ")";
         }
@@ -37,6 +38,11 @@
         protected JQuerySelector()
         {
         }
+
+        /// <summary>
+        /// Gets the raw selector.
+        /// </summary>
+        public string RawSelector { get; private set; }
 
         /// <summary>
         /// Gets the selector.

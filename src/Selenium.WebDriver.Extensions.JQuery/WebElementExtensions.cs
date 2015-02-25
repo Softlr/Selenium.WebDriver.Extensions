@@ -46,7 +46,7 @@
         {
             var path = webElement.GetPath();
             var rootSelector = new JQuerySelector(path, jQueryVariable: by.JQueryVariable);
-            return new JQuerySelector(by.Selector, rootSelector, by.JQueryVariable);
+            return new JQuerySelector(by.RawSelector, rootSelector, by.JQueryVariable);
         }
     }
 }

@@ -28,6 +28,7 @@
             }
 
             this.BaseElement = baseElement;
+            this.RawSelector = selector;
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
@@ -54,9 +55,15 @@
             }
 
             this.BaseSelector = baseSelector;
+            this.RawSelector = selector;
             this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
                 + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
+
+        /// <summary>
+        /// Gets the query raw selector.
+        /// </summary>
+        public string RawSelector { get; private set; }
 
         /// <summary>
         /// Gets the query selector.
