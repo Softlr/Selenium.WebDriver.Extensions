@@ -68,7 +68,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public string TagName
+        public virtual string TagName
         {
             get
             {
@@ -83,7 +83,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public string Text
+        public virtual string Text
         {
             get
             {
@@ -97,7 +97,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public bool Enabled
+        public virtual bool Enabled
         {
             get
             {
@@ -111,7 +111,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public bool Selected
+        public virtual bool Selected
         {
             get
             {
@@ -126,7 +126,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public Point Location
+        public virtual Point Location
         {
             get
             {
@@ -140,7 +140,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public Size Size
+        public virtual Size Size
         {
             get
             {
@@ -154,7 +154,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public bool Displayed
+        public virtual bool Displayed
         {
             get
             {
@@ -170,7 +170,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public IWebElement FindElement(By by)
+        public virtual IWebElement FindElement(By by)
         {
             return this.InnerElement.FindElement(by);
         }
@@ -186,7 +186,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public ReadOnlyCollection<IWebElement> FindElements(By @by)
+        public virtual ReadOnlyCollection<IWebElement> FindElements(By @by)
         {
             return this.InnerElement.FindElements(by);
         }
@@ -197,7 +197,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public void Clear()
+        public virtual void Clear()
         {
             this.InnerElement.Clear();
         }
@@ -209,7 +209,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public void SendKeys(string text)
+        public virtual void SendKeys(string text)
         {
             this.InnerElement.Clear();
         }
@@ -220,7 +220,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public void Submit()
+        public virtual void Submit()
         {
             this.InnerElement.Submit();
         }
@@ -231,7 +231,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public void Click()
+        public virtual void Click()
         {
             this.InnerElement.Click();
         }
@@ -244,7 +244,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public string GetAttribute(string attributeName)
+        public virtual string GetAttribute(string attributeName)
         {
             return this.InnerElement.GetAttribute(attributeName);
         }
@@ -257,7 +257,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public string GetCssValue(string propertyName)
+        public virtual string GetCssValue(string propertyName)
         {
             return this.InnerElement.GetCssValue(propertyName);
         }
