@@ -158,5 +158,15 @@
         {
             By.JQuerySelector(null);
         }
+
+        /// <summary>
+        /// Tests if the call format string is handled properly.
+        /// </summary>
+        [Test]
+        public void CallFormatString()
+        {
+            var formatString = By.JQuerySelector("div").CallFormatString;
+            Assert.IsNotNull(formatString);
+        }
     }
 }
