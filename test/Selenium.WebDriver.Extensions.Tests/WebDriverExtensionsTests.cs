@@ -862,8 +862,8 @@
         public void QuerySelectorNotSupported()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
-                .Returns(false);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(false);
             mock.Object.CheckQuerySelectorSupport();
         }
 
@@ -907,8 +907,8 @@
                 .Returns(true);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
                 .Returns(true);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
-                .Returns(true);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(true);
             return mock;
         }
     }

@@ -134,8 +134,8 @@
                 .Returns(true);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
                 .Returns(true);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
-                .Returns(true);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(true);
             return mock;
         }
     }
