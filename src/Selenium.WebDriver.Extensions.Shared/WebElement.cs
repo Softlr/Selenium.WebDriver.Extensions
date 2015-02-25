@@ -29,17 +29,17 @@
         /// <summary>
         /// Gets the inner element.
         /// </summary>
-        public IWebElement InnerElement { get; private set; }
+        public virtual IWebElement InnerElement { get; private set; }
 
         /// <summary>
         /// Gets the selector.
         /// </summary>
-        public ISelector Selector { get; private set; }
+        public virtual ISelector Selector { get; private set; }
 
         /// <summary>
         /// Gets the selector result index.
         /// </summary>
-        public int SelectorResultIndex { get; private set; }
+        public virtual int SelectorResultIndex { get; private set; }
 
         /// <summary>
         /// Gets the <see cref="IWebDriver"/> used to find this element.
