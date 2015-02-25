@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests.ExternalLibraryLoaders
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.Shared;
@@ -11,7 +10,9 @@
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class JQueryLoaderTests
     {
         /// <summary>

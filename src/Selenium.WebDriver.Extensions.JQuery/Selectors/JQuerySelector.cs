@@ -397,9 +397,9 @@
         private static string HandleSelectorWithFilter(string selector = null, string filter = null)
         {
             var data = string.Empty;
-            if (!string.IsNullOrWhiteSpace(selector))
+            if (!string.IsNullOrEmpty(selector))
             {
-                data = string.IsNullOrWhiteSpace(filter)
+                data = string.IsNullOrEmpty(filter) 
                     ? "'" + selector + "'"
                     : "'" + selector + "', '" + filter + "'";
             }
@@ -418,7 +418,7 @@
         /// <returns>The Selenium jQuery selector.</returns>
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
-            selector = string.IsNullOrWhiteSpace(selector)
+            selector = string.IsNullOrEmpty(selector)
                 ? string.Empty
                 : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
 

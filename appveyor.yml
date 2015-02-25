@@ -10,14 +10,14 @@
 
   version: 1.1.{build}
   configuration: Release
-
+    
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "{version}"
+    assembly_version: "1.1"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
     
@@ -38,6 +38,11 @@
   
   build:
     project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
     assemblies:
@@ -95,18 +100,18 @@
   skip_commits:
     message: /Update*\.md/
 
-  version: 1.1.{build}-dev
+  version: 1.1.{build}
   configuration: Release
-
+    
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "{version}"
+    assembly_version: "1.1"
     assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_informational_version: "{version}-dev"
   
   nuget:
     account_feed: true
@@ -123,6 +128,11 @@
   
   build:
     project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
     assemblies:
@@ -133,11 +143,11 @@
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
       
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 # release branch configuration
@@ -150,18 +160,18 @@
   skip_commits:
     message: /Update*\.md/
 
-  version: 1.1.{build}-preview
+  version: 1.1.{build}
   configuration: Release
-  
+    
   install:  
     - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "{version}"
+    assembly_version: "1.1"
     assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
+    assembly_informational_version: "{version}-preview"
   
   nuget:
     account_feed: true
@@ -178,6 +188,11 @@
   
   build:
     project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test:
     assemblies:
@@ -188,11 +203,11 @@
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
     
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
   deploy:
@@ -200,7 +215,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: $(APPVEYOR_BUILD_VERSION)
+      release: $(APPVEYOR_BUILD_VERSION)-preview
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L

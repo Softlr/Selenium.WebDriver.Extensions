@@ -4,7 +4,6 @@
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Moq;
     using NUnit.Framework;
@@ -20,7 +19,9 @@
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class WebDriverExtensionsTests
     {
         /// <summary>

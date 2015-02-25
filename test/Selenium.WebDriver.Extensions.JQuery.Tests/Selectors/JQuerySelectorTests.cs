@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections;
-    using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
     
     /// <summary>
@@ -10,7 +9,9 @@
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class JQuerySelectorTests
     {
         /// <summary>
@@ -107,8 +108,6 @@
                 // additional tests
                 yield return new TestCaseData(By.JQuerySelector("div").AddBack(string.Empty))
                     .Returns("jQuery('div').addBack()").SetName("empty selector");
-                yield return new TestCaseData(By.JQuerySelector("div").AddBack(" "))
-                    .Returns("jQuery('div').addBack()").SetName("whitespace selector");
                 yield return new TestCaseData(By.JQuerySelector("div").AddBack(" span "))
                     .Returns("jQuery('div').addBack('span')").SetName("trim");
                 yield return new TestCaseData(By.JQuerySelector("input[type='text']"))

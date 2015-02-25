@@ -1,6 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
@@ -17,7 +16,9 @@
     /// </remarks>
     [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
     [Category("Integration Tests")]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class WebDriverExtensionsQuerySelectorTests
     {
         /// <summary>

@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     using System;
-    using System.Diagnostics.CodeAnalysis;
     using System.Runtime.Serialization;
     using JetBrains.Annotations;
 
@@ -9,7 +8,9 @@
     /// The exception that is thrown when one of the type arguments provided to a method is not valid.
     /// </summary>
     [Serializable]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class TypeArgumentException : ArgumentException
     {
         /// <summary>

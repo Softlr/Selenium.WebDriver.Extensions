@@ -1,6 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions.Tests.Models
 {
-    using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.JQuery;
     
@@ -9,7 +8,9 @@
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class PositionTests
     {
         /// <summary>

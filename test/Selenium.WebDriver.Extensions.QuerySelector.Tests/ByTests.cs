@@ -1,6 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
 {
-    using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
     using By = Selenium.WebDriver.Extensions.QuerySelector.By;
 
@@ -9,7 +8,9 @@
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
-    [ExcludeFromCodeCoverage]
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class ByTests
     {
         /// <summary>
