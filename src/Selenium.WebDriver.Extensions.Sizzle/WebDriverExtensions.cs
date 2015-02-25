@@ -49,12 +49,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using Sizzle selector.
+        /// Searches for DOM element using Sizzle selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium Sizzle selector.</param>
-        /// <returns>The DOM elements matching given Sizzle selector.</returns>
         public static IWebElement FindElement(this IWebDriver driver, SizzleSelector by)
+        /// <returns>The first DOM element matching given Sizzle selector</returns>
         {
             var results = driver.Find<IEnumerable<IWebElement>>(by);
             if (results == null)
@@ -72,11 +72,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM element using Sizzle selector.
+        /// Searches for DOM elements using Sizzle selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium Sizzle selector.</param>
-        /// <returns>The first DOM element matching given Sizzle selector</returns>
+        /// <returns>The DOM element matching given Sizzle selector.</returns>
         public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, SizzleSelector by)
         {
             return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by).ToList());

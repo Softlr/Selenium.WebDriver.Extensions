@@ -25,11 +25,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using JavaScript query selector.
+        /// Searches for DOM element using JavaScript query selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium Sizzle selector.</param>
-        /// <returns>The DOM elements matching given JavaScript query selector.</returns>
+        /// <param name="by">The Selenium JavaScript query selector.</param>
+        /// <returns>The first DOM element matching given JavaScript query selector</returns>
         public static IWebElement FindElement(this IWebDriver driver, QuerySelector by)
         {
             var results = driver.Find<IEnumerable<IWebElement>>(by);
@@ -48,11 +48,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM element using JavaScript query selector.
+        /// Searches for DOM elements using JavaScript query selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium JavaScript query selector.</param>
-        /// <returns>The first DOM element matching given JavaScript query selector</returns>
+        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <returns>The DOM elements matching given JavaScript query selector.</returns>
         public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, QuerySelector by)
         {
             return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by).ToList());

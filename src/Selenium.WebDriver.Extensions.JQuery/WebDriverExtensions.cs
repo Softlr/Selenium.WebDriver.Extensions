@@ -51,11 +51,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector.
+        /// Searches for DOM element using jQuery selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The DOM elements matching given jQuery selector.</returns>
+        /// <returns>The first DOM element matching given jQuery selector</returns>
         public static WebElement FindElement(
             this IWebDriver driver,
             JQuerySelector by)
@@ -70,11 +70,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM element using jQuery selector.
+        /// Searches for DOM elements using jQuery selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The first DOM element matching given jQuery selector</returns>
+        /// <returns>The DOM elements matching given jQuery selector.</returns>
         public static ReadOnlyCollection<IWebElement> FindElements(
             this IWebDriver driver,
             JQuerySelector by)
