@@ -1,6 +1,8 @@
 <?xml version="1.0" ?>
 <project name="Selenium.WebDriver.Extensions" default="full" xmlns="http://nant.sf.net/schemas/nant.xsd">
 	<property name="project.framework" value="net-4.5"/>
+    <property name="project.framework.net40" value="net-4.0"/>
+    <property name="project.framework.net35" value="net-3.5"/>
 	<property name="project.config" value="Release"/>
     <property name="project.config.net40" value="Release-Net40"/>
     <property name="project.config.net35" value="Release-Net35"/>
@@ -12,23 +14,41 @@
 	<property name="path.opencover" value="packages\OpenCover.4.5.3723\OpenCover.Console.exe"/>
 	<property name="path.report.generator" value="packages\ReportGenerator.2.1.1.0\ReportGenerator.exe"/>
     <property name="path.report.coveralls" value="packages\coveralls.io.1.1.91\tools\coveralls.net.exe"/>
-	<property name="dir.build" value="../Build"/>
-	<property name="dir.work" value="${dir.build}/${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
+	<property name="dir.build" value="..\Build"/>
+	<property name="dir.work" value="${dir.build}\${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
+    <property name="dir.work.net40" value="${dir.build}\${project::get-name()}-${project.framework.net40}.${platform::get-name()}-${project.config}"/>
+    <property name="dir.work.net35" value="${dir.build}\${project::get-name()}-${project.framework.net35}.${platform::get-name()}-${project.config}"/>
 	<property name="dir.unit.tests.jquery" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.jquery.net40" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config.net40}"/>
+    <property name="dir.unit.tests.jquery.net35" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config.net35}"/>
     <property name="dir.unit.tests.sizzle" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.sizzle.net40" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config.net40}"/>
+    <property name="dir.unit.tests.sizzle.net35" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config.net35}"/>
     <property name="dir.unit.tests.queryselector" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.queryselector.net40" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config.net40}"/>
+    <property name="dir.unit.tests.queryselector.net35" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config.net35}"/>
     <property name="dir.unit.tests.combined" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.combined.net40" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config.net40}"/>
+    <property name="dir.unit.tests.combined.net35" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config.net35}"/>
     <property name="dir.integration.tests" value="test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}"/>
     <property name="dir.coverage.report" value="${dir.work}\CoverageReport"/>
 	<property name="file.unit.tests.jquery" value="${dir.work}\Selenium.WebDriver.Extensions.JQuery.Tests.dll"/>
+    <property name="file.unit.tests.jquery.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.JQuery.Tests.dll"/>
+    <property name="file.unit.tests.jquery.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.JQuery.Tests.dll"/>
     <property name="file.unit.tests.sizzle" value="${dir.work}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll"/>
+    <property name="file.unit.tests.sizzle.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll"/>
+    <property name="file.unit.tests.sizzle.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll"/>
     <property name="file.unit.tests.queryselector" value="${dir.work}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
+    <property name="file.unit.tests.queryselector.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
+    <property name="file.unit.tests.queryselector.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
     <property name="file.unit.tests.combined" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
+    <property name="file.unit.tests.combined.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.Tests.dll"/>
+    <property name="file.unit.tests.combined.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.Tests.dll"/>
     <property name="file.integration.tests" value="${dir.work}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
 	<property name="file.test.results" value="Selenium.WebDriver.Extensions.Tests.xml"/>
-	<property name="file.coverage.report" value="${dir.work}\coverage.xml"/>
+    <property name="file.coverage.report" value="${dir.work}\coverage.xml"/>
 	
-	<loadtasks assembly="packages\NAnt.Contrib.Portable.0.92\tools\NAnt.Contrib.Tasks.dll" />
+	<loadtasks assembly="packages\NAnt.Contrib.Portable.0.92\tools\NAnt.Contrib.Tasks.dll"/>
     
     <setenv>
         <variable name="SHFBROOT" dir="packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"/>
@@ -92,12 +112,6 @@
                 <include name="*.pdb"/>
 			</fileset>
 		</copy>
-        <copy todir="${dir.work}" flatten="true">
-            <fileset basedir="${dir.integration.tests}">
-				<include name="*.dll"/>
-                <include name="*.pdb"/>
-			</fileset>
-        </copy>
 	</target>
 	
 	<target name="test" depends="build, setup.build.process, move.assemblies.for.unit.tests">
@@ -113,17 +127,99 @@
 		</exec>
 	</target>
     
+    <target name="move.assemblies.for.unit.tests.net40">
+		<copy todir="${dir.work.net40}" flatten="true">
+			<fileset basedir="${dir.unit.tests.jquery.net40}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work.net40}" flatten="true">
+            <fileset basedir="${dir.unit.tests.sizzle.net40}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work.net40}" flatten="true">
+            <fileset basedir="${dir.unit.tests.queryselector.net40}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work.net40}" flatten="true">
+            <fileset basedir="${dir.unit.tests.combined.net40}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="test.net40" depends="build.net40, setup.build.process, move.assemblies.for.unit.tests.net40">
+		<exec program="${path.nunit}">
+			<arg value="${file.unit.tests.jquery.net40}"/>
+            <arg value="${file.unit.tests.sizzle.net40}"/>
+            <arg value="${file.unit.tests.queryselector.net40}"/>
+            <arg value="${file.unit.tests.combined.net40}"/>
+			<arg value="/framework:${project.framework.net40}"/>
+			<arg value="/work:${dir.work.net40}"/>
+			<arg value="/result:${file.test.results}"/>
+			<arg value="/nologo"/>
+		</exec>
+	</target>
+    
+    <target name="move.assemblies.for.unit.tests.net35">
+		<copy todir="${dir.work.net35}" flatten="true">
+			<fileset basedir="${dir.unit.tests.jquery.net35}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work.net35}" flatten="true">
+            <fileset basedir="${dir.unit.tests.sizzle.net35}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work.net35}" flatten="true">
+            <fileset basedir="${dir.unit.tests.queryselector.net35}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+        </copy>
+        <copy todir="${dir.work.net35}" flatten="true">
+            <fileset basedir="${dir.unit.tests.combined.net35}">
+				<include name="*.dll"/>
+                <include name="*.pdb"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="test.net35" depends="build.net35, setup.build.process, move.assemblies.for.unit.tests.net35">
+		<exec program="${path.nunit}">
+			<arg value="${file.unit.tests.jquery.net35}"/>
+            <arg value="${file.unit.tests.sizzle.net35}"/>
+            <arg value="${file.unit.tests.queryselector.net35}"/>
+            <arg value="${file.unit.tests.combined.net35}"/>
+			<arg value="/framework:${project.framework.net35}"/>
+			<arg value="/work:${dir.work.net35}"/>
+			<arg value="/result:${file.test.results}"/>
+			<arg value="/nologo"/>
+		</exec>
+	</target>
+    
+    <target name="test.all" depends="test, test.net40, test.net35"/>
+    
     <target name="move.assemblies.for.integration.tests">
 		<copy todir="${dir.work}" flatten="true">
             <fileset basedir="${dir.integration.tests}">
 				<include name="*.dll"/>
                 <include name="*.pdb"/>
-                <include name="**/*.exe"/>
+                <include name="**\*.exe"/>
 			</fileset>
         </copy>
         <copy todir="${dir.work}\TestCases">
             <fileset basedir="${dir.integration.tests}\TestCases">
-				<include name="**/*.*"/>
+				<include name="**\*.*"/>
 			</fileset>
         </copy>
 	</target>
@@ -196,5 +292,5 @@
 		</exec>
 	</target>
 	
-	<target name="full" depends="build, test, integration, coverage, build.docs, pack"/>
+	<target name="full" depends="build, test.all, integration, coverage, build.docs, pack"/>
 </project>
