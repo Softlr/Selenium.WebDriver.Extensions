@@ -56,7 +56,7 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <returns>The DOM elements matching given jQuery selector.</returns>
-        public static IWebElement FindElement(
+        public static WebElement FindElement(
             this IWebDriver driver,
             JQuerySelector by)
         {
@@ -66,7 +66,7 @@
                 throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
             }
 
-            return result;
+            return new WebElement(result, by);
         }
 
         /// <summary>

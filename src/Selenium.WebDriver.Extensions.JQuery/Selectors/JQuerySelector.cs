@@ -2,11 +2,12 @@
 {
     using System;
     using System.Globalization;
-    
+    using Selenium.WebDriver.Extensions.Shared;
+
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
-    public class JQuerySelector
+    public class JQuerySelector : ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
