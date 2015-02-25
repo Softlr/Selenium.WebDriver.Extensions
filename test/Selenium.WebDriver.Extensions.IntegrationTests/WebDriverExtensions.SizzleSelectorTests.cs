@@ -4,6 +4,7 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
+    using Selenium.WebDriver.Extensions.Shared;
     using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
 
@@ -68,6 +69,17 @@
         {
             var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
             Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding element by ID.
+        /// </summary>
+        [Test]
+        public void FindElementPath()
+        {
+            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var path = element.GetPath();
+            Assert.AreEqual("body > div#id1", path);
         }
 
         /// <summary>

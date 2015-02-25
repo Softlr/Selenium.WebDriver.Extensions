@@ -1,11 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using NUnit.Framework;
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
     using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
@@ -66,6 +66,17 @@
         {
             var element = this.Browser.FindElement(By.QuerySelector("#id1"));
             Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding element by ID.
+        /// </summary>
+        [Test]
+        public void FindElementPath()
+        {
+            var element = this.Browser.FindElement(By.QuerySelector("#id1"));
+            var path = element.GetPath();
+            Assert.AreEqual("body > div#id1", path);
         }
 
         /// <summary>
