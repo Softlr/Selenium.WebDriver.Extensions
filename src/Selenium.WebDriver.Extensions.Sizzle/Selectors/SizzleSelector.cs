@@ -1,11 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
-    
+    using Selenium.WebDriver.Extensions.Shared;
+
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
-    public class SizzleSelector
+    public class SizzleSelector : ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
@@ -32,9 +33,21 @@
         }
 
         /// <summary>
-        /// Gets the jQuery selector.
+        /// Gets the selector.
         /// </summary>
         public string Selector { get; private set; }
+
+        /// <summary>
+        /// Gets the call format string.
+        /// </summary>
+        /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
+        public string CallFormatString
+        {
+            get
+            {
+                return "{0}[{1}]";
+            }
+        }
 
         /// <summary>
         /// Gets the DOM Element or Document to use as context.

@@ -43,12 +43,17 @@
                 return stack.join(' > ');
              };";
 
+            var selectorCallScript = string.Format(
+                CultureInfo.InvariantCulture,
+                webElement.Selector.CallFormatString,
+                webElement.Selector.Selector,
+                webElement.SelectorResultIndex);
+
             var script = string.Format(
                 CultureInfo.InvariantCulture,
-                "{0} return getDomPath({1}.get({2}));",
+                "{0} return getDomPath({1});",
                 FindDomPathScript,
-                webElement.Selector,
-                webElement.SelectorResultIndex);
+                selectorCallScript);
             return ((RemoteWebElement)webElement.InnerElement).WrappedDriver.ExecuteScript<string>(script);
         }
     }

@@ -75,11 +75,13 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
         /// <returns>The DOM elements matching given jQuery selector.</returns>
-        public static ReadOnlyCollection<IWebElement> FindElements(
+        public static ReadOnlyCollection<WebElement> FindElements(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by, "get()").ToList());
+            var results = driver.Find<IEnumerable<IWebElement>>(by, "get()")
+                .Select((value, index) => new WebElement(value, by, index)).ToList();
+            return new ReadOnlyCollection<WebElement>(results);
         }
 
         /// <summary>
