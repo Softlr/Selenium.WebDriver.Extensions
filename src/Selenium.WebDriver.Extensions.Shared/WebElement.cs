@@ -42,6 +42,17 @@
         public int SelectorResultIndex { get; private set; }
 
         /// <summary>
+        /// Gets the <see cref="IWebDriver"/> used to find this element.
+        /// </summary>
+        public IWebDriver WrappedDriver
+        {
+            get
+            {
+                return ((RemoteWebElement)this.InnerElement).WrappedDriver;
+            }
+        }
+
+        /// <summary>
         /// Gets the tag name of this element.
         /// </summary>
         public string TagName

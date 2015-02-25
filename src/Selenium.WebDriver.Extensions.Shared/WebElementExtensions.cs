@@ -1,8 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     using System.Globalization;
-    using OpenQA.Selenium.Remote;
-
+    
     /// <summary>
     /// The web element extensions.
     /// </summary>
@@ -54,7 +53,7 @@
                 "{0} return getDomPath({1});",
                 FindDomPathScript,
                 selectorCallScript);
-            return ((RemoteWebElement)webElement.InnerElement).WrappedDriver.ExecuteScript<string>(script);
+            return webElement.WrappedDriver.ExecuteScript<string>(script);
         }
     }
 }
