@@ -72,17 +72,6 @@
         }
 
         /// <summary>
-        /// Tests finding element by ID.
-        /// </summary>
-        [Test]
-        public void FindElementPath()
-        {
-            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
-            var path = element.GetPath();
-            Assert.AreEqual("body > div#id1", path);
-        }
-
-        /// <summary>
         /// Tests finding element by ID that doesn't exist.
         /// </summary>
         [Test]
@@ -110,6 +99,39 @@
         {
             var elements = this.Browser.FindElements(By.SizzleSelector("div.mainNot"));
             Assert.AreEqual(0, elements.Count);
+        }
+
+        /// <summary>
+        /// Tests finding element path.
+        /// </summary>
+        [Test]
+        public void FindElementPath()
+        {
+            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var path = element.GetPath();
+            Assert.AreEqual("body > div#id1", path);
+        }
+
+        /// <summary>
+        /// Tests finding element.
+        /// </summary>
+        [Test]
+        public void FindInnerElement()
+        {
+            var root = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var element = root.FindElement(By.SizzleSelector("span"));
+            Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindInnerElements()
+        {
+            var root = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var elements = root.FindElements(By.SizzleSelector("span"));
+            Assert.AreEqual(2, elements.Count);
         }
     }
 }
