@@ -127,6 +127,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\..\packages\PhantomJS.2.0.0\tools\phantomjs\phantomjs.exe">
+      <Link>Drivers\phantomjs.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestCases\QuerySelector\TestCase.html" />
     <Content Include="TestCases\Sizzle\Unloaded.html" />
     <Content Include="TestCases\Sizzle\Loaded.html" />
