@@ -13,6 +13,13 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="WebElement"/> class.
         /// </summary>
+        internal WebElement()
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WebElement"/> class.
+        /// </summary>
         /// <param name="webElement">The inner web element.</param>
         /// <param name="selector">The selector used to locate the web element.</param>
         /// <param name="selectorResultIndex">
