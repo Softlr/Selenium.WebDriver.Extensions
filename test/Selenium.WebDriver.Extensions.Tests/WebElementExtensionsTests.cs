@@ -26,7 +26,8 @@
             selector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
             var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("body > div");
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("getDomPath")))
+                .Returns("body > div");
 
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(selector.Object);
