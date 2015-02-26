@@ -117,8 +117,8 @@
         public override int GetHashCode()
         {
             return this.Context == null
-                ? Tuple.Create(this.RawSelector).GetHashCode()
-                : Tuple.Create(this.RawSelector, this.Context).GetHashCode();
+                ? this.RawSelector.GetHashCode()
+                : this.RawSelector.GetHashCode() ^ this.Context.GetHashCode();
         }
 
         /// <summary>

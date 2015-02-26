@@ -150,8 +150,8 @@
         public override int GetHashCode()
         {
             return this.BaseSelector == null
-                ? Tuple.Create(this.RawSelector, this.BaseElement).GetHashCode()
-                : Tuple.Create(this.RawSelector, this.BaseSelector).GetHashCode();
+                ? this.RawSelector.GetHashCode() ^ this.BaseElement.GetHashCode()
+                : this.RawSelector.GetHashCode() ^ this.BaseSelector.GetHashCode();
         }
 
         /// <summary>
