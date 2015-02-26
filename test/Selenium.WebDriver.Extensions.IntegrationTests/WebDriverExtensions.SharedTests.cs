@@ -23,7 +23,7 @@
     public class WebDriverExtensionsSharedTests
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebDriverExtensionsSizzleSelectorTests"/> class.
+        /// Initializes a new instance of the <see cref="WebDriverExtensionsSharedTests"/> class.
         /// </summary>
         /// <param name="testCaseUrl">The test case URL.</param>
         public WebDriverExtensionsSharedTests(string testCaseUrl)
