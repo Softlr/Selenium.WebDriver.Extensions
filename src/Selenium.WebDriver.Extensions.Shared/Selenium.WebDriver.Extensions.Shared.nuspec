@@ -11,11 +11,13 @@
         <description>Shared components for for Selenium WebDriver extensions.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver</tags>
 		<dependencies>
-			<dependency id="Selenium.WebDriver" />
-			<dependency id="Selenium.Support" />
+			<dependency id="Selenium.WebDriver" version="2.0.0"/>
+			<dependency id="Selenium.Support" version="2.0.0"/>
 		</dependencies> 
     </metadata>
     <files>
-        <file src="bin\Release\Selenium.WebDriver.Extensions.Shared.dll" target="lib\Selenium.WebDriver.Extensions.Shared.dll" />
+        <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.Shared.dll" target="lib\net35\Selenium.WebDriver.Extensions.Shared.dll" />
+        <file src="bin\Release-Net40\Selenium.WebDriver.Extensions.Shared.dll" target="lib\net40\Selenium.WebDriver.Extensions.Shared.dll" />
+        <file src="bin\Release\Selenium.WebDriver.Extensions.Shared.dll" target="lib\net45\Selenium.WebDriver.Extensions.Shared.dll" />
     </files>
 </package>
