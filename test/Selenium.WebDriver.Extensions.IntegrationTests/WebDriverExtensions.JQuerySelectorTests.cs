@@ -17,13 +17,13 @@
     /// </remarks>
     [TestFixture(
         WebBrowser.PhantomJs,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture(
         WebBrowser.Chrome,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture(
         WebBrowser.InternetExplorer,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture(
         WebBrowser.PhantomJs, 
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
