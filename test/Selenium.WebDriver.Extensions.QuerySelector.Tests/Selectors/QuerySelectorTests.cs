@@ -35,6 +35,34 @@
         }
 
         /// <summary>
+        /// Gets the equality test cases.
+        /// </summary>
+        private static IEnumerable EqualityTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(By.QuerySelector("div"), By.QuerySelector("div"), true)
+                    .SetName("QS('div') == QS('div')");
+                yield return new TestCaseData(By.QuerySelector("div"), By.QuerySelector("span"), false)
+                    .SetName("QS('div') != QS('span')");
+                yield return new TestCaseData(By.QuerySelector("div"), null, false)
+                    .SetName("QS('div') != null");
+                yield return new TestCaseData(null, By.QuerySelector("div"), false)
+                    .SetName("null != QS('div')");
+                yield return new TestCaseData(
+                    By.QuerySelector("div", By.QuerySelector("body")),
+                    By.QuerySelector("div"),
+                    false)
+                    .SetName("QS('div', QS('body')) != QS('div')");
+                yield return new TestCaseData(
+                    By.QuerySelector("div", By.QuerySelector("body")),
+                    By.QuerySelector("div", By.QuerySelector("body")),
+                    true)
+                    .SetName("QS('div', QS('body')) == QS('div', QS('body'))");
+            }
+        }
+
+        /// <summary>
         /// Tests if the proper selector is generated.
         /// </summary>
         /// <param name="selector">The query selector.</param>
@@ -94,6 +122,43 @@
         {
             var formatString = By.QuerySelector("div").CallFormatString;
             Assert.IsNotNull(formatString);
+        }
+
+        /// <summary>
+        /// Tests the equality operators.
+        /// </summary>
+        /// <param name="selector1">First selector to compare.</param>
+        /// <param name="selector2">Second selector to compare.</param>
+        /// <param name="expectedResult">The expected result.</param>
+        [TestCaseSource("EqualityTestCases")]
+        public void EqualityOperator(QuerySelector selector1, QuerySelector selector2, bool expectedResult)
+        {
+            Assert.AreEqual(expectedResult, selector1 == selector2);
+            if (selector1 != null)
+            {
+                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                if (selector2 != null)
+                {
+                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                }
+            }
+
+            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+        }
+
+        /// <summary>
+        /// Tests the equality operators.
+        /// </summary>
+        [Test]
+        public void EqualityOperatorWrongType()
+        {
+            var selector1 = By.QuerySelector("div");
+            var selector2 = new object();
+
+#pragma warning disable 252,253
+            Assert.IsFalse(selector1 == selector2);
+            Assert.IsTrue(selector1 != selector2);
+#pragma warning restore 252,253
         }
     }
 }
