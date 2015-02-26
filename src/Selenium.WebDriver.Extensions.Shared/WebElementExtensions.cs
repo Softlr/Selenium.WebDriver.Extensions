@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
+    using System;
     using System.Globalization;
     
     /// <summary>
@@ -14,6 +15,11 @@
         /// <returns>The DOM path for the web element.</returns>
         public static string GetPath(this WebElement webElement)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             const string FindDomPathScript = @"var getDomPath = function(el) {
                 var stack = [];
                 while (el.parentNode != null) {

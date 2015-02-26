@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
+    using System;
     using System.Collections.ObjectModel;
     using Selenium.WebDriver.Extensions.Shared;
 
@@ -19,6 +20,11 @@
             this WebElement webElement,
             SizzleSelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindElement(webElement.CreateSelector(by));
         }
 
@@ -33,6 +39,11 @@
             this WebElement webElement,
             SizzleSelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindElements(webElement.CreateSelector(by));
         }
 
