@@ -82,7 +82,7 @@
     - git config user.name "AppVeyor Agent"
     - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GH_ACCESS_TOKEN):x-oauth-basic@github.com`n"
     - git rm -r api 
-    - xcopy ..\Help api /s /i
+    - xcopy ..\bin\Docs api /s /i
     - git add api
     - git commit -a -m "Documentation updated"
     - git push
