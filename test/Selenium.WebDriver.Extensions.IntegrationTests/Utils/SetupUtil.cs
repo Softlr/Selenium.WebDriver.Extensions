@@ -36,6 +36,9 @@
                 case WebBrowser.InternetExplorer:
                     driver = new InternetExplorerDriver();
                     break;
+                case WebBrowser.Firefox:
+                    driver = new FirefoxDriver();
+                    break;
             }
 
             if (driver == null)
