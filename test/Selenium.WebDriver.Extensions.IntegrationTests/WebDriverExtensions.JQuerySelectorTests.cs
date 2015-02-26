@@ -16,22 +16,22 @@
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
     [TestFixture(
-        "PhantomJS",
+        WebBrowser.PhantomJs,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture(
-        "Chrome",
+        WebBrowser.Chrome,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture(
-        "IE",
+        WebBrowser.InternetExplorer,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
     [TestFixture(
-        "PhantomJS", 
+        WebBrowser.PhantomJs, 
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
     [TestFixture(
-        "Chrome",
+        WebBrowser.Chrome,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
     [TestFixture(
-        "IE",
+        WebBrowser.InternetExplorer,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
     [Category("Integration Tests")]
 #if !NET35
@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="driver">The name of the driver used to run the tests.</param>
         /// <param name="testCaseUrl">The test case URL.</param>
-        public WebDriverExtensionsJQuerySelectorTests(string driver, string testCaseUrl)
+        public WebDriverExtensionsJQuerySelectorTests(WebBrowser driver, string testCaseUrl)
         {
             this.Driver = driver;
             this.TestCaseUrl = testCaseUrl;
@@ -58,7 +58,7 @@
         /// <summary>
         /// Gets or sets the driver name.
         /// </summary>
-        private string Driver { get; set; }
+        private WebBrowser Driver { get; set; }
 
         /// <summary>
         /// Gets or sets the selenium web driver.

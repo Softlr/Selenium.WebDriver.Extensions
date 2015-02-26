@@ -15,13 +15,13 @@
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
     [TestFixture(
-        "PhantomJS",
+        WebBrowser.PhantomJs,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
     [TestFixture(
-        "Chrome",
+        WebBrowser.Chrome,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
     [TestFixture(
-        "IE",
+        WebBrowser.InternetExplorer,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
     [Category("Integration Tests")]
 #if !NET35
@@ -34,7 +34,7 @@
         /// </summary>
         /// <param name="driver">The name of the driver used to run the tests.</param>
         /// <param name="testCaseUrl">The test case URL.</param>
-        public WebDriverExtensionsQuerySelectorTests(string driver, string testCaseUrl)
+        public WebDriverExtensionsQuerySelectorTests(WebBrowser driver, string testCaseUrl)
         {
             this.Driver = driver;
             this.TestCaseUrl = testCaseUrl;
@@ -48,7 +48,7 @@
         /// <summary>
         /// Gets or sets the driver name.
         /// </summary>
-        private string Driver { get; set; }
+        private WebBrowser Driver { get; set; }
 
         /// <summary>
         /// Gets or sets the selenium web driver.

@@ -2,6 +2,7 @@
 {
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.Firefox;
     using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
 
@@ -16,23 +17,23 @@
         /// <summary>
         /// Configures the driver that is going to run the tests.
         /// </summary>
-        /// <param name="driverName">The name of the driver.</param>
+        /// <param name="browser">The web browser.</param>
         /// <param name="testCaseUrl">The URL of the test case.</param>
         /// <returns>The configured web driver.</returns>
-        public static IWebDriver ConfigureDriver(string driverName, string testCaseUrl)
+        public static IWebDriver ConfigureDriver(WebBrowser browser, string testCaseUrl)
         {
             IWebDriver driver = null;
-            switch (driverName)
+            switch (browser)
             {
-                case "PhantomJS":
+                case WebBrowser.PhantomJs:
                     var phantomJsService = PhantomJSDriverService.CreateDefaultService();
                     phantomJsService.SslProtocol = "any";
                     driver = new PhantomJSDriver(phantomJsService);
                     break;
-                case "Chrome":
+                case WebBrowser.Chrome:
                     driver = new ChromeDriver();
                     break;
-                case "IE":
+                case WebBrowser.InternetExplorer:
                     driver = new InternetExplorerDriver();
                     break;
             }
