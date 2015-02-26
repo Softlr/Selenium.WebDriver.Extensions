@@ -141,6 +141,10 @@
       <Link>Drivers\chromedriver.exe</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.44\content\IEDriverServer.exe">
+      <Link>Drivers\IEDriverServer.exe</Link>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="TestCases\QuerySelector\TestCase.html" />
     <Content Include="TestCases\Sizzle\Unloaded.html" />
     <Content Include="TestCases\Sizzle\Loaded.html" />

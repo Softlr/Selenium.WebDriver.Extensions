@@ -2,6 +2,7 @@
 {
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
+    using OpenQA.Selenium.IE;
     using OpenQA.Selenium.PhantomJS;
 
     /// <summary>
@@ -30,6 +31,9 @@
                     break;
                 case "Chrome":
                     driver = new ChromeDriver();
+                    break;
+                case "IE":
+                    driver = new InternetExplorerDriver();
                     break;
             }
 
