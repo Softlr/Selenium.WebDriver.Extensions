@@ -25,12 +25,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using JavaScript query selector.
+        /// Searches for DOM element using JavaScript query selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium Sizzle selector.</param>
-        /// <returns>The DOM elements matching given JavaScript query selector.</returns>
-        public static IWebElement FindElement(this IWebDriver driver, QuerySelector by)
+        /// <param name="by">The Selenium JavaScript query selector.</param>
+        /// <returns>The first DOM element matching given JavaScript query selector</returns>
+        public static WebElement FindElement(this IWebDriver driver, QuerySelector by)
         {
             var results = driver.Find<IEnumerable<IWebElement>>(by);
             if (results == null)
@@ -41,21 +41,23 @@
             var list = results.ToList();
             if (list.Count > 0)
             {
-                return list.First();
+                return new WebElement(list.First(), by);
             }
 
             throw new NoSuchElementException("No element found with Sizzle command: " + by.Selector);
         }
 
         /// <summary>
-        /// Searches for DOM element using JavaScript query selector.
+        /// Searches for DOM elements using JavaScript query selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium JavaScript query selector.</param>
-        /// <returns>The first DOM element matching given JavaScript query selector</returns>
-        public static ReadOnlyCollection<IWebElement> FindElements(this IWebDriver driver, QuerySelector by)
+        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <returns>The DOM elements matching given JavaScript query selector.</returns>
+        public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, QuerySelector by)
         {
-            return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by).ToList());
+            var results = driver.Find<IEnumerable<IWebElement>>(by)
+                .Select((value, index) => new WebElement(value, by, index)).ToList();
+            return new ReadOnlyCollection<WebElement>(results);
         }
 
         /// <summary>

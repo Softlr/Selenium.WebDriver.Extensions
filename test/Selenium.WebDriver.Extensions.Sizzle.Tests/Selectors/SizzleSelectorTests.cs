@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests.Selectors
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
     using System.Collections;
@@ -61,6 +61,16 @@
         public void NullSelector()
         {
             By.SizzleSelector(null);
+        }
+
+        /// <summary>
+        /// Tests if the call format string is handled properly.
+        /// </summary>
+        [Test]
+        public void CallFormatString()
+        {
+            var formatString = By.SizzleSelector("div").CallFormatString;
+            Assert.IsNotNull(formatString);
         }
     }
 }

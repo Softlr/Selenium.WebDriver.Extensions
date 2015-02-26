@@ -51,12 +51,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector.
+        /// Searches for DOM element using jQuery selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The DOM elements matching given jQuery selector.</returns>
-        public static IWebElement FindElement(
+        /// <returns>The first DOM element matching given jQuery selector</returns>
+        public static WebElement FindElement(
             this IWebDriver driver,
             JQuerySelector by)
         {
@@ -66,20 +66,22 @@
                 throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
             }
 
-            return result;
+            return new WebElement(result, by);
         }
 
         /// <summary>
-        /// Searches for DOM element using jQuery selector.
+        /// Searches for DOM elements using jQuery selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The first DOM element matching given jQuery selector</returns>
-        public static ReadOnlyCollection<IWebElement> FindElements(
+        /// <returns>The DOM elements matching given jQuery selector.</returns>
+        public static ReadOnlyCollection<WebElement> FindElements(
             this IWebDriver driver,
             JQuerySelector by)
         {
-            return new ReadOnlyCollection<IWebElement>(driver.Find<IEnumerable<IWebElement>>(by, "get()").ToList());
+            var results = driver.Find<IEnumerable<IWebElement>>(by, "get()")
+                .Select((value, index) => new WebElement(value, by, index)).ToList();
+            return new ReadOnlyCollection<WebElement>(results);
         }
 
         /// <summary>

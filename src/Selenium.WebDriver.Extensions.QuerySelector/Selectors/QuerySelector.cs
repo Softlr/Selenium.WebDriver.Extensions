@@ -1,11 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using System;
-    
+    using Selenium.WebDriver.Extensions.Shared;
+
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
-    public class QuerySelector
+    public class QuerySelector : ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
@@ -27,6 +28,7 @@
             }
 
             this.BaseElement = baseElement;
+            this.RawSelector = selector;
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
@@ -53,14 +55,32 @@
             }
 
             this.BaseSelector = baseSelector;
+            this.RawSelector = selector;
             this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
                 + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
         /// <summary>
+        /// Gets the query raw selector.
+        /// </summary>
+        public string RawSelector { get; private set; }
+
+        /// <summary>
         /// Gets the query selector.
         /// </summary>
         public string Selector { get; private set; }
+
+        /// <summary>
+        /// Gets the call format string.
+        /// </summary>
+        /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
+        public string CallFormatString
+        {
+            get
+            {
+                return "{0}[{1}]";
+            }
+        }
 
         /// <summary>
         /// Gets the base element for the query selector.

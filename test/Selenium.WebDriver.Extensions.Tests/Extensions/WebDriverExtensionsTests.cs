@@ -268,7 +268,9 @@
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("span");
             var list = new List<IWebElement> { element.Object };
-            var mock = MockWebDriver("return document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span');", new ReadOnlyCollection<IWebElement>(list));
+            var mock = MockWebDriver(
+                "return document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span');", 
+                new ReadOnlyCollection<IWebElement>(list));
             var result = mock.Object.FindElement(By.QuerySelector("span", By.QuerySelector("div")));
 
             Assert.IsNotNull(result);
@@ -862,8 +864,8 @@
         public void QuerySelectorNotSupported()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
-                .Returns(false);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(false);
             mock.Object.CheckQuerySelectorSupport();
         }
 
@@ -907,8 +909,8 @@
                 .Returns(true);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
                 .Returns(true);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';"))
-                .Returns(true);
+            mock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(true);
             return mock;
         }
     }

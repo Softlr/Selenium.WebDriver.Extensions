@@ -4,6 +4,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
     using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
@@ -13,7 +14,7 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
+    [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html")]
     [Category("Integration Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -96,6 +97,39 @@
         {
             var elements = this.Browser.FindElements(By.QuerySelector("div.mainNot"));
             Assert.AreEqual(0, elements.Count);
+        }
+
+        /// <summary>
+        /// Tests finding element path.
+        /// </summary>
+        [Test]
+        public void FindElementPath()
+        {
+            var element = this.Browser.FindElement(By.QuerySelector("#id1"));
+            var path = element.GetPath();
+            Assert.AreEqual("body > div#id1", path);
+        }
+
+        /// <summary>
+        /// Tests finding element.
+        /// </summary>
+        [Test]
+        public void FindInnerElement()
+        {
+            var root = this.Browser.FindElement(By.QuerySelector("#id1"));
+            var element = root.FindElement(By.QuerySelector("span"));
+            Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindInnerElements()
+        {
+            var root = this.Browser.FindElement(By.QuerySelector("#id1"));
+            var elements = root.FindElements(By.QuerySelector("span"));
+            Assert.AreEqual(2, elements.Count);
         }
     }
 }

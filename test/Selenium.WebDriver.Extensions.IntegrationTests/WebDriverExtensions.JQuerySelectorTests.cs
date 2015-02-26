@@ -5,6 +5,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
     using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
@@ -522,6 +523,39 @@
         {
             var value = this.Browser.FindSerializedArray(By.JQuerySelector("form.test"));
             Assert.AreEqual("[]", value);
+        }
+
+        /// <summary>
+        /// Tests finding element path.
+        /// </summary>
+        [Test]
+        public void FindElementPath()
+        {
+            var element = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            var path = element.GetPath();
+            Assert.AreEqual("body > div#id1", path);
+        }
+
+        /// <summary>
+        /// Tests finding element.
+        /// </summary>
+        [Test]
+        public void FindInnerElement()
+        {
+            var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            var element = root.FindElement(By.JQuerySelector("span"));
+            Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindInnerElements()
+        {
+            var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            var elements = root.FindElements(By.JQuerySelector("span"));
+            Assert.AreEqual(2, elements.Count);
         }
     }
 }

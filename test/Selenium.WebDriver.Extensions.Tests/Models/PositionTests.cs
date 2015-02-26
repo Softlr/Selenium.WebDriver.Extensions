@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests.Models
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.JQuery;

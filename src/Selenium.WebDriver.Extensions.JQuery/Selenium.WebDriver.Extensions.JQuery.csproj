@@ -112,7 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="By.cs" />
+    <Compile Include="Models\By.cs" />
     <Compile Include="ExternalLibraryLoaders\JQueryLoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
@@ -120,7 +120,8 @@
     <Compile Include="Selectors\JQuerySelector.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebDriverExtensions.cs" />
+    <Compile Include="Extensions\WebDriverExtensions.cs" />
+    <Compile Include="Extensions\WebElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.csproj">

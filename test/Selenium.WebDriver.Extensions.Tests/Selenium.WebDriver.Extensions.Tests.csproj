@@ -108,8 +108,9 @@
   <ItemGroup>
     <Compile Include="Models\PositionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ByTests.cs" />
-    <Compile Include="WebDriverExtensionsTests.cs" />
+    <Compile Include="Models\ByTests.cs" />
+    <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
+    <Compile Include="Extensions\WebElementExtensionsTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

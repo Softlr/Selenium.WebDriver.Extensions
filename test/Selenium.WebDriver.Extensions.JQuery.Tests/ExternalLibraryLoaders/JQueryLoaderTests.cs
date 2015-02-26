@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
     using System;
     using System.Linq;

@@ -2,11 +2,12 @@
 {
     using System;
     using System.Globalization;
-    
+    using Selenium.WebDriver.Extensions.Shared;
+
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
-    public class JQuerySelector
+    public class JQuerySelector : ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
@@ -15,8 +16,8 @@
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         public JQuerySelector(
-            string selector, 
-            JQuerySelector context = null, 
+            string selector,
+            JQuerySelector context = null,
             string jQueryVariable = "jQuery")
         {
             if (selector == null)
@@ -26,7 +27,8 @@
 
             this.Context = context;
             this.JQueryVariable = jQueryVariable;
-            this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'" 
+            this.RawSelector = selector;
+            this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'"
                 + (this.Context != null ? ", " + this.Context : string.Empty) + ")";
         }
 
@@ -38,9 +40,26 @@
         }
 
         /// <summary>
-        /// Gets the jQuery selector.
+        /// Gets the raw selector.
+        /// </summary>
+        public string RawSelector { get; private set; }
+
+        /// <summary>
+        /// Gets the selector.
         /// </summary>
         public string Selector { get; private set; }
+
+        /// <summary>
+        /// Gets the call format string.
+        /// </summary>
+        /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
+        public string CallFormatString
+        {
+            get
+            {
+                return string.Format(CultureInfo.InvariantCulture, "{0}({{0}}).get({{1}})", this.JQueryVariable);
+            }
+        }
 
         /// <summary>
         /// Gets the DOM Element, Document, or jQuery to use as context.
@@ -298,7 +317,7 @@
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector ParentsUntil(string selector = null, string filter = null)
         {
-            var data = HandleSelectorWithFilter(selector, filter); 
+            var data = HandleSelectorWithFilter(selector, filter);
             return this.Chain("parentsUntil", data, true);
         }
 
@@ -405,8 +424,8 @@
 
             return new JQuerySelector
                        {
-                           Selector = this.Selector + "." + name + "(" + selector + ")", 
-                           Context = this.Context, 
+                           Selector = this.Selector + "." + name + "(" + selector + ")",
+                           Context = this.Context,
                            JQueryVariable = this.JQueryVariable
                        };
         }

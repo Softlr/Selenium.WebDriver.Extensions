@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests.Selectors
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
 {
     using System;
     using System.Collections;
@@ -84,6 +84,16 @@
         public void NullBaseSelector()
         {
             By.QuerySelector("div", (QuerySelector)null);
+        }
+
+        /// <summary>
+        /// Tests if the call format string is handled properly.
+        /// </summary>
+        [Test]
+        public void CallFormatString()
+        {
+            var formatString = By.QuerySelector("div").CallFormatString;
+            Assert.IsNotNull(formatString);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
     using System.Linq;
