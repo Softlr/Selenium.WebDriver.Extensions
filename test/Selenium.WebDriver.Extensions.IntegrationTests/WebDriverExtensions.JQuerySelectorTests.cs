@@ -3,7 +3,7 @@
     using System;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.PhantomJS;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
     using Selenium.WebDriver.Extensions.JQuery;
     using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.By;
@@ -15,8 +15,30 @@
     /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
     /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
     /// </remarks>
-    [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
-    [TestFixture("https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
+    [TestFixture(
+        WebBrowser.PhantomJs,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+    [TestFixture(
+        WebBrowser.Chrome,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+    [TestFixture(
+        WebBrowser.InternetExplorer,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+    [TestFixture(
+        WebBrowser.Firefox,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
+    [TestFixture(
+        WebBrowser.PhantomJs, 
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
+    [TestFixture(
+        WebBrowser.Chrome,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
+    [TestFixture(
+        WebBrowser.InternetExplorer,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
+    [TestFixture(
+        WebBrowser.Firefox,
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
     [Category("Integration Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
@@ -26,9 +48,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="WebDriverExtensionsJQuerySelectorTests"/> class.
         /// </summary>
+        /// <param name="driver">The name of the driver used to run the tests.</param>
         /// <param name="testCaseUrl">The test case URL.</param>
-        public WebDriverExtensionsJQuerySelectorTests(string testCaseUrl)
+        public WebDriverExtensionsJQuerySelectorTests(WebBrowser driver, string testCaseUrl)
         {
+            this.Driver = driver;
             this.TestCaseUrl = testCaseUrl;
         }
 
@@ -36,6 +60,11 @@
         /// Gets or sets the test case URL.
         /// </summary>
         private string TestCaseUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the driver name.
+        /// </summary>
+        private WebBrowser Driver { get; set; }
 
         /// <summary>
         /// Gets or sets the selenium web driver.
@@ -48,10 +77,7 @@
         [TestFixtureSetUp]
         public void SetUp()
         {
-            var phantomJsService = PhantomJSDriverService.CreateDefaultService();
-            phantomJsService.SslProtocol = "any";
-            this.Browser = new PhantomJSDriver(phantomJsService);
-            this.Browser.Navigate().GoToUrl(this.TestCaseUrl);
+            this.Browser = SetupUtil.ConfigureDriver(this.Driver, this.TestCaseUrl);
         }
 
         /// <summary>

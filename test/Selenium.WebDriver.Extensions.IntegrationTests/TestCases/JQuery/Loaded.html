@@ -52,8 +52,8 @@
     <div class="scroll"><p>scroll</p></div>
     <script src="http://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"></script>
     <script>
-        $('div.scroll').scrollTop(100);
-        $('div.scroll').scrollLeft(200);
+        document.getElementsByClassName('scroll')[0].scrollTop = 100;
+        document.getElementsByClassName('scroll')[0].scrollLeft = 200;
     </script>
 </body>
 </html>
