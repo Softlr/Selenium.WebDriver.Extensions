@@ -31,6 +31,34 @@
         }
 
         /// <summary>
+        /// Gets the equality test cases.
+        /// </summary>
+        private static IEnumerable EqualityTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(By.SizzleSelector("div"), By.SizzleSelector("div"), true)
+                    .SetName("Sizzle('div') == Sizzle('div')");
+                yield return new TestCaseData(By.SizzleSelector("div"), By.SizzleSelector("span"), false)
+                    .SetName("Sizzle('div') != Sizzle('span')");
+                yield return new TestCaseData(By.SizzleSelector("div"), null, false)
+                    .SetName("Sizzle('div') != null");
+                yield return new TestCaseData(null, By.SizzleSelector("div"), false)
+                    .SetName("null != Sizzle('div')");
+                yield return new TestCaseData(
+                    By.SizzleSelector("div", By.SizzleSelector("body")),
+                    By.SizzleSelector("div"),
+                    false)
+                    .SetName("Sizzle('div', Sizzle('body')) != Sizzle('div')");
+                yield return new TestCaseData(
+                    By.SizzleSelector("div", By.SizzleSelector("body")),
+                    By.SizzleSelector("div", By.SizzleSelector("body")),
+                    true)
+                    .SetName("Sizzle('div', Sizzle('body')) == Sizzle('div', Sizzle('body'))");
+            }
+        }
+
+        /// <summary>
         /// Tests if the proper selector is generated.
         /// </summary>
         /// <param name="selector">The Sizzle selector.</param>
@@ -71,6 +99,43 @@
         {
             var formatString = By.SizzleSelector("div").CallFormatString;
             Assert.IsNotNull(formatString);
+        }
+
+        /// <summary>
+        /// Tests the equality operators.
+        /// </summary>
+        /// <param name="selector1">First selector to compare.</param>
+        /// <param name="selector2">Second selector to compare.</param>
+        /// <param name="expectedResult">The expected result.</param>
+        [TestCaseSource("EqualityTestCases")]
+        public void EqualityOperator(SizzleSelector selector1, SizzleSelector selector2, bool expectedResult)
+        {
+            Assert.AreEqual(expectedResult, selector1 == selector2);
+            if (selector1 != null)
+            {
+                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                if (selector2 != null)
+                {
+                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                }
+            }
+
+            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+        }
+
+        /// <summary>
+        /// Tests the equality operators.
+        /// </summary>
+        [Test]
+        public void EqualityOperatorWrongType()
+        {
+            var selector1 = By.SizzleSelector("div");
+            var selector2 = new object();
+
+#pragma warning disable 252,253
+            Assert.IsFalse(selector1 == selector2);
+            Assert.IsTrue(selector1 != selector2);
+#pragma warning restore 252,253
         }
     }
 }

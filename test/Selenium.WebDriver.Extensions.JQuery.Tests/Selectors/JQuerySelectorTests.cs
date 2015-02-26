@@ -116,6 +116,39 @@
         }
 
         /// <summary>
+        /// Gets the equality test cases.
+        /// </summary>
+        private static IEnumerable EqualityTestCases
+        {
+            get
+            {
+                yield return new TestCaseData(By.JQuerySelector("div"), By.JQuerySelector("div"), true)
+                    .SetName("jQuery('div') == jQuery('div')");
+                yield return new TestCaseData(
+                    By.JQuerySelector("div"),
+                    By.JQuerySelector("div", jQueryVariable: "$"),
+                    false)
+                    .SetName("jQuery('div') != $('div')");
+                yield return new TestCaseData(By.JQuerySelector("div"), By.JQuerySelector("span"), false)
+                    .SetName("jQuery('div') != jQuery('span')");
+                yield return new TestCaseData(By.JQuerySelector("div"), null, false)
+                    .SetName("jQuery('div') != null");
+                yield return new TestCaseData(null, By.JQuerySelector("div"), false)
+                    .SetName("null != jQuery('div')");
+                yield return new TestCaseData(
+                    By.JQuerySelector("div", By.JQuerySelector("body")), 
+                    By.JQuerySelector("div"),
+                    false)
+                    .SetName("jQuery('div', jQuery('body')) != jQuery('div')");
+                yield return new TestCaseData(
+                    By.JQuerySelector("div", By.JQuerySelector("body")), 
+                    By.JQuerySelector("div", By.JQuerySelector("body")), 
+                    true)
+                    .SetName("jQuery('div', jQuery('body')) == jQuery('div', jQuery('body'))");
+            }
+        }
+
+        /// <summary>
         /// Tests if the proper selector is generated.
         /// </summary>
         /// <param name="selector">The jQuery selector.</param>
@@ -167,6 +200,43 @@
         {
             var formatString = By.JQuerySelector("div").CallFormatString;
             Assert.IsNotNull(formatString);
+        }
+
+        /// <summary>
+        /// Tests the equality operators.
+        /// </summary>
+        /// <param name="selector1">First selector to compare.</param>
+        /// <param name="selector2">Second selector to compare.</param>
+        /// <param name="expectedResult">The expected result.</param>
+        [TestCaseSource("EqualityTestCases")]
+        public void EqualityOperator(JQuerySelector selector1, JQuerySelector selector2, bool expectedResult)
+        {
+            Assert.AreEqual(expectedResult, selector1 == selector2);
+            if (selector1 != null)
+            {
+                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                if (selector2 != null)
+                {
+                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                }
+            }
+
+            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+        }
+
+        /// <summary>
+        /// Tests the equality operators.
+        /// </summary>
+        [Test]
+        public void EqualityOperatorWrongType()
+        {
+            var selector1 = By.JQuerySelector("div");
+            var selector2 = new object();
+
+#pragma warning disable 252,253
+            Assert.IsFalse(selector1 == selector2);
+            Assert.IsTrue(selector1 != selector2);
+#pragma warning restore 252,253
         }
     }
 }
