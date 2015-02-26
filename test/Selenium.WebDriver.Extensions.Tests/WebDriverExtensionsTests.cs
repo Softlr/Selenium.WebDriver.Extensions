@@ -268,7 +268,9 @@
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("span");
             var list = new List<IWebElement> { element.Object };
-            var mock = MockWebDriver("return document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span');", new ReadOnlyCollection<IWebElement>(list));
+            var mock = MockWebDriver(
+                "return document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span');", 
+                new ReadOnlyCollection<IWebElement>(list));
             var result = mock.Object.FindElement(By.QuerySelector("span", By.QuerySelector("div")));
 
             Assert.IsNotNull(result);
