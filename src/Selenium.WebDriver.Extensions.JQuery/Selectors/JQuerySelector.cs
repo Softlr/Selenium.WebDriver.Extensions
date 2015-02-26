@@ -130,7 +130,7 @@
         {
             return this.Context == null 
                 ? Tuple.Create(this.RawSelector, this.JQueryVariable).GetHashCode() 
-                : Tuple.Create(this.RawSelector, this.JQueryVariable, this.Context.GetHashCode()).GetHashCode();
+                : Tuple.Create(this.RawSelector, this.JQueryVariable, this.Context).GetHashCode();
         }
 
         /// <summary>
