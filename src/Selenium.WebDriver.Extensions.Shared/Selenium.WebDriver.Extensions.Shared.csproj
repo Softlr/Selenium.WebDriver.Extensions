@@ -127,9 +127,9 @@
     <Compile Include="Selectors\ISelector.cs" />
     <Compile Include="Utils\ParseUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebDriverExtensions.cs" />
-    <Compile Include="WebElement.cs" />
-    <Compile Include="WebElementExtensions.cs" />
+    <Compile Include="Extensions\WebDriverExtensions.cs" />
+    <Compile Include="Models\WebElement.cs" />
+    <Compile Include="Extensions\WebElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

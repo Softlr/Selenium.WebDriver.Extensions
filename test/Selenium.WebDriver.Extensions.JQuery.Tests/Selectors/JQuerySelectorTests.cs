@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests.Selectors
+﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
     using System;
     using System.Collections;

@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests.ExternalLibraryLoaders
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
 {
     using NUnit.Framework;
     

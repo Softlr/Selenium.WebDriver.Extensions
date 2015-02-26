@@ -101,7 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ByTests.cs" />
+    <Compile Include="Models\ByTests.cs" />
     <Compile Include="ExternalLibraryLoaders\SizzleLoaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\SizzleSelectorTests.cs" />

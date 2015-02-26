@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests.Selectors
+﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
 {
     using System;
     using System.Collections;
