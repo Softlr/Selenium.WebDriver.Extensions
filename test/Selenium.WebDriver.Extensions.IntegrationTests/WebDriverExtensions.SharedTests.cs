@@ -4,6 +4,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
     using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
 
@@ -65,7 +66,7 @@
         /// Tests finding element.
         /// </summary>
         [Test]
-        public void FindMixedElement()
+        public void FindMixedJQuerySizzleElement()
         {
             var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
             var element = root.FindElement(By.SizzleSelector("span"));
@@ -76,9 +77,75 @@
         /// Tests finding elements.
         /// </summary>
         [Test]
-        public void FindMixedElements()
+        public void FindMixedJQuerySizzleElements()
         {
             var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            var elements = root.FindElements(By.SizzleSelector("span"));
+            Assert.AreEqual(2, elements.Count);
+        }
+
+        /// <summary>
+        /// Tests finding element.
+        /// </summary>
+        [Test]
+        public void FindMixedJQueryQuerySelectorElement()
+        {
+            var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            var element = root.FindElement(By.QuerySelector("span"));
+            Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindMixedJQueryQuerySelectorElements()
+        {
+            var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            var elements = root.FindElements(By.QuerySelector("span"));
+            Assert.AreEqual(2, elements.Count);
+        }
+
+        /// <summary>
+        /// Tests finding element.
+        /// </summary>
+        [Test]
+        public void FindMixedSizzleJQuerySelectorElement()
+        {
+            var root = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var element = root.FindElement(By.JQuerySelector("span"));
+            Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindMixedSizzleQuerySelectorElements()
+        {
+            var root = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            var elements = root.FindElements(By.QuerySelector("span"));
+            Assert.AreEqual(2, elements.Count);
+        }
+
+        /// <summary>
+        /// Tests finding element.
+        /// </summary>
+        [Test]
+        public void FindMixedQuerySelectorJQueryElement()
+        {
+            var root = this.Browser.FindElement(By.QuerySelector("#id1"));
+            var element = root.FindElement(By.JQuerySelector("span"));
+            Assert.IsNotNull(element);
+        }
+
+        /// <summary>
+        /// Tests finding elements.
+        /// </summary>
+        [Test]
+        public void FindMixedQuerySelectorSizzleElements()
+        {
+            var root = this.Browser.FindElement(By.QuerySelector("#id1"));
             var elements = root.FindElements(By.SizzleSelector("span"));
             Assert.AreEqual(2, elements.Count);
         }
