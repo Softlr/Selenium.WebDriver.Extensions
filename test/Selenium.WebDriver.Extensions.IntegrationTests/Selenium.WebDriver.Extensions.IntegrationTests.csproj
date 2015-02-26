@@ -100,6 +100,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Utils\SetupUtil.cs" />
     <Compile Include="WebDriverExtensions.QuerySelectorTests.cs" />
     <Compile Include="WebDriverExtensions.SharedTests.cs" />
     <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
