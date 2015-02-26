@@ -101,6 +101,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="WebDriverExtensions.QuerySelectorTests.cs" />
+    <Compile Include="WebDriverExtensions.SharedTests.cs" />
     <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
     <Compile Include="WebDriverExtensions.JQuerySelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
