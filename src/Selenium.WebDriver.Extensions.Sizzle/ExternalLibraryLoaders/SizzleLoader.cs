@@ -18,8 +18,11 @@
         /// <summary>
         /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
-        private const string LoadScriptCode = "var sizzle = document.createElement('script');sizzle.src = '{0}';" +
-            "document.getElementsByTagName('body')[0].appendChild(sizzle);";
+        private const string LoadScriptCode = @"(function(src) {
+                var sizzle = document.createElement('script');
+                sizzle.src = src;
+                document.getElementsByTagName('body')[0].appendChild(sizzle);
+            })";
 
         /// <summary>
         /// Gets the default URI of the external library.
@@ -61,7 +64,7 @@
                 throw new ExternalLibraryLoadException("No Sizzle URI given");
             }
 
-            return string.Format(CultureInfo.InvariantCulture, LoadScriptCode, args.First());
+            return string.Format(CultureInfo.InvariantCulture, "{0}('{1}')", LoadScriptCode, args.First());
         }
     }
 }

@@ -18,8 +18,11 @@
         /// <summary>
         /// The JavaScript to load jQuery.
         /// </summary>
-        private const string LoadScriptCode = "var jq = document.createElement('script');jq.src = '{0}';"
-            + "document.getElementsByTagName('body')[0].appendChild(jq);";
+        private const string LoadScriptCode = @"(function(src) {
+                var jq = document.createElement('script');
+                jq.src = src;
+                document.getElementsByTagName('body')[0].appendChild(jq);
+            })";
 
         /// <summary>
         /// Gets the default URI of the external library.
@@ -61,7 +64,7 @@
                 throw new ExternalLibraryLoadException("No jQuery URI given");
             }
 
-            return string.Format(CultureInfo.InvariantCulture, LoadScriptCode, args.First());
+            return string.Format(CultureInfo.InvariantCulture, "{0}('{1}')", LoadScriptCode, args.First());
         }
     }
 }

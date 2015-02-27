@@ -20,7 +20,7 @@
                 throw new ArgumentNullException("webElement");
             }
 
-            const string FindDomPathScript = @"var getDomPath = function(el) {
+            const string FindDomPathScript = @"(function(el) {
                 var stack = [];
                 while (el.parentNode != null) {
                     var sibCount = 0;
@@ -46,7 +46,7 @@
 
                 stack = stack.slice(1); // removes the html element
                 return stack.join(' > ');
-             };";
+             })";
 
             var selectorCallScript = string.Format(
                 CultureInfo.InvariantCulture,
@@ -56,7 +56,7 @@
 
             var script = string.Format(
                 CultureInfo.InvariantCulture,
-                "{0} return getDomPath({1});",
+                "return {0}({1});",
                 FindDomPathScript,
                 selectorCallScript);
             return webElement.WrappedDriver.ExecuteScript<string>(script);
