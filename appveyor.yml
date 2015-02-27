@@ -61,7 +61,6 @@
     - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
-    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
@@ -152,7 +151,6 @@
     - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
-    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
@@ -217,7 +215,6 @@
     - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
-    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
