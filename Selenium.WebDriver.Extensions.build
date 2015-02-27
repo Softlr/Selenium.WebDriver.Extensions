@@ -286,6 +286,12 @@
 		</exec>
         <exec program="${path.nuget}">
             <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
 			<arg value="src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec"/>
             <arg value="-Version &quot;${project.version}&quot;"/>
             <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
