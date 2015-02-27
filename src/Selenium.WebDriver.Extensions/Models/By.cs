@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using JetBrains.Annotations;
+    using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
     using Selenium.WebDriver.Extensions.Sizzle;
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
@@ -78,9 +79,9 @@
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By ClassName(string classNameToFind)
+        public static new ClassNameSelector ClassName(string classNameToFind)
         {
-            return OpenQA.Selenium.By.ClassName(classNameToFind);
+            return new ClassNameSelector(classNameToFind);
         }
 
         /// <summary>
@@ -88,9 +89,9 @@
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By CssSelector(string cssSelectorToFind)
+        public static new CssSelector CssSelector(string cssSelectorToFind)
         {
-            return OpenQA.Selenium.By.CssSelector(cssSelectorToFind);
+            return new CssSelector(cssSelectorToFind);
         }
 
         /// <summary>
@@ -98,9 +99,9 @@
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By Id(string idToFind)
+        public static new IdSelector Id(string idToFind)
         {
-            return OpenQA.Selenium.By.Id(idToFind);
+            return new IdSelector(idToFind);
         }
 
         /// <summary>
