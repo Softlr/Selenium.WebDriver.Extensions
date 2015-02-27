@@ -5,6 +5,7 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions", "src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj", "{F10536EC-8FBF-437A-840D-55CE6BF44161}"
 	ProjectSection(ProjectDependencies) = postProject
+		{4DA3D055-E0C6-4746-98BC-31DA482502B0} = {4DA3D055-E0C6-4746-98BC-31DA482502B0}
 		{B0F9D77E-89AE-4162-A73F-5F544C14F41A} = {B0F9D77E-89AE-4162-A73F-5F544C14F41A}
 	EndProjectSection
 EndProject
