@@ -116,6 +116,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj">
+      <Project>{4da3d055-e0c6-4746-98bc-31da482502b0}</Project>
+      <Name>Selenium.WebDriver.Extensions.Core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.csproj">
       <Project>{e62ebb89-ae2a-4675-a56a-259b17a513e7}</Project>
       <Name>Selenium.WebDriver.Extensions.JQuery</Name>

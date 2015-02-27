@@ -119,9 +119,9 @@
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By Name(string nameToFind)
+        public static new NameSelector Name(string nameToFind)
         {
-            return OpenQA.Selenium.By.Name(nameToFind);
+            return new NameSelector(nameToFind);
         }
 
         /// <summary>
@@ -139,9 +139,9 @@
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By TagName(string tagNameToFind)
+        public static new TagNameSelector TagName(string tagNameToFind)
         {
-            return OpenQA.Selenium.By.TagName(tagNameToFind);
+            return new TagNameSelector(tagNameToFind);
         }
 
         /// <summary>

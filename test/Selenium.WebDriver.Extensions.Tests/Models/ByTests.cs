@@ -20,10 +20,9 @@
         public void ClassName()
         {
             const string ClassName = "test";
-            var originalBy = OpenQA.Selenium.By.ClassName(ClassName);
             var wrappedBy = By.ClassName(ClassName);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(".test", wrappedBy.RawSelector);
         }
 
         /// <summary>
@@ -33,10 +32,9 @@
         public void CssSelector()
         {
             const string CssSelector = "div.test";
-            var originalBy = OpenQA.Selenium.By.CssSelector(CssSelector);
             var wrappedBy = By.CssSelector(CssSelector);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(CssSelector, wrappedBy.RawSelector);
         }
 
         /// <summary>
@@ -46,10 +44,9 @@
         public void Id()
         {
             const string Id = "test";
-            var originalBy = OpenQA.Selenium.By.Id(Id);
             var wrappedBy = By.Id(Id);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual("#test", wrappedBy.RawSelector);
         }
 
         /// <summary>
@@ -71,11 +68,10 @@
         [Test]
         public void Name()
         {
-            const string Name = "div.test";
-            var originalBy = OpenQA.Selenium.By.Name(Name);
+            const string Name = "test";
             var wrappedBy = By.Name(Name);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual("[name='test']", wrappedBy.RawSelector);
         }
 
         /// <summary>
@@ -97,11 +93,10 @@
         [Test]
         public void TagName()
         {
-            const string TagName = "div.test";
-            var originalBy = OpenQA.Selenium.By.TagName(TagName);
+            const string TagName = "div";
             var wrappedBy = By.TagName(TagName);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(TagName, wrappedBy.RawSelector);
         }
 
         /// <summary>

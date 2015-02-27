@@ -119,6 +119,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selectors\TagNameSelector.cs" />
+    <Compile Include="Selectors\NameSelector.cs" />
     <Compile Include="Selectors\CssSelector.cs" />
     <Compile Include="Selectors\ClassNameSelector.cs" />
     <Compile Include="Selectors\IdSelector.cs" />
