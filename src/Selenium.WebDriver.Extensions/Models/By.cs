@@ -1,8 +1,8 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions.Shared;
     using Selenium.WebDriver.Extensions.Sizzle;
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
 

@@ -1,9 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.Core
+﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     /// <summary>
     /// The tag name selector.
     /// </summary>
-    public class TagNameSelector : QuerySelector.QuerySelector
+    public class TagNameSelector : QuerySelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CssSelector"/> class.

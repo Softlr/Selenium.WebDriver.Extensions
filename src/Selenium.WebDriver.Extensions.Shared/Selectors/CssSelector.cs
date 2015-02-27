@@ -1,9 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.Core
+﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     /// <summary>
     /// The CSS selector.
     /// </summary>
-    public class CssSelector : QuerySelector.QuerySelector
+    public class CssSelector : QuerySelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="CssSelector"/> class.
