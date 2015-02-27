@@ -11,7 +11,7 @@
     /// </summary>
     /// <remarks>
     /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By"/>. The reason for that is
-    /// to avoid warnings that the code is accessing static members of the base class.
+    /// to replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
     [UsedImplicitly]
     public class By : OpenQA.Selenium.By
@@ -51,10 +51,7 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        /// <returns>
-        /// A <see cref="QS"/> object the driver can 
-        /// use to find the elements.
-        /// </returns>
+        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
         public static QS QuerySelector(string selector, string baseElement = "document")
         {
             return Extensions.QuerySelector.By.QuerySelector(selector, baseElement);
@@ -65,10 +62,7 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
-        /// <returns>
-        /// A <see cref="QS"/> object the driver can 
-        /// use to find the elements.
-        /// </returns>
+        /// <returns> A <see cref="QS"/> object the driver can use to find the elements.</returns>
         public static QS QuerySelector(string selector, QS baseSelector)
         {
             return Extensions.QuerySelector.By.QuerySelector(selector, baseSelector);
@@ -78,7 +72,7 @@
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="ClassNameSelector"/> object the driver can use to find the elements.</returns>
         public static new ClassNameSelector ClassName(string classNameToFind)
         {
             return new ClassNameSelector(classNameToFind);
@@ -88,7 +82,7 @@
         /// Gets a mechanism to find elements by their cascading style sheet (CSS) selector.
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="CssSelector"/> object the driver can use to find the elements.</returns>
         public static new CssSelector CssSelector(string cssSelectorToFind)
         {
             return new CssSelector(cssSelectorToFind);
@@ -98,7 +92,7 @@
         /// Gets a mechanism to find elements by their ID.
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
+        /// <returns>An <see cref="IdSelector"/> object the driver can use to find the elements.</returns>
         public static new IdSelector Id(string idToFind)
         {
             return new IdSelector(idToFind);
@@ -118,7 +112,7 @@
         /// Gets a mechanism to find elements by their name.
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="NameSelector"/> object the driver can use to find the elements.</returns>
         public static new NameSelector Name(string nameToFind)
         {
             return new NameSelector(nameToFind);
@@ -138,7 +132,7 @@
         /// Gets a mechanism to find elements by their tag name.
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
         public static new TagNameSelector TagName(string tagNameToFind)
         {
             return new TagNameSelector(tagNameToFind);

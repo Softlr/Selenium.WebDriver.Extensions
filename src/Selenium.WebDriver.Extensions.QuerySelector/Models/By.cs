@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using JetBrains.Annotations;
+    using Selenium.WebDriver.Extensions.Shared;
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
     
     /// <summary>
@@ -8,7 +9,7 @@
     /// </summary>
     /// <remarks>
     /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By"/>. The reason for that is
-    /// to avoid warnings that the code is accessing static members of the base class.
+    /// to replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
     [UsedImplicitly]
     public class By : OpenQA.Selenium.By
@@ -41,30 +42,30 @@
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By ClassName(string classNameToFind)
+        /// <returns>A <see cref="ClassNameSelector"/> object the driver can use to find the elements.</returns>
+        public static new ClassNameSelector ClassName(string classNameToFind)
         {
-            return OpenQA.Selenium.By.ClassName(classNameToFind);
+            return new ClassNameSelector(classNameToFind);
         }
 
         /// <summary>
         /// Gets a mechanism to find elements by their cascading style sheet (CSS) selector.
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By CssSelector(string cssSelectorToFind)
+        /// <returns>A <see cref="CssSelector"/> object the driver can use to find the elements.</returns>
+        public static new CssSelector CssSelector(string cssSelectorToFind)
         {
-            return OpenQA.Selenium.By.CssSelector(cssSelectorToFind);
+            return new CssSelector(cssSelectorToFind);
         }
 
         /// <summary>
         /// Gets a mechanism to find elements by their ID.
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By Id(string idToFind)
+        /// <returns>An <see cref="IdSelector"/> object the driver can use to find the elements.</returns>
+        public static new IdSelector Id(string idToFind)
         {
-            return OpenQA.Selenium.By.Id(idToFind);
+            return new IdSelector(idToFind);
         }
 
         /// <summary>
@@ -81,10 +82,10 @@
         /// Gets a mechanism to find elements by their name.
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By Name(string nameToFind)
+        /// <returns>A <see cref="NameSelector"/> object the driver can use to find the elements.</returns>
+        public static new NameSelector Name(string nameToFind)
         {
-            return OpenQA.Selenium.By.Name(nameToFind);
+            return new NameSelector(nameToFind);
         }
 
         /// <summary>
@@ -101,10 +102,10 @@
         /// Gets a mechanism to find elements by their tag name.
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By TagName(string tagNameToFind)
+        /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
+        public static new TagNameSelector TagName(string tagNameToFind)
         {
-            return OpenQA.Selenium.By.TagName(tagNameToFind);
+            return new TagNameSelector(tagNameToFind);
         }
 
         /// <summary>
