@@ -125,6 +125,7 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Selectors\ISelector.cs" />
+    <Compile Include="Selectors\QuerySelectorBase.cs" />
     <Compile Include="Utils\ParseUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
