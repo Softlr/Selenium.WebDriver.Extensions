@@ -63,7 +63,7 @@
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
         public static new OpenQA.Selenium.By LinkText(string linkTextToFind)
         {
-            return new OpenQA.Selenium.By.LinkText(linkTextToFind);
+            return OpenQA.Selenium.By.LinkText(linkTextToFind);
         }
 
         /// <summary>
