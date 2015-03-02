@@ -45,7 +45,7 @@
         /// <returns>A <see cref="ClassNameSelector"/> object the driver can use to find the elements.</returns>
         public static new ClassNameSelector ClassName(string classNameToFind)
         {
-            return new ClassNameSelector(classNameToFind);
+            return Shared.By.ClassName(classNameToFind);
         }
 
         /// <summary>
@@ -55,7 +55,7 @@
         /// <returns>A <see cref="CssSelector"/> object the driver can use to find the elements.</returns>
         public static new CssSelector CssSelector(string cssSelectorToFind)
         {
-            return new CssSelector(cssSelectorToFind);
+            return Shared.By.CssSelector(cssSelectorToFind);
         }
 
         /// <summary>
@@ -65,7 +65,7 @@
         /// <returns>An <see cref="IdSelector"/> object the driver can use to find the elements.</returns>
         public static new IdSelector Id(string idToFind)
         {
-            return new IdSelector(idToFind);
+            return Shared.By.Id(idToFind);
         }
 
         /// <summary>
@@ -75,7 +75,7 @@
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
         public static new LinkTextSelector LinkText(string linkTextToFind)
         {
-            return new LinkTextSelector(linkTextToFind);
+            return Shared.By.LinkText(linkTextToFind);
         }
 
         /// <summary>
@@ -85,7 +85,7 @@
         /// <returns>A <see cref="NameSelector"/> object the driver can use to find the elements.</returns>
         public static new NameSelector Name(string nameToFind)
         {
-            return new NameSelector(nameToFind);
+            return Shared.By.Name(nameToFind);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@
         /// <returns>A <see cref="PartialLinkTextSelector"/> object the driver can use to find the elements.</returns>
         public static new PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind)
         {
-            return new PartialLinkTextSelector(partialLinkTextToFind);
+            return Shared.By.PartialLinkText(partialLinkTextToFind);
         }
 
         /// <summary>
@@ -105,7 +105,7 @@
         /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
         public static new TagNameSelector TagName(string tagNameToFind)
         {
-            return new TagNameSelector(tagNameToFind);
+            return Shared.By.TagName(tagNameToFind);
         }
 
         /// <summary>
@@ -118,7 +118,7 @@
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
         public static new XPathSelector XPath(string xpathToFind)
         {
-            return new XPathSelector(xpathToFind);
+            return Shared.By.XPath(xpathToFind);
         }
     }
 }

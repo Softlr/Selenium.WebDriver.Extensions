@@ -1,8 +1,7 @@
-﻿namespace Selenium.WebDriver.Extensions.Sizzle
+﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
     /// </summary>
@@ -14,26 +13,13 @@
     public class By : OpenQA.Selenium.By
     {
         /// <summary>
-        /// Gets a mechanism to find elements matching Sizzle selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
-        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
-        /// <returns>A <see cref="SizzleSelector"/> object the driver can use to find the elements.</returns>
-        public static SizzleSelector SizzleSelector(
-            string selector,
-            SizzleSelector context = null)
-        {
-            return new SizzleSelector(selector, context);
-        }
-
-        /// <summary>
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
         /// <returns>A <see cref="ClassNameSelector"/> object the driver can use to find the elements.</returns>
         public static new ClassNameSelector ClassName(string classNameToFind)
         {
-            return Shared.By.ClassName(classNameToFind);
+            return new ClassNameSelector(classNameToFind);
         }
 
         /// <summary>
@@ -43,7 +29,7 @@
         /// <returns>A <see cref="CssSelector"/> object the driver can use to find the elements.</returns>
         public static new CssSelector CssSelector(string cssSelectorToFind)
         {
-            return Shared.By.CssSelector(cssSelectorToFind);
+            return new CssSelector(cssSelectorToFind);
         }
 
         /// <summary>
@@ -53,7 +39,7 @@
         /// <returns>An <see cref="IdSelector"/> object the driver can use to find the elements.</returns>
         public static new IdSelector Id(string idToFind)
         {
-            return Shared.By.Id(idToFind);
+            return new IdSelector(idToFind);
         }
 
         /// <summary>
@@ -63,7 +49,7 @@
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
         public static new LinkTextSelector LinkText(string linkTextToFind)
         {
-            return Shared.By.LinkText(linkTextToFind);
+            return new LinkTextSelector(linkTextToFind);
         }
 
         /// <summary>
@@ -73,7 +59,7 @@
         /// <returns>A <see cref="NameSelector"/> object the driver can use to find the elements.</returns>
         public static new NameSelector Name(string nameToFind)
         {
-            return Shared.By.Name(nameToFind);
+            return new NameSelector(nameToFind);
         }
 
         /// <summary>
@@ -83,7 +69,7 @@
         /// <returns>A <see cref="PartialLinkTextSelector"/> object the driver can use to find the elements.</returns>
         public static new PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind)
         {
-            return Shared.By.PartialLinkText(partialLinkTextToFind);
+            return new PartialLinkTextSelector(partialLinkTextToFind);
         }
 
         /// <summary>
@@ -93,7 +79,7 @@
         /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
         public static new TagNameSelector TagName(string tagNameToFind)
         {
-            return Shared.By.TagName(tagNameToFind);
+            return new TagNameSelector(tagNameToFind);
         }
 
         /// <summary>
@@ -106,7 +92,7 @@
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
         public static new XPathSelector XPath(string xpathToFind)
         {
-            return Shared.By.XPath(xpathToFind);
+            return new XPathSelector(xpathToFind);
         }
     }
 }
