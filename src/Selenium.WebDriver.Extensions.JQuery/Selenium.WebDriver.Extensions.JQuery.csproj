@@ -112,6 +112,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Runners\JQueryRunner.cs" />
     <Compile Include="Models\By.cs" />
     <Compile Include="ExternalLibraryLoaders\JQueryLoader.cs" />
     <Compile Include="GlobalSuppressions.cs">

@@ -1,10 +1,17 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
+    using System;
+    
     /// <summary>
     /// The selector interface.
     /// </summary>
     public interface ISelector
     {
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        Type RunnerType { get; }
+
         /// <summary>
         /// Gets the selector.
         /// </summary>

@@ -24,5 +24,16 @@
                     .singleNodeValue;
                 })('" + xpath + "')";
         }
+
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public override Type RunnerType
+        {
+            get
+            {
+                return typeof(JavaScriptRunner);
+            }
+        }
     }
 }

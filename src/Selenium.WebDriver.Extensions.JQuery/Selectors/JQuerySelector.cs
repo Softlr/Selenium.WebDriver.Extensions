@@ -63,6 +63,17 @@
         public string JQueryVariable { get; private set; }
 
         /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public override Type RunnerType
+        {
+            get
+            {
+                return typeof(JQueryRunner);
+            }
+        }
+
+        /// <summary>
         /// Determines whether two object instances are equal.
         /// </summary>
         /// <param name="obj">The object to compare with the current object. </param>

@@ -58,12 +58,14 @@
             var element = new Mock<IWebElement>();
             element.SetupGet(x => x.TagName).Returns("span");
 
-            var driver = MockWebDriver("return jQuery('div').get(0);", rootElement.Object);
+            var list = new List<IWebElement> { rootElement.Object };
+            var driver = MockWebDriver("return jQuery('div').get();", new ReadOnlyCollection<IWebElement>(list));
             driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
+            var elementList = new List<IWebElement> { element.Object };
             driver.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get(0);"))
-                .Returns(element.Object);
+                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
+                .Returns(new ReadOnlyCollection<IWebElement>(elementList));
             
             var webElement = new Mock<WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
@@ -95,13 +97,14 @@
             element2.Setup(x => x.TagName).Returns("span");
             element2.Setup(x => x.GetAttribute("class")).Returns("test2");
 
-            var list = new List<IWebElement> { element1.Object, element2.Object };
-            var driver = MockWebDriver("return jQuery('div').get(0);", rootElement.Object);
+            var list = new List<IWebElement> { rootElement.Object };
+            var driver = MockWebDriver("return jQuery('div').get();", new ReadOnlyCollection<IWebElement>(list));
             driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
+            var elementList = new List<IWebElement> { element1.Object, element2.Object };
             driver.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
-                .Returns(new ReadOnlyCollection<IWebElement>(list));
+                .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
             var webElement = new Mock<WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");

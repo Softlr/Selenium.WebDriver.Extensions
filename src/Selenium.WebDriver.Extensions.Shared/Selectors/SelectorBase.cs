@@ -1,5 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
+    using System;
+
     /// <summary>
     /// The selector base.
     /// </summary>
@@ -13,6 +15,11 @@
         {
             this.RawSelector = rawSelector;
         }
+
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public abstract Type RunnerType { get; }
 
         /// <summary>
         /// Gets the query raw selector.

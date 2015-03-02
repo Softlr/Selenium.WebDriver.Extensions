@@ -5,6 +5,7 @@
     using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
     using Selenium.WebDriver.Extensions.JQuery;
     using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.Shared;
     using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
 

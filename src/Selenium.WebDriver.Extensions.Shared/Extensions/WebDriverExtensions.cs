@@ -1,6 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
     using System;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Linq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     
@@ -9,6 +12,64 @@
     /// </summary>
     public static class WebDriverExtensions
     {
+        /// <summary>
+        /// Searches for DOM element using given selector.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium selector.</param>
+        /// <returns>The first DOM element matching given JavaScript query selector</returns>
+        public static WebElement FindElement(this IWebDriver driver, ISelector by)
+        {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            var runner = (IRunner)Activator.CreateInstance(by.RunnerType);
+            var results = runner.Find<IEnumerable<IWebElement>>(driver, by);
+            if (results == null)
+            {
+                throw new NoSuchElementException("No element found for selector: " + by.Selector);
+            }
+
+            var list = results.ToList();
+            if (list.Count > 0)
+            {
+                return new WebElement(list.First(), by);
+            }
+
+            throw new NoSuchElementException("No element found for selector: " + by.Selector);
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using given selector.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <returns>The DOM elements matching given JavaScript query selector.</returns>
+        public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, ISelector by)
+        {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            var runner = (IRunner)Activator.CreateInstance(by.RunnerType);
+            var results = runner.Find<IEnumerable<IWebElement>>(driver, by)
+                .Select((value, index) => new WebElement(value, by, index)).ToList();
+            return new ReadOnlyCollection<WebElement>(results);
+        }
+
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
         /// </summary>

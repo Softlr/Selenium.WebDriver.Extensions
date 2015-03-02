@@ -125,6 +125,8 @@
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Models\By.cs" />
+    <Compile Include="Runners\IRunner.cs" />
+    <Compile Include="Runners\JavaScriptRunner.cs" />
     <Compile Include="Selectors\ClassNameSelector.cs" />
     <Compile Include="Selectors\CssSelector.cs" />
     <Compile Include="Selectors\IdSelector.cs" />

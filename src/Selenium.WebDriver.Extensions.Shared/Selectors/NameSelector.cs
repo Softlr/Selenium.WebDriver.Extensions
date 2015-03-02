@@ -1,5 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
+    using System;
+
     /// <summary>
     /// The name selector.
     /// </summary>
@@ -12,6 +14,17 @@
         public NameSelector(string name)
             : base("[name='" + name + "']")
         {
+        }
+
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public override Type RunnerType
+        {
+            get
+            {
+                return typeof(JavaScriptRunner);
+            }
         }
     }
 }

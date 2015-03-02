@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
+    using System;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -32,6 +33,17 @@
         public QuerySelector(string selector, QuerySelector baseSelector)
             : base(selector, baseSelector)
         {
+        }
+
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public override Type RunnerType
+        {
+            get
+            {
+                return typeof(JavaScriptRunner);
+            }
         }
     }
 }
