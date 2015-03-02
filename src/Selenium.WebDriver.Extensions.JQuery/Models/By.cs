@@ -62,11 +62,21 @@
         /// Gets a mechanism to find elements by their link text.
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
+        /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
+        public static new LinkTextSelector LinkText(string linkTextToFind)
+        {
+            return Shared.By.LinkText(linkTextToFind);
+        }
+
+        /// <summary>
+        /// Gets a mechanism to find elements by their link text.
+        /// </summary>
+        /// <param name="linkTextToFind">The link text to find.</param>
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
-        public static LinkTextSelector LinkText(string linkTextToFind, string baseElement = "document")
+        public static LinkTextSelector LinkText(string linkTextToFind, string baseElement)
         {
             return Shared.By.LinkText(linkTextToFind, baseElement);
         }
