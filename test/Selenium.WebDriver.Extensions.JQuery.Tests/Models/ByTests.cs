@@ -62,6 +62,18 @@
         }
 
         /// <summary>
+        /// Tests the link text.
+        /// </summary>
+        [Test]
+        public void LinkTextWithBaseElement()
+        {
+            const string LinkText = "test";
+            var wrappedBy = By.LinkText(LinkText, "document");
+
+            Assert.AreEqual("test", wrappedBy.RawSelector);
+        }
+
+        /// <summary>
         /// Tests the name.
         /// </summary>
         [Test]
@@ -81,6 +93,18 @@
         {
             const string PartialLinkText = "test";
             var wrappedBy = By.PartialLinkText(PartialLinkText);
+
+            Assert.AreEqual("test", wrappedBy.RawSelector);
+        }
+
+        /// <summary>
+        /// Tests the partial link text.
+        /// </summary>
+        [Test]
+        public void PartialLinkTextWithBaseElement()
+        {
+            const string PartialLinkText = "test";
+            var wrappedBy = By.PartialLinkText(PartialLinkText, "document");
 
             Assert.AreEqual("test", wrappedBy.RawSelector);
         }

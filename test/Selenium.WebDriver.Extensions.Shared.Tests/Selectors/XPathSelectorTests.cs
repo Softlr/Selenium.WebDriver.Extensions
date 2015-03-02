@@ -5,14 +5,14 @@
     using NUnit.Framework;
 
     /// <summary>
-    /// Link text selector tests.
+    /// XPATH selector tests.
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class LinkTextSelectorTests
+    public class XPathSelectorTests
     {
         /// <summary>
         /// Gets the equality test cases.
@@ -21,24 +21,14 @@
         {
             get
             {
-                yield return new TestCaseData(By.LinkText("test"), By.LinkText("test"), true)
-                    .SetName("LT('test') == LT('test')");
-                yield return new TestCaseData(By.LinkText("test"), By.LinkText("test2"), false)
-                    .SetName("LT('test') != LT('test2')");
-                yield return new TestCaseData(By.LinkText("test"), null, false)
-                    .SetName("LT('test') != null");
-                yield return new TestCaseData(null, By.LinkText("test"), false)
-                    .SetName("null != LT('test')");
-                yield return new TestCaseData(
-                    By.LinkText("test", "body"),
-                    By.LinkText("test"),
-                    false)
-                    .SetName("LT('test', LT('body')) != LT('test')");
-                yield return new TestCaseData(
-                    By.LinkText("test", "body"),
-                    By.LinkText("test", "body"),
-                    true)
-                    .SetName("LT('test', LT('body')) == LT('test', LT('body'))");
+                yield return new TestCaseData(By.XPath("html"), By.XPath("html"), true)
+                    .SetName("XP('test') == XP('test')");
+                yield return new TestCaseData(By.XPath("html"), By.XPath("body"), false)
+                    .SetName("XP('test') != XP('test2')");
+                yield return new TestCaseData(By.XPath("html"), null, false)
+                    .SetName("XP('test') != null");
+                yield return new TestCaseData(null, By.XPath("html"), false)
+                    .SetName("null != XP('test')");
             }
         }
 
@@ -49,7 +39,7 @@
         [Test]
         public void Selector()
         {
-            var selector = By.LinkText("test");
+            var selector = By.XPath("html");
             Assert.AreEqual(selector.Selector, selector.ToString());
         }
 
@@ -60,17 +50,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullSelector()
         {
-            By.LinkText(null);
-        }
-
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullBaseElementSelector()
-        {
-            By.LinkText("test", null);
+            By.XPath(null);
         }
 
         /// <summary>
@@ -79,7 +59,7 @@
         [Test]
         public void CallFormatString()
         {
-            var formatString = By.LinkText("test").CallFormatString;
+            var formatString = By.XPath("html").CallFormatString;
             Assert.IsNotNull(formatString);
         }
 
@@ -88,9 +68,9 @@
         /// </summary>
         /// <param name="selector1">First selector to compare.</param>
         /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
+        /// <param name="expectedResult">The expected resuXP.</param>
         [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(LinkTextSelector selector1, LinkTextSelector selector2, bool expectedResult)
+        public void EqualityOperator(XPathSelector selector1, XPathSelector selector2, bool expectedResult)
         {
             Assert.AreEqual(expectedResult, selector1 == selector2);
             if (selector1 != null)
@@ -111,7 +91,7 @@
         [Test]
         public void EqualityOperatorWrongType()
         {
-            var selector1 = By.LinkText("text");
+            var selector1 = By.XPath("text");
             var selector2 = new object();
 
 #pragma warning disable 252,253

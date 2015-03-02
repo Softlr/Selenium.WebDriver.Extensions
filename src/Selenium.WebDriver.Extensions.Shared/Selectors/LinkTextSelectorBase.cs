@@ -48,7 +48,7 @@
         {
             get
             {
-                throw new NotImplementedException();
+                return "{0}[{1}]";
             }
         }
 
