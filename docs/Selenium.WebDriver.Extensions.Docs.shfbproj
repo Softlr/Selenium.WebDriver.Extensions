@@ -35,6 +35,8 @@
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.xml" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.xml" />
+      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions.Core\bin\Release\Selenium.WebDriver.Extensions.Core.dll" />
+      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions.Core\bin\Release\Selenium.WebDriver.Extensions.Core.xml" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
