@@ -6,7 +6,7 @@
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
-    public class SizzleSelector : ISelector
+    public class SizzleSelector : SelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
@@ -34,63 +34,9 @@
         }
 
         /// <summary>
-        /// Gets the raw selector.
-        /// </summary>
-        public string RawSelector { get; private set; }
-
-        /// <summary>
-        /// Gets the selector.
-        /// </summary>
-        public string Selector { get; private set; }
-
-        /// <summary>
-        /// Gets the call format string.
-        /// </summary>
-        /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
-        public string CallFormatString
-        {
-            get
-            {
-                return "{0}[{1}]";
-            }
-        }
-
-        /// <summary>
         /// Gets the DOM Element or Document to use as context.
         /// </summary>
         public SizzleSelector Context { get; private set; }
-
-        /// <summary>
-        /// Compares two selectors and returns <c>true</c> if they are equal.
-        /// </summary>
-        /// <param name="selector1">The first selector to compare.</param>
-        /// <param name="selector2">The second selector to compare.</param>
-        /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
-        public static bool operator ==(SizzleSelector selector1, SizzleSelector selector2)
-        {
-            if (ReferenceEquals(selector1, selector2))
-            {
-                return true;
-            }
-
-            if (((object)selector1 == null) || ((object)selector2 == null))
-            {
-                return false;
-            }
-
-            return selector1.Equals(selector2);
-        }
-
-        /// <summary>
-        /// Compares two selectors and returns <c>true</c> if they are not equal.
-        /// </summary>
-        /// <param name="selector1">The first selector to compare.</param>
-        /// <param name="selector2">The second selector to compare.</param>
-        /// <returns><c>true</c> if the selectors are not equal; otherwise, <c>false</c>.</returns>
-        public static bool operator !=(SizzleSelector selector1, SizzleSelector selector2)
-        {
-            return !(selector1 == selector2);
-        }
 
         /// <summary>
         /// Determines whether two object instances are equal.
@@ -119,15 +65,6 @@
             return this.Context == null
                 ? this.RawSelector.GetHashCode()
                 : this.RawSelector.GetHashCode() ^ this.Context.GetHashCode();
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return this.Selector;
         }
     }
 }

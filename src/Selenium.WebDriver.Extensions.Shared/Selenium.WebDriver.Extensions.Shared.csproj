@@ -134,6 +134,7 @@
     <Compile Include="Selectors\NameSelector.cs" />
     <Compile Include="Selectors\PartialLinkTextSelector.cs" />
     <Compile Include="Selectors\QuerySelectorBase.cs" />
+    <Compile Include="Selectors\SelectorBase.cs" />
     <Compile Include="Selectors\TagNameSelector.cs" />
     <Compile Include="Selectors\XPathSelector.cs" />
     <Compile Include="Utils\ParseUtil.cs" />
