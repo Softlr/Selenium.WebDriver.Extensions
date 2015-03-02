@@ -55,11 +55,10 @@
         [Test]
         public void LinkText()
         {
-            const string LinkText = "div.test";
-            var originalBy = OpenQA.Selenium.By.LinkText(LinkText);
+            const string LinkText = "test";
             var wrappedBy = By.LinkText(LinkText);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual("test", wrappedBy.RawSelector);
         }
 
         /// <summary>
@@ -80,11 +79,10 @@
         [Test]
         public void PartialLinkText()
         {
-            const string PartialLinkText = "div.test";
-            var originalBy = OpenQA.Selenium.By.PartialLinkText(PartialLinkText);
+            const string PartialLinkText = "test";
             var wrappedBy = By.PartialLinkText(PartialLinkText);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual("test", wrappedBy.RawSelector);
         }
 
         /// <summary>
@@ -105,11 +103,10 @@
         [Test]
         public void XPath()
         {
-            const string XPath = "div.test";
-            var originalBy = OpenQA.Selenium.By.XPath(XPath);
+            const string XPath = "/body/div";
             var wrappedBy = By.XPath(XPath);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(XPath, wrappedBy.RawSelector);
         }
     }
 }

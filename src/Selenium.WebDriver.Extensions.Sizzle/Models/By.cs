@@ -80,20 +80,20 @@
         /// Gets a mechanism to find elements by a partial match on their link text.
         /// </summary>
         /// <param name="partialLinkTextToFind">The partial link text to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By PartialLinkText(string partialLinkTextToFind)
+        /// <returns>A <see cref="PartialLinkTextSelector"/> object the driver can use to find the elements.</returns>
+        public static new PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind)
         {
-            return OpenQA.Selenium.By.PartialLinkText(partialLinkTextToFind);
+            return new PartialLinkTextSelector(partialLinkTextToFind);
         }
 
         /// <summary>
         /// Gets a mechanism to find elements by their tag name.
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By TagName(string tagNameToFind)
+        /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
+        public static new TagNameSelector TagName(string tagNameToFind)
         {
-            return OpenQA.Selenium.By.TagName(tagNameToFind);
+            return new TagNameSelector(tagNameToFind);
         }
 
         /// <summary>
@@ -103,10 +103,10 @@
         /// this WebElement.
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By XPath(string xpathToFind)
+        /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
+        public static new XPathSelector XPath(string xpathToFind)
         {
-            return OpenQA.Selenium.By.XPath(xpathToFind);
+            return new XPathSelector(xpathToFind);
         }
     }
 }
