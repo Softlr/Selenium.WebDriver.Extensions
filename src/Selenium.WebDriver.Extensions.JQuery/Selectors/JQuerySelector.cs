@@ -57,7 +57,7 @@
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}({{0}}).get({{1}})", this.JQueryVariable);
+                return this.JQueryVariable + "({0}).get({1})";
             }
         }
 

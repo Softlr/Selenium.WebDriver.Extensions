@@ -54,11 +54,7 @@
                 webElement.Selector.Selector,
                 webElement.SelectorResultIndex);
 
-            var script = string.Format(
-                CultureInfo.InvariantCulture,
-                "return {0}({1});",
-                FindDomPathScript,
-                selectorCallScript);
+            var script = "return " + FindDomPathScript + "(" + selectorCallScript + ");";
             return webElement.WrappedDriver.ExecuteScript<string>(script);
         }
     }
