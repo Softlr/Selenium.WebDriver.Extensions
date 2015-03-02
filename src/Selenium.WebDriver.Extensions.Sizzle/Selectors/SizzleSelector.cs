@@ -21,6 +21,7 @@
         public SizzleSelector(
             string selector,
             SizzleSelector context = null)
+            : base(selector)
         {
             if (selector == null)
             {
@@ -28,7 +29,6 @@
             }
 
             this.Context = context;
-            this.RawSelector = selector;
             this.Selector = "Sizzle('" + selector.Replace('\'', '"') + "'" 
                 + (this.Context != null ? ", " + this.Context + "[0]" : string.Empty) + ")";
         }

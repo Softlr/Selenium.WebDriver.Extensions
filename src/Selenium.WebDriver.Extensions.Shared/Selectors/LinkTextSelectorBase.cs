@@ -15,6 +15,7 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         protected LinkTextSelectorBase(string text, string baseElement = "document")
+            : base(text)
         {
             if (text == null)
             {
@@ -27,7 +28,6 @@
             }
 
             this.BaseElement = baseElement;
-            this.RawSelector = text;
         }
 
         /// <summary>

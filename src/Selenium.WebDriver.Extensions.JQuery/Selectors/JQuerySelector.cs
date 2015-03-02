@@ -19,6 +19,7 @@
             string selector,
             JQuerySelector context = null,
             string jQueryVariable = "jQuery")
+            : base(selector)
         {
             if (selector == null)
             {
@@ -27,7 +28,6 @@
 
             this.Context = context;
             this.JQueryVariable = jQueryVariable;
-            this.RawSelector = selector;
             this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'"
                 + (this.Context != null ? ", " + this.Context : string.Empty) + ")";
         }
@@ -36,6 +36,7 @@
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
         protected JQuerySelector()
+            : base(null)
         {
         }
 

@@ -15,6 +15,7 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         protected QuerySelectorBase(string selector, string baseElement = "document")
+            : base(selector)
         {
             if (selector == null)
             {
@@ -27,7 +28,6 @@
             }
 
             this.BaseElement = baseElement;
-            this.RawSelector = selector;
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
@@ -42,6 +42,7 @@
         /// make sure that the base selector has actually return any results.
         /// </remarks>
         protected QuerySelectorBase(string selector, QuerySelectorBase baseSelector)
+            : base(selector)
         {
             if (selector == null)
             {
@@ -54,7 +55,6 @@
             }
 
             this.BaseSelector = baseSelector;
-            this.RawSelector = selector;
             this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
                 + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }

@@ -6,12 +6,21 @@
     public abstract class SelectorBase : ISelector
     {
         /// <summary>
-        /// Gets the query raw selector.
+        /// Initializes a new instance of the <see cref="SelectorBase"/> class.
         /// </summary>
-        public string RawSelector { get; protected set; }
+        /// <param name="rawSelector">The raw selector.</param>
+        protected SelectorBase(string rawSelector)
+        {
+            this.RawSelector = rawSelector;
+        }
 
         /// <summary>
-        /// Gets the selector.
+        /// Gets the query raw selector.
+        /// </summary>
+        public string RawSelector { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the selector.
         /// </summary>
         public string Selector { get; protected set; }
 
