@@ -40,12 +40,12 @@
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Shared" isDocumented="True">Contains the functionalities shared across extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-    </NamespaceSummaries>
+<NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Shared" isDocumented="True">Contains the functionalities shared across extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Core" isDocumented="True">Contains the implementation of overrides for standard Selenium WebDriver selectors.</NamespaceSummaryItem></NamespaceSummaries>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
