@@ -110,6 +110,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GlobalSuppressions.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Models\By.cs" />
     <Compile Include="Selectors\ClassNameSelector.cs" />
     <Compile Include="Selectors\CssSelector.cs" />
