@@ -61,6 +61,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindText(webElement.CreateSelector(by));
         }
 
@@ -78,6 +83,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindHtml(webElement.CreateSelector(by));
         }
 
@@ -94,6 +104,11 @@
             JQuerySelector by,
             string attributeName)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindAttribute(webElement.CreateSelector(by), attributeName);
         }
 
@@ -110,6 +125,11 @@
             JQuerySelector by,
             string propertyName)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindProperty<bool?>(webElement.CreateSelector(by), propertyName);
         }
 
@@ -127,6 +147,11 @@
             JQuerySelector by,
             string propertyName)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindProperty<T>(webElement.CreateSelector(by), propertyName);
         }
 
@@ -141,6 +166,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindValue(webElement.CreateSelector(by));
         }
 
@@ -160,6 +190,11 @@
             JQuerySelector by,
             string propertyName)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindCss(webElement.CreateSelector(by), propertyName);
         }
 
@@ -177,6 +212,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindWidth(webElement.CreateSelector(by));
         }
 
@@ -194,6 +234,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindHeight(webElement.CreateSelector(by));
         }
 
@@ -212,6 +257,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindInnerWidth(webElement.CreateSelector(by));
         }
 
@@ -230,6 +280,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindInnerHeight(webElement.CreateSelector(by));
         }
 
@@ -251,6 +306,11 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindOuterWidth(webElement.CreateSelector(by), includeMargin);
         }
 
@@ -272,6 +332,11 @@
             JQuerySelector by,
             bool includeMargin = false)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindOuterHeight(webElement.CreateSelector(by), includeMargin);
         }
 
@@ -289,6 +354,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindPosition(webElement.CreateSelector(by));
         }
 
@@ -305,6 +375,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindOffset(webElement.CreateSelector(by));
         }
 
@@ -323,6 +398,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindScrollLeft(webElement.CreateSelector(by));
         }
 
@@ -341,6 +421,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindScrollTop(webElement.CreateSelector(by));
         }
 
@@ -361,6 +446,11 @@
             JQuerySelector by,
             string key)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindData(webElement.CreateSelector(by), key);
         }
 
@@ -382,6 +472,11 @@
             JQuerySelector by,
             string key)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindData<T>(webElement.CreateSelector(by), key);
         }
 
@@ -395,6 +490,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindCount(webElement.CreateSelector(by));
         }
 
@@ -409,6 +509,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindSerialized(webElement.CreateSelector(by));
         }
 
@@ -423,6 +528,11 @@
             this WebElement webElement,
             JQuerySelector by)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return webElement.WrappedDriver.FindSerializedArray(webElement.CreateSelector(by));
         }
 
