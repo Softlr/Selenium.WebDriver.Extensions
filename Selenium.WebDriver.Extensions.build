@@ -27,9 +27,9 @@
     <property name="dir.unit.tests.queryselector" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config}"/>
     <property name="dir.unit.tests.queryselector.net40" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config.net40}"/>
     <property name="dir.unit.tests.queryselector.net35" value="test\Selenium.WebDriver.Extensions.QuerySelector.Tests\bin\${project.config.net35}"/>
-    <property name="dir.unit.tests.shared" value="test\Selenium.WebDriver.Extensions.Shared.Tests\bin\${project.config}"/>
-    <property name="dir.unit.tests.shared.net40" value="test\Selenium.WebDriver.Extensions.Shared.Tests\bin\${project.config.net40}"/>
-    <property name="dir.unit.tests.shared.net35" value="test\Selenium.WebDriver.Extensions.Shared.Tests\bin\${project.config.net35}"/>
+    <property name="dir.unit.tests.core" value="test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config}"/>
+    <property name="dir.unit.tests.core.net40" value="test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config.net40}"/>
+    <property name="dir.unit.tests.core.net35" value="test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config.net35}"/>
     <property name="dir.unit.tests.combined" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
     <property name="dir.unit.tests.combined.net40" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config.net40}"/>
     <property name="dir.unit.tests.combined.net35" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config.net35}"/>
@@ -44,9 +44,9 @@
     <property name="file.unit.tests.queryselector" value="${dir.work}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
     <property name="file.unit.tests.queryselector.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
     <property name="file.unit.tests.queryselector.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.QuerySelector.Tests.dll"/>
-    <property name="file.unit.tests.shared" value="${dir.work}\Selenium.WebDriver.Extensions.Shared.Tests.dll"/>
-    <property name="file.unit.tests.shared.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.Shared.Tests.dll"/>
-    <property name="file.unit.tests.shared.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.Shared.Tests.dll"/>
+    <property name="file.unit.tests.core" value="${dir.work}\Selenium.WebDriver.Extensions.Core.Tests.dll"/>
+    <property name="file.unit.tests.core.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.Core.Tests.dll"/>
+    <property name="file.unit.tests.core.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.Core.Tests.dll"/>
     <property name="file.unit.tests.combined" value="${dir.work}\Selenium.WebDriver.Extensions.Tests.dll"/>
     <property name="file.unit.tests.combined.net40" value="${dir.work.net40}\Selenium.WebDriver.Extensions.Tests.dll"/>
     <property name="file.unit.tests.combined.net35" value="${dir.work.net35}\Selenium.WebDriver.Extensions.Tests.dll"/>
@@ -113,7 +113,7 @@
 			</fileset>
         </copy>
         <copy todir="${dir.work}" flatten="true">
-            <fileset basedir="${dir.unit.tests.shared}">
+            <fileset basedir="${dir.unit.tests.core}">
 				<include name="*.dll"/>
                 <include name="*.pdb"/>
 			</fileset>
@@ -131,7 +131,7 @@
 			<arg value="${file.unit.tests.jquery}"/>
             <arg value="${file.unit.tests.sizzle}"/>
             <arg value="${file.unit.tests.queryselector}"/>
-            <arg value="${file.unit.tests.shared}"/>
+            <arg value="${file.unit.tests.core}"/>
             <arg value="${file.unit.tests.combined}"/>
 			<arg value="/framework:${project.framework}"/>
 			<arg value="/work:${dir.work}"/>
@@ -160,7 +160,7 @@
 			</fileset>
         </copy>
         <copy todir="${dir.work.net40}" flatten="true">
-            <fileset basedir="${dir.unit.tests.shared.net40}">
+            <fileset basedir="${dir.unit.tests.core.net40}">
 				<include name="*.dll"/>
                 <include name="*.pdb"/>
 			</fileset>
@@ -178,7 +178,7 @@
 			<arg value="${file.unit.tests.jquery.net40}"/>
             <arg value="${file.unit.tests.sizzle.net40}"/>
             <arg value="${file.unit.tests.queryselector.net40}"/>
-            <arg value="${file.unit.tests.shared.net40}"/>
+            <arg value="${file.unit.tests.core.net40}"/>
             <arg value="${file.unit.tests.combined.net40}"/>
 			<arg value="/framework:${project.framework.net40}"/>
 			<arg value="/work:${dir.work.net40}"/>
@@ -207,7 +207,7 @@
 			</fileset>
         </copy>
         <copy todir="${dir.work.net35}" flatten="true">
-            <fileset basedir="${dir.unit.tests.shared.net35}">
+            <fileset basedir="${dir.unit.tests.core.net35}">
 				<include name="*.dll"/>
                 <include name="*.pdb"/>
 			</fileset>
@@ -225,7 +225,7 @@
 			<arg value="${file.unit.tests.jquery.net35}"/>
             <arg value="${file.unit.tests.sizzle.net35}"/>
             <arg value="${file.unit.tests.queryselector.net35}"/>
-            <arg value="${file.unit.tests.shared.net35}"/>
+            <arg value="${file.unit.tests.core.net35}"/>
             <arg value="${file.unit.tests.combined.net35}"/>
 			<arg value="/framework:${project.framework.net35}"/>
 			<arg value="/work:${dir.work.net35}"/>
@@ -265,7 +265,7 @@
 		<exec program="${path.opencover}">
 			<arg value="-register:user"/>
 			<arg value="-target:&quot;${path.nunit}&quot;"/>
-			<arg value="-targetargs:&quot;/noshadow ${file.unit.tests.jquery} ${file.unit.tests.sizzle} ${file.unit.tests.queryselector} ${file.unit.tests.shared} ${file.unit.tests.combined} /framework:${project.framework} /work:${dir.work} /result:${file.test.results} /nologo&quot;"/>
+			<arg value="-targetargs:&quot;/noshadow ${file.unit.tests.jquery} ${file.unit.tests.sizzle} ${file.unit.tests.queryselector} ${file.unit.tests.core} ${file.unit.tests.combined} /framework:${project.framework} /work:${dir.work} /result:${file.test.results} /nologo&quot;"/>
 			<arg value="-filter:&quot;+[*]* -[*]*Exception* -[*.Tests]*&quot;"/>
             <arg value="-output:&quot;${file.coverage.report}&quot;"/>
 		</exec>
@@ -295,6 +295,18 @@
 		</exec>
         <exec program="${path.nuget}">
             <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
+			<arg value="src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec"/>
+            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
+		</exec>
+        <exec program="${path.nuget}">
+            <arg value="pack"/>
 			<arg value="src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec"/>
             <arg value="-Version &quot;${project.version}&quot;"/>
             <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
@@ -307,17 +319,12 @@
 		</exec>
         <exec program="${path.nuget}">
             <arg value="pack"/>
-			<arg value="src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec"/>
-            <arg value="-Version &quot;${project.version}&quot;"/>
-            <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
-		</exec>
-        <exec program="${path.nuget}">
-            <arg value="pack"/>
 			<arg value="src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec"/>
             <arg value="-Version &quot;${project.version}&quot;"/>
             <arg value="-OutputDirectory &quot;${dir.work}&quot;"/>
 		</exec>
 	</target>
 	
-	<target name="full" depends="build, test.all, integration, coverage, build.docs, pack"/>
+    <target name="full.noint" depends="build, test.all, coverage, build.docs, pack"/>
+	<target name="full" depends="full.noint, integration"/>
 </project>
