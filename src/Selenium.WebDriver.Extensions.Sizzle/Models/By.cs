@@ -61,9 +61,9 @@
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By LinkText(string linkTextToFind)
+        public static new LinkTextSelector LinkText(string linkTextToFind)
         {
-            return OpenQA.Selenium.By.LinkText(linkTextToFind);
+            return new LinkTextSelector(linkTextToFind);
         }
 
         /// <summary>
