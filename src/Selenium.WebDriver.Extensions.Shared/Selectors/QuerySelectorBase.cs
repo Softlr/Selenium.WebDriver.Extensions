@@ -5,7 +5,7 @@
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
-    public abstract class QuerySelectorBase : SelectorBase
+    public abstract class QuerySelectorBase : NestableSelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelectorBase"/> class.
@@ -15,7 +15,7 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         protected QuerySelectorBase(string selector, string baseElement = "document")
-            : base(selector)
+            : base(selector, baseElement)
         {
             if (selector == null)
             {
@@ -27,7 +27,6 @@
                 throw new ArgumentNullException("baseElement");
             }
 
-            this.BaseElement = baseElement;
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
@@ -42,7 +41,7 @@
         /// make sure that the base selector has actually return any results.
         /// </remarks>
         protected QuerySelectorBase(string selector, QuerySelectorBase baseSelector)
-            : base(selector)
+            : base(selector, null)
         {
             if (selector == null)
             {
@@ -58,11 +57,6 @@
             this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
                 + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
-
-        /// <summary>
-        /// Gets the base element for the query selector.
-        /// </summary>
-        public string BaseElement { get; private set; }
 
         /// <summary>
         /// Gets the base query selector for the query selector.
