@@ -7,7 +7,7 @@
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
 
     /// <summary>
-    /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
+    /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable additional selectors to be used.
     /// </summary>
     /// <remarks>
     /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By"/>. The reason for that is
