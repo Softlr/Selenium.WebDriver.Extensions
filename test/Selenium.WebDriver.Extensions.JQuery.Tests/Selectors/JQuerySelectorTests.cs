@@ -3,7 +3,8 @@
     using System;
     using System.Collections;
     using NUnit.Framework;
-    
+    using By = Selenium.WebDriver.Extensions.JQuery.By;
+
     /// <summary>
     /// JQuery selector tests.
     /// </summary>
@@ -237,6 +238,226 @@
             Assert.IsFalse(selector1 == selector2);
             Assert.IsTrue(selector1 != selector2);
 #pragma warning restore 252,253
+        }
+        
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindTextWithNullElement()
+        {
+            WebElementExtensions.FindText(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindHtmlWithNullElement()
+        {
+            WebElementExtensions.FindHtml(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindAttributeWithNullElement()
+        {
+            WebElementExtensions.FindAttribute(null, null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindPropertyWithNullElement()
+        {
+            WebElementExtensions.FindProperty(null, null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindStringPropertyWithNullElement()
+        {
+            WebElementExtensions.FindProperty<string>(null, null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindValueWithNullElement()
+        {
+            WebElementExtensions.FindValue(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindCssWithNullElement()
+        {
+            WebElementExtensions.FindCss(null, null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindWidthWithNullElement()
+        {
+            WebElementExtensions.FindWidth(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindHeightWithNullElement()
+        {
+            WebElementExtensions.FindHeight(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindInnerWidthWithNullElement()
+        {
+            WebElementExtensions.FindInnerWidth(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindInnerHeightWithNullElement()
+        {
+            WebElementExtensions.FindInnerHeight(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindOuterWidthWithNullElement()
+        {
+            WebElementExtensions.FindOuterWidth(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindOuterHeightWithNullElement()
+        {
+            WebElementExtensions.FindOuterHeight(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindPositionWithNullElement()
+        {
+            WebElementExtensions.FindPosition(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindOffsetWithNullElement()
+        {
+            WebElementExtensions.FindOffset(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindScrollLeftWithNullElement()
+        {
+            WebElementExtensions.FindScrollLeft(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindScrollTopWithNullElement()
+        {
+            WebElementExtensions.FindScrollTop(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindDataWithNullElement()
+        {
+            WebElementExtensions.FindData(null, null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindBoolDataWithNullElement()
+        {
+            WebElementExtensions.FindData<bool>(null, null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindCountWithNullElement()
+        {
+            WebElementExtensions.FindCount(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindSerializedWithNullElement()
+        {
+            WebElementExtensions.FindSerialized(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void FindSerializedArrayWithNullElement()
+        {
+            WebElementExtensions.FindSerializedArray(null, null);
         }
     }
 }
