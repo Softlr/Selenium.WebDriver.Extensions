@@ -36,7 +36,7 @@
         public string RawSelector { get; private set; }
 
         /// <summary>
-        /// Gets the selector.
+        /// Gets or sets the selector.
         /// </summary>
         public string Selector { get; protected set; }
 

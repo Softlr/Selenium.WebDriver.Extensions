@@ -45,7 +45,6 @@
         /// <summary>
         /// Tests if the proper selector is generated.
         /// </summary>
-        /// <returns>The generated query selector.</returns>
         [Test]
         public void Selector()
         {

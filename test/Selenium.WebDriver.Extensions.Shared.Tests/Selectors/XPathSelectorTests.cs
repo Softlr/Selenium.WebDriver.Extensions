@@ -35,7 +35,6 @@
         /// <summary>
         /// Tests if the proper selector is generated.
         /// </summary>
-        /// <returns>The generated query selector.</returns>
         [Test]
         public void Selector()
         {
@@ -68,7 +67,7 @@
         /// </summary>
         /// <param name="selector1">First selector to compare.</param>
         /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected resuXP.</param>
+        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(XPathSelector selector1, XPathSelector selector2, bool expectedResult)
         {

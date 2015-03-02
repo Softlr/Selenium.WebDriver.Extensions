@@ -6,7 +6,7 @@
     public class TagNameSelector : QuerySelectorBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CssSelector"/> class.
+        /// Initializes a new instance of the <see cref="TagNameSelector"/> class.
         /// </summary>
         /// <param name="tagName">A string containing a DOM tag name.</param>
         public TagNameSelector(string tagName)

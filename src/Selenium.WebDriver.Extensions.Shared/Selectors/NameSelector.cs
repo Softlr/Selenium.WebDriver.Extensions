@@ -6,7 +6,7 @@
     public class NameSelector : QuerySelectorBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="ClassNameSelector"/> class.
+        /// Initializes a new instance of the <see cref="NameSelector"/> class.
         /// </summary>
         /// <param name="name">A string containing a DOM element class name.</param>
         public NameSelector(string name)
