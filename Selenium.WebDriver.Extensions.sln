@@ -47,6 +47,8 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Selenium.WebDriver.Extensio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{50593931-822D-4BE2-897D-38EF1BC5BDB3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Shared.Tests", "test\Selenium.WebDriver.Extensions.Shared.Tests\Selenium.WebDriver.Extensions.Shared.Tests.csproj", "{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -196,6 +198,19 @@ Global
 		{09D0D71A-5E98-42B4-8F22-90BF315FD55E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{09D0D71A-5E98-42B4-8F22-90BF315FD55E}.Release-Net35|Any CPU.ActiveCfg = Release-Net35|Any CPU
 		{09D0D71A-5E98-42B4-8F22-90BF315FD55E}.Release-Net40|Any CPU.ActiveCfg = Release-Net40|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug-Net35|Any CPU.ActiveCfg = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug-Net35|Any CPU.Build.0 = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug-Net40|Any CPU.ActiveCfg = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug-Net40|Any CPU.Build.0 = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Docs|Any CPU.ActiveCfg = Debug|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net35|Any CPU.ActiveCfg = Release|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net35|Any CPU.Build.0 = Release|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net40|Any CPU.ActiveCfg = Release|Any CPU
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net40|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -207,5 +222,6 @@ Global
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 		{01CC2D5C-ADC4-4A8C-8D5C-5A761B41206B} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 		{09D0D71A-5E98-42B4-8F22-90BF315FD55E} = {50593931-822D-4BE2-897D-38EF1BC5BDB3}
+		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 	EndGlobalSection
 EndGlobal
