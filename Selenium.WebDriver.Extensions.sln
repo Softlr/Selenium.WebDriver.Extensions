@@ -47,7 +47,9 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Selenium.WebDriver.Extensio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{50593931-822D-4BE2-897D-38EF1BC5BDB3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Shared.Tests", "test\Selenium.WebDriver.Extensions.Shared.Tests\Selenium.WebDriver.Extensions.Shared.Tests.csproj", "{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Core.Tests", "test\Selenium.WebDriver.Extensions.Core.Tests\Selenium.WebDriver.Extensions.Core.Tests.csproj", "{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Core", "src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj", "{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -210,6 +212,19 @@ Global
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net35|Any CPU.Build.0 = Release-Net35|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net40|Any CPU.ActiveCfg = Release-Net40|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net40|Any CPU.Build.0 = Release-Net40|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Debug-Net35|Any CPU.ActiveCfg = Debug-Net35|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Debug-Net35|Any CPU.Build.0 = Debug-Net35|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Debug-Net40|Any CPU.ActiveCfg = Debug-Net40|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Debug-Net40|Any CPU.Build.0 = Debug-Net40|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Release-Net35|Any CPU.ActiveCfg = Release-Net35|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Release-Net35|Any CPU.Build.0 = Release-Net35|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Release-Net40|Any CPU.ActiveCfg = Release-Net40|Any CPU
+		{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}.Release-Net40|Any CPU.Build.0 = Release-Net40|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

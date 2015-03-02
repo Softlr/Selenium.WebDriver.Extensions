@@ -1,11 +1,12 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
+    using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The class name selector.
     /// </summary>
-    public class ClassNameSelector : QuerySelectorBase
+    public class ClassNameSelector : QuerySelector.QuerySelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ClassNameSelector"/> class.

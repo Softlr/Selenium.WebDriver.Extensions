@@ -1,11 +1,12 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
+    using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The tag name selector.
     /// </summary>
-    public class TagNameSelector : QuerySelectorBase
+    public class TagNameSelector : QuerySelector.QuerySelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="TagNameSelector"/> class.

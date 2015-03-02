@@ -1,6 +1,7 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
+    using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The XPATH selector.

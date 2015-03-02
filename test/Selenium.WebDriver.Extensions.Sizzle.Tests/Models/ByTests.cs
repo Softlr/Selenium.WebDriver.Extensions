@@ -13,6 +13,7 @@
 #endif
     public class ByTests
     {
+        /*
         /// <summary>
         /// Tests the class name.
         /// </summary>
@@ -131,6 +132,6 @@
             var wrappedBy = By.XPath(XPath);
 
             Assert.AreEqual(XPath, wrappedBy.RawSelector);
-        }
+        }*/
     }
 }

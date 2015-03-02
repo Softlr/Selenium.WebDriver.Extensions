@@ -1,11 +1,12 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
+    using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The identifier selector.
     /// </summary>
-    public class IdSelector : QuerySelectorBase
+    public class IdSelector : QuerySelector.QuerySelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="IdSelector"/> class.

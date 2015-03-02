@@ -1,8 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared.Tests
+﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
     using System.Collections;
     using NUnit.Framework;
+    using By = Selenium.WebDriver.Extensions.Core.By;
 
     /// <summary>
     /// Link text selector tests.
