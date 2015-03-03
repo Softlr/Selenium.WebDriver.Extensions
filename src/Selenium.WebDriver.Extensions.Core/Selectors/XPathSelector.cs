@@ -38,21 +38,6 @@
         }
 
         /// <summary>
-        /// Creates a new selector using given selector as a root.
-        /// </summary>
-        /// <param name="root">A web element to be used as a root.</param>
-        /// <returns>A new selector.</returns>
-        public override ISelector Create(WebElement root)
-        {
-            if (root == null)
-            {
-                throw new ArgumentNullException("root");
-            }
-
-            return new XPathSelector(root.XPath + this.RawSelector);
-        }
-
-        /// <summary>
         /// Compares two selectors and returns <c>true</c> if they are equal.
         /// </summary>
         /// <param name="selector1">The first selector to compare.</param>
@@ -82,6 +67,21 @@
         public static bool operator !=(XPathSelector selector1, XPathSelector selector2)
         {
             return !(selector1 == selector2);
+        }
+
+        /// <summary>
+        /// Creates a new selector using given selector as a root.
+        /// </summary>
+        /// <param name="root">A web element to be used as a root.</param>
+        /// <returns>A new selector.</returns>
+        public override ISelector Create(WebElement root)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            return new XPathSelector(root.XPath + this.RawSelector);
         }
 
         /// <summary>

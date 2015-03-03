@@ -12,6 +12,9 @@
     /// </summary>
     public class WebElement : IWebElement
     {
+        /// <summary>
+        /// The script to get the DOM path.
+        /// </summary>
         private const string FindDomPathScript = @"(function(el) {
             var stack = [];
             while (el.parentNode != null) {
@@ -40,7 +43,10 @@
             return stack.join(' > ');
         })";
 
-        const string FindXPathScript = @"(function(el) { 
+        /// <summary>
+        /// The script to get the XPATH.
+        /// </summary>
+        private const string FindXPathScript = @"(function(el) { 
             var allNodes = document.getElementsByTagName('*'); 
             for(var segs = []; el && el.nodeType == 1; el = el.parentNode) 
             { 
@@ -122,6 +128,28 @@
         /// Gets the selector result index.
         /// </summary>
         public virtual int SelectorResultIndex { get; private set; }
+
+        /// <summary>
+        /// Gets the DOM path for the web element.
+        /// </summary>
+        public string Path
+        {
+            get
+            {
+                return this.domPath ?? (this.domPath = this.FindPath(FindDomPathScript));
+            }
+        }
+
+        /// <summary>
+        /// Gets the XPATH for the web element.
+        /// </summary>
+        public string XPath
+        {
+            get
+            {
+                return this.xpath ?? (this.xpath = this.FindPath(FindXPathScript));
+            }
+        }
 
         /// <summary>
         /// Gets the <see cref="IWebDriver"/> used to find this element.
@@ -335,28 +363,6 @@
         public virtual string GetCssValue(string propertyName)
         {
             return this.InnerElement.GetCssValue(propertyName);
-        }
-
-        /// <summary>
-        /// Gets the DOM path for the web element.
-        /// </summary>
-        public string Path
-        {
-            get
-            {
-                return this.domPath ?? (this.domPath = this.FindPath(FindDomPathScript));
-            }
-        }
-
-        /// <summary>
-        /// Gets the XPATH for the web element.
-        /// </summary>
-        public string XPath
-        {
-            get
-            {
-                return this.xpath ?? (this.xpath = this.FindPath(FindXPathScript));
-            }
         }
 
         /// <summary>
