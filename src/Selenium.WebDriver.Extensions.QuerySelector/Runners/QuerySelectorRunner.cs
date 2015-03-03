@@ -34,7 +34,7 @@
                 throw new ArgumentNullException("by");
             }
 
-            driver.CheckQuerySelectorSupport();
+            driver.QuerySelector().CheckSupport();
             return ParseUtil.ParseResult<T>(driver.ExecuteScript<object>("return " + by.Selector + ";"));
         }
     }

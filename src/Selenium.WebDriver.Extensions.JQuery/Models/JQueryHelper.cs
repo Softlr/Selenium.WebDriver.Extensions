@@ -11,7 +11,7 @@
     /// <summary>
     /// Additional methods for <see cref="JQuerySelector"/>.
     /// </summary>
-    public class JQueryHelper
+    public class JQueryHelper : HelperBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JQueryHelper"/> class.
@@ -19,20 +19,9 @@
         /// <param name="driver">The driver.</param>
         /// <param name="webElement">The web element.</param>
         public JQueryHelper(IWebDriver driver, WebElement webElement = null)
+            : base(driver, webElement)
         {
-            this.Driver = driver;
-            this.WebElement = webElement;
         }
-
-        /// <summary>
-        /// Gets the driver.
-        /// </summary>
-        public IWebDriver Driver { get; private set; }
-
-        /// <summary>
-        /// Gets the web element.
-        /// </summary>
-        public WebElement WebElement { get; private set; }
 
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.

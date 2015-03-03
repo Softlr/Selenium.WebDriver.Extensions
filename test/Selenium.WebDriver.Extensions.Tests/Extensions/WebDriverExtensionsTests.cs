@@ -132,7 +132,7 @@
             var mock = new Mock<IWebDriver>();
             var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
-            mock.Object.LoadSizzle(version, timeout);
+            mock.Object.Sizzle().Load(version, timeout);
         }
 
         /// <summary>
@@ -149,7 +149,7 @@
             var mock = new Mock<IWebDriver>();
             var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
-            mock.Object.LoadSizzle(sizzleUri, timeout);
+            mock.Object.Sizzle().Load(sizzleUri, timeout);
         }
 
         /// <summary>
@@ -881,7 +881,7 @@
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(false);
-            mock.Object.CheckQuerySelectorSupport();
+            mock.Object.QuerySelector().CheckSupport();
         }
 
         /// <summary>
