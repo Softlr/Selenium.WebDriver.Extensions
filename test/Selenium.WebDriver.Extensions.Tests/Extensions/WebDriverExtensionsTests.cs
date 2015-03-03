@@ -907,6 +907,16 @@
         }
 
         /// <summary>
+        /// Tests loading external libraries.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void HelperWithNullDriver()
+        {
+            WebElementExtensions.JQuery(null);
+        }
+
+        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>
