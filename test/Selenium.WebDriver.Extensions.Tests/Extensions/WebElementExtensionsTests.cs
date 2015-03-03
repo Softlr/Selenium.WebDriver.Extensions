@@ -41,6 +41,27 @@
         }
 
         /// <summary>
+        /// Tests finding element XPATH.
+        /// </summary>
+        [Test]
+        public void GetXPath()
+        {
+            var selector = new Mock<ISelector>();
+            selector.SetupGet(x => x.Selector).Returns("div");
+            selector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("html[1]/body");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(selector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            Assert.AreEqual("html[1]/body", element.Object.XPath);
+        }
+
+        /// <summary>
         /// Tests finding an element.
         /// </summary>
         [Test]
