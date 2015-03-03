@@ -1,9 +1,10 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
     using System.Collections;
     using System.Collections.ObjectModel;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The JavaScript runner.
