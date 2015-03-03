@@ -3,9 +3,9 @@
     using System;
 
     /// <summary>
-    /// The external library loader interface.
+    /// The loader interface.
     /// </summary>
-    public interface IExternalLibraryLoader
+    public interface ILoader
     {
         /// <summary>
         /// Gets the default URI of the external library.

@@ -102,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ByTests.cs" />
-    <Compile Include="ExternalLibraryLoaders\JQueryLoaderTests.cs" />
+    <Compile Include="Loaders\JQueryLoaderTests.cs" />
     <Compile Include="Models\PositionTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\JQuerySelectorTests.cs" />

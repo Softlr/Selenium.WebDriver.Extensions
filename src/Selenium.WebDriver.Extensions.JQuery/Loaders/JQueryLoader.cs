@@ -1,17 +1,28 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector
+﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
+    using System.Globalization;
+    using System.Linq;
     using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
-    /// The query selector loader.
+    /// The jQuery loader.
     /// </summary>
-    public class QuerySelectorLoader : IExternalLibraryLoader
+    public class JQueryLoader : ILoader
     {
         /// <summary>
-        /// The JavaScript to check if query selector is supported by the browser.
+        /// The JavaScript to check if jQuery has been loaded.
         /// </summary>
-        private const string DetectScriptCode = "return typeof document.querySelectorAll === 'function';";
+        private const string DetectScriptCode = "return typeof window.jQuery === 'function';";
+
+        /// <summary>
+        /// The JavaScript to load jQuery.
+        /// </summary>
+        private const string LoadScriptCode = @"(function(src) {
+                var jq = document.createElement('script');
+                jq.src = src;
+                document.getElementsByTagName('body')[0].appendChild(jq);
+            })";
 
         /// <summary>
         /// Gets the default URI of the external library.
@@ -20,7 +31,7 @@
         {
             get
             {
-                return null;
+                return new Uri("https://code.jquery.com/jquery-latest.min.js");
             }
         }
 
@@ -43,7 +54,17 @@
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
         public string LoadScript(params string[] args)
         {
-            return null;
+            if (args == null)
+            {
+                throw new ArgumentNullException("args");
+            }
+
+            if (args.Length == 0)
+            {
+                throw new LoaderException("No jQuery URI given");
+            }
+
+            return string.Format(CultureInfo.InvariantCulture, "{0}('{1}')", LoadScriptCode, args.First());
         }
     }
 }

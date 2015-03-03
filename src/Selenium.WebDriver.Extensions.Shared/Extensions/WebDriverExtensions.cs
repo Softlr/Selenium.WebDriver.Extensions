@@ -111,7 +111,7 @@
         /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
         public static bool CheckSelectorPrerequisites(
             this IWebDriver driver,
-            IExternalLibraryLoader externalLibraryLoader)
+            ILoader externalLibraryLoader)
         {
             if (externalLibraryLoader == null)
             {
@@ -137,7 +137,7 @@
         /// </remarks>
         public static void LoadExternalLibrary(
             this IWebDriver driver,
-            IExternalLibraryLoader externalLibraryLoader,
+            ILoader externalLibraryLoader,
             Uri libraryUri,
             TimeSpan? timeout = null)
         {
@@ -161,7 +161,7 @@
         /// <param name="loadParams">The additional parameters for load script.</param>
         private static void LoadPrerequisites(
             this IWebDriver driver,
-            IExternalLibraryLoader externalLibraryLoader,
+            ILoader externalLibraryLoader,
             TimeSpan timeout,
             params string[] loadParams)
         {

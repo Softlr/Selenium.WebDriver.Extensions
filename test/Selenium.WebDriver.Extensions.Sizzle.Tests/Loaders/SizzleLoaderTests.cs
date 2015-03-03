@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
     using System.Linq;
@@ -6,14 +6,14 @@
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
-    /// JQuery loader tests.
+    /// Sizzle loader tests.
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class JQueryLoaderTests
+    public class SizzleLoaderTests
     {
         /// <summary>
         /// Script loading test.
@@ -22,7 +22,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void LoadScriptArgumentsNull()
         {
-            var loader = new JQueryLoader();
+            var loader = new SizzleLoader();
             loader.LoadScript(null);
         }
 
@@ -30,10 +30,10 @@
         /// Script loading test.
         /// </summary>
         [Test]
-        [ExpectedException(typeof(ExternalLibraryLoadException))]
+        [ExpectedException(typeof(LoaderException))]
         public void LoadScriptArgumentsEmpty()
         {
-            var loader = new JQueryLoader();
+            var loader = new SizzleLoader();
             loader.LoadScript(Enumerable.Empty<string>().ToArray());
         }
     }

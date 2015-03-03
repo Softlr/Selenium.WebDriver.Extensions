@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery
+﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
     using System.Globalization;
@@ -6,22 +6,22 @@
     using Selenium.WebDriver.Extensions.Shared;
     
     /// <summary>
-    /// The jQuery loader.
+    /// The Sizzle loader.
     /// </summary>
-    public class JQueryLoader : IExternalLibraryLoader
+    public class SizzleLoader : ILoader
     {
         /// <summary>
-        /// The JavaScript to check if jQuery has been loaded.
+        /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
-        private const string DetectScriptCode = "return typeof window.jQuery === 'function';";
+        private const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
 
         /// <summary>
-        /// The JavaScript to load jQuery.
+        /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
         private const string LoadScriptCode = @"(function(src) {
-                var jq = document.createElement('script');
-                jq.src = src;
-                document.getElementsByTagName('body')[0].appendChild(jq);
+                var sizzle = document.createElement('script');
+                sizzle.src = src;
+                document.getElementsByTagName('body')[0].appendChild(sizzle);
             })";
 
         /// <summary>
@@ -31,7 +31,7 @@
         {
             get
             {
-                return new Uri("https://code.jquery.com/jquery-latest.min.js");
+                return new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
             }
         }
 
@@ -61,7 +61,7 @@
 
             if (args.Length == 0)
             {
-                throw new ExternalLibraryLoadException("No jQuery URI given");
+                throw new LoaderException("No Sizzle URI given");
             }
 
             return string.Format(CultureInfo.InvariantCulture, "{0}('{1}')", LoadScriptCode, args.First());

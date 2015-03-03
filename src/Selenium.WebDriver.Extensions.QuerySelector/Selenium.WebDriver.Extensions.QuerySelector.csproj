@@ -109,7 +109,7 @@
   <ItemGroup>
     <Compile Include="Models\By.cs" />
     <Compile Include="Exceptions\QuerySelectorNotSupportedException.cs" />
-    <Compile Include="ExternalLibraryLoaders\QuerySelectorLoader.cs" />
+    <Compile Include="Loaders\QuerySelectorLoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>

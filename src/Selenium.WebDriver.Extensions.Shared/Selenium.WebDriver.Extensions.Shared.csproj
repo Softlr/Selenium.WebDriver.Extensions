@@ -114,9 +114,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\ExternalLibraryLoadException.cs" />
+    <Compile Include="Exceptions\LoaderException.cs" />
     <Compile Include="Exceptions\TypeArgumentException.cs" />
-    <Compile Include="ExternalLibraryLoaders\IExternalLibraryLoader.cs" />
+    <Compile Include="Loaders\ILoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>

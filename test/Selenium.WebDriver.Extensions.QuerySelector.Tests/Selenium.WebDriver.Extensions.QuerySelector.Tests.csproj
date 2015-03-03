@@ -102,7 +102,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ByTests.cs" />
-    <Compile Include="ExternalLibraryLoaders\QuerySelectorLoaderTests.cs" />
+    <Compile Include="Loaders\QuerySelectorLoaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\QuerySelectorTests.cs" />
   </ItemGroup>
