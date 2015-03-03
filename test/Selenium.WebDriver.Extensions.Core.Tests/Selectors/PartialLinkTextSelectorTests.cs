@@ -92,7 +92,7 @@
         /// </summary>
         /// <param name="selector1">First selector to compare.</param>
         /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected resuPLT.</param>
+        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(
             PartialLinkTextSelector selector1,
