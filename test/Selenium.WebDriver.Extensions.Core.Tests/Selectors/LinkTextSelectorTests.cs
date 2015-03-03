@@ -2,7 +2,11 @@
 {
     using System;
     using System.Collections;
+    using Moq;
     using NUnit.Framework;
+    using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     /// <summary>
@@ -118,6 +122,53 @@
             Assert.IsFalse(selector1 == selector2);
             Assert.IsTrue(selector1 != selector2);
 #pragma warning restore 252,253
+        }
+
+        /// <summary>
+        /// Tests the runner type.
+        /// </summary>
+        [Test]
+        public void RunnerType()
+        {
+            var selector = new LinkTextSelector("test");
+
+            Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        public void Create()
+        {
+            var rootSelector = new Mock<ISelector>();
+            rootSelector.SetupGet(x => x.Selector).Returns("div");
+            rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("body > div");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            var selector = By.LinkText("test").Create(element.Object);
+            Assert.IsInstanceOf<LinkTextSelector>(selector);
+
+            var linkTextSelector = (LinkTextSelector)selector;
+            Assert.AreEqual("test", linkTextSelector.RawSelector);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullElement()
+        {
+            var selector = new LinkTextSelector("div");
+            selector.Create(null);
         }
     }
 }

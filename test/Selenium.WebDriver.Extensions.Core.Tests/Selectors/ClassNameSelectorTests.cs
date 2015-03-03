@@ -7,7 +7,7 @@
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
 
     /// <summary>
-    /// Link text selector tests.
+    /// Class name selector tests.
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]

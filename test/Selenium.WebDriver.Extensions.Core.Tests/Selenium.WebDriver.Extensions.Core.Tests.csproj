@@ -108,6 +108,11 @@
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="Models\WebElementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selectors\PartialLinkTextSelectorTests.cs" />
+    <Compile Include="Selectors\TagNameSelectorTests.cs" />
+    <Compile Include="Selectors\NameSelectorTests.cs" />
+    <Compile Include="Selectors\IdSelectorTests.cs" />
+    <Compile Include="Selectors\CssSelectorTests.cs" />
     <Compile Include="Selectors\ClassNameSelectorTests.cs" />
     <Compile Include="Selectors\XPathSelectorTests.cs" />
     <Compile Include="Selectors\LinkTextSelectorTests.cs" />

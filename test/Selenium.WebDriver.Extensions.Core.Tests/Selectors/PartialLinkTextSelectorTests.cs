@@ -10,14 +10,14 @@
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     /// <summary>
-    /// XPATH selector tests.
+    /// Partial link text selector tests.
     /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class XPathSelectorTests
+    public class PartialLinkTextSelectorTests
     {
         /// <summary>
         /// Gets the equality test cases.
@@ -26,14 +26,24 @@
         {
             get
             {
-                yield return new TestCaseData(By.XPath("html"), By.XPath("html"), true)
-                    .SetName("XP('test') == XP('test')");
-                yield return new TestCaseData(By.XPath("html"), By.XPath("body"), false)
-                    .SetName("XP('test') != XP('test2')");
-                yield return new TestCaseData(By.XPath("html"), null, false)
-                    .SetName("XP('test') != null");
-                yield return new TestCaseData(null, By.XPath("html"), false)
-                    .SetName("null != XP('test')");
+                yield return new TestCaseData(By.PartialLinkText("test"), By.PartialLinkText("test"), true)
+                    .SetName("PLT('test') == PLT('test')");
+                yield return new TestCaseData(By.PartialLinkText("test"), By.PartialLinkText("test2"), false)
+                    .SetName("PLT('test') != PLT('test2')");
+                yield return new TestCaseData(By.PartialLinkText("test"), null, false)
+                    .SetName("PLT('test') != null");
+                yield return new TestCaseData(null, By.PartialLinkText("test"), false)
+                    .SetName("null != PLT('test')");
+                yield return new TestCaseData(
+                    By.PartialLinkText("test", "body"),
+                    By.PartialLinkText("test"),
+                    false)
+                    .SetName("PLT('test', PLT('body')) != PLT('test')");
+                yield return new TestCaseData(
+                    By.PartialLinkText("test", "body"),
+                    By.PartialLinkText("test", "body"),
+                    true)
+                    .SetName("PLT('test', PLT('body')) == PLT('test', PLT('body'))");
             }
         }
 
@@ -43,7 +53,7 @@
         [Test]
         public void Selector()
         {
-            var selector = By.XPath("html");
+            var selector = By.PartialLinkText("test");
             Assert.AreEqual(selector.Selector, selector.ToString());
         }
 
@@ -54,7 +64,17 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullSelector()
         {
-            By.XPath(null);
+            By.PartialLinkText(null);
+        }
+
+        /// <summary>
+        /// Tests if the null selector is handled properly.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void NullBaseElementSelector()
+        {
+            By.PartialLinkText("test", null);
         }
 
         /// <summary>
@@ -63,7 +83,7 @@
         [Test]
         public void CallFormatString()
         {
-            var formatString = By.XPath("html").CallFormatString;
+            var formatString = By.PartialLinkText("test").CallFormatString;
             Assert.IsNotNull(formatString);
         }
 
@@ -72,9 +92,12 @@
         /// </summary>
         /// <param name="selector1">First selector to compare.</param>
         /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
+        /// <param name="expectedResult">The expected resuPLT.</param>
         [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(XPathSelector selector1, XPathSelector selector2, bool expectedResult)
+        public void EqualityOperator(
+            PartialLinkTextSelector selector1,
+            PartialLinkTextSelector selector2,
+            bool expectedResult)
         {
             Assert.AreEqual(expectedResult, selector1 == selector2);
             if (selector1 != null)
@@ -95,7 +118,7 @@
         [Test]
         public void EqualityOperatorWrongType()
         {
-            var selector1 = By.XPath("text");
+            var selector1 = By.PartialLinkText("text");
             var selector2 = new object();
 
 #pragma warning disable 252,253
@@ -110,7 +133,7 @@
         [Test]
         public void RunnerType()
         {
-            var selector = new XPathSelector("/html");
+            var selector = new LinkTextSelector("test");
 
             Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
         }
@@ -122,22 +145,22 @@
         public void Create()
         {
             var rootSelector = new Mock<ISelector>();
-            rootSelector.SetupGet(x => x.Selector).Returns("/body");
+            rootSelector.SetupGet(x => x.Selector).Returns("div");
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
             var driver = new Mock<IWebDriver>();
             driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
-                .Returns("/html[1]/body");
+                .Returns("body > div");
 
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var selector = By.XPath("/div").Create(element.Object);
-            Assert.IsInstanceOf<XPathSelector>(selector);
+            var selector = By.PartialLinkText("test").Create(element.Object);
+            Assert.IsInstanceOf<PartialLinkTextSelector>(selector);
 
-            var linkTextSelector = (XPathSelector)selector;
-            Assert.AreEqual("/html[1]/body/div", linkTextSelector.RawSelector);
+            var linkTextSelector = (PartialLinkTextSelector)selector;
+            Assert.AreEqual("test", linkTextSelector.RawSelector);
         }
 
         /// <summary>
@@ -147,7 +170,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreateNullElement()
         {
-            var selector = new XPathSelector("div");
+            var selector = new PartialLinkTextSelector("div");
             selector.Create(null);
         }
     }
