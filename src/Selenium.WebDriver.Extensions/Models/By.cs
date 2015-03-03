@@ -3,6 +3,7 @@
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions.Shared;
     using Selenium.WebDriver.Extensions.Sizzle;
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
 
@@ -63,7 +64,7 @@
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <returns> A <see cref="QS"/> object the driver can use to find the elements.</returns>
-        public static QS QuerySelector(string selector, QS baseSelector)
+        public static QS QuerySelector(string selector, ISelector baseSelector)
         {
             return Extensions.QuerySelector.By.QuerySelector(selector, baseSelector);
         }
