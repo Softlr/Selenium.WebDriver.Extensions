@@ -9,7 +9,7 @@
     /// <summary>
     /// The JQuery runner.
     /// </summary>
-    public class JQueryRunner : IRunner
+    public class JQueryRunner : JavaScriptRunner
     {
         /// <summary>
         /// Performs a JavaScript query selector search on the <see cref="IWebDriver"/> using given 
@@ -27,7 +27,7 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        public T Find<T>(IWebDriver driver, ISelector by)
+        public override T Find<T>(IWebDriver driver, ISelector by)
         {
             if (by == null)
             {
@@ -35,7 +35,7 @@
             }
 
             driver.JQuery().Load();
-            return ParseUtil.ParseResult<T>(driver.ExecuteScript<object>("return " + by.Selector + ".get();"));
+            return this.Find<T>(driver, "return " + by.Selector + ".get();");
         }
     }
 }
