@@ -1,6 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.QuerySelector;
     
