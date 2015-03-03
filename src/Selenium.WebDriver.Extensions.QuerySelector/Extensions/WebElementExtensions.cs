@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
+    using System;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -14,6 +15,11 @@
         /// <returns>The Sizzle helper.</returns>
         public static QuerySelectorHelper QuerySelector(this WebElement webElement)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return new QuerySelectorHelper(webElement.WrappedDriver, webElement);
         }
     }

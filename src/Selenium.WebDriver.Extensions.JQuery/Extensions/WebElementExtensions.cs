@@ -1,5 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
+    using System;
+    using System.CodeDom;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -14,6 +16,11 @@
         /// <returns>The jQuery helper.</returns>
         public static JQueryHelper JQuery(this WebElement webElement)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return new JQueryHelper(webElement.WrappedDriver, webElement);
         }
     }

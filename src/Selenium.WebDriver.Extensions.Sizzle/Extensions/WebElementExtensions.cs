@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
+    using System;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -14,6 +15,11 @@
         /// <returns>The Sizzle helper.</returns>
         public static SizzleHelper JQuery(this WebElement webElement)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
             return new SizzleHelper(webElement.WrappedDriver, webElement);
         }
     }
