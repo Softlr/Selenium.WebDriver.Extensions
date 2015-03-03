@@ -329,6 +329,6 @@
 		</exec>
 	</target>
 	
-    <target name="full.skip.integration" depends="build, test.all, coverage, build.docs, pack"/>
+    <target name="full.skip.integration" depends="build.all, test.all, coverage, docs, pack"/>
 	<target name="full" depends="full.skip.integration, integration"/>
 </project>
