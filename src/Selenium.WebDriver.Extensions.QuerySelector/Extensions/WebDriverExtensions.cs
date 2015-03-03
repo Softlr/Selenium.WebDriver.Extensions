@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Shared;
     
     /// <summary>
     /// Web driver extensions.
@@ -9,15 +8,13 @@
     public static class WebDriverExtensions
     {
         /// <summary>
-        /// Checks if query selector is supported by the browser.
+        /// Returns the query selector helper, that can be used to access query selector specific functionalities.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        public static void CheckQuerySelectorSupport(this IWebDriver driver)
+        /// <returns>The Sizzle helper.</returns>
+        public static QuerySelectorHelper QuerySelector(this IWebDriver driver)
         {
-            if (!driver.CheckSelectorPrerequisites(new QuerySelectorLoader()))
-            {
-                throw new QuerySelectorNotSupportedException();
-            }
+            return new QuerySelectorHelper(driver);
         }
     }
 }

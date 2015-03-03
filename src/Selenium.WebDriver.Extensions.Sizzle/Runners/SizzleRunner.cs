@@ -34,7 +34,7 @@
                 throw new ArgumentNullException("by");
             }
 
-            driver.LoadSizzle();
+            driver.Sizzle().Load();
             return ParseUtil.ParseResult<T>(driver.ExecuteScript<object>("return " + by.Selector + ";"));
         }
     }

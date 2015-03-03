@@ -113,6 +113,7 @@
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Models\QuerySelectorHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runners\QuerySelectorRunner.cs" />
     <Compile Include="Selectors\QuerySelector.cs" />

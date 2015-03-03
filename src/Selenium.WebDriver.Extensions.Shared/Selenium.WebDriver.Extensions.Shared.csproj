@@ -120,6 +120,7 @@
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Models\HelperBase.cs" />
     <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Selectors\ISelector.cs" />
     <Compile Include="Selectors\NestableSelectorBase.cs" />
