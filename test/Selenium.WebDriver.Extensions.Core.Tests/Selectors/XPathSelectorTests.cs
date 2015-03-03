@@ -5,7 +5,6 @@
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
@@ -112,7 +111,7 @@
         {
             var selector = new XPathSelector("/html");
 
-            Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
+            Assert.AreEqual(typeof(JavaScriptRunner), selector.RunnerType);
         }
 
         /// <summary>
