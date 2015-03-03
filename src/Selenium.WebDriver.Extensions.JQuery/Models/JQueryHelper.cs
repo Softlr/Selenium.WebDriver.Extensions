@@ -420,9 +420,7 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        public T Find<T>(JQuerySelector by,
-            string scriptFormat,
-            string wrapperFormat = null)
+        public T Find<T>(JQuerySelector by, string scriptFormat, string wrapperFormat = null)
         {
             this.Driver.JQuery().Load();
             return ParseUtil.ParseResult<T>(this.ExecuteScript(by, scriptFormat, wrapperFormat));
