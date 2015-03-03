@@ -24,12 +24,12 @@
         /// <summary>
         /// Gets the query raw selector.
         /// </summary>
-        public string RawSelector { get; private set; }
+        public virtual string RawSelector { get; private set; }
 
         /// <summary>
         /// Gets or sets the selector.
         /// </summary>
-        public string Selector { get; protected set; }
+        public virtual string Selector { get; protected set; }
 
         /// <summary>
         /// Gets the call format string.

@@ -36,7 +36,7 @@
         /// <summary>
         /// Gets the DOM Element or Document to use as context.
         /// </summary>
-        public SizzleSelector Context { get; private set; }
+        public virtual SizzleSelector Context { get; private set; }
 
         /// <summary>
         /// Gets the type of the runner.

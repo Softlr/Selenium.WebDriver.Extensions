@@ -73,7 +73,7 @@
         /// <summary>
         /// Gets the base query selector for the query selector.
         /// </summary>
-        public ISelector BaseSelector { get; private set; }
+        public virtual ISelector BaseSelector { get; private set; }
 
         /// <summary>
         /// Compares two selectors and returns <c>true</c> if they are equal.

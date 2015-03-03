@@ -55,12 +55,12 @@
         /// <summary>
         /// Gets the DOM Element, Document, or jQuery to use as context.
         /// </summary>
-        public JQuerySelector Context { get; private set; }
+        public virtual JQuerySelector Context { get; private set; }
 
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.
         /// </summary>
-        public string JQueryVariable { get; private set; }
+        public virtual string JQueryVariable { get; private set; }
 
         /// <summary>
         /// Gets the type of the runner.
