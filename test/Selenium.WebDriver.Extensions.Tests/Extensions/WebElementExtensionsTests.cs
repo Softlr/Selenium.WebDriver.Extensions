@@ -1,15 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.JQuery;
-    using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
     
     /// <summary>
@@ -282,76 +279,6 @@
 
             Assert.AreEqual("span", result[1].TagName);
             Assert.AreEqual("test2", result[1].GetAttribute("class"));
-        }
-
-        /// <summary>
-        /// Tests finding element path.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void GetPathNullElement()
-        {
-            Shared.WebElementExtensions.GetPath(null);
-        }
-
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementJQueryNullElement()
-        {
-            JQuery.WebElementExtensions.FindElement(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementSizzleNullElement()
-        {
-            Sizzle.WebElementExtensions.FindElement(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementQuerySelectorNullElement()
-        {
-            Extensions.QuerySelector.WebElementExtensions.FindElement(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsJQueryNullElement()
-        {
-            JQuery.WebElementExtensions.FindElements(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsSizzleNullElement()
-        {
-            Sizzle.WebElementExtensions.FindElements(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsQuerySelectorNullElement()
-        {
-            Extensions.QuerySelector.WebElementExtensions.FindElements(null, null);
         }
 
         /// <summary>

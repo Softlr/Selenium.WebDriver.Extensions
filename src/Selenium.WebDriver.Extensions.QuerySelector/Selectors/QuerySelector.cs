@@ -41,7 +41,7 @@
         /// generated on its base will be invoked on the first match of the base selector. There's also a check to 
         /// make sure that the base selector has actually return any results.
         /// </remarks>
-        public QuerySelector(string selector, QuerySelector baseSelector)
+        public QuerySelector(string selector, ISelector baseSelector)
             : base(selector, null)
         {
             if (selector == null)
@@ -66,14 +66,58 @@
         {
             get
             {
-                return typeof(JavaScriptRunner);
+                return typeof(QuerySelectorRunner);
             }
         }
 
         /// <summary>
         /// Gets the base query selector for the query selector.
         /// </summary>
-        public QuerySelector BaseSelector { get; private set; }
+        public ISelector BaseSelector { get; private set; }
+
+        /// <summary>
+        /// Compares two selectors and returns <c>true</c> if they are equal.
+        /// </summary>
+        /// <param name="selector1">The first selector to compare.</param>
+        /// <param name="selector2">The second selector to compare.</param>
+        /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
+        public static bool operator ==(QuerySelector selector1, QuerySelector selector2)
+        {
+            if (ReferenceEquals(selector1, selector2))
+            {
+                return true;
+            }
+
+            if (((object)selector1 == null) || ((object)selector2 == null))
+            {
+                return false;
+            }
+
+            return selector1.Equals(selector2);
+        }
+
+        /// <summary>
+        /// Compares two selectors and returns <c>true</c> if they are not equal.
+        /// </summary>
+        /// <param name="selector1">The first selector to compare.</param>
+        /// <param name="selector2">The second selector to compare.</param>
+        /// <returns><c>true</c> if the selectors are not equal; otherwise, <c>false</c>.</returns>
+        public static bool operator !=(QuerySelector selector1, QuerySelector selector2)
+        {
+            return !(selector1 == selector2);
+        }
+
+        /// <summary>
+        /// Creates a new selector using given selector as a root.
+        /// </summary>
+        /// <param name="root">A web element to be used as a root.</param>
+        /// <returns>A new selector.</returns>
+        public override ISelector Create(WebElement root)
+        {
+            var path = root.GetPath();
+            var rootSelector = new QuerySelector(path);
+            return new QuerySelector(this.RawSelector, rootSelector);
+        }
 
         /// <summary>
         /// Determines whether two object instances are equal.
@@ -90,8 +134,20 @@
             }
 
             var selector = (QuerySelector)obj;
-            return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement
-                && this.BaseSelector == selector.BaseSelector;
+            if ((this.BaseSelector == null && selector.BaseSelector != null) 
+                || (this.BaseSelector != null && selector.BaseSelector == null))
+            {
+                return false;
+            }
+
+            if (this.BaseSelector != null && selector.BaseSelector != null)
+            {
+                return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement
+                    && this.BaseSelector.GetType() == selector.BaseSelector.GetType()
+                    && this.BaseSelector.Selector == selector.BaseSelector.Selector;   
+            }
+
+            return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement;
         }
 
         /// <summary>

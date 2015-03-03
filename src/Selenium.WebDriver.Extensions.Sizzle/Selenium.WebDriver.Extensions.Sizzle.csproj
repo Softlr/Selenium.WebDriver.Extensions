@@ -115,7 +115,6 @@
     <Compile Include="Runners\SizzleRunner.cs" />
     <Compile Include="Selectors\SizzleSelector.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
-    <Compile Include="Extensions\WebElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -481,11 +481,6 @@
             string scriptFormat,
             string wrapperFormat = null)
         {
-            if (by == null)
-            {
-                throw new ArgumentNullException("by");
-            }
-
             driver.LoadJQuery();
             return ParseUtil.ParseResult<T>(driver.ExecuteScript(by, scriptFormat, wrapperFormat));
         }

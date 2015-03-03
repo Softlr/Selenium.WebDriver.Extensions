@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
+    using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -36,7 +37,7 @@
         {
             get
             {
-                return typeof(JavaScriptRunner);
+                return typeof(QuerySelectorRunner);
             }
         }
     }
