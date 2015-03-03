@@ -93,7 +93,7 @@
             }
 
             var selector = (LinkTextSelector)obj;
-            return this.RawSelector == selector.RawSelector;
+            return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement;
         }
 
         /// <summary>
@@ -102,7 +102,7 @@
         /// <returns>A hash code for the current object.</returns>
         public override int GetHashCode()
         {
-            return this.RawSelector.GetHashCode();
+            return this.RawSelector.GetHashCode() ^ this.BaseElement.GetHashCode();
         }
     }
 }
