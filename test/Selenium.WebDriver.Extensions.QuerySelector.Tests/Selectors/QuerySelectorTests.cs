@@ -72,7 +72,7 @@
                 yield return new TestCaseData(
                     By.QuerySelector("div", By.QuerySelector("body")),
                     By.QuerySelector("div", By.QuerySelector("div")),
-                    true)
+                    false)
                     .SetName("QS('div', QS('body')) != QS('div', QS('div'))");
             }
         }
