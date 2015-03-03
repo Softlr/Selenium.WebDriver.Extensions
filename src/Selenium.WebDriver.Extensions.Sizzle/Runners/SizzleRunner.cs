@@ -35,7 +35,7 @@
             }
 
             driver.Sizzle().Load();
-            return this.Find<T>(driver, "return " + by.Selector + ";");
+            return Find<T>(driver, "return " + by.Selector + ";");
         }
     }
 }

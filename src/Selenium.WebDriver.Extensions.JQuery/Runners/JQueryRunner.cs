@@ -35,7 +35,7 @@
             }
 
             driver.JQuery().Load();
-            return this.Find<T>(driver, "return " + by.Selector + ".get();");
+            return Find<T>(driver, "return " + by.Selector + ".get();");
         }
     }
 }

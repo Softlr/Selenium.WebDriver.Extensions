@@ -33,7 +33,7 @@
                 throw new ArgumentNullException("by");
             }
 
-            return this.Find<T>(driver, "return " + by.Selector + ";");
+            return Find<T>(driver, "return " + by.Selector + ";");
         }
 
         /// <summary>
@@ -51,8 +51,7 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        // ReSharper disable once MemberCanBeMadeStatic.Global
-        protected T Find<T>(IWebDriver driver, string script)
+        protected static T Find<T>(IWebDriver driver, string script)
         {
             if (script == null)
             {
