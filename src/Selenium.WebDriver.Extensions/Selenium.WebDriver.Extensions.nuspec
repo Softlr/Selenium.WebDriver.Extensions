@@ -16,6 +16,7 @@
             <dependency id="Selenium.WebDriver.Extensions.JQuery" version="1.2.0"/>
             <dependency id="Selenium.WebDriver.Extensions.Sizzle" version="1.2.0"/>
             <dependency id="Selenium.WebDriver.Extensions.QuerySelector" version="1.2.0"/>
+            <dependency id="Selenium.WebDriver.Extensions.Core" version="1.2.0"/>
 		</dependencies> 
     </metadata>
     <files>

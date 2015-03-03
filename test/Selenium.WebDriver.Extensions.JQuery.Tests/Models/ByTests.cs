@@ -20,10 +20,10 @@
         public void ClassName()
         {
             const string ClassName = "test";
-            var originalBy = OpenQA.Selenium.By.ClassName(ClassName);
+            var selector = OpenQA.Selenium.By.ClassName(ClassName);
             var wrappedBy = By.ClassName(ClassName);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -33,10 +33,10 @@
         public void CssSelector()
         {
             const string CssSelector = "div.test";
-            var originalBy = OpenQA.Selenium.By.CssSelector(CssSelector);
+            var selector = OpenQA.Selenium.By.CssSelector(CssSelector);
             var wrappedBy = By.CssSelector(CssSelector);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -46,10 +46,10 @@
         public void Id()
         {
             const string Id = "test";
-            var originalBy = OpenQA.Selenium.By.Id(Id);
+            var selector = OpenQA.Selenium.By.Id(Id);
             var wrappedBy = By.Id(Id);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -58,11 +58,11 @@
         [Test]
         public void LinkText()
         {
-            const string LinkText = "div.test";
-            var originalBy = OpenQA.Selenium.By.LinkText(LinkText);
+            const string LinkText = "test";
+            var selector = OpenQA.Selenium.By.LinkText(LinkText);
             var wrappedBy = By.LinkText(LinkText);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -71,11 +71,11 @@
         [Test]
         public void Name()
         {
-            const string Name = "div.test";
-            var originalBy = OpenQA.Selenium.By.Name(Name);
+            const string Name = "test";
+            var selector = OpenQA.Selenium.By.Name(Name);
             var wrappedBy = By.Name(Name);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -84,11 +84,11 @@
         [Test]
         public void PartialLinkText()
         {
-            const string PartialLinkText = "div.test";
-            var originalBy = OpenQA.Selenium.By.PartialLinkText(PartialLinkText);
+            const string PartialLinkText = "test";
+            var selector = OpenQA.Selenium.By.PartialLinkText(PartialLinkText);
             var wrappedBy = By.PartialLinkText(PartialLinkText);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -97,11 +97,11 @@
         [Test]
         public void TagName()
         {
-            const string TagName = "div.test";
-            var originalBy = OpenQA.Selenium.By.TagName(TagName);
+            const string TagName = "div";
+            var selector = OpenQA.Selenium.By.TagName(TagName);
             var wrappedBy = By.TagName(TagName);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
 
         /// <summary>
@@ -110,11 +110,11 @@
         [Test]
         public void XPath()
         {
-            const string XPath = "div.test";
-            var originalBy = OpenQA.Selenium.By.XPath(XPath);
+            const string XPath = "/body/div";
+            var selector = OpenQA.Selenium.By.XPath(XPath);
             var wrappedBy = By.XPath(XPath);
 
-            Assert.AreEqual(originalBy, wrappedBy);
+            Assert.AreEqual(selector, wrappedBy);
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The Selenium selector for jQuery.
     /// </summary>
-    public class JQuerySelector : ISelector
+    public class JQuerySelector : SelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
@@ -19,6 +20,7 @@
             string selector,
             JQuerySelector context = null,
             string jQueryVariable = "jQuery")
+            : base(selector)
         {
             if (selector == null)
             {
@@ -27,7 +29,6 @@
 
             this.Context = context;
             this.JQueryVariable = jQueryVariable;
-            this.RawSelector = selector;
             this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'"
                 + (this.Context != null ? ", " + this.Context : string.Empty) + ")";
         }
@@ -36,40 +37,42 @@
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
         protected JQuerySelector()
+            : base(null)
         {
         }
-
-        /// <summary>
-        /// Gets the raw selector.
-        /// </summary>
-        public string RawSelector { get; private set; }
-
-        /// <summary>
-        /// Gets the selector.
-        /// </summary>
-        public string Selector { get; private set; }
 
         /// <summary>
         /// Gets the call format string.
         /// </summary>
         /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
-        public string CallFormatString
+        public override string CallFormatString
         {
             get
             {
-                return string.Format(CultureInfo.InvariantCulture, "{0}({{0}}).get({{1}})", this.JQueryVariable);
+                return this.JQueryVariable + "({0}).get({1})";
             }
         }
 
         /// <summary>
         /// Gets the DOM Element, Document, or jQuery to use as context.
         /// </summary>
-        public JQuerySelector Context { get; private set; }
+        public virtual JQuerySelector Context { get; private set; }
 
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.
         /// </summary>
-        public string JQueryVariable { get; private set; }
+        public virtual string JQueryVariable { get; private set; }
+
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public override Type RunnerType
+        {
+            get
+            {
+                return typeof(JQueryRunner);
+            }
+        }
 
         /// <summary>
         /// Compares two selectors and returns <c>true</c> if they are equal.
@@ -77,6 +80,8 @@
         /// <param name="selector1">The first selector to compare.</param>
         /// <param name="selector2">The second selector to compare.</param>
         /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public static bool operator ==(JQuerySelector selector1, JQuerySelector selector2)
         {
             if (ReferenceEquals(selector1, selector2))
@@ -101,6 +106,25 @@
         public static bool operator !=(JQuerySelector selector1, JQuerySelector selector2)
         {
             return !(selector1 == selector2);
+        }
+
+        /// <summary>
+        /// Creates a new selector using given selector as a root.
+        /// </summary>
+        /// <param name="root">A web element to be used as a root.</param>
+        /// <returns>A new selector.</returns>
+        public override ISelector Create(WebElement root)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new JQuerySelector(root.Path);
+            var jquerySelector = root.Selector as JQuerySelector;
+            return jquerySelector != null
+                ? new JQuerySelector(this.RawSelector, rootSelector, jquerySelector.JQueryVariable) 
+                : new JQuerySelector(this.RawSelector, rootSelector);
         }
 
         /// <summary>
@@ -131,15 +155,6 @@
             return this.Context == null 
                 ? this.RawSelector.GetHashCode() ^ this.JQueryVariable.GetHashCode() 
                 : this.RawSelector.GetHashCode() ^ this.JQueryVariable.GetHashCode() ^ this.Context.GetHashCode();
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return this.Selector;
         }
 
         /// <summary>

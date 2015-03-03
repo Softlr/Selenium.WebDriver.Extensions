@@ -59,6 +59,21 @@
                     By.QuerySelector("div", By.QuerySelector("body")),
                     true)
                     .SetName("QS('div', QS('body')) == QS('div', QS('body'))");
+                yield return new TestCaseData(
+                    By.QuerySelector("div", "body"),
+                    By.QuerySelector("div", By.QuerySelector("body")),
+                    false)
+                    .SetName("QS('div', null) != QS('div', QS('body'))");
+                yield return new TestCaseData(
+                    By.QuerySelector("div", By.QuerySelector("body")),
+                    By.QuerySelector("div", "body"),
+                    false)
+                    .SetName("QS('div', QS('body')) != QS('div', null)");
+                yield return new TestCaseData(
+                    By.QuerySelector("div", By.QuerySelector("body")),
+                    By.QuerySelector("div", By.QuerySelector("div")),
+                    false)
+                    .SetName("QS('div', QS('body')) != QS('div', QS('div'))");
             }
         }
 
@@ -159,6 +174,17 @@
             Assert.IsFalse(selector1 == selector2);
             Assert.IsTrue(selector1 != selector2);
 #pragma warning restore 252,253
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullElement()
+        {
+            var selector = new QuerySelector("div");
+            selector.Create(null);
         }
     }
 }

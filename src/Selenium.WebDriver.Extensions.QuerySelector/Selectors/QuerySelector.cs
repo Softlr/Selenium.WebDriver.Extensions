@@ -1,12 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
-    public class QuerySelector : ISelector
+    public class QuerySelector : NestableSelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
@@ -16,6 +17,7 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         public QuerySelector(string selector, string baseElement = "document")
+            : base(selector, baseElement)
         {
             if (selector == null)
             {
@@ -27,8 +29,6 @@
                 throw new ArgumentNullException("baseElement");
             }
 
-            this.BaseElement = baseElement;
-            this.RawSelector = selector;
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
@@ -39,10 +39,11 @@
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <remarks>
         /// Because the <see cref="QuerySelector"/> operates always on collection of results, the new selector 
-        /// generated on its base will be invoked on the first match of the base selector. There's also a check to make
-        /// sure that the base selector has actually return any results.
+        /// generated on its base will be invoked on the first match of the base selector. There's also a check to 
+        /// make sure that the base selector has actually return any results.
         /// </remarks>
-        public QuerySelector(string selector, QuerySelector baseSelector)
+        public QuerySelector(string selector, ISelector baseSelector)
+            : base(selector, null)
         {
             if (selector == null)
             {
@@ -55,42 +56,25 @@
             }
 
             this.BaseSelector = baseSelector;
-            this.RawSelector = selector;
             this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
                 + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
         }
 
         /// <summary>
-        /// Gets the query raw selector.
+        /// Gets the type of the runner.
         /// </summary>
-        public string RawSelector { get; private set; }
-
-        /// <summary>
-        /// Gets the query selector.
-        /// </summary>
-        public string Selector { get; private set; }
-
-        /// <summary>
-        /// Gets the call format string.
-        /// </summary>
-        /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
-        public string CallFormatString
+        public override Type RunnerType
         {
             get
             {
-                return "{0}[{1}]";
+                return typeof(QuerySelectorRunner);
             }
         }
 
         /// <summary>
-        /// Gets the base element for the query selector.
-        /// </summary>
-        public string BaseElement { get; private set; }
-
-        /// <summary>
         /// Gets the base query selector for the query selector.
         /// </summary>
-        public QuerySelector BaseSelector { get; private set; }
+        public virtual ISelector BaseSelector { get; private set; }
 
         /// <summary>
         /// Compares two selectors and returns <c>true</c> if they are equal.
@@ -98,6 +82,8 @@
         /// <param name="selector1">The first selector to compare.</param>
         /// <param name="selector2">The second selector to compare.</param>
         /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public static bool operator ==(QuerySelector selector1, QuerySelector selector2)
         {
             if (ReferenceEquals(selector1, selector2))
@@ -125,6 +111,22 @@
         }
 
         /// <summary>
+        /// Creates a new selector using given selector as a root.
+        /// </summary>
+        /// <param name="root">A web element to be used as a root.</param>
+        /// <returns>A new selector.</returns>
+        public override ISelector Create(WebElement root)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new QuerySelector(root.Path);
+            return new QuerySelector(this.RawSelector, rootSelector);
+        }
+
+        /// <summary>
         /// Determines whether two object instances are equal.
         /// </summary>
         /// <param name="obj">The object to compare with the current object. </param>
@@ -139,8 +141,20 @@
             }
 
             var selector = (QuerySelector)obj;
-            return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement 
-                && this.BaseSelector == selector.BaseSelector;
+            if ((this.BaseSelector == null && selector.BaseSelector != null) 
+                || (this.BaseSelector != null && selector.BaseSelector == null))
+            {
+                return false;
+            }
+
+            if (this.BaseSelector != null && selector.BaseSelector != null)
+            {
+                return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement
+                    && this.BaseSelector.GetType() == selector.BaseSelector.GetType()
+                    && this.BaseSelector.Selector == selector.BaseSelector.Selector;   
+            }
+
+            return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement;
         }
 
         /// <summary>
@@ -152,15 +166,6 @@
             return this.BaseSelector == null
                 ? this.RawSelector.GetHashCode() ^ this.BaseElement.GetHashCode()
                 : this.RawSelector.GetHashCode() ^ this.BaseSelector.GetHashCode();
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return this.Selector;
         }
     }
 }

@@ -3,7 +3,6 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
-    using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.By;
 
@@ -123,8 +122,7 @@
         public void FindElementPath()
         {
             var element = this.Browser.FindElement(By.QuerySelector("#id1"));
-            var path = element.GetPath();
-            Assert.AreEqual("body > div#id1", path);
+            Assert.AreEqual("body > div#id1", element.Path);
         }
 
         /// <summary>

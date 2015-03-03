@@ -1,7 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions.Shared
 {
+    using System;
     using System.Collections.ObjectModel;
     using System.Drawing;
+    using System.Globalization;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Remote;
 
@@ -10,6 +12,85 @@
     /// </summary>
     public class WebElement : IWebElement
     {
+        /// <summary>
+        /// The script to get the DOM path.
+        /// </summary>
+        private const string FindDomPathScript = @"(function(el) {
+            var stack = [];
+            while (el.parentNode != null) {
+                var sibCount = 0;
+                var sibIndex = 0;
+                for (var i = 0; i < el.parentNode.childNodes.length; i++) {
+                    var sib = el.parentNode.childNodes[i];
+                    if (sib.nodeName == el.nodeName) {
+                        if (sib === el) {
+                            sibIndex = sibCount;
+                        }
+                        sibCount++;
+                    }
+                }
+                if (el.hasAttribute('id') && el.id != ''){
+                    stack.unshift(el.nodeName.toLowerCase() + '#' + el.id);
+                } else if (sibCount > 1) {
+                    stack.unshift(el.nodeName.toLowerCase() + ':eq(' + sibIndex + ')');
+                } else {
+                    stack.unshift(el.nodeName.toLowerCase());
+                }
+                el = el.parentNode;
+            }
+
+            stack = stack.slice(1); // removes the html element
+            return stack.join(' > ');
+        })";
+
+        /// <summary>
+        /// The script to get the XPATH.
+        /// </summary>
+        private const string FindXPathScript = @"(function(el) { 
+            var allNodes = document.getElementsByTagName('*'); 
+            for(var segs = []; el && el.nodeType == 1; el = el.parentNode) 
+            { 
+                if(el.hasAttribute('id')) { 
+                    var uniqueIdCount = 0; 
+                    for (var n=0;n < allNodes.length;n++) { 
+                        if (allNodes[n].hasAttribute('id') && allNodes[n].id == el.id) {
+                            uniqueIdCount++; 
+                        }
+                        if (uniqueIdCount > 1) {
+                            break; 
+                        }
+                    }
+                
+                    if ( uniqueIdCount == 1) { 
+                        segs.unshift('id(""' + el.getAttribute('id') + '"")'); 
+                        return segs.join('/'); 
+                    } else { 
+                        segs.unshift(el.localName.toLowerCase() + '[@id=""' + el.getAttribute('id') + '""]'); 
+                    } 
+                } else if (el.hasAttribute('class')) { 
+                    segs.unshift(el.localName.toLowerCase() + '[@class=""' + el.getAttribute('class') + '""]'); 
+                } else { 
+                    for (i = 1, sib = el.previousSibling; sib; sib = sib.previousSibling) { 
+                        if (sib.localName == el.localName) {
+                            i++; 
+                        }
+                    }; 
+                    segs.unshift(el.localName.toLowerCase() + '[' + i + ']'); 
+                }
+            }
+            return segs.length ? '/' + segs.join('/') : null; 
+        })";
+
+        /// <summary>
+        /// The DOM path.
+        /// </summary>
+        private string domPath;
+
+        /// <summary>
+        /// The XPATH.
+        /// </summary>
+        private string xpath;
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="WebElement"/> class.
         /// </summary>
@@ -47,6 +128,28 @@
         /// Gets the selector result index.
         /// </summary>
         public virtual int SelectorResultIndex { get; private set; }
+
+        /// <summary>
+        /// Gets the DOM path for the web element.
+        /// </summary>
+        public string Path
+        {
+            get
+            {
+                return this.domPath ?? (this.domPath = this.FindPath(FindDomPathScript));
+            }
+        }
+
+        /// <summary>
+        /// Gets the XPATH for the web element.
+        /// </summary>
+        public string XPath
+        {
+            get
+            {
+                return this.xpath ?? (this.xpath = this.FindPath(FindXPathScript));
+            }
+        }
 
         /// <summary>
         /// Gets the <see cref="IWebDriver"/> used to find this element.
@@ -186,7 +289,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public virtual ReadOnlyCollection<IWebElement> FindElements(By @by)
+        public virtual ReadOnlyCollection<IWebElement> FindElements(By by)
         {
             return this.InnerElement.FindElements(by);
         }
@@ -260,6 +363,55 @@
         public virtual string GetCssValue(string propertyName)
         {
             return this.InnerElement.GetCssValue(propertyName);
+        }
+
+        /// <summary>
+        /// Searches for DOM element using query selector limiting the scope of the search to descendants of current 
+        /// element.
+        /// </summary>
+        /// <param name="by">The Selenium query selector.</param>
+        /// <returns>The first DOM element matching given query selector</returns>
+        public WebElement FindElement(ISelector by)
+        {
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return this.WrappedDriver.FindElement(by.Create(this));
+        }
+
+        /// <summary>
+        /// Searches for DOM elements using query selector limiting the scope of the search to descendants of current 
+        /// element.
+        /// </summary>
+        /// <param name="by">The Selenium query selector.</param>
+        /// <returns>The DOM elements matching given query selector.</returns>
+        public ReadOnlyCollection<WebElement> FindElements(ISelector by)
+        {
+            if (by == null)
+            {
+                throw new ArgumentNullException("by");
+            }
+
+            return this.WrappedDriver.FindElements(by.Create(this));
+        }
+
+        /// <summary>
+        /// Gets the DOM path for the web element.
+        /// </summary>
+        /// <param name="findScript">The script to be run on order to find the path.</param>
+        /// <returns>The DOM path for the web element.</returns>
+        private string FindPath(string findScript)
+        {
+            var selectorCallScript = string.Format(
+                CultureInfo.InvariantCulture,
+                this.Selector.CallFormatString,
+                this.Selector.Selector,
+                this.SelectorResultIndex);
+
+            var script = "return " + findScript + "(" + selectorCallScript + ");";
+            return this.WrappedDriver.ExecuteScript<string>(script);
         }
     }
 }

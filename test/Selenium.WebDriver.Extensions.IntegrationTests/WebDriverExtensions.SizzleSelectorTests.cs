@@ -4,7 +4,6 @@
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>
@@ -135,8 +134,7 @@
         public void FindElementPath()
         {
             var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
-            var path = element.GetPath();
-            Assert.AreEqual("body > div#id1", path);
+            Assert.AreEqual("body > div#id1", element.Path);
         }
 
         /// <summary>

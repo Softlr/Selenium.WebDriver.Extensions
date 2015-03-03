@@ -1,12 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
-    public class SizzleSelector : ISelector
+    public class SizzleSelector : SelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
@@ -21,6 +22,7 @@
         public SizzleSelector(
             string selector,
             SizzleSelector context = null)
+            : base(selector)
         {
             if (selector == null)
             {
@@ -28,37 +30,25 @@
             }
 
             this.Context = context;
-            this.RawSelector = selector;
             this.Selector = "Sizzle('" + selector.Replace('\'', '"') + "'" 
                 + (this.Context != null ? ", " + this.Context + "[0]" : string.Empty) + ")";
         }
 
         /// <summary>
-        /// Gets the raw selector.
+        /// Gets the DOM Element or Document to use as context.
         /// </summary>
-        public string RawSelector { get; private set; }
+        public virtual SizzleSelector Context { get; private set; }
 
         /// <summary>
-        /// Gets the selector.
+        /// Gets the type of the runner.
         /// </summary>
-        public string Selector { get; private set; }
-
-        /// <summary>
-        /// Gets the call format string.
-        /// </summary>
-        /// <remarks>This value is used to execute selector while determining the DOM path of the result.</remarks>
-        public string CallFormatString
+        public override Type RunnerType
         {
             get
             {
-                return "{0}[{1}]";
+                return typeof(SizzleRunner);
             }
         }
-
-        /// <summary>
-        /// Gets the DOM Element or Document to use as context.
-        /// </summary>
-        public SizzleSelector Context { get; private set; }
 
         /// <summary>
         /// Compares two selectors and returns <c>true</c> if they are equal.
@@ -66,6 +56,8 @@
         /// <param name="selector1">The first selector to compare.</param>
         /// <param name="selector2">The second selector to compare.</param>
         /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public static bool operator ==(SizzleSelector selector1, SizzleSelector selector2)
         {
             if (ReferenceEquals(selector1, selector2))
@@ -90,6 +82,22 @@
         public static bool operator !=(SizzleSelector selector1, SizzleSelector selector2)
         {
             return !(selector1 == selector2);
+        }
+
+        /// <summary>
+        /// Creates a new selector using given selector as a root.
+        /// </summary>
+        /// <param name="root">A web element to be used as a root.</param>
+        /// <returns>A new selector.</returns>
+        public override ISelector Create(WebElement root)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new SizzleSelector(root.Path);
+            return new SizzleSelector(this.RawSelector, rootSelector);
         }
 
         /// <summary>
@@ -119,15 +127,6 @@
             return this.Context == null
                 ? this.RawSelector.GetHashCode()
                 : this.RawSelector.GetHashCode() ^ this.Context.GetHashCode();
-        }
-
-        /// <summary>
-        /// Returns a string that represents the current object.
-        /// </summary>
-        /// <returns>A string that represents the current object.</returns>
-        public override string ToString()
-        {
-            return this.Selector;
         }
     }
 }

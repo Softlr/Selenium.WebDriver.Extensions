@@ -96,10 +96,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='Debug-Net40' Or '$(Configuration)'=='Release-Net40'">
     <Reference Include="WebDriver">
@@ -118,18 +114,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Exceptions\ExternalLibraryLoadException.cs" />
+    <Compile Include="Exceptions\LoaderException.cs" />
     <Compile Include="Exceptions\TypeArgumentException.cs" />
-    <Compile Include="ExternalLibraryLoaders\IExternalLibraryLoader.cs" />
+    <Compile Include="Loaders\ILoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Runners\IRunner.cs" />
     <Compile Include="Selectors\ISelector.cs" />
+    <Compile Include="Selectors\NestableSelectorBase.cs" />
+    <Compile Include="Selectors\SelectorBase.cs" />
     <Compile Include="Utils\ParseUtil.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="Models\WebElement.cs" />
-    <Compile Include="Extensions\WebElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

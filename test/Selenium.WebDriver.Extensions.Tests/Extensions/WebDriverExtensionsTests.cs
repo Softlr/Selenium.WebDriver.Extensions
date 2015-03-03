@@ -160,7 +160,9 @@
         {
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
-            var mock = MockWebDriver("return jQuery('div').get(0);", element.Object);
+
+            var list = new List<IWebElement> { element.Object };
+            var mock = MockWebDriver("return jQuery('div').get();", new ReadOnlyCollection<IWebElement>(list));
             var result = mock.Object.FindElement(By.JQuerySelector("div"));
 
             Assert.IsNotNull(result);

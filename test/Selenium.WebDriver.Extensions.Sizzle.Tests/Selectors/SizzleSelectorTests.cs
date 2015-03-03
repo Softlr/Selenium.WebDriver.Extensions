@@ -137,5 +137,16 @@
             Assert.IsTrue(selector1 != selector2);
 #pragma warning restore 252,253
         }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullElement()
+        {
+            var selector = new SizzleSelector("div");
+            selector.Create(null);
+        }
     }
 }

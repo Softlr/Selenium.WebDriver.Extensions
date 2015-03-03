@@ -3,11 +3,11 @@
     using JetBrains.Annotations;
     
     /// <summary>
-    /// Extends the selenium <see cref="OpenQA.Selenium.By"/> to enable jQuery selector to be used.
+    /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.
     /// </summary>
     /// <remarks>
     /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By"/>. The reason for that is
-    /// to avoid warnings that the code is accessing static members of the base class.
+    /// to replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
     [UsedImplicitly]
     public class By : OpenQA.Selenium.By
