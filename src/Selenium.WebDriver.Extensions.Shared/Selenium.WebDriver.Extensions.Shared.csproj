@@ -122,6 +122,7 @@
     </Compile>
     <Compile Include="Models\HelperBase.cs" />
     <Compile Include="Runners\IRunner.cs" />
+    <Compile Include="Runners\JavaScriptRunner.cs" />
     <Compile Include="Selectors\ISelector.cs" />
     <Compile Include="Selectors\NestableSelectorBase.cs" />
     <Compile Include="Selectors\SelectorBase.cs" />

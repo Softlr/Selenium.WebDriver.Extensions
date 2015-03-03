@@ -19,17 +19,6 @@
         }
 
         /// <summary>
-        /// Gets the type of the runner.
-        /// </summary>
-        public override Type RunnerType
-        {
-            get
-            {
-                return typeof(QuerySelectorRunner);
-            }
-        }
-
-        /// <summary>
         /// Compares two selectors and returns <c>true</c> if they are equal.
         /// </summary>
         /// <param name="selector1">The first selector to compare.</param>
