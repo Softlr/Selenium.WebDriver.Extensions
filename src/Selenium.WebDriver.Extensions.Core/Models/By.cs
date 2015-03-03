@@ -1,7 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using JetBrains.Annotations;
-    
+    using Selenium.WebDriver.Extensions.Shared;
+    using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
+
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.
     /// </summary>
@@ -12,6 +14,30 @@
     [UsedImplicitly]
     public class By : OpenQA.Selenium.By
     {
+        /// <summary>
+        /// Gets a mechanism to find elements matching JavaScript query selector.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="baseElement">
+        /// A string defining the base element on which base element the selector should be invoked.
+        /// </param>
+        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
+        public static QS QuerySelector(string selector, string baseElement = "document")
+        {
+            return new QS(selector, baseElement);
+        }
+
+        /// <summary>
+        /// Gets a mechanism to find elements matching JavaScript query selector.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
+        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
+        public static QS QuerySelector(string selector, ISelector baseSelector)
+        {
+            return new QS(selector, baseSelector);
+        }
+
         /// <summary>
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
