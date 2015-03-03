@@ -122,8 +122,7 @@
         public void FindElementPath()
         {
             var element = this.Browser.FindElement(By.QuerySelector("#id1"));
-            var path = element.GetPath();
-            Assert.AreEqual("body > div#id1", path);
+            Assert.AreEqual("body > div#id1", element.Path);
         }
 
         /// <summary>

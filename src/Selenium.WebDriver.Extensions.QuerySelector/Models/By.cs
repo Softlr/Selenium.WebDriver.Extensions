@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using JetBrains.Annotations;
+    using Selenium.WebDriver.Extensions.Shared;
     using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
     
     /// <summary>
@@ -32,7 +33,7 @@
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
-        public static QuerySelector QuerySelector(string selector, QuerySelector baseSelector)
+        public static QuerySelector QuerySelector(string selector, ISelector baseSelector)
         {
             return new QuerySelector(selector, baseSelector);
         }

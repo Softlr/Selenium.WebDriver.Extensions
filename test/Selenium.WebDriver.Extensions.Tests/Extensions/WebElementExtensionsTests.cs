@@ -37,8 +37,7 @@
             element.SetupGet(x => x.Selector).Returns(selector.Object);
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
             
-            var path = element.Object.GetPath();
-            Assert.AreEqual("body > div", path);
+            Assert.AreEqual("body > div", element.Object.Path);
         }
 
         /// <summary>

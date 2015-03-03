@@ -114,8 +114,12 @@
         /// <returns>A new selector.</returns>
         public override ISelector Create(WebElement root)
         {
-            var path = root.GetPath();
-            var rootSelector = new QuerySelector(path);
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new QuerySelector(root.Path);
             return new QuerySelector(this.RawSelector, rootSelector);
         }
 

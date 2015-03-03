@@ -505,8 +505,7 @@
         /// <returns>The jQuery selector limiting the scope of the search to descendants of current element.</returns>
         private static JQuerySelector CreateSelector(this WebElement webElement, JQuerySelector by)
         {
-            var path = webElement.GetPath();
-            var rootSelector = new JQuerySelector(path, jQueryVariable: by.JQueryVariable);
+            var rootSelector = new JQuerySelector(webElement.Path, jQueryVariable: by.JQueryVariable);
             return new JQuerySelector(by.RawSelector, rootSelector, by.JQueryVariable);
         }
     }

@@ -88,8 +88,12 @@
         /// <returns>A new selector.</returns>
         public override ISelector Create(WebElement root)
         {
-            var path = root.GetPath();
-            var rootSelector = new SizzleSelector(path);
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new SizzleSelector(root.Path);
             return new SizzleSelector(this.RawSelector, rootSelector);
         }
 

@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
+    using System;
     using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Shared;
 
@@ -36,8 +37,12 @@
         /// <returns>A new selector.</returns>
         public override ISelector Create(WebElement root)
         {
-            var path = root.GetPath();
-            var rootSelector = new QuerySelector(path);
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new QuerySelector(root.Path);
             return new PartialLinkTextSelector(this.RawSelector, rootSelector.Selector);
         }
 

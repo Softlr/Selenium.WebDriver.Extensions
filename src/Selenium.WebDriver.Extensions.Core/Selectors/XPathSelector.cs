@@ -44,8 +44,12 @@
         /// <returns>A new selector.</returns>
         public override ISelector Create(WebElement root)
         {
-            var xpath = root.GetXPath();
-            return new XPathSelector(xpath + this.RawSelector);
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            return new XPathSelector(root.XPath + this.RawSelector);
         }
 
         /// <summary>

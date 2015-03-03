@@ -112,8 +112,12 @@
         /// <returns>A new selector.</returns>
         public override ISelector Create(WebElement root)
         {
-            var path = root.GetPath();
-            var rootSelector = new JQuerySelector(path);
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new JQuerySelector(root.Path);
             var jquerySelector = root.Selector as JQuerySelector;
             return jquerySelector != null
                 ? new JQuerySelector(this.RawSelector, rootSelector, jquerySelector.JQueryVariable) 
