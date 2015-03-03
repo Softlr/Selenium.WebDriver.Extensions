@@ -53,11 +53,6 @@
         /// </remarks>
         protected static T Find<T>(IWebDriver driver, string script)
         {
-            if (script == null)
-            {
-                throw new ArgumentNullException("script");
-            }
-
             return ParseUtil.ParseResult<T>(driver.ExecuteScript<object>(script));
         }
     }
