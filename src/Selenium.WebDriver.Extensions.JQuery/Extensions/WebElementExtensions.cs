@@ -12,21 +12,6 @@
         /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
         /// </summary>
         /// <param name="webElement">The web element to base the search on.</param>
-        /// <returns>The jQuery helper.</returns>
-        public static JQueryHelper JQuery(this WebElement webElement)
-        {
-            if (webElement == null)
-            {
-                throw new ArgumentNullException("webElement");
-            }
-
-            return new JQueryHelper(webElement.WrappedDriver, webElement);
-        }
-
-        /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
-        /// </summary>
-        /// <param name="webElement">The web element to base the search on.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
         public static ChainJQueryHelper JQuery(this WebElement webElement, JQuerySelector selector)
