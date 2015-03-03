@@ -107,7 +107,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Models\By.cs" />
     <Compile Include="Exceptions\QuerySelectorNotSupportedException.cs" />
     <Compile Include="Loaders\QuerySelectorLoader.cs" />

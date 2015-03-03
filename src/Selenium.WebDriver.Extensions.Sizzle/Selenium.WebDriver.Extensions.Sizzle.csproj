@@ -106,7 +106,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\WebElementExtensions.cs" />
     <Compile Include="Models\By.cs" />
     <Compile Include="Loaders\SizzleLoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
