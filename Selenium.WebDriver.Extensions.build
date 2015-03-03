@@ -87,13 +87,17 @@
 			<property name="VisualStudioVersion" value="${project.visual.studio.version}"/>
 		</msbuild>
 	</target>
-	
-	<target name="setup.build.process">
+    
+    <target name="compile" depends="build"/>
+    <target name="build.all" depends="build.net40 build.net35"/>
+	<target name="docs" depends="build.docs"/>
+    
+	<target name="setup">
 		<delete dir="${dir.build}" failonerror="false"/>
 		<mkdir dir="${dir.build}"/>
 	</target>
 	
-	<target name="move.assemblies.for.unit.tests">
+	<target name="test.setup">
 		<copy todir="${dir.work}" flatten="true">
 			<fileset basedir="${dir.unit.tests.jquery}">
 				<include name="*.dll"/>
@@ -126,7 +130,7 @@
 		</copy>
 	</target>
 	
-	<target name="test" depends="build, setup.build.process, move.assemblies.for.unit.tests">
+	<target name="test" depends="build, setup, test.setup">
 		<exec program="${path.nunit}">
 			<arg value="${file.unit.tests.jquery}"/>
             <arg value="${file.unit.tests.sizzle}"/>
@@ -140,7 +144,7 @@
 		</exec>
 	</target>
     
-    <target name="move.assemblies.for.unit.tests.net40">
+    <target name="test.setup.net40">
 		<copy todir="${dir.work.net40}" flatten="true">
 			<fileset basedir="${dir.unit.tests.jquery.net40}">
 				<include name="*.dll"/>
@@ -173,7 +177,7 @@
 		</copy>
 	</target>
 	
-	<target name="test.net40" depends="build.net40, setup.build.process, move.assemblies.for.unit.tests.net40">
+	<target name="test.net40" depends="build.net40, setup, test.setup.net40">
 		<exec program="${path.nunit}">
 			<arg value="${file.unit.tests.jquery.net40}"/>
             <arg value="${file.unit.tests.sizzle.net40}"/>
@@ -187,7 +191,7 @@
 		</exec>
 	</target>
     
-    <target name="move.assemblies.for.unit.tests.net35">
+    <target name="test.setup.net35">
 		<copy todir="${dir.work.net35}" flatten="true">
 			<fileset basedir="${dir.unit.tests.jquery.net35}">
 				<include name="*.dll"/>
@@ -220,7 +224,7 @@
 		</copy>
 	</target>
 	
-	<target name="test.net35" depends="build.net35, setup.build.process, move.assemblies.for.unit.tests.net35">
+	<target name="test.net35" depends="build.net35, setup, test.setup.net35">
 		<exec program="${path.nunit}">
 			<arg value="${file.unit.tests.jquery.net35}"/>
             <arg value="${file.unit.tests.sizzle.net35}"/>
@@ -236,7 +240,7 @@
     
     <target name="test.all" depends="test, test.net40, test.net35"/>
     
-    <target name="move.assemblies.for.integration.tests">
+    <target name="integration.setup">
 		<copy todir="${dir.work}" flatten="true">
             <fileset basedir="${dir.integration.tests}">
 				<include name="*.dll"/>
@@ -251,7 +255,7 @@
         </copy>
 	</target>
     
-    <target name="integration" depends="build, setup.build.process, move.assemblies.for.integration.tests">
+    <target name="integration" depends="build, setup, integration.setup">
 		<exec program="${path.nunit}">
 			<arg value="${file.integration.tests}"/>
             <arg value="/framework:${project.framework}"/>
@@ -261,7 +265,7 @@
 		</exec>
 	</target>
 	
-	<target name="analyse.code.coverage" depends="build, setup.build.process, move.assemblies.for.unit.tests">
+	<target name="coverage.analyse" depends="build, setup, test.setup">
 		<exec program="${path.opencover}">
 			<arg value="-register:user"/>
 			<arg value="-target:&quot;${path.nunit}&quot;"/>
@@ -271,7 +275,7 @@
 		</exec>
 	</target>
 	
-	<target name="coverage" depends="analyse.code.coverage">
+	<target name="coverage" depends="coverage.analyse">
 		<exec program="${path.report.generator}">
 			<arg value="-reports:&quot;${file.coverage.report}&quot;"/>
 			<arg value="-targetdir:&quot;${dir.coverage.report}&quot;"/>
@@ -279,14 +283,14 @@
 		</exec>
 	</target>
     
-    <target name="coveralls" depends="analyse.code.coverage">
+    <target name="coveralls" depends="coverage.analyse">
 		<exec program="${path.report.coveralls}">
             <arg value="--opencover"/>
 			<arg value="${file.coverage.report}"/>
 		</exec>
 	</target>
     
-    <target name="pack" depends="build build.net40 build.net35">
+    <target name="pack" depends="build.all">
 		<exec program="${path.nuget}">
             <arg value="pack"/>
 			<arg value="src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec"/>
@@ -325,6 +329,6 @@
 		</exec>
 	</target>
 	
-    <target name="full.noint" depends="build, test.all, coverage, build.docs, pack"/>
-	<target name="full" depends="full.noint, integration"/>
+    <target name="full.skip.integration" depends="build, test.all, coverage, build.docs, pack"/>
+	<target name="full" depends="full.skip.integration, integration"/>
 </project>
