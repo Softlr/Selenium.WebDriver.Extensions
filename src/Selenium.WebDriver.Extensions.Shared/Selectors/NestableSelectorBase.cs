@@ -22,32 +22,5 @@
         /// Gets the base element for the query selector.
         /// </summary>
         public string BaseElement { get; private set; }
-
-        /// <summary>
-        /// Determines whether two object instances are equal.
-        /// </summary>
-        /// <param name="obj">The object to compare with the current object. </param>
-        /// <returns>
-        /// <c>true</c> if the specified object is equal to the current object; otherwise, <c>false</c>.
-        /// </returns>
-        public override bool Equals(object obj)
-        {
-            if (obj == null || this.GetType() != obj.GetType())
-            {
-                return false;
-            }
-
-            var selector = (NestableSelectorBase)obj;
-            return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement;
-        }
-
-        /// <summary>
-        /// Serves as the default hash function.
-        /// </summary>
-        /// <returns>A hash code for the current object.</returns>
-        public override int GetHashCode()
-        {
-            return this.RawSelector.GetHashCode() ^ this.BaseElement.GetHashCode();
-        }
     }
 }

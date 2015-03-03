@@ -1,15 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.JQuery;
-    using Selenium.WebDriver.Extensions.QuerySelector;
     using Selenium.WebDriver.Extensions.Shared;
-    using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
     
     /// <summary>
@@ -40,8 +37,28 @@
             element.SetupGet(x => x.Selector).Returns(selector.Object);
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
             
-            var path = element.Object.GetPath();
-            Assert.AreEqual("body > div", path);
+            Assert.AreEqual("body > div", element.Object.Path);
+        }
+
+        /// <summary>
+        /// Tests finding element XPATH.
+        /// </summary>
+        [Test]
+        public void GetXPath()
+        {
+            var selector = new Mock<ISelector>();
+            selector.SetupGet(x => x.Selector).Returns("div");
+            selector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("html[1]/body");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(selector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            Assert.AreEqual("html[1]/body", element.Object.XPath);
         }
 
         /// <summary>
@@ -58,12 +75,14 @@
             var element = new Mock<IWebElement>();
             element.SetupGet(x => x.TagName).Returns("span");
 
-            var driver = MockWebDriver("return jQuery('div').get(0);", rootElement.Object);
+            var list = new List<IWebElement> { rootElement.Object };
+            var driver = MockWebDriver("return jQuery('div').get();", new ReadOnlyCollection<IWebElement>(list));
             driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
+            var elementList = new List<IWebElement> { element.Object };
             driver.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get(0);"))
-                .Returns(element.Object);
+                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
+                .Returns(new ReadOnlyCollection<IWebElement>(elementList));
             
             var webElement = new Mock<WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
@@ -95,13 +114,14 @@
             element2.Setup(x => x.TagName).Returns("span");
             element2.Setup(x => x.GetAttribute("class")).Returns("test2");
 
-            var list = new List<IWebElement> { element1.Object, element2.Object };
-            var driver = MockWebDriver("return jQuery('div').get(0);", rootElement.Object);
+            var list = new List<IWebElement> { rootElement.Object };
+            var driver = MockWebDriver("return jQuery('div').get();", new ReadOnlyCollection<IWebElement>(list));
             driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
+            var elementList = new List<IWebElement> { element1.Object, element2.Object };
             driver.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
-                .Returns(new ReadOnlyCollection<IWebElement>(list));
+                .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
             var webElement = new Mock<WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
@@ -279,76 +299,6 @@
 
             Assert.AreEqual("span", result[1].TagName);
             Assert.AreEqual("test2", result[1].GetAttribute("class"));
-        }
-
-        /// <summary>
-        /// Tests finding element path.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void GetPathNullElement()
-        {
-            Shared.WebElementExtensions.GetPath(null);
-        }
-
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementJQueryNullElement()
-        {
-            JQuery.WebElementExtensions.FindElement(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementSizzleNullElement()
-        {
-            Sizzle.WebElementExtensions.FindElement(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementQuerySelectorNullElement()
-        {
-            Extensions.QuerySelector.WebElementExtensions.FindElement(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsJQueryNullElement()
-        {
-            JQuery.WebElementExtensions.FindElements(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsSizzleNullElement()
-        {
-            Sizzle.WebElementExtensions.FindElements(null, null);
-        }
-
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsQuerySelectorNullElement()
-        {
-            Extensions.QuerySelector.WebElementExtensions.FindElements(null, null);
         }
 
         /// <summary>

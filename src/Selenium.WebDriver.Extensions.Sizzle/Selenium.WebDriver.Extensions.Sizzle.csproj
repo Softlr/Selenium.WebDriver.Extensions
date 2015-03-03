@@ -94,11 +94,6 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='Debug-Net40' Or '$(Configuration)'=='Release-Net40'">
     <Reference Include="WebDriver">
@@ -112,14 +107,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\By.cs" />
-    <Compile Include="ExternalLibraryLoaders\SizzleLoader.cs" />
+    <Compile Include="Loaders\SizzleLoader.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runners\SizzleRunner.cs" />
     <Compile Include="Selectors\SizzleSelector.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
-    <Compile Include="Extensions\WebElementExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

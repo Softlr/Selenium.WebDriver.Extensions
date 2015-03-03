@@ -102,8 +102,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ByTests.cs" />
-    <Compile Include="ExternalLibraryLoaders\SizzleLoaderTests.cs" />
+    <Compile Include="Loaders\SizzleLoaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runners\SizzleRunnerTests.cs" />
     <Compile Include="Selectors\SizzleSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>

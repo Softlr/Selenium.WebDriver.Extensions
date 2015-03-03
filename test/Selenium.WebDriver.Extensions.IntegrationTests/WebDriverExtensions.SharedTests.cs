@@ -3,9 +3,7 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
-    using Selenium.WebDriver.Extensions.JQuery;
-    using Selenium.WebDriver.Extensions.QuerySelector;
-    using Selenium.WebDriver.Extensions.Sizzle;
+    using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.By;
 
     /// <summary>

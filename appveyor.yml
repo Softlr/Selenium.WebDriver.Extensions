@@ -50,15 +50,16 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
-      - Selenium.WebDriver.Extensions.Shared.Tests.dll
+      - Selenium.WebDriver.Extensions.Core.Tests.dll
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
     
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll test/Selenium.WebDriver.Extensions.Shared.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Shared.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
+    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
     - packages\coveralls.io.1.1.91\tools\coveralls.net.exe --opencover coverage.xml
   
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
+    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
@@ -141,15 +142,16 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
-      - Selenium.WebDriver.Extensions.Shared.Tests.dll
+      - Selenium.WebDriver.Extensions.Core.Tests.dll
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
   
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll test/Selenium.WebDriver.Extensions.Shared.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Shared.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
+    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
     - packages\coveralls.io.1.1.91\tools\coveralls.net.exe --opencover coverage.xml
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
@@ -206,15 +208,16 @@
       - Selenium.WebDriver.Extensions.JQuery.Tests.dll
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.QuerySelector.Tests.dll
-      - Selenium.WebDriver.Extensions.Shared.Tests.dll
+      - Selenium.WebDriver.Extensions.Core.Tests.dll
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
   
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll test/Selenium.WebDriver.Extensions.Shared.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Shared.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
+    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.QuerySelector.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.QuerySelector.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
     - packages\coveralls.io.1.1.91\tools\coveralls.net.exe --opencover coverage.xml
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
+    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
     - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"
     - nuget pack src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.nuspec -Version "%APPVEYOR_BUILD_VERSION%-preview"

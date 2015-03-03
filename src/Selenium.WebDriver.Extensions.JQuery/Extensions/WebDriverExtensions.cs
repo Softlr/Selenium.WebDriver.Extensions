@@ -51,40 +51,6 @@
         }
 
         /// <summary>
-        /// Searches for DOM element using jQuery selector.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The first DOM element matching given jQuery selector</returns>
-        public static WebElement FindElement(
-            this IWebDriver driver,
-            JQuerySelector by)
-        {
-            var result = driver.Find<IWebElement>(by, "get(0)");
-            if (result == null)
-            {
-                throw new NoSuchElementException("No element found with jQuery command: " + by.Selector);
-            }
-
-            return new WebElement(result, by);
-        }
-
-        /// <summary>
-        /// Searches for DOM elements using jQuery selector.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium jQuery selector.</param>
-        /// <returns>The DOM elements matching given jQuery selector.</returns>
-        public static ReadOnlyCollection<WebElement> FindElements(
-            this IWebDriver driver,
-            JQuerySelector by)
-        {
-            var results = driver.Find<IEnumerable<IWebElement>>(by, "get()")
-                .Select((value, index) => new WebElement(value, by, index)).ToList();
-            return new ReadOnlyCollection<WebElement>(results);
-        }
-
-        /// <summary>
         /// Searches for DOM element using jQuery selector and gets the combined text contents of each element in the 
         /// set of matched elements, including their descendants, or set the text contents of the matched elements.
         /// </summary>
@@ -515,11 +481,6 @@
             string scriptFormat,
             string wrapperFormat = null)
         {
-            if (by == null)
-            {
-                throw new ArgumentNullException("by");
-            }
-
             driver.LoadJQuery();
             return ParseUtil.ParseResult<T>(driver.ExecuteScript(by, scriptFormat, wrapperFormat));
         }

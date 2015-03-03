@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -36,7 +37,68 @@
         /// <summary>
         /// Gets the DOM Element or Document to use as context.
         /// </summary>
-        public SizzleSelector Context { get; private set; }
+        public virtual SizzleSelector Context { get; private set; }
+
+        /// <summary>
+        /// Gets the type of the runner.
+        /// </summary>
+        public override Type RunnerType
+        {
+            get
+            {
+                return typeof(SizzleRunner);
+            }
+        }
+
+        /// <summary>
+        /// Compares two selectors and returns <c>true</c> if they are equal.
+        /// </summary>
+        /// <param name="selector1">The first selector to compare.</param>
+        /// <param name="selector2">The second selector to compare.</param>
+        /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
+        public static bool operator ==(SizzleSelector selector1, SizzleSelector selector2)
+        {
+            if (ReferenceEquals(selector1, selector2))
+            {
+                return true;
+            }
+
+            if (((object)selector1 == null) || ((object)selector2 == null))
+            {
+                return false;
+            }
+
+            return selector1.Equals(selector2);
+        }
+
+        /// <summary>
+        /// Compares two selectors and returns <c>true</c> if they are not equal.
+        /// </summary>
+        /// <param name="selector1">The first selector to compare.</param>
+        /// <param name="selector2">The second selector to compare.</param>
+        /// <returns><c>true</c> if the selectors are not equal; otherwise, <c>false</c>.</returns>
+        public static bool operator !=(SizzleSelector selector1, SizzleSelector selector2)
+        {
+            return !(selector1 == selector2);
+        }
+
+        /// <summary>
+        /// Creates a new selector using given selector as a root.
+        /// </summary>
+        /// <param name="root">A web element to be used as a root.</param>
+        /// <returns>A new selector.</returns>
+        public override ISelector Create(WebElement root)
+        {
+            if (root == null)
+            {
+                throw new ArgumentNullException("root");
+            }
+
+            var rootSelector = new SizzleSelector(root.Path);
+            return new SizzleSelector(this.RawSelector, rootSelector);
+        }
 
         /// <summary>
         /// Determines whether two object instances are equal.
