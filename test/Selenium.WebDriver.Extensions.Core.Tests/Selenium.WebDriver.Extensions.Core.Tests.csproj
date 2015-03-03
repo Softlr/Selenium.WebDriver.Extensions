@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Selectors\ClassNameSelectorTests.cs" />
     <Compile Include="Selectors\XPathSelectorTests.cs" />
     <Compile Include="Selectors\LinkTextSelectorTests.cs" />
   </ItemGroup>
@@ -113,6 +114,10 @@
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj">
       <Project>{bac59c4a-bb67-4e40-ac8a-0690cc7223e1}</Project>
       <Name>Selenium.WebDriver.Extensions.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.csproj">
+      <Project>{a0d4c735-e4c6-449d-b2db-e0423e5eed5a}</Project>
+      <Name>Selenium.WebDriver.Extensions.QuerySelector</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.csproj">
       <Project>{b0f9d77e-89ae-4162-a73f-5f544c14f41a}</Project>

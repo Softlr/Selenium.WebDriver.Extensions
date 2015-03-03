@@ -2,7 +2,10 @@
 {
     using System;
     using System.Collections;
+    using Moq;
     using NUnit.Framework;
+    using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.Shared;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
     /// <summary>
@@ -458,6 +461,42 @@
         public void FindSerializedArrayWithNullElement()
         {
             WebElementExtensions.FindSerializedArray(null, null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateNullElement()
+        {
+            var selector = new JQuerySelector("div");
+            selector.Create(null);
+        }
+
+        /// <summary>
+        /// Tests invoking functions with null element.
+        /// </summary>
+        [Test]
+        public void CreateJQueryElement()
+        {
+            var rootSelector = new Mock<ISelector>();
+            rootSelector.SetupGet(x => x.Selector).Returns("div");
+            rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("body > div");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            var selector = By.JQuerySelector("test").Create(element.Object);
+            Assert.IsInstanceOf<JQuerySelector>(selector);
+
+            var jquerySelector = (JQuerySelector)selector;
+            Assert.AreEqual("jQuery", jquerySelector.JQueryVariable);
         }
     }
 }
