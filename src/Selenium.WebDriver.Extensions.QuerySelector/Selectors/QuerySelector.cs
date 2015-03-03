@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Shared;
 
     /// <summary>
@@ -81,6 +82,8 @@
         /// <param name="selector1">The first selector to compare.</param>
         /// <param name="selector2">The second selector to compare.</param>
         /// <returns><c>true</c> if the selectors are equal; otherwise, <c>false</c>.</returns>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public static bool operator ==(QuerySelector selector1, QuerySelector selector2)
         {
             if (ReferenceEquals(selector1, selector2))
