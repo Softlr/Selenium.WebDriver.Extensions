@@ -14,6 +14,17 @@
         /// <param name="webElement">The web element to base the search on.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
+        public static ChainJQueryHelper JQuery(this WebElement webElement, string selector)
+        {
+            return webElement.JQuery(By.JQuerySelector(selector));
+        }
+
+        /// <summary>
+        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
+        /// </summary>
+        /// <param name="webElement">The web element to base the search on.</param>
+        /// <param name="selector">The selector.</param>
+        /// <returns>The jQuery helper.</returns>
         public static ChainJQueryHelper JQuery(this WebElement webElement, JQuerySelector selector)
         {
             if (webElement == null)
