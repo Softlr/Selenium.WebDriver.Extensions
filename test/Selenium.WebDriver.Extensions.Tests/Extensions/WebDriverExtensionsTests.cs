@@ -912,7 +912,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void HelperWithNullDriver()
         {
-            WebElementExtensions.JQuery(null, null);
+            WebElementExtensions.JQuery(null, (string)null);
         }
 
         /// <summary>
