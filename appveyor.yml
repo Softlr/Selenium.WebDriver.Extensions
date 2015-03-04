@@ -51,7 +51,7 @@
       - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
       - Selenium.WebDriver.Extensions.Core.Tests.dll
       - Selenium.WebDriver.Extensions.IntegrationTests.dll
-    
+  
   after_test:
     - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
     - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
@@ -133,13 +133,8 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
-  test:
-    assemblies:
-      - Selenium.WebDriver.Extensions.Tests.dll
-      - Selenium.WebDriver.Extensions.JQuery.Tests.dll
-      - Selenium.WebDriver.Extensions.Sizzle.Tests.dll
-      - Selenium.WebDriver.Extensions.Core.Tests.dll
-      - Selenium.WebDriver.Extensions.IntegrationTests.dll
+  test_script:
+    - nunit-console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll /framework:net-4.0
   
   after_test:
     - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
