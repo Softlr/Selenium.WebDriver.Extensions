@@ -3,7 +3,6 @@
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
-    using Selenium.WebDriver.Extensions.Shared;
     using Selenium.WebDriver.Extensions.Sizzle;
     
     /// <summary>

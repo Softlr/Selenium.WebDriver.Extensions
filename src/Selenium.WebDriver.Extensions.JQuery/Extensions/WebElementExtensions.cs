@@ -1,7 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
-    using Selenium.WebDriver.Extensions.Shared;
+    using Selenium.WebDriver.Extensions.Core;
 
     /// <summary>
     /// The web element extensions.

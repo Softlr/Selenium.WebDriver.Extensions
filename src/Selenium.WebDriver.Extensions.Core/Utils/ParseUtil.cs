@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;

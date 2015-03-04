@@ -4,8 +4,7 @@
     using System.Collections;
     using System.Collections.ObjectModel;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// The query selector runner.
     /// </summary>

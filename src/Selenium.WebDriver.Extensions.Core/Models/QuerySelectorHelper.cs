@@ -1,8 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// Additional methods for <see cref="QuerySelector"/>.
     /// </summary>

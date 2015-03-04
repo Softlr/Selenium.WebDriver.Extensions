@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     /// <summary>
     /// The selector base.

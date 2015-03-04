@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.Shared;
     
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.

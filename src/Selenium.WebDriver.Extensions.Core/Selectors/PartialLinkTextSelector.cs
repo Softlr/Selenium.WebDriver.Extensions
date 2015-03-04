@@ -2,8 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// The partial link text selector.
     /// </summary>

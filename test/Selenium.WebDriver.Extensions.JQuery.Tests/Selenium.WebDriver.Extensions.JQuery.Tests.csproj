@@ -126,10 +126,6 @@
       <Project>{e62ebb89-ae2a-4675-a56a-259b17a513e7}</Project>
       <Name>Selenium.WebDriver.Extensions.JQuery</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.csproj">
-      <Project>{b0f9d77e-89ae-4162-a73f-5f544c14f41a}</Project>
-      <Name>Selenium.WebDriver.Extensions.Shared</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

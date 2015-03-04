@@ -4,8 +4,8 @@
     using System.Collections;
     using System.Collections.ObjectModel;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    using Selenium.WebDriver.Extensions.Core;
+    
     /// <summary>
     /// The JQuery runner.
     /// </summary>
@@ -35,7 +35,7 @@
             }
 
             driver.JQuery().Load();
-            return Find<T>(driver, "return " + by.Selector + ".get();");
+            return JavaScriptRunner.Find<T>(driver, "return " + by.Selector + ".get();");
         }
     }
 }

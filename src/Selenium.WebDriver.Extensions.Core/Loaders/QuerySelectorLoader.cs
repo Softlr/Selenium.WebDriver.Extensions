@@ -1,8 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// The query selector loader.
     /// </summary>

@@ -22,7 +22,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementDriverNull()
         {
-            Shared.WebDriverExtensions.FindElement(null, null);
+            WebDriverExtensions.FindElement(null, null);
         }
 
         /// <summary>
@@ -33,7 +33,7 @@
         public void FindElementSelectorNull()
         {
             var driver = new Mock<IWebDriver>();
-            Shared.WebDriverExtensions.FindElement(driver.Object, null);
+            WebDriverExtensions.FindElement(driver.Object, null);
         }
 
         /// <summary>
@@ -43,7 +43,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementsDriverNull()
         {
-            Shared.WebDriverExtensions.FindElements(null, null);
+            WebDriverExtensions.FindElements(null, null);
         }
 
         /// <summary>
@@ -54,7 +54,7 @@
         public void FindElementsSelectorNull()
         {
             var driver = new Mock<IWebDriver>();
-            Shared.WebDriverExtensions.FindElements(driver.Object, null);
+            WebDriverExtensions.FindElements(driver.Object, null);
         }
     }
 }

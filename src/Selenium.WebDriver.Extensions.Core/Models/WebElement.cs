@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Shared
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
     using System.Collections.ObjectModel;
@@ -274,7 +274,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public virtual IWebElement FindElement(By by)
+        public virtual IWebElement FindElement(OpenQA.Selenium.By by)
         {
             return this.InnerElement.FindElement(by);
         }
@@ -290,7 +290,7 @@
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-        public virtual ReadOnlyCollection<IWebElement> FindElements(By by)
+        public virtual ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
         {
             return this.InnerElement.FindElements(by);
         }

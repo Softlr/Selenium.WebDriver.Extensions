@@ -2,8 +2,8 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    using Selenium.WebDriver.Extensions.Core;
+    
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
