@@ -1340,7 +1340,7 @@
                 throw new ArgumentException("Opacity cannot be bigger than 1");
             }
 
-            this.Set("fadeTo(" + duration +", " + opacity + ")");
+            this.Set("fadeTo(" + duration + ", " + opacity + ")");
             return this;
         }
 
