@@ -1,9 +1,8 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
+﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.QuerySelector;
-
+    
     /// <summary>
     /// JQuery runner tests.
     /// </summary>

@@ -2,10 +2,9 @@
 {
     using System.Collections;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.QuerySelector;
+    using Selenium.WebDriver.Extensions.Core;
     using By = Selenium.WebDriver.Extensions.Core.By;
-    using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
-
+    
     /// <summary>
     /// Class name selector tests.
     /// </summary>
@@ -78,7 +77,10 @@
         /// <param name="selector2">Second selector to compare.</param>
         /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("QuerySelectorEqualityTestCases")]
-        public void QuerySelectorEqualityOperator(QS selector1, QS selector2, bool expectedResult)
+        public void QuerySelectorEqualityOperator(
+            QuerySelector selector1, 
+            QuerySelector selector2, 
+            bool expectedResult)
         {
             Assert.AreEqual(expectedResult, selector1 == selector2);
             if (selector1 != null)

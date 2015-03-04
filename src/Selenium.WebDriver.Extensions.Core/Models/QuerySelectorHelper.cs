@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Shared;

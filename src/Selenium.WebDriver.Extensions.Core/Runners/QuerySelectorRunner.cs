@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector
+﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
     using System.Collections;
@@ -35,7 +35,7 @@
             }
 
             driver.QuerySelector().CheckSupport();
-            return Find<T>(driver, "return " + by.Selector + ";");
+            return JavaScriptRunner.Find<T>(driver, "return " + by.Selector + ";");
         }
     }
 }

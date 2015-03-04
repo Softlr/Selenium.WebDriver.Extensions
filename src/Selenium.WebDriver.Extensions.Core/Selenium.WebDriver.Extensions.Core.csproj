@@ -110,10 +110,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\QuerySelectorNotSupportedException.cs" />
+    <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Loaders\QuerySelectorLoader.cs" />
     <Compile Include="Models\By.cs" />
+    <Compile Include="Models\QuerySelectorHelper.cs" />
+    <Compile Include="Runners\QuerySelectorRunner.cs" />
     <Compile Include="Selectors\ClassNameSelector.cs" />
     <Compile Include="Selectors\CssSelector.cs" />
     <Compile Include="Selectors\IdSelector.cs" />
@@ -121,6 +126,7 @@
     <Compile Include="Selectors\LinkTextSelector.cs" />
     <Compile Include="Selectors\NameSelector.cs" />
     <Compile Include="Selectors\PartialLinkTextSelector.cs" />
+    <Compile Include="Selectors\QuerySelector.cs" />
     <Compile Include="Selectors\TagNameSelector.cs" />
     <Compile Include="Selectors\XPathSelector.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -134,10 +140,6 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.csproj">
-      <Project>{a0d4c735-e4c6-449d-b2db-e0423e5eed5a}</Project>
-      <Name>Selenium.WebDriver.Extensions.QuerySelector</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.csproj">
       <Project>{b0f9d77e-89ae-4162-a73f-5f544c14f41a}</Project>
       <Name>Selenium.WebDriver.Extensions.Shared</Name>

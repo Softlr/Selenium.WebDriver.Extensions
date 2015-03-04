@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.QuerySelector;
     
     /// <summary>
     /// The class name selector.

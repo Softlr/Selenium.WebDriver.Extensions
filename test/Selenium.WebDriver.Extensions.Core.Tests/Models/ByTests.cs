@@ -1,7 +1,7 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
+﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using NUnit.Framework;
-    using By = Selenium.WebDriver.Extensions.QuerySelector.By;
+    using By = Selenium.WebDriver.Extensions.Core.By;
 
     /// <summary>
     /// Web driver extensions tests.

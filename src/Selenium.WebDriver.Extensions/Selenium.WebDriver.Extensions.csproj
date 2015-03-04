@@ -132,10 +132,6 @@
       <Project>{e62ebb89-ae2a-4675-a56a-259b17a513e7}</Project>
       <Name>Selenium.WebDriver.Extensions.JQuery</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Selenium.WebDriver.Extensions.QuerySelector\Selenium.WebDriver.Extensions.QuerySelector.csproj">
-      <Project>{a0d4c735-e4c6-449d-b2db-e0423e5eed5a}</Project>
-      <Name>Selenium.WebDriver.Extensions.QuerySelector</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.csproj">
       <Project>{b0f9d77e-89ae-4162-a73f-5f544c14f41a}</Project>
       <Name>Selenium.WebDriver.Extensions.Shared</Name>

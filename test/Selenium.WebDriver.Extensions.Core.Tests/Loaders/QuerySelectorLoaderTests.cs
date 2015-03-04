@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.QuerySelector.Tests
+﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using NUnit.Framework;
     
