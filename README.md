@@ -72,8 +72,8 @@ driver.FindElement(selector);
 If the site that you are testing with Selenium does not include jQuery this extension will automatically load the latest version when you run any of the `Find*` methods. If you want you can choose to load a different version of jQuery. The library uses jQuery CDN by default, but if you want to use a completely different source, that's also supported
 
 ```csharp
-driver.LoadJQuery("1.11.0"); // load specific version from default CDN
-driver.LoadJQuery(new Uri("http://some.server/jquery.js")); // load a library from other source
+driver.JQuery().Load("1.11.0"); // load specific version from default CDN
+driver.JQuery().Load(new Uri("http://some.server/jquery.js")); // load a library from other source
 ```
 
 #### jQuery variable name
@@ -92,6 +92,13 @@ var selector = By.JQuerySelector("ol li", context);
 driver.FindElements(selector);
 ```
 
+#### jQuery helper methods
+You can have instant access to values of the getter jQuery methods.
+
+```csharp
+var value = driver.JQuery(By.JQuerySelector("input")).Value();
+```
+
 #### Basic Sizzle example
 Invoke Sizzle selectors on the WebDriver.
 ```csharp
@@ -102,8 +109,8 @@ driver.FindElements(By.SizzleSelector("input:visible"))
 If the site that you are testing with Selenium does not include Sizzle this extension will automatically load the 2.0.0 version when you run any of the `Find*` methods. If you want you can choose to load a different version of Sizzle. The library used CloudFlare CDN by default, but if you want to use a completely different source, that's also supported
 
 ```csharp
-driver.LoadSizzle("1.11.1"); // load specific version from default CDN
-driver.LoadSizzle(new Uri("http://some.server/sizzle.js")); // load a library from other source
+driver.Sizzle().Load("1.11.1"); // load specific version from default CDN
+driver.Sizzle().Load(new Uri("http://some.server/sizzle.js")); // load a library from other source
 ```
 
 #### Sizzle context switch
