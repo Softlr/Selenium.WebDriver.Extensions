@@ -13,7 +13,7 @@
 	<property name="path.nunit" value="packages\NUnit.Runners.2.6.4\tools\nunit-console.exe"/>
 	<property name="path.opencover" value="packages\OpenCover.4.5.3723\OpenCover.Console.exe"/>
 	<property name="path.report.generator" value="packages\ReportGenerator.2.1.1.0\ReportGenerator.exe"/>
-    <property name="path.report.coveralls" value="packages\coveralls.io.1.1.91\tools\coveralls.net.exe"/>
+    <property name="path.report.coveralls" value="packages\coveralls.io.1.2.2\tools\coveralls.net.exe"/>
 	<property name="dir.build" value="..\Build"/>
 	<property name="dir.work" value="${dir.build}\${project::get-name()}-${project.framework}.${platform::get-name()}-${project.config}"/>
     <property name="dir.work.net40" value="${dir.build}\${project::get-name()}-${project.framework.net40}.${platform::get-name()}-${project.config}"/>

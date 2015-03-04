@@ -54,7 +54,7 @@
     
   after_test:
     - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.1.91\tools\coveralls.net.exe --opencover coverage.xml
+    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
   
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
@@ -143,7 +143,7 @@
   
   after_test:
     - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.1.91\tools\coveralls.net.exe --opencover coverage.xml
+    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
@@ -206,7 +206,7 @@
   
   after_test:
     - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"packages\NUnit.Runners.2.6.4\tools\nunit-console.exe" -targetargs:"/noshadow test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.1.91\tools\coveralls.net.exe --opencover coverage.xml
+    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
