@@ -442,7 +442,7 @@
         {
             const string Result = "test";
             var mock = MockWebDriver("return jQuery('div').text();", Result);
-            var result = mock.Object.JQuery().Text(By.JQuerySelector("div"));
+            var result = mock.Object.JQuery(By.JQuerySelector("div")).Text();
 
             Assert.AreEqual(Result, result);
         }
@@ -455,7 +455,7 @@
         {
             const string Result = "<p>test</p>";
             var mock = MockWebDriver("return jQuery('div').html();", Result);
-            var result = mock.Object.JQuery().Html(By.JQuerySelector("div"));
+            var result = mock.Object.JQuery(By.JQuerySelector("div")).Html();
 
             Assert.AreEqual(Result, result);
         }
@@ -468,7 +468,7 @@
         {
             const string Result = "http://github.com";
             var mock = MockWebDriver("return jQuery('a').attr('href');", Result);
-            var result = mock.Object.JQuery().Attribute(By.JQuerySelector("a"), "href");
+            var result = mock.Object.JQuery(By.JQuerySelector("a")).Attribute("href");
 
             Assert.AreEqual(Result, result);
         }
@@ -480,7 +480,7 @@
         public void FindAttributeNotExists()
         {
             var mock = MockWebDriver();
-            var result = mock.Object.JQuery().Attribute(By.JQuerySelector("a"), "href");
+            var result = mock.Object.JQuery(By.JQuerySelector("a")).Attribute("href");
 
             Assert.IsNull(result);
         }
@@ -492,7 +492,7 @@
         public void FindAttributeInvalidType()
         {
             var mock = MockWebDriver();
-            var result = mock.Object.JQuery().Attribute(By.JQuerySelector("a"), "href");
+            var result = mock.Object.JQuery(By.JQuerySelector("a")).Attribute("href");
             
             Assert.IsNull(result);
         }
@@ -505,7 +505,7 @@
         {
             const string Result = "prop";
             var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
-            var result = mock.Object.JQuery().Property<string>(By.JQuerySelector("input"), "checked");
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Property<string>("checked");
 
             Assert.AreEqual(Result, result);
         }
@@ -518,7 +518,7 @@
         {
             const bool Result = true;
             var mock = MockWebDriver("return jQuery('input').prop('checked');", Result);
-            var result = mock.Object.JQuery().Property(By.JQuerySelector("input"), "checked");
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Property("checked");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Result, result.Value);
@@ -531,7 +531,7 @@
         public void FindPropertyNotExists()
         {
             var mock = MockWebDriver();
-            var result = mock.Object.JQuery().Property(By.JQuerySelector("input"), "checked");
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Property("checked");
 
             Assert.IsNull(result);
         }
@@ -544,7 +544,7 @@
         public void FindPropertyInvalidType()
         {
             var mock = MockWebDriver();
-            mock.Object.JQuery().Property<int>(By.JQuerySelector("input"), "checked");
+            mock.Object.JQuery(By.JQuerySelector("input")).Property<int>("checked");
         }
 
         /// <summary>
@@ -555,7 +555,7 @@
         {
             const string Result = "test";
             var mock = MockWebDriver("return jQuery('input').val();", Result);
-            var result = mock.Object.JQuery().Value(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Value();
 
             Assert.AreEqual(Result, result);
         }
@@ -568,7 +568,7 @@
         {
             const string Result = "hidden";
             var mock = MockWebDriver("return jQuery('input').css('display');", Result);
-            var result = mock.Object.JQuery().Css(By.JQuerySelector("input"), "display");
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Css("display");
 
             Assert.AreEqual(Result, result);
         }
@@ -581,7 +581,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').width();", Result);
-            var result = mock.Object.JQuery().Width(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Width();
 
             Assert.AreEqual(Result, result);
         }
@@ -594,7 +594,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').height();", Result);
-            var result = mock.Object.JQuery().Height(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Height();
 
             Assert.AreEqual(Result, result);
         }
@@ -607,7 +607,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').innerWidth();", Result);
-            var result = mock.Object.JQuery().InnerWidth(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).InnerWidth();
 
             Assert.AreEqual(Result, result);
         }
@@ -620,7 +620,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').innerHeight();", Result);
-            var result = mock.Object.JQuery().InnerHeight(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).InnerHeight();
 
             Assert.AreEqual(Result, result);
         }
@@ -633,7 +633,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerWidth();", Result);
-            var result = mock.Object.JQuery().OuterWidth(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).OuterWidth();
 
             Assert.AreEqual(Result, result);
         }
@@ -646,7 +646,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerHeight();", Result);
-            var result = mock.Object.JQuery().OuterHeight(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).OuterHeight();
 
             Assert.AreEqual(Result, result);
         }
@@ -659,7 +659,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerWidth(true);", Result);
-            var result = mock.Object.JQuery().OuterWidth(By.JQuerySelector("input"), true);
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).OuterWidth(true);
 
             Assert.AreEqual(Result, result);
         }
@@ -672,7 +672,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').outerHeight(true);", Result);
-            var result = mock.Object.JQuery().OuterHeight(By.JQuerySelector("input"), true);
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).OuterHeight(true);
 
             Assert.AreEqual(Result, result);
         }
@@ -689,7 +689,7 @@
                 .Returns(dict);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
-            var position = mock.Object.JQuery().Position(By.JQuerySelector("input"));
+            var position = mock.Object.JQuery(By.JQuerySelector("input")).Position();
 
             if (position == null)
             {
@@ -711,7 +711,7 @@
                 .Returns(null);
             mock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
-            var position = mock.Object.JQuery().Position(By.JQuerySelector("input"));
+            var position = mock.Object.JQuery(By.JQuerySelector("input")).Position();
 
             Assert.IsNull(position);
         }
@@ -728,7 +728,7 @@
                 .Returns(dict);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').offset();")))
                 .Returns(true);
-            var offset = mock.Object.JQuery().Offset(By.JQuerySelector("input"));
+            var offset = mock.Object.JQuery(By.JQuerySelector("input")).Offset();
 
             if (offset == null)
             {
@@ -750,7 +750,7 @@
                 .Returns(null);
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').offset();")))
                 .Returns(true);
-            var offset = mock.Object.JQuery().Offset(By.JQuerySelector("input"));
+            var offset = mock.Object.JQuery(By.JQuerySelector("input")).Offset();
 
             Assert.IsNull(offset);
         }
@@ -763,7 +763,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').scrollLeft();", Result);
-            var result = mock.Object.JQuery().ScrollLeft(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).ScrollLeft();
 
             Assert.AreEqual(Result, result);
         }
@@ -776,7 +776,7 @@
         {
             const long Result = 100;
             var mock = MockWebDriver("return jQuery('input').scrollTop();", Result);
-            var result = mock.Object.JQuery().ScrollTop(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).ScrollTop();
 
             Assert.AreEqual(Result, result);
         }
@@ -789,7 +789,7 @@
         {
             const string Result = "val";
             var mock = MockWebDriver("return jQuery('input').data('test');", Result);
-            var result = mock.Object.JQuery().Data(By.JQuerySelector("input"), "test");
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Data("test");
 
             Assert.AreEqual(Result, result);
         }
@@ -802,7 +802,7 @@
         public void FindDataInvalidType()
         {
             var mock = MockWebDriver();
-            mock.Object.JQuery().Data<int>(By.JQuerySelector("input"), "test");
+            mock.Object.JQuery(By.JQuerySelector("input")).Data<int>("test");
         }
 
         /// <summary>
@@ -813,7 +813,7 @@
         {
             const long Result = 2;
             var mock = MockWebDriver("return jQuery('input').length;", Result);
-            var result = mock.Object.JQuery().Count(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Count();
 
             Assert.AreEqual(Result, result);
         }
@@ -826,7 +826,7 @@
         {
             const string Result = "search=test";
             var mock = MockWebDriver("return jQuery('form').serialize();", Result);
-            var result = mock.Object.JQuery().Serialized(By.JQuerySelector("form"));
+            var result = mock.Object.JQuery(By.JQuerySelector("form")).Serialized();
 
             Assert.AreEqual(Result, result);
         }
@@ -839,7 +839,7 @@
         {
             const string Result = "[{\"name\":\"s\",\"value\":\"\"}]";
             var mock = MockWebDriver("return JSON.stringify(jQuery('form').serializeArray());", Result);
-            var result = mock.Object.JQuery().SerializedArray(By.JQuerySelector("form"));
+            var result = mock.Object.JQuery(By.JQuerySelector("form")).SerializedArray();
 
             Assert.AreEqual(Result, result);
         }
@@ -852,7 +852,7 @@
         {
             const bool Result = true;
             var mock = MockWebDriver("return jQuery('form').hasClass('test');", Result);
-            var result = mock.Object.JQuery().HasClass(By.JQuerySelector("form"), "test");
+            var result = mock.Object.JQuery(By.JQuerySelector("form")).HasClass("test");
 
             Assert.AreEqual(Result, result);
         }
@@ -865,7 +865,7 @@
         {
             const double MockedWidth = 100d;
             var mock = MockWebDriver("return jQuery('input').width();", MockedWidth);
-            var result = mock.Object.JQuery().Width(By.JQuerySelector("input"));
+            var result = mock.Object.JQuery(By.JQuerySelector("input")).Width();
 
             Assert.AreEqual(MockedWidth, result);
             Assert.IsInstanceOf<long?>(result);
@@ -913,7 +913,7 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void HelperWithNullDriver()
         {
-            WebElementExtensions.JQuery(null);
+            WebElementExtensions.JQuery(null, null);
         }
 
         /// <summary>

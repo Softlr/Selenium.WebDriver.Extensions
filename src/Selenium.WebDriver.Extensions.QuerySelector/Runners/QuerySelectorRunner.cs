@@ -35,7 +35,7 @@
             }
 
             driver.QuerySelector().CheckSupport();
-            return this.Find<T>(driver, "return " + by.Selector + ";");
+            return Find<T>(driver, "return " + by.Selector + ";");
         }
     }
 }

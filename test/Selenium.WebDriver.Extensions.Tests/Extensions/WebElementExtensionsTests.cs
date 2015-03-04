@@ -319,7 +319,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Text(By.JQuerySelector("span"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("span")).Text();
 
             Assert.AreEqual(Result, result);
         }
@@ -342,7 +342,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Html(By.JQuerySelector("span"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("span")).Html();
 
             Assert.AreEqual(Result, result);
         }
@@ -365,7 +365,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Attribute(By.JQuerySelector("a"), "href");
+            var result = webElement.Object.JQuery(By.JQuerySelector("a")).Attribute("href");
 
             Assert.AreEqual(Result, result);
         }
@@ -388,7 +388,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Property<string>(By.JQuerySelector("input"), "checked");
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Property<string>("checked");
 
             Assert.AreEqual(Result, result);
         }
@@ -411,7 +411,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Property(By.JQuerySelector("input"), "checked");
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Property("checked");
 
             Assert.IsNotNull(result);
             Assert.AreEqual(Result, result.Value);
@@ -435,7 +435,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Value(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Value();
 
             Assert.AreEqual(Result, result);
         }
@@ -458,7 +458,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Css(By.JQuerySelector("input"), "display");
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Css("display");
 
             Assert.AreEqual(Result, result);
         }
@@ -481,7 +481,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Width(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Width();
 
             Assert.AreEqual(Result, result);
         }
@@ -504,7 +504,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Height(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Height();
 
             Assert.AreEqual(Result, result);
         }
@@ -527,7 +527,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().InnerWidth(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).InnerWidth();
 
             Assert.AreEqual(Result, result);
         }
@@ -550,7 +550,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().InnerHeight(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).InnerHeight();
 
             Assert.AreEqual(Result, result);
         }
@@ -573,7 +573,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().OuterWidth(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).OuterWidth();
 
             Assert.AreEqual(Result, result);
         }
@@ -596,7 +596,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().OuterHeight(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).OuterHeight();
 
             Assert.AreEqual(Result, result);
         }
@@ -619,7 +619,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().OuterWidth(By.JQuerySelector("input"), true);
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).OuterWidth(true);
 
             Assert.AreEqual(Result, result);
         }
@@ -642,7 +642,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().OuterHeight(By.JQuerySelector("input"), true);
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).OuterHeight(true);
 
             Assert.AreEqual(Result, result);
         }
@@ -665,7 +665,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var position = webElement.Object.JQuery().Position(By.JQuerySelector("input"));
+            var position = webElement.Object.JQuery(By.JQuerySelector("input")).Position();
             if (position == null)
             {
                 Assert.Fail();
@@ -693,7 +693,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var offset = webElement.Object.JQuery().Offset(By.JQuerySelector("input"));
+            var offset = webElement.Object.JQuery(By.JQuerySelector("input")).Offset();
             if (offset == null)
             {
                 Assert.Fail();
@@ -721,7 +721,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().ScrollLeft(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).ScrollLeft();
 
             Assert.AreEqual(Result, result);
         }
@@ -743,7 +743,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().ScrollTop(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).ScrollTop();
 
             Assert.AreEqual(Result, result);
         }
@@ -766,7 +766,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Data(By.JQuerySelector("input"), "test");
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Data("test");
 
             Assert.AreEqual(Result, result);
         }
@@ -789,7 +789,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Data<bool?>(By.JQuerySelector("input"), "test");
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Data<bool?>("test");
 
             Assert.AreEqual(Result, result);
         }
@@ -812,7 +812,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Count(By.JQuerySelector("input"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("input")).Count();
 
             Assert.AreEqual(Result, result);
         }
@@ -835,7 +835,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().Serialized(By.JQuerySelector("form"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("form")).Serialized();
 
             Assert.AreEqual(Result, result);
         }
@@ -860,7 +860,7 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().SerializedArray(By.JQuerySelector("form"));
+            var result = webElement.Object.JQuery(By.JQuerySelector("form")).SerializedArray();
 
             Assert.AreEqual(Result, result);
         }
@@ -885,9 +885,32 @@
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
-            var result = webElement.Object.JQuery().HasClass(By.JQuerySelector("form"), "test");
+            var result = webElement.Object.JQuery(By.JQuerySelector("form")).HasClass("test");
 
             Assert.AreEqual(Result, result);
+        }
+
+        /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        public void FindElementWithXPath()
+        {
+            var element = new Mock<IWebElement>();
+            element.SetupGet(x => x.TagName).Returns("body");
+
+            var list = new List<IWebElement> { element.Object };
+            var driver = MockWebDriver();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("/html/body");
+            driver.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("document\\.evaluate")))
+                .Returns(new ReadOnlyCollection<IWebElement>(list));
+
+            var result = driver.Object.FindElement(By.XPath("/html/body"));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("body", result.TagName);
         }
 
         /// <summary>

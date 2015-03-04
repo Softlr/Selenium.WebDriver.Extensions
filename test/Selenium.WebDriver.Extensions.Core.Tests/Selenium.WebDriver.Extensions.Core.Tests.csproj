@@ -111,6 +111,7 @@
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="Models\WebElementTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Runners\JavaScriptRunnerTests.cs" />
     <Compile Include="Selectors\PartialLinkTextSelectorTests.cs" />
     <Compile Include="Selectors\TagNameSelectorTests.cs" />
     <Compile Include="Selectors\NameSelectorTests.cs" />

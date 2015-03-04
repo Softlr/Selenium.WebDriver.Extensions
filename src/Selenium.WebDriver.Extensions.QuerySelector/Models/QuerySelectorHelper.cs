@@ -1,6 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions.QuerySelector
 {
-    using System;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Shared;
 
