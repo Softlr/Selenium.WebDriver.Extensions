@@ -959,7 +959,7 @@
         }
 
         /// <summary>
-        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <param name="value">The value of the data to set.</param>
@@ -970,7 +970,7 @@
         }
 
         /// <summary>
-        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <param name="value">The value of the data to set.</param>
@@ -981,7 +981,7 @@
         }
 
         /// <summary>
-        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <param name="value">The value of the data to set.</param>
@@ -992,7 +992,7 @@
         }
 
         /// <summary>
-        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <param name="value">The value of the data to set.</param>
@@ -1003,7 +1003,7 @@
         }
 
         /// <summary>
-        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <param name="value">The value of the data to set.</param>
@@ -1014,7 +1014,7 @@
         }
 
         /// <summary>
-        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <param name="value">The value of the data to set.</param>
@@ -1022,6 +1022,17 @@
         public ChainJQueryHelper Data(string key, decimal value)
         {
             this.Set("data('" + key + "', " + value + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Removes the data for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper RemoveData(string key)
+        {
+            this.Set("removeData('" + key + ")");
             return this;
         }
 
@@ -1096,6 +1107,119 @@
         public ChainJQueryHelper RemoveClass(string className)
         {
             this.Set("removeClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to toggle.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ToggleClass(string className)
+        {
+            this.Set("toggleClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to toggle.</param>
+        /// <param name="state">The value to determine whether the class should be added or removed.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ToggleClass(string className, bool state)
+        {
+            this.Set("toggleClass('" + className + "', " + (state ? "true" : "false") + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show()
+        {
+            this.Set("show()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide()
+        {
+            this.Set("hide()");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle()
+        {
+            this.Set("toggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown()
+        {
+            this.Set("slideDown()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp()
+        {
+            this.Set("slideUp()");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle()
+        {
+            this.Set("slideToggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn()
+        {
+            this.Set("fadeIn()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut()
+        {
+            this.Set("fadeOut()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle()
+        {
+            this.Set("fadeToggle()");
             return this;
         }
 
