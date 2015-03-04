@@ -891,6 +891,29 @@
         }
 
         /// <summary>
+        /// Tests finding an element.
+        /// </summary>
+        [Test]
+        public void FindElementWithXPath()
+        {
+            var element = new Mock<IWebElement>();
+            element.SetupGet(x => x.TagName).Returns("body");
+
+            var list = new List<IWebElement> { element.Object };
+            var driver = MockWebDriver();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("/html/body");
+            driver.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("document\\.evaluate")))
+                .Returns(new ReadOnlyCollection<IWebElement>(list));
+
+            var result = driver.Object.FindElement(By.XPath("/html/body"));
+
+            Assert.IsNotNull(result);
+            Assert.AreEqual("body", result.TagName);
+        }
+
+        /// <summary>
         /// Mocks the Selenium web driver.
         /// </summary>
         /// <param name="script">Script to mock to return value.</param>
