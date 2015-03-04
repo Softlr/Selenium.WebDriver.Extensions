@@ -14,6 +14,31 @@
     public class ByTests
     {
         /// <summary>
+        /// Tests the query selector.
+        /// </summary>
+        [Test]
+        public void QuerySelector()
+        {
+            const string Selector = "div";
+            var wrappedBy = By.QuerySelector(Selector);
+
+            Assert.AreEqual(Selector, wrappedBy.RawSelector);
+        }
+
+        /// <summary>
+        /// Tests the query selector with base.
+        /// </summary>
+        [Test]
+        public void QuerySelectorWithBase()
+        {
+            const string Selector = "div";
+            var baseSelector = By.QuerySelector("body");
+            var wrappedBy = By.QuerySelector(Selector, baseSelector);
+
+            Assert.AreEqual(Selector, wrappedBy.RawSelector);
+        }
+
+        /// <summary>
         /// Tests the class name.
         /// </summary>
         [Test]
