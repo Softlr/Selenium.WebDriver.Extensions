@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Selenium.WebDriver.Extensions.Shared.Tests")]
+[assembly: AssemblyTitle("Selenium.WebDriver.Extensions.Core.Tests")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Lukasz Rajchel")]
-[assembly: AssemblyProduct("Selenium.WebDriver.Extensions.Shared.Tests")]
+[assembly: AssemblyProduct("Selenium.WebDriver.Extensions.Core.Tests")]
 [assembly: AssemblyCopyright("Copyright © Lukasz Rajchel")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
