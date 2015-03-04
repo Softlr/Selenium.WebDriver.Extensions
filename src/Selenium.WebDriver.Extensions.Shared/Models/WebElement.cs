@@ -48,12 +48,13 @@
         /// </summary>
         private const string FindXPathScript = @"(function(el) { 
             var allNodes = document.getElementsByTagName('*'); 
-            for(var segs = []; el && el.nodeType == 1; el = el.parentNode) 
+            var segs = [];
+            for(; el && el.nodeType == 1; el = el.parentNode) 
             { 
                 if(el.hasAttribute('id')) { 
                     var uniqueIdCount = 0; 
-                    for (var n=0;n < allNodes.length;n++) { 
-                        if (allNodes[n].hasAttribute('id') && allNodes[n].id == el.id) {
+                    for (var i = 0; i < allNodes.length; i++) { 
+                        if (allNodes[i].hasAttribute('id') && allNodes[i].id == el.id) {
                             uniqueIdCount++; 
                         }
                         if (uniqueIdCount > 1) {
@@ -61,7 +62,7 @@
                         }
                     }
                 
-                    if ( uniqueIdCount == 1) { 
+                    if (uniqueIdCount == 1) { 
                         segs.unshift('id(""' + el.getAttribute('id') + '"")'); 
                         return segs.join('/'); 
                     } else { 
@@ -70,7 +71,7 @@
                 } else if (el.hasAttribute('class')) { 
                     segs.unshift(el.localName.toLowerCase() + '[@class=""' + el.getAttribute('class') + '""]'); 
                 } else { 
-                    for (i = 1, sib = el.previousSibling; sib; sib = sib.previousSibling) { 
+                    for (var i = 1, sib = el.previousSibling; sib; sib = sib.previousSibling) { 
                         if (sib.localName == el.localName) {
                             i++; 
                         }
