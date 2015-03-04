@@ -44,6 +44,17 @@
         }
 
         /// <summary>
+        /// Sets the inner text for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="text">The text to be set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Text(string text)
+        {
+            this.Set("text('" + text + "')");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the HTML contents of the first element in the set 
         /// of matched elements or set the HTML contents of every matched element.
         /// </summary>
@@ -57,6 +68,17 @@
         }
 
         /// <summary>
+        /// Sets the inner HTML for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="htmlString">The HTML string to be set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Html(string htmlString)
+        {
+            this.Set("html('" + htmlString + "')");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element 
         /// in the set of matched elements.
         /// </summary>
@@ -65,6 +87,18 @@
         public string Attribute(string attributeName)
         {
             return this.Find<string>("attr('" + attributeName + "')");
+        }
+
+        /// <summary>
+        /// Sets the attribute value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="attributeName">The name of the attribute to set.</param>
+        /// <param name="attributeValue">The value of the attribute to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Attribute(string attributeName, string attributeValue)
+        {
+            this.Set("attr('" + attributeName + "', '" + attributeValue + "')");
+            return this;
         }
 
         /// <summary>
@@ -96,6 +130,97 @@
         }
 
         /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, string propertyValue)
+        {
+            this.Set("prop('" + propertyName + "', '" + propertyValue + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, short propertyValue)
+        {
+            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, int propertyValue)
+        {
+            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, long propertyValue)
+        {
+            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, float propertyValue)
+        {
+            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, double propertyValue)
+        {
+            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, decimal propertyValue)
+        {
+            this.Set("prop('" + propertyName + "', " + propertyValue + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, bool propertyValue)
+        {
+            this.Set("prop('" + propertyName + "', " + (propertyValue ? "true" : "false") + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current value of the first element in the set 
         /// of matched elements.
         /// </summary>
@@ -103,6 +228,17 @@
         public string Value()
         {
             return this.Find<string>("val()");
+        }
+
+        /// <summary>
+        /// Sets the value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Value(string value)
+        {
+            this.Set("val('" + value + "')");
+            return this;
         }
 
         /// <summary>
@@ -120,6 +256,18 @@
         }
 
         /// <summary>
+        /// Sets the CSS property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the CSS property to set.</param>
+        /// <param name="propertyValue">The value of the CSS property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Value(string propertyName, string propertyValue)
+        {
+            this.Set("css('" + propertyName + "', '" + propertyValue + "')");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element 
         /// in the set of matched elements or set the width of every matched element.
         /// </summary>
@@ -133,6 +281,67 @@
         }
 
         /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(short value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(int value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(long value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(float value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(double value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(decimal value)
+        {
+            this.Set("width(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
         /// in the set of matched elements or set the width of every matched element.
         /// </summary>
@@ -143,6 +352,67 @@
         public long? Height()
         {
             return this.Find<long?>("height()");
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(short value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(int value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(long value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(float value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(double value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(decimal value)
+        {
+            this.Set("height(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -160,6 +430,67 @@
         }
 
         /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(short value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(int value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(long value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(float value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(double value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(decimal value)
+        {
+            this.Set("innerWidth(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed inner height (including 
         /// padding but not border) for the first element in the set of matched elements or set the inner width of 
         /// every matched element.
@@ -171,6 +502,67 @@
         public long? InnerHeight()
         {
             return this.Find<long?>("innerHeight()");
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(short value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(int value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(long value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(float value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(double value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(decimal value)
+        {
+            this.Set("innerHeight(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -190,6 +582,67 @@
         }
 
         /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(short value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(int value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(long value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(float value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(double value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(decimal value)
+        {
+            this.Set("outerWidth(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
         /// in the set of matched elements, including padding and border.
         /// </summary>
@@ -203,6 +656,67 @@
         public long? OuterHeight(bool includeMargin = false)
         {
             return this.Find<long?>("outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(short value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(int value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(long value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(float value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(double value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(decimal value)
+        {
+            this.Set("outerHeight(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -261,6 +775,67 @@
         }
 
         /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(short value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(int value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(long value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(float value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(double value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(decimal value)
+        {
+            this.Set("scrollLeft(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current vertical position of the scroll bar 
         /// for the first element in the set of matched elements or set the vertical position of the scroll bar for 
         /// every matched element.
@@ -272,6 +847,67 @@
         public long? ScrollTop()
         {
             return this.Find<long?>("scrollTop()");
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(short value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(int value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(long value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(float value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(double value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(decimal value)
+        {
+            this.Set("scrollTop(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -308,6 +944,97 @@
             }
 
             return this.Find<T>("data('" + key + "')");
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, string value)
+        {
+            this.Set("data('" + key + "', '" + value + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, short value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, int value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, long value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, float value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, double value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, decimal value)
+        {
+            this.Set("data('" + key + "', " + value + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, bool value)
+        {
+            this.Set("data('" + key + "', " + (value ? "true" : "false") + ")");
+            return this;
         }
 
         /// <summary>
@@ -351,8 +1078,30 @@
         }
 
         /// <summary>
-        /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
-        /// and script format string.
+        /// Adds the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to add.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper AddClass(string className)
+        {
+            this.Set("addClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Removes the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to remove.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper RemoveClass(string className)
+        {
+            this.Set("removeClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Performs a jQuery search on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/> 
+        /// selector and script format string.
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="scriptFormat">The format string of the script to be invoked.</param>
@@ -372,6 +1121,17 @@
         {
             this.Driver.JQuery().Load();
             return ParseUtil.ParseResult<T>(this.ExecuteScript(this.Selector, scriptFormat, wrapperFormat));
+        }
+
+        /// <summary>
+        /// Performs a jQuery value set operation on the <see cref="IWebDriver"/> using current 
+        /// <see cref="JQuerySelector"/> selector.
+        /// </summary>
+        /// <param name="script">The script to be executed in order to set the value.</param>
+        public void Set(string script)
+        {
+            this.Driver.JQuery().Load();
+            this.ExecuteScript(this.Selector, script, null);
         }
 
         /// <summary>
