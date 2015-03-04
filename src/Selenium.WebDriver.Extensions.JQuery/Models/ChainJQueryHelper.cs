@@ -70,11 +70,11 @@
         /// <summary>
         /// Sets the inner HTML for all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
-        /// <param name="htmlString">The HTML string to be set.</param>
+        /// <param name="html">The HTML string to be set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Html(string htmlString)
+        public ChainJQueryHelper Html(string html)
         {
-            this.Set("html('" + htmlString + "')");
+            this.Set("html('" + html + "')");
             return this;
         }
 
