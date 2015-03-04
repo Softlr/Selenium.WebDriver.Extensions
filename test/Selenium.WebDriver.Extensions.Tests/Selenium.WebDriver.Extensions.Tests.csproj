@@ -93,7 +93,7 @@
       <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug-Net35' Or '$(Configuration)'=='Release-Net35'">
@@ -102,7 +102,7 @@
       <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net35\Moq.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.44.0\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.45.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

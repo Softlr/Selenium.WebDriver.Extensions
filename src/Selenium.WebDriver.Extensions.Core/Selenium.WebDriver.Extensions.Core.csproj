@@ -105,7 +105,7 @@
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug-Net35' Or '$(Configuration)'=='Release-Net35'">
     <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.44.0\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.45.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support">
       <HintPath>..\..\packages\Selenium.Support.2.45.0\lib\net35\WebDriver.Support.dll</HintPath>
