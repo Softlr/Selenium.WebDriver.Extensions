@@ -1144,12 +1144,34 @@
         }
 
         /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(int duration)
+        {
+            this.Set("show(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Hides all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Hide()
         {
             this.Set("hide()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(int duration)
+        {
+            this.Set("hide(" + duration + ")");
             return this;
         }
 
@@ -1164,12 +1186,34 @@
         }
 
         /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(int duration)
+        {
+            this.Set("toggle(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideDown()
         {
             this.Set("slideDown()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(int duration)
+        {
+            this.Set("slideDown(" + duration + ")");
             return this;
         }
 
@@ -1184,12 +1228,34 @@
         }
 
         /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(int duration)
+        {
+            this.Set("slideUp(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideToggle()
         {
             this.Set("slideToggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(int duration)
+        {
+            this.Set("slideToggle(" + duration + ")");
             return this;
         }
 
@@ -1204,6 +1270,17 @@
         }
 
         /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(int duration)
+        {
+            this.Set("fadeIn(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
@@ -1214,12 +1291,56 @@
         }
 
         /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(int duration)
+        {
+            this.Set("fadeOut(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeToggle()
         {
             this.Set("fadeToggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(int duration)
+        {
+            this.Set("fadeToggle(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(int duration, decimal opacity)
+        {
+            if (opacity < 0)
+            {
+                throw new ArgumentException("Opacity cannot be negative");
+            }
+
+            if (opacity > 1)
+            {
+                throw new ArgumentException("Opacity cannot be bigger than 1");
+            }
+
+            this.Set("fadeTo(" + duration +", " + opacity + ")");
             return this;
         }
 
