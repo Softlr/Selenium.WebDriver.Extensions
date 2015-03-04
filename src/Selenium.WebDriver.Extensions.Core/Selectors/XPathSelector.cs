@@ -22,9 +22,15 @@
             }
 
             this.Selector = @"(function(path) {
-                return document.evaluate(path, document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null)
-                    .singleNodeValue;
-                })('" + xpath + "')";
+                var elements = document.evaluate(path, document, null, XPathResult.ANY_TYPE, null);
+                var results = [];
+                var element = elements.iterateNext(); 
+                while(element !== null) {
+                    results.push(element);
+                    element = elements.iterateNext(); 
+                }
+                return results;
+            })('" + xpath + "')";
         }
 
         /// <summary>
