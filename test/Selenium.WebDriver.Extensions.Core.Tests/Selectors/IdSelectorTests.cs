@@ -3,10 +3,6 @@
     using System.Collections;
     using NUnit.Framework;
     using By = Selenium.WebDriver.Extensions.Core.By;
-    
-    /// <summary>
-    /// Id selector tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -14,9 +10,6 @@
 #endif
     public class IdSelectorTests
     {
-        /// <summary>
-        /// Gets the equality test cases.
-        /// </summary>
         private static IEnumerable EqualityTestCases
         {
             get
@@ -29,12 +22,6 @@
             }
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
-        /// <param name="selector1">First selector to compare.</param>
-        /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(IdSelector selector1, IdSelector selector2, bool expectedResult)
         {
@@ -51,9 +38,6 @@
             Assert.AreNotEqual(expectedResult, selector1 != selector2);
         }
 
-        /// <summary>
-        /// Tests the runner type.
-        /// </summary>
         [Test]
         public void RunnerType()
         {

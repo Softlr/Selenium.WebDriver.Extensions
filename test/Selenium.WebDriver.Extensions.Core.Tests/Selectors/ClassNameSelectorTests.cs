@@ -4,10 +4,6 @@
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.Core;
     using By = Selenium.WebDriver.Extensions.Core.By;
-    
-    /// <summary>
-    /// Class name selector tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -15,9 +11,6 @@
 #endif
     public class ClassNameSelectorTests
     {
-        /// <summary>
-        /// Gets the equality test cases.
-        /// </summary>
         private static IEnumerable EqualityTestCases
         {
             get
@@ -33,9 +26,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the equality test cases.
-        /// </summary>
         private static IEnumerable QuerySelectorEqualityTestCases
         {
             get
@@ -48,12 +38,6 @@
             }
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
-        /// <param name="selector1">First selector to compare.</param>
-        /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(ClassNameSelector selector1, ClassNameSelector selector2, bool expectedResult)
         {
@@ -70,12 +54,6 @@
             Assert.AreNotEqual(expectedResult, selector1 != selector2);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
-        /// <param name="selector1">First selector to compare.</param>
-        /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("QuerySelectorEqualityTestCases")]
         public void QuerySelectorEqualityOperator(
             QuerySelector selector1, 
@@ -95,9 +73,6 @@
             Assert.AreNotEqual(expectedResult, selector1 != selector2);
         }
 
-        /// <summary>
-        /// Tests the runner type.
-        /// </summary>
         [Test]
         public void RunnerType()
         {

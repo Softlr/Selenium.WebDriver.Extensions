@@ -2,10 +2,6 @@
 {
     using NUnit.Framework;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
-
-    /// <summary>
-    /// Web driver extensions tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -13,9 +9,6 @@
 #endif
     public class ByTests
     {
-        /// <summary>
-        /// Tests the query selector.
-        /// </summary>
         [Test]
         public void QuerySelector()
         {
@@ -25,9 +18,6 @@
             Assert.AreEqual(Selector, wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the query selector with base.
-        /// </summary>
         [Test]
         public void QuerySelectorWithBase()
         {
@@ -38,9 +28,6 @@
             Assert.AreEqual(Selector, wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the class name.
-        /// </summary>
         [Test]
         public void ClassName()
         {
@@ -50,9 +37,6 @@
             Assert.AreEqual(".test", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the CSS selector.
-        /// </summary>
         [Test]
         public void CssSelector()
         {
@@ -62,9 +46,6 @@
             Assert.AreEqual(CssSelector, wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the ID.
-        /// </summary>
         [Test]
         public void Id()
         {
@@ -74,9 +55,6 @@
             Assert.AreEqual("#test", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the link text.
-        /// </summary>
         [Test]
         public void LinkText()
         {
@@ -86,9 +64,6 @@
             Assert.AreEqual("test", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the link text.
-        /// </summary>
         [Test]
         public void LinkTextWithBaseElement()
         {
@@ -98,9 +73,6 @@
             Assert.AreEqual("test", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the name.
-        /// </summary>
         [Test]
         public void Name()
         {
@@ -110,9 +82,6 @@
             Assert.AreEqual("[name='test']", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the partial link text.
-        /// </summary>
         [Test]
         public void PartialLinkText()
         {
@@ -122,9 +91,6 @@
             Assert.AreEqual("test", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the partial link text.
-        /// </summary>
         [Test]
         public void PartialLinkTextWithBaseElement()
         {
@@ -134,9 +100,6 @@
             Assert.AreEqual("test", wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the tag name.
-        /// </summary>
         [Test]
         public void TagName()
         {
@@ -146,9 +109,6 @@
             Assert.AreEqual(TagName, wrappedBy.RawSelector);
         }
 
-        /// <summary>
-        /// Tests the XPATH.
-        /// </summary>
         [Test]
         public void XPath()
         {

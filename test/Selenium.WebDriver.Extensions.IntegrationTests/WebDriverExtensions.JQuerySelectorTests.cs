@@ -7,14 +7,6 @@
     using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
     using Selenium.WebDriver.Extensions.JQuery;
     using By = Selenium.WebDriver.Extensions.By;
-
-    /// <summary>
-    /// JQuery selector tests.
-    /// </summary>
-    /// <remarks>
-    /// In order for IE tests to run it must allow local files to use scripts. You can enable that by going to
-    /// Tools > Internet Options > Advanced > Security > Allow active content to run in files on My Computer.
-    /// </remarks>
     [TestFixture(
         WebBrowser.PhantomJs,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/63d90edf0560889e753b5fa464f7bf825ee39168/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
@@ -45,53 +37,30 @@
 #endif
     public class WebDriverExtensionsJQuerySelectorTests
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="WebDriverExtensionsJQuerySelectorTests"/> class.
-        /// </summary>
-        /// <param name="driver">The name of the driver used to run the tests.</param>
-        /// <param name="testCaseUrl">The test case URL.</param>
         public WebDriverExtensionsJQuerySelectorTests(WebBrowser driver, string testCaseUrl)
         {
             this.Driver = driver;
             this.TestCaseUrl = testCaseUrl;
         }
 
-        /// <summary>
-        /// Gets or sets the test case URL.
-        /// </summary>
         private string TestCaseUrl { get; set; }
 
-        /// <summary>
-        /// Gets or sets the driver name.
-        /// </summary>
         private WebBrowser Driver { get; set; }
 
-        /// <summary>
-        /// Gets or sets the selenium web driver.
-        /// </summary>
         private IWebDriver Browser { get; set; }
-        
-        /// <summary>
-        /// Sets up the test fixture.
-        /// </summary>
+
         [TestFixtureSetUp]
         public void SetUp()
         {
             this.Browser = SetupUtil.ConfigureDriver(this.Driver, this.TestCaseUrl);
         }
 
-        /// <summary>
-        /// Tears down the test fixture.
-        /// </summary>
         [TestFixtureTearDown]
         public void TearDown()
         {
             this.Browser.Dispose();
         }
 
-        /// <summary>
-        /// Tests finding element by ID.
-        /// </summary>
         [Test]
         public void FindElement()
         {
@@ -99,9 +68,6 @@
             Assert.IsNotNull(element);
         }
 
-        /// <summary>
-        /// Tests finding element by ID that doesn't exist.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementThatDoesntExist()
@@ -109,9 +75,6 @@
             this.Browser.FindElement(By.JQuerySelector("#id-not"));
         }
 
-        /// <summary>
-        /// Tests finding element by class.
-        /// </summary>
         [Test]
         public void FindElements()
         {
@@ -119,9 +82,6 @@
             Assert.AreEqual(2, elements.Count);
         }
 
-        /// <summary>
-        /// Tests finding element by class that doesn't exist.
-        /// </summary>
         [Test]
         public void FindElementsThatDoesntExist()
         {
@@ -129,9 +89,6 @@
             Assert.AreEqual(0, elements.Count);
         }
 
-        /// <summary>
-        /// Tests finding element text.
-        /// </summary>
         [Test]
         public void FindText()
         {
@@ -141,9 +98,6 @@
             StringAssert.EndsWith("Selenium", trimmedText);
         }
 
-        /// <summary>
-        /// Tests finding element HTML.
-        /// </summary>
         [Test]
         public void FindHtml()
         {
@@ -153,9 +107,6 @@
             StringAssert.EndsWith("<span>Selenium</span>", trimmedText);
         }
 
-        /// <summary>
-        /// Tests finding element attribute.
-        /// </summary>
         [Test]
         public void FindAttribute()
         {
@@ -163,9 +114,6 @@
             Assert.AreEqual("checkbox", attribute);
         }
 
-        /// <summary>
-        /// Tests finding element attribute that doesn't exist.
-        /// </summary>
         [Test]
         public void FindAttributeThatDoesntExist()
         {
@@ -173,9 +121,6 @@
             Assert.IsNull(attribute);
         }
 
-        /// <summary>
-        /// Tests finding element property.
-        /// </summary>
         [Test]
         public void FindProperty()
         {
@@ -184,9 +129,6 @@
             Assert.IsTrue(property.Value);
         }
 
-        /// <summary>
-        /// Tests finding element property that doesn't exist.
-        /// </summary>
         [Test]
         public void FindPropertyThatDoesntExist()
         {
@@ -194,9 +136,6 @@
             Assert.IsNull(property);
         }
 
-        /// <summary>
-        /// Tests finding element value.
-        /// </summary>
         [Test]
         public void FindValue()
         {
@@ -204,9 +143,6 @@
             Assert.AreEqual("v1", value);
         }
 
-        /// <summary>
-        /// Tests finding element value that doesn't exist.
-        /// </summary>
         [Test]
         public void FindValueThatDoesntExist()
         {
@@ -214,9 +150,6 @@
             Assert.IsNullOrEmpty(value);
         }
 
-        /// <summary>
-        /// Tests finding element CSS.
-        /// </summary>
         [Test]
         public void FindCss()
         {
@@ -224,9 +157,6 @@
             Assert.AreEqual("rgb(0, 128, 0)", value);
         }
 
-        /// <summary>
-        /// Tests finding element CSS.
-        /// </summary>
         [Test]
         public void FindCssThatDoesntExist()
         {
@@ -234,9 +164,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element width.
-        /// </summary>
         [Test]
         public void FindWidth()
         {
@@ -244,9 +171,6 @@
             Assert.AreEqual(200, value);
         }
 
-        /// <summary>
-        /// Tests finding element height.
-        /// </summary>
         [Test]
         public void FindHeight()
         {
@@ -254,9 +178,6 @@
             Assert.AreEqual(20, value);
         }
 
-        /// <summary>
-        /// Tests finding element inner width.
-        /// </summary>
         [Test]
         public void FindInnerWidth()
         {
@@ -264,9 +185,6 @@
             Assert.AreEqual(220, value);
         }
 
-        /// <summary>
-        /// Tests finding element inner height.
-        /// </summary>
         [Test]
         public void FindInnerHeight()
         {
@@ -274,9 +192,6 @@
             Assert.AreEqual(40, value);
         }
 
-        /// <summary>
-        /// Tests finding element outer width.
-        /// </summary>
         [Test]
         public void FindOuterWidth()
         {
@@ -284,9 +199,6 @@
             Assert.AreEqual(226, value);
         }
 
-        /// <summary>
-        /// Tests finding element outer height.
-        /// </summary>
         [Test]
         public void FindOuterHeight()
         {
@@ -294,9 +206,6 @@
             Assert.AreEqual(46, value);
         }
 
-        /// <summary>
-        /// Tests finding element outer width with margin.
-        /// </summary>
         [Test]
         public void FindOuterWidthWithMargin()
         {
@@ -304,9 +213,6 @@
             Assert.AreEqual(236, value);
         }
 
-        /// <summary>
-        /// Tests finding element outer height with margin.
-        /// </summary>
         [Test]
         public void FindOuterHeightWithMargin()
         {
@@ -314,9 +220,6 @@
             Assert.AreEqual(56, value);
         }
 
-        /// <summary>
-        /// Tests finding element width that doesn't exist.
-        /// </summary>
         [Test]
         public void FindWidthThatDoesntExist()
         {
@@ -324,9 +227,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element height that doesn't exist.
-        /// </summary>
         [Test]
         public void FindHeightThatDoesntExist()
         {
@@ -334,9 +234,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element inner width that doesn't exist.
-        /// </summary>
         [Test]
         public void FindInnerWidthThatDoesntExist()
         {
@@ -344,9 +241,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element inner height that doesn't exist.
-        /// </summary>
         [Test]
         public void FindInnerHeightThatDoesntExist()
         {
@@ -354,9 +248,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element outer width that doesn't exist.
-        /// </summary>
         [Test]
         public void FindOuterWidthThatDoesntExist()
         {
@@ -364,9 +255,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element outer height that doesn't exist.
-        /// </summary>
         [Test]
         public void FindOuterHeightThatDoesntExist()
         {
@@ -374,9 +262,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element outer width with margin that doesn't exist.
-        /// </summary>
         [Test]
         public void FindOuterWidthWithMarginThatDoesntExist()
         {
@@ -384,9 +269,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element outer height with margin that doesn't exist.
-        /// </summary>
         [Test]
         public void FindOuterHeightWithMarginThatDoesntExist()
         {
@@ -394,9 +276,6 @@
             Assert.IsNull(value);
         }
 
-        /// <summary>
-        /// Tests finding element position.
-        /// </summary>
         [Test]
         public void FindPosition()
         {
@@ -406,9 +285,6 @@
             Assert.AreEqual(8, position.Value.Left);
         }
 
-        /// <summary>
-        /// Tests finding element position that doesn't exist.
-        /// </summary>
         [Test]
         public void FindPositionThatDoesntExist()
         {
@@ -416,9 +292,6 @@
             Assert.IsNull(position);
         }
 
-        /// <summary>
-        /// Tests finding element offset.
-        /// </summary>
         [Test]
         public void FindOffset()
         {
@@ -428,9 +301,6 @@
             Assert.AreEqual(13, position.Value.Left);
         }
 
-        /// <summary>
-        /// Tests finding element offset that doesn't exist.
-        /// </summary>
         [Test]
         public void FindOffsetThatDoesntExist()
         {
@@ -438,9 +308,6 @@
             Assert.IsNull(position);
         }
 
-        /// <summary>
-        /// Tests finding element string data.
-        /// </summary>
         [Test]
         public void FindStringData()
         {
@@ -448,9 +315,6 @@
             Assert.AreEqual("str", value);
         }
 
-        /// <summary>
-        /// Tests finding element integer data.
-        /// </summary>
         [Test]
         public void FindIntegerData()
         {
@@ -458,9 +322,6 @@
             Assert.AreEqual(123, value);
         }
 
-        /// <summary>
-        /// Tests finding element boolean data.
-        /// </summary>
         [Test]
         public void FindBooleanData()
         {
@@ -469,9 +330,6 @@
             Assert.IsTrue(value.Value);
         }
 
-        /// <summary>
-        /// Tests finding element scroll top value.
-        /// </summary>
         [Test]
         public void FindScrollTop()
         {
@@ -480,9 +338,6 @@
             Assert.AreEqual(100, scroll);
         }
 
-        /// <summary>
-        /// Tests finding element scroll left value.
-        /// </summary>
         [Test]
         public void FindScrollLeft()
         {
@@ -491,9 +346,6 @@
             Assert.AreEqual(200, scroll);
         }
 
-        /// <summary>
-        /// Tests finding element count.
-        /// </summary>
         [Test]
         public void FindCount()
         {
@@ -501,9 +353,6 @@
             Assert.AreEqual(2, count);
         }
 
-        /// <summary>
-        /// Tests finding element count that doesn't exist.
-        /// </summary>
         [Test]
         public void FindCountThatDoesntExist()
         {
@@ -511,9 +360,6 @@
             Assert.AreEqual(0, count);
         }
 
-        /// <summary>
-        /// Tests finding serialized element.
-        /// </summary>
         [Test]
         public void FindSerialized()
         {
@@ -521,9 +367,6 @@
             Assert.AreEqual("i1=v1&i3=v3", value);
         }
 
-        /// <summary>
-        /// Tests finding serialized element that doesn't exist.
-        /// </summary>
         [Test]
         public void FindSerializedThatDoesntExist()
         {
@@ -531,9 +374,6 @@
             Assert.IsEmpty(value);
         }
 
-        /// <summary>
-        /// Tests finding serialized array element.
-        /// </summary>
         [Test]
         public void FindSerializedArray()
         {
@@ -541,9 +381,6 @@
             Assert.AreEqual("[{\"name\":\"i1\",\"value\":\"v1\"},{\"name\":\"i3\",\"value\":\"v3\"}]", value);
         }
 
-        /// <summary>
-        /// Tests finding serialized array element that doesn't exist.
-        /// </summary>
         [Test]
         public void FindSerializedArrayThatDoesntExist()
         {
@@ -551,9 +388,6 @@
             Assert.AreEqual("[]", value);
         }
 
-        /// <summary>
-        /// Tests finding element path.
-        /// </summary>
         [Test]
         public void FindElementPath()
         {
@@ -561,9 +395,6 @@
             Assert.AreEqual("body > div#id1", element.Path);
         }
 
-        /// <summary>
-        /// Tests finding element.
-        /// </summary>
         [Test]
         public void FindInnerElement()
         {
@@ -572,9 +403,6 @@
             Assert.IsNotNull(element);
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindInnerElements()
         {

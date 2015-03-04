@@ -12,10 +12,6 @@
     using Selenium.WebDriver.Extensions.JQuery;
     using Selenium.WebDriver.Extensions.Sizzle;
     using By = Selenium.WebDriver.Extensions.By;
-    
-    /// <summary>
-    /// Web driver extensions tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -23,9 +19,6 @@
 #endif
     public class WebDriverExtensionsTests
     {
-        /// <summary>
-        /// Gets the load jQuery test cases.
-        /// </summary>
         private static IEnumerable LoadJQueryTestCases
         {
             get
@@ -37,9 +30,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the load jQuery test cases.
-        /// </summary>
         private static IEnumerable LoadJQueryWithUriTestCases
         {
             get
@@ -53,9 +43,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the load Sizzle test cases.
-        /// </summary>
         private static IEnumerable LoadSizzleTestCases
         {
             get
@@ -67,9 +54,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the load Sizzle test cases.
-        /// </summary>
         private static IEnumerable LoadSizzleWithUriTestCases
         {
             get
@@ -83,14 +67,6 @@
             }
         }
 
-        /// <summary>
-        /// Tests jQuery loading.
-        /// </summary>
-        /// <param name="version">The version of jQuery to load if it's not already loaded on the tested page.</param>
-        /// <param name="timeout">The timeout value for the jQuery load.</param>
-        /// <param name="mockValueSequence">
-        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
-        /// </param>
         [TestCaseSource("LoadJQueryTestCases")]
         public void LoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
@@ -100,14 +76,6 @@
             mock.Object.JQuery().Load(version, timeout);
         }
 
-        /// <summary>
-        /// Tests jQuery loading.
-        /// </summary>
-        /// <param name="jQueryUri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
-        /// <param name="timeout">The timeout value for the jQuery load.</param>
-        /// <param name="mockValueSequence">
-        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
-        /// </param>
         [TestCaseSource("LoadJQueryWithUriTestCases")]
         public void LoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
@@ -117,14 +85,6 @@
             mock.Object.JQuery().Load(jQueryUri, timeout);
         }
 
-        /// <summary>
-        /// Tests Sizzle loading.
-        /// </summary>
-        /// <param name="version">The version of Sizzle to load if it's not already loaded on the tested page.</param>
-        /// <param name="timeout">The timeout value for the Sizzle load.</param>
-        /// <param name="mockValueSequence">
-        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
-        /// </param>
         [TestCaseSource("LoadSizzleTestCases")]
         public void LoadSizzle(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
@@ -134,14 +94,6 @@
             mock.Object.Sizzle().Load(version, timeout);
         }
 
-        /// <summary>
-        /// Tests Sizzle loading.
-        /// </summary>
-        /// <param name="sizzleUri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
-        /// <param name="timeout">The timeout value for the Sizzle load.</param>
-        /// <param name="mockValueSequence">
-        /// A mock value sequence for <see cref="IJavaScriptExecutor.ExecuteScript"/> method.
-        /// </param>
         [TestCaseSource("LoadSizzleWithUriTestCases")]
         public void LoadSizzleWithUri(Uri sizzleUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
@@ -151,9 +103,6 @@
             mock.Object.Sizzle().Load(sizzleUri, timeout);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithJQuery()
         {
@@ -168,9 +117,6 @@
             Assert.AreEqual("div", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementWithJQueryArgumentNull()
@@ -179,9 +125,6 @@
             mock.Object.FindElement((JQuerySelector)null);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithJQueryNoSuchElement()
@@ -193,9 +136,6 @@
             mock.Object.FindElement(By.JQuerySelector("div"));
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithSizzle()
         {
@@ -209,9 +149,6 @@
             Assert.AreEqual("div", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementWithSizzleArgumentNull()
@@ -220,9 +157,6 @@
             mock.Object.FindElement((SizzleSelector)null);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithSizzleNoSuchElement()
@@ -232,9 +166,6 @@
             mock.Object.FindElement(By.SizzleSelector("div"));
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithSizzleNoSuchElementEmptyResult()
@@ -244,9 +175,6 @@
             mock.Object.FindElement(By.SizzleSelector("div"));
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithQuerySelector()
         {
@@ -260,9 +188,6 @@
             Assert.AreEqual("div", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithNestedQuerySelector()
         {
@@ -278,9 +203,6 @@
             Assert.AreEqual("span", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementWithQuerySelectorArgumentNull()
@@ -289,9 +211,6 @@
             mock.Object.FindElement((QuerySelector)null);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithQuerySelectorNoSuchElement()
@@ -301,9 +220,6 @@
             mock.Object.FindElement(By.QuerySelector("div"));
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithQuerySelectorNoSuchElementEmptyResult()
@@ -313,9 +229,6 @@
             mock.Object.FindElement(By.QuerySelector("div"));
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithJQuery()
         {
@@ -340,9 +253,6 @@
             Assert.AreEqual("test", result[1].GetAttribute("class"));
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithJQueryNotExists()
         {
@@ -353,9 +263,6 @@
             Assert.AreEqual(0, result.Count);
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithSizzle()
         {
@@ -380,9 +287,6 @@
             Assert.AreEqual("test", result[1].GetAttribute("class"));
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithSizzleNotExists()
         {
@@ -393,9 +297,6 @@
             Assert.AreEqual(0, result.Count);
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithQuerySelector()
         {
@@ -420,9 +321,6 @@
             Assert.AreEqual("test", result[1].GetAttribute("class"));
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithQuerySelectorNotExists()
         {
@@ -433,9 +331,6 @@
             Assert.AreEqual(0, result.Count);
         }
 
-        /// <summary>
-        /// Tests finding an element text.
-        /// </summary>
         [Test]
         public void FindText()
         {
@@ -446,9 +341,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element inner HTML.
-        /// </summary>
         [Test]
         public void FindHtml()
         {
@@ -459,9 +351,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element string attribute.
-        /// </summary>
         [Test]
         public void FindAttribute()
         {
@@ -472,9 +361,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element attribute that doesn't exist.
-        /// </summary>
         [Test]
         public void FindAttributeNotExists()
         {
@@ -484,9 +370,6 @@
             Assert.IsNull(result);
         }
 
-        /// <summary>
-        /// Tests finding an element attribute with invalid type parameter.
-        /// </summary>
         [Test]
         public void FindAttributeInvalidType()
         {
@@ -496,9 +379,6 @@
             Assert.IsNull(result);
         }
 
-        /// <summary>
-        /// Tests finding an element string property.
-        /// </summary>
         [Test]
         public void FindPropertyString()
         {
@@ -509,9 +389,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element boolean property.
-        /// </summary>
         [Test]
         public void FindPropertyBoolean()
         {
@@ -523,9 +400,6 @@
             Assert.AreEqual(Result, result.Value);
         }
 
-        /// <summary>
-        /// Tests finding an element property that doesn't exist.
-        /// </summary>
         [Test]
         public void FindPropertyNotExists()
         {
@@ -535,9 +409,6 @@
             Assert.IsNull(result);
         }
 
-        /// <summary>
-        /// Tests finding an element property with invalid type parameter.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(TypeArgumentException))]
         public void FindPropertyInvalidType()
@@ -546,9 +417,6 @@
             mock.Object.JQuery(By.JQuerySelector("input")).Property<int>("checked");
         }
 
-        /// <summary>
-        /// Tests finding an element value.
-        /// </summary>
         [Test]
         public void FindValue()
         {
@@ -559,9 +427,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element CSS property.
-        /// </summary>
         [Test]
         public void FindCss()
         {
@@ -572,9 +437,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element width.
-        /// </summary>
         [Test]
         public void FindWidth()
         {
@@ -585,9 +447,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element height.
-        /// </summary>
         [Test]
         public void FindHeight()
         {
@@ -598,9 +457,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element inner width.
-        /// </summary>
         [Test]
         public void FindInnerWidth()
         {
@@ -611,9 +467,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element inner height.
-        /// </summary>
         [Test]
         public void FindInnerHeight()
         {
@@ -624,9 +477,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer width.
-        /// </summary>
         [Test]
         public void FindOuterWidth()
         {
@@ -637,9 +487,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer height.
-        /// </summary>
         [Test]
         public void FindOuterHeight()
         {
@@ -650,9 +497,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer width with margin.
-        /// </summary>
         [Test]
         public void FindOuterWidthWithMargin()
         {
@@ -663,9 +507,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer height with margin.
-        /// </summary>
         [Test]
         public void FindOuterHeightWithMargin()
         {
@@ -676,9 +517,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element position.
-        /// </summary>
         [Test]
         public void FindPosition()
         {
@@ -699,9 +537,6 @@
             Assert.AreEqual(dict["left"], position.Value.Left);
         }
 
-        /// <summary>
-        /// Tests finding an element position that does not exist.
-        /// </summary>
         [Test]
         public void FindPositionNotExists()
         {
@@ -715,9 +550,6 @@
             Assert.IsNull(position);
         }
 
-        /// <summary>
-        /// Tests finding an element offset.
-        /// </summary>
         [Test]
         public void FindOffset()
         {
@@ -738,9 +570,6 @@
             Assert.AreEqual(dict["left"], offset.Value.Left);
         }
 
-        /// <summary>
-        /// Tests finding an element offset that does not exist.
-        /// </summary>
         [Test]
         public void FindOffsetNotExists()
         {
@@ -754,9 +583,6 @@
             Assert.IsNull(offset);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll left.
-        /// </summary>
         [Test]
         public void FindScrollLeft()
         {
@@ -767,9 +593,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll top.
-        /// </summary>
         [Test]
         public void FindScrollTop()
         {
@@ -780,9 +603,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll left.
-        /// </summary>
         [Test]
         public void FindData()
         {
@@ -793,9 +613,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll left.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(TypeArgumentException))]
         public void FindDataInvalidType()
@@ -804,9 +621,6 @@
             mock.Object.JQuery(By.JQuerySelector("input")).Data<int>("test");
         }
 
-        /// <summary>
-        /// Tests finding an element count.
-        /// </summary>
         [Test]
         public void FindCount()
         {
@@ -817,9 +631,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding a serialized element.
-        /// </summary>
         [Test]
         public void FindSerialized()
         {
@@ -830,9 +641,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding a serialized element array.
-        /// </summary>
         [Test]
         public void FindSerializedArray()
         {
@@ -843,9 +651,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding if elements contain a class.
-        /// </summary>
         [Test]
         public void HasClass()
         {
@@ -856,9 +661,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests numbers casting in IE.
-        /// </summary>
         [Test]
         public void NumbersCastingInInternetExplorer()
         {
@@ -870,9 +672,6 @@
             Assert.IsInstanceOf<long?>(result);
         }
 
-        /// <summary>
-        /// Tests query selector support check.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(QuerySelectorNotSupportedException))]
         public void QuerySelectorNotSupported()
@@ -883,9 +682,6 @@
             mock.Object.QuerySelector().CheckSupport();
         }
 
-        /// <summary>
-        /// Tests checking selector prerequisites.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CheckSelectorPrerequisitesWithoutLoader()
@@ -894,9 +690,6 @@
             mock.Object.CheckSelectorPrerequisites(null);
         }
 
-        /// <summary>
-        /// Tests loading external libraries.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void LoadExternalLibraryWithoutLoader()
@@ -905,9 +698,6 @@
             mock.Object.LoadExternalLibrary(null, null);
         }
 
-        /// <summary>
-        /// Tests loading external libraries.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void HelperWithNullDriver()
@@ -915,12 +705,6 @@
             WebElementExtensions.JQuery(null, null);
         }
 
-        /// <summary>
-        /// Mocks the Selenium web driver.
-        /// </summary>
-        /// <param name="script">Script to mock to return value.</param>
-        /// <param name="value">A value to return by the script.</param>
-        /// <returns>Mocked Selenium web driver.</returns>
         private static Mock<IWebDriver> MockWebDriver(string script = null, object value = null)
         {
             var mock = new Mock<IWebDriver>();

@@ -3,10 +3,6 @@
     using System;
     using System.Collections;
     using NUnit.Framework;
-    
-    /// <summary>
-    /// Query selector tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -14,9 +10,6 @@
 #endif
     public class QuerySelectorTests
     {
-        /// <summary>
-        /// Gets the selector test cases.
-        /// </summary>
         private static IEnumerable SelectorTestCases
         {
             get
@@ -34,9 +27,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the equality test cases.
-        /// </summary>
         private static IEnumerable EqualityTestCases
         {
             get
@@ -77,11 +67,6 @@
             }
         }
 
-        /// <summary>
-        /// Tests if the proper selector is generated.
-        /// </summary>
-        /// <param name="selector">The query selector.</param>
-        /// <returns>The generated query selector.</returns>
         [TestCaseSource("SelectorTestCases")]
         public string Selector(QuerySelector selector)
         {
@@ -89,9 +74,6 @@
             return selector.Selector;
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullSelector()
@@ -99,9 +81,6 @@
             By.QuerySelector(null);
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullBaseElementSelector()
@@ -109,9 +88,6 @@
             By.QuerySelector("div", (string)null);
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullSelectorWithBaseSelector()
@@ -119,9 +95,6 @@
             By.QuerySelector(null, By.QuerySelector("div"));
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullBaseSelector()
@@ -129,9 +102,6 @@
             By.QuerySelector("div", (QuerySelector)null);
         }
 
-        /// <summary>
-        /// Tests if the call format string is handled properly.
-        /// </summary>
         [Test]
         public void CallFormatString()
         {
@@ -139,12 +109,6 @@
             Assert.IsNotNull(formatString);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
-        /// <param name="selector1">First selector to compare.</param>
-        /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(QuerySelector selector1, QuerySelector selector2, bool expectedResult)
         {
@@ -161,9 +125,6 @@
             Assert.AreNotEqual(expectedResult, selector1 != selector2);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
         [Test]
         public void EqualityOperatorWrongType()
         {
@@ -176,9 +137,6 @@
 #pragma warning restore 252,253
         }
 
-        /// <summary>
-        /// Tests invoking functions with null element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreateNullElement()

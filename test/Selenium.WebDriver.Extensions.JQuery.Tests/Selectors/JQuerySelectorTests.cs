@@ -7,10 +7,6 @@
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
-
-    /// <summary>
-    /// JQuery selector tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -18,9 +14,6 @@
 #endif
     public class JQuerySelectorTests
     {
-        /// <summary>
-        /// Gets the selector test cases.
-        /// </summary>
         private static IEnumerable SelectorTestCases
         {
             get
@@ -119,9 +112,6 @@
             }
         }
 
-        /// <summary>
-        /// Gets the equality test cases.
-        /// </summary>
         private static IEnumerable EqualityTestCases
         {
             get
@@ -152,20 +142,12 @@
             }
         }
 
-        /// <summary>
-        /// Tests if the proper selector is generated.
-        /// </summary>
-        /// <param name="selector">The jQuery selector.</param>
-        /// <returns>The generated jQuery selector.</returns>
         [TestCaseSource("SelectorTestCases")]
         public string Selector(JQuerySelector selector)
         {
             return selector.Selector;
         }
 
-        /// <summary>
-        /// Tests if the context property is handled properly.
-        /// </summary>
         [Test]
         public void Context()
         {
@@ -175,9 +157,6 @@
             Assert.AreEqual(by.Context.Selector, "jQuery('article')");
         }
 
-        /// <summary>
-        /// Tests if the jQuery variable property is handled properly.
-        /// </summary>
         [Test]
         public void JQueryVariable()
         {
@@ -186,9 +165,6 @@
             Assert.AreEqual(by.JQueryVariable, "$");
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullSelector()
@@ -196,9 +172,6 @@
             By.JQuerySelector(null);
         }
 
-        /// <summary>
-        /// Tests if the call format string is handled properly.
-        /// </summary>
         [Test]
         public void CallFormatString()
         {
@@ -206,12 +179,6 @@
             Assert.IsNotNull(formatString);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
-        /// <param name="selector1">First selector to compare.</param>
-        /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(JQuerySelector selector1, JQuerySelector selector2, bool expectedResult)
         {
@@ -228,9 +195,6 @@
             Assert.AreNotEqual(expectedResult, selector1 != selector2);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
         [Test]
         public void EqualityOperatorWrongType()
         {
@@ -242,10 +206,7 @@
             Assert.IsTrue(selector1 != selector2);
 #pragma warning restore 252,253
         }
-        
-        /// <summary>
-        /// Tests invoking functions with null element.
-        /// </summary>
+
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreateNullElement()
@@ -254,9 +215,6 @@
             selector.Create(null);
         }
 
-        /// <summary>
-        /// Tests invoking functions with null element.
-        /// </summary>
         [Test]
         public void CreateJQueryElement()
         {

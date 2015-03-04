@@ -8,10 +8,6 @@
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
     using By = Selenium.WebDriver.Extensions.By;
-    
-    /// <summary>
-    /// Web element extensions tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -19,9 +15,6 @@
 #endif
     public class WebElementExtensionsTests
     {
-        /// <summary>
-        /// Tests finding element path.
-        /// </summary>
         [Test]
         public void GetPath()
         {
@@ -40,9 +33,6 @@
             Assert.AreEqual("body > div", element.Object.Path);
         }
 
-        /// <summary>
-        /// Tests finding element XPATH.
-        /// </summary>
         [Test]
         public void GetXPath()
         {
@@ -61,9 +51,6 @@
             Assert.AreEqual("html[1]/body", element.Object.XPath);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithJQuery()
         {
@@ -95,9 +82,6 @@
             Assert.AreEqual("span", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithJQuery()
         {
@@ -139,9 +123,6 @@
             Assert.AreEqual("test2", result[1].GetAttribute("class"));
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithSizzle()
         {
@@ -173,9 +154,6 @@
             Assert.AreEqual("span", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithSizzle()
         {
@@ -217,9 +195,6 @@
             Assert.AreEqual("test2", result[1].GetAttribute("class"));
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithQuerySelector()
         {
@@ -254,9 +229,6 @@
             Assert.AreEqual("span", result.TagName);
         }
 
-        /// <summary>
-        /// Tests finding elements.
-        /// </summary>
         [Test]
         public void FindElementsWithQuerySelector()
         {
@@ -301,9 +273,6 @@
             Assert.AreEqual("test2", result[1].GetAttribute("class"));
         }
 
-        /// <summary>
-        /// Tests finding an element text.
-        /// </summary>
         [Test]
         public void FindText()
         {
@@ -324,9 +293,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element inner HTML.
-        /// </summary>
         [Test]
         public void FindHtml()
         {
@@ -347,9 +313,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element string attribute.
-        /// </summary>
         [Test]
         public void FindAttribute()
         {
@@ -370,9 +333,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element string property.
-        /// </summary>
         [Test]
         public void FindPropertyString()
         {
@@ -393,9 +353,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element boolean property.
-        /// </summary>
         [Test]
         public void FindPropertyBoolean()
         {
@@ -417,9 +374,6 @@
             Assert.AreEqual(Result, result.Value);
         }
 
-        /// <summary>
-        /// Tests finding an element value.
-        /// </summary>
         [Test]
         public void FindValue()
         {
@@ -440,9 +394,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element CSS property.
-        /// </summary>
         [Test]
         public void FindCss()
         {
@@ -463,9 +414,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element width.
-        /// </summary>
         [Test]
         public void FindWidth()
         {
@@ -486,9 +434,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element height.
-        /// </summary>
         [Test]
         public void FindHeight()
         {
@@ -509,9 +454,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element inner width.
-        /// </summary>
         [Test]
         public void FindInnerWidth()
         {
@@ -532,9 +474,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element inner height.
-        /// </summary>
         [Test]
         public void FindInnerHeight()
         {
@@ -555,9 +494,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer width.
-        /// </summary>
         [Test]
         public void FindOuterWidth()
         {
@@ -578,9 +514,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer height.
-        /// </summary>
         [Test]
         public void FindOuterHeight()
         {
@@ -601,9 +534,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer width with margin.
-        /// </summary>
         [Test]
         public void FindOuterWidthWithMargin()
         {
@@ -624,9 +554,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element outer height with margin.
-        /// </summary>
         [Test]
         public void FindOuterHeightWithMargin()
         {
@@ -647,9 +574,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element position.
-        /// </summary>
         [Test]
         public void FindPosition()
         {
@@ -675,9 +599,6 @@
             Assert.AreEqual(dict["left"], position.Value.Left);
         }
 
-        /// <summary>
-        /// Tests finding an element offset.
-        /// </summary>
         [Test]
         public void FindOffset()
         {
@@ -703,9 +624,6 @@
             Assert.AreEqual(dict["left"], offset.Value.Left);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll left.
-        /// </summary>
         [Test]
         public void FindScrollLeft()
         {
@@ -726,9 +644,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll top.
-        /// </summary>
         [Test]
         public void FindScrollTop()
         {
@@ -748,9 +663,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll left.
-        /// </summary>
         [Test]
         public void FindData()
         {
@@ -771,9 +683,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element scroll left.
-        /// </summary>
         [Test]
         public void FindIntData()
         {
@@ -794,9 +703,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element count.
-        /// </summary>
         [Test]
         public void FindCount()
         {
@@ -817,9 +723,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding a serialized element.
-        /// </summary>
         [Test]
         public void FindSerialized()
         {
@@ -840,9 +743,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding a serialized element array.
-        /// </summary>
         [Test]
         public void FindSerializedArray()
         {
@@ -865,9 +765,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding if elements contain a class.
-        /// </summary>
         [Test]
         public void HasClass()
         {
@@ -890,9 +787,6 @@
             Assert.AreEqual(Result, result);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         public void FindElementWithXPath()
         {
@@ -913,12 +807,6 @@
             Assert.AreEqual("body", result.TagName);
         }
 
-        /// <summary>
-        /// Mocks the Selenium web driver.
-        /// </summary>
-        /// <param name="script">Script to mock to return value.</param>
-        /// <param name="value">A value to return by the script.</param>
-        /// <returns>Mocked Selenium web driver.</returns>
         private static Mock<IWebDriver> MockWebDriver(string script = null, object value = null)
         {
             var mock = new Mock<IWebDriver>();

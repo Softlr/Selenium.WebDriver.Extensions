@@ -6,10 +6,6 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
     using By = Selenium.WebDriver.Extensions.Core.By;
-
-    /// <summary>
-    /// Partial link text selector tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -17,9 +13,6 @@
 #endif
     public class PartialLinkTextSelectorTests
     {
-        /// <summary>
-        /// Gets the equality test cases.
-        /// </summary>
         private static IEnumerable EqualityTestCases
         {
             get
@@ -45,9 +38,6 @@
             }
         }
 
-        /// <summary>
-        /// Tests if the proper selector is generated.
-        /// </summary>
         [Test]
         public void Selector()
         {
@@ -55,9 +45,6 @@
             Assert.AreEqual(selector.Selector, selector.ToString());
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullSelector()
@@ -65,9 +52,6 @@
             By.PartialLinkText(null);
         }
 
-        /// <summary>
-        /// Tests if the null selector is handled properly.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void NullBaseElementSelector()
@@ -75,9 +59,6 @@
             By.PartialLinkText("test", null);
         }
 
-        /// <summary>
-        /// Tests if the call format string is handled properly.
-        /// </summary>
         [Test]
         public void CallFormatString()
         {
@@ -85,12 +66,6 @@
             Assert.IsNotNull(formatString);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
-        /// <param name="selector1">First selector to compare.</param>
-        /// <param name="selector2">Second selector to compare.</param>
-        /// <param name="expectedResult">The expected result.</param>
         [TestCaseSource("EqualityTestCases")]
         public void EqualityOperator(
             PartialLinkTextSelector selector1,
@@ -110,9 +85,6 @@
             Assert.AreNotEqual(expectedResult, selector1 != selector2);
         }
 
-        /// <summary>
-        /// Tests the equality operators.
-        /// </summary>
         [Test]
         public void EqualityOperatorWrongType()
         {
@@ -125,9 +97,6 @@
 #pragma warning restore 252,253
         }
 
-        /// <summary>
-        /// Tests the runner type.
-        /// </summary>
         [Test]
         public void RunnerType()
         {
@@ -136,9 +105,6 @@
             Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
         }
 
-        /// <summary>
-        /// Tests invoking functions with null element.
-        /// </summary>
         [Test]
         public void Create()
         {
@@ -161,9 +127,6 @@
             Assert.AreEqual("test", linkTextSelector.RawSelector);
         }
 
-        /// <summary>
-        /// Tests invoking functions with null element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void CreateNullElement()

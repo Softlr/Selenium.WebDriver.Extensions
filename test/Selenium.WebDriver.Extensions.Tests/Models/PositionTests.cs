@@ -2,10 +2,6 @@
 {
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.JQuery;
-    
-    /// <summary>
-    /// Position tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -13,9 +9,6 @@
 #endif
     public class PositionTests
     {
-        /// <summary>
-        /// Tests hash code generation.
-        /// </summary>
         [Test]
         public void HashCodeTest()
         {
