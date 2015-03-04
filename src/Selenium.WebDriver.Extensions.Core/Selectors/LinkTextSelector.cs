@@ -21,13 +21,14 @@
             : base(text, baseElement)
         {
             this.Selector = @"(function(text, baseElem) {
-                var l = baseElem.querySelectorAll(':link');
+                var links = baseElem.querySelectorAll(':link');
+                var results = [];
                 for (var i = 0; i < l.length; i++) { 
-                    if (l[i].innerText === text) { 
-                        return l[i]; 
+                    if (links[i].innerText === text) { 
+                        results.push(links[i]); 
                     } 
                 }
-                return null;
+                return results;
             })('" + text + "', " + this.BaseElement + ");";
         }
 
