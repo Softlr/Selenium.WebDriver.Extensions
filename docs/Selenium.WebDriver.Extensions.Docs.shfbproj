@@ -28,8 +28,6 @@
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.JQuery.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.JQuery.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Shared.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Shared.xml" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.xml" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.xml" />
