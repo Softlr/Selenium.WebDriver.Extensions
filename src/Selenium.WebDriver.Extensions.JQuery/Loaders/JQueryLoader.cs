@@ -3,8 +3,8 @@
     using System;
     using System.Globalization;
     using System.Linq;
-    using Selenium.WebDriver.Extensions.Shared;
-    
+    using Selenium.WebDriver.Extensions.Core;
+
     /// <summary>
     /// The jQuery loader.
     /// </summary>

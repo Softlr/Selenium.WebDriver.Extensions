@@ -1,9 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-    using Selenium.WebDriver.Extensions.QuerySelector;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// The link text base selector.
     /// </summary>

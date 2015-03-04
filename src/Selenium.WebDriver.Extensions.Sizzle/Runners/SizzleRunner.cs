@@ -4,7 +4,7 @@
     using System.Collections;
     using System.Collections.ObjectModel;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Shared;
+    using Selenium.WebDriver.Extensions.Core;
 
     /// <summary>
     /// The Sizzle runner.
@@ -35,7 +35,7 @@
             }
 
             driver.Sizzle().Load();
-            return Find<T>(driver, "return " + by.Selector + ";");
+            return JavaScriptRunner.Find<T>(driver, "return " + by.Selector + ";");
         }
     }
 }

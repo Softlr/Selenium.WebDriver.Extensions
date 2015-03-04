@@ -2,7 +2,6 @@
 {
     using System.Collections;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.QuerySelector;
     using By = Selenium.WebDriver.Extensions.Core.By;
     
     /// <summary>

@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using Selenium.WebDriver.Extensions.Shared;
+    using Selenium.WebDriver.Extensions.Core;
 
     /// <summary>
     /// The Selenium selector for jQuery.

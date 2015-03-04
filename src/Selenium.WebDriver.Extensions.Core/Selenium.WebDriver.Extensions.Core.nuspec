@@ -12,7 +12,7 @@
         <tags>selenium, extension, extensions, web, driver, webdriver</tags>
 		<dependencies>
 			<dependency id="Selenium.WebDriver" version="2.0.0"/>
-			<dependency id="Selenium.WebDriver.Extensions.Shared" version="1.2.0"/>
+            <dependency id="Selenium.Support" version="2.0.0"/>
 		</dependencies> 
     </metadata>
     <files>

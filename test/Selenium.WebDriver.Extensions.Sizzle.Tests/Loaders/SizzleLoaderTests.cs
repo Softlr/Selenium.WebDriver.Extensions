@@ -3,8 +3,8 @@
     using System;
     using System.Linq;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    using Selenium.WebDriver.Extensions.Core;
+    
     /// <summary>
     /// Sizzle loader tests.
     /// </summary>

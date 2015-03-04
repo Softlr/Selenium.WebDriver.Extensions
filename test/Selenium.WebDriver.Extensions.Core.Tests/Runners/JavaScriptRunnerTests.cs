@@ -2,8 +2,7 @@
 {
     using System;
     using NUnit.Framework;
-    using Selenium.WebDriver.Extensions.Shared;
-
+    
     /// <summary>
     /// JQuery runner tests.
     /// </summary>

@@ -26,26 +26,22 @@
     <CleanIntermediates>True</CleanIntermediates>
     <DocumentationSources>
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" />
+      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.xml" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.JQuery.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.JQuery.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.QuerySelector.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.QuerySelector.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Shared.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Shared.xml" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions.Core\bin\Release\Selenium.WebDriver.Extensions.Core.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions.Core\bin\Release\Selenium.WebDriver.Extensions.Core.xml" />
+      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Core.dll" />
+      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Core.xml" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Shared" isDocumented="True">Contains the functionalities shared across extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-<NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Core" isDocumented="True">Contains the implementation of overrides for standard Selenium WebDriver selectors.</NamespaceSummaryItem></NamespaceSummaries>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem>
+      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Core" isDocumented="True">Contains the implementation of overrides for standard Selenium WebDriver selectors.</NamespaceSummaryItem>
+    </NamespaceSummaries>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>

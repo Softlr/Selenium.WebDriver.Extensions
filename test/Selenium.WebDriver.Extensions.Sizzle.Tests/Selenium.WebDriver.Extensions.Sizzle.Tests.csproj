@@ -92,12 +92,12 @@
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='Debug-Net40' Or '$(Configuration)'=='Release-Net40'">
     <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.44.0\lib\net40\WebDriver.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.45.0\lib\net40\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug-Net35' Or '$(Configuration)'=='Release-Net35'">
     <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.44.0\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.45.0\lib\net35\WebDriver.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -111,9 +111,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Shared\Selenium.WebDriver.Extensions.Shared.csproj">
-      <Project>{b0f9d77e-89ae-4162-a73f-5f544c14f41a}</Project>
-      <Name>Selenium.WebDriver.Extensions.Shared</Name>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj">
+      <Project>{bac59c4a-bb67-4e40-ac8a-0690cc7223e1}</Project>
+      <Name>Selenium.WebDriver.Extensions.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.csproj">
       <Project>{b0f5e6ec-6f3b-4c84-a852-3f21ad9b9c22}</Project>

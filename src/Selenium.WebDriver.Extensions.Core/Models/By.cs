@@ -1,9 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.Shared;
-    using QS = Selenium.WebDriver.Extensions.QuerySelector.QuerySelector;
-
+    
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.
     /// </summary>
@@ -21,10 +19,13 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
-        public static QS QuerySelector(string selector, string baseElement = "document")
+        /// <returns>
+        /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
+        /// elements.
+        /// </returns>
+        public static QuerySelector QuerySelector(string selector, string baseElement = "document")
         {
-            return new QS(selector, baseElement);
+            return new QuerySelector(selector, baseElement);
         }
 
         /// <summary>
@@ -32,10 +33,13 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
-        /// <returns>A <see cref="QS"/> object the driver can use to find the elements.</returns>
-        public static QS QuerySelector(string selector, ISelector baseSelector)
+        /// <returns>
+        /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
+        /// elements.
+        /// </returns>
+        public static QuerySelector QuerySelector(string selector, ISelector baseSelector)
         {
-            return new QS(selector, baseSelector);
+            return new QuerySelector(selector, baseSelector);
         }
 
         /// <summary>
