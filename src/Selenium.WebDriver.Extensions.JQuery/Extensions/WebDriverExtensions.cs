@@ -23,6 +23,17 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
+        public static ChainJQueryHelper JQuery(this IWebDriver driver, string selector)
+        {
+            return driver.JQuery(By.JQuerySelector(selector));
+        }
+
+        /// <summary>
+        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="selector">The selector.</param>
+        /// <returns>The jQuery helper.</returns>
         public static ChainJQueryHelper JQuery(this IWebDriver driver, JQuerySelector selector)
         {
             return new ChainJQueryHelper(driver, selector);
