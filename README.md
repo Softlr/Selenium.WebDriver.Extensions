@@ -95,7 +95,13 @@ driver.FindElements(selector);
 You can have instant access to values of the getter jQuery methods.
 
 ```csharp
-var value = driver.JQuery(By.JQuerySelector("input")).Value();
+var value = driver.JQuery("input").Value();
+```
+
+You can also set the values and trigger events using the API.
+```csharp
+driver.JQuery("input").Value("new value");
+driver.JQuery("button:submit").Click();
 ```
 
 #### Basic Sizzle example
