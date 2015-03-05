@@ -2,6 +2,7 @@
 {
     using NUnit.Framework;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35

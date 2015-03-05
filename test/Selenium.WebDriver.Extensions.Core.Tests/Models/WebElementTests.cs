@@ -4,6 +4,7 @@
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35

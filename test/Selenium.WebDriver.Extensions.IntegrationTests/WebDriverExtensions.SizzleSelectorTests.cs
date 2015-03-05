@@ -5,6 +5,7 @@
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
     using By = Selenium.WebDriver.Extensions.By;
+
     [TestFixture(
         WebBrowser.PhantomJs,
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]

@@ -3,6 +3,7 @@
     using System;
     using NUnit.Framework;
     using Selenium.WebDriver.Extensions.Sizzle;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35

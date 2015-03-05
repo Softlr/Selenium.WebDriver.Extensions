@@ -6,6 +6,7 @@
     using NUnit.Framework;
     using OpenQA.Selenium;
     using By = Selenium.WebDriver.Extensions.Core.By;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35

@@ -2,6 +2,7 @@
 {
     using NUnit.Framework;
     using By = Selenium.WebDriver.Extensions.By;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -9,6 +10,42 @@
 #endif
     public class ByTests
     {
+        [Test]
+        public void JQuerySelector()
+        {
+            const string Selector = "div";
+            var wrappedBy = By.JQuerySelector(Selector);
+
+            Assert.AreEqual("div", wrappedBy.RawSelector);
+        }
+
+        [Test]
+        public void SizzleSelector()
+        {
+            const string Selector = "div";
+            var wrappedBy = By.SizzleSelector(Selector);
+
+            Assert.AreEqual("div", wrappedBy.RawSelector);
+        }
+
+        [Test]
+        public void QuerySelector()
+        {
+            const string Selector = "div";
+            var wrappedBy = By.QuerySelector(Selector);
+
+            Assert.AreEqual("div", wrappedBy.RawSelector);
+        }
+
+        [Test]
+        public void QuerySelectorWithBase()
+        {
+            const string Selector = "div";
+            var wrappedBy = By.QuerySelector(Selector, By.QuerySelector("body"));
+
+            Assert.AreEqual("div", wrappedBy.RawSelector);
+        }
+
         [Test]
         public void ClassName()
         {

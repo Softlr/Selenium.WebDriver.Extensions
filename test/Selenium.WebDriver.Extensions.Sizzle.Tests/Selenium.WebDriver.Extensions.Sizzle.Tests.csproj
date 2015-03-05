@@ -79,6 +79,9 @@
     <OutputPath>bin\Docs\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Moq">
+      <HintPath>..\..\packages\Moq.4.2.1502.0911\lib\net40\Moq.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\..\packages\NUnit.2.6.4\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -101,6 +104,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
+    <Compile Include="Extensions\WebElementExtensionsTests.cs" />
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Loaders\SizzleLoaderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

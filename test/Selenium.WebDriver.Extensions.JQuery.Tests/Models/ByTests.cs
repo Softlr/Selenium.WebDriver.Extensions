@@ -2,6 +2,7 @@
 {
     using NUnit.Framework;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
