@@ -121,9 +121,9 @@
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
         public T Property<T>(string propertyName)
         {
-            if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
+            if (!new[] { typeof(bool?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
+                throw new TypeArgumentException("Only bool? and string types are supported", "T");
             }
 
             return this.Find<T>("prop('" + propertyName + "')");
@@ -138,73 +138,6 @@
         public ChainJQueryHelper Property(string propertyName, string propertyValue)
         {
             this.Set("prop('" + propertyName + "', '" + propertyValue + "')");
-            return this;
-        }
-
-        /// <summary>
-        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="propertyValue">The value of the property to set.</param>
-        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Property(string propertyName, short propertyValue)
-        {
-            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
-        }
-
-        /// <summary>
-        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="propertyValue">The value of the property to set.</param>
-        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Property(string propertyName, int propertyValue)
-        {
-            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
-        }
-
-        /// <summary>
-        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="propertyValue">The value of the property to set.</param>
-        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Property(string propertyName, long propertyValue)
-        {
-            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
-        }
-
-        /// <summary>
-        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="propertyValue">The value of the property to set.</param>
-        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Property(string propertyName, float propertyValue)
-        {
-            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
-        }
-
-        /// <summary>
-        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="propertyValue">The value of the property to set.</param>
-        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Property(string propertyName, double propertyValue)
-        {
-            return this.Property(propertyName, Convert.ToDecimal(propertyValue));
-        }
-
-        /// <summary>
-        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
-        /// </summary>
-        /// <param name="propertyName">The name of the property to set.</param>
-        /// <param name="propertyValue">The value of the property to set.</param>
-        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Property(string propertyName, decimal propertyValue)
-        {
-            this.Set("prop('" + propertyName + "', " + propertyValue + ")");
             return this;
         }
 
