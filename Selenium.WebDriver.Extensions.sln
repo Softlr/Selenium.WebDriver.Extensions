@@ -35,6 +35,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Core", "src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj", "{BAC59C4A-BB67-4E40-AC8A-0690CC7223E1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABFABEC3-B280-40B7-9C25-7851F7E39B38}"
+	ProjectSection(SolutionItems) = preProject
+		appveyor.yml = appveyor.yml
+		go.bat = go.bat
+		Selenium.WebDriver.Extensions.build = Selenium.WebDriver.Extensions.build
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
