@@ -98,7 +98,7 @@
   configuration: Release
     
   install:  
-    - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+    - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723;%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools%PATH%
   
   assembly_info:
     patch: true
@@ -132,8 +132,8 @@
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
   
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
+    - OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
+    - coveralls.net.exe --opencover coverage.xml
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
