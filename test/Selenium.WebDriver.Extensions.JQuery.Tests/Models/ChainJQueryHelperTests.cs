@@ -1477,6 +1477,168 @@
             mock.Object.JQuery("div").FadeTo(100UL, 2.0);
         }
 
+        [Test]
+        public void Blur()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").Blur();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Focus()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").Focus();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Change()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").Change();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Click()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").Click();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void DoubleClick()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").DoubleClick();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void KeyUp()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").KeyUp();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void KeyDown()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").KeyDown();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void KeyPress()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").KeyPress();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseUp()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseUp();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseDown()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseDown();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseOver()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseOver();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseOut()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseOut();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseMove()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseMove();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseEnter()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseEnter();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void MouseLeave()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").MouseLeave();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Resize()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").Resize();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Scroll()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").Scroll();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void TriggerHandler()
+        {
+            var mock = MockWebDriver();
+            var result = mock.Object.JQuery("div").TriggerHandler("click");
+
+            Assert.IsNotNull(result);
+        }
+
         private static Mock<IWebDriver> MockWebDriver(string script = null, object value = null)
         {
             var mock = new Mock<IWebDriver>();
