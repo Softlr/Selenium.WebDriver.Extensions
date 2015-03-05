@@ -50,7 +50,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Text(string text)
         {
-            this.Set("text('" + text + "')");
+            this.Run("text('" + text + "')");
             return this;
         }
 
@@ -74,7 +74,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Html(string html)
         {
-            this.Set("html('" + html + "')");
+            this.Run("html('" + html + "')");
             return this;
         }
 
@@ -97,7 +97,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Attribute(string attributeName, string attributeValue)
         {
-            this.Set("attr('" + attributeName + "', '" + attributeValue + "')");
+            this.Run("attr('" + attributeName + "', '" + attributeValue + "')");
             return this;
         }
 
@@ -137,7 +137,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Property(string propertyName, string propertyValue)
         {
-            this.Set("prop('" + propertyName + "', '" + propertyValue + "')");
+            this.Run("prop('" + propertyName + "', '" + propertyValue + "')");
             return this;
         }
 
@@ -149,7 +149,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Property(string propertyName, bool propertyValue)
         {
-            this.Set("prop('" + propertyName + "', " + (propertyValue ? "true" : "false") + ")");
+            this.Run("prop('" + propertyName + "', " + (propertyValue ? "true" : "false") + ")");
             return this;
         }
 
@@ -170,7 +170,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Value(string value)
         {
-            this.Set("val('" + value + "')");
+            this.Run("val('" + value + "')");
             return this;
         }
 
@@ -196,7 +196,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Css(string propertyName, string propertyValue)
         {
-            this.Set("css('" + propertyName + "', '" + propertyValue + "')");
+            this.Run("css('" + propertyName + "', '" + propertyValue + "')");
             return this;
         }
 
@@ -300,7 +300,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Width(decimal value)
         {
-            this.Set("width(" + value + ")");
+            this.Run("width(" + value + ")");
             return this;
         }
 
@@ -404,7 +404,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Height(decimal value)
         {
-            this.Set("height(" + value + ")");
+            this.Run("height(" + value + ")");
             return this;
         }
 
@@ -509,7 +509,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper InnerWidth(decimal value)
         {
-            this.Set("innerWidth(" + value + ")");
+            this.Run("innerWidth(" + value + ")");
             return this;
         }
 
@@ -614,7 +614,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper InnerHeight(decimal value)
         {
-            this.Set("innerHeight(" + value + ")");
+            this.Run("innerHeight(" + value + ")");
             return this;
         }
 
@@ -721,7 +721,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper OuterWidth(decimal value)
         {
-            this.Set("outerWidth(" + value + ")");
+            this.Run("outerWidth(" + value + ")");
             return this;
         }
 
@@ -828,7 +828,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper OuterHeight(decimal value)
         {
-            this.Set("outerHeight(" + value + ")");
+            this.Run("outerHeight(" + value + ")");
             return this;
         }
 
@@ -974,7 +974,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper ScrollLeft(decimal value)
         {
-            this.Set("scrollLeft(" + value + ")");
+            this.Run("scrollLeft(" + value + ")");
             return this;
         }
 
@@ -1079,7 +1079,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper ScrollTop(decimal value)
         {
-            this.Set("scrollTop(" + value + ")");
+            this.Run("scrollTop(" + value + ")");
             return this;
         }
 
@@ -1127,7 +1127,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Data(string key, string value)
         {
-            this.Set("data('" + key + "', '" + value + "')");
+            this.Run("data('" + key + "', '" + value + "')");
             return this;
         }
 
@@ -1227,7 +1227,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Data(string key, decimal value)
         {
-            this.Set("data('" + key + "', " + value + ")");
+            this.Run("data('" + key + "', " + value + ")");
             return this;
         }
 
@@ -1238,7 +1238,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper RemoveData(string key)
         {
-            this.Set("removeData('" + key + ")");
+            this.Run("removeData('" + key + ")");
             return this;
         }
 
@@ -1250,7 +1250,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Data(string key, bool value)
         {
-            this.Set("data('" + key + "', " + (value ? "true" : "false") + ")");
+            this.Run("data('" + key + "', " + (value ? "true" : "false") + ")");
             return this;
         }
 
@@ -1301,7 +1301,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper AddClass(string className)
         {
-            this.Set("addClass('" + className + "')");
+            this.Run("addClass('" + className + "')");
             return this;
         }
 
@@ -1312,7 +1312,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper RemoveClass(string className)
         {
-            this.Set("removeClass('" + className + "')");
+            this.Run("removeClass('" + className + "')");
             return this;
         }
 
@@ -1323,7 +1323,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper ToggleClass(string className)
         {
-            this.Set("toggleClass('" + className + "')");
+            this.Run("toggleClass('" + className + "')");
             return this;
         }
 
@@ -1335,7 +1335,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper ToggleClass(string className, bool state)
         {
-            this.Set("toggleClass('" + className + "', " + (state ? "true" : "false") + ")");
+            this.Run("toggleClass('" + className + "', " + (state ? "true" : "false") + ")");
             return this;
         }
 
@@ -1345,7 +1345,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Show()
         {
-            this.Set("show()");
+            this.Run("show()");
             return this;
         }
 
@@ -1406,7 +1406,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Show(ulong duration)
         {
-            this.Set("show(" + duration + ")");
+            this.Run("show(" + duration + ")");
             return this;
         }
 
@@ -1416,7 +1416,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Hide()
         {
-            this.Set("hide()");
+            this.Run("hide()");
             return this;
         }
 
@@ -1477,7 +1477,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Hide(ulong duration)
         {
-            this.Set("hide(" + duration + ")");
+            this.Run("hide(" + duration + ")");
             return this;
         }
 
@@ -1487,7 +1487,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Toggle()
         {
-            this.Set("toggle()");
+            this.Run("toggle()");
             return this;
         }
 
@@ -1548,7 +1548,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper Toggle(ulong duration)
         {
-            this.Set("toggle(" + duration + ")");
+            this.Run("toggle(" + duration + ")");
             return this;
         }
 
@@ -1558,7 +1558,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideDown()
         {
-            this.Set("slideDown()");
+            this.Run("slideDown()");
             return this;
         }
 
@@ -1619,7 +1619,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideDown(ulong duration)
         {
-            this.Set("slideDown(" + duration + ")");
+            this.Run("slideDown(" + duration + ")");
             return this;
         }
 
@@ -1629,7 +1629,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideUp()
         {
-            this.Set("slideUp()");
+            this.Run("slideUp()");
             return this;
         }
 
@@ -1690,7 +1690,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideUp(ulong duration)
         {
-            this.Set("slideUp(" + duration + ")");
+            this.Run("slideUp(" + duration + ")");
             return this;
         }
 
@@ -1700,7 +1700,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideToggle()
         {
-            this.Set("slideToggle()");
+            this.Run("slideToggle()");
             return this;
         }
 
@@ -1761,7 +1761,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper SlideToggle(ulong duration)
         {
-            this.Set("slideToggle(" + duration + ")");
+            this.Run("slideToggle(" + duration + ")");
             return this;
         }
 
@@ -1771,7 +1771,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeIn()
         {
-            this.Set("fadeIn()");
+            this.Run("fadeIn()");
             return this;
         }
 
@@ -1832,7 +1832,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeIn(ulong duration)
         {
-            this.Set("fadeIn(" + duration + ")");
+            this.Run("fadeIn(" + duration + ")");
             return this;
         }
 
@@ -1842,7 +1842,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeOut()
         {
-            this.Set("fadeOut()");
+            this.Run("fadeOut()");
             return this;
         }
 
@@ -1903,7 +1903,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeOut(ulong duration)
         {
-            this.Set("fadeOut(" + duration + ")");
+            this.Run("fadeOut(" + duration + ")");
             return this;
         }
 
@@ -1913,7 +1913,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeToggle()
         {
-            this.Set("fadeToggle()");
+            this.Run("fadeToggle()");
             return this;
         }
 
@@ -1974,7 +1974,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper FadeToggle(ulong duration)
         {
-            this.Set("fadeToggle(" + duration + ")");
+            this.Run("fadeToggle(" + duration + ")");
             return this;
         }
 
@@ -2183,7 +2183,7 @@
                 throw new ArgumentException("Opacity cannot be bigger than 1");
             }
 
-            this.Set("fadeTo(" + duration + ", " + opacity + ")");
+            this.Run("fadeTo(" + duration + ", " + opacity + ")");
             return this;
         }
 
@@ -2212,11 +2212,10 @@
         }
 
         /// <summary>
-        /// Performs a jQuery value set operation on the <see cref="IWebDriver"/> using current 
-        /// <see cref="JQuerySelector"/> selector.
+        /// Runs a jQuery script on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/> selector.
         /// </summary>
         /// <param name="script">The script to be executed in order to set the value.</param>
-        protected void Set(string script)
+        protected void Run(string script)
         {
             this.Driver.JQuery().Load();
             this.ExecuteScript(this.Selector, script, null);
