@@ -27,7 +27,7 @@ Run the following command in Visual Studio Package Manager Console.
 Install-Package Selenium.WebDriver.Extensions
 ```
 
-This will install the full package containing jQuery, Sizzle and query selector support. If you want to use only specific extensions you can do this by installing a specific package in Package Manager Console.
+This will install the full package containing jQuery, Sizzle and core selectors support. If you want to use only specific extensions you can do this by installing a specific package in Package Manager Console.
 
 ```posh
 Install-Package Selenium.WebDriver.Extensions.JQuery
