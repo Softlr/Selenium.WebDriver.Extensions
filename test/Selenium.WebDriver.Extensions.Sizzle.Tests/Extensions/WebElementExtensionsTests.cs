@@ -15,6 +15,22 @@
 #endif
     public class WebElementExtensionsTests
     {
+        private Mock<IWebDriver> driverMock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.driverMock = new Mock<IWebDriver>();
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';")).Returns(true);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            this.driverMock = null;
+        }
+
         [Test]
         public void FindElementWithSizzle()
         {
@@ -27,18 +43,19 @@
             element.SetupGet(x => x.TagName).Returns("span");
 
             var rootList = new List<IWebElement> { rootElement.Object };
-            var driver = MockWebDriver("return Sizzle('div');", new ReadOnlyCollection<IWebElement>(rootList));
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('div');"))
+                .Returns(new ReadOnlyCollection<IWebElement>(rootList));
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
             var elementList = new List<IWebElement> { element.Object };
-            driver.As<IJavaScriptExecutor>()
+            this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return Sizzle('span', Sizzle('body > div')[0]);"))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
             var webElement = new Mock<WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
-            webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+            webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
 
             var result = webElement.Object.FindElement(By.SizzleSelector("span"));
 
@@ -64,17 +81,18 @@
 
             var rootList = new List<IWebElement> { rootElement.Object };
             var elementList = new List<IWebElement> { element1.Object, element2.Object };
-            var driver = MockWebDriver("return Sizzle('div');", new ReadOnlyCollection<IWebElement>(rootList));
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('div');"))
+                .Returns(new ReadOnlyCollection<IWebElement>(rootList));
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
-            driver.As<IJavaScriptExecutor>()
+            this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return Sizzle('span', Sizzle('body > div')[0]);"))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
             var webElement = new Mock<WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
-            webElement.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+            webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
 
             var result = webElement.Object.FindElements(By.SizzleSelector("span"));
 
@@ -85,21 +103,6 @@
 
             Assert.AreEqual("span", result[1].TagName);
             Assert.AreEqual("test2", result[1].GetAttribute("class"));
-        }
-
-        private static Mock<IWebDriver> MockWebDriver(string script = null, object value = null)
-        {
-            var mock = new Mock<IWebDriver>();
-            if (script != null)
-            {
-                mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(script)).Returns(value);
-            }
-
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery === 'function';"))
-                .Returns(true);
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
-                .Returns(true);
-            return mock;
         }
     }
 }

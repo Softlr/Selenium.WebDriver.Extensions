@@ -13,12 +13,12 @@
         /// <summary>
         /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
-        private const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
+        protected const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
 
         /// <summary>
         /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
-        private const string LoadScriptCode = @"(function(src) {
+        protected const string LoadScriptCode = @"(function(src) {
                 var sizzle = document.createElement('script');
                 sizzle.src = src;
                 document.getElementsByTagName('body')[0].appendChild(sizzle);

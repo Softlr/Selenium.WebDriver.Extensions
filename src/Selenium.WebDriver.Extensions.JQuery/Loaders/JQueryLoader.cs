@@ -13,12 +13,12 @@
         /// <summary>
         /// The JavaScript to check if jQuery has been loaded.
         /// </summary>
-        private const string DetectScriptCode = "return typeof window.jQuery === 'function';";
+        protected const string DetectScriptCode = "return typeof window.jQuery === 'function';";
 
         /// <summary>
         /// The JavaScript to load jQuery.
         /// </summary>
-        private const string LoadScriptCode = @"(function(src) {
+        protected const string LoadScriptCode = @"(function(src) {
                 var jq = document.createElement('script');
                 jq.src = src;
                 document.getElementsByTagName('body')[0].appendChild(jq);
