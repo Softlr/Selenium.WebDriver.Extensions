@@ -15,6 +15,8 @@
 #endif
     public class JQuerySelectorTests
     {
+        private Mock<IWebDriver> driverMock;
+
         private static IEnumerable SelectorTestCases
         {
             get
@@ -142,8 +144,6 @@
                     .SetName("jQuery('div', jQuery('body')) == jQuery('div', jQuery('body'))");
             }
         }
-
-        private Mock<IWebDriver> driverMock;
 
         [SetUp]
         public void SetUp()

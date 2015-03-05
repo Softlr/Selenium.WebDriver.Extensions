@@ -2278,7 +2278,7 @@
         }
 
         /// <summary>
-        /// Triggers a mouseout event on the current <see cref="JQuerySelector"/>.
+        /// Triggers a mouse out event on the current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper MouseOut()

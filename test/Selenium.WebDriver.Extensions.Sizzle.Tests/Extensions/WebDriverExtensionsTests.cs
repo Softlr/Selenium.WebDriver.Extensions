@@ -19,6 +19,8 @@
 #endif
     public class WebDriverExtensionsTests
     {
+        private Mock<IWebDriver> driverMock;
+
         private static IEnumerable LoadSizzleTestCases
         {
             get
@@ -43,15 +45,12 @@
             }
         }
 
-        private Mock<IWebDriver> driverMock;
-
         [SetUp]
         public void SetUp()
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';")).Returns(true);
-            
         }
 
         [TearDown]

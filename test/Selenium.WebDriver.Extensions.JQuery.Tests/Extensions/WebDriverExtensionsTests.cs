@@ -19,6 +19,8 @@
 #endif
     public class WebDriverExtensionsTests
     {
+        private Mock<IWebDriver> driverMock;
+
         private static IEnumerable LoadJQueryTestCases
         {
             get
@@ -42,8 +44,6 @@
                     new object[] { false }).Throws(typeof(WebDriverTimeoutException));
             }
         }
-
-        private Mock<IWebDriver> driverMock;
 
         [SetUp]
         public void SetUp()
