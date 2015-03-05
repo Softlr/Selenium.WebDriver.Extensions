@@ -261,7 +261,7 @@
         /// <param name="propertyName">The name of the CSS property to set.</param>
         /// <param name="propertyValue">The value of the CSS property to set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        public ChainJQueryHelper Value(string propertyName, string propertyValue)
+        public ChainJQueryHelper Css(string propertyName, string propertyValue)
         {
             this.Set("css('" + propertyName + "', '" + propertyValue + "')");
             return this;
