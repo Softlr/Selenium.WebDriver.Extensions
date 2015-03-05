@@ -2231,7 +2231,7 @@
         /// The wrapper format string for the purpose of wrap the jQuery selection result.
         /// </param>
         /// <returns>Result of invoking the script.</returns>
-        private object ExecuteScript(
+        protected object ExecuteScript(
             JQuerySelector by,
             string scriptFormat,
             string wrapperFormat)
@@ -2256,7 +2256,7 @@
         /// Creates the jQuery selector limiting the scope of the search to descendants of current element.
         /// </summary>
         /// <returns>The jQuery selector limiting the scope of the search to descendants of current element.</returns>
-        private JQuerySelector CreateSelector()
+        protected JQuerySelector CreateSelector()
         {
             var rootSelector = new JQuerySelector(this.WebElement.Path, jQueryVariable: this.Selector.JQueryVariable);
             return new JQuerySelector(this.Selector.RawSelector, rootSelector, this.Selector.JQueryVariable);

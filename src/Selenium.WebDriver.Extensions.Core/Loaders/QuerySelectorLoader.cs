@@ -10,7 +10,7 @@
         /// <summary>
         /// The JavaScript to check if query selector is supported by the browser.
         /// </summary>
-        private const string DetectScriptCode = "return typeof document.querySelectorAll === 'function';";
+        protected const string DetectScriptCode = "return typeof document.querySelectorAll === 'function';";
 
         /// <summary>
         /// Gets the default URI of the external library.
