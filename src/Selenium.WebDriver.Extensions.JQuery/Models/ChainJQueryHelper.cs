@@ -2205,7 +2205,7 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        public T Find<T>(string scriptFormat, string wrapperFormat = null)
+        protected T Find<T>(string scriptFormat, string wrapperFormat = null)
         {
             this.Driver.JQuery().Load();
             return ParseUtil.ParseResult<T>(this.ExecuteScript(this.Selector, scriptFormat, wrapperFormat));
@@ -2216,7 +2216,7 @@
         /// <see cref="JQuerySelector"/> selector.
         /// </summary>
         /// <param name="script">The script to be executed in order to set the value.</param>
-        public void Set(string script)
+        protected void Set(string script)
         {
             this.Driver.JQuery().Load();
             this.ExecuteScript(this.Selector, script, null);
