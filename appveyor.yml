@@ -32,6 +32,8 @@
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+    OPENCOVER_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723'
+    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools'
 
   before_build:
     - nuget restore
@@ -48,8 +50,8 @@
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
   
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
+    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
+    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml'
   
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
@@ -116,6 +118,8 @@
     SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+    OPENCOVER_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723'
+    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools'
 
   before_build:
     - nuget restore
@@ -132,8 +136,8 @@
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
   
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
+    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
+    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml'
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
@@ -174,6 +178,8 @@
     SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+    OPENCOVER_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723'
+    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools'
 
   before_build:
     - nuget restore
@@ -190,8 +196,8 @@
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
   
   after_test:
-    - packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"
-    - packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover coverage.xml
+    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test/Selenium.WebDriver.Extensions.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Tests.dll test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.JQuery.Tests.dll test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Sizzle.Tests.dll test/Selenium.WebDriver.Extensions.Core.Tests/bin/%CONFIGURATION%/Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
+    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml'
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"

@@ -2,10 +2,6 @@
 {
     using System;
     using NUnit.Framework;
-    
-    /// <summary>
-    /// JQuery runner tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -13,9 +9,6 @@
 #endif
     public class JQueryRunnerTests
     {
-        /// <summary>
-        /// Script loading test.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindArgumentNull()

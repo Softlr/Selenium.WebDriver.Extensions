@@ -4,10 +4,6 @@
     using Moq;
     using NUnit.Framework;
     using OpenQA.Selenium;
-    
-    /// <summary>
-    /// Web element tests.
-    /// </summary>
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
@@ -15,9 +11,6 @@
 #endif
     public class WebElementTests
     {
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementSelectorNull()
@@ -28,9 +21,6 @@
             element.FindElement((ISelector)null);
         }
 
-        /// <summary>
-        /// Tests finding an element.
-        /// </summary>
         [Test]
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementsSelectorNull()

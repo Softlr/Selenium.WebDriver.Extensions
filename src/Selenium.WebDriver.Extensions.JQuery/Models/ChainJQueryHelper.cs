@@ -44,6 +44,17 @@
         }
 
         /// <summary>
+        /// Sets the inner text for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="text">The text to be set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Text(string text)
+        {
+            this.Set("text('" + text + "')");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the HTML contents of the first element in the set 
         /// of matched elements or set the HTML contents of every matched element.
         /// </summary>
@@ -57,6 +68,17 @@
         }
 
         /// <summary>
+        /// Sets the inner HTML for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="html">The HTML string to be set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Html(string html)
+        {
+            this.Set("html('" + html + "')");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element 
         /// in the set of matched elements.
         /// </summary>
@@ -65,6 +87,18 @@
         public string Attribute(string attributeName)
         {
             return this.Find<string>("attr('" + attributeName + "')");
+        }
+
+        /// <summary>
+        /// Sets the attribute value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="attributeName">The name of the attribute to set.</param>
+        /// <param name="attributeValue">The value of the attribute to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Attribute(string attributeName, string attributeValue)
+        {
+            this.Set("attr('" + attributeName + "', '" + attributeValue + "')");
+            return this;
         }
 
         /// <summary>
@@ -87,12 +121,36 @@
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
         public T Property<T>(string propertyName)
         {
-            if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
+            if (!new[] { typeof(bool?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
+                throw new TypeArgumentException("Only bool? and string types are supported", "T");
             }
 
             return this.Find<T>("prop('" + propertyName + "')");
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, string propertyValue)
+        {
+            this.Set("prop('" + propertyName + "', '" + propertyValue + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the property to set.</param>
+        /// <param name="propertyValue">The value of the property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Property(string propertyName, bool propertyValue)
+        {
+            this.Set("prop('" + propertyName + "', " + (propertyValue ? "true" : "false") + ")");
+            return this;
         }
 
         /// <summary>
@@ -103,6 +161,17 @@
         public string Value()
         {
             return this.Find<string>("val()");
+        }
+
+        /// <summary>
+        /// Sets the value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Value(string value)
+        {
+            this.Set("val('" + value + "')");
+            return this;
         }
 
         /// <summary>
@@ -120,6 +189,18 @@
         }
 
         /// <summary>
+        /// Sets the CSS property value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="propertyName">The name of the CSS property to set.</param>
+        /// <param name="propertyValue">The value of the CSS property to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Css(string propertyName, string propertyValue)
+        {
+            this.Set("css('" + propertyName + "', '" + propertyValue + "')");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element 
         /// in the set of matched elements or set the width of every matched element.
         /// </summary>
@@ -133,6 +214,97 @@
         }
 
         /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(short value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(int value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(long value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(ushort value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(uint value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(ulong value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(float value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(double value)
+        {
+            return this.Width(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Width(decimal value)
+        {
+            this.Set("width(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
         /// in the set of matched elements or set the width of every matched element.
         /// </summary>
@@ -143,6 +315,97 @@
         public long? Height()
         {
             return this.Find<long?>("height()");
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(short value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(int value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(long value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(ushort value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(uint value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(ulong value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(float value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(double value)
+        {
+            return this.Height(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Height(decimal value)
+        {
+            this.Set("height(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -160,6 +423,97 @@
         }
 
         /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(short value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(int value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(long value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(ushort value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(uint value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(ulong value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(float value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(double value)
+        {
+            return this.InnerWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerWidth(decimal value)
+        {
+            this.Set("innerWidth(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed inner height (including 
         /// padding but not border) for the first element in the set of matched elements or set the inner width of 
         /// every matched element.
@@ -171,6 +525,97 @@
         public long? InnerHeight()
         {
             return this.Find<long?>("innerHeight()");
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(short value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(int value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(long value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(ushort value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(uint value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(ulong value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(float value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(double value)
+        {
+            return this.InnerHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the inner height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the inner height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper InnerHeight(decimal value)
+        {
+            this.Set("innerHeight(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -190,6 +635,97 @@
         }
 
         /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(short value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(int value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(long value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(ushort value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(uint value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(ulong value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(float value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(double value)
+        {
+            return this.OuterWidth(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer width value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer width to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterWidth(decimal value)
+        {
+            this.Set("outerWidth(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
         /// in the set of matched elements, including padding and border.
         /// </summary>
@@ -203,6 +739,97 @@
         public long? OuterHeight(bool includeMargin = false)
         {
             return this.Find<long?>("outerHeight(" + (includeMargin ? "true" : string.Empty) + ")");
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(short value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(int value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(long value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(ushort value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(uint value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(ulong value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(float value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(double value)
+        {
+            return this.OuterHeight(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the outer height value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the outer height to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper OuterHeight(decimal value)
+        {
+            this.Set("outerHeight(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -261,6 +888,97 @@
         }
 
         /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(short value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(int value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(long value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(ushort value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(uint value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(ulong value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(float value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(double value)
+        {
+            return this.ScrollLeft(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll left value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll left to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollLeft(decimal value)
+        {
+            this.Set("scrollLeft(" + value + ")");
+            return this;
+        }
+
+        /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current vertical position of the scroll bar 
         /// for the first element in the set of matched elements or set the vertical position of the scroll bar for 
         /// every matched element.
@@ -272,6 +990,97 @@
         public long? ScrollTop()
         {
             return this.Find<long?>("scrollTop()");
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(short value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(int value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(long value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(ushort value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(uint value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(ulong value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(float value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(double value)
+        {
+            return this.ScrollTop(Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the scroll top value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="value">The value of the scroll top to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ScrollTop(decimal value)
+        {
+            this.Set("scrollTop(" + value + ")");
+            return this;
         }
 
         /// <summary>
@@ -308,6 +1117,141 @@
             }
 
             return this.Find<T>("data('" + key + "')");
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, string value)
+        {
+            this.Set("data('" + key + "', '" + value + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, short value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, int value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, long value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, ushort value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, uint value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, ulong value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, float value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, double value)
+        {
+            return this.Data(key, Convert.ToDecimal(value));
+        }
+
+        /// <summary>
+        /// Sets the data value for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, decimal value)
+        {
+            this.Set("data('" + key + "', " + value + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Removes the data for the given key for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper RemoveData(string key)
+        {
+            this.Set("removeData('" + key + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Sets the data value for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="key">The name of the data stored.</param>
+        /// <param name="value">The value of the data to set.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Data(string key, bool value)
+        {
+            this.Set("data('" + key + "', " + (value ? "true" : "false") + ")");
+            return this;
         }
 
         /// <summary>
@@ -351,8 +1295,901 @@
         }
 
         /// <summary>
-        /// Performs a jQuery search on the <see cref="IWebDriver"/> using given <see cref="JQuerySelector"/> selector 
-        /// and script format string.
+        /// Adds the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to add.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper AddClass(string className)
+        {
+            this.Set("addClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Removes the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to remove.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper RemoveClass(string className)
+        {
+            this.Set("removeClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to toggle.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ToggleClass(string className)
+        {
+            this.Set("toggleClass('" + className + "')");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles the given class to all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="className">The name of the class to toggle.</param>
+        /// <param name="state">The value to determine whether the class should be added or removed.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper ToggleClass(string className, bool state)
+        {
+            this.Set("toggleClass('" + className + "', " + (state ? "true" : "false") + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show()
+        {
+            this.Set("show()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(short duration)
+        {
+            return this.Show(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(int duration)
+        {
+            return this.Show(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(long duration)
+        {
+            return this.Show(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(ushort duration)
+        {
+            return this.Show(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(uint duration)
+        {
+            return this.Show(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Show(ulong duration)
+        {
+            this.Set("show(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide()
+        {
+            this.Set("hide()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(short duration)
+        {
+            return this.Hide(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(int duration)
+        {
+            return this.Hide(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(long duration)
+        {
+            return this.Hide(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(ushort duration)
+        {
+            return this.Hide(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(uint duration)
+        {
+            return this.Hide(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Hide(ulong duration)
+        {
+            this.Set("hide(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle()
+        {
+            this.Set("toggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(short duration)
+        {
+            return this.Toggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(int duration)
+        {
+            return this.Toggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(long duration)
+        {
+            return this.Toggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(ushort duration)
+        {
+            return this.Toggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(uint duration)
+        {
+            return this.Toggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Toggle(ulong duration)
+        {
+            this.Set("toggle(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown()
+        {
+            this.Set("slideDown()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(short duration)
+        {
+            return this.SlideDown(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(int duration)
+        {
+            return this.SlideDown(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(long duration)
+        {
+            return this.SlideDown(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(ushort duration)
+        {
+            return this.SlideDown(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(uint duration)
+        {
+            return this.SlideDown(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideDown(ulong duration)
+        {
+            this.Set("slideDown(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp()
+        {
+            this.Set("slideUp()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(short duration)
+        {
+            return this.SlideUp(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(int duration)
+        {
+            return this.SlideUp(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(long duration)
+        {
+            return this.SlideUp(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(ushort duration)
+        {
+            return this.SlideUp(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(uint duration)
+        {
+            return this.SlideUp(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideUp(ulong duration)
+        {
+            this.Set("slideUp(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle()
+        {
+            this.Set("slideToggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(short duration)
+        {
+            return this.SlideToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(int duration)
+        {
+            return this.SlideToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(long duration)
+        {
+            return this.SlideToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(ushort duration)
+        {
+            return this.SlideToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(uint duration)
+        {
+            return this.SlideToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Toggles all elements matching current <see cref="JQuerySelector"/> with sliding motion.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper SlideToggle(ulong duration)
+        {
+            this.Set("slideToggle(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn()
+        {
+            this.Set("fadeIn()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(short duration)
+        {
+            return this.FadeIn(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(int duration)
+        {
+            return this.FadeIn(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(long duration)
+        {
+            return this.FadeIn(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(ushort duration)
+        {
+            return this.FadeIn(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(uint duration)
+        {
+            return this.FadeIn(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeIn(ulong duration)
+        {
+            this.Set("fadeIn(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut()
+        {
+            this.Set("fadeOut()");
+            return this;
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(short duration)
+        {
+            return this.FadeOut(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(int duration)
+        {
+            return this.FadeOut(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(long duration)
+        {
+            return this.FadeOut(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(ushort duration)
+        {
+            return this.FadeOut(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(uint duration)
+        {
+            return this.FadeOut(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeOut(ulong duration)
+        {
+            this.Set("fadeOut(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle()
+        {
+            this.Set("fadeToggle()");
+            return this;
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(short duration)
+        {
+            return this.FadeToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(int duration)
+        {
+            return this.FadeToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(long duration)
+        {
+            return this.FadeToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(ushort duration)
+        {
+            return this.FadeToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(uint duration)
+        {
+            return this.FadeToggle(Convert.ToUInt64(duration));
+        }
+
+        /// <summary>
+        /// Shows all elements matching current <see cref="JQuerySelector"/> by fading them to opaque.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeToggle(ulong duration)
+        {
+            this.Set("fadeToggle(" + duration + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(short duration, float opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(short duration, double opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(short duration, decimal opacity)
+        {
+            return this.FadeTo(Convert.ToUInt64(duration), opacity);
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(int duration, float opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(int duration, double opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(int duration, decimal opacity)
+        {
+            return this.FadeTo(Convert.ToUInt64(duration), opacity);
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(long duration, float opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(long duration, double opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(long duration, decimal opacity)
+        {
+            return this.FadeTo(Convert.ToUInt64(duration), opacity);
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(ushort duration, float opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(ushort duration, double opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(ushort duration, decimal opacity)
+        {
+            return this.FadeTo(Convert.ToUInt64(duration), opacity);
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(uint duration, float opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(uint duration, double opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(uint duration, decimal opacity)
+        {
+            return this.FadeTo(Convert.ToUInt64(duration), opacity);
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(ulong duration, float opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(ulong duration, double opacity)
+        {
+            return this.FadeTo(duration, Convert.ToDecimal(opacity));
+        }
+
+        /// <summary>
+        /// Adjust the opacity of all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="duration">The duration of the animation.</param>
+        /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper FadeTo(ulong duration, decimal opacity)
+        {
+            if (opacity < 0)
+            {
+                throw new ArgumentException("Opacity cannot be negative");
+            }
+
+            if (opacity > 1)
+            {
+                throw new ArgumentException("Opacity cannot be bigger than 1");
+            }
+
+            this.Set("fadeTo(" + duration + ", " + opacity + ")");
+            return this;
+        }
+
+        /// <summary>
+        /// Performs a jQuery search on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/> 
+        /// selector and script format string.
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="scriptFormat">The format string of the script to be invoked.</param>
@@ -372,6 +2209,17 @@
         {
             this.Driver.JQuery().Load();
             return ParseUtil.ParseResult<T>(this.ExecuteScript(this.Selector, scriptFormat, wrapperFormat));
+        }
+
+        /// <summary>
+        /// Performs a jQuery value set operation on the <see cref="IWebDriver"/> using current 
+        /// <see cref="JQuerySelector"/> selector.
+        /// </summary>
+        /// <param name="script">The script to be executed in order to set the value.</param>
+        public void Set(string script)
+        {
+            this.Driver.JQuery().Load();
+            this.ExecuteScript(this.Selector, script, null);
         }
 
         /// <summary>
