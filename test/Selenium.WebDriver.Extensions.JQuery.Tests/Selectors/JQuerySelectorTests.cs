@@ -143,6 +143,22 @@
             }
         }
 
+        private Mock<IWebDriver> driverMock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.driverMock = new Mock<IWebDriver>();
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof window.jQuery === 'function';")).Returns(true);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            this.driverMock = null;
+        }
+
         [TestCaseSource("SelectorTestCases")]
         public string Selector(JQuerySelector selector)
         {
@@ -223,13 +239,12 @@
             rootSelector.SetupGet(x => x.Selector).Returns("div");
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
                 .Returns("body > div");
 
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
-            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
 
             var selector = By.JQuerySelector("test").Create(element.Object);
             Assert.IsInstanceOf<JQuerySelector>(selector);
