@@ -471,7 +471,7 @@
         /// <param name="selector">The selector.</param>
         /// <param name="filter">The filter.</param>
         /// <returns>Chained function arguments string generated based on given selector and filter.</returns>
-        private static string HandleSelectorWithFilter(string selector = null, string filter = null)
+        protected static string HandleSelectorWithFilter(string selector = null, string filter = null)
         {
             var data = string.Empty;
             if (!string.IsNullOrEmpty(selector))
@@ -493,7 +493,7 @@
         /// <c>true</c> to not to wrap the selector into quotes; otherwise, <c>false</c>.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
+        protected JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
             selector = string.IsNullOrEmpty(selector)
                 ? string.Empty

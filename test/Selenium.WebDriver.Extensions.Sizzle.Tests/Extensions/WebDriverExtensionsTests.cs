@@ -19,6 +19,8 @@
 #endif
     public class WebDriverExtensionsTests
     {
+        private Mock<IWebDriver> driverMock;
+
         private static IEnumerable LoadSizzleTestCases
         {
             get
@@ -41,6 +43,20 @@
                     TimeSpan.FromSeconds(1),
                     new object[] { false }).Throws(typeof(WebDriverTimeoutException));
             }
+        }
+
+        [SetUp]
+        public void SetUp()
+        {
+            this.driverMock = new Mock<IWebDriver>();
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';")).Returns(true);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            this.driverMock = null;
         }
 
         [TestCaseSource("LoadSizzleTestCases")]
@@ -67,8 +83,9 @@
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
             var list = new List<IWebElement> { element.Object };
-            var mock = MockWebDriver("return Sizzle('div');", new ReadOnlyCollection<IWebElement>(list));
-            var result = mock.Object.FindElement(By.SizzleSelector("div"));
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('div');"))
+                .Returns(new ReadOnlyCollection<IWebElement>(list));
+            var result = this.driverMock.Object.FindElement(By.SizzleSelector("div"));
 
             Assert.IsNotNull(result);
             Assert.AreEqual("div", result.TagName);
@@ -78,26 +95,24 @@
         [ExpectedException(typeof(ArgumentNullException))]
         public void FindElementWithSizzleArgumentNull()
         {
-            var mock = new Mock<IWebDriver>();
-            mock.Object.FindElement((SizzleSelector)null);
+            this.driverMock.Object.FindElement((SizzleSelector)null);
         }
 
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithSizzleNoSuchElement()
         {
-            var mock = MockWebDriver();
-
-            mock.Object.FindElement(By.SizzleSelector("div"));
+            this.driverMock.Object.FindElement(By.SizzleSelector("div"));
         }
 
         [Test]
         [ExpectedException(typeof(NoSuchElementException))]
         public void FindElementWithSizzleNoSuchElementEmptyResult()
         {
-            var mock = MockWebDriver("return Sizzle('div');", Enumerable.Empty<IWebElement>());
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('div');"))
+                .Returns(Enumerable.Empty<IWebElement>());
 
-            mock.Object.FindElement(By.SizzleSelector("div"));
+            this.driverMock.Object.FindElement(By.SizzleSelector("div"));
         }
 
         [Test]
@@ -112,8 +127,9 @@
             element2.Setup(x => x.GetAttribute("class")).Returns("test");
 
             var list = new List<IWebElement> { element1.Object, element2.Object };
-            var mock = MockWebDriver("return Sizzle('.test');", new ReadOnlyCollection<IWebElement>(list));
-            var result = mock.Object.FindElements(By.SizzleSelector(".test"));
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('.test');"))
+                .Returns(new ReadOnlyCollection<IWebElement>(list));
+            var result = this.driverMock.Object.FindElements(By.SizzleSelector(".test"));
 
             Assert.AreEqual(2, result.Count);
 
@@ -128,23 +144,11 @@
         public void FindElementsWithSizzleNotExists()
         {
             var list = new List<object>();
-            var mock = MockWebDriver("return Sizzle('.test');", new ReadOnlyCollection<object>(list));
-            var result = mock.Object.FindElements(By.SizzleSelector(".test"));
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('.test');"))
+                .Returns(new ReadOnlyCollection<object>(list));
+            var result = this.driverMock.Object.FindElements(By.SizzleSelector(".test"));
 
             Assert.AreEqual(0, result.Count);
-        }
-
-        private static Mock<IWebDriver> MockWebDriver(string script = null, object value = null)
-        {
-            var mock = new Mock<IWebDriver>();
-            if (script != null)
-            {
-                mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(script)).Returns(value);
-            }
-
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';"))
-                .Returns(true);
-            return mock;
         }
     }
 }

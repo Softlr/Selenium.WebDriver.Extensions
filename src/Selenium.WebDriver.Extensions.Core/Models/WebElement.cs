@@ -15,7 +15,7 @@
         /// <summary>
         /// The script to get the DOM path.
         /// </summary>
-        private const string FindDomPathScript = @"(function(el) {
+        protected const string FindDomPathScript = @"(function(el) {
             var stack = [];
             while (el.parentNode != null) {
                 var sibCount = 0;
@@ -46,7 +46,7 @@
         /// <summary>
         /// The script to get the XPATH.
         /// </summary>
-        private const string FindXPathScript = @"(function(el) { 
+        protected const string FindXPathScript = @"(function(el) { 
             var allNodes = document.getElementsByTagName('*'); 
             var segs = [];
             for(; el && el.nodeType == 1; el = el.parentNode) 
@@ -403,7 +403,7 @@
         /// </summary>
         /// <param name="findScript">The script to be run on order to find the path.</param>
         /// <returns>The DOM path for the web element.</returns>
-        private string FindPath(string findScript)
+        protected string FindPath(string findScript)
         {
             var selectorCallScript = string.Format(
                 CultureInfo.InvariantCulture,

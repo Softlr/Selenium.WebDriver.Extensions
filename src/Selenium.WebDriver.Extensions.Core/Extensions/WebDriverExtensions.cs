@@ -16,7 +16,7 @@
         /// Returns the query selector helper, that can be used to access query selector specific functionalities.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <returns>The Sizzle helper.</returns>
+        /// <returns>The query selector helper.</returns>
         public static QuerySelectorHelper QuerySelector(this IWebDriver driver)
         {
             return new QuerySelectorHelper(driver);
@@ -60,7 +60,7 @@
         /// Searches for DOM elements using given selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium Sizzle selector.</param>
+        /// <param name="by">The selector.</param>
         /// <returns>The DOM elements matching given JavaScript query selector.</returns>
         public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, ISelector by)
         {
