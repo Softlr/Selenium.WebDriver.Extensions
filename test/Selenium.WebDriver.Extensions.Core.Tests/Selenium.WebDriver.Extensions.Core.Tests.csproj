@@ -109,6 +109,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
+    <Compile Include="Extensions\WebElementExtensionsTests.cs" />
     <Compile Include="Loaders\QuerySelectorLoaderTests.cs" />
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Models\WebElementTests.cs" />

@@ -7,6 +7,7 @@
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35

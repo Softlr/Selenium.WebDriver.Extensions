@@ -2,6 +2,7 @@
 {
     using System;
     using NUnit.Framework;
+
     [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
