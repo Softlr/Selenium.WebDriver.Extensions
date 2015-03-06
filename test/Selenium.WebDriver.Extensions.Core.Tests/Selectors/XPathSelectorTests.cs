@@ -87,7 +87,7 @@
         }
 
         [Test]
-        public void Create()
+        public void CreateWithLeadingSlash()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("/body");
@@ -106,6 +106,72 @@
 
             var linkTextSelector = (XPathSelector)selector;
             Assert.AreEqual("/html[1]/body/div", linkTextSelector.RawSelector);
+        }
+
+        [Test]
+        public void CreateWithTrailingSlash()
+        {
+            var rootSelector = new Mock<ISelector>();
+            rootSelector.SetupGet(x => x.Selector).Returns("/body");
+            rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("/html[1]/body/");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            var selector = By.XPath("div").Create(element.Object);
+            Assert.IsInstanceOf<XPathSelector>(selector);
+
+            var linkTextSelector = (XPathSelector)selector;
+            Assert.AreEqual("/html[1]/body/div", linkTextSelector.RawSelector);
+        }
+
+        [Test]
+        public void CreateWithTrailingAndLeadingSlash()
+        {
+            var rootSelector = new Mock<ISelector>();
+            rootSelector.SetupGet(x => x.Selector).Returns("/body");
+            rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("/html[1]/body/");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            var selector = By.XPath("/div").Create(element.Object);
+            Assert.IsInstanceOf<XPathSelector>(selector);
+
+            var linkTextSelector = (XPathSelector)selector;
+            Assert.AreEqual("/html[1]/body//div", linkTextSelector.RawSelector);
+        }
+
+        [Test]
+        public void CreateWithoutTrailingAndLeadingSlash()
+        {
+            var rootSelector = new Mock<ISelector>();
+            rootSelector.SetupGet(x => x.Selector).Returns("/body");
+            rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
+
+            var driver = new Mock<IWebDriver>();
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+                .Returns("/html[1]/body");
+
+            var element = new Mock<WebElement>();
+            element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+
+            var selector = By.XPath(".").Create(element.Object);
+            Assert.IsInstanceOf<XPathSelector>(selector);
+
+            var linkTextSelector = (XPathSelector)selector;
+            Assert.AreEqual("/html[1]/body/.", linkTextSelector.RawSelector);
         }
 
         [Test]
