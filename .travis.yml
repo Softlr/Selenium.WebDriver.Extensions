@@ -4,3 +4,4 @@ install:
   - nuget restore Selenium.WebDriver.Extensions.sln
 script:
   - xbuild /p:Configuration=Mono Selenium.WebDriver.Extensions.sln
+  - mono ./packages\NUnit.Runners.2.6.4/tools/nunit-console.exe ./test/Selenium.WebDriver.Extensions.Core.Tests/bin/Mono/Selenium.WebDriver.Extensions.Core.Tests.dll ./test/Selenium.WebDriver.Extensions.JQuery.Tests/bin/Mono/Selenium.WebDriver.Extensions.JQuery.Tests.dll ./test/Selenium.WebDriver.Extensions.Sizzle.Tests/bin/Mono/Selenium.WebDriver.Extensions.Sizzle.Tests.dll ./test/Selenium.WebDriver.Extensions.Tests/bin/Mono/Selenium.WebDriver.Extensions.Tests.dll
