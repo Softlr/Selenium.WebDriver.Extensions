@@ -36,7 +36,7 @@ Install-Package Selenium.WebDriver.Extensions.Core
 ```
 
 # Documentation
-API documentation can be found [here](https://rayell.github.io/selenium-webdriver-extensions/api).
+API documentation can be found [here](https://rayell.github.io/selenium-webdriver-extensions/api) and user guide is on the [wiki](https://github.com/RaYell/selenium-webdriver-extensions/wiki).
 
 # Usage
 
