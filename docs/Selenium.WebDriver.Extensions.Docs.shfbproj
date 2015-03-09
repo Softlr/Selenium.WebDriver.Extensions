@@ -95,6 +95,9 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net35' ">
     <OutputPath>bin\Debug-Net35\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Mono' ">
+    <OutputPath>bin\Mono\</OutputPath>
+  </PropertyGroup>
   <!-- Import the SHFB build targets -->
   <Import Project="$(SHFBROOT)\SandcastleHelpFileBuilder.targets" />
 </Project>
