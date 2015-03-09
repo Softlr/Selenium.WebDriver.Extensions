@@ -1,2 +1,6 @@
 language: csharp
 solution: Selenium.WebDriver.Extensions.sln
+install:
+  - nuget restore Selenium.WebDriver.Extensions.sln
+script:
+  - xbuild /p:Configuration=Mono Selenium.WebDriver.Extensions.sln
