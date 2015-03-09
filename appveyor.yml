@@ -48,7 +48,6 @@
 
   test_script:
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
-#    - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll
   
   after_test:
     - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
@@ -135,7 +134,6 @@
 
   test_script:
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
-#    - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll
   
   after_test:
     - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
@@ -196,7 +194,6 @@
 
   test_script:
     - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll
-#    - nunit-console.exe /noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll
   
   after_test:
     - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"nunit-console.exe" -targetargs:"/noshadow /framework:net-4.0 test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
