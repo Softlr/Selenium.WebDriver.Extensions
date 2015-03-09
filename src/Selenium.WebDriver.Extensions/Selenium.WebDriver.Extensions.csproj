@@ -122,7 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj">
-      <Project>{4da3d055-e0c6-4746-98bc-31da482502b0}</Project>
+      <Project>{bac59c4a-bb67-4e40-ac8a-0690cc7223e1}</Project>
       <Name>Selenium.WebDriver.Extensions.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.csproj">
