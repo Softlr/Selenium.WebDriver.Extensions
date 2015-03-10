@@ -21,12 +21,11 @@
             }
 
             this.Selector = @"(function(path) {
-                var elements = document.evaluate(path, document, null, XPathResult.ANY_TYPE, null);
-                var results = [];
-                var element = elements.iterateNext(); 
-                while(element !== null) {
+                'use strict';
+                var elements = document.evaluate(path, document, null, XPathResult.ANY_TYPE, null), results = [], element = elements.iterateNext();
+                while (element !== null) {
                     results.push(element);
-                    element = elements.iterateNext(); 
+                    element = elements.iterateNext();
                 }
                 return results;
             })('" + xpath + "')";

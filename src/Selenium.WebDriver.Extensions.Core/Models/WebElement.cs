@@ -16,20 +16,21 @@
         /// The script to get the DOM path.
         /// </summary>
         protected const string FindDomPathScript = @"(function(el) {
-            var stack = [];
-            while (el.parentNode != null) {
-                var sibCount = 0;
-                var sibIndex = 0;
-                for (var i = 0; i < el.parentNode.childNodes.length; i++) {
-                    var sib = el.parentNode.childNodes[i];
-                    if (sib.nodeName == el.nodeName) {
+            'use strict';
+            var stack = [], sibCount, sibIndex, i, sib;
+            while (el.parentNode !== null) {
+                sibCount = 0;
+                sibIndex = 0;
+                for (i = 0; i < el.parentNode.childNodes.length; i += 1) {
+                    sib = el.parentNode.childNodes[i];
+                    if (sib.nodeName === el.nodeName) {
                         if (sib === el) {
                             sibIndex = sibCount;
                         }
-                        sibCount++;
+                        sibCount += 1;
                     }
                 }
-                if (el.hasAttribute('id') && el.id != ''){
+                if (el.hasAttribute('id') && el.id !== '') {
                     stack.unshift(el.nodeName.toLowerCase() + '#' + el.id);
                 } else if (sibCount > 1) {
                     stack.unshift(el.nodeName.toLowerCase() + ':eq(' + sibIndex + ')');
@@ -38,8 +39,7 @@
                 }
                 el = el.parentNode;
             }
-
-            stack = stack.slice(1); // removes the html element
+            stack = stack.slice(1);
             return stack.join(' > ');
         })";
 
@@ -47,39 +47,36 @@
         /// The script to get the XPATH.
         /// </summary>
         protected const string FindXPathScript = @"(function(el) { 
-            var allNodes = document.getElementsByTagName('*'); 
-            var segs = [];
-            for(; el && el.nodeType == 1; el = el.parentNode) 
-            { 
-                if(el.hasAttribute('id')) { 
-                    var uniqueIdCount = 0; 
-                    for (var i = 0; i < allNodes.length; i++) { 
-                        if (allNodes[i].hasAttribute('id') && allNodes[i].id == el.id) {
-                            uniqueIdCount++; 
+            'use strict';
+            var allNodes = document.getElementsByTagName('*'), segs = [], uniqueIdCount, i, sib;
+            for (null; el !== undefined && el !== null && el.nodeType === 1; el = el.parentNode) {
+                if (el.hasAttribute('id')) {
+                    uniqueIdCount = 0;
+                    for (i = 0; i < allNodes.length; i += 1) {
+                        if (allNodes[i].hasAttribute('id') && allNodes[i].id === el.id) {
+                            uniqueIdCount += 1;
                         }
                         if (uniqueIdCount > 1) {
-                            break; 
+                            break;
                         }
                     }
-                
-                    if (uniqueIdCount == 1) { 
-                        segs.unshift('id(""' + el.getAttribute('id') + '"")'); 
-                        return segs.join('/'); 
-                    } else { 
-                        segs.unshift(el.localName.toLowerCase() + '[@id=""' + el.getAttribute('id') + '""]'); 
-                    } 
-                } else if (el.hasAttribute('class')) { 
-                    segs.unshift(el.localName.toLowerCase() + '[@class=""' + el.getAttribute('class') + '""]'); 
-                } else { 
-                    for (var i = 1, sib = el.previousSibling; sib; sib = sib.previousSibling) { 
-                        if (sib.localName == el.localName) {
-                            i++; 
+                    if (uniqueIdCount === 1) {
+                        segs.unshift('id(""' + el.getAttribute('id') + '"")');
+                        return segs.join('/');
+                    }
+                    segs.unshift(el.localName.toLowerCase() + '[@id=""' + el.getAttribute('id') + '""]');
+                } else if (el.hasAttribute('class')) {
+                    segs.unshift(el.localName.toLowerCase() + '[@class=""' + el.getAttribute('class') + '""]');
+                } else {
+                    for (i = 1, sib = el.previousSibling; sib; sib = sib.previousSibling) {
+                        if (sib.localName === el.localName) {
+                            i += 1;
                         }
-                    }; 
-                    segs.unshift(el.localName.toLowerCase() + '[' + i + ']'); 
+                    }
+                    segs.unshift(el.localName.toLowerCase() + '[' + i + ']');
                 }
             }
-            return segs.length ? '/' + segs.join('/') : null; 
+            return segs.length ? '/' + segs.join('/') : null;
         })";
 
         /// <summary>

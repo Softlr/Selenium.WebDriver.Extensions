@@ -19,12 +19,12 @@
             : base(text, baseElement)
         {
             this.Selector = @"(function(text, baseElem) {
-                var links = baseElem.querySelectorAll(':link');
-                var results = [];
-                for (var i = 0; i < l.length; i++) { 
-                    if (links[i].innerText.indexOf(text) !== -1) { 
-                        results.push(links[i]); 
-                    } 
+                'use strict';
+                var links = baseElem.querySelectorAll(':link'), results = [], i;
+                for (i = 0; i < links.length; i += 1) {
+                    if (links[i].innerText.indexOf(text) !== -1) {
+                        results.push(links[i]);
+                    }
                 }
                 return results;
             })('" + text + "', " + this.BaseElement + ");";

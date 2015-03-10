@@ -19,10 +19,11 @@
         /// The JavaScript to load jQuery.
         /// </summary>
         protected const string LoadScriptCode = @"(function(src) {
-                var jq = document.createElement('script');
-                jq.src = src;
-                document.getElementsByTagName('body')[0].appendChild(jq);
-            })";
+            'use strict';
+            var script = document.createElement('script');
+            script.src = src;
+            document.getElementsByTagName('body')[0].appendChild(script);
+        })";
 
         /// <summary>
         /// Gets the default URI of the external library.

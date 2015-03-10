@@ -19,10 +19,11 @@
         /// The JavaScript to check if Sizzle has been loaded.
         /// </summary>
         protected const string LoadScriptCode = @"(function(src) {
-                var sizzle = document.createElement('script');
-                sizzle.src = src;
-                document.getElementsByTagName('body')[0].appendChild(sizzle);
-            })";
+            'use strict';
+            var script = document.createElement('script');
+            script.src = src;
+            document.getElementsByTagName('body')[0].appendChild(script);
+        })";
 
         /// <summary>
         /// Gets the default URI of the external library.
