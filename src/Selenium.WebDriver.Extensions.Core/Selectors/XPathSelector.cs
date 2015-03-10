@@ -22,7 +22,9 @@
 
             this.Selector = @"(function(path) {
                 'use strict';
-                var elements = document.evaluate(path, document, null, XPathResult.ANY_TYPE, null), results = [], element = elements.iterateNext();
+                var elements = document.evaluate(path, document, null, XPathResult.ANY_TYPE, null),
+                    results = [],
+                    element = elements.iterateNext();
                 while (element !== null) {
                     results.push(element);
                     element = elements.iterateNext();
