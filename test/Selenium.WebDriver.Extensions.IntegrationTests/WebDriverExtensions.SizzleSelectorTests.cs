@@ -8,16 +8,16 @@
 
     [TestFixture(
         WebBrowser.PhantomJs,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
     [TestFixture(
         WebBrowser.Chrome,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
     [TestFixture(
         WebBrowser.InternetExplorer,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
     [TestFixture(
         WebBrowser.Firefox,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
+        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html")]
     [TestFixture(
         WebBrowser.PhantomJs, 
         "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Unloaded.html")]
