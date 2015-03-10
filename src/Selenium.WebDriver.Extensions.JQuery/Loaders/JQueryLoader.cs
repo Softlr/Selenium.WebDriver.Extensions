@@ -11,11 +11,6 @@
     public class JQueryLoader : ExternalLibraryLoaderBase
     {
         /// <summary>
-        /// The JavaScript to check if jQuery has been loaded.
-        /// </summary>
-        protected const string DetectScriptCode = "return typeof window.jQuery === 'function';";
-
-        /// <summary>
         /// Gets the default URI of the external library.
         /// </summary>
         public override Uri LibraryUri
@@ -34,7 +29,7 @@
         {
             get
             {
-                return DetectScriptCode;
+                return DetectScriptCode + "(window.jQuery)";
             }
         }
 

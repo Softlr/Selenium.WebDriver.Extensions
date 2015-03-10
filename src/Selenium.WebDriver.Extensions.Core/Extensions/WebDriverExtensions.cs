@@ -128,7 +128,7 @@
                 throw new ArgumentNullException("externalLibraryLoader");
             }
 
-            var result = driver.ExecuteScript<bool?>(externalLibraryLoader.CheckScript);
+            var result = driver.ExecuteScript<bool?>("return " + externalLibraryLoader.CheckScript + ";");
             return result.HasValue && result.Value;
         }
 

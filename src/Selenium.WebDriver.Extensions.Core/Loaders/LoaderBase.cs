@@ -1,43 +1,36 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-    
+
     /// <summary>
-    /// The query selector loader.
+    /// The external library loader base.
     /// </summary>
-    public class QuerySelectorLoader : LoaderBase
+    public abstract class LoaderBase : ILoader
     {
+        /// <summary>
+        /// The JavaScript to check if query selector is supported by the browser.
+        /// </summary>
+        protected const string DetectScriptCode = @"(function isFunction(value) {
+            'use strict';
+            return typeof value === 'function';
+        })";
+
         /// <summary>
         /// Gets the default URI of the external library.
         /// </summary>
-        public override Uri LibraryUri
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public abstract  Uri LibraryUri { get; }
 
         /// <summary>
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
         /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
         /// </summary>
-        public override string CheckScript
-        {
-            get
-            {
-                return DetectScriptCode + "(document.querySelectorAll)";
-            }
-        }
+        public abstract string CheckScript { get; }
 
         /// <summary>
         /// Gets the JavaScript to load the prerequisites for the selector.
         /// </summary>
         /// <param name="args">Load script arguments.</param>
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
-        public override string LoadScript(params string[] args)
-        {
-            return null;
-        }
+        public abstract string LoadScript(params string[] args);
     }
 }

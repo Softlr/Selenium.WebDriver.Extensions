@@ -11,11 +11,6 @@
     public class SizzleLoader : ExternalLibraryLoaderBase
     {
         /// <summary>
-        /// The JavaScript to check if Sizzle has been loaded.
-        /// </summary>
-        protected const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
-
-        /// <summary>
         /// Gets the default URI of the external library.
         /// </summary>
         public override Uri LibraryUri
@@ -34,7 +29,7 @@
         {
             get
             {
-                return DetectScriptCode;
+                return DetectScriptCode + "(window.Sizzle)";
             }
         }
 

@@ -132,6 +132,7 @@
     <Compile Include="GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
+    <Compile Include="Loaders\LoaderBase.cs" />
     <Compile Include="Loaders\ExternalLibraryLoaderBase.cs" />
     <Compile Include="Loaders\ILoader.cs" />
     <Compile Include="Loaders\QuerySelectorLoader.cs" />
