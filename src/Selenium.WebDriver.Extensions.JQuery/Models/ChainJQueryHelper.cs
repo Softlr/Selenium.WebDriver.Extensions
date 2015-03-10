@@ -1340,6 +1340,39 @@
         }
 
         /// <summary>
+        /// Removes the elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Remove()
+        {
+            this.Run("remove()");
+            return this;
+        }
+
+        /// <summary>
+        /// Removes the elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <param name="selector">
+        /// The selector expression that filters the set of matched elements to be removed.
+        /// </param>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Remove(string selector)
+        {
+            this.Run("remove('" + selector + "')");
+            return this;
+        }
+
+        /// <summary>
+        ///  Remove all child nodes for all elements matching current <see cref="JQuerySelector"/>.
+        /// </summary>
+        /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        public ChainJQueryHelper Empty()
+        {
+            this.Run("empty()");
+            return this;
+        }
+
+        /// <summary>
         /// Shows all elements matching current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>

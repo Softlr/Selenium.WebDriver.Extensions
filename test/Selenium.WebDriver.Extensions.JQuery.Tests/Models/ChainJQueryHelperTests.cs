@@ -718,6 +718,30 @@
         }
 
         [Test]
+        public void Remove()
+        {
+            var result = this.driver.JQuery("div").Remove();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void RemoveWithSelector()
+        {
+            var result = this.driver.JQuery("div").Remove(".test");
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void Empty()
+        {
+            var result = this.driver.JQuery("div").Empty();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void Show()
         {
             var result = this.driver.JQuery("div").Show();
