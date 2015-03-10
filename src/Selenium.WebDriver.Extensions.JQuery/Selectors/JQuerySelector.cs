@@ -171,6 +171,20 @@
         }
 
         /// <summary>
+        /// Adds elements to the set of matched elements.
+        /// </summary>
+        /// <param name="selector">
+        /// A string representing a selector expression to find additional elements to add to the set of matched 
+        /// elements.
+        /// </param>
+        /// <param name="context">The jQuery context selector.</param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Add(string selector, JQuerySelector context)
+        {
+            return this.ChainWithContext("add", selector, context);
+        }
+
+        /// <summary>
         /// Add the previous set of elements on the stack to the current set, optionally filtered by a selector.
         /// </summary>
         /// <param name="selector">
@@ -211,6 +225,18 @@
         public JQuerySelector Closest(string selector)
         {
             return this.Chain("closest", selector);
+        }
+
+        /// <summary>
+        /// For each element in the set, get the first element that matches the selector by testing the element itself 
+        /// and traversing up through its ancestors in the DOM tree.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression to match elements against.</param>
+        /// <param name="context">The jQuery context selector.</param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Closest(string selector, JQuerySelector context)
+        {
+            return this.ChainWithContext("closest", selector, context);
         }
 
         /// <summary>
@@ -505,6 +531,23 @@
                            Context = this.Context,
                            JQueryVariable = this.JQueryVariable
                        };
+        }
+
+        /// <summary>
+        /// Chain a jQuery method to a selector.
+        /// </summary>
+        /// <param name="name">The jQuery method name.</param>
+        /// <param name="selector">The jQuery method selector.</param>
+        /// <param name="context">The jQuery context selector.</param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        protected JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context)
+        {
+            return new JQuerySelector
+            {
+                Selector = this.Selector + "." + name + "('" + selector + "', " + context.Selector + ")",
+                Context = this.Context,
+                JQueryVariable = this.JQueryVariable
+            };
         }
     }
 }
