@@ -30,6 +30,9 @@
                     .Returns("jQuery('div', jQuery('article'))").SetName("jQuery('div', jQuery('article'))");
 
                 // functions tests
+                yield return new TestCaseData(By.JQuerySelector("div").Add("span", By.JQuerySelector("body")))
+                    .Returns("jQuery('div').add('span', jQuery('body'))")
+                    .SetName("jQuery('div').add('span', jQuery('body'))");
                 yield return new TestCaseData(By.JQuerySelector("div").Add("span"))
                     .Returns("jQuery('div').add('span')").SetName("jQuery('div').add('span')");
                 yield return new TestCaseData(By.JQuerySelector("div").AddBack())
@@ -44,6 +47,9 @@
                     .Returns("jQuery('div').children('span')").SetName("jQuery('div').children('span')");
                 yield return new TestCaseData(By.JQuerySelector("div").Closest("span"))
                     .Returns("jQuery('div').closest('span')").SetName("jQuery('div').closest('span')");
+                yield return new TestCaseData(By.JQuerySelector("div").Closest("span", By.JQuerySelector("body")))
+                    .Returns("jQuery('div').closest('span', jQuery('body'))")
+                    .SetName("jQuery('div').closest('span', jQuery('body'))");
                 yield return new TestCaseData(By.JQuerySelector("div").Contents())
                     .Returns("jQuery('div').contents()").SetName("jQuery('div').contents()");
                 yield return new TestCaseData(By.JQuerySelector("div").End())
