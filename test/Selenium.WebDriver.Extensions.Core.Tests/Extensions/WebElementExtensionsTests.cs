@@ -22,7 +22,7 @@
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(true);
+                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
         }
 
         [TearDown]

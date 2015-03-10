@@ -50,7 +50,7 @@
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return typeof window.Sizzle === 'function';")).Returns(true);
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.Sizzle"))).Returns(true);
         }
 
         [TearDown]

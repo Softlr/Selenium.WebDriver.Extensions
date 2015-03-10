@@ -23,7 +23,7 @@
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(true);
+                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
         }
 
         [TearDown]
@@ -38,7 +38,9 @@
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
             var list = new List<IWebElement> { element.Object };
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return document.querySelectorAll('div');")).Returns(new ReadOnlyCollection<IWebElement>(list));
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return document.querySelectorAll('div');"))
+                .Returns(new ReadOnlyCollection<IWebElement>(list));
             var result = this.driverMock.Object.FindElement(By.QuerySelector("div"));
 
             Assert.IsNotNull(result);
@@ -129,7 +131,7 @@
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return typeof document.querySelectorAll === 'function';")).Returns(false);
+                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(false);
             mock.Object.QuerySelector().CheckSupport();
         }
 

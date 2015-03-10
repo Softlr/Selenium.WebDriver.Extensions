@@ -18,8 +18,7 @@
         public void SetUp()
         {
             var mock = new Mock<IWebDriver>();
-            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return typeof window.jQuery === 'function';"))
-                .Returns(true);
+            mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
             this.driver = mock.Object;
         }
 
