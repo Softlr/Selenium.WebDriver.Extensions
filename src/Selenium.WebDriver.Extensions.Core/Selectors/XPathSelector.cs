@@ -90,9 +90,11 @@
                 throw new ArgumentNullException("root");
             }
 
-            var xpath = root.XPath 
-                + (root.XPath.EndsWith("/") || this.RawSelector.StartsWith("/") ? string.Empty : "/") 
-                + this.RawSelector;
+            var separator = root.XPath.EndsWith("/", StringComparison.OrdinalIgnoreCase)
+                || this.RawSelector.StartsWith("/", StringComparison.OrdinalIgnoreCase)
+                    ? string.Empty
+                    : "/";
+            var xpath = root.XPath + separator + this.RawSelector;
             return new XPathSelector(xpath);
         }
 
