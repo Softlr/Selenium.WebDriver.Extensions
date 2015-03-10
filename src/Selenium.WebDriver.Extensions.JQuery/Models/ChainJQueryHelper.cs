@@ -1238,7 +1238,7 @@
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
         public ChainJQueryHelper RemoveData(string key)
         {
-            this.Run("removeData('" + key + ")");
+            this.Run("removeData('" + key + "')");
             return this;
         }
 
