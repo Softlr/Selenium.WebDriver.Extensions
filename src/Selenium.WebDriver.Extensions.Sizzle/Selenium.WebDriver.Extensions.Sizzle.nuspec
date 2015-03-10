@@ -10,9 +10,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Sizzle selector support for Selenium WebDriver.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, Sizzle, selector, selectors</tags>
-		<dependencies>
-			<dependency id="Selenium.WebDriver.Extensions.Core" version="1.2.330"/>
-		</dependencies> 
+        <dependencies>
+            <dependency id="Selenium.WebDriver.Extensions.Core" version="1.2.331"/>
+        </dependencies> 
     </metadata>
     <files>
         <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.Sizzle.dll" target="lib\net35\Selenium.WebDriver.Extensions.Sizzle.dll" />

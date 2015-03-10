@@ -10,9 +10,9 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>jQuery selector support for Selenium WebDriver.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, jquery, selector, selectors</tags>
-		<dependencies>
-			<dependency id="Selenium.WebDriver.Extensions.Core" version="1.2.330"/>
-		</dependencies> 
+        <dependencies>
+            <dependency id="Selenium.WebDriver.Extensions.Core" version="1.2.331"/>
+        </dependencies> 
     </metadata>
     <files>
         <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.JQuery.dll" target="lib\net35\Selenium.WebDriver.Extensions.JQuery.dll" />
