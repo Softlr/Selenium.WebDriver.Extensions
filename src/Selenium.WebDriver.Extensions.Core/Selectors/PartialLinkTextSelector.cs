@@ -18,9 +18,9 @@
         public PartialLinkTextSelector(string text, string baseElement = "document")
             : base(text, baseElement)
         {
-            this.Selector = @"(function(text, baseElem) {
+            this.Selector = @"(function(text, baseElement) {
                 'use strict';
-                var links = baseElem.querySelectorAll(':link'), results = [], i;
+                var links = baseElement.querySelectorAll(':link'), results = [], i;
                 for (i = 0; i < links.length; i += 1) {
                     if (links[i].innerText.indexOf(text) !== -1) {
                         results.push(links[i]);

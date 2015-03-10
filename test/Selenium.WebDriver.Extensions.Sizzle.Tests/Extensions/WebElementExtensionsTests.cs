@@ -45,8 +45,8 @@
             var rootList = new List<IWebElement> { rootElement.Object };
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('div');"))
                 .Returns(new ReadOnlyCollection<IWebElement>(rootList));
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
-                .Returns("body > div");
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)"))).Returns("body > div");
             var elementList = new List<IWebElement> { element.Object };
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return Sizzle('span', Sizzle('body > div')[0]);"))
@@ -83,7 +83,7 @@
             var elementList = new List<IWebElement> { element1.Object, element2.Object };
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return Sizzle('div');"))
                 .Returns(new ReadOnlyCollection<IWebElement>(rootList));
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return Sizzle('span', Sizzle('body > div')[0]);"))

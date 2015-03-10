@@ -8,10 +8,10 @@
         /// <summary>
         /// The JavaScript to load jQuery.
         /// </summary>
-        protected const string LoadScriptCode = @"(function(src) {
+        protected const string LoadScriptCode = @"(function(source) {
             'use strict';
             var script = document.createElement('script');
-            script.src = src;
+            script.src = source;
             document.getElementsByTagName('body')[0].appendChild(script);
         })";
     }

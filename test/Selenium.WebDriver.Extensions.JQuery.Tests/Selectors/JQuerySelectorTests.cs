@@ -245,7 +245,7 @@
             rootSelector.SetupGet(x => x.Selector).Returns("div");
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
             var element = new Mock<WebElement>();

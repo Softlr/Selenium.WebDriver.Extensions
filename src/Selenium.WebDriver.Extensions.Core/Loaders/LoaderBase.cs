@@ -10,7 +10,7 @@
         /// <summary>
         /// The JavaScript to check if query selector is supported by the browser.
         /// </summary>
-        protected const string DetectScriptCode = @"(function isFunction(value) {
+        protected const string DetectScriptCode = @"(function(value) {
             'use strict';
             return typeof value === 'function';
         })";

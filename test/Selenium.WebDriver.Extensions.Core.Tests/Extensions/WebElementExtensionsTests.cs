@@ -38,8 +38,8 @@
             selector.SetupGet(x => x.Selector).Returns("div");
             selector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
-                .Returns("body > div");
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)"))).Returns("body > div");
 
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(selector.Object);
@@ -55,8 +55,8 @@
             selector.SetupGet(x => x.Selector).Returns("div");
             selector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
-                .Returns("html[1]/body");
+            this.driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)"))).Returns("html[1]/body");
 
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(selector.Object);
@@ -72,7 +72,7 @@
             element.SetupGet(x => x.TagName).Returns("body");
 
             var list = new List<IWebElement> { element.Object };
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("/html/body");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("document\\.evaluate")))
@@ -99,7 +99,7 @@
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return document.querySelectorAll('div');"))
                 .Returns(new ReadOnlyCollection<IWebElement>(rootList));
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             var elementList = new List<IWebElement> { element.Object };
             this.driverMock.As<IJavaScriptExecutor>()
@@ -139,7 +139,7 @@
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return document.querySelectorAll('div');"))
                 .Returns(new ReadOnlyCollection<IWebElement>(rootList));
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(

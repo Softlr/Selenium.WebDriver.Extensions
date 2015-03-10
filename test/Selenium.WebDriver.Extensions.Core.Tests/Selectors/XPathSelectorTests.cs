@@ -94,7 +94,7 @@
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
             var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("/html[1]/body");
 
             var element = new Mock<WebElement>();
@@ -116,7 +116,7 @@
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
             var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("/html[1]/body/");
 
             var element = new Mock<WebElement>();
@@ -138,7 +138,7 @@
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
             var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("/html[1]/body/");
 
             var element = new Mock<WebElement>();
@@ -160,7 +160,7 @@
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
             var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(el\\)")))
+            driver.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("/html[1]/body");
 
             var element = new Mock<WebElement>();
