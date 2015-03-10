@@ -130,6 +130,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Selenium.WebDriver.Extensions.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj">
