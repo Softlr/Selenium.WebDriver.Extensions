@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using Selenium.WebDriver.Extensions.Core;
@@ -25,6 +26,8 @@
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
         /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
         /// </summary>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public override string CheckScript
         {
             get
@@ -38,6 +41,8 @@
         /// </summary>
         /// <param name="args">Load script arguments.</param>
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public override string LoadScript(params string[] args)
         {
             if (args == null)

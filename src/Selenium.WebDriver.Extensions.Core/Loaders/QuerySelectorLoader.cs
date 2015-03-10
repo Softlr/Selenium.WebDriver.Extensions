@@ -1,7 +1,8 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-    
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// The query selector loader.
     /// </summary>
@@ -22,6 +23,8 @@
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
         /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
         /// </summary>
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
+            Justification = "False positive.")]
         public override string CheckScript
         {
             get

@@ -18,7 +18,7 @@
         /// <summary>
         /// Gets the default URI of the external library.
         /// </summary>
-        public abstract  Uri LibraryUri { get; }
+        public abstract Uri LibraryUri { get; }
 
         /// <summary>
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
