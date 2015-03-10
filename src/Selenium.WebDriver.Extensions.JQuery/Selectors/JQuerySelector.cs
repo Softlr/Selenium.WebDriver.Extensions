@@ -544,7 +544,7 @@
         {
             return new JQuerySelector
             {
-                Selector = this.Selector + "." + name + "('" + selector + "', " + context.Selector + ")",
+                Selector = this.Selector + "." + name + "('" + selector + "', " + context + ")",
                 Context = this.Context,
                 JQueryVariable = this.JQueryVariable
             };
