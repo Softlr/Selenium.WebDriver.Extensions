@@ -110,6 +110,7 @@
   <ItemGroup>
     <Compile Include="Utils\SetupUtil.cs" />
     <Compile Include="Utils\WebBrowser.cs" />
+    <Compile Include="WebDriverExtensions.JQuerySelectorSetterTests.cs" />
     <Compile Include="WebDriverExtensions.QuerySelectorTests.cs" />
     <Compile Include="WebDriverExtensions.CoreTests.cs" />
     <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
