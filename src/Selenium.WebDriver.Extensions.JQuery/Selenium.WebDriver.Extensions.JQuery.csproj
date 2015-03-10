@@ -119,6 +119,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\ChainJQueryHelper.cs" />
+    <Compile Include="Models\Duration.cs" />
     <Compile Include="Models\JQueryHelper.cs" />
     <Compile Include="Runners\JQueryRunner.cs" />
     <Compile Include="Models\By.cs" />
