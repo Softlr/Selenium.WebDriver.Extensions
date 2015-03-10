@@ -750,6 +750,14 @@
         }
 
         [Test]
+        public void ShowEnum()
+        {
+            var result = this.driver.JQuery("div").Show(Duration.Fast);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void ShowShort()
         {
             var result = this.driver.JQuery("div").Show((short)100);
@@ -801,6 +809,14 @@
         public void Hide()
         {
             var result = this.driver.JQuery("div").Hide();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void HideEnum()
+        {
+            var result = this.driver.JQuery("div").Hide(Duration.Slow);
 
             Assert.IsNotNull(result);
         }
@@ -862,6 +878,14 @@
         }
 
         [Test]
+        public void ToggleEnum()
+        {
+            var result = this.driver.JQuery("div").Toggle(Duration.Fast);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void ToggleShort()
         {
             var result = this.driver.JQuery("div").Toggle((short)100);
@@ -913,6 +937,14 @@
         public void SlideDown()
         {
             var result = this.driver.JQuery("div").SlideDown();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void SlideDownEnum()
+        {
+            var result = this.driver.JQuery("div").SlideDown(Duration.Fast);
 
             Assert.IsNotNull(result);
         }
@@ -974,6 +1006,14 @@
         }
 
         [Test]
+        public void SlideUpEnum()
+        {
+            var result = this.driver.JQuery("div").SlideUp(Duration.Fast);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void SlideUpShort()
         {
             var result = this.driver.JQuery("div").SlideUp((short)100);
@@ -1025,6 +1065,14 @@
         public void SlideToggle()
         {
             var result = this.driver.JQuery("div").SlideToggle();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void SlideToggleEnum()
+        {
+            var result = this.driver.JQuery("div").SlideToggle(Duration.Slow);
 
             Assert.IsNotNull(result);
         }
@@ -1086,6 +1134,14 @@
         }
 
         [Test]
+        public void FadeInEnum()
+        {
+            var result = this.driver.JQuery("div").FadeIn(Duration.Slow);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void FadeInShort()
         {
             var result = this.driver.JQuery("div").FadeIn((short)100);
@@ -1137,6 +1193,14 @@
         public void FadeOut()
         {
             var result = this.driver.JQuery("div").FadeOut();
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void FadeOutEnum()
+        {
+            var result = this.driver.JQuery("div").FadeOut(Duration.Slow);
 
             Assert.IsNotNull(result);
         }
@@ -1198,6 +1262,14 @@
         }
 
         [Test]
+        public void FadeToggleEnum()
+        {
+            var result = this.driver.JQuery("div").FadeToggle(Duration.Slow);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
         public void FadeToggleShort()
         {
             var result = this.driver.JQuery("div").FadeToggle((short)100);
@@ -1241,6 +1313,22 @@
         public void FadeToggleUnsignedLong()
         {
             var result = this.driver.JQuery("div").FadeToggle(500UL);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void FadeToEnumFloat()
+        {
+            var result = this.driver.JQuery("div").FadeTo(Duration.Fast, 0.5f);
+
+            Assert.IsNotNull(result);
+        }
+
+        [Test]
+        public void FadeToEnumDouble()
+        {
+            var result = this.driver.JQuery("div").FadeTo(Duration.Fast, 0.5d);
 
             Assert.IsNotNull(result);
         }
@@ -1353,6 +1441,20 @@
         public void FadeToOpacityBiggerThanOne()
         {
             this.driver.JQuery("div").FadeTo(100UL, 2.0);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FadeToEnumNegativeOpacity()
+        {
+            this.driver.JQuery("div").FadeTo(Duration.Slow, -1.0);
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void FadeToEnumOpacityBiggerThanOne()
+        {
+            this.driver.JQuery("div").FadeTo(Duration.Slow, 2.0);
         }
 
         [Test]
