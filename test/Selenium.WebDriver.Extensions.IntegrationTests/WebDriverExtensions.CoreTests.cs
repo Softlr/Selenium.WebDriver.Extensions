@@ -22,9 +22,9 @@
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsSharedTests
+    public class WebDriverExtensionsCoreTests
     {
-        public WebDriverExtensionsSharedTests(WebBrowser driver, string testCaseUrl)
+        public WebDriverExtensionsCoreTests(WebBrowser driver, string testCaseUrl)
         {
             this.Driver = driver;
             this.TestCaseUrl = testCaseUrl;

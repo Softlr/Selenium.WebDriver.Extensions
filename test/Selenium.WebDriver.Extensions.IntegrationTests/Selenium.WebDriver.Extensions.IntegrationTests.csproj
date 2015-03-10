@@ -111,7 +111,7 @@
     <Compile Include="Utils\SetupUtil.cs" />
     <Compile Include="Utils\WebBrowser.cs" />
     <Compile Include="WebDriverExtensions.QuerySelectorTests.cs" />
-    <Compile Include="WebDriverExtensions.SharedTests.cs" />
+    <Compile Include="WebDriverExtensions.CoreTests.cs" />
     <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
     <Compile Include="WebDriverExtensions.JQuerySelectorTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
