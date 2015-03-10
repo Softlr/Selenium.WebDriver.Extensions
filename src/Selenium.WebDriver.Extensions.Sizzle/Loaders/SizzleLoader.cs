@@ -8,7 +8,7 @@
     /// <summary>
     /// The Sizzle loader.
     /// </summary>
-    public class SizzleLoader : ILoader
+    public class SizzleLoader : ExternalLibraryLoaderBase
     {
         /// <summary>
         /// The JavaScript to check if Sizzle has been loaded.
@@ -16,19 +16,9 @@
         protected const string DetectScriptCode = "return typeof window.Sizzle === 'function';";
 
         /// <summary>
-        /// The JavaScript to check if Sizzle has been loaded.
-        /// </summary>
-        protected const string LoadScriptCode = @"(function(src) {
-            'use strict';
-            var script = document.createElement('script');
-            script.src = src;
-            document.getElementsByTagName('body')[0].appendChild(script);
-        })";
-
-        /// <summary>
         /// Gets the default URI of the external library.
         /// </summary>
-        public Uri LibraryUri
+        public override Uri LibraryUri
         {
             get
             {
@@ -40,7 +30,7 @@
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
         /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
         /// </summary>
-        public string CheckScript
+        public override string CheckScript
         {
             get
             {
@@ -53,7 +43,7 @@
         /// </summary>
         /// <param name="args">Load script arguments.</param>
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
-        public string LoadScript(params string[] args)
+        public override string LoadScript(params string[] args)
         {
             if (args == null)
             {
