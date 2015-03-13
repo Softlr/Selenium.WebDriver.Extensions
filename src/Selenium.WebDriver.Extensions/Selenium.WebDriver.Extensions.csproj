@@ -118,13 +118,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\By.cs" />
-    <Compile Include="GlobalSuppressions.cs">
+    <Compile Include="Properties\GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>

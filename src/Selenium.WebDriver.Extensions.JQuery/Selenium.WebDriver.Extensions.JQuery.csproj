@@ -124,7 +124,7 @@
     <Compile Include="Runners\JQueryRunner.cs" />
     <Compile Include="Models\By.cs" />
     <Compile Include="Loaders\JQueryLoader.cs" />
-    <Compile Include="GlobalSuppressions.cs">
+    <Compile Include="Properties\GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Selectors\JQuerySelector.cs" />
@@ -144,7 +144,7 @@
     <None Include="Selenium.WebDriver.Extensions.JQuery.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>

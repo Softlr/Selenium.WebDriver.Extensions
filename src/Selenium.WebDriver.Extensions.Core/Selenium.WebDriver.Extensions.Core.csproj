@@ -129,7 +129,7 @@
     <Compile Include="Exceptions\QuerySelectorNotSupportedException.cs" />
     <Compile Include="Exceptions\TypeArgumentException.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
-    <Compile Include="GlobalSuppressions.cs">
+    <Compile Include="Properties\GlobalSuppressions.cs">
       <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
     </Compile>
     <Compile Include="Loaders\LoaderBase.cs" />
@@ -164,7 +164,7 @@
     <None Include="Selenium.WebDriver.Extensions.Core.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <CodeAnalysisDictionary Include="CustomDictionary.xml">
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
   </ItemGroup>
