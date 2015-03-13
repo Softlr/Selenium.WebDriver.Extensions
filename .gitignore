@@ -179,3 +179,4 @@ docs/Help/
 phantomjs-license.txt
 tests.xml
 coverage.xml
+CoverageReport/
