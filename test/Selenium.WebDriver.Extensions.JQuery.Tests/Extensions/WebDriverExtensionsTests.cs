@@ -93,7 +93,7 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
             
-            Assert.Throws<NoSuchElementException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
         }
 
         [Fact]

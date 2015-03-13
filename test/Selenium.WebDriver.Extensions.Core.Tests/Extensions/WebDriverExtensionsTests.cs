@@ -152,6 +152,16 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenCheckingSelectorPrerequisitesWithIncorrectResponse()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(null);
+
+            Assert.False(driverMock.Object.CheckSelectorPrerequisites(new QuerySelectorLoader()));
+        }
+
+        [Fact]
         public void ShouldThrowExceptionWHenLoadingExternalLibraryWithoutLoader()
         {
             var driverMock = new Mock<IWebDriver>();
