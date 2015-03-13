@@ -2,34 +2,31 @@
 {
     using System;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
+    using Xunit;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebElementTests
     {
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementSelectorNull()
+        [Fact]
+        public void ShouldThrowExceptionWhenFindingElementWithNullSelector()
         {
             var webElement = new Mock<IWebElement>();
             var selector = new Mock<ISelector>();
             var element = new WebElement(webElement.Object, selector.Object);
-            element.FindElement((ISelector)null);
+            Assert.Throws<ArgumentNullException>(() => element.FindElement((ISelector)null));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementsSelectorNull()
+        [Fact]
+        public void ShouldThrowExceptionWhenFindingElementsWithNullSelector()
         {
             var webElement = new Mock<IWebElement>();
             var selector = new Mock<ISelector>();
             var element = new WebElement(webElement.Object, selector.Object);
-            element.FindElements((ISelector)null);
+            Assert.Throws<ArgumentNullException>(() => element.FindElements((ISelector)null));
         }
     }
 }

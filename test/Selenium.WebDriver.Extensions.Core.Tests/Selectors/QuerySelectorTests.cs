@@ -1,149 +1,132 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
-    using System.Collections;
-    using NUnit.Framework;
+    using System.Collections.Generic;
+    using Xunit;
+    using Xunit.Extensions;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class QuerySelectorTests
     {
-        private static IEnumerable SelectorTestCases
+        public static IEnumerable<object[]> SelectorData
         {
             get
             {
-                yield return new TestCaseData(By.QuerySelector("div"))
-                    .Returns("document.querySelectorAll('div')").SetName("document.querySelectorAll('div')");
-                yield return new TestCaseData(By.QuerySelector("input[type='text']"))
-                    .Returns("document.querySelectorAll('input[type=\"text\"]')").SetName("escape single quotes");
-                yield return new TestCaseData(By.QuerySelector("div", "document.body"))
-                    .Returns("document.body.querySelectorAll('div')")
-                    .SetName("document.body.querySelectorAll('div')");
-                yield return new TestCaseData(By.QuerySelector("span", By.QuerySelector("div")))
-                    .Returns("document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span')")
-                    .SetName("document.querySelectorAll('div')[0].querySelectorAll('span')");
+                yield return new object[] { By.QuerySelector("div"), "document.querySelectorAll('div')" };
+                yield return new object[]
+                                 {
+                                     By.QuerySelector("input[type='text']"), 
+                                     "document.querySelectorAll('input[type=\"text\"]')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.QuerySelector("div", "document.body"),
+                                     "document.body.querySelectorAll('div')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.QuerySelector("span", By.QuerySelector("div")), 
+                                     "document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span')"
+                                 };
             }
         }
 
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.QuerySelector("div"), By.QuerySelector("div"), true)
-                    .SetName("QS('div') == QS('div')");
-                yield return new TestCaseData(By.QuerySelector("div"), By.QuerySelector("span"), false)
-                    .SetName("QS('div') != QS('span')");
-                yield return new TestCaseData(By.QuerySelector("div"), null, false)
-                    .SetName("QS('div') != null");
-                yield return new TestCaseData(null, By.QuerySelector("div"), false)
-                    .SetName("null != QS('div')");
-                yield return new TestCaseData(
-                    By.QuerySelector("div", By.QuerySelector("body")),
-                    By.QuerySelector("div"),
-                    false)
-                    .SetName("QS('div', QS('body')) != QS('div')");
-                yield return new TestCaseData(
-                    By.QuerySelector("div", By.QuerySelector("body")),
-                    By.QuerySelector("div", By.QuerySelector("body")),
-                    true)
-                    .SetName("QS('div', QS('body')) == QS('div', QS('body'))");
-                yield return new TestCaseData(
-                    By.QuerySelector("div", "body"),
-                    By.QuerySelector("div", By.QuerySelector("body")),
-                    false)
-                    .SetName("QS('div', null) != QS('div', QS('body'))");
-                yield return new TestCaseData(
-                    By.QuerySelector("div", By.QuerySelector("body")),
-                    By.QuerySelector("div", "body"),
-                    false)
-                    .SetName("QS('div', QS('body')) != QS('div', null)");
-                yield return new TestCaseData(
-                    By.QuerySelector("div", By.QuerySelector("body")),
-                    By.QuerySelector("div", By.QuerySelector("div")),
-                    false)
-                    .SetName("QS('div', QS('body')) != QS('div', QS('div'))");
+                yield return new object[] { By.QuerySelector("div"), By.QuerySelector("div"), true };
+                yield return new object[] { By.QuerySelector("div"), By.QuerySelector("span"), false };
+                yield return new object[] { By.QuerySelector("div"), null, false };
+                yield return new object[] { null, By.QuerySelector("div"), false };
+                yield return new object[] { By.QuerySelector("div", By.QuerySelector("body")), By.QuerySelector("div"), false };
+                yield return new object[] { By.QuerySelector("div", By.QuerySelector("body")), By.QuerySelector("div", By.QuerySelector("body")), true };
+                yield return new object[] { By.QuerySelector("div", "body"), By.QuerySelector("div", By.QuerySelector("body")), false };
+                yield return new object[] { By.QuerySelector("div", By.QuerySelector("body")), By.QuerySelector("div", "body"), false };
+                yield return new object[] { By.QuerySelector("div", By.QuerySelector("body")), By.QuerySelector("div", By.QuerySelector("div")), false };
             }
         }
 
-        [TestCaseSource("SelectorTestCases")]
-        public string Selector(QuerySelector selector)
+        [Theory]
+        [PropertyData("SelectorData")]
+        public void ShouldGenerateCorrectSelector(QuerySelector selector, string expectedResult)
         {
-            Assert.AreEqual(selector.Selector, selector.ToString());
-            return selector.Selector;
+            Assert.Equal(selector.Selector, selector.ToString());
+            Assert.Equal(expectedResult, selector.Selector);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullSelector()
+        [Fact]
+        public void ShouldThrowErrorForNullSelector()
         {
-            By.QuerySelector(null);
+            Assert.Throws<ArgumentNullException>(() => By.QuerySelector(null));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullBaseElementSelector()
+        [Fact]
+        public void ShouldThrowErrorForNullBaseElement()
         {
-            By.QuerySelector("div", (string)null);
+            Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (string)null));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullSelectorWithBaseSelector()
+        [Fact]
+        public void ShouldThrowErrorForNullSelectorWithBaseSelector()
         {
-            By.QuerySelector(null, By.QuerySelector("div"));
+            Assert.Throws<ArgumentNullException>(() => By.QuerySelector(null, By.QuerySelector("div")));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullBaseSelector()
+        [Fact]
+        public void ShouldThrowErrorForNullBaseSelector()
         {
-            By.QuerySelector("div", (QuerySelector)null);
+            Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (QuerySelector)null));
         }
 
-        [Test]
-        public void CallFormatString()
+        [Fact]
+        public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.QuerySelector("div").CallFormatString;
-            Assert.IsNotNull(formatString);
+            Assert.NotNull(formatString);
         }
 
-        [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(QuerySelector selector1, QuerySelector selector2, bool expectedResult)
+        [Theory]
+        [PropertyData("EqualityData")]
+        public void ShouldProperlyCompareSelectors(
+            QuerySelector selector1,
+            QuerySelector selector2, 
+            bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void EqualityOperatorWrongType()
+        [Fact]
+        public void ShouldNotCompareElementsOfDifferentType()
         {
             var selector1 = By.QuerySelector("div");
             var selector2 = new object();
 
 #pragma warning disable 252,253
-            Assert.IsFalse(selector1 == selector2);
-            Assert.IsTrue(selector1 != selector2);
+            Assert.False(selector1 == selector2);
+            Assert.True(selector1 != selector2);
 #pragma warning restore 252,253
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateNullElement()
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
             var selector = new QuerySelector("div");
-            selector.Create(null);
+
+            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
         }
     }
 }

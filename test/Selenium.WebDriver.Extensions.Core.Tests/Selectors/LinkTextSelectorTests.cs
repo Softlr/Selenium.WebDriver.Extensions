@@ -1,110 +1,100 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class LinkTextSelectorTests
     {
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.LinkText("test"), By.LinkText("test"), true)
-                    .SetName("LT('test') == LT('test')");
-                yield return new TestCaseData(By.LinkText("test"), By.LinkText("test2"), false)
-                    .SetName("LT('test') != LT('test2')");
-                yield return new TestCaseData(By.LinkText("test"), null, false)
-                    .SetName("LT('test') != null");
-                yield return new TestCaseData(null, By.LinkText("test"), false)
-                    .SetName("null != LT('test')");
-                yield return new TestCaseData(
-                    By.LinkText("test", "body"),
-                    By.LinkText("test"),
-                    false)
-                    .SetName("LT('test', LT('body')) != LT('test')");
-                yield return new TestCaseData(
-                    By.LinkText("test", "body"),
-                    By.LinkText("test", "body"),
-                    true)
-                    .SetName("LT('test', LT('body')) == LT('test', LT('body'))");
+                yield return new object[] { By.LinkText("test"), By.LinkText("test"), true };
+                yield return new object[] { By.LinkText("test"), By.LinkText("test2"), false };
+                yield return new object[] { By.LinkText("test"), null, false };
+                yield return new object[] { null, By.LinkText("test"), false };
+                yield return new object[] { By.LinkText("test", "body"), By.LinkText("test"), false };
+                yield return new object[] { By.LinkText("test", "body"), By.LinkText("test", "body"), true };
             }
         }
 
-        [Test]
-        public void Selector()
+        [Fact]
+        public void ShouldGenerateCorrectSelector()
         {
             var selector = By.LinkText("test");
-            Assert.AreEqual(selector.Selector, selector.ToString());
+            Assert.Equal(selector.Selector, selector.ToString());
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullSelector()
+        [Fact]
+        public void ShouldThrowExceptionForNullSelector()
         {
-            By.LinkText(null);
+            Assert.Throws<ArgumentNullException>(() => By.LinkText(null));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullBaseElementSelector()
+        [Fact]
+        public void ShouldThrowExceptionForNullBaseElement()
         {
-            By.LinkText("test", null);
+            Assert.Throws<ArgumentNullException>(() => By.LinkText("test", null));
         }
 
-        [Test]
-        public void CallFormatString()
+        [Fact]
+        public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.LinkText("test").CallFormatString;
-            Assert.IsNotNull(formatString);
+            Assert.NotNull(formatString);
         }
 
-        [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(LinkTextSelector selector1, LinkTextSelector selector2, bool expectedResult)
+        [Theory]
+        [PropertyData("EqualityData")]
+        public void ShouldProperlyCompareSelectors(
+            LinkTextSelector selector1, 
+            LinkTextSelector selector2, 
+            bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void EqualityOperatorWrongType()
+        [Fact]
+        public void ShouldNotCompareElementsOfDifferentType()
         {
             var selector1 = By.LinkText("text");
             var selector2 = new object();
 
 #pragma warning disable 252,253
-            Assert.IsFalse(selector1 == selector2);
-            Assert.IsTrue(selector1 != selector2);
+            Assert.False(selector1 == selector2);
+            Assert.True(selector1 != selector2);
 #pragma warning restore 252,253
         }
 
-        [Test]
-        public void RunnerType()
+        [Fact]
+        public void ShouldHaveProperRunnerType()
         {
             var selector = new LinkTextSelector("test");
 
-            Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
+            Assert.Equal(typeof(QuerySelectorRunner), selector.RunnerType);
         }
 
-        [Test]
-        public void Create()
+        [Fact]
+        public void ShouldCreateNestedSelector()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("div");
@@ -119,18 +109,18 @@
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
             var selector = By.LinkText("test").Create(element.Object);
-            Assert.IsInstanceOf<LinkTextSelector>(selector);
+            Assert.IsType<LinkTextSelector>(selector);
 
             var linkTextSelector = (LinkTextSelector)selector;
-            Assert.AreEqual("test", linkTextSelector.RawSelector);
+            Assert.Equal("test", linkTextSelector.RawSelector);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateNullElement()
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
-            var selector = new LinkTextSelector("div");
-            selector.Create(null);
+            var selector = new LinkTextSelector("test");
+
+            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
         }
     }
 }
