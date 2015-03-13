@@ -1,38 +1,36 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
+    using Xunit;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebElementExtensionsTests
+    public class WebElementExtensionsTests : IDisposable
     {
         private Mock<IWebDriver> driverMock;
 
-        [SetUp]
-        public void SetUp()
+        public WebElementExtensionsTests()
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.Sizzle"))).Returns(true);
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             this.driverMock = null;
         }
 
-        [Test]
-        public void FindElementWithSizzle()
+        [Fact]
+        public void ShouldFindElementWithSizzle()
         {
             var selector = By.SizzleSelector("div");
 
@@ -59,12 +57,12 @@
 
             var result = webElement.Object.FindElement(By.SizzleSelector("span"));
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual("span", result.TagName);
+            Assert.NotNull(result);
+            Assert.Equal("span", result.TagName);
         }
 
-        [Test]
-        public void FindElementsWithSizzle()
+        [Fact]
+        public void ShouldFindElementsWithSizzle()
         {
             var selector = By.SizzleSelector("div");
 
@@ -96,13 +94,13 @@
 
             var result = webElement.Object.FindElements(By.SizzleSelector("span"));
 
-            Assert.AreEqual(2, result.Count);
+            Assert.Equal(2, result.Count);
 
-            Assert.AreEqual("span", result[0].TagName);
-            Assert.AreEqual("test1", result[0].GetAttribute("class"));
+            Assert.Equal("span", result[0].TagName);
+            Assert.Equal("test1", result[0].GetAttribute("class"));
 
-            Assert.AreEqual("span", result[1].TagName);
-            Assert.AreEqual("test2", result[1].GetAttribute("class"));
+            Assert.Equal("span", result[1].TagName);
+            Assert.Equal("test2", result[1].GetAttribute("class"));
         }
     }
 }
