@@ -1,38 +1,36 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
+    using Xunit;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebElementExtensionsTests
+    public class WebElementExtensionsTests : IDisposable
     {
         private Mock<IWebDriver> driverMock;
 
-        [SetUp]
-        public void SetUp()
+        public WebElementExtensionsTests()
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             this.driverMock = null;
         }
-        
-        [Test]
-        public void FindElementWithJQuery()
+
+        [Fact]
+        public void ShouldFindElementWithJQuery()
         {
             var selector = By.JQuerySelector("div");
             
@@ -59,12 +57,12 @@
 
             var result = webElement.Object.FindElement(By.JQuerySelector("span"));
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual("span", result.TagName);
+            Assert.NotNull(result);
+            Assert.Equal("span", result.TagName);
         }
 
-        [Test]
-        public void FindElementsWithJQuery()
+        [Fact]
+        public void ShouldFindElementsWithJQuery()
         {
             var selector = By.JQuerySelector("div");
 
@@ -96,23 +94,21 @@
 
             var result = webElement.Object.FindElements(By.JQuerySelector("span"));
 
-            Assert.AreEqual(2, result.Count);
+            Assert.Equal(2, result.Count);
 
-            Assert.AreEqual("span", result[0].TagName);
-            Assert.AreEqual("test1", result[0].GetAttribute("class"));
+            Assert.Equal("span", result[0].TagName);
+            Assert.Equal("test1", result[0].GetAttribute("class"));
 
-            Assert.AreEqual("span", result[1].TagName);
-            Assert.AreEqual("test2", result[1].GetAttribute("class"));
+            Assert.Equal("span", result[1].TagName);
+            Assert.Equal("test2", result[1].GetAttribute("class"));
         }
 
-        [Test]
-        public void FindText()
+        [Fact]
+        public void ShouldFindText()
         {
-            const string Result = "test";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).text();")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).text();")).Returns("test");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             
@@ -123,17 +119,16 @@
 
             var result = webElement.Object.JQuery("span").Text();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("test", result);
         }
 
-        [Test]
-        public void FindHtml()
+        [Fact]
+        public void ShouldFindHtml()
         {
-            const string Result = "<p>test</p>";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).html();")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).html();"))
+                .Returns("<p>test</p>");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             
@@ -144,17 +139,16 @@
 
             var result = webElement.Object.JQuery("span").Html();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("<p>test</p>", result);
         }
 
-        [Test]
-        public void FindAttribute()
+        [Fact]
+        public void ShouldFindAttribute()
         {
-            const string Result = "http://github.com";
-            
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('a', jQuery('body > div')).attr('href');")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('a', jQuery('body > div')).attr('href');"))
+                .Returns("http://github.com");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             
@@ -165,18 +159,16 @@
 
             var result = webElement.Object.JQuery("a").Attribute("href");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("http://github.com", result);
         }
 
-        [Test]
-        public void FindPropertyString()
+        [Fact]
+        public void ShouldFindPropertyString()
         {
-            const string Result = "prop";
-            
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).prop('checked');"))
-                .Returns(Result);
+                .Returns("prop");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -187,18 +179,16 @@
 
             var result = webElement.Object.JQuery("input").Property<string>("checked");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("prop", result);
         }
 
-        [Test]
-        public void FindPropertyBoolean()
+        [Fact]
+        public void ShouldFindPropertyBoolean()
         {
-            const bool Result = true;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).prop('checked');"))
-                .Returns(Result);
+                .Returns(true);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -209,18 +199,16 @@
 
             var result = webElement.Object.JQuery("input").Property("checked");
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Result, result.Value);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
-        [Test]
-        public void FindValue()
+        [Fact]
+        public void ShouldFindValue()
         {
-            const string Result = "test";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).val();")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).val();")).Returns("test");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -231,18 +219,16 @@
 
             var result = webElement.Object.JQuery("input").Value();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("test", result);
         }
 
-        [Test]
-        public void FindCss()
+        [Fact]
+        public void ShouldFindCss()
         {
-            const string Result = "hidden";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).css('display');"))
-                .Returns(Result);
+                .Returns("hidden");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -253,17 +239,15 @@
 
             var result = webElement.Object.JQuery("input").Css("display");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("hidden", result);
         }
 
-        [Test]
-        public void FindWidth()
+        [Fact]
+        public void ShouldFindWidth()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).width();")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).width();")).Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -274,17 +258,15 @@
 
             var result = webElement.Object.JQuery("input").Width();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindHeight()
+        [Fact]
+        public void ShouldFindHeight()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).height();")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).height();")).Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -295,18 +277,16 @@
 
             var result = webElement.Object.JQuery("input").Height();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindInnerWidth()
+        [Fact]
+        public void ShouldFindInnerWidth()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).innerWidth();"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -317,18 +297,16 @@
 
             var result = webElement.Object.JQuery("input").InnerWidth();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindInnerHeight()
+        [Fact]
+        public void ShouldFindInnerHeight()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).innerHeight();"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -339,18 +317,16 @@
 
             var result = webElement.Object.JQuery("input").InnerHeight();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindOuterWidth()
+        [Fact]
+        public void ShouldFindOuterWidth()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).outerWidth();"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -361,18 +337,16 @@
 
             var result = webElement.Object.JQuery("input").OuterWidth();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindOuterHeight()
+        [Fact]
+        public void ShouldFindOuterHeight()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).outerHeight();"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -383,18 +357,16 @@
 
             var result = webElement.Object.JQuery("input").OuterHeight();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindOuterWidthWithMargin()
+        [Fact]
+        public void ShouldFindOuterWidthWithMargin()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).outerWidth(true);"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -405,18 +377,16 @@
 
             var result = webElement.Object.JQuery("input").OuterWidth(true);
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindOuterHeightWithMargin()
+        [Fact]
+        public void ShouldFindOuterHeightWithMargin()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).outerHeight(true);"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -427,11 +397,11 @@
 
             var result = webElement.Object.JQuery("input").OuterHeight(true);
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindPosition()
+        [Fact]
+        public void ShouldFindPosition()
         {
             var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
 
@@ -447,17 +417,14 @@
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
 
             var position = webElement.Object.JQuery("input").Position();
-            if (position == null)
-            {
-                Assert.Fail();
-            }
 
-            Assert.AreEqual(dict["top"], position.Value.Top);
-            Assert.AreEqual(dict["left"], position.Value.Left);
+            Assert.NotNull(position);
+            Assert.Equal(dict["top"], position.Value.Top);
+            Assert.Equal(dict["left"], position.Value.Left);
         }
 
-        [Test]
-        public void FindOffset()
+        [Fact]
+        public void ShouldFindOffset()
         {
             var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
 
@@ -473,24 +440,19 @@
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
 
             var offset = webElement.Object.JQuery("input").Offset();
-            if (offset == null)
-            {
-                Assert.Fail();
-            }
 
-            Assert.AreEqual(dict["top"], offset.Value.Top);
-            Assert.AreEqual(dict["left"], offset.Value.Left);
+            Assert.NotNull(offset);
+            Assert.Equal(dict["top"], offset.Value.Top);
+            Assert.Equal(dict["left"], offset.Value.Left);
         }
 
-        [Test]
-        public void FindScrollLeft()
+        [Fact]
+        public void ShouldFindScrollLeft()
         {
-            const long Result = 100;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).scrollLeft();"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -501,17 +463,16 @@
 
             var result = webElement.Object.JQuery("input").ScrollLeft();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindScrollTop()
+        [Fact]
+        public void ShouldFindScrollTop()
         {
-            const long Result = 100;
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).scrollTop();"))
-                .Returns(Result);
+                .Returns(100L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -522,18 +483,16 @@
 
             var result = webElement.Object.JQuery("input").ScrollTop();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindData()
+        [Fact]
+        public void ShouldFindData()
         {
-            const string Result = "val";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).data('test');"))
-                .Returns(Result);
+                .Returns("val");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -544,18 +503,16 @@
 
             var result = webElement.Object.JQuery("input").Data("test");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("val", result);
         }
 
-        [Test]
-        public void FindIntData()
+        [Fact]
+        public void ShouldFindIntData()
         {
-            const bool Result = true;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).data('test');"))
-                .Returns(Result);
+                .Returns(true);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -566,11 +523,12 @@
 
             var result = webElement.Object.JQuery("input").Data<bool?>("test");
 
-            Assert.AreEqual(Result, result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
-        [Test]
-        public void FindCount()
+        [Fact]
+        public void ShouldFindCount()
         {
             const long Result = 2;
 
@@ -587,11 +545,11 @@
 
             var result = webElement.Object.JQuery("input").Count();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(Result, result);
         }
 
-        [Test]
-        public void FindSerialized()
+        [Fact]
+        public void ShouldFindSerialized()
         {
             const string Result = "search=test";
 
@@ -609,11 +567,11 @@
 
             var result = webElement.Object.JQuery("form").Serialized();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(Result, result);
         }
 
-        [Test]
-        public void FindSerializedArray()
+        [Fact]
+        public void ShouldFindSerializedArray()
         {
             const string Result = "[{\"name\":\"s\",\"value\":\"\"}]";
 
@@ -631,10 +589,10 @@
 
             var result = webElement.Object.JQuery("form").SerializedArray();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(Result, result);
         }
 
-        [Test]
+        [Fact]
         public void HasClass()
         {
             const bool Result = true;
@@ -652,7 +610,7 @@
 
             var result = webElement.Object.JQuery("form").HasClass("test");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(Result, result);
         }
     }
 }

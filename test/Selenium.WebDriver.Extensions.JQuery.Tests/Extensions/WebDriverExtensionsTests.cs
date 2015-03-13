@@ -1,117 +1,121 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
     using System;
-    using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
-    
-    [TestFixture]
-    [Category("Unit Tests")]
+
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsTests
     {
-        private Mock<IWebDriver> driverMock;
-
-        private static IEnumerable LoadJQueryTestCases
+        public static IEnumerable<object[]> LoadJQueryData
         {
             get
             {
-                yield return new TestCaseData("latest", null, new object[] { true });
-                yield return new TestCaseData("1.11.0", null, new object[] { false, true, true });
-                yield return new TestCaseData("latest", TimeSpan.FromSeconds(1), new object[] { false })
-                    .Throws(typeof(WebDriverTimeoutException));
+                yield return new object[] { "latest", null, new object[] { true } };
+                yield return new object[] { "1.11.0", null, new object[] { false, true, true } };
             }
         }
 
-        private static IEnumerable LoadJQueryWithUriTestCases
+        public static IEnumerable<object[]> LoadJQueryWithUriData
         {
             get
             {
-                yield return new TestCaseData(new Uri("http://my.com/jquery.js"), null, new object[] { true });
-                yield return new TestCaseData(null, null, new object[] { false, true, true });
-                yield return new TestCaseData(
-                    new Uri("http://my.com/jquery.js"), 
-                    TimeSpan.FromSeconds(1), 
-                    new object[] { false }).Throws(typeof(WebDriverTimeoutException));
+                yield return new object[] { new Uri("http://my.com/jquery.js"), null, new object[] { true } };
+                yield return new object[] { null, null, new object[] { false, true, true } };
             }
         }
 
-        [SetUp]
-        public void SetUp()
+        [Theory]
+        [PropertyData("LoadJQueryData")]
+        public void ShouldLoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
-            this.driverMock = new Mock<IWebDriver>();
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-        }
-
-        [TearDown]
-        public void TearDown()
-        {
-            this.driverMock = null;
-        }
-
-        [TestCaseSource("LoadJQueryTestCases")]
-        public void LoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
-        {
-            var mock = new Mock<IWebDriver>();
-            var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
+            var driverMock = new Mock<IWebDriver>();
+            var sequence = driverMock.As<IJavaScriptExecutor>()
+                .SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
-            mock.Object.JQuery().Load(version, timeout);
+            driverMock.Object.JQuery().Load(version, timeout);
         }
 
-        [TestCaseSource("LoadJQueryWithUriTestCases")]
-        public void LoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
+        [Theory]
+        [PropertyData("LoadJQueryWithUriData")]
+        public void ShouldLoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
-            var mock = new Mock<IWebDriver>();
-            var sequence = mock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
+            var driverMock = new Mock<IWebDriver>();
+            var sequence = driverMock.As<IJavaScriptExecutor>()
+                .SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
-            mock.Object.JQuery().Load(jQueryUri, timeout);
+            driverMock.Object.JQuery().Load(jQueryUri, timeout);
         }
 
-        [Test]
-        public void FindElementWithJQuery()
+        [Fact]
+        public void ShouldTimeoutWhenSizzleFailesToLoad()
         {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(false);
+            Assert.Throws<WebDriverTimeoutException>(() =>
+                driverMock.Object.JQuery().Load(timeout: TimeSpan.FromMilliseconds(100)));
+        }
+
+        [Fact]
+        public void ShouldFindElementWithJQuery()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
+
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
 
             var list = new List<IWebElement> { element.Object };
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').get();"))
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').get();"))
                 .Returns(new ReadOnlyCollection<IWebElement>(list));
-            var result = this.driverMock.Object.FindElement(By.JQuerySelector("div"));
+            var result = driverMock.Object.FindElement(By.JQuerySelector("div"));
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual("div", result.TagName);
+            Assert.NotNull(result);
+            Assert.Equal("div", result.TagName);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindElementWithJQueryArgumentNull()
+        [Fact]
+        public void ShouldThrowExceptionForNullQuerySelector()
         {
-            this.driverMock.Object.FindElement((JQuerySelector)null);
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
+            
+            Assert.Throws<NoSuchElementException>(() => driverMock.Object.FindElement((JQuerySelector)null));
         }
 
-        [Test]
-        [ExpectedException(typeof(NoSuchElementException))]
-        public void FindElementWithJQueryNoSuchElement()
+        [Fact]
+        public void ShouldThrowExceptionWhenJQueryFindsNoElement()
         {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
             
-            this.driverMock.Object.FindElement(By.JQuerySelector("div"));
+            Assert.Throws<NoSuchElementException>(() =>driverMock.Object.FindElement(By.JQuerySelector("div")));
         }
 
-        [Test]
-        public void FindElementsWithJQuery()
+        [Fact]
+        public void ShouldFindElementsWithJQuery()
         {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+
             var element1 = new Mock<IWebElement>();
             element1.Setup(x => x.TagName).Returns("div");
             element1.Setup(x => x.GetAttribute("class")).Returns("test");
@@ -121,390 +125,457 @@
             element2.Setup(x => x.GetAttribute("class")).Returns("test");
 
             var list = new List<IWebElement> { element1.Object, element2.Object };
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('.test').get();"))
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('.test').get();"))
                 .Returns(new ReadOnlyCollection<IWebElement>(list));
-            var result = this.driverMock.Object.FindElements(By.JQuerySelector(".test"));
+            var result = driverMock.Object.FindElements(By.JQuerySelector(".test"));
 
-            Assert.AreEqual(2, result.Count);
+            Assert.Equal(2, result.Count);
 
-            Assert.AreEqual("div", result[0].TagName);
-            Assert.AreEqual("test", result[0].GetAttribute("class"));
-
-            Assert.AreEqual("span", result[1].TagName);
-            Assert.AreEqual("test", result[1].GetAttribute("class"));
-        }
-
-        [Test]
-        public void FindElementsWithJQueryNotExists()
-        {
-            var list = new List<object>();
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('.test').get();"))
-                .Returns(new ReadOnlyCollection<object>(list));
-            var result = this.driverMock.Object.FindElements(By.JQuerySelector(".test"));
-
-            Assert.AreEqual(0, result.Count);
-        }
-
-        [Test]
-        public void FindText()
-        {
-            const string Result = "test";
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').text();"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("div").Text();
-
-            Assert.AreEqual(Result, result);
-        }
-
-        [Test]
-        public void FindHtml()
-        {
-            const string Result = "<p>test</p>";
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').html();"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("div").Html();
-
-            Assert.AreEqual(Result, result);
-        }
-
-        [Test]
-        public void FindAttribute()
-        {
-            const string Result = "http://github.com";
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('a').attr('href');"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("a").Attribute("href");
-
-            Assert.AreEqual(Result, result);
-        }
-
-        [Test]
-        public void FindAttributeNotExists()
-        {
-            var result = this.driverMock.Object.JQuery("a").Attribute("href");
-
-            Assert.IsNull(result);
-        }
-
-        [Test]
-        public void FindAttributeInvalidType()
-        {
-            var result = this.driverMock.Object.JQuery("a").Attribute("href");
+            Assert.Equal("div", result[0].TagName);
+            Assert.Equal("test", result[0].GetAttribute("class"));
             
-            Assert.IsNull(result);
+            Assert.Equal("span", result[1].TagName);
+            Assert.Equal("test", result[1].GetAttribute("class"));
         }
 
-        [Test]
-        public void FindPropertyString()
+        [Fact]
+        public void ShouldReturnEmptyResultsWhenjQueryDoentFindAnyMatches()
         {
-            const string Result = "prop";
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').prop('checked');")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Property<string>("checked");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            var list = new List<object>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('.test').get();"))
+                .Returns(new ReadOnlyCollection<object>(list));
+            var result = driverMock.Object.FindElements(By.JQuerySelector(".test"));
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(0, result.Count);
         }
 
-        [Test]
-        public void FindPropertyBoolean()
+        [Fact]
+        public void ShouldFindText()
         {
-            const bool Result = true;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').prop('checked');")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Property("checked");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').text();"))
+                .Returns("test");
+            var result = driverMock.Object.JQuery("div").Text();
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual(Result, result.Value);
+            Assert.Equal("test", result);
         }
 
-        [Test]
-        public void FindPropertyNotExists()
+        [Fact]
+        public void ShouldFindHtml()
         {
-            var result = this.driverMock.Object.JQuery("input").Property("checked");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('div').html();"))
+                .Returns("<p>test</p>");
+            var result = driverMock.Object.JQuery("div").Html();
 
-            Assert.IsNull(result);
+            Assert.Equal("<p>test</p>", result);
         }
 
-        [Test]
-        [ExpectedException(typeof(TypeArgumentException))]
-        public void FindPropertyInvalidType()
+        [Fact]
+        public void ShouldFindAttribute()
         {
-            this.driverMock.Object.JQuery("input").Property<int>("checked");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('a').attr('href');"))
+                .Returns("http://github.com");
+            var result = driverMock.Object.JQuery("a").Attribute("href");
+
+            Assert.Equal("http://github.com", result);
         }
 
-        [Test]
-        public void FindValue()
+        [Fact]
+        public void ShouldFindAttributeNotExists()
         {
-            const string Result = "test";
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').val();"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Value();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            var result = driverMock.Object.JQuery("a").Attribute("href");
 
-            Assert.AreEqual(Result, result);
+            Assert.Null(result);
         }
 
-        [Test]
-        public void FindCss()
+        [Fact]
+        public void ShouldFindAttributeInvalidType()
         {
-            const string Result = "hidden";
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').css('display');")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Css("display");
-
-            Assert.AreEqual(Result, result);
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            var result = driverMock.Object.JQuery("a").Attribute("href");
+            
+            Assert.Null(result);
         }
 
-        [Test]
-        public void FindWidth()
+        [Fact]
+        public void ShouldFindPropertyString()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').width();"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Width();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('input').prop('checked');")).Returns("prop");
+            var result = driverMock.Object.JQuery("input").Property<string>("checked");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("prop", result);
         }
 
-        [Test]
-        public void FindHeight()
+        [Fact]
+        public void ShouldFindPropertyBoolean()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').height();"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Height();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('input').prop('checked');")).Returns(true);
+            var result = driverMock.Object.JQuery("input").Property("checked");
 
-            Assert.AreEqual(Result, result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
-        [Test]
-        public void FindInnerWidth()
+        [Fact]
+        public void ShouldFindPropertyNotExists()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').innerWidth();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").InnerWidth();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            var result = driverMock.Object.JQuery("input").Property("checked");
 
-            Assert.AreEqual(Result, result);
+            Assert.Null(result);
         }
 
-        [Test]
-        public void FindInnerHeight()
+        [Fact]
+        public void ShouldFindPropertyInvalidType()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').innerHeight();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").InnerHeight();
-
-            Assert.AreEqual(Result, result);
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Property<int>("checked"));
         }
 
-        [Test]
-        public void FindOuterWidth()
+        [Fact]
+        public void ShouldFindValue()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').outerWidth();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").OuterWidth();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').val();"))
+                .Returns("test");
+            var result = driverMock.Object.JQuery("input").Value();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("test", result);
         }
 
-        [Test]
-        public void FindOuterHeight()
+        [Fact]
+        public void ShouldFindCss()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').outerHeight();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").OuterHeight();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('input').css('display');")).Returns("hidden");
+            var result = driverMock.Object.JQuery("input").Css("display");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("hidden", result);
         }
 
-        [Test]
-        public void FindOuterWidthWithMargin()
+        [Fact]
+        public void ShouldFindWidth()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').outerWidth(true);")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").OuterWidth(true);
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').width();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").Width();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindOuterHeightWithMargin()
+        [Fact]
+        public void ShouldFindHeight()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').outerHeight(true);")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").OuterHeight(true);
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').height();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").Height();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindPosition()
+        [Fact]
+        public void ShouldFindInnerWidth()
         {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').innerWidth();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").InnerWidth();
+
+            Assert.Equal(100L, result);
+        }
+
+        [Fact]
+        public void ShouldFindInnerHeight()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').innerHeight();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").InnerHeight();
+
+            Assert.Equal(100L, result);
+        }
+
+        [Fact]
+        public void ShouldFindOuterWidth()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerWidth();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").OuterWidth();
+
+            Assert.Equal(100L, result);
+        }
+
+        [Fact]
+        public void ShouldFindOuterHeight()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').outerHeight();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").OuterHeight();
+
+            Assert.Equal(100L, result);
+        }
+
+        [Fact]
+        public void ShouldFindOuterWidthWithMargin()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('input').outerWidth(true);")).Returns(100L);
+            var result = driverMock.Object.JQuery("input").OuterWidth(true);
+
+            Assert.Equal(100L, result);
+        }
+
+        [Fact]
+        public void ShouldFindOuterHeightWithMargin()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('input').outerHeight(true);")).Returns(100L);
+            var result = driverMock.Object.JQuery("input").OuterHeight(true);
+
+            Assert.Equal(100L, result);
+        }
+
+        [Fact]
+        public void ShouldFindPosition()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
             var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
-            this.driverMock.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input').position();")).Returns(dict);
-            this.driverMock.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
-            var position = this.driverMock.Object.JQuery("input").Position();
+            var position = driverMock.Object.JQuery("input").Position();
 
-            if (position == null)
-            {
-                Assert.Fail();
-            }
-
-            Assert.AreEqual(dict["top"], position.Value.Top);
-            Assert.AreEqual(dict["left"], position.Value.Left);
+            Assert.NotNull(position);
+            Assert.Equal(dict["top"], position.Value.Top);
+            Assert.Equal(dict["left"], position.Value.Left);
         }
 
-        [Test]
-        public void FindPositionNotExists()
+        [Fact]
+        public void ShouldFindPositionNotExists()
         {
-            this.driverMock.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('input').position();")).Returns(null);
-            this.driverMock.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').position();"))).Returns(true);
-            var position = this.driverMock.Object.JQuery("input").Position();
+            var position = driverMock.Object.JQuery("input").Position();
 
-            Assert.IsNull(position);
+            Assert.Null(position);
         }
 
-        [Test]
-        public void FindOffset()
+        [Fact]
+        public void ShouldFindOffset()
         {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
             var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset();"))
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset();"))
                 .Returns(dict);
-            this.driverMock.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').offset();"))).Returns(true);
-            var offset = this.driverMock.Object.JQuery("input").Offset();
+            var offset = driverMock.Object.JQuery("input").Offset();
 
-            if (offset == null)
-            {
-                Assert.Fail();
-            }
-
-            Assert.AreEqual(dict["top"], offset.Value.Top);
-            Assert.AreEqual(dict["left"], offset.Value.Left);
+            Assert.NotNull(offset);
+            Assert.Equal(dict["top"], offset.Value.Top);
+            Assert.Equal(dict["left"], offset.Value.Left);
         }
 
-        [Test]
-        public void FindOffsetNotExists()
+        [Fact]
+        public void ShouldFindOffsetNotExists()
         {
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset();"))
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').offset();"))
                 .Returns(null);
-            this.driverMock.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsNotIn("return jQuery('input').offset();"))).Returns(true);
-            var offset = this.driverMock.Object.JQuery("input").Offset();
+            var offset = driverMock.Object.JQuery("input").Offset();
 
-            Assert.IsNull(offset);
+            Assert.Null(offset);
         }
 
-        [Test]
-        public void FindScrollLeft()
+        [Fact]
+        public void ShouldFindScrollLeft()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').scrollLeft();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").ScrollLeft();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').scrollLeft();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").ScrollLeft();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindScrollTop()
+        [Fact]
+        public void ShouldFindScrollTop()
         {
-            const long Result = 100;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').scrollTop();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").ScrollTop();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').scrollTop();"))
+                .Returns(100L);
+            var result = driverMock.Object.JQuery("input").ScrollTop();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(100L, result);
         }
 
-        [Test]
-        public void FindData()
+        [Fact]
+        public void ShouldFindData()
         {
-            const string Result = "val";
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input').data('test');")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Data("test");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').data('test');"))
+                .Returns("val");
+            var result = driverMock.Object.JQuery("input").Data("test");
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("val", result);
         }
 
-        [Test]
-        [ExpectedException(typeof(TypeArgumentException))]
-        public void FindDataInvalidType()
+        [Fact]
+        public void ShouldFindDataInvalidType()
         {
-            this.driverMock.Object.JQuery("input").Data<int>("test");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
         }
 
-        [Test]
-        public void FindCount()
+        [Fact]
+        public void ShouldFindCount()
         {
-            const long Result = 2;
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').length;"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("input").Count();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').length;"))
+                .Returns(2L);
+            var result = driverMock.Object.JQuery("input").Count();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal(2L, result);
         }
 
-        [Test]
-        public void FindSerialized()
+        [Fact]
+        public void ShouldFindSerialized()
         {
-            const string Result = "search=test";
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('form').serialize();")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("form").Serialized();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('form').serialize();"))
+                .Returns("search=test");
+            var result = driverMock.Object.JQuery("form").Serialized();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("search=test", result);
         }
 
-        [Test]
-        public void FindSerializedArray()
+        [Fact]
+        public void ShouldFindSerializedArray()
         {
-            const string Result = "[{\"name\":\"s\",\"value\":\"\"}]";
-            this.driverMock.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return JSON.stringify(jQuery('form').serializeArray());"))
-                .Returns(Result);
-            var result = this.driverMock.Object.JQuery("form").SerializedArray();
+                .Returns("[{\"name\":\"s\",\"value\":\"\"}]");
+            var result = driverMock.Object.JQuery("form").SerializedArray();
 
-            Assert.AreEqual(Result, result);
+            Assert.Equal("[{\"name\":\"s\",\"value\":\"\"}]", result);
         }
 
-        [Test]
-        public void HasClass()
+        [Fact]
+        public void ShouldCheckIfElementHasClass()
         {
-            const bool Result = true;
-            this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('form').hasClass('test');")).Returns(Result);
-            var result = this.driverMock.Object.JQuery("form").HasClass("test");
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript("return jQuery('form').hasClass('test');")).Returns(true);
+            var result = driverMock.Object.JQuery("form").HasClass("test");
 
-            Assert.AreEqual(Result, result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
-        [Test]
-        public void NumbersCastingInInternetExplorer()
+        [Fact]
+        public void ShouldCorrectlyHandleNumberCastingInInternetExplorer()
         {
-            const double MockedWidth = 100d;
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').width();"))
-                .Returns(MockedWidth);
-            var result = this.driverMock.Object.JQuery("input").Width();
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return jQuery('input').width();"))
+                .Returns(100d);
+            var result = driverMock.Object.JQuery("input").Width();
 
-            Assert.AreEqual(MockedWidth, result);
-            Assert.IsInstanceOf<long?>(result);
+            Assert.NotNull(result);
+            Assert.Equal(100d, result.Value);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void HelperWithNullDriver()
+        [Fact]
+        public void ShouldThrowExpcetionWhenInitializingHelperWithNullDriver()
         {
-            WebElementExtensions.JQuery(null, (JQuerySelector)null);
+            Assert.Throws<ArgumentNullException>(() => WebElementExtensions.JQuery(null, (JQuerySelector)null));
         }
     }
 }
