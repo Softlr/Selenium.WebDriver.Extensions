@@ -1,26 +1,25 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
-    using NUnit.Framework;
-
-    [TestFixture]
-    [Category("Unit Tests")]
+    using Xunit;
+    
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class QuerySelectorLoaderTests
     {
-        [Test]
-        public void LoadScript()
+        [Fact]
+        public void ShouldLoadScript()
         {
             var loadScript = new QuerySelectorLoader().LoadScript();
-            Assert.IsNull(loadScript);
+            Assert.Null(loadScript);
         }
 
-        [Test]
-        public void DefaultLibraryUrl()
+        [Fact]
+        public void ShouldGetDefaultLibraryUrl()
         {
             var url = new QuerySelectorLoader().LibraryUri;
-            Assert.IsNull(url);
+            Assert.Null(url);
         }
     }
 }

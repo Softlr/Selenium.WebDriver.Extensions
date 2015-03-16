@@ -1,415 +1,370 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
-    using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Utils;
     using Selenium.WebDriver.Extensions.JQuery;
+    using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 
-    [TestFixture(
-        WebBrowser.PhantomJs,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
-    [TestFixture(
-        WebBrowser.Chrome,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
-    [TestFixture(
-        WebBrowser.InternetExplorer,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
-    [TestFixture(
-        WebBrowser.Firefox,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html")]
-    [TestFixture(
-        WebBrowser.PhantomJs, 
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
-    [TestFixture(
-        WebBrowser.Chrome,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
-    [TestFixture(
-        WebBrowser.InternetExplorer,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
-    [TestFixture(
-        WebBrowser.Firefox,
-        "https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html")]
-    [Category("Integration Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsJQuerySelectorTests
+    public abstract class WebDriverExtensionsJQuerySelectorTests
     {
-        public WebDriverExtensionsJQuerySelectorTests(WebBrowser driver, string testCaseUrl)
-        {
-            this.Driver = driver;
-            this.TestCaseUrl = testCaseUrl;
-        }
+        protected IWebDriver Browser { get; set; }
 
-        private string TestCaseUrl { get; set; }
-
-        private WebBrowser Driver { get; set; }
-
-        private IWebDriver Browser { get; set; }
-
-        [TestFixtureSetUp]
-        public void SetUp()
-        {
-            this.Browser = SetupUtil.ConfigureDriver(this.Driver, this.TestCaseUrl);
-        }
-
-        [TestFixtureTearDown]
-        public void TearDown()
-        {
-            this.Browser.Dispose();
-        }
-
-        [Test]
+        [Fact]
         public void FindElement()
         {
             var element = this.Browser.FindElement(By.JQuerySelector("#id1"));
-            Assert.IsNotNull(element);
+            Assert.NotNull(element);
         }
 
-        [Test]
-        [ExpectedException(typeof(NoSuchElementException))]
+        [Fact]
         public void FindElementThatDoesntExist()
         {
-            this.Browser.FindElement(By.JQuerySelector("#id-not"));
+            Assert.Throws<NoSuchElementException>(() => this.Browser.FindElement(By.JQuerySelector("#id-not")));
         }
 
-        [Test]
+        [Fact]
         public void FindElements()
         {
             var elements = this.Browser.FindElements(By.JQuerySelector("div.main"));
-            Assert.AreEqual(2, elements.Count);
+            Assert.Equal(2, elements.Count);
         }
 
-        [Test]
+        [Fact]
         public void FindElementsThatDoesntExist()
         {
             var elements = this.Browser.FindElements(By.JQuerySelector("div.mainNot"));
-            Assert.AreEqual(0, elements.Count);
+            Assert.Equal(0, elements.Count);
         }
 
-        [Test]
+        [Fact]
         public void FindText()
         {
             var text = this.Browser.JQuery("#id1").Text();
             var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
-            StringAssert.StartsWith("jQuery", trimmedText);
-            StringAssert.EndsWith("Selenium", trimmedText);
+            Assert.True(trimmedText.StartsWith("jQuery"));
+            Assert.True(trimmedText.EndsWith("Selenium"));
         }
 
-        [Test]
+        [Fact]
         public void FindHtml()
         {
             var text = this.Browser.JQuery("#id1").Html();
             var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
-            StringAssert.StartsWith("<span>jQuery</span>", trimmedText);
-            StringAssert.EndsWith("<span>Selenium</span>", trimmedText);
+            Assert.True(trimmedText.StartsWith("<span>jQuery</span>"));
+            Assert.True(trimmedText.EndsWith("<span>Selenium</span>"));
         }
 
-        [Test]
+        [Fact]
         public void FindAttribute()
         {
             var attribute = this.Browser.JQuery("input:first").Attribute("type");
-            Assert.AreEqual("checkbox", attribute);
+            Assert.Equal("checkbox", attribute);
         }
 
-        [Test]
+        [Fact]
         public void FindAttributeThatDoesntExist()
         {
             var attribute = this.Browser.JQuery("input:first").Attribute("typeNot");
-            Assert.IsNull(attribute);
+            Assert.Null(attribute);
         }
 
-        [Test]
+        [Fact]
         public void FindProperty()
         {
             var property = this.Browser.JQuery("input:first").Property("checked");
-            Assert.IsNotNull(property);
-            Assert.IsTrue(property.Value);
+            Assert.NotNull(property);
+            Assert.True(property.Value);
         }
 
-        [Test]
+        [Fact]
         public void FindPropertyThatDoesntExist()
         {
             var property = this.Browser.JQuery("input:first").Property("checkedNot");
-            Assert.IsNull(property);
+            Assert.Null(property);
         }
 
-        [Test]
+        [Fact]
         public void FindValue()
         {
             var value = this.Browser.JQuery("input:first").Value();
-            Assert.AreEqual("v1", value);
+            Assert.Equal("v1", value);
         }
 
-        [Test]
+        [Fact]
         public void FindValueThatDoesntExist()
         {
             var value = this.Browser.JQuery("form").Value();
-            Assert.IsNullOrEmpty(value);
+            Assert.True(string.IsNullOrEmpty(value));
         }
 
-        [Test]
+        [Fact]
         public void FindCss()
         {
             var value = this.Browser.JQuery("#id1").Css("background-color");
-            Assert.AreEqual("rgb(0, 128, 0)", value);
+            Assert.Equal("rgb(0, 128, 0)", value);
         }
 
-        [Test]
+        [Fact]
         public void FindCssThatDoesntExist()
         {
             var value = this.Browser.JQuery("#id1").Css("test");
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindWidth()
         {
             var value = this.Browser.JQuery("h1").Width();
-            Assert.AreEqual(200, value);
+            Assert.Equal(200, value);
         }
 
-        [Test]
+        [Fact]
         public void FindHeight()
         {
             var value = this.Browser.JQuery("h1").Height();
-            Assert.AreEqual(20, value);
+            Assert.Equal(20, value);
         }
 
-        [Test]
+        [Fact]
         public void FindInnerWidth()
         {
             var value = this.Browser.JQuery("h1").InnerWidth();
-            Assert.AreEqual(220, value);
+            Assert.Equal(220, value);
         }
 
-        [Test]
+        [Fact]
         public void FindInnerHeight()
         {
             var value = this.Browser.JQuery("h1").InnerHeight();
-            Assert.AreEqual(40, value);
+            Assert.Equal(40, value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterWidth()
         {
             var value = this.Browser.JQuery("h1").OuterWidth();
-            Assert.AreEqual(226, value);
+            Assert.Equal(226, value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterHeight()
         {
             var value = this.Browser.JQuery("h1").OuterHeight();
-            Assert.AreEqual(46, value);
+            Assert.Equal(46, value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterWidthWithMargin()
         {
             var value = this.Browser.JQuery("h1").OuterWidth(true);
-            Assert.AreEqual(236, value);
+            Assert.Equal(236, value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterHeightWithMargin()
         {
             var value = this.Browser.JQuery("h1").OuterHeight(true);
-            Assert.AreEqual(56, value);
+            Assert.Equal(56, value);
         }
 
-        [Test]
+        [Fact]
         public void FindWidthThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").Width();
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindHeightThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").Height();
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindInnerWidthThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").InnerWidth();
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindInnerHeightThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").InnerHeight();
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterWidthThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").OuterWidth();
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterHeightThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").OuterHeight();
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterWidthWithMarginThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").OuterWidth(true);
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindOuterHeightWithMarginThatDoesntExist()
         {
             var value = this.Browser.JQuery("h6").OuterHeight(true);
-            Assert.IsNull(value);
+            Assert.Null(value);
         }
 
-        [Test]
+        [Fact]
         public void FindPosition()
         {
             var position = this.Browser.JQuery("h1").Position();
-            Assert.IsNotNull(position);
-            Assert.AreEqual(3, position.Value.Top);
-            Assert.AreEqual(8, position.Value.Left);
+            Assert.NotNull(position);
+            
+            // ReSharper disable once PossibleInvalidOperationException
+            Assert.Equal(3, position.Value.Top);
+            Assert.Equal(8, position.Value.Left);
         }
 
-        [Test]
+        [Fact]
         public void FindPositionThatDoesntExist()
         {
             var position = this.Browser.JQuery("h6").Position();
-            Assert.IsNull(position);
+            Assert.Null(position);
         }
 
-        [Test]
+        [Fact]
         public void FindOffset()
         {
             var position = this.Browser.JQuery("h1").Offset();
-            Assert.IsNotNull(position);
-            Assert.AreEqual(8, position.Value.Top);
-            Assert.AreEqual(13, position.Value.Left);
+            Assert.NotNull(position);
+
+            // ReSharper disable once PossibleInvalidOperationException
+            Assert.Equal(8, position.Value.Top);
+            Assert.Equal(13, position.Value.Left);
         }
 
-        [Test]
+        [Fact]
         public void FindOffsetThatDoesntExist()
         {
             var position = this.Browser.JQuery("h6").Offset();
-            Assert.IsNull(position);
+            Assert.Null(position);
         }
 
-        [Test]
+        [Fact]
         public void FindStringData()
         {
             var value = this.Browser.JQuery("form").Data("mystring");
-            Assert.AreEqual("str", value);
+            Assert.Equal("str", value);
         }
 
-        [Test]
+        [Fact]
         public void FindIntegerData()
         {
             var value = this.Browser.JQuery("form").Data<long?>("myint");
-            Assert.AreEqual(123, value);
+            Assert.Equal(123, value);
         }
 
-        [Test]
+        [Fact]
         public void FindBooleanData()
         {
             var value = this.Browser.JQuery("form").Data<bool?>("mybool");
-            Assert.IsNotNull(value);
-            Assert.IsTrue(value.Value);
+            Assert.NotNull(value);
+            Assert.True(value.Value);
         }
 
-        [Test]
+        [Fact]
         public void FindScrollTop()
         {
             var scroll = this.Browser.JQuery("div.scroll").ScrollTop();
-            Assert.IsNotNull(scroll);
-            Assert.AreEqual(100, scroll);
+            Assert.NotNull(scroll);
+            Assert.Equal(100, scroll);
         }
 
-        [Test]
+        [Fact]
         public void FindScrollLeft()
         {
             var scroll = this.Browser.JQuery("div.scroll").ScrollLeft();
-            Assert.IsNotNull(scroll);
-            Assert.AreEqual(200, scroll);
+            Assert.NotNull(scroll);
+            Assert.Equal(200, scroll);
         }
 
-        [Test]
+        [Fact]
         public void FindCount()
         {
             var count = this.Browser.JQuery("div.main").Count();
-            Assert.AreEqual(2, count);
+            Assert.Equal(2, count);
         }
 
-        [Test]
+        [Fact]
         public void FindCountThatDoesntExist()
         {
             var count = this.Browser.JQuery("div.mainNot").Count();
-            Assert.AreEqual(0, count);
+            Assert.Equal(0, count);
         }
 
-        [Test]
+        [Fact]
         public void FindSerialized()
         {
             var value = this.Browser.JQuery("form").Serialized();
-            Assert.AreEqual("i1=v1&i3=v3", value);
+            Assert.Equal("i1=v1&i3=v3", value);
         }
 
-        [Test]
+        [Fact]
         public void FindSerializedThatDoesntExist()
         {
             var value = this.Browser.JQuery("form.test").Serialized();
-            Assert.IsEmpty(value);
+            Assert.Empty(value);
         }
 
-        [Test]
+        [Fact]
         public void FindSerializedArray()
         {
             var value = this.Browser.JQuery("form").SerializedArray();
-            Assert.AreEqual("[{\"name\":\"i1\",\"value\":\"v1\"},{\"name\":\"i3\",\"value\":\"v3\"}]", value);
+            Assert.Equal("[{\"name\":\"i1\",\"value\":\"v1\"},{\"name\":\"i3\",\"value\":\"v3\"}]", value);
         }
 
-        [Test]
+        [Fact]
         public void FindSerializedArrayThatDoesntExist()
         {
             var value = this.Browser.JQuery("form.test").SerializedArray();
-            Assert.AreEqual("[]", value);
+            Assert.Equal("[]", value);
         }
 
-        [Test]
+        [Fact]
         public void FindElementPath()
         {
             var element = this.Browser.FindElement(By.JQuerySelector("#id1"));
-            Assert.AreEqual("body > div#id1", element.Path);
+            Assert.Equal("body > div#id1", element.Path);
         }
 
-        [Test]
+        [Fact]
         public void FindInnerElement()
         {
             var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
             var element = root.FindElement(By.JQuerySelector("span"));
-            Assert.IsNotNull(element);
+            Assert.NotNull(element);
         }
 
-        [Test]
+        [Fact]
         public void FindInnerElements()
         {
             var root = this.Browser.FindElement(By.JQuerySelector("#id1"));
             var elements = root.FindElements(By.JQuerySelector("span"));
-            Assert.AreEqual(2, elements.Count);
+            Assert.Equal(2, elements.Count);
         }
     }
 }

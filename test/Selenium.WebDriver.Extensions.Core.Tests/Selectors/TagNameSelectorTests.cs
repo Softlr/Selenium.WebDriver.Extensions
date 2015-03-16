@@ -1,51 +1,53 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
-    using System.Collections;
-    using NUnit.Framework;
+    using System.Collections.Generic;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class TagNameSelectorTests
     {
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.TagName("div"), By.TagName("div"), true)
-                    .SetName("TN('div') == TN('test')");
-                yield return new TestCaseData(By.TagName("div"), By.TagName("span"), false)
-                    .SetName("TN('div') != TN('span')");
-                yield return new TestCaseData(By.TagName("div"), null, false).SetName("TN('div') != null");
-                yield return new TestCaseData(null, By.TagName("div"), false).SetName("null != TN('div')");
+                yield return new object[] { By.TagName("div"), By.TagName("div"), true };
+                yield return new object[] { By.TagName("div"), By.TagName("span"), false };
+                yield return new object[] { By.TagName("div"), null, false };
+                yield return new object[] { null, By.TagName("div"), false };
             }
         }
 
-        [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(TagNameSelector selector1, TagNameSelector selector2, bool expectedResult)
+        [Theory]
+        [PropertyData("EqualityData")]
+        public void ShouldProperlyCompareSelectors(
+            TagNameSelector selector1,
+            TagNameSelector selector2, 
+            bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void RunnerType()
+        [Fact]
+        public void ShouldHaveProperRunnerType()
         {
             var selector = new TagNameSelector("test");
 
-            Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
+            Assert.Equal(typeof(QuerySelectorRunner), selector.RunnerType);
         }
     }
 }

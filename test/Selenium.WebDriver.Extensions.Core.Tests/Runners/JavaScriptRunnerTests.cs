@@ -1,21 +1,19 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
-    using NUnit.Framework;
+    using Xunit;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class JavaScriptRunnerTests
     {
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindArgumentNull()
+        [Fact]
+        public void ShouldThrowExceptionForNullSelector()
         {
             var runner = new JavaScriptRunner();
-            runner.Find<object>(null, null);
+            Assert.Throws<ArgumentNullException>(() => runner.Find<object>(null, null));
         }
     }
 }

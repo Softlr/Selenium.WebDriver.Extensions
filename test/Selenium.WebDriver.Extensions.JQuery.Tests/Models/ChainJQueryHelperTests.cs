@@ -2,1602 +2,1604 @@
 {
     using System;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
-    
-    [TestFixture]
-    [Category("Unit Tests")]
+    using Xunit;
+
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class ChainJQueryHelperTests
+    public class ChainJQueryHelperTests : IDisposable
     {
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
-        [SetUp]
-        public void SetUp()
+        public ChainJQueryHelperTests()
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
             this.driver = mock.Object;
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
-            this.driver = null;
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
-        [Test]
-        public void SetText()
+        [Fact]
+        public void ShouldSetText()
         {
             var result = this.driver.JQuery("div").Text("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHtml()
+        [Fact]
+        public void ShouldSetHtml()
         {
             var result = this.driver.JQuery("div").Html("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetAttribute()
+        [Fact]
+        public void ShouldSetAttribute()
         {
             var result = this.driver.JQuery("div").Attribute("test", "test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetPropertyBool()
+        [Fact]
+        public void ShouldSetPropertyBool()
         {
             var result = this.driver.JQuery("div").Property("test", true).Property("test", false);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetPropertyString()
+        [Fact]
+        public void ShouldSetPropertyString()
         {
             var result = this.driver.JQuery("div").Property("test", "test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetValue()
+        [Fact]
+        public void ShouldSetValue()
         {
             var result = this.driver.JQuery("input").Value("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetCss()
+        [Fact]
+        public void ShouldSetCss()
         {
             var result = this.driver.JQuery("div").Css("test", "test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthShort()
+        [Fact]
+        public void ShouldSetWidthShort()
         {
             var result = this.driver.JQuery("div").Width((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthInt()
+        [Fact]
+        public void ShouldSetWidthInt()
         {
             var result = this.driver.JQuery("div").Width(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthLong()
+        [Fact]
+        public void ShouldSetWidthLong()
         {
             var result = this.driver.JQuery("div").Width(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthUnsignedShort()
+        [Fact]
+        public void ShouldSetWidthUnsignedShort()
         {
             var result = this.driver.JQuery("div").Width((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthUnsignedInt()
+        [Fact]
+        public void ShouldSetWidthUnsignedInt()
         {
             var result = this.driver.JQuery("div").Width(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthUnsignedLong()
+        [Fact]
+        public void ShouldSetWidthUnsignedLong()
         {
             var result = this.driver.JQuery("div").Width(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthFloat()
+        [Fact]
+        public void ShouldSetWidthFloat()
         {
             var result = this.driver.JQuery("div").Width(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetWidthDouble()
+        [Fact]
+        public void ShouldSetWidthDouble()
         {
             var result = this.driver.JQuery("div").Width(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightShort()
+        [Fact]
+        public void ShouldSetHeightShort()
         {
             var result = this.driver.JQuery("div").Height((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightInt()
+        [Fact]
+        public void ShouldSetHeightInt()
         {
             var result = this.driver.JQuery("div").Height(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightLong()
+        [Fact]
+        public void ShouldSetHeightLong()
         {
             var result = this.driver.JQuery("div").Height(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightUnsignedShort()
+        [Fact]
+        public void ShouldSetHeightUnsignedShort()
         {
             var result = this.driver.JQuery("div").Height((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightUnsignedInt()
+        [Fact]
+        public void ShouldSetHeightUnsignedInt()
         {
             var result = this.driver.JQuery("div").Height(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightUnsignedLong()
+        [Fact]
+        public void ShouldSetHeightUnsignedLong()
         {
             var result = this.driver.JQuery("div").Height(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightFloat()
+        [Fact]
+        public void ShouldSetHeightFloat()
         {
             var result = this.driver.JQuery("div").Height(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetHeightDouble()
+        [Fact]
+        public void ShouldSetHeightDouble()
         {
             var result = this.driver.JQuery("div").Height(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthShort()
+        [Fact]
+        public void ShouldSetInnerWidthShort()
         {
             var result = this.driver.JQuery("div").InnerWidth((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthInt()
+        [Fact]
+        public void ShouldSetInnerWidthInt()
         {
             var result = this.driver.JQuery("div").InnerWidth(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthLong()
+        [Fact]
+        public void ShouldSetInnerWidthLong()
         {
             var result = this.driver.JQuery("div").InnerWidth(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthUnsignedShort()
+        [Fact]
+        public void ShouldSetInnerWidthUnsignedShort()
         {
             var result = this.driver.JQuery("div").InnerWidth((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthUnsignedInt()
+        [Fact]
+        public void ShouldSetInnerWidthUnsignedInt()
         {
             var result = this.driver.JQuery("div").InnerWidth(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthUnsignedLong()
+        [Fact]
+        public void ShouldSetInnerWidthUnsignedLong()
         {
             var result = this.driver.JQuery("div").InnerWidth(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthFloat()
+        [Fact]
+        public void ShouldSetInnerWidthFloat()
         {
             var result = this.driver.JQuery("div").InnerWidth(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerWidthDouble()
+        [Fact]
+        public void ShouldSetInnerWidthDouble()
         {
             var result = this.driver.JQuery("div").InnerWidth(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightShort()
+        [Fact]
+        public void ShouldSetInnerHeightShort()
         {
             var result = this.driver.JQuery("div").InnerHeight((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightInt()
+        [Fact]
+        public void ShouldSetInnerHeightInt()
         {
             var result = this.driver.JQuery("div").InnerHeight(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightLong()
+        [Fact]
+        public void ShouldSetInnerHeightLong()
         {
             var result = this.driver.JQuery("div").InnerHeight(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightUnsignedShort()
+        [Fact]
+        public void ShouldSetInnerHeightUnsignedShort()
         {
             var result = this.driver.JQuery("div").InnerHeight((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightUnsignedInt()
+        [Fact]
+        public void ShouldSetInnerHeightUnsignedInt()
         {
             var result = this.driver.JQuery("div").InnerHeight(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightUnsignedLong()
+        [Fact]
+        public void ShouldSetInnerHeightUnsignedLong()
         {
             var result = this.driver.JQuery("div").InnerHeight(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightFloat()
+        [Fact]
+        public void ShouldSetInnerHeightFloat()
         {
             var result = this.driver.JQuery("div").InnerHeight(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetInnerHeightDouble()
+        [Fact]
+        public void ShouldSetInnerHeightDouble()
         {
             var result = this.driver.JQuery("div").InnerHeight(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthShort()
+        [Fact]
+        public void ShouldSetOuterWidthShort()
         {
             var result = this.driver.JQuery("div").OuterWidth((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthInt()
+        [Fact]
+        public void ShouldSetOuterWidthInt()
         {
             var result = this.driver.JQuery("div").OuterWidth(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthLong()
+        [Fact]
+        public void ShouldSetOuterWidthLong()
         {
             var result = this.driver.JQuery("div").OuterWidth(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthUnsignedShort()
+        [Fact]
+        public void ShouldSetOuterWidthUnsignedShort()
         {
             var result = this.driver.JQuery("div").OuterWidth((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthUnsignedInt()
+        [Fact]
+        public void ShouldSetOuterWidthUnsignedInt()
         {
             var result = this.driver.JQuery("div").OuterWidth(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthUnsignedLong()
+        [Fact]
+        public void ShouldSetOuterWidthUnsignedLong()
         {
             var result = this.driver.JQuery("div").OuterWidth(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthFloat()
+        [Fact]
+        public void ShouldSetOuterWidthFloat()
         {
             var result = this.driver.JQuery("div").OuterWidth(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterWidthDouble()
+        [Fact]
+        public void ShouldSetOuterWidthDouble()
         {
             var result = this.driver.JQuery("div").OuterWidth(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightShort()
+        [Fact]
+        public void ShouldSetOuterHeightShort()
         {
             var result = this.driver.JQuery("div").OuterHeight((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightInt()
+        [Fact]
+        public void ShouldSetOuterHeightInt()
         {
             var result = this.driver.JQuery("div").OuterHeight(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightLong()
+        [Fact]
+        public void ShouldSetOuterHeightLong()
         {
             var result = this.driver.JQuery("div").OuterHeight(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightUnsignedShort()
+        [Fact]
+        public void ShouldSetOuterHeightUnsignedShort()
         {
             var result = this.driver.JQuery("div").OuterHeight((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightUnsignedInt()
+        [Fact]
+        public void ShouldSetOuterHeightUnsignedInt()
         {
             var result = this.driver.JQuery("div").OuterHeight(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightUnsignedLong()
+        [Fact]
+        public void ShouldSetOuterHeightUnsignedLong()
         {
             var result = this.driver.JQuery("div").OuterHeight(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightFloat()
+        [Fact]
+        public void ShouldSetOuterHeightFloat()
         {
             var result = this.driver.JQuery("div").OuterHeight(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetOuterHeightDouble()
+        [Fact]
+        public void ShouldSetOuterHeightDouble()
         {
             var result = this.driver.JQuery("div").OuterHeight(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftShort()
+        [Fact]
+        public void ShouldSetScrollLeftShort()
         {
             var result = this.driver.JQuery("div").ScrollLeft((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftInt()
+        [Fact]
+        public void ShouldSetScrollLeftInt()
         {
             var result = this.driver.JQuery("div").ScrollLeft(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftLong()
+        [Fact]
+        public void ShouldSetScrollLeftLong()
         {
             var result = this.driver.JQuery("div").ScrollLeft(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftUnsignedShort()
+        [Fact]
+        public void ShouldSetScrollLeftUnsignedShort()
         {
             var result = this.driver.JQuery("div").ScrollLeft((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftUnsignedInt()
+        [Fact]
+        public void ShouldSetScrollLeftUnsignedInt()
         {
             var result = this.driver.JQuery("div").ScrollLeft(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftUnsignedLong()
+        [Fact]
+        public void ShouldSetScrollLeftUnsignedLong()
         {
             var result = this.driver.JQuery("div").ScrollLeft(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftFloat()
+        [Fact]
+        public void ShouldSetScrollLeftFloat()
         {
             var result = this.driver.JQuery("div").ScrollLeft(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollLeftDouble()
+        [Fact]
+        public void ShouldSetScrollLeftDouble()
         {
             var result = this.driver.JQuery("div").ScrollLeft(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopShort()
+        [Fact]
+        public void ShouldSetScrollTopShort()
         {
             var result = this.driver.JQuery("div").ScrollTop((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopInt()
+        [Fact]
+        public void ShouldSetScrollTopInt()
         {
             var result = this.driver.JQuery("div").ScrollTop(100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopLong()
+        [Fact]
+        public void ShouldSetScrollTopLong()
         {
             var result = this.driver.JQuery("div").ScrollTop(100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopUnsignedShort()
+        [Fact]
+        public void ShouldSetScrollTopUnsignedShort()
         {
             var result = this.driver.JQuery("div").ScrollTop((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopUnsignedInt()
+        [Fact]
+        public void ShouldSetScrollTopUnsignedInt()
         {
             var result = this.driver.JQuery("div").ScrollTop(100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopUnsignedLong()
+        [Fact]
+        public void ShouldSetScrollTopUnsignedLong()
         {
             var result = this.driver.JQuery("div").ScrollTop(100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopFloat()
+        [Fact]
+        public void ShouldSetScrollTopFloat()
         {
             var result = this.driver.JQuery("div").ScrollTop(100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetScrollTopDouble()
+        [Fact]
+        public void ShouldSetScrollTopDouble()
         {
             var result = this.driver.JQuery("div").ScrollTop(100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataString()
+        [Fact]
+        public void ShouldSetDataString()
         {
             var result = this.driver.JQuery("div").Data("test", "test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataBool()
+        [Fact]
+        public void ShouldSetDataBool()
         {
             var result = this.driver.JQuery("div").Data("test", true).Data("test", false);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataShort()
+        [Fact]
+        public void ShouldSetDataShort()
         {
             var result = this.driver.JQuery("div").Data("test", (short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataInt()
+        [Fact]
+        public void ShouldSetDataInt()
         {
             var result = this.driver.JQuery("div").Data("test", 100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataLong()
+        [Fact]
+        public void ShouldSetDataLong()
         {
             var result = this.driver.JQuery("div").Data("test", 100L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataUnsignedShort()
+        [Fact]
+        public void ShouldSetDataUnsignedShort()
         {
             var result = this.driver.JQuery("div").Data("test", (ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataUnsignedInt()
+        [Fact]
+        public void ShouldSetDataUnsignedInt()
         {
             var result = this.driver.JQuery("div").Data("test", 100U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataUnsignedLong()
+        [Fact]
+        public void ShouldSetDataUnsignedLong()
         {
             var result = this.driver.JQuery("div").Data("test", 100UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataFloat()
+        [Fact]
+        public void ShouldSetDataFloat()
         {
             var result = this.driver.JQuery("div").Data("test", 100.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SetDataDouble()
+        [Fact]
+        public void ShouldSetDataDouble()
         {
             var result = this.driver.JQuery("div").Data("test", 100.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void RemoveData()
+        [Fact]
+        public void ShouldRemoveData()
         {
             var result = this.driver.JQuery("div").RemoveData("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void AddClass()
+        [Fact]
+        public void ShouldAddClass()
         {
             var result = this.driver.JQuery("div").AddClass("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void RemoveClass()
+        [Fact]
+        public void ShouldRemoveClass()
         {
             var result = this.driver.JQuery("div").RemoveClass("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleClass()
+        [Fact]
+        public void ShouldToggleClass()
         {
             var result = this.driver.JQuery("div").ToggleClass("test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleClassBool()
+        [Fact]
+        public void ShouldToggleClassBool()
         {
             var result = this.driver.JQuery("div").ToggleClass("test", true).ToggleClass("test", false);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Remove()
+        [Fact]
+        public void ShouldRemove()
         {
             var result = this.driver.JQuery("div").Remove();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void RemoveWithSelector()
+        [Fact]
+        public void ShouldRemoveWithSelector()
         {
             var result = this.driver.JQuery("div").Remove(".test");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Empty()
+        [Fact]
+        public void ShouldEmpty()
         {
             var result = this.driver.JQuery("div").Empty();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Show()
+        [Fact]
+        public void ShouldShow()
         {
             var result = this.driver.JQuery("div").Show();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowEnum()
+        [Fact]
+        public void ShouldShowEnum()
         {
             var result = this.driver.JQuery("div").Show(Duration.Fast);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowShort()
+        [Fact]
+        public void ShouldShowShort()
         {
             var result = this.driver.JQuery("div").Show((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowInt()
+        [Fact]
+        public void ShouldShowInt()
         {
             var result = this.driver.JQuery("div").Show(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowLong()
+        [Fact]
+        public void ShouldShowLong()
         {
             var result = this.driver.JQuery("div").Show(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowUnsignedShort()
+        [Fact]
+        public void ShouldShowUnsignedShort()
         {
             var result = this.driver.JQuery("div").Show((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowUnsignedInt()
+        [Fact]
+        public void ShouldShowUnsignedInt()
         {
             var result = this.driver.JQuery("div").Show(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ShowUnsignedLong()
+        [Fact]
+        public void ShouldShowUnsignedLong()
         {
             var result = this.driver.JQuery("div").Show(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Hide()
+        [Fact]
+        public void ShouldHide()
         {
             var result = this.driver.JQuery("div").Hide();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideEnum()
+        [Fact]
+        public void ShouldHideEnum()
         {
             var result = this.driver.JQuery("div").Hide(Duration.Slow);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideShort()
+        [Fact]
+        public void ShouldHideShort()
         {
             var result = this.driver.JQuery("div").Hide((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideInt()
+        [Fact]
+        public void ShouldHideInt()
         {
             var result = this.driver.JQuery("div").Hide(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideLong()
+        [Fact]
+        public void ShouldHideLong()
         {
             var result = this.driver.JQuery("div").Hide(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideUnsignedShort()
+        [Fact]
+        public void ShouldHideUnsignedShort()
         {
             var result = this.driver.JQuery("div").Hide((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideUnsignedInt()
+        [Fact]
+        public void ShouldHideUnsignedInt()
         {
             var result = this.driver.JQuery("div").Hide(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void HideUnsignedLong()
+        [Fact]
+        public void ShouldHideUnsignedLong()
         {
             var result = this.driver.JQuery("div").Hide(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Toggle()
+        [Fact]
+        public void ShouldToggle()
         {
             var result = this.driver.JQuery("div").Toggle();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleEnum()
+        [Fact]
+        public void ShouldToggleEnum()
         {
             var result = this.driver.JQuery("div").Toggle(Duration.Fast);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleShort()
+        [Fact]
+        public void ShouldToggleShort()
         {
             var result = this.driver.JQuery("div").Toggle((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleInt()
+        [Fact]
+        public void ShouldToggleInt()
         {
             var result = this.driver.JQuery("div").Toggle(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleLong()
+        [Fact]
+        public void ShouldToggleLong()
         {
             var result = this.driver.JQuery("div").Toggle(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleUnsignedShort()
+        [Fact]
+        public void ShouldToggleUnsignedShort()
         {
             var result = this.driver.JQuery("div").Toggle((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleUnsignedInt()
+        [Fact]
+        public void ShouldToggleUnsignedInt()
         {
             var result = this.driver.JQuery("div").Toggle(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void ToggleUnsignedLong()
+        [Fact]
+        public void ShouldToggleUnsignedLong()
         {
             var result = this.driver.JQuery("div").Toggle(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDown()
+        [Fact]
+        public void ShouldSlideDown()
         {
             var result = this.driver.JQuery("div").SlideDown();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownEnum()
+        [Fact]
+        public void ShouldSlideDownEnum()
         {
             var result = this.driver.JQuery("div").SlideDown(Duration.Fast);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownShort()
+        [Fact]
+        public void ShouldSlideDownShort()
         {
             var result = this.driver.JQuery("div").SlideDown((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownInt()
+        [Fact]
+        public void ShouldSlideDownInt()
         {
             var result = this.driver.JQuery("div").SlideDown(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownLong()
+        [Fact]
+        public void ShouldSlideDownLong()
         {
             var result = this.driver.JQuery("div").SlideDown(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownUnsignedShort()
+        [Fact]
+        public void ShouldSlideDownUnsignedShort()
         {
             var result = this.driver.JQuery("div").SlideDown((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownUnsignedInt()
+        [Fact]
+        public void ShouldSlideDownUnsignedInt()
         {
             var result = this.driver.JQuery("div").SlideDown(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideDownUnsignedLong()
+        [Fact]
+        public void ShouldSlideDownUnsignedLong()
         {
             var result = this.driver.JQuery("div").SlideDown(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUp()
+        [Fact]
+        public void ShouldSlideUp()
         {
             var result = this.driver.JQuery("div").SlideUp();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpEnum()
+        [Fact]
+        public void ShouldSlideUpEnum()
         {
             var result = this.driver.JQuery("div").SlideUp(Duration.Fast);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpShort()
+        [Fact]
+        public void ShouldSlideUpShort()
         {
             var result = this.driver.JQuery("div").SlideUp((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpInt()
+        [Fact]
+        public void ShouldSlideUpInt()
         {
             var result = this.driver.JQuery("div").SlideUp(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpLong()
+        [Fact]
+        public void ShouldSlideUpLong()
         {
             var result = this.driver.JQuery("div").SlideUp(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpUnsignedShort()
+        [Fact]
+        public void ShouldSlideUpUnsignedShort()
         {
             var result = this.driver.JQuery("div").SlideUp((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpUnsignedInt()
+        [Fact]
+        public void ShouldSlideUpUnsignedInt()
         {
             var result = this.driver.JQuery("div").SlideUp(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideUpUnsignedLong()
+        [Fact]
+        public void ShouldSlideUpUnsignedLong()
         {
             var result = this.driver.JQuery("div").SlideUp(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggle()
+        [Fact]
+        public void ShouldSlideToggle()
         {
             var result = this.driver.JQuery("div").SlideToggle();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleEnum()
+        [Fact]
+        public void ShouldSlideToggleEnum()
         {
             var result = this.driver.JQuery("div").SlideToggle(Duration.Slow);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleShort()
+        [Fact]
+        public void ShouldSlideToggleShort()
         {
             var result = this.driver.JQuery("div").SlideToggle((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleInt()
+        [Fact]
+        public void ShouldSlideToggleInt()
         {
             var result = this.driver.JQuery("div").SlideToggle(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleLong()
+        [Fact]
+        public void ShouldSlideToggleLong()
         {
             var result = this.driver.JQuery("div").SlideToggle(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleUnsignedShort()
+        [Fact]
+        public void ShouldSlideToggleUnsignedShort()
         {
             var result = this.driver.JQuery("div").SlideToggle((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleUnsignedInt()
+        [Fact]
+        public void ShouldSlideToggleUnsignedInt()
         {
             var result = this.driver.JQuery("div").SlideToggle(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void SlideToggleUnsignedLong()
+        [Fact]
+        public void ShouldSlideToggleUnsignedLong()
         {
             var result = this.driver.JQuery("div").SlideToggle(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeIn()
+        [Fact]
+        public void ShouldFadeIn()
         {
             var result = this.driver.JQuery("div").FadeIn();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInEnum()
+        [Fact]
+        public void ShouldFadeInEnum()
         {
             var result = this.driver.JQuery("div").FadeIn(Duration.Slow);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInShort()
+        [Fact]
+        public void ShouldFadeInShort()
         {
             var result = this.driver.JQuery("div").FadeIn((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInInt()
+        [Fact]
+        public void ShouldFadeInInt()
         {
             var result = this.driver.JQuery("div").FadeIn(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInLong()
+        [Fact]
+        public void ShouldFadeInLong()
         {
             var result = this.driver.JQuery("div").FadeIn(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInUnsignedShort()
+        [Fact]
+        public void ShouldFadeInUnsignedShort()
         {
             var result = this.driver.JQuery("div").FadeIn((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInUnsignedInt()
+        [Fact]
+        public void ShouldFadeInUnsignedInt()
         {
             var result = this.driver.JQuery("div").FadeIn(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeInUnsignedLong()
+        [Fact]
+        public void ShouldFadeInUnsignedLong()
         {
             var result = this.driver.JQuery("div").FadeIn(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOut()
+        [Fact]
+        public void ShouldFadeOut()
         {
             var result = this.driver.JQuery("div").FadeOut();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutEnum()
+        [Fact]
+        public void ShouldFadeOutEnum()
         {
             var result = this.driver.JQuery("div").FadeOut(Duration.Slow);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutShort()
+        [Fact]
+        public void ShouldFadeOutShort()
         {
             var result = this.driver.JQuery("div").FadeOut((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutInt()
+        [Fact]
+        public void ShouldFadeOutInt()
         {
             var result = this.driver.JQuery("div").FadeOut(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutLong()
+        [Fact]
+        public void ShouldFadeOutLong()
         {
             var result = this.driver.JQuery("div").FadeOut(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutUnsignedShort()
+        [Fact]
+        public void ShouldFadeOutUnsignedShort()
         {
             var result = this.driver.JQuery("div").FadeOut((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutUnsignedInt()
+        [Fact]
+        public void ShouldFadeOutUnsignedInt()
         {
             var result = this.driver.JQuery("div").FadeOut(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeOutUnsignedLong()
+        [Fact]
+        public void ShouldFadeOutUnsignedLong()
         {
             var result = this.driver.JQuery("div").FadeOut(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggle()
+        [Fact]
+        public void ShouldFadeToggle()
         {
             var result = this.driver.JQuery("div").FadeToggle();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleEnum()
+        [Fact]
+        public void ShouldFadeToggleEnum()
         {
             var result = this.driver.JQuery("div").FadeToggle(Duration.Slow);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleShort()
+        [Fact]
+        public void ShouldFadeToggleShort()
         {
             var result = this.driver.JQuery("div").FadeToggle((short)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleInt()
+        [Fact]
+        public void ShouldFadeToggleInt()
         {
             var result = this.driver.JQuery("div").FadeToggle(500);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleLong()
+        [Fact]
+        public void ShouldFadeToggleLong()
         {
             var result = this.driver.JQuery("div").FadeToggle(500L);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleUnsignedShort()
+        [Fact]
+        public void ShouldFadeToggleUnsignedShort()
         {
             var result = this.driver.JQuery("div").FadeToggle((ushort)100);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleUnsignedInt()
+        [Fact]
+        public void ShouldFadeToggleUnsignedInt()
         {
             var result = this.driver.JQuery("div").FadeToggle(500U);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToggleUnsignedLong()
+        [Fact]
+        public void ShouldFadeToggleUnsignedLong()
         {
             var result = this.driver.JQuery("div").FadeToggle(500UL);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToEnumFloat()
+        [Fact]
+        public void ShouldFadeToEnumFloat()
         {
             var result = this.driver.JQuery("div").FadeTo(Duration.Fast, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToEnumDouble()
+        [Fact]
+        public void ShouldFadeToEnumDouble()
         {
             var result = this.driver.JQuery("div").FadeTo(Duration.Fast, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToShortFloat()
+        [Fact]
+        public void ShouldFadeToShortFloat()
         {
             var result = this.driver.JQuery("div").FadeTo((short)100, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToShortDouble()
+        [Fact]
+        public void ShouldFadeToShortDouble()
         {
             var result = this.driver.JQuery("div").FadeTo((short)100, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToIntFloat()
+        [Fact]
+        public void ShouldFadeToIntFloat()
         {
             var result = this.driver.JQuery("div").FadeTo(100, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToIntDouble()
+        [Fact]
+        public void ShouldFadeToIntDouble()
         {
             var result = this.driver.JQuery("div").FadeTo(100, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToLongFloat()
+        [Fact]
+        public void ShouldFadeToLongFloat()
         {
             var result = this.driver.JQuery("div").FadeTo(100L, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToLongDouble()
+        [Fact]
+        public void ShouldFadeToLongDouble()
         {
             var result = this.driver.JQuery("div").FadeTo(100L, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToUnsignedShortFloat()
+        [Fact]
+        public void ShouldFadeToUnsignedShortFloat()
         {
             var result = this.driver.JQuery("div").FadeTo((ushort)100, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToUnsignedShortDouble()
+        [Fact]
+        public void ShouldFadeToUnsignedShortDouble()
         {
             var result = this.driver.JQuery("div").FadeTo((ushort)100, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToUnsignedIntFloat()
+        [Fact]
+        public void ShouldFadeToUnsignedIntFloat()
         {
             var result = this.driver.JQuery("div").FadeTo(100U, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToUnsignedIntDouble()
+        [Fact]
+        public void ShouldFadeToUnsignedIntDouble()
         {
             var result = this.driver.JQuery("div").FadeTo(100U, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToUnsignedLongFloat()
+        [Fact]
+        public void ShouldFadeToUnsignedLongFloat()
         {
             var result = this.driver.JQuery("div").FadeTo(100UL, 0.5f);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void FadeToUnsignedLongDouble()
+        [Fact]
+        public void ShouldFadeToUnsignedLongDouble()
         {
             var result = this.driver.JQuery("div").FadeTo(100UL, 0.5d);
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void FadeToNegativeOpacity()
+        [Fact]
+        public void ShouldFadeToNegativeOpacity()
         {
-            this.driver.JQuery("div").FadeTo(100UL, -1.0);
+            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(100UL, -1.0));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void FadeToOpacityBiggerThanOne()
+        [Fact]
+        public void ShouldFadeToOpacityBiggerThanOne()
         {
-            this.driver.JQuery("div").FadeTo(100UL, 2.0);
+            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(100UL, 2.0));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void FadeToEnumNegativeOpacity()
+        [Fact]
+        public void ShouldFadeToEnumNegativeOpacity()
         {
-            this.driver.JQuery("div").FadeTo(Duration.Slow, -1.0);
+            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, -1.0));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentException))]
-        public void FadeToEnumOpacityBiggerThanOne()
+        [Fact]
+        public void ShouldFadeToEnumOpacityBiggerThanOne()
         {
-            this.driver.JQuery("div").FadeTo(Duration.Slow, 2.0);
+            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, 2.0));
         }
 
-        [Test]
-        public void Blur()
+        [Fact]
+        public void ShouldBlur()
         {
             var result = this.driver.JQuery("div").Blur();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Focus()
+        [Fact]
+        public void ShouldFocus()
         {
             var result = this.driver.JQuery("div").Focus();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Change()
+        [Fact]
+        public void ShouldChange()
         {
             var result = this.driver.JQuery("div").Change();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Click()
+        [Fact]
+        public void ShouldClick()
         {
             var result = this.driver.JQuery("div").Click();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void DoubleClick()
+        [Fact]
+        public void ShouldDoubleClick()
         {
             var result = this.driver.JQuery("div").DoubleClick();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void KeyUp()
+        [Fact]
+        public void ShouldKeyUp()
         {
             var result = this.driver.JQuery("div").KeyUp();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void KeyDown()
+        [Fact]
+        public void ShouldKeyDown()
         {
             var result = this.driver.JQuery("div").KeyDown();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void KeyPress()
+        [Fact]
+        public void ShouldKeyPress()
         {
             var result = this.driver.JQuery("div").KeyPress();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseUp()
+        [Fact]
+        public void ShouldMouseUp()
         {
             var result = this.driver.JQuery("div").MouseUp();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseDown()
+        [Fact]
+        public void ShouldMouseDown()
         {
             var result = this.driver.JQuery("div").MouseDown();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseOver()
+        [Fact]
+        public void ShouldMouseOver()
         {
             var result = this.driver.JQuery("div").MouseOver();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseOut()
+        [Fact]
+        public void ShouldMouseOut()
         {
             var result = this.driver.JQuery("div").MouseOut();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseMove()
+        [Fact]
+        public void ShouldMouseMove()
         {
             var result = this.driver.JQuery("div").MouseMove();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseEnter()
+        [Fact]
+        public void ShouldMouseEnter()
         {
             var result = this.driver.JQuery("div").MouseEnter();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void MouseLeave()
+        [Fact]
+        public void ShouldMouseLeave()
         {
             var result = this.driver.JQuery("div").MouseLeave();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Resize()
+        [Fact]
+        public void ShouldResize()
         {
             var result = this.driver.JQuery("div").Resize();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void Scroll()
+        [Fact]
+        public void ShouldScroll()
         {
             var result = this.driver.JQuery("div").Scroll();
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
         }
 
-        [Test]
-        public void TriggerHandler()
+        [Fact]
+        public void ShouldTriggerHandler()
         {
             var result = this.driver.JQuery("div").TriggerHandler("click");
 
-            Assert.IsNotNull(result);
+            Assert.NotNull(result);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.driver.Dispose();
+            }
         }
     }
 }

@@ -1,139 +1,143 @@
 ﻿namespace Selenium.WebDriver.Extensions.Tests
 {
-    using NUnit.Framework;
+    using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class ByTests
     {
-        [Test]
-        public void JQuerySelector()
+        [Fact]
+        public void ShouldCreateJQuerySelector()
         {
-            const string Selector = "div";
-            var wrappedBy = By.JQuerySelector(Selector);
+            var selector = By.JQuerySelector("div");
 
-            Assert.AreEqual("div", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
         }
 
-        [Test]
-        public void SizzleSelector()
+        [Fact]
+        public void ShouldCreateSizzleSelector()
         {
-            const string Selector = "div";
-            var wrappedBy = By.SizzleSelector(Selector);
+            var selector = By.SizzleSelector("div");
 
-            Assert.AreEqual("div", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
         }
 
-        [Test]
-        public void QuerySelector()
+        [Fact]
+        public void ShouldCreateQuerySelector()
         {
-            const string Selector = "div";
-            var wrappedBy = By.QuerySelector(Selector);
+            var selector = By.QuerySelector("div");
 
-            Assert.AreEqual("div", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
         }
 
-        [Test]
-        public void QuerySelectorWithBase()
+        [Fact]
+        public void ShouldCreateQuerySelectorWithBase()
         {
-            const string Selector = "div";
-            var wrappedBy = By.QuerySelector(Selector, By.QuerySelector("body"));
+            var selector = By.QuerySelector("div", By.QuerySelector("body"));
 
-            Assert.AreEqual("div", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
+
+            Assert.NotNull(selector.BaseSelector);
+            Assert.Equal("body", selector.BaseSelector.RawSelector);
         }
 
-        [Test]
-        public void ClassName()
+        [Fact]
+        public void ShouldCreateClassNameSelector()
         {
-            const string ClassName = "test";
-            var wrappedBy = By.ClassName(ClassName);
+            var selector = By.ClassName("test");
 
-            Assert.AreEqual(".test", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal(".test", selector.RawSelector);
         }
 
-        [Test]
-        public void CssSelector()
+        [Fact]
+        public void ShouldCreateCssSelector()
         {
-            const string CssSelector = "div.test";
-            var wrappedBy = By.CssSelector(CssSelector);
+            var selector = By.CssSelector("div.test");
 
-            Assert.AreEqual(CssSelector, wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("div.test", selector.RawSelector);
         }
 
-        [Test]
-        public void Id()
+        [Fact]
+        public void ShouldCreateIdSelector()
         {
-            const string Id = "test";
-            var wrappedBy = By.Id(Id);
+            var selector = By.Id("test");
 
-            Assert.AreEqual("#test", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("#test", selector.RawSelector);
         }
 
-        [Test]
-        public void LinkText()
+        [Fact]
+        public void ShouldCreateLinkTextSelector()
         {
-            const string LinkText = "test";
-            var wrappedBy = By.LinkText(LinkText);
+            var selector = By.LinkText("test");
 
-            Assert.AreEqual("test", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("test", selector.RawSelector);
         }
 
-        [Test]
-        public void LinkTextWithBaseElement()
+        [Fact]
+        public void ShouldCreateLinkTextWithBaseElement()
         {
-            const string LinkText = "test";
-            var wrappedBy = By.LinkText(LinkText, "document");
+            var selector = By.LinkText("test", "document.getElementById('a')");
 
-            Assert.AreEqual("test", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("test", selector.RawSelector);
+            Assert.Equal("document.getElementById('a')", selector.BaseElement);
         }
 
-        [Test]
-        public void Name()
+        [Fact]
+        public void ShouldCreateNameSelector()
         {
-            const string Name = "test";
-            var wrappedBy = By.Name(Name);
+            var selector = By.Name("test");
 
-            Assert.AreEqual("[name='test']", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("[name='test']", selector.RawSelector);
         }
 
-        [Test]
-        public void PartialLinkText()
+        [Fact]
+        public void ShouldCreatePartialLinkTextSelector()
         {
-            const string PartialLinkText = "test";
-            var wrappedBy = By.PartialLinkText(PartialLinkText);
+            var selector = By.PartialLinkText("test");
 
-            Assert.AreEqual("test", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("test", selector.RawSelector);
         }
 
-        [Test]
-        public void PartialLinkTextWithBaseElement()
+        [Fact]
+        public void ShouldCreatePartialLinkTextWithBaseElement()
         {
-            const string PartialLinkText = "test";
-            var wrappedBy = By.PartialLinkText(PartialLinkText, "document");
+            var selector = By.PartialLinkText("test", "document.getElementById('a')");
 
-            Assert.AreEqual("test", wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("test", selector.RawSelector);
+            Assert.Equal("document.getElementById('a')", selector.BaseElement);
         }
 
-        [Test]
-        public void TagName()
+        [Fact]
+        public void ShouldCreateTagName()
         {
-            const string TagName = "div";
-            var wrappedBy = By.TagName(TagName);
+            var selector = By.TagName("div");
 
-            Assert.AreEqual(TagName, wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
         }
 
-        [Test]
-        public void XPath()
+        [Fact]
+        public void ShouldCreateXPathSelector()
         {
-            const string XPath = "/body/div";
-            var wrappedBy = By.XPath(XPath);
+            var selector = By.XPath("/body/div");
 
-            Assert.AreEqual(XPath, wrappedBy.RawSelector);
+            Assert.NotNull(selector);
+            Assert.Equal("/body/div", selector.RawSelector);
         }
     }
 }

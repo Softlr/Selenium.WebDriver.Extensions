@@ -1,262 +1,272 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class JQuerySelectorTests
     {
-        private Mock<IWebDriver> driverMock;
-
-        private static IEnumerable SelectorTestCases
+        public static IEnumerable<object[]> SelectorData
         {
             get
             {
                 // basic tests
-                yield return new TestCaseData(By.JQuerySelector("div"))
-                    .Returns("jQuery('div')").SetName("jQuery('div')");
-                yield return new TestCaseData(By.JQuerySelector("div", jQueryVariable: "$"))
-                    .Returns("$('div')").SetName("$('div')");
-                yield return new TestCaseData(By.JQuerySelector("div", By.JQuerySelector("article")))
-                    .Returns("jQuery('div', jQuery('article'))").SetName("jQuery('div', jQuery('article'))");
+                yield return new object[] { By.JQuerySelector("div"), "jQuery('div')" };
+                yield return new object[] { By.JQuerySelector("div", jQueryVariable: "$"), "$('div')" };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div", By.JQuerySelector("article")), 
+                                     "jQuery('div', jQuery('article'))"
+                                 };
 
                 // functions tests
-                yield return new TestCaseData(By.JQuerySelector("div").Add("span", By.JQuerySelector("body")))
-                    .Returns("jQuery('div').add('span', jQuery('body'))")
-                    .SetName("jQuery('div').add('span', jQuery('body'))");
-                yield return new TestCaseData(By.JQuerySelector("div").Add("span"))
-                    .Returns("jQuery('div').add('span')").SetName("jQuery('div').add('span')");
-                yield return new TestCaseData(By.JQuerySelector("div").AddBack())
-                    .Returns("jQuery('div').addBack()").SetName("jQuery('div').addBack()");
-                yield return new TestCaseData(By.JQuerySelector("div").AddBack("span"))
-                    .Returns("jQuery('div').addBack('span')").SetName("jQuery('div').addBack('span')");
-                yield return new TestCaseData(By.JQuerySelector("div").AndSelf())
-                    .Returns("jQuery('div').andSelf()").SetName("jQuery('div').andSelf()");
-                yield return new TestCaseData(By.JQuerySelector("div").Children())
-                    .Returns("jQuery('div').children()").SetName("jQuery('div').children()");
-                yield return new TestCaseData(By.JQuerySelector("div").Children("span"))
-                    .Returns("jQuery('div').children('span')").SetName("jQuery('div').children('span')");
-                yield return new TestCaseData(By.JQuerySelector("div").Closest("span"))
-                    .Returns("jQuery('div').closest('span')").SetName("jQuery('div').closest('span')");
-                yield return new TestCaseData(By.JQuerySelector("div").Closest("span", By.JQuerySelector("body")))
-                    .Returns("jQuery('div').closest('span', jQuery('body'))")
-                    .SetName("jQuery('div').closest('span', jQuery('body'))");
-                yield return new TestCaseData(By.JQuerySelector("div").Contents())
-                    .Returns("jQuery('div').contents()").SetName("jQuery('div').contents()");
-                yield return new TestCaseData(By.JQuerySelector("div").End())
-                    .Returns("jQuery('div').end()").SetName("jQuery('div').end()");
-                yield return new TestCaseData(By.JQuerySelector("div").Eq(0))
-                    .Returns("jQuery('div').eq(0)").SetName("jQuery('div').eq(0)");
-                yield return new TestCaseData(By.JQuerySelector("div").Eq(-2))
-                    .Returns("jQuery('div').eq(-2)").SetName("jQuery('div').eq(-2)");
-                yield return new TestCaseData(By.JQuerySelector("div").Filter(".empty"))
-                    .Returns("jQuery('div').filter('.empty')").SetName("jQuery('div').filter('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").Find(".empty"))
-                    .Returns("jQuery('div').find('.empty')").SetName("jQuery('div').find('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").First())
-                    .Returns("jQuery('div').first()").SetName("jQuery('div').first()");
-                yield return new TestCaseData(By.JQuerySelector("div").Has(".empty"))
-                    .Returns("jQuery('div').has('.empty')").SetName("jQuery('div').has('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").Is(".empty"))
-                    .Returns("jQuery('div').is('.empty')").SetName("jQuery('div').is('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").Last())
-                    .Returns("jQuery('div').last()").SetName("jQuery('div').last()");
-                yield return new TestCaseData(By.JQuerySelector("div").Next(".empty"))
-                    .Returns("jQuery('div').next('.empty')").SetName("jQuery('div').next('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").NextAll(".empty"))
-                    .Returns("jQuery('div').nextAll('.empty')").SetName("jQuery('div').nextAll('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").NextUntil(".empty"))
-                    .Returns("jQuery('div').nextUntil('.empty')").SetName("jQuery('div').nextUntil('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").NextUntil(".empty", "span"))
-                    .Returns("jQuery('div').nextUntil('.empty', 'span')")
-                    .SetName("jQuery('div').nextUntil('.empty', 'span')");
-                yield return new TestCaseData(By.JQuerySelector("div").Not(".empty"))
-                    .Returns("jQuery('div').not('.empty')").SetName("jQuery('div').not('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").OffsetParent())
-                    .Returns("jQuery('div').offsetParent()").SetName("jQuery('div').offsetParent()");
-                yield return new TestCaseData(By.JQuerySelector("div").Parent(".parent"))
-                    .Returns("jQuery('div').parent('.parent')").SetName("jQuery('div').parent('.parent')");
-                yield return new TestCaseData(By.JQuerySelector("div").Parents(".parent"))
-                    .Returns("jQuery('div').parents('.parent')").SetName("jQuery('div').parents('.parent')");
-                yield return new TestCaseData(By.JQuerySelector("div").ParentsUntil(".parent"))
-                    .Returns("jQuery('div').parentsUntil('.parent')")
-                    .SetName("jQuery('div').parentsUntil('.parent')");
-                yield return new TestCaseData(By.JQuerySelector("div").ParentsUntil(".parent", "body"))
-                    .Returns("jQuery('div').parentsUntil('.parent', 'body')")
-                    .SetName("jQuery('div').parentsUntil('.parent', 'body')");
-                yield return new TestCaseData(By.JQuerySelector("div").Prev(".empty"))
-                    .Returns("jQuery('div').prev('.empty')").SetName("jQuery('div').prev('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").PrevAll(".empty"))
-                    .Returns("jQuery('div').prevAll('.empty')").SetName("jQuery('div').prevAll('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").PrevUntil(".empty"))
-                    .Returns("jQuery('div').prevUntil('.empty')").SetName("jQuery('div').prevUntil('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").PrevUntil(".empty", "span"))
-                    .Returns("jQuery('div').prevUntil('.empty', 'span')")
-                    .SetName("jQuery('div').prevUntil('.empty', 'span')");
-                yield return new TestCaseData(By.JQuerySelector("div").Siblings(".empty"))
-                    .Returns("jQuery('div').siblings('.empty')").SetName("jQuery('div').siblings('.empty')");
-                yield return new TestCaseData(By.JQuerySelector("div").Slice(1))
-                    .Returns("jQuery('div').slice(1)").SetName("jQuery('div').slice(1)");
-                yield return new TestCaseData(By.JQuerySelector("div").Slice(1, 3))
-                    .Returns("jQuery('div').slice(1, 3)").SetName("jQuery('div').slice(1, 3)");
-                yield return new TestCaseData(By.JQuerySelector("div").Slice(-3, -1))
-                    .Returns("jQuery('div').slice(-3, -1)").SetName("jQuery('div').slice(-3, -1)");
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").Add("span", By.JQuerySelector("body")), 
+                                     "jQuery('div').add('span', jQuery('body'))"
+                                 };
+                yield return new object[] { By.JQuerySelector("div").Add("span"), "jQuery('div').add('span')" };
+                yield return new object[] { By.JQuerySelector("div").AddBack(), "jQuery('div').addBack()" };
+                yield return new object[] { By.JQuerySelector("div").AddBack("span"), "jQuery('div').addBack('span')" };
+                yield return new object[] { By.JQuerySelector("div").AndSelf(), "jQuery('div').andSelf()" };
+                yield return new object[] { By.JQuerySelector("div").Children(), "jQuery('div').children()" };
+                yield return new object[] { By.JQuerySelector("div").Children("span"), "jQuery('div').children('span')" };
+                yield return new object[] { By.JQuerySelector("div").Closest("span"), "jQuery('div').closest('span')" };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").Closest("span", By.JQuerySelector("body")), 
+                                     "jQuery('div').closest('span', jQuery('body'))"
+                                 };
+                yield return new object[] { By.JQuerySelector("div").Contents(), "jQuery('div').contents()" };
+                yield return new object[] { By.JQuerySelector("div").End(), "jQuery('div').end()" };
+                yield return new object[] { By.JQuerySelector("div").Eq(0), "jQuery('div').eq(0)" };
+                yield return new object[] { By.JQuerySelector("div").Eq(-2), "jQuery('div').eq(-2)" };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").Filter(".empty"),
+                                     "jQuery('div').filter('.empty')"
+                                 };
+                yield return new object[] { By.JQuerySelector("div").Find(".empty"), "jQuery('div').find('.empty')" };
+                yield return new object[] { By.JQuerySelector("div").First(), "jQuery('div').first()" };
+                yield return new object[] { By.JQuerySelector("div").Has(".empty"), "jQuery('div').has('.empty')" };
+                yield return new object[] { By.JQuerySelector("div").Is(".empty"), "jQuery('div').is('.empty')" };
+                yield return new object[] { By.JQuerySelector("div").Last(), "jQuery('div').last()" };
+                yield return new object[] { By.JQuerySelector("div").Next(".empty"), "jQuery('div').next('.empty')" };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").NextAll(".empty"),
+                                     "jQuery('div').nextAll('.empty')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").NextUntil(".empty"), 
+                                     "jQuery('div').nextUntil('.empty')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").NextUntil(".empty", "span"), 
+                                     "jQuery('div').nextUntil('.empty', 'span')"
+                                 };
+                yield return new object[] { By.JQuerySelector("div").Not(".empty"), "jQuery('div').not('.empty')" };
+                yield return new object[] { By.JQuerySelector("div").OffsetParent(), "jQuery('div').offsetParent()" };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").Parent(".parent"), 
+                                     "jQuery('div').parent('.parent')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").Parents(".parent"),
+                                     "jQuery('div').parents('.parent')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").ParentsUntil(".parent"),
+                                     "jQuery('div').parentsUntil('.parent')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").ParentsUntil(".parent", "body"),
+                                     "jQuery('div').parentsUntil('.parent', 'body')"
+                                 };
+                yield return new object[] { By.JQuerySelector("div").Prev(".empty"), "jQuery('div').prev('.empty')" };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").PrevAll(".empty"), 
+                                     "jQuery('div').prevAll('.empty')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").PrevUntil(".empty"), 
+                                     "jQuery('div').prevUntil('.empty')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").PrevUntil(".empty", "span"), 
+                                     "jQuery('div').prevUntil('.empty', 'span')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").Siblings(".empty"), 
+                                     "jQuery('div').siblings('.empty')"
+                                 };
+                yield return new object[] { By.JQuerySelector("div").Slice(1), "jQuery('div').slice(1)" };
+                yield return new object[] { By.JQuerySelector("div").Slice(1, 3), "jQuery('div').slice(1, 3)" };
+                yield return new object[] { By.JQuerySelector("div").Slice(-3, -1), "jQuery('div').slice(-3, -1)" };
 
                 // additional tests
-                yield return new TestCaseData(By.JQuerySelector("div").AddBack(string.Empty))
-                    .Returns("jQuery('div').addBack()").SetName("empty selector");
-                yield return new TestCaseData(By.JQuerySelector("div").AddBack(" span "))
-                    .Returns("jQuery('div').addBack('span')").SetName("trim");
-                yield return new TestCaseData(By.JQuerySelector("input[type='text']"))
-                    .Returns("jQuery('input[type=\"text\"]')").SetName("escape single quotes");
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").AddBack(string.Empty),
+                                     "jQuery('div').addBack()"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").AddBack(" span "),
+                                     "jQuery('div').addBack('span')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("input[type='text']"),
+                                     "jQuery('input[type=\"text\"]')"
+                                 };
             }
         }
 
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.JQuerySelector("div"), By.JQuerySelector("div"), true)
-                    .SetName("jQuery('div') == jQuery('div')");
-                yield return new TestCaseData(
-                    By.JQuerySelector("div"),
-                    By.JQuerySelector("div", jQueryVariable: "$"),
-                    false)
-                    .SetName("jQuery('div') != $('div')");
-                yield return new TestCaseData(By.JQuerySelector("div"), By.JQuerySelector("span"), false)
-                    .SetName("jQuery('div') != jQuery('span')");
-                yield return new TestCaseData(By.JQuerySelector("div"), null, false)
-                    .SetName("jQuery('div') != null");
-                yield return new TestCaseData(null, By.JQuerySelector("div"), false)
-                    .SetName("null != jQuery('div')");
-                yield return new TestCaseData(
-                    By.JQuerySelector("div", By.JQuerySelector("body")), 
-                    By.JQuerySelector("div"),
-                    false)
-                    .SetName("jQuery('div', jQuery('body')) != jQuery('div')");
-                yield return new TestCaseData(
-                    By.JQuerySelector("div", By.JQuerySelector("body")), 
-                    By.JQuerySelector("div", By.JQuerySelector("body")), 
-                    true)
-                    .SetName("jQuery('div', jQuery('body')) == jQuery('div', jQuery('body'))");
+                yield return new object[] { By.JQuerySelector("div"), By.JQuerySelector("div"), true };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div"), 
+                                     By.JQuerySelector("div", jQueryVariable: "$"), 
+                                     false
+                                 };
+                yield return new object[] { By.JQuerySelector("div"), By.JQuerySelector("span"), false };
+                yield return new object[] { By.JQuerySelector("div"), null, false };
+                yield return new object[] { null, By.JQuerySelector("div"), false };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div", By.JQuerySelector("body")), 
+                                     By.JQuerySelector("div"),
+                                     false
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div", By.JQuerySelector("body")), 
+                                     By.JQuerySelector("div", By.JQuerySelector("body")),
+                                     true
+                                 };
             }
         }
 
-        [SetUp]
-        public void SetUp()
+        [Theory]
+        [PropertyData("SelectorData")]
+        public void ShouldGenerateCorrectSelector(JQuerySelector selector, string expectedResult)
         {
-            this.driverMock = new Mock<IWebDriver>();
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery")))
-                .Returns(true);
+            Assert.Equal(expectedResult, selector.Selector);
         }
 
-        [TearDown]
-        public void TearDown()
-        {
-            this.driverMock = null;
-        }
-
-        [TestCaseSource("SelectorTestCases")]
-        public string Selector(JQuerySelector selector)
-        {
-            return selector.Selector;
-        }
-
-        [Test]
-        public void Context()
+        [Fact]
+        public void ShouldPopulateContextProperty()
         {
             var by = By.JQuerySelector("div", By.JQuerySelector("article"));
 
-            Assert.AreEqual(by.Selector, "jQuery('div', jQuery('article'))");
-            Assert.AreEqual(by.Context.Selector, "jQuery('article')");
+            Assert.Equal(by.Selector, "jQuery('div', jQuery('article'))");
+            Assert.Equal(by.Context.Selector, "jQuery('article')");
         }
 
-        [Test]
-        public void JQueryVariable()
+        [Fact]
+        public void ShouldPopulateJQueryVariable()
         {
             var by = By.JQuerySelector("div", jQueryVariable: "$");
 
-            Assert.AreEqual(by.JQueryVariable, "$");
+            Assert.Equal(by.JQueryVariable, "$");
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullSelector()
+        [Fact]
+        public void ShowThrowExceptionWhenCreatingJQuerySelectorWithNull()
         {
-            By.JQuerySelector(null);
+            Assert.Throws<ArgumentNullException>(() => By.JQuerySelector(null));
         }
 
-        [Test]
-        public void CallFormatString()
+        [Fact]
+        public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.JQuerySelector("div").CallFormatString;
-            Assert.IsNotNull(formatString);
+
+            Assert.NotNull(formatString);
         }
 
-        [TestCaseSource("EqualityTestCases")]
+        [Theory]
+        [PropertyData("EqualityData")]
         public void EqualityOperator(JQuerySelector selector1, JQuerySelector selector2, bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void EqualityOperatorWrongType()
+        [Fact]
+        public void ShouldNotCompareElementsOfDifferentType()
         {
             var selector1 = By.JQuerySelector("div");
             var selector2 = new object();
 
 #pragma warning disable 252,253
-            Assert.IsFalse(selector1 == selector2);
-            Assert.IsTrue(selector1 != selector2);
+            Assert.False(selector1 == selector2);
+            Assert.True(selector1 != selector2);
 #pragma warning restore 252,253
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateNullElement()
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
             var selector = new JQuerySelector("div");
-            selector.Create(null);
+            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
         }
 
-        [Test]
-        public void CreateJQueryElement()
+        [Fact]
+        public void ShouldCreateNestedJQueryElement()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("div");
             rootSelector.SetupGet(x => x.CallFormatString).Returns("{0}[{1}]");
 
-            this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery")))
+                .Returns(true); 
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(rootSelector.Object);
-            element.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
+            element.SetupGet(x => x.WrappedDriver).Returns(driverMock.Object);
 
             var selector = By.JQuerySelector("test").Create(element.Object);
-            Assert.IsInstanceOf<JQuerySelector>(selector);
+            Assert.IsType<JQuerySelector>(selector);
 
             var jquerySelector = (JQuerySelector)selector;
-            Assert.AreEqual("jQuery", jquerySelector.JQueryVariable);
+            Assert.Equal("jQuery", jquerySelector.JQueryVariable);
         }
     }
 }

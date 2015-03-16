@@ -1,53 +1,51 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
-    using System.Collections;
-    using NUnit.Framework;
+    using System.Collections.Generic;
+    using System.ComponentModel;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [TestFixture]
     [Category("Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class CssSelectorTests
     {
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.CssSelector("div"), By.CssSelector("div"), true)
-                    .SetName("CSS('div') == CSS('div')");
-                yield return new TestCaseData(By.CssSelector("test"), By.CssSelector("span"), false)
-                    .SetName("CSS('div') != CSS('span')");
-                yield return new TestCaseData(By.CssSelector("test"), null, false)
-                    .SetName("CSS('div') != null");
-                yield return new TestCaseData(null, By.CssSelector("test"), false)
-                    .SetName("null != CSS('div')");
+                yield return new object[] { By.CssSelector("div"), By.CssSelector("div"), true };
+                yield return new object[] { By.CssSelector("test"), By.CssSelector("span"), false };
+                yield return new object[] { By.CssSelector("test"), null, false };
+                yield return new object[] { null, By.CssSelector("test"), false };
             }
         }
 
-        [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(CssSelector selector1, CssSelector selector2, bool expectedResult)
+        [Theory]
+        [PropertyData("EqualityData")]
+        public void ShouldProperlyCompareSelectors(CssSelector selector1, CssSelector selector2, bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void RunnerType()
+        [Fact]
+        public void ShouldHaveProperRunnerType()
         {
             var selector = new CssSelector("test");
 
-            Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
+            Assert.Equal(typeof(QuerySelectorRunner), selector.RunnerType);
         }
     }
 }

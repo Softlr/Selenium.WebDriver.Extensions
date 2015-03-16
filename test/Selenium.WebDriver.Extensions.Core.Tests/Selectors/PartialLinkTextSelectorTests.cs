@@ -1,113 +1,105 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class PartialLinkTextSelectorTests
     {
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.PartialLinkText("test"), By.PartialLinkText("test"), true)
-                    .SetName("PLT('test') == PLT('test')");
-                yield return new TestCaseData(By.PartialLinkText("test"), By.PartialLinkText("test2"), false)
-                    .SetName("PLT('test') != PLT('test2')");
-                yield return new TestCaseData(By.PartialLinkText("test"), null, false)
-                    .SetName("PLT('test') != null");
-                yield return new TestCaseData(null, By.PartialLinkText("test"), false)
-                    .SetName("null != PLT('test')");
-                yield return new TestCaseData(
-                    By.PartialLinkText("test", "body"),
-                    By.PartialLinkText("test"),
-                    false)
-                    .SetName("PLT('test', PLT('body')) != PLT('test')");
-                yield return new TestCaseData(
-                    By.PartialLinkText("test", "body"),
-                    By.PartialLinkText("test", "body"),
-                    true)
-                    .SetName("PLT('test', PLT('body')) == PLT('test', PLT('body'))");
+                yield return new object[] { By.PartialLinkText("test"), By.PartialLinkText("test"), true };
+                yield return new object[] { By.PartialLinkText("test"), By.PartialLinkText("test2"), false };
+                yield return new object[] { By.PartialLinkText("test"), null, false };
+                yield return new object[] { null, By.PartialLinkText("test"), false };
+                yield return new object[] { By.PartialLinkText("test", "body"), By.PartialLinkText("test"), false };
+                yield return new object[]
+                                 {
+                                     By.PartialLinkText("test", "body"), 
+                                     By.PartialLinkText("test", "body"),
+                                     true
+                                 };
             }
         }
 
-        [Test]
-        public void Selector()
+        [Fact]
+        public void ShouldGenerateCorrectSelector()
         {
             var selector = By.PartialLinkText("test");
-            Assert.AreEqual(selector.Selector, selector.ToString());
+            Assert.Equal(selector.Selector, selector.ToString());
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullSelector()
+        [Fact]
+        public void ShouldThrowExceptionForNullSelector()
         {
-            By.PartialLinkText(null);
+            Assert.Throws<ArgumentNullException>(() => By.PartialLinkText(null));
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullBaseElementSelector()
+        [Fact]
+        public void ShouldThrowExceptionForNullBaseElement()
         {
-            By.PartialLinkText("test", null);
+            Assert.Throws<ArgumentNullException>(() => By.PartialLinkText("test", null));
         }
 
-        [Test]
-        public void CallFormatString()
+        [Fact]
+        public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.PartialLinkText("test").CallFormatString;
-            Assert.IsNotNull(formatString);
+            Assert.NotNull(formatString);
         }
 
-        [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(
+        [Theory]
+        [PropertyData("EqualityData")]
+        public void ShouldProperlyCompareSelectors(
             PartialLinkTextSelector selector1,
             PartialLinkTextSelector selector2,
             bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void EqualityOperatorWrongType()
+        [Fact]
+        public void ShouldNotCompareElementsOfDifferentType()
         {
             var selector1 = By.PartialLinkText("text");
             var selector2 = new object();
 
 #pragma warning disable 252,253
-            Assert.IsFalse(selector1 == selector2);
-            Assert.IsTrue(selector1 != selector2);
+            Assert.False(selector1 == selector2);
+            Assert.True(selector1 != selector2);
 #pragma warning restore 252,253
         }
 
-        [Test]
-        public void RunnerType()
+        [Fact]
+        public void ShouldHaveProperRunnerType()
         {
             var selector = new LinkTextSelector("test");
 
-            Assert.AreEqual(typeof(QuerySelectorRunner), selector.RunnerType);
+            Assert.Equal(typeof(QuerySelectorRunner), selector.RunnerType);
         }
 
-        [Test]
-        public void Create()
+        [Fact]
+        public void ShouldCreateNestedSelector()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("div");
@@ -122,18 +114,18 @@
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
             var selector = By.PartialLinkText("test").Create(element.Object);
-            Assert.IsInstanceOf<PartialLinkTextSelector>(selector);
+            Assert.IsType<PartialLinkTextSelector>(selector);
 
             var linkTextSelector = (PartialLinkTextSelector)selector;
-            Assert.AreEqual("test", linkTextSelector.RawSelector);
+            Assert.Equal("test", linkTextSelector.RawSelector);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateNullElement()
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
-            var selector = new PartialLinkTextSelector("div");
-            selector.Create(null);
+            var selector = new PartialLinkTextSelector("test");
+
+            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
         }
     }
 }

@@ -1,22 +1,21 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
-    using NUnit.Framework;
     using Selenium.WebDriver.Extensions.Sizzle;
+    using Xunit;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class SizzleRunnerTests
     {
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void FindArgumentNull()
+        [Fact]
+        public void ShouldThrowExceptionWhenSelectorIsNull()
         {
             var runner = new SizzleRunner();
-            runner.Find<object>(null, null);
+
+            Assert.Throws<ArgumentNullException>(() => runner.Find<object>(null, null));
         }
     }
 }

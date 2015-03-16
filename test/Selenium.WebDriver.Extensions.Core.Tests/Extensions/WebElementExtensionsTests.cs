@@ -3,13 +3,12 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
+    using Xunit;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
         [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
@@ -17,22 +16,20 @@
     {
         private Mock<IWebDriver> driverMock;
 
-        [SetUp]
-        public void SetUp()
+        public WebElementExtensionsTests()
         {
             this.driverMock = new Mock<IWebDriver>();
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
         }
 
-        [TearDown]
-        public void TearDown()
+        public void Dispose()
         {
             this.driverMock = null;
         }
 
-        [Test]
-        public void GetPath()
+        [Fact]
+        public void ShouldGetPath()
         {
             var selector = new Mock<ISelector>();
             selector.SetupGet(x => x.Selector).Returns("div");
@@ -45,11 +42,11 @@
             element.SetupGet(x => x.Selector).Returns(selector.Object);
             element.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
             
-            Assert.AreEqual("body > div", element.Object.Path);
+            Assert.Equal("body > div", element.Object.Path);
         }
 
-        [Test]
-        public void GetXPath()
+        [Fact]
+        public void ShouldGetXPath()
         {
             var selector = new Mock<ISelector>();
             selector.SetupGet(x => x.Selector).Returns("div");
@@ -62,11 +59,11 @@
             element.SetupGet(x => x.Selector).Returns(selector.Object);
             element.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
 
-            Assert.AreEqual("html[1]/body", element.Object.XPath);
+            Assert.Equal("html[1]/body", element.Object.XPath);
         }
 
-        [Test]
-        public void FindElementWithXPath()
+        [Fact]
+        public void ShouldFindElementWithXPath()
         {
             var element = new Mock<IWebElement>();
             element.SetupGet(x => x.TagName).Returns("body");
@@ -80,12 +77,12 @@
 
             var result = this.driverMock.Object.FindElement(By.XPath("/html/body"));
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual("body", result.TagName);
+            Assert.NotNull(result);
+            Assert.Equal("body", result.TagName);
         }
 
-        [Test]
-        public void FindElementWithQuerySelector()
+        [Fact]
+        public void ShouldFindElementWithQuerySelector()
         {
             var selector = By.QuerySelector("div");
 
@@ -114,12 +111,12 @@
 
             var result = webElement.Object.FindElement(By.QuerySelector("span"));
 
-            Assert.IsNotNull(result);
-            Assert.AreEqual("span", result.TagName);
+            Assert.NotNull(result);
+            Assert.Equal("span", result.TagName);
         }
 
-        [Test]
-        public void FindElementsWithQuerySelector()
+        [Fact]
+        public void ShouldFindElementsWithQuerySelector()
         {
             var selector = By.QuerySelector("div");
 
@@ -153,13 +150,13 @@
 
             var result = webElement.Object.FindElements(By.QuerySelector("span"));
 
-            Assert.AreEqual(2, result.Count);
+            Assert.Equal(2, result.Count);
 
-            Assert.AreEqual("span", result[0].TagName);
-            Assert.AreEqual("test1", result[0].GetAttribute("class"));
-
-            Assert.AreEqual("span", result[1].TagName);
-            Assert.AreEqual("test2", result[1].GetAttribute("class"));
+            Assert.Equal("span", result[0].TagName);
+            Assert.Equal("test1", result[0].GetAttribute("class"));
+            
+            Assert.Equal("span", result[1].TagName);
+            Assert.Equal("test2", result[1].GetAttribute("class"));
         }
     }
 }
