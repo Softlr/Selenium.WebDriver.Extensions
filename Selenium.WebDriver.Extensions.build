@@ -77,7 +77,7 @@
         <exec program="${path.opencover}">
             <arg value="-register:user"/>
             <arg value="-target:&quot;${path.xunit}&quot;"/>
-            <arg value="-targetargs:&quot;${file.unit.tests.jquery} ${file.unit.tests.sizzle} ${file.unit.tests.core} ${file.unit.tests.combined} -noshadow -parallel all -xml ${file.test.results}&quot;"/>
+            <arg value="-targetargs:&quot;${files.unit.tests} -noshadow -parallel all -xml ${file.test.results}&quot;"/>
             <arg value="-filter:&quot;+[*]* -[*]*Exception* -[*.Tests]*&quot;"/>
             <arg value="-output:&quot;${file.coverage.report}&quot;"/>
         </exec>
