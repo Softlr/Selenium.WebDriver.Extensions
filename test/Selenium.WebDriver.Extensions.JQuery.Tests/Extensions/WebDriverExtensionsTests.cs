@@ -106,7 +106,7 @@
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
             
-            Assert.Throws<NoSuchElementException>(() =>driverMock.Object.FindElement(By.JQuerySelector("div")));
+            Assert.Throws<NoSuchElementException>(() => driverMock.Object.FindElement(By.JQuerySelector("div")));
         }
 
         [Fact]

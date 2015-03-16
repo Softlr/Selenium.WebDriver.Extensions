@@ -34,7 +34,7 @@
                                      By.JQuerySelector("div").Add("span", By.JQuerySelector("body")), 
                                      "jQuery('div').add('span', jQuery('body'))"
                                  };
-                yield return new object[] { By.JQuerySelector("div").Add("span"),"jQuery('div').add('span')" };
+                yield return new object[] { By.JQuerySelector("div").Add("span"), "jQuery('div').add('span')" };
                 yield return new object[] { By.JQuerySelector("div").AddBack(), "jQuery('div').addBack()" };
                 yield return new object[] { By.JQuerySelector("div").AddBack("span"), "jQuery('div').addBack('span')" };
                 yield return new object[] { By.JQuerySelector("div").AndSelf(), "jQuery('div').andSelf()" };

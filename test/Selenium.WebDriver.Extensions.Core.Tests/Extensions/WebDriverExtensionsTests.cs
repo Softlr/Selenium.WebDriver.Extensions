@@ -6,9 +6,9 @@
     using System.Linq;
     using Moq;
     using OpenQA.Selenium;
-    using By = Selenium.WebDriver.Extensions.Core.By;
     using Xunit;
-
+    using By = Selenium.WebDriver.Extensions.Core.By;
+    
     [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]

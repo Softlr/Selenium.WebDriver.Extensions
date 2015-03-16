@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
@@ -21,8 +20,8 @@
             {
                 yield return new object[] { By.XPath("html"), By.XPath("html"), true };
                 yield return new object[] { By.XPath("html"), By.XPath("body"), false };
-                yield return new object[] { By.XPath("html"), (XPathSelector)null, false };
-                yield return new object[] { (XPathSelector)null, By.XPath("html"), false };
+                yield return new object[] { By.XPath("html"), null, false };
+                yield return new object[] { null, By.XPath("html"), false };
             }
         }
 
