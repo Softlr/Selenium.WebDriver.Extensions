@@ -83,8 +83,6 @@
             <arg value="${file.integration.tests}"/>
             <arg value="/framework:${project.framework}"/>
             <arg value="-noshadow"/>
-            <arg value="-parallel"/>
-            <arg value="collections"/>
         </exec>
     </target>
     
