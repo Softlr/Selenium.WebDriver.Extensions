@@ -9,7 +9,7 @@ Extensions for Selenium WebDriver.
 * Main
  * Support for nested selectors
  * Very easy setup: install packages with NuGet, include a namespace and start using it with your existing Selenium solution
- * High quality ensured by continous integration setup with Appveyor, unit and integration testing and hight code coverage
+ * High quality ensured by continous integration setup with Appveyor, unit and integration testing and high code coverage
  * Well documented code following strict StyleCop and FxCop rules
 * jQuery support
  * jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
