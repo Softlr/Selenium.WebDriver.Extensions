@@ -161,9 +161,6 @@
         /// <summary>
         /// Gets the <see cref="IWebDriver"/> used to find this element.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual IWebDriver WrappedDriver
         {
             get
@@ -175,9 +172,6 @@
         /// <summary>
         /// Gets the tag name of this element.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual string TagName
         {
             get
@@ -190,9 +184,6 @@
         /// Gets the innerText of this element, without any leading or trailing whitespace, and with other whitespace 
         /// collapsed.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual string Text
         {
             get
@@ -204,9 +195,6 @@
         /// <summary>
         /// Gets a value indicating whether or not this element is enabled.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual bool Enabled
         {
             get
@@ -218,9 +206,6 @@
         /// <summary>
         /// Gets a value indicating whether or not this element is selected.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual bool Selected
         {
             get
@@ -233,9 +218,6 @@
         /// Gets a <see cref="Point"/> object containing the coordinates of the upper-left corner of this element 
         /// relative to the upper-left corner of the page.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual Point Location
         {
             get
@@ -247,9 +229,6 @@
         /// <summary>
         /// Gets a <see cref="Size"/> object containing the height and width of this element.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual Size Size
         {
             get
@@ -261,9 +240,6 @@
         /// <summary>
         /// Gets a value indicating whether or not this element is displayed.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual bool Displayed
         {
             get
@@ -277,9 +253,6 @@
         /// </summary>
         /// <param name="by">The locating mechanism to use.</param>
         /// <returns>The first matching <see cref="IWebElement"/> on the current context.</returns>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual IWebElement FindElement(OpenQA.Selenium.By by)
         {
             return this.InnerElement.FindElement(by);
@@ -293,9 +266,6 @@
         /// A <see cref="ReadOnlyCollection{IWebElement}"/> of all <see cref="IWebElement">WebElements</see>
         /// matching the current criteria, or an empty list if nothing matches.
         /// </returns>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual ReadOnlyCollection<IWebElement> FindElements(OpenQA.Selenium.By by)
         {
             return this.InnerElement.FindElements(by);
@@ -304,9 +274,6 @@
         /// <summary>
         /// Clears the content of this element.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual void Clear()
         {
             this.InnerElement.Clear();
@@ -316,9 +283,6 @@
         /// Simulates typing text into the element.
         /// </summary>
         /// <param name="text">The text to type into the element.</param>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual void SendKeys(string text)
         {
             this.InnerElement.SendKeys(text);
@@ -327,9 +291,6 @@
         /// <summary>
         /// Submits this element to the web server.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual void Submit()
         {
             this.InnerElement.Submit();
@@ -338,9 +299,6 @@
         /// <summary>
         /// Clicks this element.
         /// </summary>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual void Click()
         {
             this.InnerElement.Click();
@@ -351,9 +309,6 @@
         /// </summary>
         /// <param name="attributeName">The name of the attribute.</param>
         /// <returns>The attribute's current value. Returns a <see langword="null"/> if the value is not set.</returns>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual string GetAttribute(string attributeName)
         {
             return this.InnerElement.GetAttribute(attributeName);
@@ -364,9 +319,6 @@
         /// </summary>
         /// <param name="propertyName">The name of the CSS property to get the value of.</param>
         /// <returns>The value of the specified CSS property.</returns>
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
         public virtual string GetCssValue(string propertyName)
         {
             return this.InnerElement.GetCssValue(propertyName);
