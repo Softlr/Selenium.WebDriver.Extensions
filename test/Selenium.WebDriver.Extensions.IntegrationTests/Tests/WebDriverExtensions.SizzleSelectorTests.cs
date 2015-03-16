@@ -49,17 +49,17 @@
         [Fact]
         public void FindInnerElement()
         {
-            var root = this.Browser.FindElement(By.SizzleSelector("#id1"));
-            var element = root.FindElement(By.SizzleSelector("span"));
+            var root = this.Browser.FindElement(By.SizzleSelector("body"));
+            var element = root.FindElement(By.SizzleSelector("div"));
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindInnerElements()
         {
-            var root = this.Browser.FindElement(By.SizzleSelector("#id1"));
-            var elements = root.FindElements(By.SizzleSelector("span"));
-            Assert.Equal(2, elements.Count);
+            var root = this.Browser.FindElement(By.SizzleSelector("body"));
+            var elements = root.FindElements(By.SizzleSelector("h1"));
+            Assert.Equal(1, elements.Count);
         }
     }
 }
