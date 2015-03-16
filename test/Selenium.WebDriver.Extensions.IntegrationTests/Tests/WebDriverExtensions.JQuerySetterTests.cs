@@ -40,7 +40,8 @@
         {
             var result = this.Browser.JQuery("input:checkbox").Property("checked", "checked").Property("checked");
 
-            Assert.True(result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
         [Fact]
@@ -48,7 +49,8 @@
         {
             var result = this.Browser.JQuery("input:checkbox").Property("checked", true).Property("checked");
 
-            Assert.True(result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
         [Fact]
@@ -158,7 +160,8 @@
         {
             var result = this.Browser.JQuery("h1").AddClass("foo").HasClass("foo");
 
-            Assert.True(result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
 
         [Fact]
@@ -166,7 +169,8 @@
         {
             var result = this.Browser.JQuery("h1").AddClass("foo").RemoveClass("foo").HasClass("foo");
 
-            Assert.False(result);
+            Assert.NotNull(result);
+            Assert.False(result.Value);
         }
 
         [Fact]
@@ -174,11 +178,13 @@
         {
             var result = this.Browser.JQuery("h1").AddClass("foo").ToggleClass("foo").HasClass("foo");
 
-            Assert.False(result);
+            Assert.NotNull(result);
+            Assert.False(result.Value);
 
             result = this.Browser.JQuery("h1").ToggleClass("foo").HasClass("foo");
 
-            Assert.True(result);
+            Assert.NotNull(result);
+            Assert.True(result.Value);
         }
     }
 }

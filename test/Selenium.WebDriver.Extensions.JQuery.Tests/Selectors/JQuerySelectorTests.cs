@@ -6,6 +6,7 @@
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
     [Trait("Category", "Unit Tests")]

@@ -5,6 +5,7 @@
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit Tests")]

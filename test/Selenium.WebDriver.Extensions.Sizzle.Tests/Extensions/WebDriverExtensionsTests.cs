@@ -9,6 +9,7 @@
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.Sizzle;
     using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
     [Trait("Category", "Unit Tests")]

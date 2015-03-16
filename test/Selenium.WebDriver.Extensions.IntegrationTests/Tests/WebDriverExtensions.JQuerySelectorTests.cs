@@ -77,7 +77,8 @@
         public void FindProperty()
         {
             var property = this.Browser.JQuery("input:first").Property("checked");
-            Assert.True(property);
+            Assert.NotNull(property);
+            Assert.True(property.Value);
         }
 
         [Fact]
@@ -281,7 +282,8 @@
         public void FindBooleanData()
         {
             var value = this.Browser.JQuery("form").Data<bool?>("mybool");
-            Assert.True(value);
+            Assert.NotNull(value);
+            Assert.True(value.Value);
         }
 
         [Fact]

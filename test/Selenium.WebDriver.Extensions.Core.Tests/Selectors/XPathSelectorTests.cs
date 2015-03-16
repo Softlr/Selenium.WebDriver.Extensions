@@ -5,6 +5,7 @@
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit Tests")]
@@ -45,7 +46,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData", PropertyType = typeof(XPathSelectorTests))]
+        [PropertyData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             XPathSelector selector1, 
             XPathSelector selector2, 

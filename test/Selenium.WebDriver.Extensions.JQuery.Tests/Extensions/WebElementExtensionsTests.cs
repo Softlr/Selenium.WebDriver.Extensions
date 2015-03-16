@@ -201,7 +201,7 @@
             var result = webElement.Object.JQuery("input").Property("checked");
 
             Assert.NotNull(result);
-            Assert.True(result);
+            Assert.True(result.Value);
         }
 
         [Fact]
@@ -529,7 +529,7 @@
             var result = webElement.Object.JQuery("input").Data<bool?>("test");
 
             Assert.NotNull(result);
-            Assert.True(result);
+            Assert.True(result.Value);
         }
 
         [Fact]
