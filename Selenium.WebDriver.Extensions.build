@@ -14,17 +14,9 @@
     <property name="path.opencover" value="packages\OpenCover.4.5.3723\OpenCover.Console.exe"/>
     <property name="path.report.generator" value="packages\ReportGenerator.2.1.3.0\ReportGenerator.exe"/>
     <property name="path.report.coveralls" value="packages\coveralls.io.1.2.2\tools\coveralls.net.exe"/>
-    <property name="dir.unit.tests.jquery" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}"/>
-    <property name="dir.unit.tests.sizzle" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}"/>
-    <property name="dir.unit.tests.core" value="test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config}"/>
-    <property name="dir.unit.tests.combined" value="test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}"/>
-    <property name="dir.integration.tests" value="test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}"/>
     <property name="dir.coverage.report" value="CoverageReport"/>
-    <property name="file.unit.tests.jquery" value="${dir.unit.tests.jquery}\Selenium.WebDriver.Extensions.JQuery.Tests.dll"/>
-    <property name="file.unit.tests.sizzle" value="${dir.unit.tests.sizzle}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll"/>
-    <property name="file.unit.tests.core" value="${dir.unit.tests.core}\Selenium.WebDriver.Extensions.Core.Tests.dll"/>
-    <property name="file.unit.tests.combined" value="${dir.unit.tests.combined}\Selenium.WebDriver.Extensions.Tests.dll"/>
-    <property name="file.integration.tests" value="${dir.integration.tests}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
+    <property name="files.unit.tests" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Tests.dll"/>
+    <property name="files.integration.tests" value="test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
     <property name="file.test.results" value="tests.xml"/>
     <property name="file.coverage.report" value="coverage.xml"/>
     
@@ -68,19 +60,15 @@
     
     <target name="test" depends="build">
         <exec program="${path.xunit}">
-            <arg value="${file.unit.tests.core}"/>
-            <arg value="${file.unit.tests.jquery}"/>
-            <arg value="${file.unit.tests.sizzle}"/>
-            <arg value="${file.unit.tests.combined}"/>
+            <arg line="${files.unit.tests}"/>
             <arg value="-noshadow"/>
-            <arg value="-parallel"/>
-            <arg value="all"/>
+            <arg line="-parallel all"/>
         </exec>
     </target>
     
     <target name="integration" depends="build">
         <exec program="${path.xunit}">
-            <arg value="${file.integration.tests}"/>
+            <arg line="${files.integration.tests}"/>
             <arg value="-noshadow"/>
         </exec>
     </target>
@@ -110,26 +98,26 @@
         </exec>
     </target>
     
-    <target name="pack" depends="build.all">
+    <target name="pack" depends="">
         <exec program="${path.nuget}">
             <arg value="pack"/>
             <arg value="src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec"/>
-            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg line="-Version &quot;${project.version}&quot;"/>
         </exec>
         <exec program="${path.nuget}">
             <arg value="pack"/>
             <arg value="src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec"/>
-            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg line="-Version &quot;${project.version}&quot;"/>
         </exec>
         <exec program="${path.nuget}">
             <arg value="pack"/>
             <arg value="src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec"/>
-            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg line="-Version &quot;${project.version}&quot;"/>
         </exec>
         <exec program="${path.nuget}">
             <arg value="pack"/>
             <arg value="src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec"/>
-            <arg value="-Version &quot;${project.version}&quot;"/>
+            <arg line="-Version &quot;${project.version}&quot;"/>
         </exec>
     </target>
     
