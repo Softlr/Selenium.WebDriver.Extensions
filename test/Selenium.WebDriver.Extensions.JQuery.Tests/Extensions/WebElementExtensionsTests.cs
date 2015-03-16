@@ -200,7 +200,7 @@
             var result = webElement.Object.JQuery("input").Property("checked");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -419,6 +419,8 @@
             var position = webElement.Object.JQuery("input").Position();
 
             Assert.NotNull(position);
+
+            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], position.Value.Top);
             Assert.Equal(dict["left"], position.Value.Left);
         }
@@ -442,6 +444,8 @@
             var offset = webElement.Object.JQuery("input").Offset();
 
             Assert.NotNull(offset);
+
+            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], offset.Value.Top);
             Assert.Equal(dict["left"], offset.Value.Left);
         }
@@ -524,7 +528,7 @@
             var result = webElement.Object.JQuery("input").Data<bool?>("test");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]

@@ -40,8 +40,7 @@
         {
             var result = this.Browser.JQuery("input:checkbox").Property("checked", "checked").Property("checked");
 
-            Assert.True(result.HasValue);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -49,8 +48,7 @@
         {
             var result = this.Browser.JQuery("input:checkbox").Property("checked", true).Property("checked");
 
-            Assert.True(result.HasValue);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -74,8 +72,7 @@
         {
             var result = this.Browser.JQuery("div.scroll").Width(50).Width();
 
-            Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -83,8 +80,7 @@
         {
             var result = this.Browser.JQuery("div.scroll").Height(50).Height();
 
-            Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -93,7 +89,7 @@
             var result = this.Browser.JQuery("div.scroll").InnerWidth(50).InnerWidth();
 
             Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -102,7 +98,7 @@
             var result = this.Browser.JQuery("div.scroll").InnerHeight(50).InnerHeight();
 
             Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -111,7 +107,7 @@
             var result = this.Browser.JQuery("div.scroll").OuterWidth(50).OuterWidth();
 
             Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -120,7 +116,7 @@
             var result = this.Browser.JQuery("div.scroll").OuterHeight(50).OuterHeight();
 
             Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -129,7 +125,7 @@
             var result = this.Browser.JQuery("div.scroll").ScrollLeft(50).ScrollLeft();
 
             Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -138,7 +134,7 @@
             var result = this.Browser.JQuery("div.scroll").ScrollTop(50).ScrollTop();
 
             Assert.True(result.HasValue);
-            Assert.Equal(50, result.Value);
+            Assert.Equal(50, result);
         }
 
         [Fact]
@@ -162,8 +158,7 @@
         {
             var result = this.Browser.JQuery("h1").AddClass("foo").HasClass("foo");
 
-            Assert.True(result.HasValue);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -171,8 +166,7 @@
         {
             var result = this.Browser.JQuery("h1").AddClass("foo").RemoveClass("foo").HasClass("foo");
 
-            Assert.True(result.HasValue);
-            Assert.False(result.Value);
+            Assert.False(result);
         }
 
         [Fact]
@@ -180,13 +174,11 @@
         {
             var result = this.Browser.JQuery("h1").AddClass("foo").ToggleClass("foo").HasClass("foo");
 
-            Assert.True(result.HasValue);
-            Assert.False(result.Value);
+            Assert.False(result);
 
             result = this.Browser.JQuery("h1").ToggleClass("foo").HasClass("foo");
 
-            Assert.True(result.HasValue);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
     }
 }

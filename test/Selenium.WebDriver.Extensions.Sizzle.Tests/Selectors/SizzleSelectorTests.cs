@@ -3,8 +3,7 @@
     using System;
     using System.Collections.Generic;
     using Xunit;
-    using Xunit.Extensions;
-
+    
     [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]

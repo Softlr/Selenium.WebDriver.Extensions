@@ -9,7 +9,6 @@
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
     [Trait("Category", "Unit Tests")]
@@ -237,7 +236,7 @@
             var result = driverMock.Object.JQuery("input").Property("checked");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -404,6 +403,8 @@
             var position = driverMock.Object.JQuery("input").Position();
 
             Assert.NotNull(position);
+
+            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], position.Value.Top);
             Assert.Equal(dict["left"], position.Value.Left);
         }
@@ -437,6 +438,8 @@
             var offset = driverMock.Object.JQuery("input").Offset();
 
             Assert.NotNull(offset);
+
+            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], offset.Value.Top);
             Assert.Equal(dict["left"], offset.Value.Left);
         }
@@ -555,7 +558,7 @@
             var result = driverMock.Object.JQuery("form").HasClass("test");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -568,8 +571,7 @@
                 .Returns(100d);
             var result = driverMock.Object.JQuery("input").Width();
 
-            Assert.NotNull(result);
-            Assert.Equal(100d, result.Value);
+            Assert.Equal(100, result);
         }
 
         [Fact]

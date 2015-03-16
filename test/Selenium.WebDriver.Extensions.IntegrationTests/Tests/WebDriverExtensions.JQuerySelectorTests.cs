@@ -77,8 +77,7 @@
         public void FindProperty()
         {
             var property = this.Browser.JQuery("input:first").Property("checked");
-            Assert.NotNull(property);
-            Assert.True(property.Value);
+            Assert.True(property);
         }
 
         [Fact]
@@ -233,6 +232,8 @@
         {
             var position = this.Browser.JQuery("h1").Position();
             Assert.NotNull(position);
+            
+            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(3, position.Value.Top);
             Assert.Equal(8, position.Value.Left);
         }
@@ -249,6 +250,8 @@
         {
             var position = this.Browser.JQuery("h1").Offset();
             Assert.NotNull(position);
+
+            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(8, position.Value.Top);
             Assert.Equal(13, position.Value.Left);
         }
@@ -278,8 +281,7 @@
         public void FindBooleanData()
         {
             var value = this.Browser.JQuery("form").Data<bool?>("mybool");
-            Assert.NotNull(value);
-            Assert.True(value.Value);
+            Assert.True(value);
         }
 
         [Fact]
