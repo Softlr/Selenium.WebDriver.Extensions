@@ -12,7 +12,7 @@
     using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
-    [Trait("Category", "Unit Tests")]
+    [Trait("Category", "Unit")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif

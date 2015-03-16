@@ -1,12 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System.Collections.Generic;
-    using System.ComponentModel;
     using Xunit;
     using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif

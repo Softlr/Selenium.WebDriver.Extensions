@@ -2,7 +2,7 @@
 {
     using Xunit;
 
-    [Trait("Category", "Unit Tests")]
+    [Trait("Category", "Unit")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
