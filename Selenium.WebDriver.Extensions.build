@@ -12,7 +12,7 @@
     <property name="path.nuget" value=".nuget\NuGet.exe"/>
     <property name="path.xunit" value="packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe"/>
     <property name="path.opencover" value="packages\OpenCover.4.5.3723\OpenCover.Console.exe"/>
-    <property name="path.report.generator" value="packages\ReportGenerator.2.1.2.0\ReportGenerator.exe"/>
+    <property name="path.report.generator" value="packages\ReportGenerator.2.1.3.0\ReportGenerator.exe"/>
     <property name="path.report.coveralls" value="packages\coveralls.io.1.2.2\tools\coveralls.net.exe"/>
     <property name="dir.unit.tests.jquery" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}"/>
     <property name="dir.unit.tests.sizzle" value="test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}"/>
