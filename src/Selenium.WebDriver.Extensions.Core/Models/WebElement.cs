@@ -321,7 +321,7 @@
 #endif
         public virtual void SendKeys(string text)
         {
-            this.InnerElement.Clear();
+            this.InnerElement.SendKeys(text);
         }
 
         /// <summary>
