@@ -3,6 +3,7 @@
     using Xunit;
 
     [Trait("Category", "Integration Tests")]
+    [Trait("Browser", "InternetExplorer")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif

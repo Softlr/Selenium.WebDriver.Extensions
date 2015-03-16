@@ -107,18 +107,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="WebDriverExtensions.JQuerySelectorSetterTests.cs" />
-    <Compile Include="WebDriverExtensions.QuerySelectorTests.cs" />
-    <Compile Include="WebDriverExtensions.SizzleSelectorTests.cs" />
-    <Compile Include="WebDriverExtensions.JQuerySelectorTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.CoreChromeTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.CoreInternetExplorerTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.CorePhantomJsTests.cs" />
-    <Compile Include="Fixtures\PhantomJSFixture.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.QuerySelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.SizzleLoadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.JQueryLoadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.JQueryLoadedSetterChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.SizzleUnloadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.JQueryUnloadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.JQueryUnloadedSetterChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensions.CoreChromeTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryLoadedSelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryLoadedSetterFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryUnloadedSelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryUnloadedSetterFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.QuerySelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.SizzleLoadedSelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensions.SizzleUnloadedSelectorFirefoxTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.CoreInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSetterInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryUnloadedSetterInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.QuerySelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.SizzleLoadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensions.SizzleUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.CorePhantomJsTests.cs" />
+    <Compile Include="Fixtures\PhantomJsFixture.cs" />
     <Compile Include="Fixtures\InternetExplorerFixture.cs" />
     <Compile Include="Fixtures\ChromeFixture.cs" />
     <Compile Include="Fixtures\FirefoxFixture.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.CoreFirefoxTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryLoadedSelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryLoadedSetterPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryUnloadedSelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryUnloadedSetterPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.QuerySelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleLoadedSelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleUnloadedSelectorPhantomJsTests.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -126,6 +150,10 @@
     </Compile>
     <Compile Include="Tests\WebDriverExtensions.CoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\WebDriverExtensions.JQuerySetterTests.cs" />
+    <Compile Include="Tests\WebDriverExtensions.JQuerySelectorTests.cs" />
+    <Compile Include="Tests\WebDriverExtensions.QuerySelectorTests.cs" />
+    <Compile Include="Tests\WebDriverExtensions.SizzleSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

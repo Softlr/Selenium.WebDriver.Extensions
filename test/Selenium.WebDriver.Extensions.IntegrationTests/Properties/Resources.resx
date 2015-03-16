@@ -120,4 +120,19 @@
   <data name="CoreTestsUrl" xml:space="preserve">
     <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html</value>
   </data>
+  <data name="JQueryLoadedTestsUrl" xml:space="preserve">
+    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html</value>
+  </data>
+  <data name="JQueryUnloadedTestsUrl" xml:space="preserve">
+    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html</value>
+  </data>
+  <data name="QuerySelectorTestsUrl" xml:space="preserve">
+    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html</value>
+  </data>
+  <data name="SizzleLoadedTestsUrl" xml:space="preserve">
+    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html</value>
+  </data>
+  <data name="SizzleUnloadedTestsUrl" xml:space="preserve">
+    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Unloaded.html</value>
+  </data>
 </root>

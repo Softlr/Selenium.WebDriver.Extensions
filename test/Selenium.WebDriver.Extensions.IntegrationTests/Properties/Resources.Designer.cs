@@ -68,5 +68,50 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Properties {
                 return ResourceManager.GetString("CoreTestsUrl", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html.
+        /// </summary>
+        internal static string JQueryLoadedTestsUrl {
+            get {
+                return ResourceManager.GetString("JQueryLoadedTestsUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html.
+        /// </summary>
+        internal static string JQueryUnloadedTestsUrl {
+            get {
+                return ResourceManager.GetString("JQueryUnloadedTestsUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html.
+        /// </summary>
+        internal static string QuerySelectorTestsUrl {
+            get {
+                return ResourceManager.GetString("QuerySelectorTestsUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html.
+        /// </summary>
+        internal static string SizzleLoadedTestsUrl {
+            get {
+                return ResourceManager.GetString("SizzleLoadedTestsUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Unloaded.html.
+        /// </summary>
+        internal static string SizzleUnloadedTestsUrl {
+            get {
+                return ResourceManager.GetString("SizzleUnloadedTestsUrl", resourceCulture);
+            }
+        }
     }
 }

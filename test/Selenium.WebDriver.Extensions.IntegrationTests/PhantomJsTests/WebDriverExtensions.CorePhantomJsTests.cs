@@ -3,13 +3,14 @@
     using Xunit;
 
     [Trait("Category", "Integration Tests")]
-    [Trait("Browser", "Firefox")]
+    [Trait("Browser", "PhantomJS")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsCoreFirefoxTests : WebDriverExtensionsCoreTests, IUseFixture<FirefoxFixture>
+    public class WebDriverExtensionsCorePhantomJsFixtureTests : WebDriverExtensionsCoreTests, 
+        IUseFixture<PhantomJsFixture>
     {
-        public void SetFixture(FirefoxFixture fixture)
+        public void SetFixture(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);
