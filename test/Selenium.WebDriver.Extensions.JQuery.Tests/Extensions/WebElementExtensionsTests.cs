@@ -26,7 +26,8 @@
 
         public void Dispose()
         {
-            this.driverMock = null;
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         [Fact]
@@ -615,6 +616,14 @@
             var result = webElement.Object.JQuery("form").HasClass("test");
 
             Assert.Equal(Result, result);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.driverMock = null;
+            }
         }
     }
 }

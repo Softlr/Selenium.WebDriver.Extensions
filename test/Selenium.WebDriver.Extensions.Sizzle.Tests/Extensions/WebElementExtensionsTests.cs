@@ -26,7 +26,8 @@
 
         public void Dispose()
         {
-            this.driverMock = null;
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         [Fact]
@@ -101,6 +102,14 @@
 
             Assert.Equal("span", result[1].TagName);
             Assert.Equal("test2", result[1].GetAttribute("class"));
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.driverMock = null;
+            }
         }
     }
 }

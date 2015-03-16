@@ -11,7 +11,7 @@
 #endif
     public class ChainJQueryHelperTests : IDisposable
     {
-        private IWebDriver driver;
+        private readonly IWebDriver driver;
 
         public ChainJQueryHelperTests()
         {
@@ -22,7 +22,8 @@
 
         public void Dispose()
         {
-            this.driver = null;
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
         }
 
         [Fact]
@@ -1591,6 +1592,14 @@
             var result = this.driver.JQuery("div").TriggerHandler("click");
 
             Assert.NotNull(result);
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                this.driver.Dispose();
+            }
         }
     }
 }
