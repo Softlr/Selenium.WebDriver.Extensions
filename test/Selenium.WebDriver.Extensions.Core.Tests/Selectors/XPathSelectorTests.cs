@@ -1,93 +1,92 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
-    using System.Collections;
+    using System.Collections.Generic;
     using Moq;
-    using NUnit.Framework;
     using OpenQA.Selenium;
+    using Xunit;
+    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class XPathSelectorTests
     {
-        private static IEnumerable EqualityTestCases
+        public static IEnumerable<object[]> EqualityData
         {
             get
             {
-                yield return new TestCaseData(By.XPath("html"), By.XPath("html"), true)
-                    .SetName("XP('test') == XP('test')");
-                yield return new TestCaseData(By.XPath("html"), By.XPath("body"), false)
-                    .SetName("XP('test') != XP('test2')");
-                yield return new TestCaseData(By.XPath("html"), null, false)
-                    .SetName("XP('test') != null");
-                yield return new TestCaseData(null, By.XPath("html"), false)
-                    .SetName("null != XP('test')");
+                yield return new object[] { By.XPath("html"), By.XPath("html"), true };
+                yield return new object[] { By.XPath("html"), By.XPath("body"), false };
+                yield return new object[] { By.XPath("html"), null, false };
+                yield return new object[] { null, By.XPath("html"), false };
             }
         }
 
-        [Test]
-        public void Selector()
+        [Fact]
+        public void ShouldGenerateCorrectSelector()
         {
             var selector = By.XPath("html");
-            Assert.AreEqual(selector.Selector, selector.ToString());
+            Assert.Equal(selector.Selector, selector.ToString());
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void NullSelector()
+        [Fact]
+        public void ShouldThrowErrorForNullSelector()
         {
-            By.XPath(null);
+            Assert.Throws<ArgumentNullException>(() => By.XPath(null));
         }
 
-        [Test]
-        public void CallFormatString()
+        [Fact]
+        public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.XPath("html").CallFormatString;
-            Assert.IsNotNull(formatString);
+            Assert.NotNull(formatString);
         }
 
-        [TestCaseSource("EqualityTestCases")]
-        public void EqualityOperator(XPathSelector selector1, XPathSelector selector2, bool expectedResult)
+        [Theory]
+        [PropertyData("EqualityData")]
+        public void ShouldProperlyCompareSelectors(
+            XPathSelector selector1, 
+            XPathSelector selector2, 
+            bool expectedResult)
         {
-            Assert.AreEqual(expectedResult, selector1 == selector2);
+            Assert.Equal(expectedResult, selector1 == selector2);
             if (selector1 != null)
             {
-                Assert.AreEqual(expectedResult, selector1.Equals(selector2));
+                Assert.Equal(expectedResult, selector1.Equals(selector2));
                 if (selector2 != null)
                 {
-                    Assert.AreEqual(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
+                    Assert.Equal(expectedResult, selector1.GetHashCode() == selector2.GetHashCode());
                 }
             }
 
-            Assert.AreNotEqual(expectedResult, selector1 != selector2);
+            Assert.NotEqual(expectedResult, selector1 != selector2);
         }
 
-        [Test]
-        public void EqualityOperatorWrongType()
+        [Fact]
+        public void ShouldNotCompareElementsOfDifferentType()
         {
             var selector1 = By.XPath("text");
             var selector2 = new object();
 
 #pragma warning disable 252,253
-            Assert.IsFalse(selector1 == selector2);
-            Assert.IsTrue(selector1 != selector2);
+            Assert.False(selector1 == selector2);
+            Assert.True(selector1 != selector2);
 #pragma warning restore 252,253
         }
-
-        [Test]
-        public void RunnerType()
+        
+        [Fact]
+        public void ShouldHaveProperRunnerType()
         {
             var selector = new XPathSelector("/html");
 
-            Assert.AreEqual(typeof(JavaScriptRunner), selector.RunnerType);
+            Assert.Equal(typeof(JavaScriptRunner), selector.RunnerType);
         }
 
-        [Test]
-        public void CreateWithLeadingSlash()
+        [Fact]
+        public void ShouldCreateSelectorWithLeadingSlash()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("/body");
@@ -102,14 +101,14 @@
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
             var selector = By.XPath("/div").Create(element.Object);
-            Assert.IsInstanceOf<XPathSelector>(selector);
+            Assert.IsType<XPathSelector>(selector);
 
             var linkTextSelector = (XPathSelector)selector;
-            Assert.AreEqual("/html[1]/body/div", linkTextSelector.RawSelector);
+            Assert.Equal("/html[1]/body/div", linkTextSelector.RawSelector);
         }
 
-        [Test]
-        public void CreateWithTrailingSlash()
+        [Fact]
+        public void ShouldCreateSelectorWithTrailingSlash()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("/body");
@@ -124,14 +123,14 @@
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
             var selector = By.XPath("div").Create(element.Object);
-            Assert.IsInstanceOf<XPathSelector>(selector);
+            Assert.IsType<XPathSelector>(selector);
 
             var linkTextSelector = (XPathSelector)selector;
-            Assert.AreEqual("/html[1]/body/div", linkTextSelector.RawSelector);
+            Assert.Equal("/html[1]/body/div", linkTextSelector.RawSelector);
         }
 
-        [Test]
-        public void CreateWithTrailingAndLeadingSlash()
+        [Fact]
+        public void ShouldCreateSelectorWithTrailingAndLeadingSlash()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("/body");
@@ -146,14 +145,14 @@
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
             var selector = By.XPath("/div").Create(element.Object);
-            Assert.IsInstanceOf<XPathSelector>(selector);
+            Assert.IsType<XPathSelector>(selector);
 
             var linkTextSelector = (XPathSelector)selector;
-            Assert.AreEqual("/html[1]/body//div", linkTextSelector.RawSelector);
+            Assert.Equal("/html[1]/body//div", linkTextSelector.RawSelector);
         }
 
-        [Test]
-        public void CreateWithoutTrailingAndLeadingSlash()
+        [Fact]
+        public void ShouldCreateSelectorWithoutTrailingAndLeadingSlash()
         {
             var rootSelector = new Mock<ISelector>();
             rootSelector.SetupGet(x => x.Selector).Returns("/body");
@@ -168,18 +167,18 @@
             element.SetupGet(x => x.WrappedDriver).Returns(driver.Object);
 
             var selector = By.XPath(".").Create(element.Object);
-            Assert.IsInstanceOf<XPathSelector>(selector);
+            Assert.IsType<XPathSelector>(selector);
 
             var linkTextSelector = (XPathSelector)selector;
-            Assert.AreEqual("/html[1]/body/.", linkTextSelector.RawSelector);
+            Assert.Equal("/html[1]/body/.", linkTextSelector.RawSelector);
         }
 
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateNullElement()
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
-            var selector = new XPathSelector("div");
-            selector.Create(null);
+            var selector = new XPathSelector("//div");
+
+            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
         }
     }
 }

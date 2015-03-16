@@ -13,6 +13,11 @@
         Type RunnerType { get; }
 
         /// <summary>
+        /// Gets the raw selector.
+        /// </summary>
+        string RawSelector { get; }
+
+        /// <summary>
         /// Gets the selector.
         /// </summary>
         string Selector { get; }

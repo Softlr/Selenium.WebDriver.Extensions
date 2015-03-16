@@ -2,30 +2,29 @@
 {
     using System;
     using System.Linq;
-    using NUnit.Framework;
     using Selenium.WebDriver.Extensions.Core;
+    using Xunit;
 
-    [TestFixture]
-    [Category("Unit Tests")]
+    [Trait("Category", "Unit Tests")]
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class SizzleLoaderTests
     {
-        [Test]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void LoadScriptArgumentsNull()
+        [Fact]
+        public void ShouldLoadScriptArgumentsNull()
         {
             var loader = new SizzleLoader();
-            loader.LoadScript(null);
+            
+            Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
         }
 
-        [Test]
-        [ExpectedException(typeof(LoaderException))]
-        public void LoadScriptArgumentsEmpty()
+        [Fact]
+        public void ShouldLoadScriptArgumentsEmpty()
         {
             var loader = new SizzleLoader();
-            loader.LoadScript(Enumerable.Empty<string>().ToArray());
+            
+            Assert.Throws<LoaderException>(() => loader.LoadScript(Enumerable.Empty<string>().ToArray()));
         }
     }
 }
