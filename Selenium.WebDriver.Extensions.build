@@ -81,7 +81,6 @@
     <target name="integration" depends="build">
         <exec program="${path.xunit}">
             <arg value="${file.integration.tests}"/>
-            <arg value="/framework:${project.framework}"/>
             <arg value="-noshadow"/>
         </exec>
     </target>
