@@ -7,10 +7,10 @@
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsJQueryUnloadedSetterFirefoxTests : WebDriverExtensionsJQuerySetterTests, 
-        IClassFixture<FirefoxFixture>
+    public class WebDriverExtensionsJQueryUnloadedSetterFirefoxTests :
+        WebDriverExtensionsJQuerySetterTests, IUseFixture<FirefoxFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSetterFirefoxTests(FirefoxFixture fixture)
+        public void SetFixture(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryUnloadedTestsUrl);

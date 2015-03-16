@@ -8,9 +8,9 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsQuerySelectorInternetExplorerTests : 
-        WebDriverExtensionsQuerySelectorTests, IClassFixture<InternetExplorerFixture>
+        WebDriverExtensionsQuerySelectorTests, IUseFixture<InternetExplorerFixture>
     {
-        public WebDriverExtensionsQuerySelectorInternetExplorerTests(InternetExplorerFixture fixture)
+        public void SetFixture(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.QuerySelectorTestsUrl);

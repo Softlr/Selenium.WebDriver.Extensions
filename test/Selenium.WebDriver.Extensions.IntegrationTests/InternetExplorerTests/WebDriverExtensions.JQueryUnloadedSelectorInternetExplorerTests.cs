@@ -8,9 +8,9 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>
+        WebDriverExtensionsJQuerySelectorTests, IUseFixture<InternetExplorerFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
+        public void SetFixture(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryUnloadedTestsUrl);

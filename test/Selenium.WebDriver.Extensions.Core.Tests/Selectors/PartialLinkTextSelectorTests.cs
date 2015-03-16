@@ -58,7 +58,7 @@
         }
 
         [Theory]
-        [MemberData("EqualityData")]
+        [PropertyData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             PartialLinkTextSelector selector1,
             PartialLinkTextSelector selector2,

@@ -22,7 +22,7 @@
         }
 
         [Theory]
-        [MemberData("EqualityData")]
+        [PropertyData("EqualityData")]
         public void ShouldProperlyCompareSelectors(NameSelector selector1, NameSelector selector2, bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

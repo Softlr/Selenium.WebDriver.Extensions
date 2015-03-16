@@ -8,9 +8,9 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
+        WebDriverExtensionsSizzleSelectorTests, IUseFixture<InternetExplorerFixture>
     {
-        public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
+        public void SetFixture(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.SizzleUnloadedTestsUrl);

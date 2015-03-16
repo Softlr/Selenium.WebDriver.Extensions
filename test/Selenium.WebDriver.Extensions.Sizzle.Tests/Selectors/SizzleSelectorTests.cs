@@ -52,7 +52,7 @@
         }
 
         [Theory]
-        [MemberData("SelectorData")]
+        [PropertyData("SelectorData")]
         public void ShouldGenerateCorrectSelector(SizzleSelector selector, string expectedResult)
         {
             Assert.Equal(expectedResult, selector.Selector);
@@ -82,7 +82,7 @@
         }
 
         [Theory]
-        [MemberData("EqualityData")]
+        [PropertyData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             SizzleSelector selector1,
             SizzleSelector selector2,

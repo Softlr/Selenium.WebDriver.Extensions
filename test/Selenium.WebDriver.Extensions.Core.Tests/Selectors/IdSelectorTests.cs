@@ -23,7 +23,7 @@
         }
 
         [Theory]
-        [MemberData("EqualityData")]
+        [PropertyData("EqualityData")]
         public void EqualityOperator(IdSelector selector1, IdSelector selector2, bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

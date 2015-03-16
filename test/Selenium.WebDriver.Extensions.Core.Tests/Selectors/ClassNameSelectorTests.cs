@@ -36,7 +36,7 @@
         }
 
         [Theory]
-        [MemberData("EqualityData")]
+        [PropertyData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             ClassNameSelector selector1, 
             ClassNameSelector selector2, 
@@ -56,7 +56,7 @@
         }
 
         [Theory]
-        [MemberData("QuerySelectorEqualityData")]
+        [PropertyData("QuerySelectorEqualityData")]
         public void ShouldProperlyCompareQuerySelectors(
             QuerySelector selector1, 
             QuerySelector selector2, 

@@ -8,9 +8,9 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsCoreInternetExplorerFixtureTests : WebDriverExtensionsCoreTests, 
-        IClassFixture<InternetExplorerFixture>
+        IUseFixture<InternetExplorerFixture>
     {
-        public WebDriverExtensionsCoreInternetExplorerFixtureTests(InternetExplorerFixture fixture)
+        public void SetFixture(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);

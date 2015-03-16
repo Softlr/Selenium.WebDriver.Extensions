@@ -8,9 +8,9 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsCorePhantomJsFixtureTests : WebDriverExtensionsCoreTests, 
-        IClassFixture<PhantomJsFixture>
+        IUseFixture<PhantomJsFixture>
     {
-        public WebDriverExtensionsCorePhantomJsFixtureTests(PhantomJsFixture fixture)
+        public void SetFixture(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);

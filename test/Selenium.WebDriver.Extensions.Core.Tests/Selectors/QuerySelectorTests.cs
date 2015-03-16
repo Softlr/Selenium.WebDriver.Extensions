@@ -50,7 +50,7 @@
         }
 
         [Theory]
-        [MemberData("SelectorData")]
+        [PropertyData("SelectorData")]
         public void ShouldGenerateCorrectSelector(QuerySelector selector, string expectedResult)
         {
             Assert.Equal(selector.Selector, selector.ToString());
@@ -89,7 +89,7 @@
         }
 
         [Theory]
-        [MemberData("EqualityData")]
+        [PropertyData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             QuerySelector selector1,
             QuerySelector selector2, 

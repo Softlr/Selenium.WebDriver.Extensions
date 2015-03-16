@@ -7,10 +7,10 @@
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsJQueryLoadedSelectorChromeTests : WebDriverExtensionsJQuerySelectorTests, 
-        IClassFixture<ChromeFixture>
+    public class WebDriverExtensionsJQueryLoadedSelectorChromeTests : 
+        WebDriverExtensionsJQuerySelectorTests, IUseFixture<ChromeFixture>
     {
-        public WebDriverExtensionsJQueryLoadedSelectorChromeTests(ChromeFixture fixture)
+        public void SetFixture(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryLoadedTestsUrl);
