@@ -8,7 +8,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 1.3.{build}
+  version: 1.4.{build}
   configuration: Release
     
   install:  
@@ -17,7 +17,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "1.3"
+    assembly_version: "1.4"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
     
@@ -96,7 +96,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 1.3.{build}
+  version: 1.4.{build}
   configuration: Release
     
   install:  
@@ -105,7 +105,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "1.3"
+    assembly_version: "1.4"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-dev"
   
@@ -156,7 +156,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 1.3.{build}
+  version: 1.4.{build}
   configuration: Release
     
   install:  
@@ -165,7 +165,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "1.3"
+    assembly_version: "1.4"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-preview"
   
