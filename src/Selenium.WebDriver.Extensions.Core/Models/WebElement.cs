@@ -5,10 +5,10 @@
     using System.Drawing;
     using System.Globalization;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Remote;
-
+    using OpenQA.Selenium.Internal;
+    
     /// <summary>
-    /// Wrapper on the Selenium <see cref="RemoteWebElement"/> that adds support for selector storage on element level.
+    /// Wrapper on the Selenium <see cref="IWebElement"/> that adds support for selector storage on element level.
     /// </summary>
     public class WebElement : IWebElement
     {
@@ -165,7 +165,7 @@
         {
             get
             {
-                return ((RemoteWebElement)this.InnerElement).WrappedDriver;
+                return ((IWrapsDriver)this.InnerElement).WrappedDriver;
             }
         }
 
