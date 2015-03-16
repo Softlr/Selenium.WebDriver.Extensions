@@ -55,7 +55,7 @@
     </target>
     
     <target name="compile" depends="build"/>
-    <target name="build.all" depends="build.net40 build.net35"/>
+    <target name="build.all" depends="build build.net40 build.net35"/>
     <target name="docs" depends="build.docs"/>
     
     <target name="test" depends="build">
@@ -98,7 +98,7 @@
         </exec>
     </target>
     
-    <target name="pack" depends="">
+    <target name="pack" depends="build.all">
         <exec program="${path.nuget}">
             <arg value="pack"/>
             <arg value="src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec"/>
