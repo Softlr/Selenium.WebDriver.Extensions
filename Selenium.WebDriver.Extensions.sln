@@ -37,6 +37,7 @@ Project("{7CF6DF6D-3B04-46F8-A40B-537D21BCA0B4}") = "Selenium.WebDriver.Extensio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{ABFABEC3-B280-40B7-9C25-7851F7E39B38}"
 	ProjectSection(SolutionItems) = preProject
+		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
 		go.bat = go.bat
 		.nuget\NAnt.exe.config = .nuget\NAnt.exe.config
