@@ -172,7 +172,7 @@
         }
 
         [Theory]
-        [PropertyData("SelectorData")]
+        [MemberData("SelectorData")]
         public void ShouldGenerateCorrectSelector(JQuerySelector selector, string expectedResult)
         {
             Assert.Equal(expectedResult, selector.Selector);
@@ -210,7 +210,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void EqualityOperator(JQuerySelector selector1, JQuerySelector selector2, bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

@@ -46,7 +46,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData", PropertyType = typeof(XPathSelectorTests))]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             XPathSelector selector1, 
             XPathSelector selector2, 

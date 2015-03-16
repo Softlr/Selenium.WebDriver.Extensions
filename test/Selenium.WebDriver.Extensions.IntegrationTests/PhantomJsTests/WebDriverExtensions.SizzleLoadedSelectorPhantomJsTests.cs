@@ -7,10 +7,10 @@
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests : 
-        WebDriverExtensionsSizzleSelectorTests, IUseFixture<PhantomJsFixture>
+    public class WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests : WebDriverExtensionsSizzleSelectorTests, 
+        IClassFixture<PhantomJsFixture>
     {
-        public void SetFixture(PhantomJsFixture fixture)
+        public WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.SizzleLoadedTestsUrl);

@@ -37,7 +37,7 @@
         }
 
         [Theory]
-        [PropertyData("LoadJQueryData")]
+        [MemberData("LoadJQueryData")]
         public void ShouldLoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
@@ -48,7 +48,7 @@
         }
 
         [Theory]
-        [PropertyData("LoadJQueryWithUriData")]
+        [MemberData("LoadJQueryWithUriData")]
         public void ShouldLoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
