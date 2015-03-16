@@ -4,6 +4,9 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.IE;
 
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class InternetExplorerFixture : IDisposable
     {
         public InternetExplorerFixture()

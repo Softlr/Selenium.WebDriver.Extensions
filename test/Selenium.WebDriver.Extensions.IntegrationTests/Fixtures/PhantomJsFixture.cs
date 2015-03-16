@@ -3,7 +3,10 @@
     using System;
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
-    
+
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class PhantomJsFixture : IDisposable
     {
         public PhantomJsFixture()

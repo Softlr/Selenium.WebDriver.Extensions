@@ -3,7 +3,10 @@
     using System;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
-    
+
+#if !NET35
+    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
+#endif
     public class ChromeFixture : IDisposable
     {
         public ChromeFixture()
