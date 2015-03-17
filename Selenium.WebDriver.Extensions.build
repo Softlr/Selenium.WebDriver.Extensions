@@ -15,7 +15,8 @@
     <property name="path.report.generator" value="packages\ReportGenerator.2.1.3.0\ReportGenerator.exe"/>
     <property name="path.report.coveralls" value="packages\coveralls.io.1.2.2\tools\coveralls.net.exe"/>
     <property name="dir.coverage.report" value="CoverageReport"/>
-    <property name="files.tests" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Tests.dll test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
+    <property name="files.unit.tests" value="test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Core.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\${project.config}\Selenium.WebDriver.Extensions.Tests.dll"/>
+    <property name="files.integration.tests" value="test\Selenium.WebDriver.Extensions.IntegrationTests\bin\${project.config}\Selenium.WebDriver.Extensions.IntegrationTests.dll"/>
     <property name="file.test.results" value="tests.xml"/>
     <property name="file.coverage.report" value="coverage.xml"/>
     
@@ -59,41 +60,40 @@
     
     <target name="test" depends="build">
         <exec program="${path.xunit}">
-            <arg line="${files.tests}"/>
-            <arg line="-trait Category=Unit"/>
+            <arg line="${files.unit.tests}"/>
             <arg value="-noshadow"/>
             <arg line="-parallel all"/>
         </exec>
     </target>
     
-    <target name="integration.phantomjs" depends="build">
+    <target name="integration.phantomjs" depends="">
         <exec program="${path.xunit}">
-            <arg line="${files.tests}"/>
-            <arg line="-trait Category=Integration;Browser=PhantomJS"/>
+            <arg line="${files.integration.tests}"/>
+            <arg line="-trait Browser=PhantomJS"/>
             <arg value="-noshadow"/>
         </exec>
     </target>
     
     <target name="integration.chrome" depends="build">
         <exec program="${path.xunit}">
-            <arg line="${files.tests}"/>
-            <arg line="-trait Category=Integration;Browser=Chrome"/>
+            <arg line="${files.integration.tests}"/>
+            <arg line="-trait Browser=Chrome"/>
             <arg value="-noshadow"/>
         </exec>
     </target>
     
     <target name="integration.firefox" depends="build">
         <exec program="${path.xunit}">
-            <arg line="${files.tests}"/>
-            <arg line="-trait Category=Integration;Browser=Firefox"/>
+            <arg line="${files.integration.tests}"/>
+            <arg line="-trait Browser=Firefox"/>
             <arg value="-noshadow"/>
         </exec>
     </target>
     
     <target name="integration.ie" depends="build">
         <exec program="${path.xunit}">
-            <arg line="${files.tests}"/>
-            <arg line="-trait Category=Integration;Browser=InternetExplorer"/>
+            <arg line="${files.integration.tests}"/>
+            <arg line="-trait Browser=InternetExplorer"/>
             <arg value="-noshadow"/>
         </exec>
     </target>
@@ -104,7 +104,7 @@
         <exec program="${path.opencover}">
             <arg value="-register:user"/>
             <arg value="-target:&quot;${path.xunit}&quot;"/>
-            <arg value="-targetargs:&quot;${files.tests} -trait Category=Unit -noshadow -parallel all -xml ${file.test.results}&quot;"/>
+            <arg value="-targetargs:&quot;${files.unit.tests} -noshadow -parallel all -xml ${file.test.results}&quot;"/>
             <arg value="-filter:&quot;+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*&quot;"/>
             <arg value="-output:&quot;${file.coverage.report}&quot;"/>
         </exec>
