@@ -48,6 +48,7 @@
 
   test_script:
     - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
 
   after_test:
     - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
@@ -195,6 +196,7 @@
 
   test_script:
     - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
 
   after_test:
     - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
