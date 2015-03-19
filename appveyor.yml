@@ -243,3 +243,5 @@
     - ps: ./psake
   
   test: off
+  
+  deploy: off
