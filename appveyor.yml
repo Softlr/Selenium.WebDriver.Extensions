@@ -219,3 +219,26 @@
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       prerelease: true
+
+# psake branches
+-
+  branches:
+    only:
+      - psake
+      
+  skip_tags: true
+  skip_commits:
+    message: /Update.*\.md/
+
+  version: 1.4.{build}
+  configuration: Release
+    
+  environment:
+    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
+
+  before_build:
+    - nuget restore
+  
+  build_script:
+    - ps: ./psake
+      
