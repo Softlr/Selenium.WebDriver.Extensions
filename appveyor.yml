@@ -242,4 +242,4 @@
   build_script:
     - ps: ./psake
   
-  test_script:
+  test: off
