@@ -1,8 +1,9 @@
 properties {
   $solution = 'Selenium.WebDriver.Extensions.sln'
   $version = '1.4.0'
-  $buildConfig = 'Release'
-  $visualStudioVersion = '12.0'
+  $buildConfig = '/property:Configuration=Release'
+  $docsConfig = '/property:Configuration=Docs'
+  $visualStudioVersion = '/property:VisualStudioVersion=12.0'
   $nuget = '.\.nuget\NuGet.exe'
   $xunit = '.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe'
   $opencover = '.\packages\OpenCover.4.5.3723\OpenCover.Console.exe'
@@ -12,7 +13,7 @@ properties {
   $sizzleUnitTests = '.\test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\Release\Selenium.WebDriver.Extensions.Sizzle.Tests.dll'
   $coreUnitTests = '.\test\Selenium.WebDriver.Extensions.Core.Tests\bin\Release\Selenium.WebDriver.Extensions.Core.Tests.dll'
   $combinedUnitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
-  $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$buildConfig\Selenium.WebDriver.Extensions.IntegrationTests.dll'
+  $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
   $coverageXml = '.\coverage.xml'
   $coverageReportDir = '.\CoverageReport'
 }
@@ -20,39 +21,39 @@ properties {
 task default -depends Compile, Test, Coverage, Docs, Pack
 
 task CleanNet45 {
-  msbuild /property:Configuration=$buildConfig /property:VisualStudioVersion=$visualStudioVersion /t:Clean
+  msbuild $solution $buildConfig $visualStudioVersion /t:Clean
 }
 
 task CleanNet40 {
-  msbuild /property:Configuration=$buildConfig-Net40 /property:VisualStudioVersion=$visualStudioVersion /t:Clean
+  msbuild $solution $buildConfig-Net40 $visualStudioVersion /t:Clean
 }
 
 task CleanNet35 {
-  msbuild /property:Configuration=$buildConfig-Net35 /property:VisualStudioVersion=$visualStudioVersion /t:Clean
+  msbuild $solution $buildConfig-Net35 $visualStudioVersion /t:Clean
 }
 
 task CleanDocs {
-  msbuild /property:Configuration=Docs /property:VisualStudioVersion=$visualStudioVersion /t:Clean
+  msbuild $solution $docsConfig $visualStudioVersion /t:Clean
 }
 
 task Clean -depends CleanNet45, CleanNet40, CleanNet35, CleanDocs
 
 task CompileNet45 -depends CleanNet45 {
-  msbuild $solution /property:Configuration=$buildConfig /property:VisualStudioVersion=$visualStudioVersion
+  msbuild $solution $buildConfig $visualStudioVersion
 }
 
 task CompileNet40 -depends CleanNet40 {
-  msbuild $solution /property:Configuration=$buildConfig-Net40 /property:VisualStudioVersion=$visualStudioVersion
+  msbuild $solution $buildConfig-Net40 $visualStudioVersion
 }
 
 task CompileNet35 -depends CleanNet35 {
-  msbuild $solution /property:Configuration=$buildConfig-Net35 /property:VisualStudioVersion=$visualStudioVersion
+  msbuild $solution $buildConfig-Net35 $visualStudioVersion
 }
 
 task Compile -depends CompileNet45, CompileNet40, CompileNet35
 
 task CompileDocs -depends CleanDocs {
-  msbuild $solution /property:Configuration=Docs /property:VisualStudioVersion=$visualStudioVersion
+  msbuild $solution $docsConfig $visualStudioVersion
 }
 
 task Docs -depends CompileDocs
