@@ -23,91 +23,91 @@ FormatTaskName '-------- {0} --------'
 task default -depends Compile, Test, Coverage, Docs, Pack
 
 task CleanNet45 {
-  msbuild $solution $buildConfig $visualStudioVersion /t:Clean
+  exec { msbuild $solution $buildConfig $visualStudioVersion /t:Clean }
 }
 
 task CleanNet40 {
-  msbuild $solution $buildConfig-Net40 $visualStudioVersion /t:Clean
+  exec { msbuild $solution $buildConfig-Net40 $visualStudioVersion /t:Clean }
 }
 
 task CleanNet35 {
-  msbuild $solution $buildConfig-Net35 $visualStudioVersion /t:Clean
+  exec { msbuild $solution $buildConfig-Net35 $visualStudioVersion /t:Clean }
 }
 
 task CleanDocs {
-  msbuild $solution $docsConfig $visualStudioVersion /t:Clean
+  exec { msbuild $solution $docsConfig $visualStudioVersion /t:Clean }
 }
 
 task Clean -depends CleanNet45, CleanNet40, CleanNet35, CleanDocs
 
 task CompileNet45 -depends CleanNet45 {
-  msbuild $solution $buildConfig $visualStudioVersion
+  exec { msbuild $solution $buildConfig $visualStudioVersion }
 }
 
 task CompileNet40 -depends CleanNet40 {
-  msbuild $solution $buildConfig-Net40 $visualStudioVersion
+  exec { msbuild $solution $buildConfig-Net40 $visualStudioVersion }
 }
 
 task CompileNet35 -depends CleanNet35 {
-  msbuild $solution $buildConfig-Net35 $visualStudioVersion
+  exec { msbuild $solution $buildConfig-Net35 $visualStudioVersion }
 }
 
 task Compile -depends CompileNet45, CompileNet40, CompileNet35
 
 task CompileDocs -depends CleanDocs {
-  msbuild $solution $docsConfig $visualStudioVersion
+  exec { msbuild $solution $docsConfig $visualStudioVersion }
 }
 
 task Docs -depends CompileDocs
 
 task Test -depends CompileNet45 {
-  & $xunit $jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -noshadow -parallel all
+  exec { & $xunit $jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -noshadow -parallel all }
 }
 
 task IntegrationPhantomJs -depends CompileNet45 {
-  & $xunit $integrationTests -noshadow -trait Browser=PhantomJS
+  exec { & $xunit $integrationTests -noshadow -trait Browser=PhantomJS }
 }
 
 task IntegrationChrome -depends CompileNet45 {
-  & $xunit $integrationTests -noshadow -trait Browser=Chrome
+  exec { & $xunit $integrationTests -noshadow -trait Browser=Chrome }
 }
 
 task IntegrationFirefox -depends CompileNet45 {
-  & $xunit $integrationTests -noshadow -trait Browser=Firefox
+  exec { & $xunit $integrationTests -noshadow -trait Browser=Firefox }
 }
 
 task IntegrationInternetExplorer -depends CompileNet45 {
-  & $xunit $integrationTests -noshadow -trait Browser=InternetExplorer
+  exec { & $xunit $integrationTests -noshadow -trait Browser=InternetExplorer }
 }
 
 task Integration -depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
 
 task AnalyzeCoverage -depends CompileNet45 {
-  & $opencover -register:user -target:$xunit "-targetargs:$jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -noshadow -parallel all" "-filter:+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*" -output:$coverageXml
+  exec { & $opencover -register:user -target:$xunit "-targetargs:$jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -noshadow -parallel all" "-filter:+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*" -output:$coverageXml }
 }
 
 task Coverage -depends AnalyzeCoverage {
-  & $reportGenerator -reports:$coverageXml -targetdir:$coverageReportDir -reporttypes:Html
+  exec { & $reportGenerator -reports:$coverageXml -targetdir:$coverageReportDir -reporttypes:Html }
 }
 
 task Coveralls -depends AnalyzeCoverage {
-  & $coveralls --opencover $coverageXml
+  exec { & $coveralls --opencover $coverageXml }
 }
 
 task PackJQuery -depends Compile {
-  & $nuget pack .\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version
+  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version }
 }
 
 task PackSizzle -depends Compile {
-  & $nuget pack .\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version
+  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version }
 }
 
 task PackCore -depends Compile {
-  & $nuget pack .\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version
+  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version }
 }
 
 task PackCombined -depends Compile {
-  & $nuget pack .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
+  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version }
 }
 
 task Pack -depends PackJQuery, PackSizzle, PackCore, PackCombined
