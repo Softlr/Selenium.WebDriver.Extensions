@@ -18,6 +18,8 @@ properties {
   $coverageReportDir = '.\CoverageReport'
 }
 
+FormatTaskName '-------- {0} --------'
+
 task default -depends Compile, Test, Coverage, Docs, Pack
 
 task CleanNet45 {
