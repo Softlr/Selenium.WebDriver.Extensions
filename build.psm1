@@ -1,9 +1,9 @@
 <#
 .SYNOPSIS
-Invoke the code coverage analysis.
+Creates the code coverage analysis.
 
 .DESCRIPTION
-This function invokes the code coverage analysis tool for the given test assemblies.
+This function creates the code coverage analysis tool for the given test assemblies.
 
 .PARAMETER Tests
 The test assemblies.
@@ -15,18 +15,18 @@ The output path for the coverage file.
 The filter for the test assemblies.
 
 .EXAMPLE
-Invoke-AnalyzeCoverage @(.\Foo.Tests\bin\Release\Foo.Tests.dll) ./coverage.xml
+New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll) ./coverage.xml
 
 .EXAMPLE
-Invoke-AnalyzeCoverage @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml
+New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml
 
 .EXAMPLE
-Invoke-AnalyzeCoverage @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml
+New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml
 
 .EXAMPLE
-Invoke-AnalyzeCoverage @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml -Filter "+[*]*"
+New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml -Filter "+[*]*"
 #>
-function Invoke-AnalyzeCoverage {
+function New-CoverageAnalysis {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
@@ -40,18 +40,18 @@ function Invoke-AnalyzeCoverage {
 		[string] $Filter = "+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*"
 	)
 
-	$testAssembies = $Tests -join " "
+	$testAssemblies = $Tests -Join " "
 	Exec {
-		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe "-targetargs:$testAssembies -noshadow -parallel all" "-filter:$Filter" -output:$Output
+		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
 	}
 }
 
 <#
 .SYNOPSIS
-Invoke the code coverage report generation.
+Creates the code coverage report.
 
 .DESCRIPTION
-This function invokes the code coverage report generation that generate a HTML coverage report.
+This function creates the code coverage report.
 
 .PARAMETER CoverageXmlPath
 The code coverage XML file path.
@@ -63,12 +63,12 @@ The output path for the coverage report.
 The verebosity level.
 
 .EXAMPLE
-Invoke-CoverageReportGenerator .\coverage.xml .\CoverageReport
+New-CoverageReport .\coverage.xml .\CoverageReport
 
 .EXAMPLE
-Invoke-CoverageReportGenerator .\coverage.xml .\CoverageReport -Verbosity Verbose
+New-CoverageReport .\coverage.xml .\CoverageReport -Verbosity Verbose
 #>
-function Invoke-CoverageReportGenerator {
+function New-CoverageReport {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true)]
@@ -90,18 +90,18 @@ function Invoke-CoverageReportGenerator {
 
 <#
 .SYNOPSIS
-Sends the coverage data to coveralls.
+Pushishes the coverage data to coveralls.io.
 
 .DESCRIPTION
-This function sends the coverage data to coveralls.io.
+This function publishes the coverage data to coveralls.io.
 
 .PARAMETER CoverageXmlPath
 The code coverage XML file path.
 
 .EXAMPLE
-Send-Coveralls .\coverage.xml
+Publish-Coveralls .\coverage.xml
 #>
-function Send-Coveralls {
+function Publish-Coveralls {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true)]
@@ -116,19 +116,19 @@ function Send-Coveralls {
 
 <#
 .SYNOPSIS
-Invoke the MS build process.
+Creates the build.
 
 .DESCRIPTION
-This function invokes the MS build process that builds given solution.
+This function creates the build for the given solution.
 
 .PARAMETER SolutionPath
-The path for the Visual Studio solution file.
+The path for the solution file.
 
 .PARAMETER BuildConfiguration
 The build configuration name to use.
 
-.PARAMETER VisualStudioVersion
-The visual studio version to use.
+.PARAMETER ToolsVersion
+The tools version.
 
 .PARAMETER Verbosity
 The verebosity level.
@@ -137,18 +137,21 @@ The verebosity level.
 The target for the MS build.
 
 .EXAMPLE
-Invoke-Build .\Foo.sln
+New-Build .\Foo.sln
 
 .EXAMPLE
-Invoke-Build .\Foo.sln "Debug"
+New-Build .\Foo.sln "Debug"
 
 .EXAMPLE
-Invoke-Build .\Foo.sln -Verbosity normal
+New-Build .\Foo.sln -Verbosity normal
 
 .EXAMPLE
-Invoke-Build .\Foo.sln -Target Clean
+New-Build .\Foo.sln -Target Clean
+
+.EXAMPLE
+New-Build .\Foo.sln -ToolsVersion 12.0
 #>
-function Invoke-Build {
+function New-Build {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true)]
@@ -156,8 +159,8 @@ function Invoke-Build {
 		[string] $SolutionPath,
 
 		[string] $BuildConfiguration = "Release",
-
-		[string] $VisualStudioVersion = "12.0",
+		
+		[string] $ToolsVersion = "4.0",
 
 		[string] $Verbosity = "minimal",
 
@@ -165,7 +168,7 @@ function Invoke-Build {
 	)
 
 	Exec {
-		msbuild $SolutionPath /property:Configuration=$BuildConfiguration /property:VisualStudioVersion=$VisualStudioVersion /verbosity:$Verbosity /t:$Target
+		msbuild $SolutionPath /property:Configuration=$BuildConfiguration /verbosity:$Verbosity /t:$Target /tv:$ToolsVersion
 	}
 }
 
@@ -192,9 +195,9 @@ Write-NugetPackage .\Foo\Foo.nuspec
 Write-NugetPackage .\Foo\Foo.nuspec -Output .\packages
 
 .EXAMPLE
-Write-NugetPackage .\Foo\Foo.nuspec . -Version 2.0
+New-NugetPackage .\Foo\Foo.nuspec . -Version 2.0
 #>
-function Write-NugetPackage {
+function New-NugetPackage {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
@@ -206,10 +209,8 @@ function Write-NugetPackage {
 		[string] $Version = "1.0"
 	)
 
-	Foreach ($spec in $SpecificationPaths) {
-		Exec {
-			./.nuget/NuGet.exe pack $spec -Version $Version -OutputDirectory $Output
-		}
+	Exec {
+		$SpecificationPaths | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output }
 	}
 }
 
@@ -227,12 +228,12 @@ The test assemblies.
 The trait to filter the tests.
 
 .EXAMPLE
-Invoke-Tests .\Foo.Tests\bin\Release\Foo.Tests.dll
+Test-Assembly .\Foo.Tests\bin\Release\Foo.Tests.dll
 
 .EXAMPLE
-Invoke-Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
+Test-Assembly .\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
 #>
-function Invoke-Tests {
+function Test-Assembly {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
@@ -242,17 +243,15 @@ function Invoke-Tests {
 		[string] $Trait
 	)
 
-	$testFiles = @()
-	Foreach ($test in $Tests) {
-		$testFiles += $test
-	}
+	$testAssemblies = @()
+	$Tests | ForEach-Object -Process { $testAssemblies += $_ }
 
 	If ($Trait -ne $null -and $Trait -ne "") {
-		$testFiles += "-trait"
-		$testFiles += $Trait
+		$testAssemblies += "-trait"
+		$testAssemblies += $Trait
 	}
 
 	Exec {
-		.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe $testFiles -noshadow -parallel all
+		.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
 	}
 }
