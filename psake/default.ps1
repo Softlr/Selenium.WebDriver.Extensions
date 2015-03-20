@@ -103,22 +103,22 @@ task Coveralls -depends AnalyzeCoverage {
 
 task PackJQuery -depends Compile {
 	. .\nugetPack.ps1
-	Write-NugetPackage .\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version
+	Write-NugetPackage ..\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version
 }
 
 task PackSizzle -depends Compile {
 	. .\nugetPack.ps1
-	Write-NugetPackage .\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version
+	Write-NugetPackage ..\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version
 }
 
 task PackCore -depends Compile {
 	. .\nugetPack.ps1
-	Write-NugetPackage .\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version
+	Write-NugetPackage ..\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version
 }
 
 task PackCombined -depends Compile {
 	. .\nugetPack.ps1
-	Write-NugetPackage .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
+	Write-NugetPackage ..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
 }
 
 task Pack -depends PackJQuery, PackSizzle, PackCore, PackCombined
