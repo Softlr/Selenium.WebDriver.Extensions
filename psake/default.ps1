@@ -83,12 +83,12 @@ Task Integration  -Description "Runs all of the integration tests" -Depends Inte
 
 Task AnalyzeCoverage -Description "Analyzes the code coverage" -Depends CompileNet45 {
 	. .\coverage.ps1
-	Invoke-AnalyzeCoverage $unitTests -Output $coverageXml
+	Invoke-AnalyzeCoverage $unitTests $coverageXml
 }
 
 Task Coverage -Description "Generates the code coverage HTML report" -Depends AnalyzeCoverage {
 	. .\coverageReport.ps1
-	Invoke-CoverageReportGenerator $coverageXml -Output ..\CoverageReport
+	Invoke-CoverageReportGenerator $coverageXml ..\CoverageReport
 }
 
 Task Coveralls -Description "Sends coverage data to coveralls.io" -Depends AnalyzeCoverage {

@@ -1,18 +1,14 @@
 <#
 .SYNOPSIS
-
 Sends the coverage data to coveralls.
 
 .DESCRIPTION
-
 This function sends the coverage data to coveralls.io.
 
 .PARAMETER CoverageXmlPath
-
 The code coverage XML file path.
 
 .EXAMPLE
-
 Send-Coveralls ..\coverage.xml
 #>
 function Send-Coveralls {

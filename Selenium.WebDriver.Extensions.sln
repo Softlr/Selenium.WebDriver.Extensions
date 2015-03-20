@@ -49,7 +49,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "psake", "psake", "{B21FB72D
 		psake\coverageReport.ps1 = psake\coverageReport.ps1
 		psake\coveralls.ps1 = psake\coveralls.ps1
 		psake\default.ps1 = psake\default.ps1
-		psake\integration.ps1 = psake\integration.ps1
 		psake\msbuild.ps1 = psake\msbuild.ps1
 		psake\nugetPack.ps1 = psake\nugetPack.ps1
 		psake\test.ps1 = psake\test.ps1

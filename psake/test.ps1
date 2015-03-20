@@ -1,23 +1,21 @@
 <#
 .SYNOPSIS
-
 Invoke the tests.
 
 .DESCRIPTION
-
 This function invokes the tests for the given test assemblies.
 
 .PARAMETER Tests
-
 The test assemblies.
 
-.PARAMETER XUnitPath
-
-The xunit console runner path.
+.PARAMETER Trait
+The trait to filter the tests.
 
 .EXAMPLE
-
 Invoke-Tests ..\Foo.Tests\bin\Release\Foo.Tests.dll
+
+.EXAMPLE
+Invoke-Tests ..\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
 #>
 function Invoke-Tests {
 	[CmdletBinding()]
@@ -25,6 +23,7 @@ function Invoke-Tests {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string[]] $Tests,
+
 		[string] $Trait
 	)
 
