@@ -7,21 +7,9 @@ Invoke the tests.
 
 This function invokes the tests for the given test assemblies.
 
-.PARAMETER Test1
+.PARAMETER Tests
 
-The first test assembly.
-
-.PARAMETER Test2
-
-The second test assembly.
-
-.PARAMETER Test3
-
-The third test assembly.
-
-.PARAMETER Test4
-
-The fourth test assembly.
+The test assemblies.
 
 .PARAMETER XUnitPath
 
@@ -36,14 +24,22 @@ function Invoke-Tests {
 	param(
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[string] $Test1,
-		[string] $Test2 = "",
-		[string] $Test3 = "",
-		[string] $Test4 = "",
+		[string[]] $Tests,
+		[string] $Trait = "",
 		[string] $XUnitPath = "..\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe"
 	)
 
+	$testFiles = @()
+	Foreach ($test in $Tests) {
+		$testFiles += $test
+	}
+
+	If ($Trait -ne "") {
+		$testFiles += "-trait"
+		$testFiles += $Trait
+	}
+
 	Exec {
-		& $XUnitPath $Test1 $Test2 $Test3 $Test4 -noshadow -parallel all
+		& $XUnitPath $testFiles -noshadow -parallel all
 	}
 }

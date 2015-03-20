@@ -1,10 +1,7 @@
 properties {
 	$solution = '..\Selenium.WebDriver.Extensions.sln'
 	$version = '1.4.0'
-	$jQueryUnitTests = '..\test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\Release\Selenium.WebDriver.Extensions.JQuery.Tests.dll'
-	$sizzleUnitTests = '..\test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\Release\Selenium.WebDriver.Extensions.Sizzle.Tests.dll'
-	$coreUnitTests = '..\test\Selenium.WebDriver.Extensions.Core.Tests\bin\Release\Selenium.WebDriver.Extensions.Core.Tests.dll'
-	$combinedUnitTests = '..\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
+	$unitTests = '..\test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\Release\Selenium.WebDriver.Extensions.JQuery.Tests.dll', '..\test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\Release\Selenium.WebDriver.Extensions.Sizzle.Tests.dll', '..\test\Selenium.WebDriver.Extensions.Core.Tests\bin\Release\Selenium.WebDriver.Extensions.Core.Tests.dll', '..\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
 	$integrationTests = '..\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
 	$coverageXml = '..\coverage.xml'
 }
@@ -61,34 +58,34 @@ task Docs -depends CompileDocs
 
 task Test -depends CompileNet45 {
 	. .\test.ps1
-	Invoke-Tests $jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests
+	Invoke-Tests $unitTests
 }
 
 task IntegrationPhantomJs -depends CompileNet45 {
-	. .\integration.ps1
-	Invoke-IntegrationTests $integrationTests -Trait Browser=PhantomJS
+	. .\test.ps1
+	Invoke-Tests @($integrationTests) -Trait Browser=PhantomJS
 }
 
 task IntegrationChrome -depends CompileNet45 {
-	. .\integration.ps1
-	Invoke-IntegrationTests $integrationTests -Trait Browser=Chrome
+	. .\test.ps1
+	Invoke-Tests @($integrationTests) -Trait Browser=Chrome
 }
 
 task IntegrationFirefox -depends CompileNet45 {
-	. .\integration.ps1
-	Invoke-IntegrationTests $integrationTests -Trait Browser=Firefox
+	. .\test.ps1
+	Invoke-Tests @($integrationTests) -Trait Browser=Firefox
 }
 
 task IntegrationInternetExplorer -depends CompileNet45 {
-	. .\integration.ps1
-	Invoke-IntegrationTests $integrationTests -Trait Browser=InternetExplorer
+	. .\test.ps1
+	Invoke-Tests @($integrationTests) -Trait Browser=InternetExplorer
 }
 
 task Integration -depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
 
 task AnalyzeCoverage -depends CompileNet45 {
 	. .\coverage.ps1
-	Invoke-AnalyzeCoverage $jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -Output $coverageXml
+	Invoke-AnalyzeCoverage $unitTests -Output $coverageXml
 }
 
 task Coverage -depends AnalyzeCoverage {
