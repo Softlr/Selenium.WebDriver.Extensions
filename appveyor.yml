@@ -240,7 +240,7 @@
     - nuget restore
   
   build_script:
-    - ps: ./psake
+    - ps: ./psake.ps1
   
   test: off
   
