@@ -15,10 +15,6 @@ The path for the NuGet specification file.
 
 The version of the package.
 
-.PARAMETER NuGetPath
-
-The path for the NuGet executable.
-
 .EXAMPLE
 
 Write-NugetPackage ..\Foo\Foo.nuspec
@@ -29,11 +25,10 @@ function Write-NugetPackage {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string] $SpecPath,
-		[string] $Version = "1.0",
-		[string] $NuGetPath = "../.nuget/NuGet.exe"
+		[string] $Version = "1.0"
 	)
 
 	Exec {
-		& $NuGetPath pack $SpecPath -Version $Version
+		../.nuget/NuGet.exe pack $SpecPath -Version $Version
 	}
 }

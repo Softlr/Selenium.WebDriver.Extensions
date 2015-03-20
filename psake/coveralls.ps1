@@ -11,22 +11,19 @@ This function sends the coverage data to coveralls.io.
 
 The code coverage XML file path.
 
-.PARAMETER CoverallsToolPath
-
 .EXAMPLE
 
-Push-Coveralls ..\coverage.xml
+Send-Coveralls ..\coverage.xml
 #>
 function Send-Coveralls {
 	[CmdletBinding()]
 	param(
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[string] $CoverageXmlPath,
-		[string] $CoverallsToolPath = "..\packages\coveralls.io.1.2.2\tools\coveralls.net.exe"
+		[string] $CoverageXmlPath
 	)
 
 	Exec {
-		  & $CoverallsToolPath --opencover $CoverageXmlPath
+		  ..\packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover $CoverageXmlPath
 	}
 }

@@ -25,8 +25,7 @@ function Invoke-Tests {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string[]] $Tests,
-		[string] $Trait = "",
-		[string] $XUnitPath = "..\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe"
+		[string] $Trait
 	)
 
 	$testFiles = @()
@@ -34,12 +33,12 @@ function Invoke-Tests {
 		$testFiles += $test
 	}
 
-	If ($Trait -ne "") {
+	If ($Trait -ne $null -and $Trait -ne "") {
 		$testFiles += "-trait"
 		$testFiles += $Trait
 	}
 
 	Exec {
-		& $XUnitPath $testFiles -noshadow -parallel all
+		..\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe $testFiles -noshadow -parallel all
 	}
 }

@@ -11,14 +11,6 @@ This function invokes the code coverage analysis tool for the given test assembl
 
 The test assemblies.
 
-.PARAMETER XUnitPath
-
-The xunit console runner path.
-
-.PARAMETER OpenCoverPath
-
-The Open Cover path.
-
 .PARAMETER Output
 
 The output path for the coverage file.
@@ -33,13 +25,14 @@ function Invoke-AnalyzeCoverage {
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string[]] $Tests,
-		[string] $XUnitPath = "..\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe",
-		[string] $OpenCoverPath = "..\packages\OpenCover.4.5.3723\OpenCover.Console.exe",
-		[string] $Output = ".\coverage.xml"
+		
+		[Parameter(Mandatory = $true)]
+		[ValidateNotNullOrEmpty()]
+		[string] $Output
 	)
 
 	$testAssembies = $Tests -join " "
 	Exec {
-		  & $OpenCoverPath -register:user -target:$XUnitPath "-targetargs:$testAssembies -noshadow -parallel all" "-filter:+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*" -output:$Output
+		  ..\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:..\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe "-targetargs:$testAssembies -noshadow -parallel all" "-filter:+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*" -output:$Output
 	}
 }
