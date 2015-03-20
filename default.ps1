@@ -42,8 +42,9 @@ Task CompileNet35 -Description "Compiles the .NET 3.5 build configuration" -Depe
 
 Task Compile -Description "Compiles all of the build configurations" -Depends CompileNet45, CompileNet40, CompileNet35
 
-Task Docs  -Description "Compiles the documentation build configuration" -Depends CleanDocs {
-	Invoke-Build $solution -BuildConfiguration Docs
+Task Docs  -Description "Compiles the documentation build configuration" {# -Depends CleanDocs {
+	$env:SHFBROOT = $PSScriptRoot + "\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"
+	New-Build $solution -BuildConfiguration Docs
 }
 
 Task Test -Description "Runs the unit tests" -Depends CompileNet45 {
