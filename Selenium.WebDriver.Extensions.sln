@@ -39,8 +39,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
-		default.ps1 = default.ps1
+		psake.ps1 = psake.ps1
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "psake", "psake", "{B21FB72D-484E-4C0A-92A5-39A41397D720}"
+	ProjectSection(SolutionItems) = preProject
+		psake\coverage.ps1 = psake\coverage.ps1
+		psake\coverageReport.ps1 = psake\coverageReport.ps1
+		psake\coveralls.ps1 = psake\coveralls.ps1
+		psake\default.ps1 = psake\default.ps1
+		psake\integration.ps1 = psake\integration.ps1
+		psake\msbuild.ps1 = psake\msbuild.ps1
+		psake\nugetPack.ps1 = psake\nugetPack.ps1
+		psake\test.ps1 = psake\test.ps1
 	EndProjectSection
 EndProject
 Global
