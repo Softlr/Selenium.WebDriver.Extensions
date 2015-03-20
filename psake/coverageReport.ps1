@@ -15,6 +15,10 @@ The code coverage XML file path.
 
 The output path for the coverage report.
 
+.PARAMETER Verbosity
+
+The verebosity level.
+
 .EXAMPLE
 
 Invoke-CoverageReportGenerator ..\coverage.xml
@@ -28,10 +32,12 @@ function Invoke-CoverageReportGenerator {
 		
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[string] $Output
+		[string] $Output,
+
+		[string] $Verbosity = "Error"
 	)
 
 	Exec {
-		  ..\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:Error
+		  ..\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
 	}
 }
