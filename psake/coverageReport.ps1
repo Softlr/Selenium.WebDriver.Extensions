@@ -32,6 +32,6 @@ function Invoke-CoverageReportGenerator {
 	)
 
 	Exec {
-		  ..\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -reporttypes:Html
+		  ..\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:Error
 	}
 }
