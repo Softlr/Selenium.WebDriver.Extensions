@@ -233,9 +233,6 @@
   version: 1.4.{build}
   configuration: Release
     
-  environment:
-    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
-
   build_script:
     - ps: ./psake.ps1
   
