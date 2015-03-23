@@ -146,6 +146,11 @@
         /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
         public static bool CheckSelectorPrerequisites(this IWebDriver driver, ILoader loader)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             if (loader == null)
             {
                 throw new ArgumentNullException("loader");
