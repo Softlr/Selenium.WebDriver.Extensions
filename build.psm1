@@ -42,7 +42,7 @@ function New-CoverageAnalysis {
 
 	$testAssemblies = $Tests -Join " "
 	Exec {
-		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
+		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
 	}
 }
 
@@ -252,6 +252,6 @@ function Test-Assembly {
 	}
 
 	Exec {
-		.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
+		.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
 	}
 }
