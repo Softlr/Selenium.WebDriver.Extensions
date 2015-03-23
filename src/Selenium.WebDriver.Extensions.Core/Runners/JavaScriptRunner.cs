@@ -28,6 +28,11 @@
         /// </remarks>
         public virtual T Find<T>(IWebDriver driver, ISelector by)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             if (by == null)
             {
                 throw new ArgumentNullException("by");

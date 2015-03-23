@@ -16,6 +16,16 @@
         /// <returns>The jQuery helper.</returns>
         public static ChainJQueryHelper JQuery(this WebElement webElement, string selector)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
             return webElement.JQuery(By.JQuerySelector(selector));
         }
 
@@ -30,6 +40,11 @@
             if (webElement == null)
             {
                 throw new ArgumentNullException("webElement");
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
             }
 
             return new ChainJQueryHelper(webElement.WrappedDriver, selector, webElement);

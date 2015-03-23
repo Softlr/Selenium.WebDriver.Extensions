@@ -17,6 +17,10 @@
         public JQueryHelper(IWebDriver driver, WebElement webElement = null)
             : base(driver, webElement)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
         }
 
         /// <summary>
@@ -34,6 +38,16 @@
         /// </remarks>
         public void Load(string version = "latest", TimeSpan? timeout = null)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException("version");
+            }
+
+            if (version.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Version cannot be empty", "version");
+            }
+
             this.Driver.LoadExternalLibrary(
                 new JQueryLoader(),
                 new Uri("https://code.jquery.com/jquery-" + version + ".min.js"),
@@ -51,6 +65,11 @@
         /// </remarks>
         public void Load(Uri jQueryUri, TimeSpan? timeout = null)
         {
+            if (jQueryUri == null)
+            {
+                throw new ArgumentNullException("jQueryUri");
+            }
+
             this.Driver.LoadExternalLibrary(new JQueryLoader(), jQueryUri, timeout);
         }
     }

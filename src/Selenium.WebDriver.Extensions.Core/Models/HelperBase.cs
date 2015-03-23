@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
+    using System;
     using OpenQA.Selenium;
 
     /// <summary>
@@ -14,6 +15,11 @@
         /// <param name="webElement">The web element.</param>
         protected HelperBase(IWebDriver driver, WebElement webElement = null)
         {
+            if (driver == null)
+            {
+                throw  new ArgumentNullException("driver");
+            }
+
             this.Driver = driver;
             this.WebElement = webElement;
         }

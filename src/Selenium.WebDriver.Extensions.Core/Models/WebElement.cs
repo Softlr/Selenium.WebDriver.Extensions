@@ -109,6 +109,16 @@
         /// </param>
         public WebElement(IWebElement webElement, ISelector selector, int selectorResultIndex = 0)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
             this.InnerElement = webElement;
             this.Selector = selector;
             this.SelectorResultIndex = selectorResultIndex;
@@ -117,6 +127,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="WebElement"/> class.
         /// </summary>
+        /// <remarks>This constructor is only used for testing purposes.</remarks>
         internal WebElement()
         {
         }

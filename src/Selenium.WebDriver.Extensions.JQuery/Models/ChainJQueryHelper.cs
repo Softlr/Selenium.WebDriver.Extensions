@@ -22,6 +22,11 @@
         public ChainJQueryHelper(IWebDriver driver, JQuerySelector selector, WebElement webElement = null)
             : base(driver, webElement)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
             this.Selector = selector;
         }
 
