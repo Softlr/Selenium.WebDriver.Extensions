@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="name">A string containing a DOM element class name.</param>
         public NameSelector(string name)
-            : base("[name='" + name + "']")
+            : base(ModifyName(name))
         {
         }
 
@@ -75,6 +75,26 @@
         public override int GetHashCode()
         {
             return this.RawSelector.GetHashCode() ^ this.BaseElement.GetHashCode();
+        }
+
+        /// <summary>
+        /// Modifies the name to be a proper query selector value.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The query selector value.</returns>
+        private static string ModifyName(string name)
+        {
+            if (name == null)
+            {
+                return null;
+            }
+
+            if (string.IsNullOrWhiteSpace(name))
+            {
+                return string.Empty;
+            }
+
+            return "[name='" + name + "']";
         }
     }
 }

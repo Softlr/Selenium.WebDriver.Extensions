@@ -22,9 +22,19 @@
                 throw new ArgumentNullException("text");
             }
 
+            if (string.IsNullOrWhiteSpace(text))
+            {
+                throw new ArgumentException("Text cannot be empty", "text");
+            }
+
             if (baseElement == null)
             {
                 throw new ArgumentNullException("baseElement");
+            }
+
+            if (string.IsNullOrWhiteSpace(baseElement))
+            {
+                throw new ArgumentException("Base element cannot be empty", "baseElement");
             }
         }
 

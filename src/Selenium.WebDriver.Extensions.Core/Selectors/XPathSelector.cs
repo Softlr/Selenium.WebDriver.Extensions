@@ -20,6 +20,11 @@
                 throw new ArgumentNullException("xpath");
             }
 
+            if (string.IsNullOrWhiteSpace(xpath))
+            {
+                throw new ArgumentException("XPath cannot be empty", "xpath");
+            }
+
             this.Selector = @"(function(path) {
                 'use strict';
                 var elements = document.evaluate(path, document, null, XPathResult.ANY_TYPE, null),

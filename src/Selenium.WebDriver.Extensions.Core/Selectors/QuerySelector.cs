@@ -23,9 +23,19 @@
                 throw new ArgumentNullException("selector");
             }
 
+            if (string.IsNullOrWhiteSpace(selector))
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             if (baseElement == null)
             {
                 throw new ArgumentNullException("baseElement");
+            }
+
+            if (string.IsNullOrWhiteSpace(baseElement))
+            {
+                throw new ArgumentException("Base element cannot be empty", "baseElement");
             }
 
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
@@ -47,6 +57,11 @@
             if (selector == null)
             {
                 throw new ArgumentNullException("selector");
+            }
+
+            if (string.IsNullOrWhiteSpace(selector))
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
             }
 
             if (baseSelector == null)
