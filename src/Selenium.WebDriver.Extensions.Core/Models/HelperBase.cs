@@ -17,7 +17,7 @@
         {
             if (driver == null)
             {
-                throw  new ArgumentNullException("driver");
+                throw new ArgumentNullException("driver");
             }
 
             this.Driver = driver;
