@@ -17,10 +17,6 @@
         public JQueryHelper(IWebDriver driver, WebElement webElement = null)
             : base(driver, webElement)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException("driver");
-            }
         }
 
         /// <summary>
