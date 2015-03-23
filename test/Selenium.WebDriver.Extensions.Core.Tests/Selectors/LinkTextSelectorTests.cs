@@ -28,13 +28,6 @@
         }
 
         [Fact]
-        public void ShouldGenerateCorrectSelector()
-        {
-            var selector = By.LinkText("test");
-            Assert.Equal(selector.Selector, selector.ToString());
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.LinkText("test").CallFormatString;

@@ -26,13 +26,6 @@
         }
 
         [Fact]
-        public void ShouldGenerateCorrectSelector()
-        {
-            var selector = By.XPath("html");
-            Assert.Equal(selector.Selector, selector.ToString());
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.XPath("html").CallFormatString;

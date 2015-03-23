@@ -154,7 +154,7 @@
         public void ShouldThrowExceptionWhenCreatingQuerySelectorWithNullBaseSelector()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (ISelector)null));
-            Assert.Equal("baseElement", ex.ParamName);
+            Assert.Equal("baseSelector", ex.ParamName);
         }
 
         [Fact]
