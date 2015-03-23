@@ -102,8 +102,7 @@
                 .Returns("body > div");
             var elementList = new List<IWebElement> { element.Object };
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(
-                    "return document.querySelectorAll('body > div').length === 0 ? [] : document.querySelectorAll('body > div')[0].querySelectorAll('span');"))
+                .Setup(x => x.ExecuteScript(It.IsRegex("document.querySelectorAll\\('body > div'\\).length === 0")))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
             var webElement = new Mock<WebElement>();
@@ -141,8 +140,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(
-                    "return document.querySelectorAll('body > div').length === 0 ? [] : document.querySelectorAll('body > div')[0].querySelectorAll('span');"))
+                .Setup(x => x.ExecuteScript(It.IsRegex("document.querySelectorAll\\('body > div'\\).length === 0")))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
             var webElement = new Mock<WebElement>();
@@ -182,8 +180,6 @@
         [Fact]
         public void ShouldInitializeInnerElementCorrectly()
         {
-            var driver = new Mock<IWebDriver>();
-
             var findElementResult = false;
             var findElementsResult = false;
             var clearResult = false;
@@ -193,7 +189,7 @@
             var getAtrributeResult = false;
             var getCssValueResult = false;
             var webElement = new Mock<IWebElement>();
-            webElement.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+            webElement.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Text).Returns("test");
             webElement.SetupGet(x => x.Enabled).Returns(true);
@@ -215,7 +211,7 @@
 
             var element = new WebElement(webElement.Object, By.TagName("div"));
 
-            Assert.Same(driver.Object, element.WrappedDriver);
+            Assert.Same(this.driverMock.Object, element.WrappedDriver);
             Assert.Equal(webElement.Object.TagName, element.TagName);
             Assert.Equal(webElement.Object.Text, element.Text);
             Assert.Equal(webElement.Object.Enabled, element.Enabled);
@@ -247,6 +243,21 @@
 
             element.GetCssValue("display");
             Assert.True(getCssValueResult);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingWebElementWithNullInnerElement()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => new WebElement(null, By.TagName("div")));
+            Assert.Equal("webElement", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingWebElementWithNullSelector()
+        {
+            var webElement = new Mock<IWebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => new WebElement(webElement.Object, null));
+            Assert.Equal("selector", ex.ParamName);
         }
     }
 }

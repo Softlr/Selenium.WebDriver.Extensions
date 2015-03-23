@@ -116,8 +116,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\StringExtensionsTests.cs" />
-    <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
+    <Compile Include="Extensions\StringExtensions.IsNullOrWhiteSpaceTests.cs" />
+    <Compile Include="Extensions\WebDriverExtensions.FindElementTests.cs" />
+    <Compile Include="Extensions\WebDriverExtensions.FindElementsTests.cs" />
+    <Compile Include="Extensions\WebDriverExtensions.OtherTests.cs" />
     <Compile Include="Loaders\QuerySelectorLoaderTests.cs" />
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Models\WebElementTests.cs" />

@@ -4,7 +4,7 @@
     using Xunit;
     using Xunit.Extensions;
 
-    public class StringExtensionsTests
+    public class StringExtensionsIsNullOrWhiteSpaceTests
     {
         public static IEnumerable<object[]> IsNullOrWhiteSpaceData
         {
