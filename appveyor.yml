@@ -233,14 +233,8 @@
   version: 1.4.{build}
   configuration: Release
     
-  environment:
-    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
-
-  before_build:
-    - nuget restore
-  
   build_script:
-    - ps: ./psake
+    - ps: ./psake.ps1
   
   test: off
   

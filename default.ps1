@@ -1,113 +1,105 @@
 properties {
-  $solution = 'Selenium.WebDriver.Extensions.sln'
-  $version = '1.4.0'
-  $buildConfig = '/property:Configuration=Release'
-  $docsConfig = '/property:Configuration=Docs'
-  $visualStudioVersion = '/property:VisualStudioVersion=12.0'
-  $nuget = '.\.nuget\NuGet.exe'
-  $xunit = '.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe'
-  $opencover = '.\packages\OpenCover.4.5.3723\OpenCover.Console.exe'
-  $reportGenerator = '.\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe'
-  $coveralls = '.\packages\coveralls.io.1.2.2\tools\coveralls.net.exe'
-  $jQueryUnitTests = '.\test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\Release\Selenium.WebDriver.Extensions.JQuery.Tests.dll'
-  $sizzleUnitTests = '.\test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\Release\Selenium.WebDriver.Extensions.Sizzle.Tests.dll'
-  $coreUnitTests = '.\test\Selenium.WebDriver.Extensions.Core.Tests\bin\Release\Selenium.WebDriver.Extensions.Core.Tests.dll'
-  $combinedUnitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
-  $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
-  $coverageXml = '.\coverage.xml'
-  $coverageReportDir = '.\CoverageReport'
+	$solution = '.\Selenium.WebDriver.Extensions.sln'
+	$version = '1.4.0'
+	$unitTests = '.\test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\Release\Selenium.WebDriver.Extensions.JQuery.Tests.dll', '.\test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\Release\Selenium.WebDriver.Extensions.Sizzle.Tests.dll', '.\test\Selenium.WebDriver.Extensions.Core.Tests\bin\Release\Selenium.WebDriver.Extensions.Core.Tests.dll', '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
+	$integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
+	$coverageXml = '.\coverage.xml'
 }
 
 FormatTaskName '-------- {0} --------'
 
-task default -depends Compile, Test, Coverage, Docs, Pack
+Task default -Depends Compile, Test, Coverage, Docs, Pack
 
-task CleanNet45 {
-  exec { msbuild $solution $buildConfig $visualStudioVersion /t:Clean }
+Task CleanNet45 -Description "Cleans the output directory of the default .NET 4.5 build configuration" {
+	New-Build $solution -Target Clean
 }
 
-task CleanNet40 {
-  exec { msbuild $solution $buildConfig-Net40 $visualStudioVersion /t:Clean }
+Task CleanNet40 -Description "Cleans the output directory of the .NET 4.0 build configuration" {
+	New-Build $solution -BuildConfiguration Release-Net40 -Target Clean
 }
 
-task CleanNet35 {
-  exec { msbuild $solution $buildConfig-Net35 $visualStudioVersion /t:Clean }
+Task CleanNet35 -Description "Cleans the output directory of the .NET 3.5 build configuration" {
+	New-Build $solution -BuildConfiguration Release-Net35 -Target Clean
 }
 
-task CleanDocs {
-  exec { msbuild $solution $docsConfig $visualStudioVersion /t:Clean }
+Task CleanDocs -Description "Cleans the output directory of the documentation build configuration" {
+	New-Build $solution -BuildConfiguration Docs -Target Clean
 }
 
-task Clean -depends CleanNet45, CleanNet40, CleanNet35, CleanDocs
+Task Clean -Description "Cleans the output directory of all build configurations" -Depends CleanNet45, CleanNet40, CleanNet35, CleanDocs
 
-task CompileNet45 -depends CleanNet45 {
-  exec { msbuild $solution $buildConfig $visualStudioVersion }
+Task CompileNet45 -Description "Compiles the default .NET 4.5 build configuration" -Depends CleanNet45 {
+	New-Build $solution
 }
 
-task CompileNet40 -depends CleanNet40 {
-  exec { msbuild $solution $buildConfig-Net40 $visualStudioVersion }
+Task CompileNet40 -Description "Compiles the .NET 4.0 build configuration" -Depends CleanNet40 {
+	New-Build $solution -BuildConfiguration Release-Net40
 }
 
-task CompileNet35 -depends CleanNet35 {
-  exec { msbuild $solution $buildConfig-Net35 $visualStudioVersion }
+Task CompileNet35 -Description "Compiles the .NET 3.5 build configuration" -Depends CleanNet35 {
+	New-Build $solution -BuildConfiguration Release-Net35
 }
 
-task Compile -depends CompileNet45, CompileNet40, CompileNet35
+Task Compile -Description "Compiles all of the build configurations" -Depends CompileNet45, CompileNet40, CompileNet35
 
-task CompileDocs -depends CleanDocs {
-  exec { msbuild $solution $docsConfig $visualStudioVersion }
+Task Docs  -Description "Compiles the documentation build configuration" -Depends CleanDocs {
+	$sandCastleRoot = $env:SHFBROOT
+	$env:SHFBROOT = $PSScriptRoot + "\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"
+	Try {
+		New-Build $solution -BuildConfiguration Docs
+	} Finally {
+		$env:SHFBROOT = $sandCastleRoot
+	}
 }
 
-task Docs -depends CompileDocs
-
-task Test -depends CompileNet45 {
-  exec { & $xunit $jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -noshadow -parallel all }
+Task Test -Description "Runs the unit tests" -Depends CompileNet45 {
+	Test-Assembly $unitTests
 }
 
-task IntegrationPhantomJs -depends CompileNet45 {
-  exec { & $xunit $integrationTests -noshadow -trait Browser=PhantomJS }
+Task IntegrationPhantomJs -Description "Runs the PhantomJS integration tests" -Depends CompileNet45 {
+	Test-Assembly $integrationTests -Trait Browser=PhantomJS
 }
 
-task IntegrationChrome -depends CompileNet45 {
-  exec { & $xunit $integrationTests -noshadow -trait Browser=Chrome }
+Task IntegrationChrome -Description "Runs the Chrome integration tests" -Depends CompileNet45 {
+	Test-Assembly $integrationTests -Trait Browser=Chrome
 }
 
-task IntegrationFirefox -depends CompileNet45 {
-  exec { & $xunit $integrationTests -noshadow -trait Browser=Firefox }
+Task IntegrationFirefox -Description "Runs the Firefox integration tests" -Depends CompileNet45 {
+	Test-Assembly $integrationTests -Trait Browser=Firefox
 }
 
-task IntegrationInternetExplorer -depends CompileNet45 {
-  exec { & $xunit $integrationTests -noshadow -trait Browser=InternetExplorer }
+Task IntegrationInternetExplorer -Description "Runs the Internet Explorer integration tests" -Depends CompileNet45 {
+	Test-Assembly $integrationTests -Trait Browser=InternetExplorer
 }
 
-task Integration -depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
+Task Integration  -Description "Runs all of the integration tests" -Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
 
-task AnalyzeCoverage -depends CompileNet45 {
-  exec { & $opencover -register:user -target:$xunit "-targetargs:$jQueryUnitTests $sizzleUnitTests $coreUnitTests $combinedUnitTests -noshadow -parallel all" "-filter:+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*" -output:$coverageXml }
+Task AnalyzeCoverage -Description "Analyzes the code coverage" -Depends CompileNet45 {
+	New-CoverageAnalysis $unitTests $coverageXml
 }
 
-task Coverage -depends AnalyzeCoverage {
-  exec { & $reportGenerator -reports:$coverageXml -targetdir:$coverageReportDir -reporttypes:Html }
+Task Coverage -Description "Generates the code coverage HTML report" -Depends AnalyzeCoverage {
+	New-CoverageReport $coverageXml .\CoverageReport
 }
 
-task Coveralls -depends AnalyzeCoverage {
-  exec { & $coveralls --opencover $coverageXml }
+Task Coveralls -Description "Sends coverage data to coveralls.io" -Depends AnalyzeCoverage {
+	Publish-Coveralls $coverageXml
 }
 
-task PackJQuery -depends Compile {
-  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version }
+Task PackJQuery -Description "Packs JQuery module NuGet package" -Depends Compile {
+	New-NugetPackage .\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version
 }
 
-task PackSizzle -depends Compile {
-  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version }
+Task PackSizzle -Description "Packs Sizzle module NuGet package" -Depends Compile {
+	New-NugetPackage .\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version
 }
 
-task PackCore -depends Compile {
-  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version }
+Task PackCore -Description "Packs core module NuGet package" -Depends Compile {
+	New-NugetPackage .\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version
 }
 
-task PackCombined -depends Compile {
-  exec { & $nuget pack .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version }
+Task PackCombined -Description "Packs combined module NuGet package" -Depends Compile {
+	New-NugetPackage .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
 }
 
-task Pack -depends PackJQuery, PackSizzle, PackCore, PackCombined
+Task Pack -Description "Packs all of the module NuGet packages" -Depends PackJQuery, PackSizzle, PackCore, PackCombined
