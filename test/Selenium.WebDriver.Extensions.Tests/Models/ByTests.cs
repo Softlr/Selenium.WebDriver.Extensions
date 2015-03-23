@@ -151,6 +151,13 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenCreatingQuerySelectorWithNullBaseSelector()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (ISelector)null));
+            Assert.Equal("baseElement", ex.ParamName);
+        }
+
+        [Fact]
         public void ShouldThrowExceptionWhenCreatingQuerySelectorWithEmptyBaseElement()
         {
             var ex = Assert.Throws<ArgumentException>(() => By.QuerySelector("div", string.Empty));

@@ -947,12 +947,12 @@
         {
             if (opacity < 0)
             {
-                throw new ArgumentException("Opacity cannot be negative");
+                throw new ArgumentException("Opacity cannot be negative", "opacity");
             }
 
             if (opacity > 1)
             {
-                throw new ArgumentException("Opacity cannot be bigger than 1");
+                throw new ArgumentException("Opacity cannot be bigger than 1", "opacity");
             }
 
             this.Run("fadeTo('" + duration.ToString("G").ToLowerInvariant() + "', " + opacity + ")");
@@ -969,12 +969,12 @@
         {
             if (opacity < 0)
             {
-                throw new ArgumentException("Opacity cannot be negative");
+                throw new ArgumentException("Opacity cannot be negative", "opacity");
             }
 
             if (opacity > 1)
             {
-                throw new ArgumentException("Opacity cannot be bigger than 1");
+                throw new ArgumentException("Opacity cannot be bigger than 1", "opacity");
             }
 
             this.Run("fadeTo(" + duration + ", " + opacity + ")");
