@@ -23,7 +23,7 @@
                 throw new ArgumentNullException("selector");
             }
 
-            if (string.IsNullOrWhiteSpace(selector))
+            if (selector.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Selector cannot be empty", "selector");
             }
@@ -33,7 +33,7 @@
                 throw new ArgumentNullException("baseElement");
             }
 
-            if (string.IsNullOrWhiteSpace(baseElement))
+            if (baseElement.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Base element cannot be empty", "baseElement");
             }
@@ -59,7 +59,7 @@
                 throw new ArgumentNullException("selector");
             }
 
-            if (string.IsNullOrWhiteSpace(selector))
+            if (selector.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Selector cannot be empty", "selector");
             }

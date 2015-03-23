@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.Core;
     
     /// <summary>
     /// The class name selector.
@@ -89,7 +90,7 @@
                 return null;
             }
 
-            if (string.IsNullOrWhiteSpace(name))
+            if (name.IsNullOrWhiteSpace())
             {
                 return string.Empty;
             }

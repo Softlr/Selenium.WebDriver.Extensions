@@ -89,7 +89,7 @@
                 return null;
             }
 
-            if (string.IsNullOrWhiteSpace(id))
+            if (id.IsNullOrWhiteSpace())
             {
                 return string.Empty;
             }

@@ -89,7 +89,7 @@
                 return null;
             }
 
-            if (string.IsNullOrWhiteSpace(name))
+            if (name.IsNullOrWhiteSpace())
             {
                 return string.Empty;
             }

@@ -20,7 +20,7 @@
                 throw new ArgumentNullException("xpath");
             }
 
-            if (string.IsNullOrWhiteSpace(xpath))
+            if (xpath.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("XPath cannot be empty", "xpath");
             }
