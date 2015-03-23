@@ -75,6 +75,17 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenFindingElementsWithNullSelector()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
+                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
+
+            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElements((QuerySelector)null));
+            Assert.Equal("by", ex.ParamName);
+        }
+
+        [Fact]
         public void ShouldReturnEmptyResultWhenFindingElementsThatDoesntExist()
         {
             var driverMock = new Mock<IWebDriver>();

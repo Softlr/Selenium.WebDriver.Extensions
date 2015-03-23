@@ -69,6 +69,20 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenExuecutingScriptWithNullDriver()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript(null, null));
+            Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenExuecutingScriptThatExpectsValueWithNullDriver()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript<object>(null, null));
+            Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
         public void ShouldThrowExceptionWhenExuecutingNullScript()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -93,6 +107,13 @@
 
             var ex = Assert.Throws<ArgumentException>(() => driverMock.Object.ExecuteScript(" "));
             Assert.Equal("script", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingQuerySelectorHelperWithNullDriver()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.QuerySelector(null));
+            Assert.Equal("driver", ex.ParamName);
         }
     }
 }
