@@ -116,6 +116,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="Extensions\WebElementExtensionsTests.cs" />
     <Compile Include="Loaders\QuerySelectorLoaderTests.cs" />
