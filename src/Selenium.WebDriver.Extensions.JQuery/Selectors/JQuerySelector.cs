@@ -27,6 +27,21 @@
                 throw new ArgumentNullException("selector");
             }
 
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (jQueryVariable == null)
+            {
+                throw new ArgumentNullException("jQueryVariable");
+            }
+
+            if (jQueryVariable.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("jQuery variable cannot be empty", "jQueryVariable");
+            }
+
             this.Context = context;
             this.JQueryVariable = jQueryVariable;
             this.Selector = this.JQueryVariable + "('" + selector.Replace('\'', '"') + "'"

@@ -29,6 +29,11 @@
                 throw new ArgumentNullException("selector");
             }
 
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             this.Context = context;
             this.Selector = "Sizzle('" + selector.Replace('\'', '"') + "'" 
                 + (this.Context != null ? ", " + this.Context + "[0]" : string.Empty) + ")";

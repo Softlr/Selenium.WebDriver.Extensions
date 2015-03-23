@@ -21,6 +21,37 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => By.SizzleSelector(null));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => By.SizzleSelector(string.Empty));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => By.SizzleSelector(" "));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldCreateSizzleSelectorWithContext()
+        {
+            var selector = By.SizzleSelector("div", By.SizzleSelector("body"));
+
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
+            Assert.Equal("body", selector.Context.RawSelector);
+        }
+
+        [Fact]
         public void ShouldCreateQuerySelector()
         {
             var selector = By.QuerySelector("div");

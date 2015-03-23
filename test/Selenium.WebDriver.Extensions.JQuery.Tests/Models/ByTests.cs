@@ -21,6 +21,48 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => By.JQuerySelector(null));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector(string.Empty));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector(" "));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => By.JQuerySelector("div", jQueryVariable: null));
+            Assert.Equal("jQueryVariable", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector("div", jQueryVariable: string.Empty));
+            Assert.Equal("jQueryVariable", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue()
+        {
+            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector("div", jQueryVariable: " "));
+            Assert.Equal("jQueryVariable", ex.ParamName);
+        }
+
+        [Fact]
         public void ShouldCreateQuerySelector()
         {
             var selector = By.QuerySelector("div");
