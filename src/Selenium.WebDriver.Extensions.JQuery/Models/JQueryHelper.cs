@@ -65,11 +65,6 @@
         /// </remarks>
         public void Load(Uri jQueryUri, TimeSpan? timeout = null)
         {
-            if (jQueryUri == null)
-            {
-                throw new ArgumentNullException("jQueryUri");
-            }
-
             this.Driver.LoadExternalLibrary(new JQueryLoader(), jQueryUri, timeout);
         }
     }

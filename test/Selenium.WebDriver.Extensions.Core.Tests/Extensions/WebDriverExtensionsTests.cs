@@ -61,7 +61,7 @@
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
 
             var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((QuerySelector)null));
-            Assert.Equal("selector", ex.ParamName);
+            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]
@@ -197,7 +197,7 @@
 
             var ex = Assert.Throws<ArgumentNullException>(
                 () => WebDriverExtensions.FindElements(driverMock.Object, null));
-            Assert.Equal("driver", ex.ParamName);
+            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]
@@ -214,7 +214,7 @@
         {
             var driverMock = new Mock<IWebDriver>();
 
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.ExecuteScript(string.Empty));
+            var ex = Assert.Throws<ArgumentException>(() => driverMock.Object.ExecuteScript(string.Empty));
             Assert.Equal("script", ex.ParamName);
         }
 
@@ -223,7 +223,7 @@
         {
             var driverMock = new Mock<IWebDriver>();
 
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.ExecuteScript(" "));
+            var ex = Assert.Throws<ArgumentException>(() => driverMock.Object.ExecuteScript(" "));
             Assert.Equal("script", ex.ParamName);
         }
     }

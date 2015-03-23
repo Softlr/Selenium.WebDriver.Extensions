@@ -126,11 +126,6 @@
                 // additional tests
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").AddBack(string.Empty),
-                                     "jQuery('div').addBack()"
-                                 };
-                yield return new object[]
-                                 {
                                      By.JQuerySelector("div").AddBack(" span "),
                                      "jQuery('div').addBack('span')"
                                  };
