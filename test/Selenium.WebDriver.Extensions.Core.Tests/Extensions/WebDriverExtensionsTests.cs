@@ -16,7 +16,7 @@
     public class WebDriverExtensionsTests
     {
         [Fact]
-        public void ShouldFindElementWithQuerySelector()
+        public void ShouldFindElement()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -35,7 +35,7 @@
         }
 
         [Fact]
-        public void ShouldFindElementWithNestedQuerySelector()
+        public void ShouldFindElementWithNestedSelector()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -45,7 +45,7 @@
             element.Setup(x => x.TagName).Returns("span");
             var list = new List<IWebElement> { element.Object };
             driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span');"))
+                .Setup(x => x.ExecuteScript(It.IsRegex("document.querySelectorAll('div').length === 0")))
                 .Returns(new ReadOnlyCollection<IWebElement>(list));
             var result = driverMock.Object.FindElement(By.QuerySelector("span", By.QuerySelector("div")));
 
@@ -60,7 +60,7 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
 
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((QuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement(null));
             Assert.Equal("by", ex.ParamName);
         }
 
@@ -88,7 +88,7 @@
         }
 
         [Fact]
-        public void ShouldFindElementsWithQuerySelector()
+        public void ShouldFindElements()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -118,7 +118,7 @@
         }
 
         [Fact]
-        public void ShouldReturnEmptyResultWhenFindingElementsThatDontExist()
+        public void ShouldReturnEmptyResultWhenFindingElementsThatDoesntExist()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -164,7 +164,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWHenLoadingExternalLibraryWithoutLoader()
+        public void ShouldThrowExceptionWhenLoadingExternalLibraryWithoutLoader()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -186,18 +186,6 @@
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.FindElements(null, null));
             Assert.Equal("driver", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenFindingElementsWithNullSelector()
-        {
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
-
-            var ex = Assert.Throws<ArgumentNullException>(
-                () => WebDriverExtensions.FindElements(driverMock.Object, null));
-            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]
