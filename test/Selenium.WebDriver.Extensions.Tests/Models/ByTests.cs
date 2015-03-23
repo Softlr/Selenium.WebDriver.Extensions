@@ -123,7 +123,7 @@
         }
 
         [Fact]
-        public void ShouldCreateTagName()
+        public void ShouldCreateTagNameSelector()
         {
             var selector = By.TagName("div");
 
