@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
+    using System;
     using OpenQA.Selenium;
     
     /// <summary>
@@ -14,6 +15,11 @@
         /// <returns>The Sizzle helper.</returns>
         public static SizzleHelper Sizzle(this IWebDriver driver)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             return new SizzleHelper(driver);
         }
     }

@@ -33,6 +33,16 @@
         /// </remarks>
         public void Load(string version = "2.0.0", TimeSpan? timeout = null)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException("version");
+            }
+
+            if (version.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Version cannot be empty", "version");
+            }
+
             this.Driver.LoadExternalLibrary(
                 new SizzleLoader(),
                 new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
