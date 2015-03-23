@@ -118,6 +118,7 @@
     <Compile Include="Extensions\WebElementExtensionsTests.cs" />
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Loaders\SizzleLoaderTests.cs" />
+    <Compile Include="Models\SizzleHelperTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Runners\SizzleRunnerTests.cs" />
     <Compile Include="Selectors\SizzleSelectorTests.cs" />

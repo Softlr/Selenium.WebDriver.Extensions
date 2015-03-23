@@ -580,5 +580,12 @@
         {
             Assert.Throws<ArgumentNullException>(() => WebElementExtensions.JQuery(null, (JQuerySelector)null));
         }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingJQueryHelperWithNullDriver()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null));
+            Assert.Equal("driver", ex.ParamName);
+        }
     }
 }

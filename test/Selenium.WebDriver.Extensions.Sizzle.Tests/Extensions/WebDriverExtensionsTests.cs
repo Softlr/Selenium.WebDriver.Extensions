@@ -164,5 +164,12 @@
 
             Assert.Equal(0, result.Count);
         }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingSizzleHelperWithNullDriver()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => Sizzle.WebDriverExtensions.Sizzle(null));
+            Assert.Equal("driver", ex.ParamName);
+        }
     }
 }
