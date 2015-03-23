@@ -93,7 +93,8 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
             
-            Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]
@@ -576,9 +577,11 @@
         }
 
         [Fact]
-        public void ShouldThrowExpcetionWhenInitializingHelperWithNullDriver()
+        public void ShouldThrowExpcetionWhenGettingHelperWithNullSelector()
         {
-            Assert.Throws<ArgumentNullException>(() => WebElementExtensions.JQuery(null, (JQuerySelector)null));
+            var driver = new Mock<WebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => driver.Object.JQuery((JQuerySelector)null));
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]

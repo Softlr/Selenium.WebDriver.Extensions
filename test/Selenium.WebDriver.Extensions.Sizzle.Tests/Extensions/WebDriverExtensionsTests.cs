@@ -94,7 +94,8 @@
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.Sizzle")))
                 .Returns(true);
 
-            Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((SizzleSelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((SizzleSelector)null));
+            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]

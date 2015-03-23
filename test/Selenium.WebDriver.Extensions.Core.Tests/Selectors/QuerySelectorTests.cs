@@ -59,30 +59,6 @@
         }
 
         [Fact]
-        public void ShouldThrowErrorForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector(null));
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullBaseElement()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (string)null));
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullSelectorWithBaseSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector(null, By.QuerySelector("div")));
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullBaseSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (QuerySelector)null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.QuerySelector("div").CallFormatString;
@@ -126,7 +102,8 @@
         {
             var selector = new QuerySelector("div");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

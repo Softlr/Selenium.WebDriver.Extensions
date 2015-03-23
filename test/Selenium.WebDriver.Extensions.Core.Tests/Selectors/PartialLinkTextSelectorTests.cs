@@ -40,18 +40,6 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.PartialLinkText(null));
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionForNullBaseElement()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.PartialLinkText("test", null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.PartialLinkText("test").CallFormatString;
@@ -125,7 +113,8 @@
         {
             var selector = new PartialLinkTextSelector("test");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

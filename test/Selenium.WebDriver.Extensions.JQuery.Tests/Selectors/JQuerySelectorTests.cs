@@ -191,12 +191,6 @@
         }
 
         [Fact]
-        public void ShowThrowExceptionWhenCreatingJQuerySelectorWithNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.JQuerySelector(null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.JQuerySelector("div").CallFormatString;
@@ -237,7 +231,8 @@
         public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
             var selector = new JQuerySelector("div");
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
 
         [Fact]

@@ -16,7 +16,8 @@
         {
             var loader = new SizzleLoader();
             
-            Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
+            Assert.Equal("args", ex.ParamName);
         }
 
         [Fact]

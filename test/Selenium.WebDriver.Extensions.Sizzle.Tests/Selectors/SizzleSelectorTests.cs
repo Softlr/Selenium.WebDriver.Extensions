@@ -69,12 +69,6 @@
         }
 
         [Fact]
-        public void ShowThrowExceptionWhenCreatingSizzleSelectorWithNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.SizzleSelector(null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.SizzleSelector("div").CallFormatString;
@@ -119,7 +113,8 @@
         {
             var selector = new SizzleSelector("div");
             
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

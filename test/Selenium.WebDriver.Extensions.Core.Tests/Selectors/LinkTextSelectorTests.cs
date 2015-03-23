@@ -35,18 +35,6 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.LinkText(null));
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionForNullBaseElement()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.LinkText("test", null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.LinkText("test").CallFormatString;
@@ -120,7 +108,8 @@
         {
             var selector = new LinkTextSelector("test");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

@@ -165,7 +165,9 @@
             var webElement = new Mock<IWebElement>();
             var selector = new Mock<ISelector>();
             var element = new WebElement(webElement.Object, selector.Object);
-            Assert.Throws<ArgumentNullException>(() => element.FindElement((ISelector)null));
+            
+            var ex = Assert.Throws<ArgumentNullException>(() => element.FindElement((ISelector)null));
+            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]
@@ -174,7 +176,9 @@
             var webElement = new Mock<IWebElement>();
             var selector = new Mock<ISelector>();
             var element = new WebElement(webElement.Object, selector.Object);
-            Assert.Throws<ArgumentNullException>(() => element.FindElements((ISelector)null));
+
+            var ex = Assert.Throws<ArgumentNullException>(() => element.FindElements((ISelector)null));
+            Assert.Equal("by", ex.ParamName);
         }
 
         [Fact]

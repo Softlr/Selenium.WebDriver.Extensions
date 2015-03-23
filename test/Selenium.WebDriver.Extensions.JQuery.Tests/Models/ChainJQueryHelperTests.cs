@@ -461,25 +461,29 @@
         [Fact]
         public void ShouldFadeToNegativeOpacity()
         {
-            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(100, -1m));
+            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(100, -1m));
+            Assert.Equal("opacity", ex.ParamName);
         }
 
         [Fact]
         public void ShouldFadeToOpacityBiggerThanOne()
         {
-            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(100, 2m));
+            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(100, 2m));
+            Assert.Equal("opacity", ex.ParamName);
         }
 
         [Fact]
         public void ShouldFadeToEnumNegativeOpacity()
         {
-            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, -1m));
+            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, -1m));
+            Assert.Equal("opacity", ex.ParamName);
         }
 
         [Fact]
         public void ShouldFadeToEnumOpacityBiggerThanOne()
         {
-            Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, 2m));
+            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, 2m));
+            Assert.Equal("opacity", ex.ParamName);
         }
 
         [Fact]

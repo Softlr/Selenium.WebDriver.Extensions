@@ -16,7 +16,8 @@
         {
             var loader = new JQueryLoader();
 
-            Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
+            Assert.Equal("args", ex.ParamName);
         }
 
         [Fact]

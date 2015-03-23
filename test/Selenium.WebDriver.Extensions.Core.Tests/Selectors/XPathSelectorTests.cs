@@ -33,12 +33,6 @@
         }
 
         [Fact]
-        public void ShouldThrowErrorForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.XPath(null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.XPath("html").CallFormatString;
@@ -178,7 +172,8 @@
         {
             var selector = new XPathSelector("//div");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }
