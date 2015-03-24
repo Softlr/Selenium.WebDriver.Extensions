@@ -10,7 +10,7 @@
     public class WebDriverExtensionsJQueryLoadedSelectorChromeTests : 
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
     {
-        public void SetFixture(ChromeFixture fixture)
+        public WebDriverExtensionsJQueryLoadedSelectorChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryLoadedTestsUrl);

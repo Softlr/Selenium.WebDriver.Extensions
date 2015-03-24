@@ -10,7 +10,7 @@
     public class WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests : 
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<PhantomJsFixture>
     {
-        public void SetFixture(PhantomJsFixture fixture)
+        public WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryLoadedTestsUrl);

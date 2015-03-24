@@ -10,7 +10,7 @@
     public class WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {
-        public void SetFixture(PhantomJsFixture fixture)
+        public WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.SizzleUnloadedTestsUrl);

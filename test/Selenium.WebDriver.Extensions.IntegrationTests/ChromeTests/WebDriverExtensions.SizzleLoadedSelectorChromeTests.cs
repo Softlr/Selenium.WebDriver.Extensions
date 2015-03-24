@@ -10,7 +10,7 @@
     public class WebDriverExtensionsSizzleLoadedSelectorChromeTests : 
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<ChromeFixture>
     {
-        public void SetFixture(ChromeFixture fixture)
+        public WebDriverExtensionsSizzleLoadedSelectorChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.SizzleLoadedTestsUrl);

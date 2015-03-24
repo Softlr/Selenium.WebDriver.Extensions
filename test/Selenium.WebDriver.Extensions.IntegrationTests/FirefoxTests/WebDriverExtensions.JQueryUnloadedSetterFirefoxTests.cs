@@ -10,7 +10,7 @@
     public class WebDriverExtensionsJQueryUnloadedSetterFirefoxTests :
         WebDriverExtensionsJQuerySetterTests, IClassFixture<FirefoxFixture>
     {
-        public void SetFixture(FirefoxFixture fixture)
+        public WebDriverExtensionsJQueryUnloadedSetterFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryUnloadedTestsUrl);

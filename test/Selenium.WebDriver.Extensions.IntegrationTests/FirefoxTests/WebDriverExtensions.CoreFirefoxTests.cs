@@ -9,7 +9,7 @@
 #endif
     public class WebDriverExtensionsCoreFirefoxTests : WebDriverExtensionsCoreTests, IClassFixture<FirefoxFixture>
     {
-        public void SetFixture(FirefoxFixture fixture)
+        public WebDriverExtensionsCoreFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);

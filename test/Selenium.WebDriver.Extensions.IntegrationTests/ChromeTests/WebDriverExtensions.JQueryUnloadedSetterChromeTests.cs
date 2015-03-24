@@ -10,7 +10,7 @@
     public class WebDriverExtensionsJQueryUnloadedSetterChromeTests :
         WebDriverExtensionsJQuerySetterTests, IClassFixture<ChromeFixture>
     {
-        public void SetFixture(ChromeFixture fixture)
+        public WebDriverExtensionsJQueryUnloadedSetterChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryUnloadedTestsUrl);

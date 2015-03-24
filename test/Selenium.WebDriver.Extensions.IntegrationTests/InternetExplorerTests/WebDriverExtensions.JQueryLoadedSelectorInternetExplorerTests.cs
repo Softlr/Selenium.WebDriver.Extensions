@@ -10,7 +10,7 @@
     public class WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests : 
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>
     {
-        public void SetFixture(InternetExplorerFixture fixture)
+        public WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryLoadedTestsUrl);

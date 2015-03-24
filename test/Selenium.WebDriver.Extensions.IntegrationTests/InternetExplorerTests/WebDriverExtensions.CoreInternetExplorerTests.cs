@@ -7,10 +7,10 @@
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsCoreInternetExplorerFixtureTests : WebDriverExtensionsCoreTests, 
+    public class WebDriverExtensionsCoreInternetExplorerTests : WebDriverExtensionsCoreTests, 
         IClassFixture<InternetExplorerFixture>
     {
-        public void SetFixture(InternetExplorerFixture fixture)
+        public WebDriverExtensionsCoreInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);

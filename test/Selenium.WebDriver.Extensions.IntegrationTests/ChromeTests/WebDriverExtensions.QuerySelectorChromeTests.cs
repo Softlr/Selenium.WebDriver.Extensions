@@ -10,7 +10,7 @@
     public class WebDriverExtensionsQuerySelectorChromeTests : 
         WebDriverExtensionsQuerySelectorTests, IClassFixture<ChromeFixture>
     {
-        public void SetFixture(ChromeFixture fixture)
+        public WebDriverExtensionsQuerySelectorChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.QuerySelectorTestsUrl);

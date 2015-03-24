@@ -10,7 +10,7 @@
     public class WebDriverExtensionsJQueryUnloadedSetterInternetExplorerTests :
         WebDriverExtensionsJQuerySetterTests, IClassFixture<InternetExplorerFixture>
     {
-        public void SetFixture(InternetExplorerFixture fixture)
+        public WebDriverExtensionsJQueryUnloadedSetterInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.JQueryUnloadedTestsUrl);
