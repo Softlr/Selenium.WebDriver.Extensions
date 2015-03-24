@@ -575,11 +575,18 @@
         }
 
         [Fact]
-        public void ShouldThrowExpcetionWhenGettingHelperWithNullSelector()
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
         {
-            var driver = new Mock<WebElement>();
-            var ex = Assert.Throws<ArgumentNullException>(() => driver.Object.JQuery((JQuerySelector)null));
-            Assert.Equal("selector", ex.ParamName);
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => JQuery.WebDriverExtensions.JQuery(null, (JQuerySelector)null));
+            Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null, (string)null));
+            Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]

@@ -617,6 +617,37 @@
             Assert.Equal(Result, result);
         }
 
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelectorAndNullWebElement()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => WebElementExtensions.JQuery(null, (JQuerySelector)null));
+            Assert.Equal("webElement", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelectorAndNullWebElement()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => WebElementExtensions.JQuery(null, (string)null));
+            Assert.Equal("webElement", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
+        {
+            var webElement = new Mock<WebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((JQuerySelector)null));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
+        {
+            var webElement = new Mock<WebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((string)null));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
