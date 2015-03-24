@@ -82,7 +82,7 @@ Task Coverage -Description "Generates the code coverage HTML report" -Depends An
 	New-CoverageReport $coverageXml .\CoverageReport
 }
 
-Task Coveralls -Description "Sends coverage data to coveralls.io" -Depends AnalyzeCoverage {
+Task Coveralls -Description "Sends coverage data to coveralls.io" {
 	Publish-Coveralls $coverageXml
 }
 
