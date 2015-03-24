@@ -83,7 +83,7 @@ function New-CoverageReport {
 	)
 
 	Exec {
-		  .\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
+		  .\packages\ReportGenerator.2.1.4.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
 	}
 }
 
