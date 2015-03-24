@@ -3,19 +3,17 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Moq;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
         public static IEnumerable<object[]> LoadJQueryData
@@ -37,7 +35,7 @@
         }
 
         [Theory]
-        [PropertyData("LoadJQueryData")]
+        [MemberData("LoadJQueryData")]
         public void ShouldLoadJQuery(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
@@ -48,7 +46,7 @@
         }
 
         [Theory]
-        [PropertyData("LoadJQueryWithUriData")]
+        [MemberData("LoadJQueryWithUriData")]
         public void ShouldLoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
@@ -93,7 +91,8 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
             
-            Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]
@@ -237,7 +236,7 @@
             var result = driverMock.Object.JQuery("input").Property("checked");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -559,7 +558,7 @@
             var result = driverMock.Object.JQuery("form").HasClass("test");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -576,9 +575,25 @@
         }
 
         [Fact]
-        public void ShouldThrowExpcetionWhenInitializingHelperWithNullDriver()
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
         {
-            Assert.Throws<ArgumentNullException>(() => WebElementExtensions.JQuery(null, (JQuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => JQuery.WebDriverExtensions.JQuery(null, (JQuerySelector)null));
+            Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null, (string)null));
+            Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingJQueryHelperWithNullDriver()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null));
+            Assert.Equal("driver", ex.ParamName);
         }
     }
 }

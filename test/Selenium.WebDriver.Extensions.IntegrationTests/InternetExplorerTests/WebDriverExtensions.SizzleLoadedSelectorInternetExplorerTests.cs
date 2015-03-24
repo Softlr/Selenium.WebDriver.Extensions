@@ -1,16 +1,15 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    [Trait("Category", "Integration Tests")]
+    [Trait("Category", "Integration")]
     [Trait("Browser", "InternetExplorer")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests : 
-        WebDriverExtensionsSizzleSelectorTests, IUseFixture<InternetExplorerFixture>
+        WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
     {
-        public void SetFixture(InternetExplorerFixture fixture)
+        public WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.SizzleLoadedTestsUrl);

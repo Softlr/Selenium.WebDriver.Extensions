@@ -2,16 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class PartialLinkTextSelectorTests
     {
         public static IEnumerable<object[]> EqualityData
@@ -33,25 +31,6 @@
         }
 
         [Fact]
-        public void ShouldGenerateCorrectSelector()
-        {
-            var selector = By.PartialLinkText("test");
-            Assert.Equal(selector.Selector, selector.ToString());
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.PartialLinkText(null));
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionForNullBaseElement()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.PartialLinkText("test", null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.PartialLinkText("test").CallFormatString;
@@ -59,7 +38,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             PartialLinkTextSelector selector1,
             PartialLinkTextSelector selector2,
@@ -125,7 +104,8 @@
         {
             var selector = new PartialLinkTextSelector("test");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

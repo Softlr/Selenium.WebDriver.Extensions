@@ -16,7 +16,7 @@
         /// <summary>
         /// Gets a mechanism to find elements matching jQuery selector.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
@@ -31,7 +31,7 @@
         /// <summary>
         /// Gets a mechanism to find elements matching JavaScript query selector.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
@@ -47,7 +47,7 @@
         /// <summary>
         /// Gets a mechanism to find elements matching JavaScript query selector.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <returns>
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 

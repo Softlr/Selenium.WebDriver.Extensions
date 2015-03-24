@@ -1,14 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class NameSelectorTests
     {
         public static IEnumerable<object[]> EqualityData
@@ -23,7 +21,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(NameSelector selector1, NameSelector selector2, bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

@@ -13,9 +13,11 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
+        /// <exception cref="ArgumentNullException">Selector is null or jQuery variable name is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or jQuery variable name is empty.</exception>
         public JQuerySelector(
             string selector,
             JQuerySelector context = null,
@@ -25,6 +27,21 @@
             if (selector == null)
             {
                 throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (jQueryVariable == null)
+            {
+                throw new ArgumentNullException("jQueryVariable");
+            }
+
+            if (jQueryVariable.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("jQuery variable cannot be empty", "jQueryVariable");
             }
 
             this.Context = context;
@@ -113,6 +130,7 @@
         /// </summary>
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
+        /// <exception cref="ArgumentNullException">Root element is null.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)
@@ -165,8 +183,20 @@
         /// elements.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Add(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("add", selector);
         }
 
@@ -179,8 +209,25 @@
         /// </param>
         /// <param name="context">The jQuery context selector.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or context is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Add(string selector, JQuerySelector context)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             return this.ChainWithContext("add", selector, context);
         }
 
@@ -191,8 +238,14 @@
         /// A string containing a selector expression to match the current set of elements against.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector AddBack(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("addBack", selector);
         }
 
@@ -211,8 +264,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Children(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("children", selector);
         }
 
@@ -222,8 +281,20 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Closest(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("closest", selector);
         }
 
@@ -234,8 +305,25 @@
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <param name="context">The jQuery context selector.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or context is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Closest(string selector, JQuerySelector context)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (context == null)
+            {
+                throw new ArgumentNullException("context");
+            }
+
             return this.ChainWithContext("closest", selector, context);
         }
 
@@ -273,8 +361,20 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Filter(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("filter", selector);
         }
 
@@ -284,8 +384,20 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Find(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("find", selector);
         }
 
@@ -304,8 +416,20 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Has(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("has", selector);
         }
 
@@ -315,8 +439,20 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Is(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("is", selector);
         }
 
@@ -335,8 +471,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Next(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("next", selector);
         }
 
@@ -346,8 +488,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector NextAll(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("nextAll", selector);
         }
 
@@ -360,8 +508,24 @@
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty or filter is empty.</exception>
         public JQuerySelector NextUntil(string selector = null, string filter = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (filter != null && filter.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Filter cannot be empty", "filter");
+            }
+
+            if (selector == null && filter != null)
+            {
+                selector = string.Empty;
+            }
+
             var data = HandleSelectorWithFilter(selector, filter);
             return this.Chain("nextUntil", data, true);
         }
@@ -374,8 +538,20 @@
         /// set.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Not(string selector = null)
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
+        public JQuerySelector Not(string selector)
         {
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("not", selector);
         }
 
@@ -393,8 +569,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Parent(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("parent", selector);
         }
 
@@ -404,8 +586,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Parents(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("parents", selector);
         }
 
@@ -418,8 +606,24 @@
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty or filter is empty.</exception>
         public JQuerySelector ParentsUntil(string selector = null, string filter = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (filter != null && filter.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Filter cannot be empty", "filter");
+            }
+
+            if (selector == null && filter != null)
+            {
+                selector = string.Empty;
+            }
+
             var data = HandleSelectorWithFilter(selector, filter);
             return this.Chain("parentsUntil", data, true);
         }
@@ -430,8 +634,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Prev(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("prev", selector);
         }
 
@@ -441,8 +651,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector PrevAll(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("prevAll", selector);
         }
 
@@ -455,8 +671,24 @@
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty or filter is empty.</exception>
         public JQuerySelector PrevUntil(string selector = null, string filter = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
+            if (filter != null && filter.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Filter cannot be empty", "filter");
+            }
+
+            if (selector == null && filter != null)
+            {
+                selector = string.Empty;
+            }
+
             var data = HandleSelectorWithFilter(selector, filter);
             return this.Chain("prevUntil", data, true);
         }
@@ -466,8 +698,14 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Siblings(string selector = null)
         {
+            if (selector != null && selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             return this.Chain("siblings", selector);
         }
 
@@ -500,7 +738,7 @@
         protected static string HandleSelectorWithFilter(string selector = null, string filter = null)
         {
             var data = string.Empty;
-            if (!string.IsNullOrEmpty(selector))
+            if (selector != null)
             {
                 data = string.IsNullOrEmpty(filter) 
                     ? "'" + selector + "'"
@@ -521,9 +759,7 @@
         /// <returns>The Selenium jQuery selector.</returns>
         protected JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
-            selector = string.IsNullOrEmpty(selector)
-                ? string.Empty
-                : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
+            selector = selector == null ? string.Empty : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
 
             return new JQuerySelector
                        {

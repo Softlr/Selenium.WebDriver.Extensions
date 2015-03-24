@@ -12,7 +12,7 @@
         /// </summary>
         /// <param name="id">A string containing a DOM element id.</param>
         public IdSelector(string id)
-            : base("#" + id)
+            : base(ModifyId(id))
         {
         }
 
@@ -75,6 +75,26 @@
         public override int GetHashCode()
         {
             return this.RawSelector.GetHashCode() ^ this.BaseElement.GetHashCode();
+        }
+
+        /// <summary>
+        /// Modifies the id to be a proper query selector value.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>The query selector value.</returns>
+        private static string ModifyId(string id)
+        {
+            if (id == null)
+            {
+                return null;
+            }
+
+            if (id.IsNullOrWhiteSpace())
+            {
+                return string.Empty;
+            }
+
+            return "#" + id;
         }
     }
 }

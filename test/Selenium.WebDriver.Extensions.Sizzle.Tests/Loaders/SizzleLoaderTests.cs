@@ -1,26 +1,26 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class SizzleLoaderTests
     {
         [Fact]
-        public void ShouldLoadScriptArgumentsNull()
+        public void ShouldThrowExceptionWhenLoadingScriptWithNullArguments()
         {
             var loader = new SizzleLoader();
             
-            Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
+            Assert.Equal("args", ex.ParamName);
         }
 
         [Fact]
-        public void ShouldLoadScriptArgumentsEmpty()
+        public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyArguments()
         {
             var loader = new SizzleLoader();
             

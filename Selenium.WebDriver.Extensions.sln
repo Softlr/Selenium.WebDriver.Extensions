@@ -39,10 +39,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.travis.yml = .travis.yml
 		appveyor.yml = appveyor.yml
-		go.bat = go.bat
-		.nuget\NAnt.exe.config = .nuget\NAnt.exe.config
+		build.psm1 = build.psm1
+		default.ps1 = default.ps1
+		psake.ps1 = psake.ps1
 		README.md = README.md
-		Selenium.WebDriver.Extensions.build = Selenium.WebDriver.Extensions.build
 	EndProjectSection
 EndProject
 Global
@@ -123,7 +123,6 @@ Global
 		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Debug-Net40|Any CPU.ActiveCfg = Debug-Net40|Any CPU
 		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
 		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Release|Any CPU.Build.0 = Release|Any CPU
 		{41458FC5-B67A-456D-A085-8F6012E59A0C}.Release-Net35|Any CPU.ActiveCfg = Release-Net35|Any CPU
@@ -134,7 +133,6 @@ Global
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Debug-Net40|Any CPU.ActiveCfg = Debug-Net40|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}.Release-Net35|Any CPU.ActiveCfg = Release-Net35|Any CPU
@@ -145,7 +143,6 @@ Global
 		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Debug-Net40|Any CPU.ActiveCfg = Debug-Net40|Any CPU
 		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
 		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Release|Any CPU.Build.0 = Release|Any CPU
 		{86310EE4-5080-44D2-A1F9-1B00587A6F52}.Release-Net35|Any CPU.ActiveCfg = Release-Net35|Any CPU
@@ -156,7 +153,6 @@ Global
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Debug-Net40|Any CPU.ActiveCfg = Debug-Net40|Any CPU
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Docs|Any CPU.ActiveCfg = Docs|Any CPU
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Mono|Any CPU.ActiveCfg = Mono|Any CPU
-		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Mono|Any CPU.Build.0 = Mono|Any CPU
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4}.Release-Net35|Any CPU.ActiveCfg = Release-Net35|Any CPU

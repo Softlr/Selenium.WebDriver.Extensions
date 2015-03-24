@@ -1,16 +1,15 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    [Trait("Category", "Integration Tests")]
+    [Trait("Category", "Integration")]
     [Trait("Browser", "Firefox")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsQuerySelectorFirefoxTests : 
-        WebDriverExtensionsQuerySelectorTests, IUseFixture<FirefoxFixture>
+        WebDriverExtensionsQuerySelectorTests, IClassFixture<FirefoxFixture>
     {
-        public void SetFixture(FirefoxFixture fixture)
+        public WebDriverExtensionsQuerySelectorFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.QuerySelectorTestsUrl);

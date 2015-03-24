@@ -1,13 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public abstract class WebDriverExtensionsCoreTests
     {
         protected IWebDriver Browser { get; set; }

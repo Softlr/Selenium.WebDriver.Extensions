@@ -1,11 +1,10 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class PositionTests
     {
         [Fact]

@@ -1,16 +1,15 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    [Trait("Category", "Integration Tests")]
+    [Trait("Category", "Integration")]
     [Trait("Browser", "PhantomJs")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests : 
-        WebDriverExtensionsSizzleSelectorTests, IUseFixture<PhantomJsFixture>
+        WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {
-        public void SetFixture(PhantomJsFixture fixture)
+        public WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.SizzleLoadedTestsUrl);

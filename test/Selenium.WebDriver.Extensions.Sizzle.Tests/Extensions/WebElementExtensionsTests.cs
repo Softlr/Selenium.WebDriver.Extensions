@@ -3,16 +3,15 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class WebElementExtensionsTests : IDisposable
     {
         private Mock<IWebDriver> driverMock;

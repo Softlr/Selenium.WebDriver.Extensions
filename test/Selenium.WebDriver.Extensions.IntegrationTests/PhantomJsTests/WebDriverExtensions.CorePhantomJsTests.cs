@@ -1,16 +1,15 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    [Trait("Category", "Integration Tests")]
+    [Trait("Category", "Integration")]
     [Trait("Browser", "PhantomJS")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
-    public class WebDriverExtensionsCorePhantomJsFixtureTests : WebDriverExtensionsCoreTests, 
-        IUseFixture<PhantomJsFixture>
+    [ExcludeFromCodeCoverage]
+    public class WebDriverExtensionsCorePhantomJsTests : WebDriverExtensionsCoreTests, 
+        IClassFixture<PhantomJsFixture>
     {
-        public void SetFixture(PhantomJsFixture fixture)
+        public WebDriverExtensionsCorePhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);

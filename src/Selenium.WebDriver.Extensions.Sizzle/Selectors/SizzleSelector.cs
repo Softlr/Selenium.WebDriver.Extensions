@@ -12,13 +12,15 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <remarks>
         /// Contrary to jQuery selectors, the <see cref="SizzleSelector"/> only works when single element
         /// is given as context. Therefore only the first match is added to the selector if the context parameters
         /// is used.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public SizzleSelector(
             string selector,
             SizzleSelector context = null)
@@ -27,6 +29,11 @@
             if (selector == null)
             {
                 throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
             }
 
             this.Context = context;
@@ -89,6 +96,7 @@
         /// </summary>
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
+        /// <exception cref="ArgumentNullException">Root element is null.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

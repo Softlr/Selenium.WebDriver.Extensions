@@ -2,16 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
-    [Trait("Category", "Unit Tests")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
     public class XPathSelectorTests
     {
         public static IEnumerable<object[]> EqualityData
@@ -26,19 +24,6 @@
         }
 
         [Fact]
-        public void ShouldGenerateCorrectSelector()
-        {
-            var selector = By.XPath("html");
-            Assert.Equal(selector.Selector, selector.ToString());
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.XPath(null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.XPath("html").CallFormatString;
@@ -46,7 +31,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             XPathSelector selector1, 
             XPathSelector selector2, 
@@ -178,7 +163,8 @@
         {
             var selector = new XPathSelector("//div");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

@@ -1,15 +1,14 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
-    [Trait("Category", "Integration Tests")]
+    [Trait("Category", "Integration")]
     [Trait("Browser", "Chrome")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
-    public class WebDriverExtensionsCoreChromeTests : WebDriverExtensionsCoreTests, IUseFixture<ChromeFixture>
+    [ExcludeFromCodeCoverage]
+    public class WebDriverExtensionsCoreChromeTests : WebDriverExtensionsCoreTests, IClassFixture<ChromeFixture>
     {
-        public void SetFixture(ChromeFixture fixture)
+        public WebDriverExtensionsCoreChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
             this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);

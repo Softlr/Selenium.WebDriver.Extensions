@@ -1,9 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using OpenQA.Selenium.PhantomJS;
-    
+
+    [ExcludeFromCodeCoverage]
     public class PhantomJsFixture : IDisposable
     {
         public PhantomJsFixture()
