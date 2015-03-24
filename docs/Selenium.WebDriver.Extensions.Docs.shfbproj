@@ -49,7 +49,7 @@
     <RootNamespaceContainer>True</RootNamespaceContainer>
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
-    <NamingMethod>Guid</NamingMethod>
+    <NamingMethod>MemberName</NamingMethod>
     <HelpTitle>Selenium WebDriver Extensions</HelpTitle>
     <ContentPlacement>AboveNamespaces</ContentPlacement>
     <PlugInConfigurations>
