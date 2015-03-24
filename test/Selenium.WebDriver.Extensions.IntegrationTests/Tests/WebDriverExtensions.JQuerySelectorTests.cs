@@ -77,7 +77,7 @@
         {
             var property = this.Browser.JQuery("input:first").Property("checked");
             Assert.NotNull(property);
-            Assert.True(property.Value);
+            Assert.True(property);
         }
 
         [Fact]
@@ -282,7 +282,7 @@
         {
             var value = this.Browser.JQuery("form").Data<bool?>("mybool");
             Assert.NotNull(value);
-            Assert.True(value.Value);
+            Assert.True(value);
         }
 
         [Fact]

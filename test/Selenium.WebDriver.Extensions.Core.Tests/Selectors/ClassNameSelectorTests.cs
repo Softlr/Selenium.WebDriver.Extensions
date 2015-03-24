@@ -4,7 +4,6 @@
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit")]

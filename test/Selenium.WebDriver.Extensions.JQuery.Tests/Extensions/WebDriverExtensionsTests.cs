@@ -10,7 +10,6 @@
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
     [Trait("Category", "Unit")]
@@ -237,7 +236,7 @@
             var result = driverMock.Object.JQuery("input").Property("checked");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -559,7 +558,7 @@
             var result = driverMock.Object.JQuery("form").HasClass("test");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]

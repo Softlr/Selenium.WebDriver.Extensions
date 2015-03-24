@@ -4,7 +4,6 @@
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
     using Xunit;
 
     [Trait("Category", "Unit")]

@@ -4,8 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    using Xunit.Extensions;
-
+    
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class SizzleSelectorTests
