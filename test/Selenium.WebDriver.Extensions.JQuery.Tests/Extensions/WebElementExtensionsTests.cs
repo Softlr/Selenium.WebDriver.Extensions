@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
@@ -10,9 +11,7 @@
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebElementExtensionsTests : IDisposable
     {
         private Mock<IWebDriver> driverMock;

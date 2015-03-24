@@ -2,13 +2,12 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using Xunit.Extensions;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class SizzleSelectorTests
     {
         public static IEnumerable<object[]> SelectorData

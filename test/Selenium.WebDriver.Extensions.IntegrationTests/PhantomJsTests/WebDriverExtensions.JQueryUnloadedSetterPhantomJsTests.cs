@@ -1,12 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [Trait("Category", "Integration")]
     [Trait("Browser", "PhantomJs")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsJQueryUnloadedSetterPhantomJsTests :
         WebDriverExtensionsJQuerySetterTests, IClassFixture<PhantomJsFixture>
     {

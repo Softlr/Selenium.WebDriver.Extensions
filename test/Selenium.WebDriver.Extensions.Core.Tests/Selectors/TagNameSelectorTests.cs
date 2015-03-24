@@ -1,14 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class TagNameSelectorTests
     {
         public static IEnumerable<object[]> EqualityData

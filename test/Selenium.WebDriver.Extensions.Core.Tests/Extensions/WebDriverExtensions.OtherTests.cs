@@ -1,14 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
     
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsOtherTests
     {
         [Fact]

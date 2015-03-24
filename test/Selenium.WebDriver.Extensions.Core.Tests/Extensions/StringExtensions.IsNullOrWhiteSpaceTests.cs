@@ -1,13 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using Xunit.Extensions;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class StringExtensionsIsNullOrWhiteSpaceTests
     {
         public static IEnumerable<object[]> IsNullOrWhiteSpaceData

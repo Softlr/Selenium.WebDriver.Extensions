@@ -1,12 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.JQuery;
     using Xunit;
 
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public abstract class WebDriverExtensionsJQuerySetterTests
     {
         protected IWebDriver Browser { get; set; }

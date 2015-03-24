@@ -1,15 +1,14 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
     using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class ClassNameSelectorTests
     {
         public static IEnumerable<object[]> EqualityData

@@ -1,15 +1,14 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Sizzle;
     using Xunit;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class SizzleRunnerTests
     {
         [Fact]

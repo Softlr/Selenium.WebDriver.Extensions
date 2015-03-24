@@ -1,12 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class QuerySelectorHelperTests
     {
         [Fact]

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using Moq;
     using OpenQA.Selenium;
@@ -13,9 +14,7 @@
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
         public static IEnumerable<object[]> LoadSizzleData
