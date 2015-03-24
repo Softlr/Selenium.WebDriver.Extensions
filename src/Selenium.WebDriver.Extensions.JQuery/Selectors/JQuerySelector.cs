@@ -497,6 +497,11 @@
                 throw new ArgumentException("Filter cannot be empty", "filter");
             }
 
+            if (selector == null && filter != null)
+            {
+                selector = string.Empty;
+            }
+
             var data = HandleSelectorWithFilter(selector, filter);
             return this.Chain("nextUntil", data, true);
         }
@@ -585,6 +590,11 @@
                 throw new ArgumentException("Filter cannot be empty", "filter");
             }
 
+            if (selector == null && filter != null)
+            {
+                selector = string.Empty;
+            }
+
             var data = HandleSelectorWithFilter(selector, filter);
             return this.Chain("parentsUntil", data, true);
         }
@@ -640,6 +650,11 @@
             if (filter != null && filter.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Filter cannot be empty", "filter");
+            }
+
+            if (selector == null && filter != null)
+            {
+                selector = string.Empty;
             }
 
             var data = HandleSelectorWithFilter(selector, filter);
@@ -711,9 +726,7 @@
         /// <returns>The Selenium jQuery selector.</returns>
         protected JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
-            selector = string.IsNullOrEmpty(selector)
-                ? string.Empty
-                : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
+            selector = selector == null ? string.Empty : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
 
             return new JQuerySelector
                        {

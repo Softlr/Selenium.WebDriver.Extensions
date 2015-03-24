@@ -85,6 +85,11 @@
                                      By.JQuerySelector("div").NextUntil(".empty", "span"), 
                                      "jQuery('div').nextUntil('.empty', 'span')"
                                  };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").NextUntil(null, "span"), 
+                                     "jQuery('div').nextUntil('', 'span')"
+                                 };
                 yield return new object[] { By.JQuerySelector("div").Not(".empty"), "jQuery('div').not('.empty')" };
                 yield return new object[] { By.JQuerySelector("div").OffsetParent(), "jQuery('div').offsetParent()" };
                 yield return new object[] { By.JQuerySelector("div").Parent(), "jQuery('div').parent()" };
@@ -114,6 +119,11 @@
                                      By.JQuerySelector("div").ParentsUntil(".parent", "body"),
                                      "jQuery('div').parentsUntil('.parent', 'body')"
                                  };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").ParentsUntil(null, "body"),
+                                     "jQuery('div').parentsUntil('', 'body')"
+                                 };
                 yield return new object[] { By.JQuerySelector("div").Prev(), "jQuery('div').prev()" };
                 yield return new object[] { By.JQuerySelector("div").Prev(".empty"), "jQuery('div').prev('.empty')" };
                 yield return new object[]
@@ -140,6 +150,11 @@
                                  {
                                      By.JQuerySelector("div").PrevUntil(".empty", "span"), 
                                      "jQuery('div').prevUntil('.empty', 'span')"
+                                 };
+                yield return new object[]
+                                 {
+                                     By.JQuerySelector("div").PrevUntil(null, "span"), 
+                                     "jQuery('div').prevUntil('', 'span')"
                                  };
                 yield return new object[] { By.JQuerySelector("div").Siblings(), "jQuery('div').siblings()" };
                 yield return new object[]
