@@ -33,7 +33,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             XPathSelector selector1, 
             XPathSelector selector2, 

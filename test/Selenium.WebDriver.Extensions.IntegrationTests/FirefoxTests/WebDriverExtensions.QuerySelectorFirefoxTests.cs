@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsQuerySelectorFirefoxTests : 
-        WebDriverExtensionsQuerySelectorTests, IUseFixture<FirefoxFixture>
+        WebDriverExtensionsQuerySelectorTests, IClassFixture<FirefoxFixture>
     {
         public void SetFixture(FirefoxFixture fixture)
         {

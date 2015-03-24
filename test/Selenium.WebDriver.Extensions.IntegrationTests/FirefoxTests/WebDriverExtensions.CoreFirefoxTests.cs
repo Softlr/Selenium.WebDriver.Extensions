@@ -7,7 +7,7 @@
 #if !NET35
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
-    public class WebDriverExtensionsCoreFirefoxTests : WebDriverExtensionsCoreTests, IUseFixture<FirefoxFixture>
+    public class WebDriverExtensionsCoreFirefoxTests : WebDriverExtensionsCoreTests, IClassFixture<FirefoxFixture>
     {
         public void SetFixture(FirefoxFixture fixture)
         {

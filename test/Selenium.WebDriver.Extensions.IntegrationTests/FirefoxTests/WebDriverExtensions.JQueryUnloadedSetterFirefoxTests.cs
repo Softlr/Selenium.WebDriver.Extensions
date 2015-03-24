@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsJQueryUnloadedSetterFirefoxTests :
-        WebDriverExtensionsJQuerySetterTests, IUseFixture<FirefoxFixture>
+        WebDriverExtensionsJQuerySetterTests, IClassFixture<FirefoxFixture>
     {
         public void SetFixture(FirefoxFixture fixture)
         {

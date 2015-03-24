@@ -22,7 +22,7 @@
         }
 
         [Theory]
-        [PropertyData("IsNullOrWhiteSpaceData")]
+        [MemberData("IsNullOrWhiteSpaceData")]
         public void ShouldCorrectlyResolveStrings(string value, bool expectedResult)
         {
             Assert.Equal(expectedResult, value.IsNullOrWhiteSpace());

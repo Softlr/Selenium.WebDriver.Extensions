@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests : 
-        WebDriverExtensionsJQuerySelectorTests, IUseFixture<InternetExplorerFixture>
+        WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>
     {
         public void SetFixture(InternetExplorerFixture fixture)
         {

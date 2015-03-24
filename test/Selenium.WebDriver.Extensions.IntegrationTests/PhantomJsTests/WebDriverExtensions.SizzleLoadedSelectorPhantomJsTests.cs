@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests : 
-        WebDriverExtensionsSizzleSelectorTests, IUseFixture<PhantomJsFixture>
+        WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {
         public void SetFixture(PhantomJsFixture fixture)
         {

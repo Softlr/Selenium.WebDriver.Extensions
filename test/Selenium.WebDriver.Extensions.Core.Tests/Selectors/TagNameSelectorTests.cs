@@ -23,7 +23,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             TagNameSelector selector1,
             TagNameSelector selector2, 

@@ -23,7 +23,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(CssSelector selector1, CssSelector selector2, bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

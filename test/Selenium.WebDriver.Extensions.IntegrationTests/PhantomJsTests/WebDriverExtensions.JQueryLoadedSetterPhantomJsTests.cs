@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsJQueryLoadedSetterPhantomJsTests :
-        WebDriverExtensionsJQuerySetterTests, IUseFixture<PhantomJsFixture>
+        WebDriverExtensionsJQuerySetterTests, IClassFixture<PhantomJsFixture>
     {
         public void SetFixture(PhantomJsFixture fixture)
         {

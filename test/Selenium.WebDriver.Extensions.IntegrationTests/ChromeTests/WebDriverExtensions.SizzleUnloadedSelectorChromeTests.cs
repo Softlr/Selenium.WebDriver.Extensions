@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsSizzleUnloadedSelectorChromeTests :
-        WebDriverExtensionsSizzleSelectorTests, IUseFixture<ChromeFixture>
+        WebDriverExtensionsSizzleSelectorTests, IClassFixture<ChromeFixture>
     {
         public void SetFixture(ChromeFixture fixture)
         {

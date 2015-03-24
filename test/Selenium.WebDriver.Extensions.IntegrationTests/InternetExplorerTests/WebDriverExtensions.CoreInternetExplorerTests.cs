@@ -8,7 +8,7 @@
     [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
 #endif
     public class WebDriverExtensionsCoreInternetExplorerFixtureTests : WebDriverExtensionsCoreTests, 
-        IUseFixture<InternetExplorerFixture>
+        IClassFixture<InternetExplorerFixture>
     {
         public void SetFixture(InternetExplorerFixture fixture)
         {

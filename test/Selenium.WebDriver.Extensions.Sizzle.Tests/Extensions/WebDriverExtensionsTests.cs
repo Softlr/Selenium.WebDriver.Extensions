@@ -37,7 +37,7 @@
         }
 
         [Theory]
-        [PropertyData("LoadSizzleData")]
+        [MemberData("LoadSizzleData")]
         public void ShouldLoadSizzle(string version, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
@@ -48,7 +48,7 @@
         }
 
         [Theory]
-        [PropertyData("LoadSizzleWithUriData")]
+        [MemberData("LoadSizzleWithUriData")]
         public void ShouldLoadSizzleWithUri(Uri sizzleUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
