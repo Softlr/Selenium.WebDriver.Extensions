@@ -705,7 +705,7 @@
         protected static string HandleSelectorWithFilter(string selector = null, string filter = null)
         {
             var data = string.Empty;
-            if (!string.IsNullOrEmpty(selector))
+            if (selector != null)
             {
                 data = string.IsNullOrEmpty(filter) 
                     ? "'" + selector + "'"
