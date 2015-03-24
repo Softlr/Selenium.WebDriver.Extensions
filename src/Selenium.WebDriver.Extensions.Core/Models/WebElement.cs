@@ -341,7 +341,7 @@
         /// element.
         /// </summary>
         /// <param name="selector">The Selenium query selector.</param>
-        /// <returns>The first DOM element matching given query selector</returns>
+        /// <returns>The first DOM element matching given query selector.</returns>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         public WebElement FindElement(ISelector selector)
         {

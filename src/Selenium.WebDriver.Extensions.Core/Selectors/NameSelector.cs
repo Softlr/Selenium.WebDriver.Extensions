@@ -80,7 +80,7 @@
         /// <summary>
         /// Modifies the name to be a proper query selector value.
         /// </summary>
-        /// <param name="name">The name.</param>
+        /// <param name="name">The element name.</param>
         /// <returns>The query selector value.</returns>
         private static string ModifyName(string name)
         {

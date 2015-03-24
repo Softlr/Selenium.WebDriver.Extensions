@@ -13,7 +13,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <exception cref="ArgumentNullException">Selector is null or jQuery variable name is null.</exception>

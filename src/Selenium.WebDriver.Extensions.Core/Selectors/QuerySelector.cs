@@ -11,7 +11,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
@@ -46,7 +46,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <remarks>
         /// Because the <see cref="QuerySelector"/> operates always on collection of results, the new selector 

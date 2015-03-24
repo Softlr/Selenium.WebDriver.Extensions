@@ -33,7 +33,7 @@
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The Selenium selector.</param>
-        /// <returns>The first DOM element matching given JavaScript query selector</returns>
+        /// <returns>The first DOM element matching given JavaScript query selector.</returns>
         /// <exception cref="ArgumentNullException">Driver is null or selector is null.</exception>
         /// <exception cref="NoSuchElementException">The requested element is not found.</exception>
         public static WebElement FindElement(this IWebDriver driver, ISelector selector)
@@ -93,7 +93,7 @@
         /// Executes JavaScript in the context of the currently selected frame or window.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="script">The script to be </param>
+        /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static void ExecuteScript(this IWebDriver driver, string script, params object[] args)
@@ -111,7 +111,7 @@
         /// </summary>
         /// <typeparam name="T">The type of the result.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="script">The script to be </param>
+        /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
         /// <returns>The value returned by the script.</returns>
         /// <remarks>

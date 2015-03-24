@@ -80,7 +80,7 @@
         /// <summary>
         /// Modifies the id to be a proper query selector value.
         /// </summary>
-        /// <param name="id">The id.</param>
+        /// <param name="id">The identifier.</param>
         /// <returns>The query selector value.</returns>
         private static string ModifyId(string id)
         {

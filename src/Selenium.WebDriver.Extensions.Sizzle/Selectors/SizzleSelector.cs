@@ -12,7 +12,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <remarks>
         /// Contrary to jQuery selectors, the <see cref="SizzleSelector"/> only works when single element
