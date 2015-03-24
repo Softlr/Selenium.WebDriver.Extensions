@@ -509,9 +509,14 @@
         /// set.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Not(string selector = null)
+        public JQuerySelector Not(string selector)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Selector cannot be empty", "selector");
             }
