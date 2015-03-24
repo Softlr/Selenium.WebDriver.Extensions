@@ -36,7 +36,7 @@
 
             if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
             return Find<T>(driver, "return " + selector.Selector + ";");

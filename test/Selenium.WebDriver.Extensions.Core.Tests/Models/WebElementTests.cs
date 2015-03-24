@@ -166,7 +166,7 @@
             var element = new WebElement(webElement.Object, selector.Object);
             
             var ex = Assert.Throws<ArgumentNullException>(() => element.FindElement((ISelector)null));
-            Assert.Equal("by", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]
@@ -177,7 +177,7 @@
             var element = new WebElement(webElement.Object, selector.Object);
 
             var ex = Assert.Throws<ArgumentNullException>(() => element.FindElements((ISelector)null));
-            Assert.Equal("by", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]

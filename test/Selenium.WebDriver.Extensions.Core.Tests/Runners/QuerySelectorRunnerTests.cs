@@ -26,7 +26,7 @@
             var runner = new QuerySelectorRunner();
 
             var ex = Assert.Throws<ArgumentNullException>(() => runner.Find<object>(driver.Object, null));
-            Assert.Equal("by", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
     }
 }

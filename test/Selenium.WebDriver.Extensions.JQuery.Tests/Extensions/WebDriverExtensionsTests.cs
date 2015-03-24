@@ -92,7 +92,7 @@
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
             
             var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
-            Assert.Equal("by", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]

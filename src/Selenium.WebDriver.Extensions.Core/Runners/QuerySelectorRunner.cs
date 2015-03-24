@@ -36,7 +36,7 @@
 
             if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
             driver.QuerySelector().CheckSupport();

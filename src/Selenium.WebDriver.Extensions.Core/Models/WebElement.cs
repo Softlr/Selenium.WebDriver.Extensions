@@ -347,7 +347,7 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
             return this.WrappedDriver.FindElement(selector.Create(this));
@@ -364,7 +364,7 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
             return this.WrappedDriver.FindElements(selector.Create(this));

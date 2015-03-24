@@ -60,7 +60,7 @@
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
 
             var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((QuerySelector)null));
-            Assert.Equal("by", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]

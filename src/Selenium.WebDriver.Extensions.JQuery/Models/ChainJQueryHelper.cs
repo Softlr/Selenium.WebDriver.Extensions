@@ -1220,23 +1220,23 @@
         /// <summary>
         /// Executes jQuery script.
         /// </summary>
-        /// <param name="by">The Selenium jQuery selector.</param>
+        /// <param name="selector">The Selenium jQuery selector.</param>
         /// <param name="scriptFormat">The format string of the script to be invoked.</param>
         /// <param name="wrapperFormat">
         /// The wrapper format string for the purpose of wrap the jQuery selection result.
         /// </param>
         /// <returns>Result of invoking the script.</returns>
         protected object ExecuteScript(
-            JQuerySelector by,
+            JQuerySelector selector,
             string scriptFormat,
             string wrapperFormat)
         {
             if (this.WebElement != null)
             {
-                by = this.CreateSelector();
+                selector = this.CreateSelector();
             }
 
-            var script = by + "." + scriptFormat;
+            var script = selector + "." + scriptFormat;
             if (wrapperFormat != null)
             {
                 script = string.Format(CultureInfo.InvariantCulture, wrapperFormat, script);

@@ -93,7 +93,7 @@
                 .Returns(true);
 
             var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((SizzleSelector)null));
-            Assert.Equal("by", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]

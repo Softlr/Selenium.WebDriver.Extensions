@@ -16,7 +16,7 @@
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium JavaScript query selector selector.</param>
+        /// <param name="selector">The Selenium JavaScript query selector selector.</param>
         /// <returns>Parsed result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
@@ -26,6 +26,6 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        T Find<T>(IWebDriver driver, ISelector by);
+        T Find<T>(IWebDriver driver, ISelector selector);
     }
 }

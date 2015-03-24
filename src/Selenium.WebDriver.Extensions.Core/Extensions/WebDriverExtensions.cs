@@ -80,7 +80,7 @@
 
             if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
             var runner = (IRunner)Activator.CreateInstance(selector.RunnerType);
