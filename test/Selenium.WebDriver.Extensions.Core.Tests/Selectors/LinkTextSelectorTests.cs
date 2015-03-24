@@ -2,16 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class LinkTextSelectorTests
     {
         public static IEnumerable<object[]> EqualityData
@@ -28,25 +26,6 @@
         }
 
         [Fact]
-        public void ShouldGenerateCorrectSelector()
-        {
-            var selector = By.LinkText("test");
-            Assert.Equal(selector.Selector, selector.ToString());
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.LinkText(null));
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionForNullBaseElement()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.LinkText("test", null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.LinkText("test").CallFormatString;
@@ -54,7 +33,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             LinkTextSelector selector1, 
             LinkTextSelector selector2, 
@@ -120,7 +99,8 @@
         {
             var selector = new LinkTextSelector("test");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

@@ -42,7 +42,7 @@ function New-CoverageAnalysis {
 
 	$testAssemblies = $Tests -Join " "
 	Exec {
-		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
+		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
 	}
 }
 
@@ -83,7 +83,7 @@ function New-CoverageReport {
 	)
 
 	Exec {
-		  .\packages\ReportGenerator.2.1.3.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
+		  .\packages\ReportGenerator.2.1.4.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
 	}
 }
 
@@ -110,7 +110,7 @@ function Publish-Coveralls {
 	)
 
 	Exec {
-		  .\packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover $CoverageXmlPath
+		  .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXmlPath -f
 	}
 }
 
@@ -252,6 +252,6 @@ function Test-Assembly {
 	}
 
 	Exec {
-		.\packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
+		.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
 	}
 }

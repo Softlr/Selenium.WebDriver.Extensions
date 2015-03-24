@@ -2,13 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    using Xunit.Extensions;
-
+    
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class QuerySelectorTests
     {
         public static IEnumerable<object[]> SelectorData
@@ -51,35 +49,11 @@
         }
 
         [Theory]
-        [PropertyData("SelectorData")]
+        [MemberData("SelectorData")]
         public void ShouldGenerateCorrectSelector(QuerySelector selector, string expectedResult)
         {
             Assert.Equal(selector.Selector, selector.ToString());
             Assert.Equal(expectedResult, selector.Selector);
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector(null));
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullBaseElement()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (string)null));
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullSelectorWithBaseSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector(null, By.QuerySelector("div")));
-        }
-
-        [Fact]
-        public void ShouldThrowErrorForNullBaseSelector()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (QuerySelector)null));
         }
 
         [Fact]
@@ -90,7 +64,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             QuerySelector selector1,
             QuerySelector selector2, 
@@ -126,7 +100,8 @@
         {
             var selector = new QuerySelector("div");
 
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

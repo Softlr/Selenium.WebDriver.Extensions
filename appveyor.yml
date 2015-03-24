@@ -33,7 +33,7 @@
     GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
     OPENCOVER_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723'
-    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools'
+    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.3.2\tools'
 
   before_build:
     - nuget restore
@@ -47,12 +47,12 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test_script:
-    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
-    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml'
+    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
+    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml -f'
   
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"
@@ -85,11 +85,63 @@
     - git push
     - cd ..\..
 
-# develop, feature & bugfix branches
+# develop
 -
   branches:
     only:
       - develop
+      
+  skip_tags: true
+  skip_commits:
+    message: /Update.*\.md/
+
+  version: 1.4.{build}
+  configuration: Release
+    
+  install:  
+    - cmd: SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+  
+  assembly_info:
+    patch: true
+    file: AssemblyInfo.*
+    assembly_version: "1.4"
+    assembly_file_version: "{version}"
+    assembly_informational_version: "{version}-dev"
+  
+  nuget:
+    account_feed: true
+    project_feed: true
+    disable_publish_on_pr: true
+  
+  environment:
+    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
+
+  before_build:
+    - nuget restore
+  
+  build:
+    project: Selenium.WebDriver.Extensions.sln
+    
+  after_build:
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net35 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+  test_script:
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
+      
+  before_deploy:
+    - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"-dev
+    - nuget pack src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
+    - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
+
+# feature & bugfix branches
+-
+  branches:
+    only:
       - /feature.*/
       - /bugfix.*/
       
@@ -120,7 +172,7 @@
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     OPENCOVER_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723'
-    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools'
+    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.3.2\tools'
 
   before_build:
     - nuget restore
@@ -134,12 +186,12 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test_script:
-    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
-    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml'
+    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
+    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml -f'
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"-dev
@@ -147,7 +199,7 @@
     - nuget pack src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version "%APPVEYOR_BUILD_VERSION%-dev"
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
-
+    
 # release branch configuration
 -
   branches:
@@ -181,7 +233,7 @@
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     OPENCOVER_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\OpenCover.4.5.3723'
-    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.2.2\tools'
+    COVERALLS_ROOT: '%APPVEYOR_BUILD_FOLDER%\packages\coveralls.io.1.3.2\tools'
 
   before_build:
     - nuget restore
@@ -195,12 +247,12 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
 
   test_script:
-    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    - packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    - packages\xunit.runner.console.2.0.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0-rc4-build2924\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
-    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml'
+    - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[*]* -[*]*Exception* -[*.Tests]*"'
+    - '%COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml -f'
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"-preview

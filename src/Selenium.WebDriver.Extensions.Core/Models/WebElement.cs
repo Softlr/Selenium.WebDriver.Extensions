@@ -107,8 +107,19 @@
         /// The index number of the selector result collection that corresponds with the web element. Used when 
         /// selector returns multiple matches to identify the particular match.
         /// </param>
+        /// <exception cref="ArgumentNullException">Web element is null or selector is null.</exception>
         public WebElement(IWebElement webElement, ISelector selector, int selectorResultIndex = 0)
         {
+            if (webElement == null)
+            {
+                throw new ArgumentNullException("webElement");
+            }
+
+            if (selector == null)
+            {
+                throw new ArgumentNullException("selector");
+            }
+
             this.InnerElement = webElement;
             this.Selector = selector;
             this.SelectorResultIndex = selectorResultIndex;
@@ -117,6 +128,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="WebElement"/> class.
         /// </summary>
+        /// <remarks>This constructor is only used for testing purposes.</remarks>
         internal WebElement()
         {
         }
@@ -328,32 +340,34 @@
         /// Searches for DOM element using query selector limiting the scope of the search to descendants of current 
         /// element.
         /// </summary>
-        /// <param name="by">The Selenium query selector.</param>
-        /// <returns>The first DOM element matching given query selector</returns>
-        public WebElement FindElement(ISelector by)
+        /// <param name="selector">The Selenium query selector.</param>
+        /// <returns>The first DOM element matching given query selector.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        public WebElement FindElement(ISelector selector)
         {
-            if (by == null)
+            if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
-            return this.WrappedDriver.FindElement(by.Create(this));
+            return this.WrappedDriver.FindElement(selector.Create(this));
         }
 
         /// <summary>
         /// Searches for DOM elements using query selector limiting the scope of the search to descendants of current 
         /// element.
         /// </summary>
-        /// <param name="by">The Selenium query selector.</param>
+        /// <param name="selector">The Selenium query selector.</param>
         /// <returns>The DOM elements matching given query selector.</returns>
-        public ReadOnlyCollection<WebElement> FindElements(ISelector by)
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        public ReadOnlyCollection<WebElement> FindElements(ISelector selector)
         {
-            if (by == null)
+            if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
-            return this.WrappedDriver.FindElements(by.Create(this));
+            return this.WrappedDriver.FindElements(selector.Create(this));
         }
 
         /// <summary>

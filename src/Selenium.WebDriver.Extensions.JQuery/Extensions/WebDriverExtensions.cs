@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
+    using System;
     using OpenQA.Selenium;
     
     /// <summary>
@@ -12,8 +13,14 @@
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <returns>The jQuery helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static JQueryHelper JQuery(this IWebDriver driver)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             return new JQueryHelper(driver);
         }
 
@@ -23,8 +30,14 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static ChainJQueryHelper JQuery(this IWebDriver driver, string selector)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             return driver.JQuery(By.JQuerySelector(selector));
         }
 
@@ -34,8 +47,14 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static ChainJQueryHelper JQuery(this IWebDriver driver, JQuerySelector selector)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             return new ChainJQueryHelper(driver, selector);
         }
     }

@@ -41,6 +41,8 @@
         /// </summary>
         /// <param name="args">Load script arguments.</param>
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
+        /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
+        /// <exception cref="LoaderException">No URI given as first parameter.</exception>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
             Justification = "False positive.")]
         public override string LoadScript(params string[] args)

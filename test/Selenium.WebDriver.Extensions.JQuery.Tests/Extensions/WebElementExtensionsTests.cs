@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
@@ -10,9 +11,7 @@
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-        [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class WebElementExtensionsTests : IDisposable
     {
         private Mock<IWebDriver> driverMock;
@@ -201,7 +200,7 @@
             var result = webElement.Object.JQuery("input").Property("checked");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -529,7 +528,7 @@
             var result = webElement.Object.JQuery("input").Data<bool?>("test");
 
             Assert.NotNull(result);
-            Assert.True(result.Value);
+            Assert.True(result);
         }
 
         [Fact]
@@ -616,6 +615,37 @@
             var result = webElement.Object.JQuery("form").HasClass("test");
 
             Assert.Equal(Result, result);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelectorAndNullWebElement()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => WebElementExtensions.JQuery(null, (JQuerySelector)null));
+            Assert.Equal("webElement", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelectorAndNullWebElement()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => WebElementExtensions.JQuery(null, (string)null));
+            Assert.Equal("webElement", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
+        {
+            var webElement = new Mock<WebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((JQuerySelector)null));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
+        {
+            var webElement = new Mock<WebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((string)null));
+            Assert.Equal("selector", ex.ParamName);
         }
 
         protected virtual void Dispose(bool disposing)

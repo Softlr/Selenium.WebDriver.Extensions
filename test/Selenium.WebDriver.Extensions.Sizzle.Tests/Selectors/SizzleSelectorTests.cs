@@ -2,13 +2,11 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    using Xunit.Extensions;
-
+    
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class SizzleSelectorTests
     {
         public static IEnumerable<object[]> SelectorData
@@ -53,7 +51,7 @@
         }
 
         [Theory]
-        [PropertyData("SelectorData")]
+        [MemberData("SelectorData")]
         public void ShouldGenerateCorrectSelector(SizzleSelector selector, string expectedResult)
         {
             Assert.Equal(expectedResult, selector.Selector);
@@ -69,12 +67,6 @@
         }
 
         [Fact]
-        public void ShowThrowExceptionWhenCreatingSizzleSelectorWithNull()
-        {
-            Assert.Throws<ArgumentNullException>(() => By.SizzleSelector(null));
-        }
-
-        [Fact]
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.SizzleSelector("div").CallFormatString;
@@ -83,7 +75,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             SizzleSelector selector1,
             SizzleSelector selector2,
@@ -119,7 +111,8 @@
         {
             var selector = new SizzleSelector("div");
             
-            Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
+            Assert.Equal("root", ex.ParamName);
         }
     }
 }

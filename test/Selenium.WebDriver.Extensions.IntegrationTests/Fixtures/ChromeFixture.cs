@@ -1,12 +1,11 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Chrome;
 
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class ChromeFixture : IDisposable
     {
         public ChromeFixture()

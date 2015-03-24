@@ -11,10 +11,12 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public QuerySelector(string selector, string baseElement = "document")
             : base(selector, baseElement)
         {
@@ -23,9 +25,19 @@
                 throw new ArgumentNullException("selector");
             }
 
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
+            }
+
             if (baseElement == null)
             {
                 throw new ArgumentNullException("baseElement");
+            }
+
+            if (baseElement.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Base element cannot be empty", "baseElement");
             }
 
             this.Selector = this.BaseElement + ".querySelectorAll('" + selector.Replace('\'', '"') + "')";
@@ -34,19 +46,26 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
         /// </summary>
-        /// <param name="selector">A string containing a selector expression</param>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <remarks>
         /// Because the <see cref="QuerySelector"/> operates always on collection of results, the new selector 
         /// generated on its base will be invoked on the first match of the base selector. There's also a check to 
         /// make sure that the base selector has actually return any results.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public QuerySelector(string selector, ISelector baseSelector)
             : base(selector, null)
         {
             if (selector == null)
             {
                 throw new ArgumentNullException("selector");
+            }
+
+            if (selector.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Selector cannot be empty", "selector");
             }
 
             if (baseSelector == null)
@@ -114,6 +133,7 @@
         /// </summary>
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
+        /// <exception cref="ArgumentNullException">Root element is null.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

@@ -1,20 +1,32 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
+    using Moq;
+    using OpenQA.Selenium;
     using Xunit;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class JQueryRunnerTests
     {
         [Fact]
-        public void ShouldThrowExceptionWhenSelectorIsNull()
+        public void ShouldThrowExceptionForRunnerWithNullDriver()
         {
             var runner = new JQueryRunner();
 
-            Assert.Throws<ArgumentNullException>(() => runner.Find<object>(null, null));
+            var ex = Assert.Throws<ArgumentNullException>(() => runner.Find<object>(null, null));
+            Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionForNullSelector()
+        {
+            var runner = new JQueryRunner();
+            var driver = new Mock<IWebDriver>();
+
+            var ex = Assert.Throws<ArgumentNullException>(() => runner.Find<object>(driver.Object, null));
+            Assert.Equal("selector", ex.ParamName);
         }
     }
 }

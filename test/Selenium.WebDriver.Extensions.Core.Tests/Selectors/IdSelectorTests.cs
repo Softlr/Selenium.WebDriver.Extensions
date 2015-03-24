@@ -1,14 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core.Tests
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    using Xunit.Extensions;
     using By = Selenium.WebDriver.Extensions.Core.By;
 
     [Trait("Category", "Unit")]
-#if !NET35
-    [System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverage]
-#endif
+    [ExcludeFromCodeCoverage]
     public class IdSelectorTests
     {
         public static IEnumerable<object[]> EqualityData
@@ -23,7 +21,7 @@
         }
 
         [Theory]
-        [PropertyData("EqualityData")]
+        [MemberData("EqualityData")]
         public void EqualityOperator(IdSelector selector1, IdSelector selector2, bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

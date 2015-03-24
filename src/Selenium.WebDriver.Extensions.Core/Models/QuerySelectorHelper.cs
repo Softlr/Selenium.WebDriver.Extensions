@@ -20,6 +20,9 @@
         /// <summary>
         /// Checks if query selector is supported by the browser.
         /// </summary>
+        /// <exception cref="QuerySelectorNotSupportedException">
+        /// The query selector is not supported by the browser.
+        /// </exception>
         public void CheckSupport()
         {
             if (!this.Driver.CheckSelectorPrerequisites(new QuerySelectorLoader()))

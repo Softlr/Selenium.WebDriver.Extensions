@@ -17,8 +17,14 @@
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <returns>The query selector helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static QuerySelectorHelper QuerySelector(this IWebDriver driver)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             return new QuerySelectorHelper(driver);
         }
 
@@ -26,57 +32,60 @@
         /// Searches for DOM element using given selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The Selenium selector.</param>
-        /// <returns>The first DOM element matching given JavaScript query selector</returns>
-        public static WebElement FindElement(this IWebDriver driver, ISelector by)
+        /// <param name="selector">The Selenium selector.</param>
+        /// <returns>The first DOM element matching given JavaScript query selector.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null or selector is null.</exception>
+        /// <exception cref="NoSuchElementException">The requested element is not found.</exception>
+        public static WebElement FindElement(this IWebDriver driver, ISelector selector)
         {
             if (driver == null)
             {
                 throw new ArgumentNullException("driver");
             }
 
-            if (by == null)
+            if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
-            var runner = (IRunner)Activator.CreateInstance(by.RunnerType);
-            var results = runner.Find<IEnumerable<IWebElement>>(driver, by);
+            var runner = (IRunner)Activator.CreateInstance(selector.RunnerType);
+            var results = runner.Find<IEnumerable<IWebElement>>(driver, selector);
             if (results == null)
             {
-                throw new NoSuchElementException("No element found for selector: " + by.Selector);
+                throw new NoSuchElementException("No element found for selector: " + selector.Selector);
             }
 
             var list = results.ToList();
             if (list.Count > 0)
             {
-                return new WebElement(list.First(), by);
+                return new WebElement(list.First(), selector);
             }
 
-            throw new NoSuchElementException("No element found for selector: " + by.Selector);
+            throw new NoSuchElementException("No element found for selector: " + selector.Selector);
         }
 
         /// <summary>
         /// Searches for DOM elements using given selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="by">The selector.</param>
+        /// <param name="selector">The selector.</param>
         /// <returns>The DOM elements matching given JavaScript query selector.</returns>
-        public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, ISelector by)
+        /// <exception cref="ArgumentNullException">Driver is null or selector is null.</exception>
+        public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, ISelector selector)
         {
             if (driver == null)
             {
                 throw new ArgumentNullException("driver");
             }
 
-            if (by == null)
+            if (selector == null)
             {
-                throw new ArgumentNullException("by");
+                throw new ArgumentNullException("selector");
             }
 
-            var runner = (IRunner)Activator.CreateInstance(by.RunnerType);
-            var results = runner.Find<IEnumerable<IWebElement>>(driver, by)
-                .Select((value, index) => new WebElement(value, by, index)).ToList();
+            var runner = (IRunner)Activator.CreateInstance(selector.RunnerType);
+            var results = runner.Find<IEnumerable<IWebElement>>(driver, selector)
+                .Select((value, index) => new WebElement(value, selector, index)).ToList();
             return new ReadOnlyCollection<WebElement>(results);
         }
 
@@ -84,10 +93,16 @@
         /// Executes JavaScript in the context of the currently selected frame or window.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="script">The script to be </param>
+        /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static void ExecuteScript(this IWebDriver driver, string script, params object[] args)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
             driver.ExecuteScript<object>(script, args);
         }
 
@@ -96,7 +111,7 @@
         /// </summary>
         /// <typeparam name="T">The type of the result.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="script">The script to be </param>
+        /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
         /// <returns>The value returned by the script.</returns>
         /// <remarks>
@@ -108,8 +123,25 @@
         /// <see cref="T:System.Collections.Generic.List`1"/> of that type, following the rules above. Nested lists 
         /// are not supported.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Driver is null or script is null.</exception>
+        /// <exception cref="ArgumentException">Script is empty.</exception>
         public static T ExecuteScript<T>(this IWebDriver driver, string script, params object[] args)
         {
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            if (script == null)
+            {
+                throw new ArgumentNullException("script");
+            }
+
+            if (script.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Script cannot be empty", "script");
+            }
+
             return (T)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
         }
 
@@ -117,18 +149,22 @@
         /// Checks if prerequisites for the selector has been met.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="externalLibraryLoader">The external library loader.</param>
+        /// <param name="loader">The loader.</param>
         /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
-        public static bool CheckSelectorPrerequisites(
-            this IWebDriver driver,
-            ILoader externalLibraryLoader)
+        /// <exception cref="ArgumentNullException">Driver is null or loader is null.</exception>
+        public static bool CheckSelectorPrerequisites(this IWebDriver driver, ILoader loader)
         {
-            if (externalLibraryLoader == null)
+            if (driver == null)
             {
-                throw new ArgumentNullException("externalLibraryLoader");
+                throw new ArgumentNullException("driver");
             }
 
-            var result = driver.ExecuteScript<bool?>("return " + externalLibraryLoader.CheckScript + ";");
+            if (loader == null)
+            {
+                throw new ArgumentNullException("loader");
+            }
+
+            var result = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";");
             return result.HasValue && result.Value;
         }
 
@@ -136,53 +172,59 @@
         /// Checks if external library is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="externalLibraryLoader">The external library loader.</param>
+        /// <param name="loader">The loader.</param>
         /// <param name="libraryUri">
         /// The URI of external library to load if it's not already loaded on the tested page.
         /// </param>
-        /// <param name="timeout">The timeout value for the external library load.</param>
+        /// <param name="timeout">The timeout value for the load.</param>
         /// <remarks>
         /// If external library is already loaded on a page this method will do nothing, even if the loaded version 
         /// and version requested by invoking this method have different versions.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Driver is null or loader is null.</exception>
         public static void LoadExternalLibrary(
             this IWebDriver driver,
-            ILoader externalLibraryLoader,
+            ILoader loader,
             Uri libraryUri,
             TimeSpan? timeout = null)
         {
-            if (externalLibraryLoader == null)
+            if (driver == null)
             {
-                throw new ArgumentNullException("externalLibraryLoader");
+                throw new ArgumentNullException("driver");
+            }
+
+            if (loader == null)
+            {
+                throw new ArgumentNullException("loader");
             }
 
             driver.LoadPrerequisites(
-                externalLibraryLoader,
+                loader,
                 timeout ?? TimeSpan.FromSeconds(3),
-                libraryUri == null ? externalLibraryLoader.LibraryUri.OriginalString : libraryUri.OriginalString);
+                libraryUri == null ? loader.LibraryUri.OriginalString : libraryUri.OriginalString);
         }
 
         /// <summary>
         /// Loads the prerequisites for the selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="externalLibraryLoader">The external library loader.</param>
+        /// <param name="loader">The loader.</param>
         /// <param name="timeout">The timeout value for the prerequisites load.</param>
         /// <param name="loadParams">The additional parameters for load script.</param>
         private static void LoadPrerequisites(
             this IWebDriver driver,
-            ILoader externalLibraryLoader,
+            ILoader loader,
             TimeSpan timeout,
             params string[] loadParams)
         {
-            if (driver.CheckSelectorPrerequisites(externalLibraryLoader))
+            if (driver.CheckSelectorPrerequisites(loader))
             {
                 return;
             }
 
-            driver.ExecuteScript(externalLibraryLoader.LoadScript(loadParams));
+            driver.ExecuteScript(loader.LoadScript(loadParams));
             var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => driver.CheckSelectorPrerequisites(externalLibraryLoader));
+            wait.Until(d => driver.CheckSelectorPrerequisites(loader));
         }
     }
 }

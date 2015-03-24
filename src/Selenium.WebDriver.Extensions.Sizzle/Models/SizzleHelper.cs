@@ -31,8 +31,20 @@
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Version is null.</exception>
+        /// <exception cref="ArgumentException">Version is empty.</exception>
         public void Load(string version = "2.0.0", TimeSpan? timeout = null)
         {
+            if (version == null)
+            {
+                throw new ArgumentNullException("version");
+            }
+
+            if (version.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Version cannot be empty", "version");
+            }
+
             this.Driver.LoadExternalLibrary(
                 new SizzleLoader(),
                 new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
