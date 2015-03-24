@@ -15,6 +15,8 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public QuerySelector(string selector, string baseElement = "document")
             : base(selector, baseElement)
         {
@@ -51,6 +53,8 @@
         /// generated on its base will be invoked on the first match of the base selector. There's also a check to 
         /// make sure that the base selector has actually return any results.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public QuerySelector(string selector, ISelector baseSelector)
             : base(selector, null)
         {
@@ -129,6 +133,7 @@
         /// </summary>
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
+        /// <exception cref="ArgumentNullException">Root element is null.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

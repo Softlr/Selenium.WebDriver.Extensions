@@ -19,6 +19,8 @@
         /// is given as context. Therefore only the first match is added to the selector if the context parameters
         /// is used.
         /// </remarks>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public SizzleSelector(
             string selector,
             SizzleSelector context = null)
@@ -94,6 +96,7 @@
         /// </summary>
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
+        /// <exception cref="ArgumentNullException">Root element is null.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

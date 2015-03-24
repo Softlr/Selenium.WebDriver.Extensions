@@ -19,6 +19,7 @@
         /// <param name="driver">The driver.</param>
         /// <param name="selector">The selector.</param>
         /// <param name="webElement">The web element.</param>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
         public ChainJQueryHelper(IWebDriver driver, JQuerySelector selector, WebElement webElement = null)
             : base(driver, webElement)
         {
@@ -124,6 +125,7 @@
         /// <typeparam name="T">The type of the value to be returned.</typeparam>
         /// <param name="propertyName">The name of the property to get.</param>
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
+        /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
         public T Property<T>(string propertyName)
         {
             if (!new[] { typeof(bool?), typeof(string) }.Contains(typeof(T)))
@@ -474,6 +476,7 @@
         /// The value at the named data store for the first element in the jQuery collection, as set by 
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
+        /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
         public T Data<T>(string key)
         {
             if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
@@ -943,6 +946,7 @@
         /// <param name="duration">The duration of the animation.</param>
         /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="ArgumentException">Opacity is negative or opacity is bigger than one.</exception>
         public ChainJQueryHelper FadeTo(Duration duration, decimal opacity)
         {
             if (opacity < 0)
@@ -965,6 +969,7 @@
         /// <param name="duration">The duration of the animation.</param>
         /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="ArgumentException">Opacity is negative or opacity is bigger than one.</exception>
         public ChainJQueryHelper FadeTo(decimal duration, decimal opacity)
         {
             if (opacity < 0)

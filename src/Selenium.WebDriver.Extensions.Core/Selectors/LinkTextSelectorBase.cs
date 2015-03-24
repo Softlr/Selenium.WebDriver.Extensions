@@ -14,6 +14,8 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
+        /// <exception cref="ArgumentNullException">Text is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Text is empty or base element is empty.</exception>
         protected LinkTextSelectorBase(string text, string baseElement = "document")
             : base(text, baseElement)
         {

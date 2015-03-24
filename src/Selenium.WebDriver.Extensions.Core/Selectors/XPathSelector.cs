@@ -12,6 +12,8 @@
         /// Initializes a new instance of the <see cref="XPathSelector"/> class.
         /// </summary>
         /// <param name="xpath">The XPATH to locate.</param>
+        /// <exception cref="ArgumentNullException">XPATH is null.</exception>
+        /// <exception cref="ArgumentException">XPATH is empty.</exception>
         public XPathSelector(string xpath)
             : base(xpath)
         {
@@ -88,6 +90,7 @@
         /// </summary>
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
+        /// <exception cref="ArgumentNullException">Root element is null.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)
