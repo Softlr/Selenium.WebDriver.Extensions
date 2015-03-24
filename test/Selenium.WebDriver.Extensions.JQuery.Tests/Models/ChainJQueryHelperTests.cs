@@ -3,6 +3,7 @@
     using System;
     using Moq;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.Core;
     using Xunit;
 
     [Trait("Category", "Unit")]
@@ -24,6 +25,20 @@
         {
             this.Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => this.driver.JQuery((JQuerySelector)null));
+            Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
+        {
+            var ex = Assert.Throws<ArgumentNullException>(() => this.driver.JQuery((string)null));
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]
@@ -454,6 +469,22 @@
         public void ShouldFadeToNumber()
         {
             var result = this.driver.JQuery("div").FadeTo(100, 0.5m);
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void ShouldFadeToGivenValue()
+        {
+            var result = this.driver.JQuery("div").FadeTo(100, 0.5m);
+            
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void ShouldFadeToGivenDuration()
+        {
+            var result = this.driver.JQuery("div").FadeTo(Duration.Slow, 0.5m);
 
             Assert.NotNull(result);
         }

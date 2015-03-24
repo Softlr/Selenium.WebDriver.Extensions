@@ -12,7 +12,7 @@
     public class JQueryLoaderTests
     {
         [Fact]
-        public void ShouldLoadScriptArgumentsNull()
+        public void ShouldThrowExceptionWhenLoadingScriptWithNullArguments()
         {
             var loader = new JQueryLoader();
 
@@ -21,7 +21,7 @@
         }
 
         [Fact]
-        public void ShouldLoadScriptArgumentsEmpty()
+        public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyArguments()
         {
             var loader = new JQueryLoader();
 

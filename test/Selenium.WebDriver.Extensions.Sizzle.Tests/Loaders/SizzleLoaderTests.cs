@@ -12,7 +12,7 @@
     public class SizzleLoaderTests
     {
         [Fact]
-        public void ShouldLoadScriptArgumentsNull()
+        public void ShouldThrowExceptionWhenLoadingScriptWithNullArguments()
         {
             var loader = new SizzleLoader();
             
@@ -21,7 +21,7 @@
         }
 
         [Fact]
-        public void ShouldLoadScriptArgumentsEmpty()
+        public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyArguments()
         {
             var loader = new SizzleLoader();
             
