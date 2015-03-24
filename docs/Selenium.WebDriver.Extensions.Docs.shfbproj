@@ -46,7 +46,7 @@
     <NamespaceGrouping>False</NamespaceGrouping>
     <SyntaxFilters>C#</SyntaxFilters>
     <SdkLinkTarget>Blank</SdkLinkTarget>
-    <RootNamespaceContainer>False</RootNamespaceContainer>
+    <RootNamespaceContainer>True</RootNamespaceContainer>
     <PresentationStyle>VS2013</PresentationStyle>
     <Preliminary>False</Preliminary>
     <NamingMethod>Guid</NamingMethod>
