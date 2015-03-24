@@ -110,7 +110,7 @@ function Publish-Coveralls {
 	)
 
 	Exec {
-		  .\packages\coveralls.io.1.2.2\tools\coveralls.net.exe --opencover $CoverageXmlPath
+		  .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXmlPath
 	}
 }
 
