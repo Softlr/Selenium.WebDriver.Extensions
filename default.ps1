@@ -23,7 +23,17 @@ Task CleanNet35 -Description "Cleans the output directory of the .NET 3.5 build 
 }
 
 Task CleanDocs -Description "Cleans the output directory of the documentation build configuration" {
-	New-Build $solution -BuildConfiguration Docs -Target Clean
+	$envVarNotDefined = $env:SHFBROOT -eq $null
+	If ($envVarNotDefined) {
+		$env:SHFBROOT = $PSScriptRoot + "\..\..\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"
+	}
+	Try {
+		New-Build $solution -BuildConfiguration Docs -Target Clean
+	} Finally {
+		If ($envVarNotDefined) {
+			$env:SHFBROOT = $null
+		}
+	}
 }
 
 Task Clean -Description "Cleans the output directory of all build configurations" -Depends CleanNet45, CleanNet40, CleanNet35, CleanDocs
