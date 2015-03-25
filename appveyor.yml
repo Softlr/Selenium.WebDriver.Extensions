@@ -139,7 +139,7 @@
 
   after_test:
     - '%OPENCOVER_ROOT%\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.0.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Core.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Core.Tests.dll test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.JQuery.Tests.dll test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Sizzle.Tests.dll test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]* -[xunit*]*"'
-    - ps: If(%APPVEYOR_PULL_REQUEST_NUMBER% -eq $null) { & %COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml -f }
+    - ps: If($env:APPVEYOR_PULL_REQUEST_NUMBER -eq $null) { & %COVERALLS_ROOT%\coveralls.net.exe --opencover coverage.xml -f }
       
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version "%APPVEYOR_BUILD_VERSION%"-dev
