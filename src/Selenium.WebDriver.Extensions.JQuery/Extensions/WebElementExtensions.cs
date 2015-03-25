@@ -14,7 +14,9 @@
         /// <param name="webElement">The web element to base the search on.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Web element is null or selector is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Web element is null.
+        /// -or- Selector is null.</exception>
         public static ChainJQueryHelper JQuery(this WebElement webElement, string selector)
         {
             if (webElement == null)
@@ -36,7 +38,10 @@
         /// <param name="webElement">The web element to base the search on.</param>
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Web element is null or selector is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Web element is null.
+        /// -or- Selector is null.
+        /// </exception>
         public static ChainJQueryHelper JQuery(this WebElement webElement, JQuerySelector selector)
         {
             if (webElement == null)

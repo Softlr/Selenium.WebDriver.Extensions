@@ -26,7 +26,10 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">Driver is null or selector is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Driver is null.
+        /// -or- Selector is null.
+        /// </exception>
         /// <exception cref="QuerySelectorNotSupportedException">
         /// The query selector is not supported by the browser.
         /// </exception>

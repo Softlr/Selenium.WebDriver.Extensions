@@ -26,7 +26,9 @@
         /// <exception cref="QuerySelectorNotSupportedException">
         /// The query selector is not supported by the browser.
         /// </exception>
-        /// <exception cref="ArgumentNullException">Driver is null or loader is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Driver is null.
+        /// -or- Loader is null.</exception>
         /// <exception cref="ArgumentException">Script is empty.</exception>
         public void CheckSupport()
         {

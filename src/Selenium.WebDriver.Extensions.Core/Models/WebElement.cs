@@ -110,7 +110,10 @@
         /// The index number of the selector result collection that corresponds with the web element. Used when 
         /// selector returns multiple matches to identify the particular match.
         /// </param>
-        /// <exception cref="ArgumentNullException">Web element is null or selector is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Web element is null.
+        /// -or- Selector is null.
+        /// </exception>
         public WebElement(IWebElement webElement, ISelector selector, int selectorResultIndex = 0)
         {
             if (webElement == null)
@@ -410,14 +413,16 @@
         /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
         /// <exception cref="InvalidOperationException">The source sequence is empty.</exception>
         /// <exception cref="ArgumentException">
-        /// Type is not a RuntimeType. -or-Type is an open generic type (that is, the 
-        /// <see cref="P:System.Type.ContainsGenericParameters" /> property returns true).
+        /// Type is not a RuntimeType.
+        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" /> 
+        /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.-or- Creation of 
-        /// <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, <see cref="T:System.Void" />, 
-        /// and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.-or-
-        /// The assembly that contains type is a dynamic assembly that was created with 
+        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
+        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
+        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
+        /// types, is not supported.
+        /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>
         public WebElement FindElement(ISelector selector)
@@ -455,14 +460,16 @@
         /// </exception>
         /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
         /// <exception cref="ArgumentException">
-        /// Type is not a RuntimeType. -or-Type is an open generic type (that is, the 
-        /// <see cref="P:System.Type.ContainsGenericParameters" /> property returns true).
+        /// Type is not a RuntimeType.
+        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" /> 
+        /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.-or- Creation of 
-        /// <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, <see cref="T:System.Void" />, 
-        /// and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.-or-
-        /// The assembly that contains type is a dynamic assembly that was created with 
+        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
+        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
+        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
+        /// types, is not supported.
+        /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>
         public ReadOnlyCollection<WebElement> FindElements(ISelector selector)

@@ -372,8 +372,8 @@
         /// </returns>
         /// <exception cref="ArgumentNullException">Key is null.</exception>
         /// <exception cref="OverflowException">
-        /// Position coordinate represents a number less than <see cref="Int32.MinValue" /> or greater than 
-        /// <see cref="Int32.MaxValue" />.
+        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than 
+        /// <see cref="int.MaxValue" />.
         /// </exception>
         /// <exception cref="FormatException">Position coordinate is not of the correct format.</exception>
         /// <exception cref="KeyNotFoundException">
@@ -404,8 +404,8 @@
         /// </returns>
         /// <exception cref="ArgumentNullException">Key is null.</exception>
         /// <exception cref="OverflowException">
-        /// Position coordinate represents a number less than <see cref="Int32.MinValue" /> or greater than 
-        /// <see cref="Int32.MaxValue" />.
+        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than 
+        /// <see cref="int.MaxValue" />.
         /// </exception>
         /// <exception cref="FormatException">Position coordinate is not of the correct format.</exception>
         /// <exception cref="KeyNotFoundException">
@@ -1014,7 +1014,10 @@
         /// <param name="duration">The duration of the animation.</param>
         /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        /// <exception cref="ArgumentException">Opacity is negative or opacity is bigger than one.</exception>
+        /// <exception cref="ArgumentException">
+        /// Opacity is negative.
+        /// -or- Opacity is greater than one.
+        /// </exception>
         /// <exception cref="FormatException">Format contains an invalid specification. </exception>
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
@@ -1041,7 +1044,10 @@
         /// <param name="duration">The duration of the animation.</param>
         /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        /// <exception cref="ArgumentException">Opacity is negative or opacity is bigger than one.</exception>
+        /// <exception cref="ArgumentException">
+        /// Opacity is negative.
+        /// -or- Opacity is greater than one.
+        /// </exception>
         public ChainJQueryHelper FadeTo(decimal duration, decimal opacity)
         {
             if (opacity < 0)

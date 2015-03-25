@@ -12,8 +12,14 @@
         /// Initializes a new instance of the <see cref="CssSelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a CSS selector.</param>
-        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
-        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public CssSelector(string selector)
             : base(selector)
         {

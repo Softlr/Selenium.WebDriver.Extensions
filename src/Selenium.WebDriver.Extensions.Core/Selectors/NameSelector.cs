@@ -12,8 +12,14 @@
         /// Initializes a new instance of the <see cref="NameSelector"/> class.
         /// </summary>
         /// <param name="name">A string containing a DOM element class name.</param>
-        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
-        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public NameSelector(string name)
             : base(ModifyName(name))
         {

@@ -16,8 +16,14 @@
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
-        /// <exception cref="ArgumentNullException">Selector is null or jQuery variable name is null.</exception>
-        /// <exception cref="ArgumentException">Selector is empty or jQuery variable name is empty.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- jQuery variable name is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- jQuery variable name is empty.
+        /// </exception>
         public JQuerySelector(
             string selector,
             JQuerySelector context = null,
@@ -131,7 +137,10 @@
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
         /// <exception cref="ArgumentNullException">Root element is null.</exception>
-        /// <exception cref="ArgumentException">Selector is empty or jQuery variable name is empty.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- jQuery variable name is empty.
+        /// </exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)
@@ -210,7 +219,10 @@
         /// </param>
         /// <param name="context">The jQuery context selector.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        /// <exception cref="ArgumentNullException">Selector is null or context is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Context is null.
+        /// </exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Add(string selector, JQuerySelector context)
         {
@@ -306,7 +318,10 @@
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <param name="context">The jQuery context selector.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        /// <exception cref="ArgumentNullException">Selector is null or context is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Context is null.
+        /// </exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Closest(string selector, JQuerySelector context)
         {
@@ -509,7 +524,10 @@
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        /// <exception cref="ArgumentException">Selector is empty or filter is empty.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Filter is empty.
+        /// </exception>
         public JQuerySelector NextUntil(string selector = null, string filter = null)
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
@@ -607,7 +625,10 @@
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        /// <exception cref="ArgumentException">Selector is empty or filter is empty.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Filter is empty.
+        /// </exception>
         public JQuerySelector ParentsUntil(string selector = null, string filter = null)
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
@@ -672,7 +693,10 @@
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        /// <exception cref="ArgumentException">Selector is empty or filter is empty.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Filter is empty.
+        /// </exception>
         public JQuerySelector PrevUntil(string selector = null, string filter = null)
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
