@@ -15,16 +15,16 @@ The output path for the coverage file.
 The filter for the test assemblies.
 
 .EXAMPLE
-New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll) ./coverage.xml
+New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Output ./coverage.xml
 
 .EXAMPLE
-New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml
+New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll .\Bar.Tests\bin\Release\Bar.Tests.dll
 
 .EXAMPLE
-New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml
+New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Output ./coverage.xml
 
 .EXAMPLE
-New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml -Filter "+[*]*"
+New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Filter "+[*]*"
 #>
 function New-CoverageAnalysis {
     [CmdletBinding()]
@@ -53,7 +53,7 @@ Creates the code coverage report.
 .DESCRIPTION
 This function creates the code coverage report.
 
-.PARAMETER CoverageXmlPath
+.PARAMETER CoverageXml
 The code coverage XML file path.
 
 .PARAMETER Output
@@ -63,17 +63,17 @@ The output path for the coverage report.
 The verebosity level.
 
 .EXAMPLE
-New-CoverageReport .\coverage.xml .\CoverageReport
+New-CoverageReport -CoverageXml .\coverage.xml -Output .\CoverageReport
 
 .EXAMPLE
-New-CoverageReport .\coverage.xml .\CoverageReport -Verbosity Verbose
+New-CoverageReport -CoverageXml .\coverage.xml -Output .\CoverageReport -Verbosity Verbose
 #>
 function New-CoverageReport {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $CoverageXmlPath,
+        [string] $CoverageXml,
         
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -83,7 +83,7 @@ function New-CoverageReport {
     )
 
     Exec {
-          .\packages\ReportGenerator.2.1.4.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
+          .\packages\ReportGenerator.2.1.4.0\ReportGenerator.exe -reports:$CoverageXml -targetdir:$Output -verbosity:$Verbosity
     }
 }
 
@@ -95,22 +95,22 @@ Pushishes the coverage data to coveralls.io.
 .DESCRIPTION
 This function publishes the coverage data to coveralls.io.
 
-.PARAMETER CoverageXmlPath
+.PARAMETER CoverageXml
 The code coverage XML file path.
 
 .EXAMPLE
-Publish-Coveralls .\coverage.xml
+Publish-Coveralls -CoverageXml .\coverage.xml
 #>
 function Publish-Coveralls {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $CoverageXmlPath
+        [string] $CoverageXml
     )
 
     Exec {
-          .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXmlPath -f
+          .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXml -f
     }
 }
 
@@ -121,7 +121,7 @@ Creates the build.
 .DESCRIPTION
 This function creates the build for the given solution.
 
-.PARAMETER SolutionPath
+.PARAMETER Solution
 The path for the solution file.
 
 .PARAMETER BuildConfiguration
@@ -137,26 +137,26 @@ The verebosity level.
 The target for the MS build.
 
 .EXAMPLE
-New-Build .\Foo.sln
+New-Build -Solution .\Foo.sln
 
 .EXAMPLE
-New-Build .\Foo.sln "Debug"
+New-Build -Solution .\Foo.sln -BuildConfiguration Debug
 
 .EXAMPLE
-New-Build .\Foo.sln -Verbosity normal
+New-Build -Solution .\Foo.sln -Verbosity normal
 
 .EXAMPLE
-New-Build .\Foo.sln -Target Clean
+New-Build -Solution .\Foo.sln -Target Clean
 
 .EXAMPLE
-New-Build .\Foo.sln -ToolsVersion 12.0
+New-Build -Solution .\Foo.sln -ToolsVersion 12.0
 #>
 function New-Build {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
-        [string] $SolutionPath,
+        [string] $Solution,
 
         [string] $BuildConfiguration = "Release",
         
@@ -168,7 +168,7 @@ function New-Build {
     )
 
     Exec {
-        msbuild $SolutionPath /property:Configuration=$BuildConfiguration /verbosity:$Verbosity /t:$Target /tv:$ToolsVersion
+        msbuild $Solution /property:Configuration=$BuildConfiguration /verbosity:$Verbosity /t:$Target /tv:$ToolsVersion
     }
 }
 
@@ -179,7 +179,7 @@ Create the NuGet package based on the given specification.
 .DESCRIPTION
 This function creates the NuGet package based on the given NuGet specification files.
 
-.PARAMETER SpecificationPaths
+.PARAMETER Specification
 The paths for the NuGet specification files.
 
 .PARAMETER Output
@@ -189,20 +189,20 @@ The output directory for NuGet package.
 The version of the package.
 
 .EXAMPLE
-Write-NugetPackage .\Foo\Foo.nuspec
+New-NugetPackage -Specification .\Foo\Foo.nuspec
 
 .EXAMPLE
-Write-NugetPackage .\Foo\Foo.nuspec -Output .\packages
+New-NugetPackage -Specification .\Foo\Foo.nuspec -Output .\packages
 
 .EXAMPLE
-New-NugetPackage .\Foo\Foo.nuspec . -Version 2.0
+New-NugetPackage -Specification .\Foo\Foo.nuspec -Version 2.0
 #>
 function New-NugetPackage {
     [CmdletBinding()]
     param(
         [Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
         [ValidateNotNullOrEmpty()]
-        [string[]] $SpecificationPaths,
+        [string[]] $Specification,
 
         [string] $Output = ".",
 
@@ -210,7 +210,7 @@ function New-NugetPackage {
     )
 
     Exec {
-        $SpecificationPaths | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output }
+        $Specification | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output }
     }
 }
 
@@ -228,10 +228,13 @@ The test assemblies.
 The trait to filter the tests.
 
 .EXAMPLE
-Test-Assembly .\Foo.Tests\bin\Release\Foo.Tests.dll
+Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll
 
 .EXAMPLE
-Test-Assembly .\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
+Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll .\Bar.Tests\bin\Release\Bar.Tests.dll
+
+.EXAMPLE
+Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
 #>
 function Test-Assembly {
     [CmdletBinding()]
