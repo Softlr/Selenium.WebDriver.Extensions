@@ -15,6 +15,8 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
+        /// <exception cref="ArgumentNullException">Text is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Text is empty or base element is empty.</exception>
         public LinkTextSelector(string text, string baseElement = "document")
             : base(text, baseElement)
         {
@@ -70,6 +72,7 @@
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
         /// <exception cref="ArgumentNullException">Root element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

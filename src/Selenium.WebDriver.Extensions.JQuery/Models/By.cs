@@ -1,5 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
+    using System;
+
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
     
@@ -20,6 +22,8 @@
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or jQuery variable name is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or jQuery variable name is empty.</exception>
         public static JQuerySelector JQuerySelector(
             string selector, 
             JQuerySelector context = null, 
@@ -39,6 +43,8 @@
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
         /// elements.
         /// </returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static QuerySelector QuerySelector(string selector, string baseElement = "document")
         {
             return Core.By.QuerySelector(selector, baseElement);
@@ -53,6 +59,8 @@
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
         /// elements.
         /// </returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public static QuerySelector QuerySelector(string selector, ISelector baseSelector)
         {
             return Core.By.QuerySelector(selector, baseSelector);
@@ -162,6 +170,8 @@
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">XPATH is null.</exception>
+        /// <exception cref="ArgumentException">XPATH is empty.</exception>
         public static new XPathSelector XPath(string xpathToFind)
         {
             return Core.By.XPath(xpathToFind);

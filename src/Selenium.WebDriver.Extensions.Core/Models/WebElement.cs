@@ -4,6 +4,9 @@
     using System.Collections.ObjectModel;
     using System.Drawing;
     using System.Globalization;
+    using System.Reflection;
+    using System.Runtime.InteropServices;
+
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     
@@ -175,6 +178,9 @@
         /// <summary>
         /// Gets the tag name of this element.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual string TagName
         {
             get
@@ -187,6 +193,9 @@
         /// Gets the innerText of this element, without any leading or trailing whitespace, and with other whitespace 
         /// collapsed.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual string Text
         {
             get
@@ -198,6 +207,9 @@
         /// <summary>
         /// Gets a value indicating whether or not this element is enabled.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual bool Enabled
         {
             get
@@ -209,6 +221,9 @@
         /// <summary>
         /// Gets a value indicating whether or not this element is selected.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual bool Selected
         {
             get
@@ -221,6 +236,9 @@
         /// Gets a <see cref="Point"/> object containing the coordinates of the upper-left corner of this element 
         /// relative to the upper-left corner of the page.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual Point Location
         {
             get
@@ -232,6 +250,9 @@
         /// <summary>
         /// Gets a <see cref="Size"/> object containing the height and width of this element.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual Size Size
         {
             get
@@ -243,6 +264,9 @@
         /// <summary>
         /// Gets a value indicating whether or not this element is displayed.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual bool Displayed
         {
             get
@@ -266,6 +290,7 @@
         /// </summary>
         /// <param name="by">The locating mechanism to use.</param>
         /// <returns>The first matching <see cref="IWebElement"/> on the current context.</returns>
+        /// <exception cref="NoSuchElementException">If no element matches the criteria.</exception>
         public virtual IWebElement FindElement(OpenQA.Selenium.By by)
         {
             return this.InnerElement.FindElement(by);
@@ -287,6 +312,9 @@
         /// <summary>
         /// Clears the content of this element.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual void Clear()
         {
             this.InnerElement.Clear();
@@ -296,6 +324,11 @@
         /// Simulates typing text into the element.
         /// </summary>
         /// <param name="text">The text to type into the element.</param>
+        /// <exception cref="InvalidElementStateException">Thrown when the target element is not enabled.</exception>
+        /// <exception cref="ElementNotVisibleException">Thrown when the target element is not visible.</exception>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual void SendKeys(string text)
         {
             this.InnerElement.SendKeys(text);
@@ -304,6 +337,9 @@
         /// <summary>
         /// Submits this element to the web server.
         /// </summary>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual void Submit()
         {
             this.InnerElement.Submit();
@@ -312,6 +348,10 @@
         /// <summary>
         /// Clicks this element.
         /// </summary>
+        /// <exception cref="ElementNotVisibleException">Thrown when the target element is not visible.</exception>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual void Click()
         {
             this.InnerElement.Click();
@@ -322,6 +362,9 @@
         /// </summary>
         /// <param name="attributeName">The name of the attribute.</param>
         /// <returns>The attribute's current value. Returns a <see langword="null"/> if the value is not set.</returns>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual string GetAttribute(string attributeName)
         {
             return this.InnerElement.GetAttribute(attributeName);
@@ -332,6 +375,9 @@
         /// </summary>
         /// <param name="propertyName">The name of the CSS property to get the value of.</param>
         /// <returns>The value of the specified CSS property.</returns>
+        /// <exception cref="StaleElementReferenceException">
+        /// Thrown when the target element is no longer valid in the document DOM.
+        /// </exception>
         public virtual string GetCssValue(string propertyName)
         {
             return this.InnerElement.GetCssValue(propertyName);
@@ -344,6 +390,36 @@
         /// <param name="selector">The Selenium query selector.</param>
         /// <returns>The first DOM element matching given query selector.</returns>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="NoSuchElementException">The requested element is not found.</exception>
+        /// <exception cref="TargetInvocationException">The constructor being called throws an exception.</exception>
+        /// <exception cref="MethodAccessException">
+        /// The caller does not have permission to call this constructor.
+        /// </exception>
+        /// <exception cref="MemberAccessException">
+        /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
+        /// </exception>
+        /// <exception cref="InvalidComObjectException">
+        /// The COM type was not obtained through <see cref="T:Type.GetTypeFromProgID" /> or 
+        /// <see cref="T:Type.GetTypeFromCLSID" />.
+        /// </exception>
+        /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
+        /// <exception cref="COMException">
+        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class 
+        /// is not registered.
+        /// </exception>
+        /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
+        /// <exception cref="InvalidOperationException">The source sequence is empty.</exception>
+        /// <exception cref="ArgumentException">
+        /// Type is not a RuntimeType. -or-Type is an open generic type (that is, the 
+        /// <see cref="P:System.Type.ContainsGenericParameters" /> property returns true).
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.-or- Creation of 
+        /// <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, <see cref="T:System.Void" />, 
+        /// and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.-or-
+        /// The assembly that contains type is a dynamic assembly that was created with 
+        /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
+        /// </exception>
         public WebElement FindElement(ISelector selector)
         {
             if (selector == null)
@@ -361,6 +437,34 @@
         /// <param name="selector">The Selenium query selector.</param>
         /// <returns>The DOM elements matching given query selector.</returns>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="TargetInvocationException">The constructor being called throws an exception.</exception>
+        /// <exception cref="MethodAccessException">
+        /// The caller does not have permission to call this constructor.
+        /// </exception>
+        /// <exception cref="MemberAccessException">
+        /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
+        /// </exception>
+        /// <exception cref="InvalidComObjectException">
+        /// The COM type was not obtained through <see cref="T:Type.GetTypeFromProgID" /> or 
+        /// <see cref="T:Type.GetTypeFromCLSID" />.
+        /// </exception>
+        /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
+        /// <exception cref="COMException">
+        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class 
+        /// is not registered.
+        /// </exception>
+        /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
+        /// <exception cref="ArgumentException">
+        /// Type is not a RuntimeType. -or-Type is an open generic type (that is, the 
+        /// <see cref="P:System.Type.ContainsGenericParameters" /> property returns true).
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.-or- Creation of 
+        /// <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, <see cref="T:System.Void" />, 
+        /// and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.-or-
+        /// The assembly that contains type is a dynamic assembly that was created with 
+        /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
+        /// </exception>
         public ReadOnlyCollection<WebElement> FindElements(ISelector selector)
         {
             if (selector == null)

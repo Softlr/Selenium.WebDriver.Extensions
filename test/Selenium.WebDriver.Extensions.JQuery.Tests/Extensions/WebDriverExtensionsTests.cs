@@ -258,7 +258,9 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Property<int>("checked"));
+            var ex = Assert.Throws<TypeArgumentException>(
+                () => driverMock.Object.JQuery("input").Property<int>("checked"));
+            Assert.Equal("T", ex.ParamName);
         }
 
         [Fact]
@@ -506,7 +508,8 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
+            var ex = Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
+            Assert.Equal("T", ex.ParamName);
         }
 
         [Fact]

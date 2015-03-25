@@ -1,5 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
+    using System;
+
     using JetBrains.Annotations;
     
     /// <summary>
@@ -23,6 +25,8 @@
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
         /// elements.
         /// </returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static QuerySelector QuerySelector(string selector, string baseElement = "document")
         {
             return new QuerySelector(selector, baseElement);
@@ -37,6 +41,8 @@
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
         /// elements.
         /// </returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public static QuerySelector QuerySelector(string selector, ISelector baseSelector)
         {
             return new QuerySelector(selector, baseSelector);
@@ -47,6 +53,8 @@
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
         /// <returns>A <see cref="ClassNameSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static new ClassNameSelector ClassName(string classNameToFind)
         {
             return new ClassNameSelector(classNameToFind);
@@ -57,6 +65,8 @@
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
         /// <returns>A <see cref="CssSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static new CssSelector CssSelector(string cssSelectorToFind)
         {
             return new CssSelector(cssSelectorToFind);
@@ -67,6 +77,8 @@
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
         /// <returns>An <see cref="IdSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static new IdSelector Id(string idToFind)
         {
             return new IdSelector(idToFind);
@@ -77,6 +89,8 @@
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Text is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Text is empty or base element is empty.</exception>
         public static new LinkTextSelector LinkText(string linkTextToFind)
         {
             return new LinkTextSelector(linkTextToFind);
@@ -90,6 +104,8 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Text is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Text is empty or base element is empty.</exception>
         public static LinkTextSelector LinkText(string linkTextToFind, string baseElement)
         {
             return new LinkTextSelector(linkTextToFind, baseElement);
@@ -100,6 +116,8 @@
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
         /// <returns>A <see cref="NameSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static new NameSelector Name(string nameToFind)
         {
             return new NameSelector(nameToFind);
@@ -110,6 +128,8 @@
         /// </summary>
         /// <param name="partialLinkTextToFind">The partial link text to find.</param>
         /// <returns>A <see cref="PartialLinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Text is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Text is empty or base element is empty.</exception>
         public static new PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind)
         {
             return new PartialLinkTextSelector(partialLinkTextToFind);
@@ -123,6 +143,8 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Text is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Text is empty or base element is empty.</exception>
         public static PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind, string baseElement)
         {
             return new PartialLinkTextSelector(partialLinkTextToFind, baseElement);
@@ -133,6 +155,8 @@
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
         /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public static new TagNameSelector TagName(string tagNameToFind)
         {
             return new TagNameSelector(tagNameToFind);
@@ -146,6 +170,8 @@
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">XPATH is null.</exception>
+        /// <exception cref="ArgumentException">XPATH is empty.</exception>
         public static new XPathSelector XPath(string xpathToFind)
         {
             return new XPathSelector(xpathToFind);

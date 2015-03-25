@@ -18,7 +18,7 @@
         private readonly int left;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Position"/> struct.
+        /// Initializes a new instance of the <see cref="Position"/> structure.
         /// </summary>
         /// <param name="top">The top coordinate of DOM element position.</param>
         /// <param name="left">The left coordinate of DOM element position.</param>

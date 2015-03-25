@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     
     /// <summary>
@@ -11,6 +12,8 @@
         /// Initializes a new instance of the <see cref="IdSelector"/> class.
         /// </summary>
         /// <param name="id">A string containing a DOM element id.</param>
+        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
         public IdSelector(string id)
             : base(ModifyId(id))
         {

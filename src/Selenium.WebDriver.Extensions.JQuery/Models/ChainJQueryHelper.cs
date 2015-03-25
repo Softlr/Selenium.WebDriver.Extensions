@@ -133,7 +133,7 @@
         {
             if (!new[] { typeof(bool?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool? and string types are supported", "T");
+                throw new TypeArgumentException("Only null-able boolean and string types are supported", "T");
             }
 
             return this.Find<T>("prop('" + propertyName + "')");
@@ -511,7 +511,9 @@
         {
             if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
+                throw new TypeArgumentException(
+                    "Only null-able boolean, null-able long and string types are supported", 
+                    "T");
             }
 
             return this.Find<T>("data('" + key + "')");

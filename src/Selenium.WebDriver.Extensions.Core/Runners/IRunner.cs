@@ -16,7 +16,7 @@
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The Selenium JavaScript query selector selector.</param>
+        /// <param name="selector">The Selenium JavaScript query selector.</param>
         /// <returns>Parsed result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 

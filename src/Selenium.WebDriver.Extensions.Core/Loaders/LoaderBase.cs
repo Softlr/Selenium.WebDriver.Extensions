@@ -22,7 +22,7 @@
 
         /// <summary>
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
-        /// return <c>true</c> if the prerequisites are ok; otherwise, <c>false</c>.
+        /// return <c>true</c> if the prerequisites are met; otherwise, <c>false</c>.
         /// </summary>
         public abstract string CheckScript { get; }
 

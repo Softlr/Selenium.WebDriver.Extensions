@@ -711,7 +711,7 @@
         }
 
         /// <summary>
-        /// Reduce the set of matched elements to a subset specified by a range of indices.
+        /// Reduce the set of matched elements to a subset specified by a range of indexes.
         /// </summary>
         /// <param name="start">
         /// An integer indicating the 0-based position at which the elements begin to be selected. If negative, it 
