@@ -175,7 +175,6 @@ FakesAssemblies/
 
 # SandCastle build documentation
 docs/Help/
-*.DotSettings
 phantomjs-license.txt
 tests.xml
 coverage.xml
