@@ -534,11 +534,9 @@
         [Fact]
         public void ShouldFindCount()
         {
-            const long Result = 2;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).length;")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).length;")).Returns(2);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -549,18 +547,16 @@
 
             var result = webElement.Object.JQuery("input").Count();
 
-            Assert.Equal(Result, result);
+            Assert.Equal(2, result);
         }
 
         [Fact]
         public void ShouldFindSerialized()
         {
-            const string Result = "search=test";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('form', jQuery('body > div')).serialize();"))
-                .Returns(Result);
+                .Returns("search=test");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -571,18 +567,16 @@
 
             var result = webElement.Object.JQuery("form").Serialized();
 
-            Assert.Equal(Result, result);
+            Assert.Equal("search=test", result);
         }
 
         [Fact]
         public void ShouldFindSerializedArray()
         {
-            const string Result = "[{\"name\":\"s\",\"value\":\"\"}]";
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return JSON.stringify(jQuery('form', jQuery('body > div')).serializeArray());"))
-                .Returns(Result);
+                .Returns("[{\"name\":\"s\",\"value\":\"\"}]");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -593,17 +587,16 @@
 
             var result = webElement.Object.JQuery("form").SerializedArray();
 
-            Assert.Equal(Result, result);
+            Assert.Equal("[{\"name\":\"s\",\"value\":\"\"}]", result);
         }
 
         [Fact]
         public void HasClass()
         {
-            const bool Result = true;
-
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('form', jQuery('body > div')).hasClass('test');")).Returns(Result);
+                .Setup(x => x.ExecuteScript("return jQuery('form', jQuery('body > div')).hasClass('test');"))
+                .Returns(true);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
@@ -614,7 +607,7 @@
 
             var result = webElement.Object.JQuery("form").HasClass("test");
 
-            Assert.Equal(Result, result);
+            Assert.Equal(true, result);
         }
 
         [Fact]
