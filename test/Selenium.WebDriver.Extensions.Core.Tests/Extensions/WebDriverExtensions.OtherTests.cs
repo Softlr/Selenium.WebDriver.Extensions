@@ -6,10 +6,10 @@
     using OpenQA.Selenium;
     using Xunit;
 
-    // ReSharper disable ExceptionNotDocumented
-    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsOtherTests
     {
         [Fact]

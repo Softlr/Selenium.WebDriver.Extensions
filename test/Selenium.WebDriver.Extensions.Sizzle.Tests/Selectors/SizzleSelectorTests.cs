@@ -4,21 +4,16 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
-
     using Moq;
-
     using OpenQA.Selenium;
-
     using Selenium.WebDriver.Extensions.Core;
-
     using Xunit;
-
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
-    // ReSharper disable ExceptionNotDocumented
-    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class SizzleSelectorTests
     {
         private Mock<IWebDriver> driverMock;

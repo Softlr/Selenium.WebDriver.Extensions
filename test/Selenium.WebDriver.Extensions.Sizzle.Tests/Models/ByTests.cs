@@ -6,9 +6,10 @@
     using Xunit;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
-    // ReSharper disable ExceptionNotDocumented
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class ByTests
     {
         [Fact]

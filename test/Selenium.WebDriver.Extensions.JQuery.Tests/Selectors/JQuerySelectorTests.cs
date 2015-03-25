@@ -9,10 +9,10 @@
     using Xunit;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
-    // ReSharper disable ExceptionNotDocumented
-    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
         public static IEnumerable<object[]> SelectorData

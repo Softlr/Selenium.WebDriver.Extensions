@@ -7,10 +7,10 @@
     using Selenium.WebDriver.Extensions.Sizzle;
     using Xunit;
 
-    // ReSharper disable ExceptionNotDocumented
-    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class SizzleRunnerTests
     {
         [Fact]
