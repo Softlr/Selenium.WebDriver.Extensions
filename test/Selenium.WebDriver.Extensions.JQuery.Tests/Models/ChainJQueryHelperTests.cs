@@ -652,6 +652,14 @@
         }
 
         [Fact]
+        public void ShouldTriggerEvent()
+        {
+            var result = this.driver.JQuery("div").Trigger("click");
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
         public void ShouldTriggerHandler()
         {
             var result = this.driver.JQuery("div").TriggerHandler("click");
