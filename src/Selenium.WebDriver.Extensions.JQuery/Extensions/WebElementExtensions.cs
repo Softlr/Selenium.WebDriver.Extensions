@@ -17,6 +17,10 @@
         /// <exception cref="ArgumentNullException">
         /// Web element is null.
         /// -or- Selector is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- jQuery variable name is empty.
+        /// </exception>
         public static ChainJQueryHelper JQuery(this WebElement webElement, string selector)
         {
             if (webElement == null)

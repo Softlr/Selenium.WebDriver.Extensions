@@ -20,6 +20,10 @@
         /// Selector is null.
         /// -or- Base element is null.
         /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public IdSelector(string id)
             : base(ModifyId(id))
         {
