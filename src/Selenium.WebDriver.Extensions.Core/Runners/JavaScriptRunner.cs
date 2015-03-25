@@ -27,6 +27,10 @@
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
         /// <exception cref="ArgumentNullException">Driver is null or selector is null.</exception>
+        /// <exception cref="InvalidCastException">
+        /// An element in the sequence cannot be cast to type <typeparamref name="T" />.
+        /// </exception>
+        /// <exception cref="ArgumentException">Script is empty.</exception>
         public virtual T Find<T>(IWebDriver driver, ISelector selector)
         {
             if (driver == null)
@@ -57,6 +61,11 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
+        /// <exception cref="InvalidCastException">
+        /// An element in the sequence cannot be cast to type <typeparamref name="T" />.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
+        /// <exception cref="ArgumentException">Script is empty.</exception>
         protected static T Find<T>(IWebDriver driver, string script)
         {
             return ParseUtil.ParseResult<T>(driver.ExecuteScript<object>(script));
