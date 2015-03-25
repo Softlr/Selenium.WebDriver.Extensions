@@ -394,6 +394,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindPosition()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -408,7 +409,6 @@
 
             Assert.NotNull(position);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], position.Value.Top);
             Assert.Equal(dict["left"], position.Value.Left);
         }
@@ -429,6 +429,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindOffset()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -443,7 +444,6 @@
 
             Assert.NotNull(offset);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], offset.Value.Top);
             Assert.Equal(dict["left"], offset.Value.Left);
         }

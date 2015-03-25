@@ -403,6 +403,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindPosition()
         {
             var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
@@ -422,12 +423,12 @@
 
             Assert.NotNull(position);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], position.Value.Top);
             Assert.Equal(dict["left"], position.Value.Left);
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindOffset()
         {
             var dict = new Dictionary<string, object> { { "top", 100 }, { "left", 200 } };
@@ -447,7 +448,6 @@
 
             Assert.NotNull(offset);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], offset.Value.Top);
             Assert.Equal(dict["left"], offset.Value.Left);
         }

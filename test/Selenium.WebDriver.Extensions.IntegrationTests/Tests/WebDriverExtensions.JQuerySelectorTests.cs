@@ -9,6 +9,8 @@
     using By = Selenium.WebDriver.Extensions.By;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public abstract class WebDriverExtensionsJQuerySelectorTests
     {
         protected IWebDriver Browser { get; set; }
@@ -228,12 +230,12 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void FindPosition()
         {
             var position = this.Browser.JQuery("h1").Position();
             Assert.NotNull(position);
             
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(3, position.Value.Top);
             Assert.Equal(8, position.Value.Left);
         }
@@ -246,12 +248,12 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void FindOffset()
         {
             var position = this.Browser.JQuery("h1").Offset();
             Assert.NotNull(position);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(8, position.Value.Top);
             Assert.Equal(13, position.Value.Left);
         }

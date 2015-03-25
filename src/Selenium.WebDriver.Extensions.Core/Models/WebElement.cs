@@ -135,7 +135,6 @@
         /// Initializes a new instance of the <see cref="WebElement"/> class.
         /// </summary>
         /// <remarks>This constructor is only used for testing purposes.</remarks>
-        // ReSharper disable once UnusedMember.Global
         internal WebElement()
         {
         }
