@@ -380,7 +380,7 @@
         /// The property is retrieved and key is not found.
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// The property is set and the <see cref="T:System.Collections.Generic.IDictionary`2" /> is read-only.
+        /// The property is set and the <see cref="IDictionary{TKey,TValue}" /> is read-only.
         /// </exception>
         public Position? Position()
         {
@@ -412,7 +412,7 @@
         /// The property is retrieved and key is not found.
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// The property is set and the <see cref="T:System.Collections.Generic.IDictionary`2" /> is read-only.
+        /// The property is set and the <see cref="IDictionary{TKey,TValue}" /> is read-only.
         /// </exception>
         public Position? Offset()
         {

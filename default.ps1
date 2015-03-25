@@ -42,7 +42,7 @@ Task CompileNet35 -Description "Compiles the .NET 3.5 build configuration" -Depe
 
 Task Compile -Description "Compiles all of the build configurations" -Depends CompileNet45, CompileNet40, CompileNet35
 
-Task Docs -Description "Compiles the documentation build configuration" -Depends CleanDocs {
+Task Docs -Description "Compiles the documentation build configuration" -Depends CleanDocs, CompileNet45 {
 	$envVarNotDefined = $env:SHFBROOT -eq $null
 	If ($envVarNotDefined) {
 		$env:SHFBROOT = $PSScriptRoot + "\..\..\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"

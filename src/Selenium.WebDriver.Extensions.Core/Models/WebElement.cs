@@ -5,6 +5,7 @@
     using System.Drawing;
     using System.Globalization;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.InteropServices;
 
     using OpenQA.Selenium;
@@ -401,8 +402,8 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="T:Type.GetTypeFromProgID" /> or 
-        /// <see cref="T:Type.GetTypeFromCLSID" />.
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
@@ -417,13 +418,12 @@
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
-        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
-        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
-        /// types, is not supported.
+        /// Type cannot be a <see cref="TypeBuilder" />.
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
         /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
-        /// </exception>
+        /// </exception>      
         public WebElement FindElement(ISelector selector)
         {
             if (selector == null)
@@ -449,8 +449,8 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="T:Type.GetTypeFromProgID" /> or 
-        /// <see cref="T:Type.GetTypeFromCLSID" />.
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
@@ -464,13 +464,12 @@
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
-        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
-        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
-        /// types, is not supported.
+        /// Type cannot be a <see cref="TypeBuilder" />.
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
         /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
-        /// </exception>
+        /// </exception>      
         public ReadOnlyCollection<WebElement> FindElements(ISelector selector)
         {
             if (selector == null)
