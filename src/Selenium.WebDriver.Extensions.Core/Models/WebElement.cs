@@ -15,7 +15,7 @@
         /// <summary>
         /// The script to get the DOM path.
         /// </summary>
-        protected const string FindDomPathScript = @"(function(element) {
+        private const string FindDomPathScript = @"(function(element) {
             'use strict';
             var stack = [], siblingsCount, siblingIndex, i, sibling;
             while (element.parentNode !== null) {
@@ -46,7 +46,7 @@
         /// <summary>
         /// The script to get the XPATH.
         /// </summary>
-        protected const string FindXPathScript = @"(function(element) { 
+        private const string FindXPathScript = @"(function(element) { 
             'use strict';
             var allNodes = document.getElementsByTagName('*'),
                 segments = [],
@@ -136,7 +136,7 @@
         /// <summary>
         /// Gets the inner element.
         /// </summary>
-        public virtual IWebElement InnerElement { get; private set; }
+        protected virtual IWebElement InnerElement { get; private set; }
 
         /// <summary>
         /// Gets the selector.
@@ -146,7 +146,7 @@
         /// <summary>
         /// Gets the selector result index.
         /// </summary>
-        public virtual int SelectorResultIndex { get; private set; }
+        protected virtual int SelectorResultIndex { get; private set; }
 
         /// <summary>
         /// Gets the DOM path for the web element.
@@ -375,7 +375,7 @@
         /// </summary>
         /// <param name="findScript">The script to be run on order to find the path.</param>
         /// <returns>The DOM path for the web element.</returns>
-        protected string FindPath(string findScript)
+        private string FindPath(string findScript)
         {
             var selectorCallScript = string.Format(
                 CultureInfo.InvariantCulture,

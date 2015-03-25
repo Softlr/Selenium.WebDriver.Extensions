@@ -34,7 +34,7 @@
         /// <summary>
         /// Gets the driver.
         /// </summary>
-        public JQuerySelector Selector { get; private set; }
+        private JQuerySelector Selector { get; set; }
 
         /// <summary>
         /// Searches for DOM element using jQuery selector and gets the combined text contents of each element in the 
@@ -1201,7 +1201,7 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        protected T Find<T>(string scriptFormat, string wrapperFormat = null)
+        private T Find<T>(string scriptFormat, string wrapperFormat = null)
         {
             this.Driver.JQuery().Load();
             return ParseUtil.ParseResult<T>(this.ExecuteScript(this.Selector, scriptFormat, wrapperFormat));
@@ -1211,7 +1211,7 @@
         /// Runs a jQuery script on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/> selector.
         /// </summary>
         /// <param name="script">The script to be executed in order to set the value.</param>
-        protected void Run(string script)
+        private void Run(string script)
         {
             this.Driver.JQuery().Load();
             this.ExecuteScript(this.Selector, script, null);
@@ -1226,7 +1226,7 @@
         /// The wrapper format string for the purpose of wrap the jQuery selection result.
         /// </param>
         /// <returns>Result of invoking the script.</returns>
-        protected object ExecuteScript(
+        private object ExecuteScript(
             JQuerySelector selector,
             string scriptFormat,
             string wrapperFormat)
@@ -1251,7 +1251,7 @@
         /// Creates the jQuery selector limiting the scope of the search to descendants of current element.
         /// </summary>
         /// <returns>The jQuery selector limiting the scope of the search to descendants of current element.</returns>
-        protected JQuerySelector CreateSelector()
+        private JQuerySelector CreateSelector()
         {
             var rootSelector = new JQuerySelector(this.WebElement.Path, jQueryVariable: this.Selector.JQueryVariable);
             return new JQuerySelector(this.Selector.RawSelector, rootSelector, this.Selector.JQueryVariable);

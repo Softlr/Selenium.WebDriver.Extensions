@@ -28,11 +28,11 @@
         /// <summary>
         /// Gets the driver.
         /// </summary>
-        public IWebDriver Driver { get; private set; }
+        protected IWebDriver Driver { get; private set; }
 
         /// <summary>
         /// Gets the web element.
         /// </summary>
-        public WebElement WebElement { get; private set; }
+        protected WebElement WebElement { get; private set; }
     }
 }

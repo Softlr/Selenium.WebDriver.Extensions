@@ -53,7 +53,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
-        protected JQuerySelector()
+        private JQuerySelector()
             : base(null)
         {
         }
@@ -735,7 +735,7 @@
         /// <param name="selector">The selector.</param>
         /// <param name="filter">The filter.</param>
         /// <returns>Chained function arguments string generated based on given selector and filter.</returns>
-        protected static string HandleSelectorWithFilter(string selector = null, string filter = null)
+        private static string HandleSelectorWithFilter(string selector = null, string filter = null)
         {
             var data = string.Empty;
             if (selector != null)
@@ -757,7 +757,7 @@
         /// <c>true</c> to not to wrap the selector into quotes; otherwise, <c>false</c>.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        protected JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
+        private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
             selector = selector == null ? string.Empty : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
 
@@ -776,7 +776,7 @@
         /// <param name="selector">The jQuery method selector.</param>
         /// <param name="context">The jQuery context selector.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        protected JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context)
+        private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context)
         {
             return new JQuerySelector
             {
