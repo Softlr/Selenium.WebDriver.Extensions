@@ -135,19 +135,9 @@
         }
 
         /// <summary>
-        /// Gets the inner element.
-        /// </summary>
-        protected virtual IWebElement InnerElement { get; private set; }
-
-        /// <summary>
         /// Gets the selector.
         /// </summary>
         public virtual ISelector Selector { get; private set; }
-
-        /// <summary>
-        /// Gets the selector result index.
-        /// </summary>
-        protected virtual int SelectorResultIndex { get; private set; }
 
         /// <summary>
         /// Gets the DOM path for the web element.
@@ -260,6 +250,16 @@
                 return this.InnerElement.Displayed;
             }
         }
+
+        /// <summary>
+        /// Gets the inner element.
+        /// </summary>
+        protected virtual IWebElement InnerElement { get; private set; }
+
+        /// <summary>
+        /// Gets the selector result index.
+        /// </summary>
+        protected virtual int SelectorResultIndex { get; private set; }
 
         /// <summary>
         /// Finds the first <see cref="IWebElement"/> using the given method.
