@@ -401,8 +401,8 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="T:Type.GetTypeFromProgID" /> or 
-        /// <see cref="T:Type.GetTypeFromCLSID" />.
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
@@ -449,8 +449,8 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="T:Type.GetTypeFromProgID" /> or 
-        /// <see cref="T:Type.GetTypeFromCLSID" />.
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
