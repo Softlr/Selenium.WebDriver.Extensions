@@ -24,7 +24,7 @@ New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll .\Bar.Tests\bi
 New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Output ./coverage.xml
 
 .EXAMPLE
-New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Filter "+[*]*"
+New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Filter '+[*]*'
 #>
 function New-CoverageAnalysis {
     [CmdletBinding()]
@@ -37,12 +37,12 @@ function New-CoverageAnalysis {
         [ValidateNotNullOrEmpty()]
         [string] $Output,
 
-        [string] $Filter = "+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]* -[xunit*]*"
+        [string] $Filter = '+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]* -[xunit*]*'
     )
 
-    $testAssemblies = $Tests -Join " "
+    $testAssemblies = $Tests -Join ' '
     Exec {
-          .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
+          .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe '-targetargs:$testAssemblies -noshadow -parallel all' '-filter:$Filter' -output:$Output
     }
 }
 
@@ -79,7 +79,7 @@ function New-CoverageReport {
         [ValidateNotNullOrEmpty()]
         [string] $Output,
 
-        [string] $Verbosity = "Error"
+        [string] $Verbosity = 'Error'
     )
 
     Exec {
@@ -158,13 +158,13 @@ function New-Build {
         [ValidateNotNullOrEmpty()]
         [string] $Solution,
 
-        [string] $BuildConfiguration = "Release",
+        [string] $BuildConfiguration = 'Release',
         
-        [string] $ToolsVersion = "4.0",
+        [string] $ToolsVersion = '4.0',
 
-        [string] $Verbosity = "minimal",
+        [string] $Verbosity = 'minimal',
 
-        [string] $Target = "Rebuild"
+        [string] $Target = 'Rebuild'
     )
 
     Exec {
@@ -204,9 +204,9 @@ function New-NugetPackage {
         [ValidateNotNullOrEmpty()]
         [string[]] $Specification,
 
-        [string] $Output = ".",
+        [string] $Output = '.',
 
-        [string] $Version = "1.0"
+        [string] $Version = '1.0'
     )
 
     Exec {
@@ -249,8 +249,8 @@ function Test-Assembly {
     $testAssemblies = @()
     $Tests | ForEach-Object -Process { $testAssemblies += $_ }
 
-    If ($Trait -ne $null -and $Trait -ne "") {
-        $testAssemblies += "-trait"
+    If ($Trait -ne $null -and $Trait -ne '') {
+        $testAssemblies += '-trait'
         $testAssemblies += $Trait
     }
 
