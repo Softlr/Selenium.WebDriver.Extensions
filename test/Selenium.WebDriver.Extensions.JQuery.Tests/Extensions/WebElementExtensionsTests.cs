@@ -10,6 +10,8 @@
     using Xunit;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
+    // ReSharper disable ExceptionNotDocumented
+    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class WebElementExtensionsTests : IDisposable
@@ -536,7 +538,7 @@
         {
             var selector = By.QuerySelector("div");
             this.driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).length;")).Returns(2);
+                .Setup(x => x.ExecuteScript("return jQuery('input', jQuery('body > div')).length;")).Returns(2L);
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 

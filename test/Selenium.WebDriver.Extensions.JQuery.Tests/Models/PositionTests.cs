@@ -3,6 +3,7 @@
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
+    // ReSharper disable ExceptionNotDocumented
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class PositionTests

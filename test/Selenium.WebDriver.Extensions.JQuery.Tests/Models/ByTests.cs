@@ -6,6 +6,7 @@
     using Xunit;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
 
+    // ReSharper disable ExceptionNotDocumented
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class ByTests

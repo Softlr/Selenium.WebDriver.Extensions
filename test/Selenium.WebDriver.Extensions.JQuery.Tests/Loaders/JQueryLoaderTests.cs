@@ -6,6 +6,8 @@
     using Selenium.WebDriver.Extensions.Core;
     using Xunit;
 
+    // ReSharper disable ExceptionNotDocumented
+    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class JQueryLoaderTests

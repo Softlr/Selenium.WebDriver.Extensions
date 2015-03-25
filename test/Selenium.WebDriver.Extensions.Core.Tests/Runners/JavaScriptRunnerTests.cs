@@ -6,6 +6,8 @@
     using OpenQA.Selenium;
     using Xunit;
 
+    // ReSharper disable ExceptionNotDocumented
+    // ReSharper disable ExceptionNotDocumentedOptional
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class JavaScriptRunnerTests
