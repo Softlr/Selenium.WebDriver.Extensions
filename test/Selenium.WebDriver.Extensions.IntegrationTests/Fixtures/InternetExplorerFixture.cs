@@ -13,7 +13,7 @@
             this.Browser = new InternetExplorerDriver();
         }
 
-        public IWebDriver Browser { get; set; }
+        public IWebDriver Browser { get; private set; }
 
         public void Dispose()
         {
