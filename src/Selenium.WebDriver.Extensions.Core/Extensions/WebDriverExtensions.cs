@@ -5,6 +5,7 @@
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Reflection;
+    using System.Reflection.Emit;
     using System.Runtime.InteropServices;
 
     using OpenQA.Selenium;
@@ -66,10 +67,9 @@
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
-        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
-        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
-        /// types, is not supported.
+        /// Type cannot be a <see cref="TypeBuilder" />.
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
         /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>
@@ -134,10 +134,9 @@
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
-        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
-        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
-        /// types, is not supported.
+        /// Type cannot be a <see cref="TypeBuilder" />.
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
         /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>
@@ -190,9 +189,8 @@
         /// For a number, a <see cref="long"/> is returned.
         /// For a boolean, a <see cref="bool"/> is returned.
         /// For all other cases a <see cref="string"/> is returned.
-        /// For an array,we check the first element, and attempt to return a 
-        /// <see cref="T:System.Collections.Generic.List`1"/> of that type, following the rules above. Nested lists 
-        /// are not supported.
+        /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type, 
+        /// following the rules above. Nested lists are not supported.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
         /// Driver is null.
@@ -345,10 +343,9 @@
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="T:System.Reflection.Emit.TypeBuilder" />.
-        /// -or- Creation of <see cref="T:System.TypedReference" />, <see cref="T:System.ArgIterator" />, 
-        /// <see cref="T:System.Void" />, and <see cref="T:System.RuntimeArgumentHandle" /> types, or arrays of those 
-        /// types, is not supported.
+        /// Type cannot be a <see cref="TypeBuilder" />.
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
         /// -or- The assembly that contains type is a dynamic assembly that was created with 
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>      
