@@ -32,7 +32,7 @@
         }
 
         /// <summary>
-        /// Gets the driver.
+        /// Gets or sets the driver.
         /// </summary>
         private JQuerySelector Selector { get; set; }
 
