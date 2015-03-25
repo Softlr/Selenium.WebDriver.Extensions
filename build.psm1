@@ -27,23 +27,23 @@ New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Re
 New-CoverageAnalysis @(.\Foo.Tests\bin\Release\Foo.Tests.dll, .\Bar.Tests\bin\Release\Bar.Tests.dll) ./coverage.xml -Filter "+[*]*"
 #>
 function New-CoverageAnalysis {
-	[CmdletBinding()]
-	param(
-		[Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-		[ValidateNotNullOrEmpty()]
-		[string[]] $Tests,
-		
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string] $Output,
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string[]] $Tests,
+        
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Output,
 
-		[string] $Filter = "+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]* -[xunit*]*"
-	)
+        [string] $Filter = "+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]* -[xunit*]*"
+    )
 
-	$testAssemblies = $Tests -Join " "
-	Exec {
-		  .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
-	}
+    $testAssemblies = $Tests -Join " "
+    Exec {
+          .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
+    }
 }
 
 <#
@@ -69,22 +69,22 @@ New-CoverageReport .\coverage.xml .\CoverageReport
 New-CoverageReport .\coverage.xml .\CoverageReport -Verbosity Verbose
 #>
 function New-CoverageReport {
-	[CmdletBinding()]
-	param(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string] $CoverageXmlPath,
-		
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string] $Output,
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string] $CoverageXmlPath,
+        
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string] $Output,
 
-		[string] $Verbosity = "Error"
-	)
+        [string] $Verbosity = "Error"
+    )
 
-	Exec {
-		  .\packages\ReportGenerator.2.1.4.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
-	}
+    Exec {
+          .\packages\ReportGenerator.2.1.4.0\ReportGenerator.exe -reports:$CoverageXmlPath -targetdir:$Output -verbosity:$Verbosity
+    }
 }
 
 
@@ -102,16 +102,16 @@ The code coverage XML file path.
 Publish-Coveralls .\coverage.xml
 #>
 function Publish-Coveralls {
-	[CmdletBinding()]
-	param(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string] $CoverageXmlPath
-	)
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string] $CoverageXmlPath
+    )
 
-	Exec {
-		  .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXmlPath -f
-	}
+    Exec {
+          .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXmlPath -f
+    }
 }
 
 <#
@@ -152,24 +152,24 @@ New-Build .\Foo.sln -Target Clean
 New-Build .\Foo.sln -ToolsVersion 12.0
 #>
 function New-Build {
-	[CmdletBinding()]
-	param(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string] $SolutionPath,
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string] $SolutionPath,
 
-		[string] $BuildConfiguration = "Release",
-		
-		[string] $ToolsVersion = "4.0",
+        [string] $BuildConfiguration = "Release",
+        
+        [string] $ToolsVersion = "4.0",
 
-		[string] $Verbosity = "minimal",
+        [string] $Verbosity = "minimal",
 
-		[string] $Target = "Rebuild"
-	)
+        [string] $Target = "Rebuild"
+    )
 
-	Exec {
-		msbuild $SolutionPath /property:Configuration=$BuildConfiguration /verbosity:$Verbosity /t:$Target /tv:$ToolsVersion
-	}
+    Exec {
+        msbuild $SolutionPath /property:Configuration=$BuildConfiguration /verbosity:$Verbosity /t:$Target /tv:$ToolsVersion
+    }
 }
 
 <#
@@ -198,20 +198,20 @@ Write-NugetPackage .\Foo\Foo.nuspec -Output .\packages
 New-NugetPackage .\Foo\Foo.nuspec . -Version 2.0
 #>
 function New-NugetPackage {
-	[CmdletBinding()]
-	param(
-		[Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-		[ValidateNotNullOrEmpty()]
-		[string[]] $SpecificationPaths,
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string[]] $SpecificationPaths,
 
-		[string] $Output = ".",
+        [string] $Output = ".",
 
-		[string] $Version = "1.0"
-	)
+        [string] $Version = "1.0"
+    )
 
-	Exec {
-		$SpecificationPaths | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output }
-	}
+    Exec {
+        $SpecificationPaths | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output }
+    }
 }
 
 <#
@@ -234,24 +234,24 @@ Test-Assembly .\Foo.Tests\bin\Release\Foo.Tests.dll
 Test-Assembly .\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
 #>
 function Test-Assembly {
-	[CmdletBinding()]
-	param(
-		[Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
-		[ValidateNotNullOrEmpty()]
-		[string[]] $Tests,
+    [CmdletBinding()]
+    param(
+        [Parameter(Mandatory = $true, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [ValidateNotNullOrEmpty()]
+        [string[]] $Tests,
 
-		[string] $Trait
-	)
+        [string] $Trait
+    )
 
-	$testAssemblies = @()
-	$Tests | ForEach-Object -Process { $testAssemblies += $_ }
+    $testAssemblies = @()
+    $Tests | ForEach-Object -Process { $testAssemblies += $_ }
 
-	If ($Trait -ne $null -and $Trait -ne "") {
-		$testAssemblies += "-trait"
-		$testAssemblies += $Trait
-	}
+    If ($Trait -ne $null -and $Trait -ne "") {
+        $testAssemblies += "-trait"
+        $testAssemblies += $Trait
+    }
 
-	Exec {
-		.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
-	}
+    Exec {
+        .\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe $testAssemblies -noshadow -parallel all
+    }
 }
