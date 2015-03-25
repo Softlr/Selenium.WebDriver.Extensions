@@ -42,13 +42,17 @@ Task CompileNet35 -Description "Compiles the .NET 3.5 build configuration" -Depe
 
 Task Compile -Description "Compiles all of the build configurations" -Depends CompileNet45, CompileNet40, CompileNet35
 
-Task Docs  -Description "Compiles the documentation build configuration" -Depends CleanDocs {
-	$sandCastleRoot = $env:SHFBROOT
-	$env:SHFBROOT = $PSScriptRoot + "\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"
+Task Docs -Description "Compiles the documentation build configuration" -Depends CleanDocs {
+	$envVarNotDefined = $env:SHFBROOT -eq $null
+	If ($envVarNotDefined) {
+		$env:SHFBROOT = $PSScriptRoot + "\..\..\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder"
+	}
 	Try {
 		New-Build $solution -BuildConfiguration Docs
 	} Finally {
-		$env:SHFBROOT = $sandCastleRoot
+		If ($envVarNotDefined) {
+			$env:SHFBROOT = $null
+		}
 	}
 }
 
@@ -72,7 +76,7 @@ Task IntegrationInternetExplorer -Description "Runs the Internet Explorer integr
 	Test-Assembly $integrationTests -Trait Browser=InternetExplorer
 }
 
-Task Integration  -Description "Runs all of the integration tests" -Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
+Task Integration -Description "Runs all of the integration tests" -Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
 
 Task AnalyzeCoverage -Description "Analyzes the code coverage" -Depends CompileNet45 {
 	New-CoverageAnalysis $unitTests $coverageXml
