@@ -5,9 +5,11 @@
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
-    
+
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsOtherTests
     {
         [Fact]

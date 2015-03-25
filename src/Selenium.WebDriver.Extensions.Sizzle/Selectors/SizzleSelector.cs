@@ -97,6 +97,7 @@
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
         /// <exception cref="ArgumentNullException">Root element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

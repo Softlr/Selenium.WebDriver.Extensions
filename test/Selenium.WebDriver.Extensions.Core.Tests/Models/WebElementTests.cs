@@ -13,6 +13,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebElementTests
     {
         private Mock<IWebDriver> driverMock;

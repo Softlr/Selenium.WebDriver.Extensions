@@ -8,9 +8,11 @@
     using OpenQA.Selenium;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.Core.By;
-    
+
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsFindElementsTests
     {
         [Fact]

@@ -37,7 +37,7 @@ function New-CoverageAnalysis {
 		[ValidateNotNullOrEmpty()]
 		[string] $Output,
 
-		[string] $Filter = "+[*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]*"
+		[string] $Filter = "+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*.Tests]* -[*.IntegrationTests]* -[xunit*]*"
 	)
 
 	$testAssemblies = $Tests -Join " "

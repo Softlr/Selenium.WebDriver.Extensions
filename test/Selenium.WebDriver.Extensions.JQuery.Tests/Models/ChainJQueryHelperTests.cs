@@ -8,6 +8,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class ChainJQueryHelperTests : IDisposable
     {
         private readonly IWebDriver driver;
@@ -647,6 +649,14 @@
         public void ShouldScroll()
         {
             var result = this.driver.JQuery("div").Scroll();
+
+            Assert.NotNull(result);
+        }
+
+        [Fact]
+        public void ShouldTriggerEvent()
+        {
+            var result = this.driver.JQuery("div").Trigger("click");
 
             Assert.NotNull(result);
         }

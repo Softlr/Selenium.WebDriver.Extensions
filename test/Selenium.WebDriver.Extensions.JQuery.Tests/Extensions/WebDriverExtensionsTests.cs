@@ -14,6 +14,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsTests
     {
         public static IEnumerable<object[]> LoadJQueryData
@@ -256,7 +258,9 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Property<int>("checked"));
+            var ex = Assert.Throws<TypeArgumentException>(
+                () => driverMock.Object.JQuery("input").Property<int>("checked"));
+            Assert.Equal("T", ex.ParamName);
         }
 
         [Fact]
@@ -390,6 +394,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindPosition()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -404,7 +409,6 @@
 
             Assert.NotNull(position);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], position.Value.Top);
             Assert.Equal(dict["left"], position.Value.Left);
         }
@@ -425,6 +429,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindOffset()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -439,7 +444,6 @@
 
             Assert.NotNull(offset);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], offset.Value.Top);
             Assert.Equal(dict["left"], offset.Value.Left);
         }
@@ -504,7 +508,8 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
+            var ex = Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
+            Assert.Equal("T", ex.ParamName);
         }
 
         [Fact]

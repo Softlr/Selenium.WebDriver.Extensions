@@ -11,6 +11,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
         public static IEnumerable<object[]> SelectorData

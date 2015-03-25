@@ -7,6 +7,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class NameSelectorTests
     {
         public static IEnumerable<object[]> EqualityData

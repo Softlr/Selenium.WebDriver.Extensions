@@ -7,6 +7,8 @@
     using By = Selenium.WebDriver.Extensions.By;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
     public abstract class WebDriverExtensionsSizzleSelectorTests
     {
         protected IWebDriver Browser { get; set; }

@@ -6,6 +6,8 @@
     using Xunit;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
     public abstract class WebDriverExtensionsJQuerySetterTests
     {
         protected IWebDriver Browser { get; set; }

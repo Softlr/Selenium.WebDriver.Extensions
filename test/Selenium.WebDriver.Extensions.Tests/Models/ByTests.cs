@@ -8,6 +8,7 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     public class ByTests
     {
         [Fact]
