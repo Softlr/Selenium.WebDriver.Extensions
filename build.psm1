@@ -18,7 +18,7 @@ The filter for the test assemblies.
 New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Output ./coverage.xml
 
 .EXAMPLE
-New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll .\Bar.Tests\bin\Release\Bar.Tests.dll
+New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll , .\Bar.Tests\bin\Release\Bar.Tests.dll
 
 .EXAMPLE
 New-CoverageAnalysis -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Output ./coverage.xml
@@ -192,6 +192,9 @@ The version of the package.
 New-NugetPackage -Specification .\Foo\Foo.nuspec
 
 .EXAMPLE
+New-NugetPackage -Specification .\Foo\Foo.nuspec , .\Bar\Bar.nuspec
+
+.EXAMPLE
 New-NugetPackage -Specification .\Foo\Foo.nuspec -Output .\packages
 
 .EXAMPLE
@@ -231,7 +234,7 @@ The trait to filter the tests.
 Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll
 
 .EXAMPLE
-Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll .\Bar.Tests\bin\Release\Bar.Tests.dll
+Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll , .\Bar.Tests\bin\Release\Bar.Tests.dll
 
 .EXAMPLE
 Test-Assembly -Tests .\Foo.Tests\bin\Release\Foo.Tests.dll -Trait Category=UnitTests
