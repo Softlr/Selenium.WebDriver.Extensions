@@ -92,7 +92,7 @@ The code coverage XML file path.
 The output path for the coverage report.
 
 .PARAMETER Verbosity
-The verebosity level.
+The verbosity level.
 
 .EXAMPLE
 New-CoverageReport -CoverageXml .\coverage.xml -Output .\CoverageReport
@@ -135,7 +135,7 @@ function New-CoverageReport {
 
 <#
 .SYNOPSIS
-Pushishes the coverage data to coveralls.io.
+Publishes the coverage data to coveralls.io.
 
 .DESCRIPTION
 This function publishes the coverage data to coveralls.io.
@@ -183,7 +183,7 @@ The build configuration name to use.
 The tools version.
 
 .PARAMETER Verbosity
-The verebosity level.
+The verbosity level.
 
 .PARAMETER Target
 The target for the MS build.
