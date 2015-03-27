@@ -76,7 +76,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWherFindingElementReturnsEmptyResult()
+        public void ShouldThrowExceptionWhenFindingElementReturnsEmptyResult()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()

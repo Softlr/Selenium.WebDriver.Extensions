@@ -70,21 +70,21 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingScriptWithNullDriver()
+        public void ShouldThrowExceptionWhenExucutingScriptWithNullDriver()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript(null, null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingScriptThatExpectsValueWithNullDriver()
+        public void ShouldThrowExceptionWhenExecutingScriptThatExpectsValueWithNullDriver()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript<object>(null, null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingNullScript()
+        public void ShouldThrowExceptionWhenExecutingNullScript()
         {
             var driverMock = new Mock<IWebDriver>();
             
@@ -93,7 +93,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingEmptyScript()
+        public void ShouldThrowExceptionWhenExecutingEmptyScript()
         {
             var driverMock = new Mock<IWebDriver>();
 
@@ -102,7 +102,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingWhiteSpaceOnlyScript()
+        public void ShouldThrowExceptionWhenExecutingWhiteSpaceOnlyScript()
         {
             var driverMock = new Mock<IWebDriver>();
 

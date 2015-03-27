@@ -113,7 +113,7 @@
             Assert.Equal("selector", ex.ParamName);
         }
 
-        public void ShouldThrowexceptionWhenCreatingQuerySelectorWithNullBaseSelector()
+        public void ShouldThrowExceptionWhenCreatingQuerySelectorWithNullBaseSelector()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (ISelector)null));
             Assert.Equal("baseSelector", ex.ParamName);
