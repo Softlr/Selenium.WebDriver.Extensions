@@ -87,7 +87,7 @@
         }
 
         [Fact]
-        public void ShouldReturnEmptyResultWhenFindingElementsThatDoesntExist()
+        public void ShouldReturnEmptyResultWhenFindingElementsThatDoesNotExist()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()

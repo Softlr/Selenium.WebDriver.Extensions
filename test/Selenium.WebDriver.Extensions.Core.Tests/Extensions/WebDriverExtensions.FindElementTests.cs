@@ -66,7 +66,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenFindingElementThatDoesntExist()
+        public void ShouldThrowExceptionWhenFindingElementThatDoesNotExist()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()

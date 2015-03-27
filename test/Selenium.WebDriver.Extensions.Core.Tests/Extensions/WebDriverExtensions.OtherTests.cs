@@ -70,7 +70,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExucutingScriptWithNullDriver()
+        public void ShouldThrowExceptionWhenExecutingScriptWithNullDriver()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript(null, null));
             Assert.Equal("driver", ex.ParamName);
