@@ -59,7 +59,7 @@
         }
 
         [Fact]
-        public void ShouldTimeoutWhenSizzleFailesToLoad()
+        public void ShouldTimeoutWhenSizzleFailsToLoad()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(false);
@@ -152,7 +152,7 @@
         }
 
         [Fact]
-        public void ShouldReturnEmptyResultsWhenSizzleDoentFindAnyMatches()
+        public void ShouldReturnEmptyResultsWhenSizzleDoesNotFindAnyMatches()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.Sizzle")))

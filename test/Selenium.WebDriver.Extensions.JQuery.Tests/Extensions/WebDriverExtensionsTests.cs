@@ -49,17 +49,17 @@
 
         [Theory]
         [MemberData("LoadJQueryWithUriData")]
-        public void ShouldLoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
+        public void ShouldLoadJQueryWithUri(Uri uri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
             var sequence = driverMock.As<IJavaScriptExecutor>()
                 .SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
-            driverMock.Object.JQuery().Load(jQueryUri, timeout);
+            driverMock.Object.JQuery().Load(uri, timeout);
         }
 
         [Fact]
-        public void ShouldTimeoutWhenSizzleFailesToLoad()
+        public void ShouldTimeoutWhenSizzleFailsToLoad()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(false);
@@ -140,7 +140,7 @@
         }
 
         [Fact]
-        public void ShouldReturnEmptyResultsWhenjQueryDoentFindAnyMatches()
+        public void ShouldReturnEmptyResultsWhenJQueryDoesNotFindAnyMatches()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
