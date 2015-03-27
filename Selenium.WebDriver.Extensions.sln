@@ -22,6 +22,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8CA6CE5-A741-4B80-8B9F-689B2301492A}"
+	ProjectSection(SolutionItems) = preProject
+		test\Settings.StyleCop = test\Settings.StyleCop
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Core.Tests", "test\Selenium.WebDriver.Extensions.Core.Tests\Selenium.WebDriver.Extensions.Core.Tests.csproj", "{777EE9F7-FCFF-42B1-BB9C-A7FD46A91B7A}"
 EndProject
