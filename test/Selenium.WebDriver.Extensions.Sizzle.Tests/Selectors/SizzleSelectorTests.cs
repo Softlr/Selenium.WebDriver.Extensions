@@ -14,7 +14,7 @@
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class SizzleSelectorTests
+    public class SizzleSelectorTests : IDisposable
     {
         private Mock<IWebDriver> driverMock;
 
