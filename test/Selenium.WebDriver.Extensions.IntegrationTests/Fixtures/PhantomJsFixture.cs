@@ -8,6 +8,7 @@
     [ExcludeFromCodeCoverage]
     public class PhantomJsFixture : IDisposable
     {
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public PhantomJsFixture()
         {
             var phantomJsService = PhantomJSDriverService.CreateDefaultService();

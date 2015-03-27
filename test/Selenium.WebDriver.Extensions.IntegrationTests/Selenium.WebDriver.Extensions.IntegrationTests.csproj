@@ -90,6 +90,7 @@
     <Compile Include="FirefoxTests\WebDriverExtensions.QuerySelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.SizzleLoadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.SizzleUnloadedSelectorFirefoxTests.cs" />
+    <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.CoreInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSetterInternetExplorerTests.cs" />
@@ -154,6 +155,9 @@
     <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.44\content\IEDriverServer.exe">
       <Link>Drivers\IEDriverServer.exe</Link>
     </Content>
+    <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
+      <SubType>Designer</SubType>
+    </CodeAnalysisDictionary>
     <Content Include="TestCases\QuerySelector\TestCase.html" />
     <Content Include="TestCases\Sizzle\Unloaded.html" />
     <Content Include="TestCases\Sizzle\Loaded.html" />
