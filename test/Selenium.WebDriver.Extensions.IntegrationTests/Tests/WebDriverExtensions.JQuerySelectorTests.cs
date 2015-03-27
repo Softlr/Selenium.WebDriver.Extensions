@@ -47,8 +47,8 @@
         {
             var text = this.Browser.JQuery("#id1").Text();
             var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
-            Assert.True(trimmedText.StartsWith("jQuery"));
-            Assert.True(trimmedText.EndsWith("Selenium"));
+            Assert.True(trimmedText.StartsWith("jQuery", StringComparison.OrdinalIgnoreCase));
+            Assert.True(trimmedText.EndsWith("Selenium", StringComparison.OrdinalIgnoreCase));
         }
 
         [Fact]
@@ -56,8 +56,8 @@
         {
             var text = this.Browser.JQuery("#id1").Html();
             var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
-            Assert.True(trimmedText.StartsWith("<span>jQuery</span>"));
-            Assert.True(trimmedText.EndsWith("<span>Selenium</span>"));
+            Assert.True(trimmedText.StartsWith("<span>jQuery</span>", StringComparison.OrdinalIgnoreCase));
+            Assert.True(trimmedText.EndsWith("<span>Selenium</span>", StringComparison.OrdinalIgnoreCase));
         }
 
         [Fact]
