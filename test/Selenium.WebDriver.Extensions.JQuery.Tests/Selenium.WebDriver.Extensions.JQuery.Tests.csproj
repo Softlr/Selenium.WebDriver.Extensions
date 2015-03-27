@@ -78,7 +78,9 @@
   <ItemGroup>
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="Extensions\WebElementExtensionsTests.cs" />
-    <Compile Include="Properties\GlobalSuppressions.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Loaders\JQueryLoaderTests.cs" />
     <Compile Include="Models\ChainJQueryHelperTests.cs" />

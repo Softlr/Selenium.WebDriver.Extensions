@@ -90,7 +90,9 @@
     <Compile Include="FirefoxTests\WebDriverExtensions.QuerySelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.SizzleLoadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.SizzleUnloadedSelectorFirefoxTests.cs" />
-    <Compile Include="Properties\GlobalSuppressions.cs" />
+    <Compile Include="Properties\GlobalSuppressions.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="InternetExplorerTests\WebDriverExtensions.CoreInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSetterInternetExplorerTests.cs" />
