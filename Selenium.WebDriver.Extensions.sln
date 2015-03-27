@@ -23,6 +23,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8CA6CE5-A741-4B80-8B9F-689B2301492A}"
 	ProjectSection(SolutionItems) = preProject
+		test\CodeAnalysis.ruleset = test\CodeAnalysis.ruleset
 		test\Settings.StyleCop = test\Settings.StyleCop
 	EndProjectSection
 EndProject
