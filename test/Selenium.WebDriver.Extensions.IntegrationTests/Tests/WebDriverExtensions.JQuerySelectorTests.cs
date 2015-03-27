@@ -23,7 +23,7 @@
         }
 
         [Fact]
-        public void FindElementThatDoesntExist()
+        public void FindElementThatDoesNotExist()
         {
             Assert.Throws<NoSuchElementException>(() => this.Browser.FindElement(By.JQuerySelector("#id-not")));
         }
@@ -36,7 +36,7 @@
         }
 
         [Fact]
-        public void FindElementsThatDoesntExist()
+        public void FindElementsThatDoesNotExist()
         {
             var elements = this.Browser.FindElements(By.JQuerySelector("div.mainNot"));
             Assert.Equal(0, elements.Count);
@@ -47,8 +47,8 @@
         {
             var text = this.Browser.JQuery("#id1").Text();
             var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
-            Assert.True(trimmedText.StartsWith("jQuery"));
-            Assert.True(trimmedText.EndsWith("Selenium"));
+            Assert.True(trimmedText.StartsWith("jQuery", StringComparison.OrdinalIgnoreCase));
+            Assert.True(trimmedText.EndsWith("Selenium", StringComparison.OrdinalIgnoreCase));
         }
 
         [Fact]
@@ -56,8 +56,8 @@
         {
             var text = this.Browser.JQuery("#id1").Html();
             var trimmedText = text.Replace(Environment.NewLine, string.Empty).Trim();
-            Assert.True(trimmedText.StartsWith("<span>jQuery</span>"));
-            Assert.True(trimmedText.EndsWith("<span>Selenium</span>"));
+            Assert.True(trimmedText.StartsWith("<span>jQuery</span>", StringComparison.OrdinalIgnoreCase));
+            Assert.True(trimmedText.EndsWith("<span>Selenium</span>", StringComparison.OrdinalIgnoreCase));
         }
 
         [Fact]
@@ -68,7 +68,7 @@
         }
 
         [Fact]
-        public void FindAttributeThatDoesntExist()
+        public void FindAttributeThatDoesNotExist()
         {
             var attribute = this.Browser.JQuery("input:first").Attribute("typeNot");
             Assert.Null(attribute);
@@ -83,7 +83,7 @@
         }
 
         [Fact]
-        public void FindPropertyThatDoesntExist()
+        public void FindPropertyThatDoesNotExist()
         {
             var property = this.Browser.JQuery("input:first").Property("checkedNot");
             Assert.Null(property);
@@ -97,7 +97,7 @@
         }
 
         [Fact]
-        public void FindValueThatDoesntExist()
+        public void FindValueThatDoesNotExist()
         {
             var value = this.Browser.JQuery("form").Value();
             Assert.True(string.IsNullOrEmpty(value));
@@ -111,7 +111,7 @@
         }
 
         [Fact]
-        public void FindCssThatDoesntExist()
+        public void FindCssThatDoesNotExist()
         {
             var value = this.Browser.JQuery("#id1").Css("test");
             Assert.Null(value);
@@ -174,56 +174,56 @@
         }
 
         [Fact]
-        public void FindWidthThatDoesntExist()
+        public void FindWidthThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").Width();
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindHeightThatDoesntExist()
+        public void FindHeightThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").Height();
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindInnerWidthThatDoesntExist()
+        public void FindInnerWidthThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").InnerWidth();
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindInnerHeightThatDoesntExist()
+        public void FindInnerHeightThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").InnerHeight();
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindOuterWidthThatDoesntExist()
+        public void FindOuterWidthThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").OuterWidth();
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindOuterHeightThatDoesntExist()
+        public void FindOuterHeightThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").OuterHeight();
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindOuterWidthWithMarginThatDoesntExist()
+        public void FindOuterWidthWithMarginThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").OuterWidth(true);
             Assert.Null(value);
         }
 
         [Fact]
-        public void FindOuterHeightWithMarginThatDoesntExist()
+        public void FindOuterHeightWithMarginThatDoesNotExist()
         {
             var value = this.Browser.JQuery("h6").OuterHeight(true);
             Assert.Null(value);
@@ -241,7 +241,7 @@
         }
 
         [Fact]
-        public void FindPositionThatDoesntExist()
+        public void FindPositionThatDoesNotExist()
         {
             var position = this.Browser.JQuery("h6").Position();
             Assert.Null(position);
@@ -259,7 +259,7 @@
         }
 
         [Fact]
-        public void FindOffsetThatDoesntExist()
+        public void FindOffsetThatDoesNotExist()
         {
             var position = this.Browser.JQuery("h6").Offset();
             Assert.Null(position);
@@ -311,7 +311,7 @@
         }
 
         [Fact]
-        public void FindCountThatDoesntExist()
+        public void FindCountThatDoesNotExist()
         {
             var count = this.Browser.JQuery("div.mainNot").Count();
             Assert.Equal(0, count);
@@ -325,7 +325,7 @@
         }
 
         [Fact]
-        public void FindSerializedThatDoesntExist()
+        public void FindSerializedThatDoesNotExist()
         {
             var value = this.Browser.JQuery("form.test").Serialized();
             Assert.Empty(value);
@@ -339,7 +339,7 @@
         }
 
         [Fact]
-        public void FindSerializedArrayThatDoesntExist()
+        public void FindSerializedArrayThatDoesNotExist()
         {
             var value = this.Browser.JQuery("form.test").SerializedArray();
             Assert.Equal("[]", value);

@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
@@ -11,7 +12,7 @@
         public WebDriverExtensionsCoreFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(Properties.Resources.CoreTestsUrl);
+            this.Browser.Navigate().GoToUrl(new Uri(Properties.Resources.CoreTestsUrl));
         }
     }
 }

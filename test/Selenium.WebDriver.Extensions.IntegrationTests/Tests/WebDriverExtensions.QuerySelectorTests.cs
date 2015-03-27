@@ -21,7 +21,7 @@
         }
 
         [Fact]
-        public void FindElementThatDoesntExist()
+        public void FindElementThatDoesNotExist()
         {
             Assert.Throws<NoSuchElementException>(() => this.Browser.FindElement(By.QuerySelector("#id-not")));
         }
@@ -34,7 +34,7 @@
         }
 
         [Fact]
-        public void FindElementsThatDoesntExist()
+        public void FindElementsThatDoesNotExist()
         {
             var elements = this.Browser.FindElements(By.QuerySelector("div.mainNot"));
             Assert.Equal(0, elements.Count);

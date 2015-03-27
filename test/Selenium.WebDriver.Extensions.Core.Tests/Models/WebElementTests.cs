@@ -240,7 +240,7 @@
             element.Click();
             Assert.True(clickResult);
 
-            element.SendKeys("abc");
+            element.SendKeys("test");
             Assert.True(sendKeysResult);
 
             element.GetAttribute("class");

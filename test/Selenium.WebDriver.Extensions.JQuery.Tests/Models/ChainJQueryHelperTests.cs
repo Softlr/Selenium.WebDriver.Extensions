@@ -362,7 +362,7 @@
         }
 
         [Fact]
-        public void ShouldSlideUpNumbel()
+        public void ShouldSlideUpNumber()
         {
             var result = this.driver.JQuery("div").SlideUp(500);
 
