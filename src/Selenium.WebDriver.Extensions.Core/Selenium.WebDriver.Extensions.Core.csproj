@@ -147,7 +147,7 @@
     <Compile Include="Selectors\LinkTextSelectorBase.cs" />
     <Compile Include="Selectors\LinkTextSelector.cs" />
     <Compile Include="Selectors\NameSelector.cs" />
-    <Compile Include="Selectors\NestableSelectorBase.cs" />
+    <Compile Include="Selectors\NestedSelectorBase.cs" />
     <Compile Include="Selectors\PartialLinkTextSelector.cs" />
     <Compile Include="Selectors\QuerySelector.cs" />
     <Compile Include="Selectors\SelectorBase.cs" />

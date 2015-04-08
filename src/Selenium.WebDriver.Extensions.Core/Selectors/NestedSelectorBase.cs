@@ -1,18 +1,18 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     /// <summary>
-    /// The selector base.
+    /// The nested selector base.
     /// </summary>
-    public abstract class NestableSelectorBase : SelectorBase
+    public abstract class NestedSelectorBase : SelectorBase
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="NestableSelectorBase"/> class.
+        /// Initializes a new instance of the <see cref="NestedSelectorBase"/> class.
         /// </summary>
         /// <param name="rawSelector">The raw selector.</param>
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        protected NestableSelectorBase(string rawSelector, string baseElement)
+        protected NestedSelectorBase(string rawSelector, string baseElement)
             : base(rawSelector)
         {
             this.BaseElement = baseElement;
