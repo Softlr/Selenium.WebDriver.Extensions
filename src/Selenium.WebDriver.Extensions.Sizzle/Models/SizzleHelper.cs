@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Sizzle
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
 
@@ -58,6 +59,7 @@
         /// <exception cref="InvalidOperationException">
         /// This instance represents a relative URI, and this property is valid only for absolute URIs.
         /// </exception>
+        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public void Load(string version = "2.0.0", TimeSpan? timeout = null)
         {
             if (version == null)

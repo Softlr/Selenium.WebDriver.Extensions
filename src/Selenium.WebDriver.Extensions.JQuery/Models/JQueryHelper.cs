@@ -1,6 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
     
@@ -59,6 +60,7 @@
         /// -or- There is an invalid character sequence in URI string.
         /// -or- The MS-DOS path specified in URI string must start with c:\\.
         /// </exception>
+        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public void Load(string version = "latest", TimeSpan? timeout = null)
         {
             if (version == null)
@@ -99,6 +101,7 @@
         /// <exception cref="InvalidOperationException">
         /// This instance represents a relative URI, and this property is valid only for absolute URIs.
         /// </exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
         public void Load(Uri jQueryUri, TimeSpan? timeout = null)
         {
             this.Driver.LoadExternalLibrary(new JQueryLoader(), jQueryUri, timeout);

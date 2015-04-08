@@ -7,7 +7,6 @@
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
-
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
 

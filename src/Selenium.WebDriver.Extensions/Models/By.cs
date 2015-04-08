@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
@@ -22,6 +23,7 @@
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
         public static JQuerySelector JQuerySelector(
             string selector, 
             JQuerySelector context = null, 
@@ -177,6 +179,7 @@
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
         public static new XPathSelector XPath(string xpathToFind)
         {
             return Core.By.XPath(xpathToFind);
