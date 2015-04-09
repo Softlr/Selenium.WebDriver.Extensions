@@ -76,7 +76,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Loaders\SizzleLoaderTests.cs" />
     <Compile Include="Models\SizzleHelperTests.cs" />

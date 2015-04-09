@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Core.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -6,8 +6,9 @@
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.Core.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
@@ -82,7 +83,8 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
 
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElements((QuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => driverMock.Object.FindElements((Core.QuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 

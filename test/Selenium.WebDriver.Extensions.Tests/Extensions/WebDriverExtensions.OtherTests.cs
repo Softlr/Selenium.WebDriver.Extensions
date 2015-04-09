@@ -1,11 +1,12 @@
-﻿namespace Selenium.WebDriver.Extensions.Core.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
-
+    
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
@@ -18,7 +19,8 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(false);
-            Assert.Throws<QuerySelectorNotSupportedException>(() => driverMock.Object.QuerySelector().CheckSupport());
+            Assert.Throws<Core.QuerySelectorNotSupportedException>(
+                () => driverMock.Object.QuerySelector().CheckSupport());
         }
 
         [Fact]
@@ -47,7 +49,20 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(null);
 
-            Assert.False(driverMock.Object.CheckSelectorPrerequisites(new QuerySelectorLoader()));
+            Assert.False(driverMock.Object.CheckSelectorPrerequisites(new Core.QuerySelectorLoader()));
+        }
+
+        [Fact]
+        public void ShouldLoadingExternalLibrary()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+
+            driverMock.Object.LoadExternalLibrary(
+                new JQuery.JQueryLoader(), 
+                new Uri("http://example.com"),
+                TimeSpan.FromMilliseconds(100));
+            Assert.True(true);
         }
 
         [Fact]
@@ -81,6 +96,26 @@
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript<object>(null, null));
             Assert.Equal("driver", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldExecuteScript()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
+            
+            driverMock.Object.ExecuteScript("myMethod();");
+            Assert.True(true);
+        }
+
+        [Fact]
+        public void ShouldExecuteScriptThatReturnsValue()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
+
+            var result = driverMock.Object.ExecuteScript<string>("return 'foo';");
+            Assert.Equal("foo", result);
         }
 
         [Fact]
