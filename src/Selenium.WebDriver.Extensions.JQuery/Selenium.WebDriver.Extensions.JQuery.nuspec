@@ -11,8 +11,6 @@
         <description>jQuery selector support for Selenium WebDriver.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, jquery, selector, selectors</tags>
         <dependencies>
-			<dependency id="Selenium.WebDriver" version="2.0.0"/>
-            <dependency id="Selenium.Support" version="2.0.0"/>
             <dependency id="Selenium.WebDriver.Extensions.Core" version="$version$"/>
         </dependencies> 
     </metadata>
