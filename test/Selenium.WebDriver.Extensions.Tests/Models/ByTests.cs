@@ -2,13 +2,13 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.Core;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class ByTests
     {
         [Fact]
@@ -153,7 +153,7 @@
         [Fact]
         public void ShouldThrowExceptionWhenCreatingQuerySelectorWithNullBaseSelector()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (ISelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (Core.ISelector)null));
             Assert.Equal("baseSelector", ex.ParamName);
         }
 

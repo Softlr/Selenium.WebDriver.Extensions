@@ -7,6 +7,7 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "PhantomJs")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {

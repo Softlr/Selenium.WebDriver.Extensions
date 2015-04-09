@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -6,9 +6,9 @@
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.JQuery.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
@@ -52,7 +52,7 @@
                 .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
             
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -89,7 +89,7 @@
                 .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -114,7 +114,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -134,7 +134,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -154,7 +154,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
             
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -174,7 +174,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -194,7 +194,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -214,7 +214,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -234,7 +234,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -253,7 +253,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -272,7 +272,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -292,7 +292,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -312,7 +312,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -332,7 +332,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -352,7 +352,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -372,7 +372,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -392,7 +392,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -414,7 +414,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -439,7 +439,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -462,7 +462,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -482,7 +482,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -502,7 +502,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -522,7 +522,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -542,7 +542,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -562,7 +562,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -582,7 +582,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -602,7 +602,7 @@
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
             webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
@@ -613,10 +613,20 @@
         }
 
         [Fact]
+        public void ShouldGetHelper()
+        {
+            var webElement = new Mock<Core.WebElement>();
+            webElement.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
+
+            webElement.Object.JQuery(By.JQuerySelector("input"));
+            Assert.True(true);
+        }
+
+        [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullSelectorAndNullWebElement()
         {
             var ex = Assert.Throws<ArgumentNullException>(
-                () => WebElementExtensions.JQuery(null, (JQuerySelector)null));
+                () => WebElementExtensions.JQuery(null, (JQuery.JQuerySelector)null));
             Assert.Equal("webElement", ex.ParamName);
         }
 
@@ -630,15 +640,15 @@
         [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
         {
-            var webElement = new Mock<WebElement>();
-            var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((JQuerySelector)null));
+            var webElement = new Mock<Core.WebElement>();
+            var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((JQuery.JQuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
         {
-            var webElement = new Mock<WebElement>();
+            var webElement = new Mock<Core.WebElement>();
             var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((string)null));
             Assert.Equal("selector", ex.ParamName);
         }

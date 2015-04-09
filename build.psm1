@@ -74,7 +74,7 @@ function New-CoverageAnalysis {
     Exec {
           .\packages\OpenCover.4.5.3723\OpenCover.Console.exe -register:user `
           -target:.\packages\xunit.runner.console.2.0.0\tools\xunit.console.exe `
-          "-targetargs:$testAssemblies -noshadow -parallel all" '-filter:$Filter' -output:$Output
+          "-targetargs:$testAssemblies -noshadow -parallel all" "-filter:$Filter" -output:$Output
     }
 }
 

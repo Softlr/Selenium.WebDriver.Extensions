@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -8,66 +8,14 @@
     using System.Runtime.InteropServices;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.Core;
+    using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions.Sizzle;
 
     /// <summary>
     /// Web driver extensions.
     /// </summary>
     public static class WebDriverExtensions
     {
-        /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static JQueryHelper JQuery(this IWebDriver driver)
-        {
-            if (driver == null)
-            {
-                throw new ArgumentNullException("driver");
-            }
-
-            return new JQueryHelper(driver);
-        }
-
-        /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        /// <exception cref="ArgumentException">
-        /// Selector is empty.
-        /// -or- jQuery variable name is empty.
-        /// </exception>
-        public static ChainJQueryHelper JQuery(this IWebDriver driver, string selector)
-        {
-            if (driver == null)
-            {
-                throw new ArgumentNullException("driver");
-            }
-
-            return driver.JQuery(By.JQuerySelector(selector));
-        }
-
-        /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static ChainJQueryHelper JQuery(this IWebDriver driver, JQuerySelector selector)
-        {
-            if (driver == null)
-            {
-                throw new ArgumentNullException("driver");
-            }
-
-            return new ChainJQueryHelper(driver, selector);
-        }
-
         /// <summary>
         /// Returns the query selector helper, that can be used to access query selector specific functionalities.
         /// </summary>
@@ -257,6 +205,56 @@
             TimeSpan? timeout = null)
         {
             Core.WebDriverExtensions.LoadExternalLibrary(driver, loader, libraryUri, timeout);
+        }
+
+        /// <summary>
+        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <returns>The jQuery helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
+        public static JQueryHelper JQuery(this IWebDriver driver)
+        {
+            return Extensions.JQuery.WebDriverExtensions.JQuery(driver);
+        }
+
+        /// <summary>
+        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="selector">The selector.</param>
+        /// <returns>The jQuery helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- jQuery variable name is empty.
+        /// </exception>
+        public static ChainJQueryHelper JQuery(this IWebDriver driver, string selector)
+        {
+            return Extensions.JQuery.WebDriverExtensions.JQuery(driver, selector);
+        }
+
+        /// <summary>
+        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="selector">The selector.</param>
+        /// <returns>The jQuery helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
+        public static ChainJQueryHelper JQuery(this IWebDriver driver, JQuerySelector selector)
+        {
+            return Extensions.JQuery.WebDriverExtensions.JQuery(driver, selector);
+        }
+
+        /// <summary>
+        /// Returns the Sizzle helper, that can be used to access Sizzle-specific functionalities.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <returns>The Sizzle helper.</returns>
+        /// <exception cref="ArgumentNullException">Driver is null.</exception>
+        public static SizzleHelper Sizzle(this IWebDriver driver)
+        {
+            return Extensions.Sizzle.WebDriverExtensions.Sizzle(driver);
         }
     }
 }

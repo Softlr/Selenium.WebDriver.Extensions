@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,16 +7,15 @@
     using System.Linq;
     using Moq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
-    using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.JQuery.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class WebDriverExtensionsTests
+    public class WebDriverExtensionsJQueryTests
     {
         public static IEnumerable<object[]> LoadJQueryData
         {
@@ -93,7 +92,8 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
             
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => driverMock.Object.FindElement((JQuery.JQuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -258,7 +258,7 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            var ex = Assert.Throws<TypeArgumentException>(
+            var ex = Assert.Throws<Core.TypeArgumentException>(
                 () => driverMock.Object.JQuery("input").Property<int>("checked"));
             Assert.Equal("T", ex.ParamName);
         }
@@ -508,7 +508,8 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            var ex = Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
+            var ex = Assert.Throws<Core.TypeArgumentException>(() => driverMock.Object.JQuery("input")
+                .Data<int>("test"));
             Assert.Equal("T", ex.ParamName);
         }
 
@@ -583,21 +584,21 @@
         public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
         {
             var ex = Assert.Throws<ArgumentNullException>(
-                () => JQuery.WebDriverExtensions.JQuery(null, (JQuerySelector)null));
+                () => WebDriverExtensions.JQuery(null, (JQuery.JQuerySelector)null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null, (string)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.JQuery(null, (string)null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenGettingJQueryHelperWithNullDriver()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.JQuery(null));
             Assert.Equal("driver", ex.ParamName);
         }
     }

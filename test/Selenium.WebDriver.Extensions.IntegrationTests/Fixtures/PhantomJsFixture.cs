@@ -6,6 +6,7 @@
     using OpenQA.Selenium.PhantomJS;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class PhantomJsFixture : IDisposable
     {
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]

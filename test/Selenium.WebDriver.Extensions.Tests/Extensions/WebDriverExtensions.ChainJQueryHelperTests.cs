@@ -1,20 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class ChainJQueryHelperTests : IDisposable
+    public class WebDriverExtensionsChainJQueryHelperTests : IDisposable
     {
         private readonly IWebDriver driver;
 
-        public ChainJQueryHelperTests()
+        public WebDriverExtensionsChainJQueryHelperTests()
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
@@ -30,7 +31,7 @@
         [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => this.driver.JQuery((JQuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => this.driver.JQuery((JQuery.JQuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -39,6 +40,13 @@
         {
             var ex = Assert.Throws<ArgumentNullException>(() => this.driver.JQuery((string)null));
             Assert.Equal("selector", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldGetHelper()
+        {
+            var helper = this.driver.JQuery(By.JQuerySelector("input"));
+            Assert.NotNull(helper);
         }
 
         [Fact]
@@ -260,7 +268,7 @@
         [Fact]
         public void ShouldShowEnum()
         {
-            var result = this.driver.JQuery("div").Show(Duration.Fast);
+            var result = this.driver.JQuery("div").Show(JQuery.Duration.Fast);
 
             Assert.NotNull(result);
         }
@@ -284,7 +292,7 @@
         [Fact]
         public void ShouldHideEnum()
         {
-            var result = this.driver.JQuery("div").Hide(Duration.Slow);
+            var result = this.driver.JQuery("div").Hide(JQuery.Duration.Slow);
 
             Assert.NotNull(result);
         }
@@ -308,7 +316,7 @@
         [Fact]
         public void ShouldToggleEnum()
         {
-            var result = this.driver.JQuery("div").Toggle(Duration.Fast);
+            var result = this.driver.JQuery("div").Toggle(JQuery.Duration.Fast);
 
             Assert.NotNull(result);
         }
@@ -332,7 +340,7 @@
         [Fact]
         public void ShouldSlideDownEnum()
         {
-            var result = this.driver.JQuery("div").SlideDown(Duration.Fast);
+            var result = this.driver.JQuery("div").SlideDown(JQuery.Duration.Fast);
 
             Assert.NotNull(result);
         }
@@ -356,7 +364,7 @@
         [Fact]
         public void ShouldSlideUpEnum()
         {
-            var result = this.driver.JQuery("div").SlideUp(Duration.Fast);
+            var result = this.driver.JQuery("div").SlideUp(JQuery.Duration.Fast);
 
             Assert.NotNull(result);
         }
@@ -380,7 +388,7 @@
         [Fact]
         public void ShouldSlideToggleEnum()
         {
-            var result = this.driver.JQuery("div").SlideToggle(Duration.Slow);
+            var result = this.driver.JQuery("div").SlideToggle(JQuery.Duration.Slow);
 
             Assert.NotNull(result);
         }
@@ -404,7 +412,7 @@
         [Fact]
         public void ShouldFadeInEnum()
         {
-            var result = this.driver.JQuery("div").FadeIn(Duration.Slow);
+            var result = this.driver.JQuery("div").FadeIn(JQuery.Duration.Slow);
 
             Assert.NotNull(result);
         }
@@ -428,7 +436,7 @@
         [Fact]
         public void ShouldFadeOutEnum()
         {
-            var result = this.driver.JQuery("div").FadeOut(Duration.Slow);
+            var result = this.driver.JQuery("div").FadeOut(JQuery.Duration.Slow);
 
             Assert.NotNull(result);
         }
@@ -452,7 +460,7 @@
         [Fact]
         public void ShouldFadeToggleEnum()
         {
-            var result = this.driver.JQuery("div").FadeToggle(Duration.Slow);
+            var result = this.driver.JQuery("div").FadeToggle(JQuery.Duration.Slow);
 
             Assert.NotNull(result);
         }
@@ -484,7 +492,7 @@
         [Fact]
         public void ShouldFadeToGivenDuration()
         {
-            var result = this.driver.JQuery("div").FadeTo(Duration.Slow, 0.5m);
+            var result = this.driver.JQuery("div").FadeTo(JQuery.Duration.Slow, 0.5m);
 
             Assert.NotNull(result);
         }
@@ -506,14 +514,16 @@
         [Fact]
         public void ShouldFadeToEnumNegativeOpacity()
         {
-            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, -1m));
+            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div")
+                .FadeTo(JQuery.Duration.Slow, -1m));
             Assert.Equal("opacity", ex.ParamName);
         }
 
         [Fact]
         public void ShouldFadeToEnumOpacityBiggerThanOne()
         {
-            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div").FadeTo(Duration.Slow, 2m));
+            var ex = Assert.Throws<ArgumentException>(() => this.driver.JQuery("div")
+                .FadeTo(JQuery.Duration.Slow, 2m));
             Assert.Equal("opacity", ex.ParamName);
         }
 

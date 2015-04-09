@@ -2,7 +2,6 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.JQuery;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
