@@ -2,7 +2,6 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 
