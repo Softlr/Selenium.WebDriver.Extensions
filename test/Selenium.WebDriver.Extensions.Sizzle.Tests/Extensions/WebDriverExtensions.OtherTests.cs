@@ -1,10 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions;
     using Xunit;
     
     [Trait("Category", "Unit")]
@@ -59,7 +58,7 @@
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
 
             driverMock.Object.LoadExternalLibrary(
-                new JQuery.JQueryLoader(), 
+                new SizzleLoader(), 
                 new Uri("http://example.com"),
                 TimeSpan.FromMilliseconds(100));
             Assert.True(true);
