@@ -2,12 +2,12 @@
 {
     using System;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Drawing;
     using System.Globalization;
     using System.Reflection;
     using System.Reflection.Emit;
     using System.Runtime.InteropServices;
-
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     
@@ -159,6 +159,7 @@
         /// <summary>
         /// Gets the XPATH for the web element.
         /// </summary>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
         public string XPath
         {
             get

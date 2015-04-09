@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using OpenQA.Selenium;
@@ -54,6 +55,7 @@
         /// </summary>
         /// <param name="text">The text to be set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#")]
         public ChainJQueryHelper Text(string text)
         {
             this.Run("text('" + text + "')");
@@ -78,6 +80,7 @@
         /// </summary>
         /// <param name="html">The HTML string to be set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#")]
         public ChainJQueryHelper Html(string html)
         {
             this.Run("html('" + html + "')");
@@ -178,6 +181,7 @@
         /// </summary>
         /// <param name="value">The value to set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#")]
         public ChainJQueryHelper Value(string value)
         {
             this.Run("val('" + value + "')");
@@ -703,6 +707,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper Show(Duration duration)
         {
             this.Run("show('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -739,6 +744,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper Hide(Duration duration)
         {
             this.Run("hide('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -775,6 +781,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper Toggle(Duration duration)
         {
             this.Run("toggle('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -811,6 +818,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper SlideDown(Duration duration)
         {
             this.Run("slideDown('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -847,6 +855,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper SlideUp(Duration duration)
         {
             this.Run("slideUp('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -883,6 +892,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper SlideToggle(Duration duration)
         {
             this.Run("slideToggle('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -919,6 +929,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeIn(Duration duration)
         {
             this.Run("fadeIn('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -940,6 +951,7 @@
         /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "FadeOut")]
         public ChainJQueryHelper FadeOut()
         {
             this.Run("fadeOut()");
@@ -955,6 +967,8 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "FadeOut")]
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeOut(Duration duration)
         {
             this.Run("fadeOut('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -966,6 +980,7 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "FadeOut")]
         public ChainJQueryHelper FadeOut(decimal duration)
         {
             this.Run("fadeOut(" + duration + ")");
@@ -991,6 +1006,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeToggle(Duration duration)
         {
             this.Run("fadeToggle('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -1022,6 +1038,7 @@
         /// <exception cref="InvalidOperationException">
         /// Format equals "X", but the enumeration type is unknown.
         /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeTo(Duration duration, decimal opacity)
         {
             if (opacity < 0)

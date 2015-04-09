@@ -5,7 +5,7 @@
     /// <summary>
     /// The link text base selector.
     /// </summary>
-    public abstract class LinkTextSelectorBase : NestableSelectorBase
+    public abstract class LinkTextSelectorBase : NestedSelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LinkTextSelectorBase"/> class.

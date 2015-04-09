@@ -129,9 +129,6 @@
     <Compile Include="Exceptions\TypeArgumentException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
-    <Compile Include="GlobalSuppressions.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Loaders\LoaderBase.cs" />
     <Compile Include="Loaders\ExternalLibraryLoaderBase.cs" />
     <Compile Include="Loaders\ILoader.cs" />
@@ -150,7 +147,7 @@
     <Compile Include="Selectors\LinkTextSelectorBase.cs" />
     <Compile Include="Selectors\LinkTextSelector.cs" />
     <Compile Include="Selectors\NameSelector.cs" />
-    <Compile Include="Selectors\NestableSelectorBase.cs" />
+    <Compile Include="Selectors\NestedSelectorBase.cs" />
     <Compile Include="Selectors\PartialLinkTextSelector.cs" />
     <Compile Include="Selectors\QuerySelector.cs" />
     <Compile Include="Selectors\SelectorBase.cs" />

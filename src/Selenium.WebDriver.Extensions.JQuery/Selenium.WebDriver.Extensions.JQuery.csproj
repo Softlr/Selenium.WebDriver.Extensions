@@ -123,9 +123,6 @@
     <Compile Include="Runners\JQueryRunner.cs" />
     <Compile Include="Models\By.cs" />
     <Compile Include="Loaders\JQueryLoader.cs" />
-    <Compile Include="Properties\GlobalSuppressions.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Selectors\JQuerySelector.cs" />
     <Compile Include="Models\Position.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

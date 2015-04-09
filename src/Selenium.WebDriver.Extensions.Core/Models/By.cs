@@ -1,7 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     
     /// <summary>
@@ -235,6 +235,7 @@
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
         /// <exception cref="ArgumentNullException">XPATH is null.</exception>
         /// <exception cref="ArgumentException">XPATH is empty.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
         public static new XPathSelector XPath(string xpathToFind)
         {
             return new XPathSelector(xpathToFind);

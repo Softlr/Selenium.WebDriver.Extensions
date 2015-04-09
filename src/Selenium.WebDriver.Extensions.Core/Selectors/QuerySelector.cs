@@ -6,7 +6,7 @@
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
-    public class QuerySelector : NestableSelectorBase
+    public class QuerySelector : NestedSelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
@@ -23,6 +23,7 @@
         /// Selector is empty.
         /// -or- Base element is empty.
         /// </exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuerySelector(string selector, string baseElement = "document")
             : base(selector, baseElement)
         {
@@ -64,6 +65,7 @@
         /// -or- Base element is null.
         /// </exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuerySelector(string selector, ISelector baseSelector)
             : base(selector, null)
         {

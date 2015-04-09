@@ -24,6 +24,8 @@
         /// Selector is empty.
         /// -or- jQuery variable name is empty.
         /// </exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public JQuerySelector(
             string selector,
             JQuerySelector context = null,

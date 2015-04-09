@@ -162,7 +162,7 @@ function Publish-Coveralls {
     )
 
     Exec {
-          .\packages\coveralls.io.1.3.2\tools\coveralls.net.exe --opencover $CoverageXml -f
+          .\packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover $CoverageXml -f
     }
 }
 

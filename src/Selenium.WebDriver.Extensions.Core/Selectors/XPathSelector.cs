@@ -6,6 +6,7 @@
     /// <summary>
     /// The XPATH selector.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
     public class XPathSelector : SelectorBase
     {
         /// <summary>
@@ -14,6 +15,7 @@
         /// <param name="xpath">The XPATH to locate.</param>
         /// <exception cref="ArgumentNullException">XPATH is null.</exception>
         /// <exception cref="ArgumentException">XPATH is empty.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public XPathSelector(string xpath)
             : base(xpath)
         {

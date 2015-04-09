@@ -1,7 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.JQuery
 {
     using System;
-
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
     
@@ -29,6 +29,7 @@
         /// Selector is empty.
         /// -or- jQuery variable name is empty.
         /// </exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
         public static JQuerySelector JQuerySelector(
             string selector, 
             JQuerySelector context = null, 
@@ -258,6 +259,7 @@
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
         /// <exception cref="ArgumentNullException">XPATH is null.</exception>
         /// <exception cref="ArgumentException">XPATH is empty.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
         public static new XPathSelector XPath(string xpathToFind)
         {
             return Core.By.XPath(xpathToFind);

@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-
     using OpenQA.Selenium;
     
     /// <summary>

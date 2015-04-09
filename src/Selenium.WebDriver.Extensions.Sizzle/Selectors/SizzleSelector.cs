@@ -21,6 +21,7 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SizzleSelector(
             string selector,
             SizzleSelector context = null)
