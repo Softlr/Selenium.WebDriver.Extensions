@@ -31,6 +31,10 @@
         /// <param name="selector">The selector.</param>
         /// <returns>The jQuery helper.</returns>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- jQuery variable name is empty.
+        /// </exception>
         public static ChainJQueryHelper JQuery(this IWebDriver driver, string selector)
         {
             if (driver == null)
