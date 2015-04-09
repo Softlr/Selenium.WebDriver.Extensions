@@ -1,5 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     
     /// <summary>
@@ -11,6 +12,14 @@
         /// Initializes a new instance of the <see cref="TagNameSelector"/> class.
         /// </summary>
         /// <param name="tagName">A string containing a DOM tag name.</param>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public TagNameSelector(string tagName)
             : base(tagName)
         {

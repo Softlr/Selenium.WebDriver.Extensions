@@ -26,7 +26,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -36,7 +36,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net40|AnyCPU'">
     <OutputPath>bin\Release-Net40\</OutputPath>
@@ -78,9 +78,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\StringExtensions.IsNullOrWhiteSpaceTests.cs" />
-    <Compile Include="Extensions\WebDriverExtensions.FindElementTests.cs" />
-    <Compile Include="Extensions\WebDriverExtensions.FindElementsTests.cs" />
-    <Compile Include="Extensions\WebDriverExtensions.OtherTests.cs" />
     <Compile Include="Loaders\QuerySelectorLoaderTests.cs" />
     <Compile Include="Models\ByTests.cs" />
     <Compile Include="Models\QuerySelectorHelperTests.cs" />

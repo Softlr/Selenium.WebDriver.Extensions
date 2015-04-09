@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Linq;
     using OpenQA.Selenium;
@@ -32,9 +33,9 @@
         }
 
         /// <summary>
-        /// Gets the driver.
+        /// Gets or sets the driver.
         /// </summary>
-        public JQuerySelector Selector { get; private set; }
+        private JQuerySelector Selector { get; set; }
 
         /// <summary>
         /// Searches for DOM element using jQuery selector and gets the combined text contents of each element in the 
@@ -54,6 +55,7 @@
         /// </summary>
         /// <param name="text">The text to be set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#")]
         public ChainJQueryHelper Text(string text)
         {
             this.Run("text('" + text + "')");
@@ -78,6 +80,7 @@
         /// </summary>
         /// <param name="html">The HTML string to be set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#")]
         public ChainJQueryHelper Html(string html)
         {
             this.Run("html('" + html + "')");
@@ -113,6 +116,8 @@
         /// </summary>
         /// <param name="propertyName">The name of the property to get.</param>
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
+        /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
         public bool? Property(string propertyName)
         {
             return this.Property<bool?>(propertyName);
@@ -126,11 +131,12 @@
         /// <param name="propertyName">The name of the property to get.</param>
         /// <returns>The value of a property for the first element in the set of matched elements.</returns>
         /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
         public T Property<T>(string propertyName)
         {
             if (!new[] { typeof(bool?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool? and string types are supported", "T");
+                throw new TypeArgumentException("Only null-able boolean and string types are supported", "T");
             }
 
             return this.Find<T>("prop('" + propertyName + "')");
@@ -175,6 +181,7 @@
         /// </summary>
         /// <param name="value">The value to set.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1719:ParameterNamesShouldNotMatchMemberNames", MessageId = "0#")]
         public ChainJQueryHelper Value(string value)
         {
             this.Run("val('" + value + "')");
@@ -367,6 +374,18 @@
         /// The current coordinates of the first element in the set of matched elements, relative to the offset 
         /// parent.
         /// </returns>
+        /// <exception cref="ArgumentNullException">Key is null.</exception>
+        /// <exception cref="OverflowException">
+        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than 
+        /// <see cref="int.MaxValue" />.
+        /// </exception>
+        /// <exception cref="FormatException">Position coordinate is not of the correct format.</exception>
+        /// <exception cref="KeyNotFoundException">
+        /// The property is retrieved and key is not found.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// The property is set and the <see cref="IDictionary{TKey,TValue}" /> is read-only.
+        /// </exception>
         public Position? Position()
         {
             var positionDict = this.Find<IDictionary<string, object>>("position()");
@@ -387,6 +406,18 @@
         /// <returns>
         /// The current coordinates of the first element in the set of matched elements, relative to the document.
         /// </returns>
+        /// <exception cref="ArgumentNullException">Key is null.</exception>
+        /// <exception cref="OverflowException">
+        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than 
+        /// <see cref="int.MaxValue" />.
+        /// </exception>
+        /// <exception cref="FormatException">Position coordinate is not of the correct format.</exception>
+        /// <exception cref="KeyNotFoundException">
+        /// The property is retrieved and key is not found.
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// The property is set and the <see cref="IDictionary{TKey,TValue}" /> is read-only.
+        /// </exception>
         public Position? Offset()
         {
             var offsetDict = this.Find<IDictionary<string, object>>("offset()");
@@ -460,6 +491,8 @@
         /// The value at the named data store for the first element in the jQuery collection, as set by 
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
+        /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
         public string Data(string key)
         {
             return this.Data<string>(key);
@@ -477,11 +510,14 @@
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
         /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
         public T Data<T>(string key)
         {
             if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
             {
-                throw new TypeArgumentException("Only bool?, long? and string types are supported", "T");
+                throw new TypeArgumentException(
+                    "Only null-able boolean, null-able long and string types are supported", 
+                    "T");
             }
 
             return this.Find<T>("data('" + key + "')");
@@ -667,6 +703,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification.</exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper Show(Duration duration)
         {
             this.Run("show('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -699,6 +740,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper Hide(Duration duration)
         {
             this.Run("hide('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -731,6 +777,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper Toggle(Duration duration)
         {
             this.Run("toggle('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -763,6 +814,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper SlideDown(Duration duration)
         {
             this.Run("slideDown('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -795,6 +851,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper SlideUp(Duration duration)
         {
             this.Run("slideUp('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -827,6 +888,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper SlideToggle(Duration duration)
         {
             this.Run("slideToggle('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -859,6 +925,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeIn(Duration duration)
         {
             this.Run("fadeIn('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -880,6 +951,7 @@
         /// Hides all elements matching current <see cref="JQuerySelector"/> by fading them to transparent.
         /// </summary>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "FadeOut")]
         public ChainJQueryHelper FadeOut()
         {
             this.Run("fadeOut()");
@@ -891,6 +963,12 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "FadeOut")]
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeOut(Duration duration)
         {
             this.Run("fadeOut('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -902,6 +980,7 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "FadeOut")]
         public ChainJQueryHelper FadeOut(decimal duration)
         {
             this.Run("fadeOut(" + duration + ")");
@@ -923,6 +1002,11 @@
         /// </summary>
         /// <param name="duration">The duration of the animation.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeToggle(Duration duration)
         {
             this.Run("fadeToggle('" + duration.ToString("G").ToLowerInvariant() + "')");
@@ -946,7 +1030,15 @@
         /// <param name="duration">The duration of the animation.</param>
         /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        /// <exception cref="ArgumentException">Opacity is negative or opacity is bigger than one.</exception>
+        /// <exception cref="ArgumentException">
+        /// Opacity is negative.
+        /// -or- Opacity is greater than one.
+        /// </exception>
+        /// <exception cref="FormatException">Format contains an invalid specification. </exception>
+        /// <exception cref="InvalidOperationException">
+        /// Format equals "X", but the enumeration type is unknown.
+        /// </exception>
+        [SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
         public ChainJQueryHelper FadeTo(Duration duration, decimal opacity)
         {
             if (opacity < 0)
@@ -969,7 +1061,10 @@
         /// <param name="duration">The duration of the animation.</param>
         /// <param name="opacity">The opacity to be set. Must be a value between 0 and 1.</param>
         /// <returns>The instance of <see cref="ChainJQueryHelper"/> to allow setter chaining.</returns>
-        /// <exception cref="ArgumentException">Opacity is negative or opacity is bigger than one.</exception>
+        /// <exception cref="ArgumentException">
+        /// Opacity is negative.
+        /// -or- Opacity is greater than one.
+        /// </exception>
         public ChainJQueryHelper FadeTo(decimal duration, decimal opacity)
         {
             if (opacity < 0)
@@ -1201,7 +1296,7 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        protected T Find<T>(string scriptFormat, string wrapperFormat = null)
+        private T Find<T>(string scriptFormat, string wrapperFormat = null)
         {
             this.Driver.JQuery().Load();
             return ParseUtil.ParseResult<T>(this.ExecuteScript(this.Selector, scriptFormat, wrapperFormat));
@@ -1211,7 +1306,7 @@
         /// Runs a jQuery script on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/> selector.
         /// </summary>
         /// <param name="script">The script to be executed in order to set the value.</param>
-        protected void Run(string script)
+        private void Run(string script)
         {
             this.Driver.JQuery().Load();
             this.ExecuteScript(this.Selector, script, null);
@@ -1226,7 +1321,7 @@
         /// The wrapper format string for the purpose of wrap the jQuery selection result.
         /// </param>
         /// <returns>Result of invoking the script.</returns>
-        protected object ExecuteScript(
+        private object ExecuteScript(
             JQuerySelector selector,
             string scriptFormat,
             string wrapperFormat)
@@ -1251,7 +1346,7 @@
         /// Creates the jQuery selector limiting the scope of the search to descendants of current element.
         /// </summary>
         /// <returns>The jQuery selector limiting the scope of the search to descendants of current element.</returns>
-        protected JQuerySelector CreateSelector()
+        private JQuerySelector CreateSelector()
         {
             var rootSelector = new JQuerySelector(this.WebElement.Path, jQueryVariable: this.Selector.JQueryVariable);
             return new JQuerySelector(this.Selector.RawSelector, rootSelector, this.Selector.JQueryVariable);

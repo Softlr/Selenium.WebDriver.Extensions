@@ -1,5 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
     using Selenium.WebDriver.Extensions.JQuery;
@@ -22,6 +24,14 @@
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="jQueryVariable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- jQuery variable name is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- jQuery variable name is empty.
+        /// </exception>
+        [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
         public static JQuerySelector JQuerySelector(
             string selector, 
             JQuerySelector context = null, 
@@ -36,6 +46,8 @@
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <returns>A <see cref="SizzleSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">Selector is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public static SizzleSelector SizzleSelector(
             string selector,
             SizzleSelector context = null)
@@ -54,6 +66,14 @@
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
         /// elements.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static QuerySelector QuerySelector(string selector, string baseElement = "document")
         {
             return Core.By.QuerySelector(selector, baseElement);
@@ -68,6 +88,11 @@
         /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
         /// elements.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public static QuerySelector QuerySelector(string selector, ISelector baseSelector)
         {
             return Core.By.QuerySelector(selector, baseSelector);
@@ -78,6 +103,14 @@
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
         /// <returns>A <see cref="ClassNameSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new ClassNameSelector ClassName(string classNameToFind)
         {
             return Core.By.ClassName(classNameToFind);
@@ -88,6 +121,14 @@
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
         /// <returns>A <see cref="CssSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new CssSelector CssSelector(string cssSelectorToFind)
         {
             return Core.By.CssSelector(cssSelectorToFind);
@@ -98,6 +139,14 @@
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
         /// <returns>An <see cref="IdSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new IdSelector Id(string idToFind)
         {
             return Core.By.Id(idToFind);
@@ -108,6 +157,14 @@
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Text is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Text is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new LinkTextSelector LinkText(string linkTextToFind)
         {
             return Core.By.LinkText(linkTextToFind);
@@ -121,6 +178,14 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>A <see cref="LinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Text is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Text is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static LinkTextSelector LinkText(string linkTextToFind, string baseElement)
         {
             return Core.By.LinkText(linkTextToFind, baseElement);
@@ -131,6 +196,14 @@
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
         /// <returns>A <see cref="NameSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new NameSelector Name(string nameToFind)
         {
             return Core.By.Name(nameToFind);
@@ -141,6 +214,14 @@
         /// </summary>
         /// <param name="partialLinkTextToFind">The partial link text to find.</param>
         /// <returns>A <see cref="PartialLinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Text is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Text is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind)
         {
             return Core.By.PartialLinkText(partialLinkTextToFind);
@@ -154,6 +235,14 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>A <see cref="PartialLinkTextSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Text is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Text is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static PartialLinkTextSelector PartialLinkText(string partialLinkTextToFind, string baseElement)
         {
             return Core.By.PartialLinkText(partialLinkTextToFind, baseElement);
@@ -164,6 +253,14 @@
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
         /// <returns>A <see cref="TagNameSelector"/> selector object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public static new TagNameSelector TagName(string tagNameToFind)
         {
             return Core.By.TagName(tagNameToFind);
@@ -177,6 +274,9 @@
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="XPathSelector"/> object the driver can use to find the elements.</returns>
+        /// <exception cref="ArgumentNullException">XPATH is null.</exception>
+        /// <exception cref="ArgumentException">XPATH is empty.</exception>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
         public static new XPathSelector XPath(string xpathToFind)
         {
             return Core.By.XPath(xpathToFind);

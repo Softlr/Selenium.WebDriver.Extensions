@@ -13,6 +13,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebElementTests
     {
         private Mock<IWebDriver> driverMock;
@@ -238,7 +240,7 @@
             element.Click();
             Assert.True(clickResult);
 
-            element.SendKeys("abc");
+            element.SendKeys("test");
             Assert.True(sendKeysResult);
 
             element.GetAttribute("class");

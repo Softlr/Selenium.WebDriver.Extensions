@@ -1,13 +1,16 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
+    using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium;
 
     /// <summary>
     /// The parse utility.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Util")]
     public static class ParseUtil
     {
         /// <summary>
@@ -20,6 +23,10 @@
         /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
         /// to long integer type.
         /// </remarks>
+        /// <exception cref="InvalidCastException">
+        /// An element in the sequence cannot be cast to type <typeparamref name="T" />.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
         public static T ParseResult<T>(object result)
         {
             if (result == null)

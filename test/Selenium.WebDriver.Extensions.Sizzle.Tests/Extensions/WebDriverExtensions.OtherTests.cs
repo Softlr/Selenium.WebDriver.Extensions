@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Core.Tests
+﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -8,6 +8,8 @@
     
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsOtherTests
     {
         [Fact]
@@ -16,7 +18,8 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(false);
-            Assert.Throws<QuerySelectorNotSupportedException>(() => driverMock.Object.QuerySelector().CheckSupport());
+            Assert.Throws<Core.QuerySelectorNotSupportedException>(
+                () => driverMock.Object.QuerySelector().CheckSupport());
         }
 
         [Fact]
@@ -45,7 +48,20 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(null);
 
-            Assert.False(driverMock.Object.CheckSelectorPrerequisites(new QuerySelectorLoader()));
+            Assert.False(driverMock.Object.CheckSelectorPrerequisites(new Core.QuerySelectorLoader()));
+        }
+
+        [Fact]
+        public void ShouldLoadExternalLibrary()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+
+            driverMock.Object.LoadExternalLibrary(
+                new SizzleLoader(), 
+                new Uri("http://example.com"),
+                TimeSpan.FromMilliseconds(100));
+            Assert.True(true);
         }
 
         [Fact]
@@ -68,21 +84,41 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingScriptWithNullDriver()
+        public void ShouldThrowExceptionWhenExecutingScriptWithNullDriver()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript(null, null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingScriptThatExpectsValueWithNullDriver()
+        public void ShouldThrowExceptionWhenExecutingScriptThatExpectsValueWithNullDriver()
         {
             var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.ExecuteScript<object>(null, null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingNullScript()
+        public void ShouldExecuteScript()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
+            
+            driverMock.Object.ExecuteScript("myMethod();");
+            Assert.True(true);
+        }
+
+        [Fact]
+        public void ShouldExecuteScriptThatReturnsValue()
+        {
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
+
+            var result = driverMock.Object.ExecuteScript<string>("return 'foo';");
+            Assert.Equal("foo", result);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenExecutingNullScript()
         {
             var driverMock = new Mock<IWebDriver>();
             
@@ -91,7 +127,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingEmptyScript()
+        public void ShouldThrowExceptionWhenExecutingEmptyScript()
         {
             var driverMock = new Mock<IWebDriver>();
 
@@ -100,7 +136,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenExuecutingWhiteSpaceOnlyScript()
+        public void ShouldThrowExceptionWhenExecutingWhiteSpaceOnlyScript()
         {
             var driverMock = new Mock<IWebDriver>();
 

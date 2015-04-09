@@ -8,6 +8,8 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class ByTests
     {
         [Fact]
@@ -161,12 +163,6 @@
         {
             var ex = Assert.Throws<ArgumentException>(() => By.QuerySelector(" ", By.QuerySelector("div")));
             Assert.Equal("selector", ex.ParamName);
-        }
-
-        public void ShouldThrowexceptionWhenCreatingQuerySelectorWithNullBaseSelector()
-        {
-            var ex = Assert.Throws<ArgumentNullException>(() => By.QuerySelector("div", (ISelector)null));
-            Assert.Equal("baseSelector", ex.ParamName);
         }
 
         [Fact]

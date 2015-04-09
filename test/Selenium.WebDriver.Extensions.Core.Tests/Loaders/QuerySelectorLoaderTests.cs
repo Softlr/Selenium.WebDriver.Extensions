@@ -2,9 +2,10 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    
+
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     public class QuerySelectorLoaderTests
     {
         [Fact]

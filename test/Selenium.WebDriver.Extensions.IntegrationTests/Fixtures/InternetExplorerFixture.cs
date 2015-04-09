@@ -6,6 +6,7 @@
     using OpenQA.Selenium.IE;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class InternetExplorerFixture : IDisposable
     {
         public InternetExplorerFixture()
@@ -13,7 +14,7 @@
             this.Browser = new InternetExplorerDriver();
         }
 
-        public IWebDriver Browser { get; set; }
+        public IWebDriver Browser { get; private set; }
 
         public void Dispose()
         {

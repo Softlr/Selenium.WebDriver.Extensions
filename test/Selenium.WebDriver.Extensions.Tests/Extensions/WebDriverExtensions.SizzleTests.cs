@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Sizzle.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,14 @@
     using System.Linq;
     using Moq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
-    using Selenium.WebDriver.Extensions.Sizzle;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.Sizzle.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    public class WebDriverExtensionsTests
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    public class WebDriverExtensionsSizzleTests
     {
         public static IEnumerable<object[]> LoadSizzleData
         {
@@ -57,7 +57,7 @@
         }
 
         [Fact]
-        public void ShouldTimeoutWhenSizzleFailesToLoad()
+        public void ShouldTimeoutWhenSizzleFailsToLoad()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(false);
@@ -92,7 +92,8 @@
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.Sizzle")))
                 .Returns(true);
 
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((SizzleSelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => driverMock.Object.FindElement((Sizzle.SizzleSelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -150,7 +151,7 @@
         }
 
         [Fact]
-        public void ShouldReturnEmptyResultsWhenSizzleDoentFindAnyMatches()
+        public void ShouldReturnEmptyResultsWhenSizzleDoesNotFindAnyMatches()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.Sizzle")))
@@ -167,7 +168,7 @@
         [Fact]
         public void ShouldThrowExceptionWhenGettingSizzleHelperWithNullDriver()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => Sizzle.WebDriverExtensions.Sizzle(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.Sizzle(null));
             Assert.Equal("driver", ex.ParamName);
         }
     }

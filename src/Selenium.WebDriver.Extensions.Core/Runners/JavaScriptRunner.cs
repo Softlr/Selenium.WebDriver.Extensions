@@ -16,7 +16,7 @@
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The Selenium JavaScript query selector selector.</param>
+        /// <param name="selector">The Selenium JavaScript query selector.</param>
         /// <returns>Parsed result of invoking the script.</returns>
         /// <remarks>
         /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
@@ -26,7 +26,14 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">Driver is null or selector is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Driver is null.
+        /// -or- Selector is null.
+        /// </exception>
+        /// <exception cref="InvalidCastException">
+        /// An element in the sequence cannot be cast to type <typeparamref name="T" />.
+        /// </exception>
+        /// <exception cref="ArgumentException">Script is empty.</exception>
         public virtual T Find<T>(IWebDriver driver, ISelector selector)
         {
             if (driver == null)
@@ -57,6 +64,11 @@
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return
         /// an empty <see cref="ReadOnlyCollection{T}"/>.
         /// </remarks>
+        /// <exception cref="InvalidCastException">
+        /// An element in the sequence cannot be cast to type <typeparamref name="T" />.
+        /// </exception>
+        /// <exception cref="ArgumentNullException">Source is null.</exception>
+        /// <exception cref="ArgumentException">Script is empty.</exception>
         protected static T Find<T>(IWebDriver driver, string script)
         {
             return ParseUtil.ParseResult<T>(driver.ExecuteScript<object>(script));

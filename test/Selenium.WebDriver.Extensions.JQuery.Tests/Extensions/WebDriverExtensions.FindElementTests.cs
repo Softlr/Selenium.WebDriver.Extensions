@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Core.Tests
+﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -8,10 +8,12 @@
     using Moq;
     using OpenQA.Selenium;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.Core.By;
+    using By = Selenium.WebDriver.Extensions.JQuery.By;
     
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsFindElementTests
     {
         [Fact]
@@ -59,12 +61,13 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(true);
 
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((QuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => driverMock.Object.FindElement((Core.QuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]
-        public void ShouldThrowExceptionWhenFindingElementThatDoesntExist()
+        public void ShouldThrowExceptionWhenFindingElementThatDoesNotExist()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -74,7 +77,7 @@
         }
 
         [Fact]
-        public void ShouldThrowExceptionWherFindingElementReturnsEmptyResult()
+        public void ShouldThrowExceptionWhenFindingElementReturnsEmptyResult()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()

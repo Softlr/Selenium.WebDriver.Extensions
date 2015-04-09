@@ -21,6 +21,7 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SizzleSelector(
             string selector,
             SizzleSelector context = null)
@@ -97,6 +98,7 @@
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
         /// <exception cref="ArgumentNullException">Root element is null.</exception>
+        /// <exception cref="ArgumentException">Selector is empty.</exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

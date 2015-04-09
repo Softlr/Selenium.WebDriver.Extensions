@@ -6,7 +6,7 @@
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
-    public class QuerySelector : NestableSelectorBase
+    public class QuerySelector : NestedSelectorBase
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="QuerySelector"/> class.
@@ -15,8 +15,15 @@
         /// <param name="baseElement">
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
-        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
-        /// <exception cref="ArgumentException">Selector is empty or base element is empty.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuerySelector(string selector, string baseElement = "document")
             : base(selector, baseElement)
         {
@@ -53,8 +60,12 @@
         /// generated on its base will be invoked on the first match of the base selector. There's also a check to 
         /// make sure that the base selector has actually return any results.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">Selector is null or base element is null.</exception>
+        /// <exception cref="ArgumentNullException">
+        /// Selector is null.
+        /// -or- Base element is null.
+        /// </exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public QuerySelector(string selector, ISelector baseSelector)
             : base(selector, null)
         {
@@ -134,6 +145,10 @@
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
         /// <exception cref="ArgumentNullException">Root element is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// Selector is empty.
+        /// -or- Base element is empty.
+        /// </exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

@@ -6,6 +6,7 @@
     using OpenQA.Selenium.Firefox;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class FirefoxFixture : IDisposable
     {
         public FirefoxFixture()
@@ -13,7 +14,7 @@
             this.Browser = new FirefoxDriver();
         }
 
-        public IWebDriver Browser { get; set; }
+        public IWebDriver Browser { get; private set; }
 
         public void Dispose()
         {

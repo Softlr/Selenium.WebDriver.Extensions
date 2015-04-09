@@ -6,6 +6,7 @@
     /// <summary>
     /// The XPATH selector.
     /// </summary>
+    [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
     public class XPathSelector : SelectorBase
     {
         /// <summary>
@@ -14,6 +15,7 @@
         /// <param name="xpath">The XPATH to locate.</param>
         /// <exception cref="ArgumentNullException">XPATH is null.</exception>
         /// <exception cref="ArgumentException">XPATH is empty.</exception>
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public XPathSelector(string xpath)
             : base(xpath)
         {
@@ -91,6 +93,9 @@
         /// <param name="root">A web element to be used as a root.</param>
         /// <returns>A new selector.</returns>
         /// <exception cref="ArgumentNullException">Root element is null.</exception>
+        /// <exception cref="ArgumentException">
+        /// Comparison type is not a <see cref="StringComparison" /> value.
+        /// </exception>
         public override ISelector Create(WebElement root)
         {
             if (root == null)

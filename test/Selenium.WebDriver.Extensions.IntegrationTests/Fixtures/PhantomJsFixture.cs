@@ -6,8 +6,10 @@
     using OpenQA.Selenium.PhantomJS;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class PhantomJsFixture : IDisposable
     {
+        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public PhantomJsFixture()
         {
             var phantomJsService = PhantomJSDriverService.CreateDefaultService();
@@ -15,7 +17,7 @@
             this.Browser = new PhantomJSDriver(phantomJsService);
         }
 
-        public IWebDriver Browser { get; set; }
+        public IWebDriver Browser { get; private set; }
 
         public void Dispose()
         {

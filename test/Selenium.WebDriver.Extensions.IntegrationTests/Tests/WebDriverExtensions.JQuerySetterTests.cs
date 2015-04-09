@@ -2,10 +2,11 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.JQuery;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
     public abstract class WebDriverExtensionsJQuerySetterTests
     {
         protected IWebDriver Browser { get; set; }

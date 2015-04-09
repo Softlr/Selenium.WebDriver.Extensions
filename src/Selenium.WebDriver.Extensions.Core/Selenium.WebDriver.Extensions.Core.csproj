@@ -23,7 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <CodeAnalysisRuleSet>..\..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Debug\Selenium.WebDriver.Extensions.Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -34,7 +34,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <CodeAnalysisRuleSet>..\..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
     <DocumentationFile>bin\Release\Selenium.WebDriver.Extensions.Core.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release-Net40|AnyCPU'">
@@ -129,9 +129,6 @@
     <Compile Include="Exceptions\TypeArgumentException.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
-    <Compile Include="Properties\GlobalSuppressions.cs">
-      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
-    </Compile>
     <Compile Include="Loaders\LoaderBase.cs" />
     <Compile Include="Loaders\ExternalLibraryLoaderBase.cs" />
     <Compile Include="Loaders\ILoader.cs" />
@@ -150,7 +147,7 @@
     <Compile Include="Selectors\LinkTextSelectorBase.cs" />
     <Compile Include="Selectors\LinkTextSelector.cs" />
     <Compile Include="Selectors\NameSelector.cs" />
-    <Compile Include="Selectors\NestableSelectorBase.cs" />
+    <Compile Include="Selectors\NestedSelectorBase.cs" />
     <Compile Include="Selectors\PartialLinkTextSelector.cs" />
     <Compile Include="Selectors\QuerySelector.cs" />
     <Compile Include="Selectors\SelectorBase.cs" />

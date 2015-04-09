@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.JQuery.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -7,14 +7,15 @@
     using System.Linq;
     using Moq;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
-    using Selenium.WebDriver.Extensions.JQuery;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.JQuery.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    public class WebDriverExtensionsTests
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    public class WebDriverExtensionsJQueryTests
     {
         public static IEnumerable<object[]> LoadJQueryData
         {
@@ -47,17 +48,17 @@
 
         [Theory]
         [MemberData("LoadJQueryWithUriData")]
-        public void ShouldLoadJQueryWithUri(Uri jQueryUri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
+        public void ShouldLoadJQueryWithUri(Uri uri, TimeSpan? timeout, IEnumerable<object> mockValueSequence)
         {
             var driverMock = new Mock<IWebDriver>();
             var sequence = driverMock.As<IJavaScriptExecutor>()
                 .SetupSequence(x => x.ExecuteScript(It.IsAny<string>()));
             mockValueSequence.Aggregate(sequence, (current, mockValue) => current.Returns(mockValue));
-            driverMock.Object.JQuery().Load(jQueryUri, timeout);
+            driverMock.Object.JQuery().Load(uri, timeout);
         }
 
         [Fact]
-        public void ShouldTimeoutWhenSizzleFailesToLoad()
+        public void ShouldTimeoutWhenSizzleFailsToLoad()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(false);
@@ -91,7 +92,8 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
             
-            var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.FindElement((JQuerySelector)null));
+            var ex = Assert.Throws<ArgumentNullException>(
+                () => driverMock.Object.FindElement((JQuery.JQuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -138,7 +140,7 @@
         }
 
         [Fact]
-        public void ShouldReturnEmptyResultsWhenjQueryDoentFindAnyMatches()
+        public void ShouldReturnEmptyResultsWhenJQueryDoesNotFindAnyMatches()
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
@@ -256,7 +258,9 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Property<int>("checked"));
+            var ex = Assert.Throws<Core.TypeArgumentException>(
+                () => driverMock.Object.JQuery("input").Property<int>("checked"));
+            Assert.Equal("T", ex.ParamName);
         }
 
         [Fact]
@@ -390,6 +394,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindPosition()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -404,7 +409,6 @@
 
             Assert.NotNull(position);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], position.Value.Top);
             Assert.Equal(dict["left"], position.Value.Left);
         }
@@ -425,6 +429,7 @@
         }
 
         [Fact]
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public void ShouldFindOffset()
         {
             var driverMock = new Mock<IWebDriver>();
@@ -439,7 +444,6 @@
 
             Assert.NotNull(offset);
 
-            // ReSharper disable once PossibleInvalidOperationException
             Assert.Equal(dict["top"], offset.Value.Top);
             Assert.Equal(dict["left"], offset.Value.Left);
         }
@@ -504,7 +508,9 @@
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
-            Assert.Throws<TypeArgumentException>(() => driverMock.Object.JQuery("input").Data<int>("test"));
+            var ex = Assert.Throws<Core.TypeArgumentException>(() => driverMock.Object.JQuery("input")
+                .Data<int>("test"));
+            Assert.Equal("T", ex.ParamName);
         }
 
         [Fact]
@@ -578,21 +584,21 @@
         public void ShouldThrowExceptionWhenGettingHelperWithNullSelector()
         {
             var ex = Assert.Throws<ArgumentNullException>(
-                () => JQuery.WebDriverExtensions.JQuery(null, (JQuerySelector)null));
+                () => WebDriverExtensions.JQuery(null, (JQuery.JQuerySelector)null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullStringSelector()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null, (string)null));
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.JQuery(null, (string)null));
             Assert.Equal("driver", ex.ParamName);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenGettingJQueryHelperWithNullDriver()
         {
-            var ex = Assert.Throws<ArgumentNullException>(() => JQuery.WebDriverExtensions.JQuery(null));
+            var ex = Assert.Throws<ArgumentNullException>(() => WebDriverExtensions.JQuery(null));
             Assert.Equal("driver", ex.ParamName);
         }
     }

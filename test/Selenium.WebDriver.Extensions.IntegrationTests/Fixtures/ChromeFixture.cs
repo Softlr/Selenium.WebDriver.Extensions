@@ -6,6 +6,7 @@
     using OpenQA.Selenium.Chrome;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class ChromeFixture : IDisposable
     {
         public ChromeFixture()
@@ -13,7 +14,7 @@
             this.Browser = new ChromeDriver();
         }
 
-        public IWebDriver Browser { get; set; }
+        public IWebDriver Browser { get; private set; }
 
         public void Dispose()
         {

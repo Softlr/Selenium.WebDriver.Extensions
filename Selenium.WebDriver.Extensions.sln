@@ -45,6 +45,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Source", "Source", "{BD701CE5-3F90-49A7-92E4-96E0587E1C66}"
+	ProjectSection(SolutionItems) = preProject
+		src\CodeAnalysis.ruleset = src\CodeAnalysis.ruleset
+		src\Settings.StyleCop = src\Settings.StyleCop
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{174C7489-4CD2-4555-A37A-47CAC8EA43B3}"
+	ProjectSection(SolutionItems) = preProject
+		test\CodeAnalysis.ruleset = test\CodeAnalysis.ruleset
+		test\Settings.StyleCop = test\Settings.StyleCop
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -187,5 +199,7 @@ Global
 		{353B46BF-A4BD-4C3F-BD96-CC187797E1C4} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 		{6394128B-6A58-482E-936E-D298726BA7F0} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 		{09D0D71A-5E98-42B4-8F22-90BF315FD55E} = {50593931-822D-4BE2-897D-38EF1BC5BDB3}
+		{BD701CE5-3F90-49A7-92E4-96E0587E1C66} = {ABFABEC3-B280-40B7-9C25-7851F7E39B38}
+		{174C7489-4CD2-4555-A37A-47CAC8EA43B3} = {ABFABEC3-B280-40B7-9C25-7851F7E39B38}
 	EndGlobalSection
 EndGlobal
