@@ -7,6 +7,7 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "Chrome")]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsQuerySelectorChromeTests : 
         WebDriverExtensionsQuerySelectorTests, IClassFixture<ChromeFixture>
     {

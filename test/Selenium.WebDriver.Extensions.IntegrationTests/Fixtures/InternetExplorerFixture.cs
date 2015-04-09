@@ -6,6 +6,7 @@
     using OpenQA.Selenium.IE;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class InternetExplorerFixture : IDisposable
     {
         public InternetExplorerFixture()
