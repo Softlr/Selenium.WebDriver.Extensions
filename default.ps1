@@ -89,7 +89,7 @@ Task IntegrationInternetExplorer -Description 'Runs the Internet Explorer integr
 Task Integration -Description 'Runs all of the integration tests' -Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
 
 Task AnalyzeCoverage -Description 'Analyzes the code coverage' -Depends CompileNet45 {
-    New-CoverageAnalysis -Tests $unitTests -Output $coverageXml
+    New-CoverageAnalysis -Tests $unitTests -Output $coverageXml -Filter '+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*'
 }
 
 Task Coverage -Description 'Generates the code coverage HTML report' -Depends AnalyzeCoverage {
