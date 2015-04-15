@@ -213,23 +213,3 @@
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       prerelease: true
-
-# psake branches
--
-  branches:
-    only:
-      - psake
-      
-  skip_tags: true
-  skip_commits:
-    message: /Update.*\.md/
-
-  version: 1.6.{build}
-  configuration: Release
-    
-  build_script:
-    - ps: ./psake.ps1
-  
-  test: off
-  
-  deploy: off
