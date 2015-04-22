@@ -12,7 +12,6 @@
   configuration: Release
     
   install:  
-    - netsh http add urlacl url=http://+:50502/ user=Everyone
     - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
   assembly_info:
@@ -100,7 +99,6 @@
   configuration: Release
     
   install:  
-    - netsh http add urlacl url=http://+:50502/ user=Everyone
     - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
   
   assembly_info:
@@ -160,7 +158,6 @@
   configuration: Release
     
   install:  
-    - netsh http add urlacl url=http://+:50502/ user=Everyone
     - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
 
   assembly_info:

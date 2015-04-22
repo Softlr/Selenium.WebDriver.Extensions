@@ -13,7 +13,9 @@
 
         protected TestsBase()
         {
-            this.host = new NancyHost(new Uri(Resources.HostUrl));
+            var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
+
+            this.host = new NancyHost(config, new Uri(Resources.HostUrl));
             this.host.Start();
         }
 
