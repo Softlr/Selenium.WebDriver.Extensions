@@ -9,9 +9,16 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class ChromeFixture : IDisposable
     {
+        private bool disposed;
+
         public ChromeFixture()
         {
             this.Browser = new ChromeDriver();
+        }
+
+        ~ChromeFixture()
+        {
+            this.Dispose(false);
         }
 
         public IWebDriver Browser { get; private set; }
@@ -24,10 +31,13 @@
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (this.disposed || !disposing)
             {
-                this.Browser.Dispose();
+                return;
             }
+
+            this.Browser.Dispose();
+            this.disposed = true;
         }
     }
 }

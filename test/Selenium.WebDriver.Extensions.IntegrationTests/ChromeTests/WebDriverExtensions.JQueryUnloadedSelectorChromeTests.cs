@@ -14,7 +14,7 @@
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(Properties.Resources.JQueryUnloadedTestsUrl));
+            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/JQueryUnloaded"));
         }
     }
 }

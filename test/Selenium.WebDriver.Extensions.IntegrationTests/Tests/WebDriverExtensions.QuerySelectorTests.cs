@@ -7,11 +7,9 @@
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
-    public abstract class WebDriverExtensionsQuerySelectorTests
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    public abstract class WebDriverExtensionsQuerySelectorTests : TestsBase
     {
-        protected IWebDriver Browser { get; set; }
-
         [Fact]
         public void FindElement()
         {

@@ -14,9 +14,10 @@
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly")]
     public class WebElementExtensionsTests : IDisposable
     {
-        private Mock<IWebDriver> driverMock;
+        private readonly Mock<IWebDriver> driverMock;
 
         public WebElementExtensionsTests()
         {
@@ -25,9 +26,9 @@
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly")]
         public void Dispose()
         {
-            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -651,14 +652,6 @@
             var webElement = new Mock<Core.WebElement>();
             var ex = Assert.Throws<ArgumentNullException>(() => webElement.Object.JQuery((string)null));
             Assert.Equal("selector", ex.ParamName);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.driverMock = null;
-            }
         }
     }
 }

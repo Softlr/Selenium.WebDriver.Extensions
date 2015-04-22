@@ -10,13 +10,13 @@
     using Xunit;
     using By = Selenium.WebDriver.Extensions.Sizzle.By;
 
-    [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly")]
     public class SizzleSelectorTests : IDisposable
     {
-        private Mock<IWebDriver> driverMock;
+        private readonly Mock<IWebDriver> driverMock;
 
         public SizzleSelectorTests()
         {
@@ -66,9 +66,9 @@
             }
         }
 
+        [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly")]
         public void Dispose()
         {
-            this.Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -209,14 +209,6 @@
 
             Assert.Equal("span", result[1].TagName);
             Assert.Equal("test2", result[1].GetAttribute("class"));
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                this.driverMock = null;
-            }
         }
     }
 }

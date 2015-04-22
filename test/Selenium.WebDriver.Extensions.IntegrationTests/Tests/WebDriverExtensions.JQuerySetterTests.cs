@@ -1,16 +1,13 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
-    public abstract class WebDriverExtensionsJQuerySetterTests
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    public abstract class WebDriverExtensionsJQuerySetterTests : TestsBase
     {
-        protected IWebDriver Browser { get; set; }
-
         [Fact]
         public void ChangeText()
         {

@@ -2,29 +2,30 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using Nancy.Hosting.Self;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.PhantomJS;
-
+    
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class PhantomJsFixture : IDisposable
+    public abstract class TestsBase : IDisposable
     {
+        private readonly NancyHost host;
+
         private bool disposed;
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
-        public PhantomJsFixture()
+        protected TestsBase()
         {
-            var phantomJsService = PhantomJSDriverService.CreateDefaultService();
-            phantomJsService.SslProtocol = "any";
-            this.Browser = new PhantomJSDriver(phantomJsService);
+            var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
+
+            this.host = new NancyHost(config, new Uri("http://localhost:50502"));
+            this.host.Start();
         }
 
-        ~PhantomJsFixture()
+        ~TestsBase()
         {
             this.Dispose(false);
         }
 
-        public IWebDriver Browser { get; private set; }
+        protected IWebDriver Browser { get; set; }
 
         public void Dispose()
         {
@@ -39,7 +40,7 @@
                 return;
             }
 
-            this.Browser.Dispose();
+            this.host.Dispose();
             this.disposed = true;
         }
     }

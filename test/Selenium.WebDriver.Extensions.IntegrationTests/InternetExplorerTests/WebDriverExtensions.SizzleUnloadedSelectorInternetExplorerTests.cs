@@ -14,7 +14,7 @@
         public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(Properties.Resources.SizzleUnloadedTestsUrl));
+            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/SizzleLoaded"));
         }
     }
 }

@@ -7,11 +7,9 @@
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
-    public abstract class WebDriverExtensionsSizzleSelectorTests
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
     {
-        protected IWebDriver Browser { get; set; }
-
         [Fact]
         public void FindElement()
         {
