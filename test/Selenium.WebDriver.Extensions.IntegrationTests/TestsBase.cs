@@ -19,6 +19,8 @@
 
         protected IWebDriver Browser { get; set; }
 
+        [SuppressMessage("Microsoft.Usage", "CA1816:CallGCSuppressFinalizeCorrectly")]
+        [SuppressMessage("Microsoft.Design", "CA1063:ImplementIDisposableCorrectly")]
         public void Dispose()
         {
             this.host.Dispose();
