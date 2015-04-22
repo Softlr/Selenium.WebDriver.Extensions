@@ -15,7 +15,7 @@
         public WebDriverExtensionsCorePhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(Resources.HostUrl + Resources.CoreTestsUrl));
+            this.Browser.Navigate().GoToUrl(new Uri(Resources.HostUrl + "/Core"));
         }
     }
 }

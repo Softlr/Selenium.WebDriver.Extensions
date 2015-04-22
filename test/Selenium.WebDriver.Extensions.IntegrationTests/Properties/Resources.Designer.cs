@@ -86,15 +86,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to /Core.
-        /// </summary>
-        internal static string CoreTestsUrl {
-            get {
-                return ResourceManager.GetString("CoreTestsUrl", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to http://localhost:50502.
         /// </summary>
         internal static string HostUrl {
@@ -104,47 +95,135 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///        .main {
+        ///            color: red;
+        ///        }
+        ///        div.scroll {
+        ///            background: #ccc none repeat scroll 0 0;
+        ///            border: 3px solid #666;
+        ///            margin: 5px;
+        ///            padding: 5px;
+        ///            position: relative;
+        ///            width: 200px;
+        ///            height: 100px;
+        ///            overflow: auto;
+        ///        }
+        ///        p {
+        ///     [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string JQueryLoadedTestsUrl {
+        internal static string jQueryLoadedHtml {
             get {
-                return ResourceManager.GetString("JQueryLoadedTestsUrl", resourceCulture);
+                return ResourceManager.GetString("jQueryLoadedHtml", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///        .main {
+        ///            color: red;
+        ///        }
+        ///        div.scroll {
+        ///            background: #ccc none repeat scroll 0 0;
+        ///            border: 3px solid #666;
+        ///            margin: 5px;
+        ///            padding: 5px;
+        ///            position: relative;
+        ///            width: 200px;
+        ///            height: 100px;
+        ///            overflow: auto;
+        ///        }
+        ///        p {
+        ///     [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string JQueryUnloadedTestsUrl {
+        internal static string jQueryUnloadedHtml {
             get {
-                return ResourceManager.GetString("JQueryUnloadedTestsUrl", resourceCulture);
+                return ResourceManager.GetString("jQueryUnloadedHtml", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;h1 class=&quot;main&quot;&gt;
+        ///        H1 Header
+        ///    &lt;/h1&gt;
+        ///    &lt;div class=&quot;main&quot; id=&quot;id1&quot;&gt;
+        ///        &lt;span&gt;Query&lt;/span&gt;
+        ///        &lt;span&gt;Selector&lt;/span&gt;
+        ///    &lt;/div&gt;
+        ///    &lt;div class=&quot;main&quot;&gt;Selenium WebDriver Extensions&lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
         /// </summary>
-        internal static string QuerySelectorTestsUrl {
+        internal static string QuerySelectorHtml {
             get {
-                return ResourceManager.GetString("QuerySelectorTestsUrl", resourceCulture);
+                return ResourceManager.GetString("QuerySelectorHtml", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;h1 class=&quot;main&quot;&gt;
+        ///        H1 Header
+        ///    &lt;/h1&gt;
+        ///    &lt;div class=&quot;main&quot; id=&quot;id1&quot;&gt;Sizzle Selector&lt;/div&gt;
+        ///    &lt;div class=&quot;main&quot;&gt;Selenium WebDriver Extensions&lt;/div&gt;
+        ///    &lt;script src=&quot;https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
         /// </summary>
-        internal static string SizzleLoadedTestsUrl {
+        internal static string SizzleLoadedHtml {
             get {
-                return ResourceManager.GetString("SizzleLoadedTestsUrl", resourceCulture);
+                return ResourceManager.GetString("SizzleLoadedHtml", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Unloaded.html.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+        ///    &lt;style type=&quot;text/css&quot;&gt;
+        ///        .main {
+        ///            color: red;
+        ///        }
+        ///    &lt;/style&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;h1 class=&quot;main&quot; style=&quot;width: 200px; height: 20px; padding: 10px; margin: 5px; border: 3px solid black;&quot;&gt;
+        ///        H1 Header
+        ///    &lt;/h1&gt;
+        ///    &lt;div class=&quot;main&quot; id=&quot;id1&quot; style=&quot;background-color: green; z-index: 1;&quot;&gt;
+        ///        &lt;span&gt;Sizzle&lt;/span&gt;
+        ///        &lt;span&gt;Selenium&lt;/span&gt;
+        /// [rest of string was truncated]&quot;;.
         /// </summary>
-        internal static string SizzleUnloadedTestsUrl {
+        internal static string SizzleUnloadedHtml {
             get {
-                return ResourceManager.GetString("SizzleUnloadedTestsUrl", resourceCulture);
+                return ResourceManager.GetString("SizzleUnloadedHtml", resourceCulture);
             }
         }
     }

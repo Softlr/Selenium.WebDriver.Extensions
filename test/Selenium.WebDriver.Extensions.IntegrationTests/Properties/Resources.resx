@@ -136,25 +136,202 @@
 &lt;/body&gt;
 &lt;/html&gt;</value>
   </data>
-  <data name="CoreTestsUrl" xml:space="preserve">
-    <value>/Core</value>
-  </data>
   <data name="HostUrl" xml:space="preserve">
     <value>http://localhost:50502</value>
   </data>
-  <data name="JQueryLoadedTestsUrl" xml:space="preserve">
-    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html</value>
+  <data name="jQueryLoadedHtml" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+        .main {
+            color: red;
+        }
+        div.scroll {
+            background: #ccc none repeat scroll 0 0;
+            border: 3px solid #666;
+            margin: 5px;
+            padding: 5px;
+            position: relative;
+            width: 200px;
+            height: 100px;
+            overflow: auto;
+        }
+        p {
+            margin: 10px;
+            padding: 5px;
+            border: 2px solid #666;
+            width: 1000px;
+            height: 1000px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="main" style="width: 200px; height: 20px; padding: 10px; margin: 5px; border: 3px solid black;"&gt;
+        H1 Header
+    &lt;/h1&gt;
+    &lt;div class="main" id="id1" style="background-color: green; z-index: 1;"&gt;
+        &lt;span&gt;jQuery&lt;/span&gt;
+        &lt;span&gt;Selenium&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="main" id="id2"&gt;
+        &lt;span&gt;WebDriver&lt;/span&gt;
+        &lt;span&gt;Extension&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;form data-mybool="true" data-mystring="str" data-myint="123"&gt;
+        &lt;label&gt;
+            First checkbox
+            &lt;input type="checkbox" id="input1" name="i1" checked="checked" value="v1" /&gt;
+        &lt;/label&gt;
+        &lt;label&gt;
+            Second checkbox
+            &lt;input type="checkbox" id="input2" checked /&gt;
+        &lt;/label&gt;
+        &lt;input type="text" id="input3" name="i3" value="v3" maxlength="100" /&gt;
+    &lt;/form&gt;
+    &lt;div class="scroll"&gt;&lt;p&gt;scroll&lt;/p&gt;&lt;/div&gt;
+    &lt;script src="https://code.jquery.com/jquery-2.1.1.min.js" type="text/javascript"&gt;&lt;/script&gt;
+    &lt;script&gt;
+        document.getElementsByClassName('scroll')[0].scrollTop = 100;
+        document.getElementsByClassName('scroll')[0].scrollLeft = 200;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
-  <data name="JQueryUnloadedTestsUrl" xml:space="preserve">
-    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Unloaded.html</value>
+  <data name="jQueryUnloadedHtml" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+        .main {
+            color: red;
+        }
+        div.scroll {
+            background: #ccc none repeat scroll 0 0;
+            border: 3px solid #666;
+            margin: 5px;
+            padding: 5px;
+            position: relative;
+            width: 200px;
+            height: 100px;
+            overflow: auto;
+        }
+        p {
+            margin: 10px;
+            padding: 5px;
+            border: 2px solid #666;
+            width: 1000px;
+            height: 1000px;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="main" style="width: 200px; height: 20px; padding: 10px; margin: 5px; border: 3px solid black;"&gt;
+        H1 Header
+    &lt;/h1&gt;
+    &lt;div class="main" id="id1" style="background-color: green; z-index: 1;"&gt;
+        &lt;span&gt;jQuery&lt;/span&gt;
+        &lt;span&gt;Selenium&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="main" id="id2"&gt;
+        &lt;span&gt;WebDriver&lt;/span&gt;
+        &lt;span&gt;Extension&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;form data-mybool="true" data-mystring="str" data-myint="123"&gt;
+        &lt;label&gt;
+            First checkbox
+            &lt;input type="checkbox" id="input1" name="i1" checked="checked" value="v1" /&gt;
+        &lt;/label&gt;
+        &lt;label&gt;
+            Second checkbox
+            &lt;input type="checkbox" id="input2" checked /&gt;
+        &lt;/label&gt;
+        &lt;input type="text" id="input3" name="i3" value="v3" maxlength="100" /&gt;
+    &lt;/form&gt;
+    &lt;div class="scroll"&gt;&lt;p&gt;scroll&lt;/p&gt;&lt;/div&gt;
+    &lt;script&gt;
+        document.getElementsByClassName('scroll')[0].scrollTop = 100;
+        document.getElementsByClassName('scroll')[0].scrollLeft = 200;
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
-  <data name="QuerySelectorTestsUrl" xml:space="preserve">
-    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html</value>
+  <data name="QuerySelectorHtml" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="main"&gt;
+        H1 Header
+    &lt;/h1&gt;
+    &lt;div class="main" id="id1"&gt;
+        &lt;span&gt;Query&lt;/span&gt;
+        &lt;span&gt;Selector&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="main"&gt;Selenium WebDriver Extensions&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
-  <data name="SizzleLoadedTestsUrl" xml:space="preserve">
-    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Loaded.html</value>
+  <data name="SizzleLoadedHtml" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="main"&gt;
+        H1 Header
+    &lt;/h1&gt;
+    &lt;div class="main" id="id1"&gt;Sizzle Selector&lt;/div&gt;
+    &lt;div class="main"&gt;Selenium WebDriver Extensions&lt;/div&gt;
+    &lt;script src="https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js" type="text/javascript"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
-  <data name="SizzleUnloadedTestsUrl" xml:space="preserve">
-    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/642465fff703167db9516f24330f8413916524e5/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/Sizzle/Unloaded.html</value>
+  <data name="SizzleUnloadedHtml" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+    &lt;style type="text/css"&gt;
+        .main {
+            color: red;
+        }
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="main" style="width: 200px; height: 20px; padding: 10px; margin: 5px; border: 3px solid black;"&gt;
+        H1 Header
+    &lt;/h1&gt;
+    &lt;div class="main" id="id1" style="background-color: green; z-index: 1;"&gt;
+        &lt;span&gt;Sizzle&lt;/span&gt;
+        &lt;span&gt;Selenium&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="main" id="id2"&gt;
+        &lt;span&gt;WebDriver&lt;/span&gt;
+        &lt;span&gt;Extension&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;form data-mybool="true" data-mystring="str" data-myint="123"&gt;
+        &lt;label&gt;
+            First checkbox
+            &lt;input type="checkbox" id="input1" name="i1" checked="checked" value="v1" /&gt;
+        &lt;/label&gt;
+        &lt;label&gt;
+            Second checkbox
+            &lt;input type="checkbox" id="input2" checked /&gt;
+        &lt;/label&gt;
+        &lt;input type="text" id="input3" name="i3" value="v3" maxlength="100" /&gt;
+    &lt;/form&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
   </data>
 </root>
