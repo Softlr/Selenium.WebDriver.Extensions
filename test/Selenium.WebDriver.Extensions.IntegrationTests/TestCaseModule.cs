@@ -19,8 +19,10 @@
         private static string GetHtml(string resourceName)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using (var stream = assembly.GetManifestResourceStream(resourceName))
+            Stream stream = null;
+            try
             {
+                stream = assembly.GetManifestResourceStream(resourceName);
                 if (stream == null)
                 {
                     return null;
@@ -28,7 +30,15 @@
 
                 using (var reader = new StreamReader(stream))
                 {
+                    stream = null;
                     return reader.ReadToEnd();
+                }
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Dispose();
                 }
             }
         }
