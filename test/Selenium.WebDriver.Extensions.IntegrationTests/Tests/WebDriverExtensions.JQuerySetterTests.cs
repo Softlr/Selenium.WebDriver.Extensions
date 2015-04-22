@@ -1,7 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium;
     using Xunit;
 
     [ExcludeFromCodeCoverage]
