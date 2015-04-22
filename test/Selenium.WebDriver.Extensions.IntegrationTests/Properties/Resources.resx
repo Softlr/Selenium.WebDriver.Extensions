@@ -117,8 +117,30 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CoreTestsHtml" xml:space="preserve">
+    <value>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1 class="main"&gt;
+        H1 Header
+    &lt;/h1&gt;
+    &lt;div class="main" id="id1"&gt;
+        &lt;span&gt;Query&lt;/span&gt;
+        &lt;span&gt;Selector&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div class="main"&gt;Selenium WebDriver Extensions&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;</value>
+  </data>
   <data name="CoreTestsUrl" xml:space="preserve">
-    <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html</value>
+    <value>/Core</value>
+  </data>
+  <data name="HostUrl" xml:space="preserve">
+    <value>http://localhost:50502</value>
   </data>
   <data name="JQueryLoadedTestsUrl" xml:space="preserve">
     <value>https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/b4fd6869d59572f5b84ccc4d5a817d0ac0acd6e8/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/JQuery/Loaded.html</value>

@@ -59,6 +59,12 @@
     <OutputPath>bin\Mono\</OutputPath>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Nancy">
+      <HintPath>..\..\packages\Nancy.1.2.0\lib\net40\Nancy.dll</HintPath>
+    </Reference>
+    <Reference Include="Nancy.Hosting.Self">
+      <HintPath>..\..\packages\Nancy.Hosting.Self.1.2.0\lib\net40\Nancy.Hosting.Self.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
@@ -116,6 +122,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="TestCaseModule.cs" />
+    <Compile Include="TestsBase.cs" />
     <Compile Include="Tests\WebDriverExtensions.CoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\WebDriverExtensions.JQuerySetterTests.cs" />
@@ -150,7 +158,7 @@
     </Content>
     <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.15.0.0\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
-	</Content>
+    </Content>
     <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.44\content\IEDriverServer.exe">
       <Link>Drivers\IEDriverServer.exe</Link>
     </Content>

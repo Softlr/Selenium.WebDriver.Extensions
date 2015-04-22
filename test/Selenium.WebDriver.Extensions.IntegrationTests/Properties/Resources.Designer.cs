@@ -61,11 +61,45 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to https://cdn.rawgit.com/RaYell/selenium-webdriver-extensions/cc9834d8c6b17beb3f8e2b70ef96e8317785aa71/test/Selenium.WebDriver.Extensions.IntegrationTests/TestCases/QuerySelector/TestCase.html.
+        ///   Looks up a localized string similar to &lt;!DOCTYPE html&gt;
+        ///&lt;html&gt;
+        ///&lt;head&gt;
+        ///    &lt;meta charset=&quot;utf-8&quot; /&gt;
+        ///    &lt;title&gt;Selenium.WebDriver.Extensions Tests&lt;/title&gt;
+        ///&lt;/head&gt;
+        ///&lt;body&gt;
+        ///    &lt;h1 class=&quot;main&quot;&gt;
+        ///        H1 Header
+        ///    &lt;/h1&gt;
+        ///    &lt;div class=&quot;main&quot; id=&quot;id1&quot;&gt;
+        ///        &lt;span&gt;Query&lt;/span&gt;
+        ///        &lt;span&gt;Selector&lt;/span&gt;
+        ///    &lt;/div&gt;
+        ///    &lt;div class=&quot;main&quot;&gt;Selenium WebDriver Extensions&lt;/div&gt;
+        ///&lt;/body&gt;
+        ///&lt;/html&gt;.
+        /// </summary>
+        internal static string CoreTestsHtml {
+            get {
+                return ResourceManager.GetString("CoreTestsHtml", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to /Core.
         /// </summary>
         internal static string CoreTestsUrl {
             get {
                 return ResourceManager.GetString("CoreTestsUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to http://localhost:50502.
+        /// </summary>
+        internal static string HostUrl {
+            get {
+                return ResourceManager.GetString("HostUrl", resourceCulture);
             }
         }
         

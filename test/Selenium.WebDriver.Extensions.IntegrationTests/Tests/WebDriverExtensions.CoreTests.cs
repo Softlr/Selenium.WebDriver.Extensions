@@ -1,17 +1,14 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
-    public abstract class WebDriverExtensionsCoreTests
+    public abstract class WebDriverExtensionsCoreTests : TestsBase
     {
-        protected IWebDriver Browser { get; set; }
-
         [Fact]
         public void FindMixedJQuerySizzleElement()
         {
