@@ -117,11 +117,6 @@
     <Compile Include="PhantomJsTests\WebDriverExtensions.QuerySelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleLoadedSelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleUnloadedSelectorPhantomJsTests.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <Compile Include="TestCaseModule.cs" />
     <Compile Include="TestsBase.cs" />
     <Compile Include="Tests\WebDriverExtensions.CoreTests.cs" />
@@ -165,20 +160,14 @@
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
-    <Content Include="TestCases\QuerySelector\TestCase.html" />
-    <Content Include="TestCases\Sizzle\Unloaded.html" />
-    <Content Include="TestCases\Sizzle\Loaded.html" />
-    <Content Include="TestCases\JQuery\Unloaded.html" />
-    <Content Include="TestCases\JQuery\Loaded.html" />
+    <EmbeddedResource Include="TestCases\QuerySelector\TestCase.html" />
+    <EmbeddedResource Include="TestCases\Sizzle\Unloaded.html" />
+    <EmbeddedResource Include="TestCases\Sizzle\Loaded.html" />
+    <EmbeddedResource Include="TestCases\JQuery\Unloaded.html" />
+    <EmbeddedResource Include="TestCases\JQuery\Loaded.html" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />

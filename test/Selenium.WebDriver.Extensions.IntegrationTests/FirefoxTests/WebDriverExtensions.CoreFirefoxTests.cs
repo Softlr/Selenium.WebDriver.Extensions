@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Properties;
     using Xunit;
 
     [Trait("Category", "Integration")]
@@ -14,7 +13,7 @@
         public WebDriverExtensionsCoreFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(Resources.HostUrl + "/Core"));
+            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/QuerySelector"));
         }
     }
 }

@@ -4,8 +4,6 @@
     using System.Diagnostics.CodeAnalysis;
     using Nancy.Hosting.Self;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Properties;
-
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase : IDisposable
     {
@@ -15,7 +13,7 @@
         {
             var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
 
-            this.host = new NancyHost(config, new Uri(Resources.HostUrl));
+            this.host = new NancyHost(config, new Uri("http://localhost:50502"));
             this.host.Start();
         }
 

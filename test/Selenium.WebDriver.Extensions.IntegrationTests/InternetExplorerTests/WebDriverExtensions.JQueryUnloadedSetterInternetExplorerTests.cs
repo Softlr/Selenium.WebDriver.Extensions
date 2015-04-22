@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Properties;
     using Xunit;
 
     [Trait("Category", "Integration")]
@@ -15,7 +14,7 @@
         public WebDriverExtensionsJQueryUnloadedSetterInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(Resources.HostUrl + "/JQueryUnloaded"));
+            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/JQueryUnloaded"));
         }
     }
 }
