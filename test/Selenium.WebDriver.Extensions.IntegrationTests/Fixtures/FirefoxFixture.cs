@@ -9,9 +9,16 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class FirefoxFixture : IDisposable
     {
+        private bool disposed;
+
         public FirefoxFixture()
         {
             this.Browser = new FirefoxDriver();
+        }
+
+        ~FirefoxFixture()
+        {
+            this.Dispose(false);
         }
 
         public IWebDriver Browser { get; private set; }
@@ -24,10 +31,13 @@
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (this.disposed || !disposing)
             {
-                this.Browser.Dispose();
+                return;
             }
+
+            this.Browser.Dispose();
+            this.disposed = true;
         }
     }
 }

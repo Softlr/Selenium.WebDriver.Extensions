@@ -15,11 +15,18 @@
     {
         private readonly IWebDriver driver;
 
+        private bool disposed;
+
         public WebDriverExtensionsChainJQueryHelperTests()
         {
             var mock = new Mock<IWebDriver>();
             mock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
             this.driver = mock.Object;
+        }
+
+        ~WebDriverExtensionsChainJQueryHelperTests()
+        {
+            this.Dispose(false);
         }
 
         public void Dispose()
@@ -681,10 +688,13 @@
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (this.disposed || !disposing)
             {
-                this.driver.Dispose();
+                return;
             }
+
+            this.driver.Dispose();
+            this.disposed = true;
         }
     }
 }

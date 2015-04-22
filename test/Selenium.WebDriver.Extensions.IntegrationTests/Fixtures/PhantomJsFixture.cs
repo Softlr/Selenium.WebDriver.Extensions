@@ -9,12 +9,19 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class PhantomJsFixture : IDisposable
     {
+        private bool disposed;
+
         [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public PhantomJsFixture()
         {
             var phantomJsService = PhantomJSDriverService.CreateDefaultService();
             phantomJsService.SslProtocol = "any";
             this.Browser = new PhantomJSDriver(phantomJsService);
+        }
+
+        ~PhantomJsFixture()
+        {
+            this.Dispose(false);
         }
 
         public IWebDriver Browser { get; private set; }
@@ -27,10 +34,13 @@
 
         protected virtual void Dispose(bool disposing)
         {
-            if (disposing)
+            if (this.disposed || !disposing)
             {
-                this.Browser.Dispose();
+                return;
             }
+
+            this.Browser.Dispose();
+            this.disposed = true;
         }
     }
 }
