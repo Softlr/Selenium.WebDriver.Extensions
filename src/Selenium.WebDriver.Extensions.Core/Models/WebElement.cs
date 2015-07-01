@@ -282,7 +282,8 @@
         /// <summary>
         /// Gets the inner element.
         /// </summary>
-        protected virtual IWebElement InnerElement { get; private set; }
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public IWebElement InnerElement { get; private set; }
 
         /// <summary>
         /// Gets the selector result index.
