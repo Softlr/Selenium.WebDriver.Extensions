@@ -30,7 +30,7 @@
                 'use strict';
                 var links = baseElement.querySelectorAll(':link'), results = [], i;
                 for (i = 0; i < links.length; i += 1) {
-                    if (links[i].innerText === text) {
+                    if (links[i].innerText.trim() === text) {
                         results.push(links[i]);
                     }
                 }
