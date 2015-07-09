@@ -99,25 +99,25 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or
         /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
-        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class 
+        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class
         /// is not registered.
         /// </exception>
         /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
         /// <exception cref="ArgumentException">
         /// Type is not a RuntimeType.
-        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" /> 
+        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" />
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// Type cannot be a <see cref="TypeBuilder" />.
-        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and
         /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
-        /// -or- The assembly that contains type is a dynamic assembly that was created with 
+        /// -or- The assembly that contains type is a dynamic assembly that was created with
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>
         public static WebElement FindElement(this IWebDriver driver, ISelector selector)
@@ -143,25 +143,25 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or
         /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
-        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class 
+        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class
         /// is not registered.
         /// </exception>
         /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
         /// <exception cref="ArgumentException">
         /// Type is not a RuntimeType.
-        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" /> 
+        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" />
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// Type cannot be a <see cref="TypeBuilder" />.
-        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and
         /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
-        /// -or- The assembly that contains type is a dynamic assembly that was created with 
+        /// -or- The assembly that contains type is a dynamic assembly that was created with
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
         /// </exception>
         public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, ISelector selector)
@@ -195,7 +195,7 @@
         /// For a number, a <see cref="long"/> is returned.
         /// For a boolean, a <see cref="bool"/> is returned.
         /// For all other cases a <see cref="string"/> is returned.
-        /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type, 
+        /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type,
         /// following the rules above. Nested lists are not supported.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
@@ -234,7 +234,7 @@
         /// </param>
         /// <param name="timeout">The timeout value for the load.</param>
         /// <remarks>
-        /// If external library is already loaded on a page this method will do nothing, even if the loaded version 
+        /// If external library is already loaded on a page this method will do nothing, even if the loaded version
         /// and version requested by invoking this method have different versions.
         /// </remarks>
         /// <exception cref="ArgumentNullException">

@@ -35,8 +35,8 @@
         [Theory]
         [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
-            XPathSelector selector1, 
-            XPathSelector selector2, 
+            XPathSelector selector1,
+            XPathSelector selector2,
             bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);
@@ -63,7 +63,7 @@
             Assert.True(selector1 != selector2);
 #pragma warning restore 252,253
         }
-        
+
         [Fact]
         public void ShouldHaveProperRunnerType()
         {

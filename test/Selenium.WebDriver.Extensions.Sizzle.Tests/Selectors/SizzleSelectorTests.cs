@@ -32,12 +32,12 @@
                 yield return new object[] { By.SizzleSelector("div"), "Sizzle('div')" };
                 yield return new object[]
                                  {
-                                     By.SizzleSelector("div", By.SizzleSelector("article")), 
+                                     By.SizzleSelector("div", By.SizzleSelector("article")),
                                      "Sizzle('div', Sizzle('article')[0])"
                                  };
                 yield return new object[]
                                  {
-                                     By.SizzleSelector("input[type='text']"), 
+                                     By.SizzleSelector("input[type='text']"),
                                      "Sizzle('input[type=\"text\"]')"
                                  };
             }
@@ -53,14 +53,14 @@
                 yield return new object[] { null, By.SizzleSelector("div"), false };
                 yield return new object[]
                                  {
-                                     By.SizzleSelector("div", By.SizzleSelector("body")), 
+                                     By.SizzleSelector("div", By.SizzleSelector("body")),
                                      By.SizzleSelector("div"),
                                      false
                                  };
                 yield return new object[]
                                  {
                                      By.SizzleSelector("div", By.SizzleSelector("body")),
-                                     By.SizzleSelector("div", By.SizzleSelector("body")), 
+                                     By.SizzleSelector("div", By.SizzleSelector("body")),
                                      true
                                  };
             }
@@ -92,7 +92,7 @@
         public void ShouldPopulateFormatStringProperty()
         {
             var formatString = By.SizzleSelector("div").CallFormatString;
-            
+
             Assert.NotNull(formatString);
         }
 
@@ -132,7 +132,7 @@
         public void ShouldThrowExceptionWhenCreatingNestedSelectorWithNull()
         {
             var selector = new SizzleSelector("div");
-            
+
             var ex = Assert.Throws<ArgumentNullException>(() => selector.Create(null));
             Assert.Equal("root", ex.ParamName);
         }

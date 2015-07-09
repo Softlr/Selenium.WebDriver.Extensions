@@ -32,7 +32,7 @@
             Assert.True(position1.Equals((object)position3));
             Assert.False(position1.Equals((object)position4));
             Assert.False(position1.Equals(new object()));
-            
+
             Assert.NotEqual(position1.GetHashCode(), position2.GetHashCode());
             Assert.Equal(position1.GetHashCode(), position3.GetHashCode());
             Assert.NotEqual(position1.GetHashCode(), position4.GetHashCode());

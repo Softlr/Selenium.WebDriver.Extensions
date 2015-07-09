@@ -6,7 +6,7 @@
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]   
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public abstract class WebDriverExtensionsCoreTests : TestsBase
     {
         [Fact]

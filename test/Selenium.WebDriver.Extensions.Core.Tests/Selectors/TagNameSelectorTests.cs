@@ -26,7 +26,7 @@
         [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             TagNameSelector selector1,
-            TagNameSelector selector2, 
+            TagNameSelector selector2,
             bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

@@ -492,7 +492,7 @@
         public void ShouldFadeToGivenValue()
         {
             var result = this.driver.JQuery("div").FadeTo(100, 0.5m);
-            
+
             Assert.NotNull(result);
         }
 

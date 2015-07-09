@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Core;
-    
+
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.
     /// </summary>
@@ -31,8 +31,8 @@
         /// </exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
         public static JQuerySelector JQuerySelector(
-            string selector, 
-            JQuerySelector context = null, 
+            string selector,
+            JQuerySelector context = null,
             string jQueryVariable = "jQuery")
         {
             return new JQuerySelector(selector, context, jQueryVariable);
@@ -46,7 +46,7 @@
         /// A string defining the base element on which base element the selector should be invoked.
         /// </param>
         /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
+        /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the
         /// elements.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -68,7 +68,7 @@
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <returns>
-        /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the 
+        /// A <see cref="Selenium.WebDriver.Extensions.Core.QuerySelector"/> object the driver can use to find the
         /// elements.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -250,9 +250,9 @@
         }
 
         /// <summary>
-        /// Gets a mechanism to find elements by an XPath query. When searching within a WebElement using xpath be 
-        /// aware that WebDriver follows standard conventions: a search prefixed with "//" will search the entire 
-        /// document, not just the children of this current node.  Use ".//" to limit your search to the children of 
+        /// Gets a mechanism to find elements by an XPath query. When searching within a WebElement using xpath be
+        /// aware that WebDriver follows standard conventions: a search prefixed with "//" will search the entire
+        /// document, not just the children of this current node.  Use ".//" to limit your search to the children of
         /// this WebElement.
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>

@@ -13,7 +13,7 @@
         <dependencies>
             <dependency id="Selenium.WebDriver"/>
             <dependency id="Selenium.Support"/>
-        </dependencies> 
+        </dependencies>
     </metadata>
     <files>
         <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.Core.dll" target="lib\net35\Selenium.WebDriver.Extensions.Core.dll" />

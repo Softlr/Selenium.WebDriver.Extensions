@@ -8,7 +8,7 @@
     [Trait("Browser", "Chrome")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class WebDriverExtensionsJQueryLoadedSelectorChromeTests : 
+    public class WebDriverExtensionsJQueryLoadedSelectorChromeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
     {
         public WebDriverExtensionsJQueryLoadedSelectorChromeTests(ChromeFixture fixture)

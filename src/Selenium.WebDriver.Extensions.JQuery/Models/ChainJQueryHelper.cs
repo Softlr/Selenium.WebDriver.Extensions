@@ -38,11 +38,11 @@
         private JQuerySelector Selector { get; set; }
 
         /// <summary>
-        /// Searches for DOM element using jQuery selector and gets the combined text contents of each element in the 
+        /// Searches for DOM element using jQuery selector and gets the combined text contents of each element in the
         /// set of matched elements, including their descendants, or set the text contents of the matched elements.
         /// </summary>
         /// <returns>
-        /// The combined text contents of each element in the set of matched elements, including their descendants, or 
+        /// The combined text contents of each element in the set of matched elements, including their descendants, or
         /// set the text contents of the matched elements.
         /// </returns>
         public string Text()
@@ -63,11 +63,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the HTML contents of the first element in the set 
+        /// Searches for DOM elements using jQuery selector and gets the HTML contents of the first element in the set
         /// of matched elements or set the HTML contents of every matched element.
         /// </summary>
         /// <returns>
-        /// The HTML contents of the first element in the set of matched elements or set the HTML contents of every 
+        /// The HTML contents of the first element in the set of matched elements or set the HTML contents of every
         /// matched element.
         /// </returns>
         public string Html()
@@ -88,7 +88,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element 
+        /// Searches for DOM elements using jQuery selector and gets the value of an attribute for the first element
         /// in the set of matched elements.
         /// </summary>
         /// <param name="attributeName">The name of the attribute to get.</param>
@@ -111,7 +111,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the value of a property for the first element in 
+        /// Searches for DOM elements using jQuery selector and gets the value of a property for the first element in
         /// the set of matched elements.
         /// </summary>
         /// <param name="propertyName">The name of the property to get.</param>
@@ -124,7 +124,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the value of a property for the first element in 
+        /// Searches for DOM elements using jQuery selector and gets the value of a property for the first element in
         /// the set of matched elements.
         /// </summary>
         /// <typeparam name="T">The type of the value to be returned.</typeparam>
@@ -167,7 +167,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current value of the first element in the set 
+        /// Searches for DOM elements using jQuery selector and gets the current value of the first element in the set
         /// of matched elements.
         /// </summary>
         /// <returns>The current value of the first element in the set of matched elements.</returns>
@@ -189,12 +189,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and get the value of a style property for the first 
+        /// Searches for DOM elements using jQuery selector and get the value of a style property for the first
         /// element in the set of matched elements or set one or more CSS properties for every matched element.
         /// </summary>
         /// <param name="propertyName">The CSS property name.</param>
         /// <returns>
-        /// The value of a style property for the first element in the set of matched elements or set one or more CSS 
+        /// The value of a style property for the first element in the set of matched elements or set one or more CSS
         /// properties for every matched element.
         /// </returns>
         public string Css(string propertyName)
@@ -215,11 +215,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element 
+        /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element
         /// in the set of matched elements or set the width of every matched element.
         /// </summary>
         /// <returns>
-        /// The current computed width for the first element in the set of matched elements or set the width of every 
+        /// The current computed width for the first element in the set of matched elements or set the width of every
         /// matched element.
         /// </returns>
         public long? Width()
@@ -239,11 +239,11 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
+        /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element
         /// in the set of matched elements or set the width of every matched element.
         /// </summary>
         /// <returns>
-        /// The current computed height for the first element in the set of matched elements or set the height of 
+        /// The current computed height for the first element in the set of matched elements or set the height of
         /// every matched element.
         /// </returns>
         public long? Height()
@@ -263,12 +263,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current computed inner width (including 
-        /// padding but not border) for the first element in the set of matched elements or set the inner width of 
+        /// Searches for DOM elements using jQuery selector and gets the current computed inner width (including
+        /// padding but not border) for the first element in the set of matched elements or set the inner width of
         /// every matched element.
         /// </summary>
         /// <returns>
-        /// The current computed inner width (including padding but not border) for the first element in the set of 
+        /// The current computed inner width (including padding but not border) for the first element in the set of
         /// matched elements or set the inner width of every matched element.
         /// </returns>
         public long? InnerWidth()
@@ -288,12 +288,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current computed inner height (including 
-        /// padding but not border) for the first element in the set of matched elements or set the inner width of 
+        /// Searches for DOM elements using jQuery selector and gets the current computed inner height (including
+        /// padding but not border) for the first element in the set of matched elements or set the inner width of
         /// every matched element.
         /// </summary>
         /// <returns>
-        /// The current computed inner height (including padding but not border) for the first element in the set of 
+        /// The current computed inner height (including padding but not border) for the first element in the set of
         /// matched elements or set the inner width of every matched element.
         /// </returns>
         public long? InnerHeight()
@@ -313,14 +313,14 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element 
+        /// Searches for DOM elements using jQuery selector and gets the current computed width for the first element
         /// in the set of matched elements, including padding and border.
         /// </summary>
         /// <param name="includeMargin">
         /// A flag indicating whether to include the element's margin in the calculation.
         /// </param>
         /// <returns>
-        /// The current computed width for the first element in the set of matched elements, including padding and 
+        /// The current computed width for the first element in the set of matched elements, including padding and
         /// border.
         /// </returns>
         public long? OuterWidth(bool includeMargin = false)
@@ -340,14 +340,14 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element 
+        /// Searches for DOM elements using jQuery selector and gets the current computed height for the first element
         /// in the set of matched elements, including padding and border.
         /// </summary>
         /// <param name="includeMargin">
         /// A flag indicating whether to include the element's margin in the calculation.
         /// </param>
         /// <returns>
-        /// The current computed height for the first element in the set of matched elements, including padding and 
+        /// The current computed height for the first element in the set of matched elements, including padding and
         /// border.
         /// </returns>
         public long? OuterHeight(bool includeMargin = false)
@@ -367,16 +367,16 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current coordinates of the first element in 
+        /// Searches for DOM elements using jQuery selector and gets the current coordinates of the first element in
         /// the set of matched elements, relative to the offset parent.
         /// </summary>
         /// <returns>
-        /// The current coordinates of the first element in the set of matched elements, relative to the offset 
+        /// The current coordinates of the first element in the set of matched elements, relative to the offset
         /// parent.
         /// </returns>
         /// <exception cref="ArgumentNullException">Key is null.</exception>
         /// <exception cref="OverflowException">
-        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than 
+        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than
         /// <see cref="int.MaxValue" />.
         /// </exception>
         /// <exception cref="FormatException">Position coordinate is not of the correct format.</exception>
@@ -400,7 +400,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current coordinates of the first element in 
+        /// Searches for DOM elements using jQuery selector and gets the current coordinates of the first element in
         /// the set of matched elements, relative to the document.
         /// </summary>
         /// <returns>
@@ -408,7 +408,7 @@
         /// </returns>
         /// <exception cref="ArgumentNullException">Key is null.</exception>
         /// <exception cref="OverflowException">
-        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than 
+        /// Position coordinate represents a number less than <see cref="int.MinValue" /> or greater than
         /// <see cref="int.MaxValue" />.
         /// </exception>
         /// <exception cref="FormatException">Position coordinate is not of the correct format.</exception>
@@ -433,11 +433,11 @@
 
         /// <summary>
         /// Searches for DOM elements using jQuery selector and gets the current horizontal position of the scroll bar
-        /// for the first element in the set of matched elements or set the horizontal position of the scroll bar for 
+        /// for the first element in the set of matched elements or set the horizontal position of the scroll bar for
         /// every matched element.
         /// </summary>
         /// <returns>
-        /// The current horizontal position of the scroll bar for the first element in the set of matched elements or 
+        /// The current horizontal position of the scroll bar for the first element in the set of matched elements or
         /// set the horizontal position of the scroll bar for every matched element.
         /// </returns>
         public long? ScrollLeft()
@@ -457,12 +457,12 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the current vertical position of the scroll bar 
-        /// for the first element in the set of matched elements or set the vertical position of the scroll bar for 
+        /// Searches for DOM elements using jQuery selector and gets the current vertical position of the scroll bar
+        /// for the first element in the set of matched elements or set the vertical position of the scroll bar for
         /// every matched element.
         /// </summary>
         /// <returns>
-        /// The current vertical position of the scroll bar for the first element in the set of matched elements or 
+        /// The current vertical position of the scroll bar for the first element in the set of matched elements or
         /// set the vertical position of the scroll bar for every matched element.
         /// </returns>
         public long? ScrollTop()
@@ -482,13 +482,13 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and returns the value at the named data store for the 
-        /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-* 
+        /// Searches for DOM elements using jQuery selector and returns the value at the named data store for the
+        /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-*
         /// attribute.
         /// </summary>
         /// <param name="key">The name of the data stored.</param>
         /// <returns>
-        /// The value at the named data store for the first element in the jQuery collection, as set by 
+        /// The value at the named data store for the first element in the jQuery collection, as set by
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
         /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
@@ -499,14 +499,14 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and returns the value at the named data store for the 
-        /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-* 
+        /// Searches for DOM elements using jQuery selector and returns the value at the named data store for the
+        /// first element in the jQuery collection, as set by <c>data(name, value)</c> or by an HTML5 data-*
         /// attribute.
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
         /// <param name="key">The name of the data stored.</param>
         /// <returns>
-        /// The value at the named data store for the first element in the jQuery collection, as set by 
+        /// The value at the named data store for the first element in the jQuery collection, as set by
         /// <c>data(name, value)</c> or by an HTML5 data-* attribute.
         /// </returns>
         /// <exception cref="TypeArgumentException">Invoked generic method with unsupported type.</exception>
@@ -516,7 +516,7 @@
             if (!new[] { typeof(bool?), typeof(long?), typeof(string) }.Contains(typeof(T)))
             {
                 throw new TypeArgumentException(
-                    "Only null-able boolean, null-able long and string types are supported", 
+                    "Only null-able boolean, null-able long and string types are supported",
                     "T");
             }
 
@@ -580,7 +580,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using jQuery selector and gets the encoded set of form elements as a string 
+        /// Searches for DOM elements using jQuery selector and gets the encoded set of form elements as a string
         /// for submission.
         /// </summary>
         /// <returns>The encoded set of form elements as a string for submission.</returns>
@@ -1235,7 +1235,7 @@
         }
 
         /// <summary>
-        /// Execute all handlers and behaviors attached to the matched elements for the given event type on the 
+        /// Execute all handlers and behaviors attached to the matched elements for the given event type on the
         /// current <see cref="JQuerySelector"/>.
         /// </summary>
         /// <param name="eventName">The name of the JavaScript event to be triggered.</param>
@@ -1254,8 +1254,8 @@
         /// <remarks>
         /// The behavior of this method is similar to <see cref="Trigger"/>, with the following exceptions:
         /// <list type="bullet">
-        /// The <c>.triggerHandler("event")</c> method will not call <c>.event()</c> on the element it is 
-        /// triggered on. This means <c>.triggerHandler("submit")</c> on a form will not call <c>.submit()</c> on the 
+        /// The <c>.triggerHandler("event")</c> method will not call <c>.event()</c> on the element it is
+        /// triggered on. This means <c>.triggerHandler("submit")</c> on a form will not call <c>.submit()</c> on the
         /// form.
         /// </list>>
         /// <list type="bullet">
@@ -1263,12 +1263,12 @@
         /// <c>.triggerHandler()</c> only affects the first matched element.
         /// </list>
         /// <list type="bullet">
-        /// Events triggered with <c>.triggerHandler()</c> do not bubble up the DOM hierarchy; if they are not handled 
+        /// Events triggered with <c>.triggerHandler()</c> do not bubble up the DOM hierarchy; if they are not handled
         /// by the target element directly, they do nothing.
         /// </list>
         /// <list type="bullet">
-        /// Instead of returning the jQuery object (to allow chaining), <c>.triggerHandler()</c> returns whatever 
-        /// value was returned by the last handler it caused to be executed. If no handlers are triggered, it returns 
+        /// Instead of returning the jQuery object (to allow chaining), <c>.triggerHandler()</c> returns whatever
+        /// value was returned by the last handler it caused to be executed. If no handlers are triggered, it returns
         /// undefined.
         /// </list>
         /// </remarks>
@@ -1279,7 +1279,7 @@
         }
 
         /// <summary>
-        /// Performs a jQuery search on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/> 
+        /// Performs a jQuery search on the <see cref="IWebDriver"/> using current <see cref="JQuerySelector"/>
         /// selector and script format string.
         /// </summary>
         /// <typeparam name="T">The type of the result to be returned.</typeparam>
@@ -1289,8 +1289,8 @@
         /// </param>
         /// <returns>Parsed result of invoking the script.</returns>
         /// <remarks>
-        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>, 
-        /// <see cref="Nullable{Long}"/>, <see cref="bool"/>, <see cref="Nullable"/>, <see cref="string"/>, 
+        /// Because of the limitations of the Selenium the only valid types are: <see cref="long"/>,
+        /// <see cref="Nullable{Long}"/>, <see cref="bool"/>, <see cref="Nullable"/>, <see cref="string"/>,
         /// <see cref="IWebElement"/> and <see cref="IEnumerable{IWebElement}"/>.
         /// Selenium returns different types depending if element has been found or not. If there's a match a
         /// <see cref="ReadOnlyCollection{IWebElement}"/> is returned, but if there are no matches than it will return

@@ -1,7 +1,7 @@
 ﻿namespace Selenium.WebDriver.Extensions.Core
 {
     using System;
-    
+
     /// <summary>
     /// The selector interface.
     /// </summary>

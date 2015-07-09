@@ -29,7 +29,7 @@
             {
                 yield return new object[]
                                  {
-                                     By.QuerySelector("div", By.ClassName("div")), 
+                                     By.QuerySelector("div", By.ClassName("div")),
                                      By.QuerySelector("div", By.QuerySelector("div")),
                                      false
                                  };
@@ -39,8 +39,8 @@
         [Theory]
         [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
-            ClassNameSelector selector1, 
-            ClassNameSelector selector2, 
+            ClassNameSelector selector1,
+            ClassNameSelector selector2,
             bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);
@@ -59,8 +59,8 @@
         [Theory]
         [MemberData("QuerySelectorEqualityData")]
         public void ShouldProperlyCompareQuerySelectors(
-            QuerySelector selector1, 
-            QuerySelector selector2, 
+            QuerySelector selector1,
+            QuerySelector selector2,
             bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

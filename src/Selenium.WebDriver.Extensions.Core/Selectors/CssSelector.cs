@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    
+
     /// <summary>
     /// The CSS selector.
     /// </summary>

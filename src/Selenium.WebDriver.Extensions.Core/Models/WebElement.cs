@@ -10,7 +10,7 @@
     using System.Runtime.InteropServices;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
-    
+
     /// <summary>
     /// Wrapper on the Selenium <see cref="IWebElement"/> that adds support for selector storage on element level.
     /// </summary>
@@ -50,7 +50,7 @@
         /// <summary>
         /// The script to get the XPATH.
         /// </summary>
-        private const string FindXPathScript = @"(function(element) { 
+        private const string FindXPathScript = @"(function(element) {
             'use strict';
             var allNodes = document.getElementsByTagName('*'),
                 segments = [],
@@ -101,14 +101,14 @@
         /// The XPATH.
         /// </summary>
         private string xpath;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WebElement"/> class.
         /// </summary>
         /// <param name="webElement">The inner web element.</param>
         /// <param name="selector">The selector used to locate the web element.</param>
         /// <param name="selectorResultIndex">
-        /// The index number of the selector result collection that corresponds with the web element. Used when 
+        /// The index number of the selector result collection that corresponds with the web element. Used when
         /// selector returns multiple matches to identify the particular match.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -194,7 +194,7 @@
         }
 
         /// <summary>
-        /// Gets the innerText of this element, without any leading or trailing whitespace, and with other whitespace 
+        /// Gets the innerText of this element, without any leading or trailing whitespace, and with other whitespace
         /// collapsed.
         /// </summary>
         /// <exception cref="StaleElementReferenceException">
@@ -237,7 +237,7 @@
         }
 
         /// <summary>
-        /// Gets a <see cref="Point"/> object containing the coordinates of the upper-left corner of this element 
+        /// Gets a <see cref="Point"/> object containing the coordinates of the upper-left corner of this element
         /// relative to the upper-left corner of the page.
         /// </summary>
         /// <exception cref="StaleElementReferenceException">
@@ -389,7 +389,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM element using query selector limiting the scope of the search to descendants of current 
+        /// Searches for DOM element using query selector limiting the scope of the search to descendants of current
         /// element.
         /// </summary>
         /// <param name="selector">The Selenium query selector.</param>
@@ -404,28 +404,28 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or
         /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
-        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class 
+        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class
         /// is not registered.
         /// </exception>
         /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
         /// <exception cref="InvalidOperationException">The source sequence is empty.</exception>
         /// <exception cref="ArgumentException">
         /// Type is not a RuntimeType.
-        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" /> 
+        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" />
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// Type cannot be a <see cref="TypeBuilder" />.
-        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and
         /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
-        /// -or- The assembly that contains type is a dynamic assembly that was created with 
+        /// -or- The assembly that contains type is a dynamic assembly that was created with
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
-        /// </exception>      
+        /// </exception>
         public WebElement FindElement(ISelector selector)
         {
             if (selector == null)
@@ -437,7 +437,7 @@
         }
 
         /// <summary>
-        /// Searches for DOM elements using query selector limiting the scope of the search to descendants of current 
+        /// Searches for DOM elements using query selector limiting the scope of the search to descendants of current
         /// element.
         /// </summary>
         /// <param name="selector">The Selenium query selector.</param>
@@ -451,27 +451,27 @@
         /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
         /// </exception>
         /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or 
+        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or
         /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
         /// </exception>
         /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
         /// <exception cref="COMException">
-        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class 
+        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class
         /// is not registered.
         /// </exception>
         /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
         /// <exception cref="ArgumentException">
         /// Type is not a RuntimeType.
-        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" /> 
+        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" />
         /// property returns true).
         /// </exception>
         /// <exception cref="NotSupportedException">
         /// Type cannot be a <see cref="TypeBuilder" />.
-        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and 
+        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and
         /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
-        /// -or- The assembly that contains type is a dynamic assembly that was created with 
+        /// -or- The assembly that contains type is a dynamic assembly that was created with
         /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
-        /// </exception>      
+        /// </exception>
         public ReadOnlyCollection<WebElement> FindElements(ISelector selector)
         {
             if (selector == null)

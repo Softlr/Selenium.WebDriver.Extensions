@@ -24,14 +24,14 @@
                 yield return new object[] { By.JQuerySelector("div", jQueryVariable: "$"), "$('div')" };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div", By.JQuerySelector("article")), 
+                                     By.JQuerySelector("div", By.JQuerySelector("article")),
                                      "jQuery('div', jQuery('article'))"
                                  };
 
                 // functions tests
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").Add("span", By.JQuerySelector("body")), 
+                                     By.JQuerySelector("div").Add("span", By.JQuerySelector("body")),
                                      "jQuery('div').add('span', jQuery('body'))"
                                  };
                 yield return new object[] { By.JQuerySelector("div").Add("span"), "jQuery('div').add('span')" };
@@ -43,7 +43,7 @@
                 yield return new object[] { By.JQuerySelector("div").Closest("span"), "jQuery('div').closest('span')" };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").Closest("span", By.JQuerySelector("body")), 
+                                     By.JQuerySelector("div").Closest("span", By.JQuerySelector("body")),
                                      "jQuery('div').closest('span', jQuery('body'))"
                                  };
                 yield return new object[] { By.JQuerySelector("div").Contents(), "jQuery('div').contents()" };
@@ -74,22 +74,22 @@
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").NextUntil(), 
+                                     By.JQuerySelector("div").NextUntil(),
                                      "jQuery('div').nextUntil()"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").NextUntil(".empty"), 
+                                     By.JQuerySelector("div").NextUntil(".empty"),
                                      "jQuery('div').nextUntil('.empty')"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").NextUntil(".empty", "span"), 
+                                     By.JQuerySelector("div").NextUntil(".empty", "span"),
                                      "jQuery('div').nextUntil('.empty', 'span')"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").NextUntil(null, "span"), 
+                                     By.JQuerySelector("div").NextUntil(null, "span"),
                                      "jQuery('div').nextUntil('', 'span')"
                                  };
                 yield return new object[] { By.JQuerySelector("div").Not(".empty"), "jQuery('div').not('.empty')" };
@@ -98,7 +98,7 @@
                 yield return new object[] { By.JQuerySelector("div").Parents(), "jQuery('div').parents()" };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").Parent(".parent"), 
+                                     By.JQuerySelector("div").Parent(".parent"),
                                      "jQuery('div').parent('.parent')"
                                  };
                 yield return new object[]
@@ -130,38 +130,38 @@
                 yield return new object[] { By.JQuerySelector("div").Prev(".empty"), "jQuery('div').prev('.empty')" };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").PrevAll(), 
+                                     By.JQuerySelector("div").PrevAll(),
                                      "jQuery('div').prevAll()"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").PrevAll(".empty"), 
+                                     By.JQuerySelector("div").PrevAll(".empty"),
                                      "jQuery('div').prevAll('.empty')"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").PrevUntil(), 
+                                     By.JQuerySelector("div").PrevUntil(),
                                      "jQuery('div').prevUntil()"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").PrevUntil(".empty"), 
+                                     By.JQuerySelector("div").PrevUntil(".empty"),
                                      "jQuery('div').prevUntil('.empty')"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").PrevUntil(".empty", "span"), 
+                                     By.JQuerySelector("div").PrevUntil(".empty", "span"),
                                      "jQuery('div').prevUntil('.empty', 'span')"
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").PrevUntil(null, "span"), 
+                                     By.JQuerySelector("div").PrevUntil(null, "span"),
                                      "jQuery('div').prevUntil('', 'span')"
                                  };
                 yield return new object[] { By.JQuerySelector("div").Siblings(), "jQuery('div').siblings()" };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div").Siblings(".empty"), 
+                                     By.JQuerySelector("div").Siblings(".empty"),
                                      "jQuery('div').siblings('.empty')"
                                  };
                 yield return new object[] { By.JQuerySelector("div").Slice(1), "jQuery('div').slice(1)" };
@@ -189,8 +189,8 @@
                 yield return new object[] { By.JQuerySelector("div"), By.JQuerySelector("div"), true };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div"), 
-                                     By.JQuerySelector("div", jQueryVariable: "$"), 
+                                     By.JQuerySelector("div"),
+                                     By.JQuerySelector("div", jQueryVariable: "$"),
                                      false
                                  };
                 yield return new object[] { By.JQuerySelector("div"), By.JQuerySelector("span"), false };
@@ -198,13 +198,13 @@
                 yield return new object[] { null, By.JQuerySelector("div"), false };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div", By.JQuerySelector("body")), 
+                                     By.JQuerySelector("div", By.JQuerySelector("body")),
                                      By.JQuerySelector("div"),
                                      false
                                  };
                 yield return new object[]
                                  {
-                                     By.JQuerySelector("div", By.JQuerySelector("body")), 
+                                     By.JQuerySelector("div", By.JQuerySelector("body")),
                                      By.JQuerySelector("div", By.JQuerySelector("body")),
                                      true
                                  };
@@ -289,7 +289,7 @@
 
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery")))
-                .Returns(true); 
+                .Returns(true);
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
 

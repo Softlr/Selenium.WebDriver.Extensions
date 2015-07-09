@@ -4,7 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using Nancy.Hosting.Self;
     using OpenQA.Selenium;
-    
+
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase : IDisposable
     {
