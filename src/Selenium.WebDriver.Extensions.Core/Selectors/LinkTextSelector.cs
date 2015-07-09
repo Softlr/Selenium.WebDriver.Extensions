@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    
+
     /// <summary>
     /// The link text selector.
     /// </summary>
@@ -35,7 +35,7 @@
                     }
                 }
                 return results;
-            })('" + text + "', " + this.BaseElement + ");";
+            })('" + text.Replace("'", "\\'") + "', " + this.BaseElement + ");";
         }
 
         /// <summary>

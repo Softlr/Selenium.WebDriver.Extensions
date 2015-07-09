@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    
+
     /// <summary>
     /// The Selenium JavaScript query selector.
     /// </summary>
@@ -56,8 +56,8 @@
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="baseSelector">A query selector on which defines a base element for the new selector.</param>
         /// <remarks>
-        /// Because the <see cref="QuerySelector"/> operates always on collection of results, the new selector 
-        /// generated on its base will be invoked on the first match of the base selector. There's also a check to 
+        /// Because the <see cref="QuerySelector"/> operates always on collection of results, the new selector
+        /// generated on its base will be invoked on the first match of the base selector. There's also a check to
         /// make sure that the base selector has actually return any results.
         /// </remarks>
         /// <exception cref="ArgumentNullException">
@@ -85,8 +85,8 @@
             }
 
             this.BaseSelector = baseSelector;
-            this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector 
-                + "[0].querySelectorAll('" + selector.Replace('\'', '"') + "')";
+            this.Selector = this.BaseSelector + ".length === 0 ? [] : " + this.BaseSelector
+                + "[0].querySelectorAll('" + selector.Replace("'", "\\'") + "')";
         }
 
         /// <summary>
@@ -175,7 +175,7 @@
             }
 
             var selector = (QuerySelector)obj;
-            if ((this.BaseSelector == null && selector.BaseSelector != null) 
+            if ((this.BaseSelector == null && selector.BaseSelector != null)
                 || (this.BaseSelector != null && selector.BaseSelector == null))
             {
                 return false;
@@ -185,7 +185,7 @@
             {
                 return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement
                     && this.BaseSelector.GetType() == selector.BaseSelector.GetType()
-                    && this.BaseSelector.Selector == selector.BaseSelector.Selector;   
+                    && this.BaseSelector.Selector == selector.BaseSelector.Selector;
             }
 
             return this.RawSelector == selector.RawSelector && this.BaseElement == selector.BaseElement;

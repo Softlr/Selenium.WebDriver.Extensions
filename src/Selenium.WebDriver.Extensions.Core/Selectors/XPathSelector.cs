@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    
+
     /// <summary>
     /// The XPATH selector.
     /// </summary>
@@ -39,7 +39,7 @@
                     element = elements.iterateNext();
                 }
                 return results;
-            })('" + xpath + "')";
+            })('" + xpath.Replace("'", "\\'") + "')";
         }
 
         /// <summary>
