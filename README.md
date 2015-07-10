@@ -1,5 +1,5 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu)](https://ci.appveyor.com/project/RaYell/selenium-helpers)
-[![Build Status](https://travis-ci.org/RaYell/selenium-webdriver-extensions.svg)](https://travis-ci.org/RaYell/openui5-custom)
+[![Build Status](https://travis-ci.org/RaYell/selenium-webdriver-extensions.svg)](https://travis-ci.org/RaYell/selenium-webdriver-extensions)
 [![Coverage Status](https://coveralls.io/repos/RaYell/selenium-webdriver-extensions/badge.svg?branch=master)](https://coveralls.io/r/RaYell/selenium-webdriver-extensions?branch=master)
 
 # Description
