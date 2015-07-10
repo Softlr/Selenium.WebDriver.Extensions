@@ -37,8 +37,8 @@
         [Theory]
         [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
-            LinkTextSelector selector1, 
-            LinkTextSelector selector2, 
+            LinkTextSelector selector1,
+            LinkTextSelector selector2,
             bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

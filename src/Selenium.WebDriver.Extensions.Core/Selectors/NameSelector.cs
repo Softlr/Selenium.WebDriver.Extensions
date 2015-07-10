@@ -2,7 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    
+
     /// <summary>
     /// The name selector.
     /// </summary>
@@ -103,7 +103,7 @@
                 return string.Empty;
             }
 
-            return "[name='" + name + "']";
+            return "[name='" + name.Replace("'", "\\'") + "']";
         }
     }
 }

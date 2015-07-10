@@ -231,7 +231,7 @@
         {
             var position = this.Browser.JQuery("h1").Position();
             Assert.NotNull(position);
-            
+
             Assert.Equal(3, position.Value.Top);
             Assert.Equal(8, position.Value.Left);
         }

@@ -8,7 +8,7 @@
     [Trait("Browser", "Firefox")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class WebDriverExtensionsJQueryLoadedSelectorFirefoxTests : 
+    public class WebDriverExtensionsJQueryLoadedSelectorFirefoxTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<FirefoxFixture>
     {
         public WebDriverExtensionsJQueryLoadedSelectorFirefoxTests(FirefoxFixture fixture)

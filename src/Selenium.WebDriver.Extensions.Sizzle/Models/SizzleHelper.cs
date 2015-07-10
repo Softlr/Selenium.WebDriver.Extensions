@@ -42,12 +42,12 @@
         /// </exception>
         /// <exception cref="UriFormatException">
         /// URI string is empty.
-        /// -or- The scheme specified in URI string is not correctly formed. See 
+        /// -or- The scheme specified in URI string is not correctly formed. See
         /// <see cref="M:System.Uri.CheckSchemeName(System.String)" />.
         /// -or- URI string contains too many slashes.
         /// -or- The password specified in URI string is not valid.
         /// -or- The host name specified in URI string is not valid.
-        /// -or- The file name specified in URI string is not valid. 
+        /// -or- The file name specified in URI string is not valid.
         /// -or- The user name specified in URI string is not valid.
         /// -or- The host or authority name specified in URI string cannot be terminated by backslashes.
         /// -or- The port number specified in URI string is not valid or cannot be parsed.

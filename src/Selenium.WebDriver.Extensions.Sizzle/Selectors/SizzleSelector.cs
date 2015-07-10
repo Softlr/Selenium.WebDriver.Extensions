@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Core;
-    
+
     /// <summary>
     /// The Selenium selector for Sizzle.
     /// </summary>
@@ -38,7 +38,7 @@
             }
 
             this.Context = context;
-            this.Selector = "Sizzle('" + selector.Replace('\'', '"') + "'" 
+            this.Selector = "Sizzle('" + selector.Replace('\'', '"') + "'"
                 + (this.Context != null ? ", " + this.Context + "[0]" : string.Empty) + ")";
         }
 

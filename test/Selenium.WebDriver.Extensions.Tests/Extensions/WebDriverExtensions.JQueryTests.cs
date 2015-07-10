@@ -71,7 +71,7 @@
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
 
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
@@ -90,8 +90,8 @@
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true); 
-            
+                .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
+
             var ex = Assert.Throws<ArgumentNullException>(
                 () => driverMock.Object.FindElement((JQuery.JQuerySelector)null));
             Assert.Equal("selector", ex.ParamName);
@@ -106,7 +106,7 @@
 
             var element = new Mock<IWebElement>();
             element.Setup(x => x.TagName).Returns("div");
-            
+
             Assert.Throws<NoSuchElementException>(() => driverMock.Object.FindElement(By.JQuerySelector("div")));
         }
 
@@ -134,7 +134,7 @@
 
             Assert.Equal("div", result[0].TagName);
             Assert.Equal("test", result[0].GetAttribute("class"));
-            
+
             Assert.Equal("span", result[1].TagName);
             Assert.Equal("test", result[1].GetAttribute("class"));
         }
@@ -210,7 +210,7 @@
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("window.jQuery"))).Returns(true);
             var result = driverMock.Object.JQuery("a").Attribute("href");
-            
+
             Assert.Null(result);
         }
 

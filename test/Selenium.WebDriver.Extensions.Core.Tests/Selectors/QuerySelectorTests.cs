@@ -18,7 +18,7 @@
                 yield return new object[] { By.QuerySelector("div"), "document.querySelectorAll('div')" };
                 yield return new object[]
                                  {
-                                     By.QuerySelector("input[type='text']"), 
+                                     By.QuerySelector("input[type='text']"),
                                      "document.querySelectorAll('input[type=\"text\"]')"
                                  };
                 yield return new object[]
@@ -28,7 +28,7 @@
                                  };
                 yield return new object[]
                                  {
-                                     By.QuerySelector("span", By.QuerySelector("div")), 
+                                     By.QuerySelector("span", By.QuerySelector("div")),
                                      "document.querySelectorAll('div').length === 0 ? [] : document.querySelectorAll('div')[0].querySelectorAll('span')"
                                  };
             }
@@ -69,7 +69,7 @@
         [MemberData("EqualityData")]
         public void ShouldProperlyCompareSelectors(
             QuerySelector selector1,
-            QuerySelector selector2, 
+            QuerySelector selector2,
             bool expectedResult)
         {
             Assert.Equal(expectedResult, selector1 == selector2);

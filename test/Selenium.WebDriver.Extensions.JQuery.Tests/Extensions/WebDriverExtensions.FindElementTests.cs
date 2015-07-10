@@ -9,7 +9,7 @@
     using OpenQA.Selenium;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.JQuery.By;
-    
+
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]

@@ -12,7 +12,7 @@
         <tags>selenium, extension, extensions, web, driver, webdriver, Sizzle, selector, selectors</tags>
         <dependencies>
             <dependency id="Selenium.WebDriver.Extensions.Core" version="$version$"/>
-        </dependencies> 
+        </dependencies>
     </metadata>
     <files>
         <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.Sizzle.dll" target="lib\net35\Selenium.WebDriver.Extensions.Sizzle.dll" />

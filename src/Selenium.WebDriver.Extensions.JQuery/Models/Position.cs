@@ -70,7 +70,7 @@
         public static bool operator !=(Position position1, Position position2)
         {
             return !position1.Equals(position2);
-        }    
+        }
 
         /// <summary>
         /// Determines whether the specified object is equal to the current object.

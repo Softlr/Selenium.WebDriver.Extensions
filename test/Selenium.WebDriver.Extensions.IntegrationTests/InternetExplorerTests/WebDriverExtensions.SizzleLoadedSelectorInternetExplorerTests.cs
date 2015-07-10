@@ -8,7 +8,7 @@
     [Trait("Browser", "InternetExplorer")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests : 
+    public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
     {
         public WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)

@@ -10,7 +10,7 @@
     using Selenium.WebDriver.Extensions;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
-    
+
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]

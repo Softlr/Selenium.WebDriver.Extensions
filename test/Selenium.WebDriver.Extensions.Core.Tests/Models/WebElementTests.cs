@@ -44,7 +44,7 @@
             var element = new Mock<WebElement>();
             element.SetupGet(x => x.Selector).Returns(selector.Object);
             element.SetupGet(x => x.WrappedDriver).Returns(this.driverMock.Object);
-            
+
             Assert.Equal("body > div", element.Object.Path);
         }
 
@@ -155,7 +155,7 @@
 
             Assert.Equal("span", result[0].TagName);
             Assert.Equal("test1", result[0].GetAttribute("class"));
-            
+
             Assert.Equal("span", result[1].TagName);
             Assert.Equal("test2", result[1].GetAttribute("class"));
         }
@@ -166,7 +166,7 @@
             var webElement = new Mock<IWebElement>();
             var selector = new Mock<ISelector>();
             var element = new WebElement(webElement.Object, selector.Object);
-            
+
             var ex = Assert.Throws<ArgumentNullException>(() => element.FindElement((ISelector)null));
             Assert.Equal("selector", ex.ParamName);
         }
@@ -227,7 +227,7 @@
 
             element.FindElement(OpenQA.Selenium.By.TagName("div"));
             Assert.True(findElementResult);
-            
+
             element.FindElements(OpenQA.Selenium.By.TagName("div"));
             Assert.True(findElementsResult);
 

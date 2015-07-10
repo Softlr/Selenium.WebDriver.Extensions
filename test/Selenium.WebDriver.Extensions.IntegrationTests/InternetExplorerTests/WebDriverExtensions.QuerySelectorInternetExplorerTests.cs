@@ -8,7 +8,7 @@
     [Trait("Browser", "InternetExplorer")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class WebDriverExtensionsQuerySelectorInternetExplorerTests : 
+    public class WebDriverExtensionsQuerySelectorInternetExplorerTests :
         WebDriverExtensionsQuerySelectorTests, IClassFixture<InternetExplorerFixture>
     {
         public WebDriverExtensionsQuerySelectorInternetExplorerTests(InternetExplorerFixture fixture)

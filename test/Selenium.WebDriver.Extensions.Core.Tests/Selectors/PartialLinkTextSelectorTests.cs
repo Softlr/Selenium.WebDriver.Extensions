@@ -25,7 +25,7 @@
                 yield return new object[] { By.PartialLinkText("test", "body"), By.PartialLinkText("test"), false };
                 yield return new object[]
                                  {
-                                     By.PartialLinkText("test", "body"), 
+                                     By.PartialLinkText("test", "body"),
                                      By.PartialLinkText("test", "body"),
                                      true
                                  };

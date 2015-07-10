@@ -16,7 +16,7 @@
         public void ShouldThrowExceptionWhenLoadingScriptWithNullArguments()
         {
             var loader = new SizzleLoader();
-            
+
             var ex = Assert.Throws<ArgumentNullException>(() => loader.LoadScript(null));
             Assert.Equal("args", ex.ParamName);
         }
@@ -25,7 +25,7 @@
         public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyArguments()
         {
             var loader = new SizzleLoader();
-            
+
             Assert.Throws<LoaderException>(() => loader.LoadScript(Enumerable.Empty<string>().ToArray()));
         }
     }

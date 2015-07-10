@@ -13,7 +13,7 @@
         <dependencies>
             <dependency id="Selenium.WebDriver.Extensions.JQuery" version="$version$"/>
             <dependency id="Selenium.WebDriver.Extensions.Sizzle" version="$version$"/>
-        </dependencies> 
+        </dependencies>
     </metadata>
     <files>
         <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.dll" target="lib\net35\Selenium.WebDriver.Extensions.dll" />

@@ -59,7 +59,7 @@
             var element2 = new Mock<IWebElement>();
             element2.Setup(x => x.TagName).Returns("span");
             element2.Setup(x => x.GetAttribute("class")).Returns("test");
-            
+
             var list = new List<IWebElement> { element1.Object, element2.Object };
             driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.IsRegex("document.querySelectorAll\\('div'\\).length === 0")))

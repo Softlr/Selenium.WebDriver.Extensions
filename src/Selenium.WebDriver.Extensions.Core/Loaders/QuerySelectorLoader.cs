@@ -20,7 +20,7 @@
         }
 
         /// <summary>
-        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should 
+        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
         /// return <c>true</c> if the prerequisites are met; otherwise, <c>false</c>.
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",

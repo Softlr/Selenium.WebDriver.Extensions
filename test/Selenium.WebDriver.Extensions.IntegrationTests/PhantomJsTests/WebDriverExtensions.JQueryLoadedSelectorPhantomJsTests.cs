@@ -8,7 +8,7 @@
     [Trait("Browser", "PhantomJs")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    public class WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests : 
+    public class WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<PhantomJsFixture>
     {
         public WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)

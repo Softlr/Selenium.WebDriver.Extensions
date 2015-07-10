@@ -36,7 +36,7 @@
         public void ShouldFindElementWithJQuery()
         {
             var selector = By.JQuerySelector("div");
-            
+
             var rootElement = new Mock<IWebElement>();
             rootElement.SetupGet(x => x.TagName).Returns("div");
 
@@ -52,7 +52,7 @@
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).get();"))
                 .Returns(new ReadOnlyCollection<IWebElement>(elementList));
-            
+
             var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
@@ -114,7 +114,7 @@
                 .Setup(x => x.ExecuteScript("return jQuery('span', jQuery('body > div')).text();")).Returns("test");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
-            
+
             var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
@@ -134,7 +134,7 @@
                 .Returns("<p>test</p>");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
-            
+
             var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);
@@ -154,7 +154,7 @@
                 .Returns("http://github.com");
             this.driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsRegex("function\\(element\\)")))
                 .Returns("body > div");
-            
+
             var webElement = new Mock<Core.WebElement>();
             webElement.SetupGet(x => x.TagName).Returns("div");
             webElement.SetupGet(x => x.Selector).Returns(selector);

@@ -26,7 +26,7 @@
         {
             var runner = new JavaScriptRunner();
             var driver = new Mock<IWebDriver>();
-            
+
             var ex = Assert.Throws<ArgumentNullException>(() => runner.Find<object>(driver.Object, null));
             Assert.Equal("selector", ex.ParamName);
         }

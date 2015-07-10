@@ -6,7 +6,7 @@
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
-    
+
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
@@ -59,7 +59,7 @@
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
 
             driverMock.Object.LoadExternalLibrary(
-                new JQuery.JQueryLoader(), 
+                new JQuery.JQueryLoader(),
                 new Uri("http://example.com"),
                 TimeSpan.FromMilliseconds(100));
             Assert.True(true);
@@ -103,7 +103,7 @@
         {
             var driverMock = new Mock<IWebDriver>();
             driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
-            
+
             driverMock.Object.ExecuteScript("myMethod();");
             Assert.True(true);
         }
@@ -122,7 +122,7 @@
         public void ShouldThrowExceptionWhenExecutingNullScript()
         {
             var driverMock = new Mock<IWebDriver>();
-            
+
             var ex = Assert.Throws<ArgumentNullException>(() => driverMock.Object.ExecuteScript(null));
             Assert.Equal("script", ex.ParamName);
         }

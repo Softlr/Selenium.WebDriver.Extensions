@@ -2,7 +2,7 @@
 {
     using System;
     using OpenQA.Selenium;
-    
+
     /// <summary>
     /// Additional methods for <see cref="QuerySelector"/>.
     /// </summary>
