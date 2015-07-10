@@ -32,12 +32,12 @@
         /// -or- jQuery variable name is empty.
         /// </exception>
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "j")]
-        public static JQuerySelector JQuerySelector(
+        public static JQuerySelector2 JQuerySelector(
             string selector,
-            JQuerySelector context = null,
+            JQuerySelector2 context = null,
             string jQueryVariable = "jQuery")
         {
-            return JQuery.By.JQuerySelector(selector, context, jQueryVariable);
+            return new JQuerySelector2(selector, context, jQueryVariable);
         }
 
         /// <summary>

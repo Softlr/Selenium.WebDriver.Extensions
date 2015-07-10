@@ -14,14 +14,14 @@
         /// <param name="driver">The driver.</param>
         /// <param name="webElement">The web element.</param>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        protected HelperBase(IWebDriver driver, WebElement webElement = null)
+        protected HelperBase(ISearchContext driver, WebElement webElement = null)
         {
             if (driver == null)
             {
                 throw new ArgumentNullException("driver");
             }
 
-            this.Driver = driver;
+            this.Driver = driver as IWebDriver;
             this.WebElement = webElement;
         }
 

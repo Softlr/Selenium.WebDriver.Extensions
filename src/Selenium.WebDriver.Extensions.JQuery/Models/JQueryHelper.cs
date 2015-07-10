@@ -16,7 +16,7 @@
         /// <param name="driver">The driver.</param>
         /// <param name="webElement">The web element.</param>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public JQueryHelper(IWebDriver driver, WebElement webElement = null)
+        public JQueryHelper(ISearchContext driver, WebElement webElement = null)
             : base(driver, webElement)
         {
         }

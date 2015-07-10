@@ -341,12 +341,13 @@
             Assert.Equal("[]", value);
         }
 
+        /*
         [Fact]
         public void FindElementPath()
         {
             var element = this.Browser.FindElement(By.JQuerySelector("#id1"));
             Assert.Equal("body > div#id1", element.Path);
-        }
+        }*/
 
         [Fact]
         public void FindInnerElement()

@@ -9,6 +9,7 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public abstract class WebDriverExtensionsCoreTests : TestsBase
     {
+        /*
         [Fact]
         public void FindMixedJQuerySizzleElement()
         {
@@ -71,6 +72,6 @@
             var root = this.Browser.FindElement(By.QuerySelector("#id1"));
             var elements = root.FindElements(By.SizzleSelector("span"));
             Assert.Equal(2, elements.Count);
-        }
+        }*/
     }
 }

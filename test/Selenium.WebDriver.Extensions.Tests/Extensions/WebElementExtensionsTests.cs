@@ -32,6 +32,7 @@
             GC.SuppressFinalize(this);
         }
 
+        /*
         [Fact]
         public void ShouldFindElementWithJQuery()
         {
@@ -104,7 +105,7 @@
 
             Assert.Equal("span", result[1].TagName);
             Assert.Equal("test2", result[1].GetAttribute("class"));
-        }
+        }*/
 
         [Fact]
         public void ShouldFindText()
@@ -613,6 +614,7 @@
             Assert.Equal(true, result);
         }
 
+        /*
         [Fact]
         public void ShouldGetHelper()
         {
@@ -621,7 +623,7 @@
 
             webElement.Object.JQuery(By.JQuerySelector("input"));
             Assert.True(true);
-        }
+        }*/
 
         [Fact]
         public void ShouldThrowExceptionWhenGettingHelperWithNullSelectorAndNullWebElement()
