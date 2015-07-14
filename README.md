@@ -5,6 +5,15 @@
 # Description
 Extensions for Selenium WebDriver.
 
+# Version 2.0
+The work on the second major version of this extensions library has started. Some of the features that are planned in this version are:
+* completely rework the selectors to inherit from standard Selenium `By` class
+* support for page objects
+* support for `ExpectedConditions`
+* removal of some of the hacks the extensions library performs in favor of actual solutions for the problems
+
+No release date for version 2.0 has been set yet.
+
 # Features
 * Main
  * Support for nested selectors
