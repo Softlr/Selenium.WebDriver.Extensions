@@ -58,9 +58,37 @@
                 var driver = searchContext as IWebDriver;
                 if (driver == null)
                 {
-                    var driverWrapper = searchContext as IWrapsDriver;
+                    var driverWrapper = searchContext as RemoteWebElement;
                     if (driverWrapper != null && driverWrapper.WrappedDriver != null)
                     {
+                        var scr = @"return (function(element) {
+                            'use strict';
+                            var stack = [], siblingsCount, siblingIndex, i, sibling;
+                            while (element.parentNode !== null) {
+                                siblingsCount = 0;
+                                siblingIndex = 0;
+                                for (i = 0; i < element.parentNode.childNodes.length; i += 1) {
+                                    sibling = element.parentNode.childNodes[i];
+                                    if (sibling.nodeName === element.nodeName) {
+                                        if (sibling === element) {
+                                            siblingIndex = siblingsCount;
+                                        }
+                                        siblingsCount += 1;
+                                    }
+                                }
+                                if (element.hasAttribute('id') && element.id !== '') {
+                                    stack.unshift(element.nodeName.toLowerCase() + '#' + element.id);
+                                } else if (siblingsCount > 1) {
+                                    stack.unshift(element.nodeName.toLowerCase() + ':eq(' + siblingIndex + ')');
+                                } else {
+                                    stack.unshift(element.nodeName.toLowerCase());
+                                }
+                                element = element.parentNode;
+                            }
+                            stack = stack.slice(1); // removes the html element
+                            return stack.join(' > ');
+                        })(arguments[0])";
+                        var res = ((IJavaScriptExecutor) driverWrapper.WrappedDriver).ExecuteScript(scr, driverWrapper);
                         driver = driverWrapper.WrappedDriver;
                     }
                     else
