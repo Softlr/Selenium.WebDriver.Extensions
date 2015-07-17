@@ -12,7 +12,7 @@ The work on the second major version of this extensions library has started. Som
 * support for `ExpectedConditions`
 * removal of some of the hacks the extensions library performs in favor of actual solutions for the problems
 
-No release date for version 2.0 has been set yet.
+No release date for version 2.0 has been set yet. More details can be found [here](https://github.com/RaYell/selenium-webdriver-extensions/wiki/V2).
 
 # Features
 * Main
