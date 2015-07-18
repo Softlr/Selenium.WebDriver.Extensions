@@ -1,7 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
     using Xunit;
     using By = OpenQA.Selenium.Extensions.By;
 
@@ -51,6 +53,15 @@
             var root = this.Browser.FindElement(By.SizzleSelector("body"));
             var elements = root.FindElements(By.SizzleSelector("h1"));
             Assert.Equal(1, elements.Count);
+        }
+
+        [Fact]
+        public void ExpectedConditionsSupport()
+        {
+            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
+            wait.Until(ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1")));
+
+            Assert.True(true);
         }
     }
 }
