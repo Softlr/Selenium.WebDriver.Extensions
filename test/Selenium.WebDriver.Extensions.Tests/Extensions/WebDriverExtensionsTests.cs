@@ -1,6 +1,7 @@
 ﻿namespace OpenQA.Selenium.Tests.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
@@ -45,7 +46,8 @@
         {
             // Given
             var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+            driverMock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()))
+                .Returns(false).Returns(null).Returns(true);
 
             // When
             driverMock.Object.LoadExternalLibrary(
