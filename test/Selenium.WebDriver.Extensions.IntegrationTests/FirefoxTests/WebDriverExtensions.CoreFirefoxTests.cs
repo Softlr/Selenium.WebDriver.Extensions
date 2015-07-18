@@ -8,12 +8,13 @@
     [Trait("Browser", "Firefox")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsCoreFirefoxTests : WebDriverExtensionsCoreTests, IClassFixture<FirefoxFixture>
     {
         public WebDriverExtensionsCoreFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/QuerySelector"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/QuerySelector"));
         }
     }
 }

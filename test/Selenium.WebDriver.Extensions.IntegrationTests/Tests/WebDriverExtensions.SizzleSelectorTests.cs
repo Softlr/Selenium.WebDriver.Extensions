@@ -3,7 +3,7 @@
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.By;
+    using By = OpenQA.Selenium.Extensions.By;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
@@ -38,16 +38,9 @@
         }
 
         [Fact]
-        public void FindElementPath()
-        {
-            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
-            Assert.Equal("body > div#id1", element.Path);
-        }
-
-        [Fact]
         public void FindInnerElement()
         {
-            var root = this.Browser.FindElement(By.SizzleSelector("body"));
+            var root = this.Browser.FindElement(By.CssSelector("body"));
             var element = root.FindElement(By.SizzleSelector("div"));
             Assert.NotNull(element);
         }

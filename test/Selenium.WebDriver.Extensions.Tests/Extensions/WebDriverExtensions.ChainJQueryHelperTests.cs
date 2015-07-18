@@ -49,12 +49,13 @@
             Assert.Equal("selector", ex.ParamName);
         }
 
+        /*
         [Fact]
         public void ShouldGetHelper()
         {
             var helper = this.driver.JQuery(By.JQuerySelector("input"));
             Assert.NotNull(helper);
-        }
+        }*/
 
         [Fact]
         public void ShouldSetText()

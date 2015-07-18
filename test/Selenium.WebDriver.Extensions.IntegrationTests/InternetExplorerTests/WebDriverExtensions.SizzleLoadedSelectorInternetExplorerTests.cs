@@ -8,13 +8,14 @@
     [Trait("Browser", "InternetExplorer")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
     {
         public WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/SizzleLoaded"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/SizzleLoaded"));
         }
     }
 }

@@ -8,13 +8,14 @@
     [Trait("Browser", "PhantomJS")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsCorePhantomJsTests : WebDriverExtensionsCoreTests,
         IClassFixture<PhantomJsFixture>
     {
         public WebDriverExtensionsCorePhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/QuerySelector"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/QuerySelector"));
         }
     }
 }

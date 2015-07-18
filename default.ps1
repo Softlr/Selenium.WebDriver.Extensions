@@ -1,7 +1,7 @@
 properties {
     $solution = '.\Selenium.WebDriver.Extensions.sln'
     $version = '1.8.0'
-    $unitTests = '.\test\Selenium.WebDriver.Extensions.JQuery.Tests\bin\Release\Selenium.WebDriver.Extensions.JQuery.Tests.dll', '.\test\Selenium.WebDriver.Extensions.Sizzle.Tests\bin\Release\Selenium.WebDriver.Extensions.Sizzle.Tests.dll', '.\test\Selenium.WebDriver.Extensions.Core.Tests\bin\Release\Selenium.WebDriver.Extensions.Core.Tests.dll', '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
+    $unitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
     $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
     $coverageXml = '.\coverage.xml'
 }
@@ -100,20 +100,6 @@ Task Coveralls -Description 'Sends coverage data to coveralls.io' -Depends Analy
     Publish-Coveralls -CoverageXml $coverageXml
 }
 
-Task PackJQuery -Description 'Packs JQuery module NuGet package' -Depends Compile {
-    New-NugetPackage -Specification .\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.nuspec -Version $version
-}
-
-Task PackSizzle -Description 'Packs Sizzle module NuGet package' -Depends Compile {
-    New-NugetPackage -Specification .\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.nuspec -Version $version
-}
-
-Task PackCore -Description 'Packs core module NuGet package' -Depends Compile {
-    New-NugetPackage -Specification .\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.nuspec -Version $version
-}
-
-Task PackCombined -Description 'Packs combined module NuGet package' -Depends Compile {
+Task Pack -Description 'Packs NuGet package' -Depends Compile {
     New-NugetPackage -Specification .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
 }
-
-Task Pack -Description 'Packs all of the module NuGet packages' -Depends PackJQuery, PackSizzle, PackCore, PackCombined

@@ -8,13 +8,14 @@
     [Trait("Browser", "PhantomJs")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {
         public WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/SizzleLoaded"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/SizzleLoaded"));
         }
     }
 }

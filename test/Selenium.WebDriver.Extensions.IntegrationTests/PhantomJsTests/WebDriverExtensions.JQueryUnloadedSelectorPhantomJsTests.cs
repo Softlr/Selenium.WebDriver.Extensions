@@ -8,13 +8,14 @@
     [Trait("Browser", "PhantomJs")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<PhantomJsFixture>
     {
         public WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/JQueryUnloaded"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/JQueryUnloaded"));
         }
     }
 }

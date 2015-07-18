@@ -8,13 +8,14 @@
     [Trait("Browser", "Chrome")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
     {
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/JQueryUnloaded"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/JQueryUnloaded"));
         }
     }
 }

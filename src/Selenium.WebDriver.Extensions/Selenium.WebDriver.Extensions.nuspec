@@ -9,11 +9,7 @@
         <projectUrl>https://rayell.github.io/selenium-webdriver-extensions</projectUrl>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>Contains all Selenium WebDriver extensions including jQuery, Sizzle and query selector support..</description>
-        <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, queryselector, selector, selectors</tags>
-        <dependencies>
-            <dependency id="Selenium.WebDriver.Extensions.JQuery" version="$version$"/>
-            <dependency id="Selenium.WebDriver.Extensions.Sizzle" version="$version$"/>
-        </dependencies>
+        <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
     </metadata>
     <files>
         <file src="bin\Release-Net35\Selenium.WebDriver.Extensions.dll" target="lib\net35\Selenium.WebDriver.Extensions.dll" />
