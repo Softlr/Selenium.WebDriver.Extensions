@@ -1,7 +1,9 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.UI;
     using Xunit;
     using By = OpenQA.Selenium.Extensions.By;
 
@@ -13,44 +15,93 @@
         [Fact]
         public void FindElement()
         {
-            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            // Given
+            var selector = By.SizzleSelector("#id1");
+
+            // When
+            var element = this.Browser.FindElement(selector);
+
+            // Then
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            Assert.Throws<NoSuchElementException>(() => this.Browser.FindElement(By.SizzleSelector("#id-not")));
+            // Given
+            var selector = By.SizzleSelector("#id-not");
+
+            // When
+            Action action = () => this.Browser.FindElement(selector);
+
+            // Then
+            Assert.Throws<NoSuchElementException>(action);
         }
 
         [Fact]
         public void FindElements()
         {
-            var elements = this.Browser.FindElements(By.SizzleSelector("div.main"));
+            // Given
+            var selector = By.SizzleSelector("div.main");
+
+            // When
+            var elements = this.Browser.FindElements(selector);
+
+            // Then
             Assert.Equal(2, elements.Count);
         }
 
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            var elements = this.Browser.FindElements(By.SizzleSelector("div.mainNot"));
+            // Given
+            var selector = By.SizzleSelector("div.mainNot");
+
+            // When
+            var elements = this.Browser.FindElements(selector);
+
+            // Then
             Assert.Equal(0, elements.Count);
         }
 
         [Fact]
         public void FindInnerElement()
         {
+            // Given
             var root = this.Browser.FindElement(By.CssSelector("body"));
-            var element = root.FindElement(By.SizzleSelector("div"));
+            var selector = By.SizzleSelector("div");
+
+            // When
+            var element = root.FindElement(selector);
+
+            // Then
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindInnerElements()
         {
+            // Given
             var root = this.Browser.FindElement(By.SizzleSelector("body"));
-            var elements = root.FindElements(By.SizzleSelector("h1"));
+            var selector = By.SizzleSelector("h1");
+
+            // When
+            var elements = root.FindElements(selector);
             Assert.Equal(1, elements.Count);
+        }
+
+        [Fact]
+        public void ExpectedConditionsSupport()
+        {
+            //Given
+            var condition = ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
+
+            // When
+            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
+            wait.Until(condition);
+
+            // Then
+            Assert.True(true);
         }
     }
 }
