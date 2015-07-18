@@ -25,7 +25,7 @@
             JQuerySelector context = null,
             string variable = "jQuery")
         {
-            return new JQuerySelector(selector, context, variable);
+            return new JQuerySelector(selector, context, variable, null);
         }
 
         /// <summary>
