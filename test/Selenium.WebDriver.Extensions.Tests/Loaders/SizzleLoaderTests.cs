@@ -46,7 +46,7 @@
              var loader = new SizzleLoader();
 
              // When
-             var uri = loader.CheckScript;
+             var uri = loader.LibraryUri;
 
              // Then
              Assert.NotNull(uri);
