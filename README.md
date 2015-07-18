@@ -20,8 +20,6 @@ The features planned for the new version are:
 * Changes to the static By implementations. There will still be a By class provided with static methods for creating all sorts of selectors, however it will simply be a wrapper on a base class that will also provide methods for the new selectors.
 Namespace change. The namespace of the extensions library is going to be changed from Selenium.WebDriver.Extensions to OpenQA.Selenium which will make integration with Selenium even easier.
 
-No release date for version 2.0 has been set yet.
-
 # Features
 * Main
  * Support for nested selectors
