@@ -88,7 +88,6 @@
                     driver.ExecuteScript<object>("return " + this.Selector + this.ResultResolver + ";"));
                 return new ReadOnlyCollection<IWebElement>(result.ToList());
             };
-            this.Description = "By.JQuerySelector: " + this.RawSelector;
         }
 
         /// <summary>
