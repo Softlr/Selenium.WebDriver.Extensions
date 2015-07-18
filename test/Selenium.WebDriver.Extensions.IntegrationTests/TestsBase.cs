@@ -16,7 +16,8 @@
         {
             var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
 
-            this.host = new NancyHost(config, new Uri("http://localhost:50502"));
+            this.ServerUrl = "http://localhost:50502";
+            this.host = new NancyHost(config, new Uri(this.ServerUrl));
             this.host.Start();
         }
 
@@ -26,6 +27,8 @@
         }
 
         protected IWebDriver Browser { get; set; }
+
+        protected string ServerUrl { get; private set; }
 
         public void Dispose()
         {

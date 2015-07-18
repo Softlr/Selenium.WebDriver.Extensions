@@ -4,6 +4,7 @@
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Extensions;
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
@@ -13,16 +14,6 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsOtherTests
     {
-        [Fact]
-        public void ShouldThrowExceptionWhenQuerySelectorIsNotSupported()
-        {
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.IsRegex("\\(document.querySelectorAll\\)"))).Returns(false);
-            Assert.Throws<Core.QuerySelectorNotSupportedException>(
-                () => driverMock.Object.QuerySelector().CheckSupport());
-        }
-
         [Fact]
         public void ShouldThrowExceptionWhenCheckingSelectorPrerequisitesWithNullDriver()
         {

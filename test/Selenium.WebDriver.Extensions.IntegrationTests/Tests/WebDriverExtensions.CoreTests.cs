@@ -1,8 +1,6 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
-    using Xunit;
-    using By = Selenium.WebDriver.Extensions.By;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
