@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
@@ -51,7 +52,8 @@
         /// <param name="context">The context.</param>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
-        public SelectorBase(string selector, T context)
+        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        protected SelectorBase(string selector, T context)
         {
             if (selector == null)
             {
@@ -135,10 +137,10 @@
             var driver = searchContext as IWebDriver;
             if (driver == null)
             {
-                if (searchContext is IWebElement && searchContext is IWrapsDriver)
+                var driverWrapper = searchContext as IWrapsDriver;
+                if (searchContext is IWebElement && driverWrapper != null)
                 {
                     // nested query
-                    var driverWrapper = (IWrapsDriver)searchContext;
                     driver = driverWrapper.WrappedDriver;
                     var baseElementSelector = ((IJavaScriptExecutor)driver)
                         .ExecuteScript(FindDomPathScript, driverWrapper) as string;
