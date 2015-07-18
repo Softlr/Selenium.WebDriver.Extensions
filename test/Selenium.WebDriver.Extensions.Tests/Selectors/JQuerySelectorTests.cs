@@ -62,9 +62,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentNullException>(() => By.JQuerySelector(null));
+            Action action = () => By.JQuerySelector(null);
 
             // Then
+            var ex = Assert.Throws<ArgumentNullException>(action);
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -73,9 +74,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector(string.Empty));
+            Action action = () => By.JQuerySelector(string.Empty);
 
             // Then
+            var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -84,9 +86,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector(" "));
+            Action action = () => By.JQuerySelector(" ");
 
             // Then
+            var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -95,9 +98,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentNullException>(() => By.JQuerySelector("div", variable: null));
+            Action action = () => By.JQuerySelector("div", variable: null);
 
             // Then
+            var ex = Assert.Throws<ArgumentNullException>(action);
             Assert.Equal("variable", ex.ParamName);
         }
 
@@ -106,9 +110,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector("div", variable: string.Empty));
+            Action action = () => By.JQuerySelector("div", variable: string.Empty);
 
             // Then
+            var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("variable", ex.ParamName);
         }
 
@@ -117,9 +122,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentException>(() => By.JQuerySelector("div", variable: " "));
+            Action action = () => By.JQuerySelector("div", variable: " ");
 
             // Then
+            var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("variable", ex.ParamName);
         }
 
@@ -178,9 +184,10 @@
             var selector = By.JQuerySelector("div");
 
             // When
-            Assert.Throws<NoSuchElementException>(() => selector.FindElement(driver.Object));
+            Action action = () => selector.FindElement(driver.Object);
 
             // Then
+            Assert.Throws<NoSuchElementException>(action);
         }
 
         [Fact]
@@ -259,8 +266,10 @@
             var selector = By.JQuerySelector("div");
 
             // When
+            Action action = () => selector.FindElement(element.Object);
+
             // Then
-            Assert.Throws<NotSupportedException>(() => selector.FindElement(element.Object));
+            Assert.Throws<NotSupportedException>(action);
        }
 
         [Fact]
@@ -273,8 +282,10 @@
             var selector = By.JQuerySelector("div");
 
             // When
+            Action action = () => selector.FindElement(element.Object);
+
             // Then
-            Assert.Throws<NotSupportedException>(() => selector.FindElement(element.Object));
+            Assert.Throws<NotSupportedException>(action);
         }
     }
 }

@@ -46,9 +46,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentNullException>(() => By.SizzleSelector(null));
+            Action action = () => By.SizzleSelector(null);
 
             // Then
+            var ex = Assert.Throws<ArgumentNullException>(action);
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -57,9 +58,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentException>(() => By.SizzleSelector(string.Empty));
+            Action action = () => By.SizzleSelector(string.Empty);
 
             // Then
+            var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -68,9 +70,10 @@
         {
             // Given
             // When
-            var ex = Assert.Throws<ArgumentException>(() => By.SizzleSelector(" "));
+            Action action = () => By.SizzleSelector(" ");
 
             // Then
+            var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("selector", ex.ParamName);
         }
 
@@ -129,9 +132,10 @@
             var selector = By.SizzleSelector("div");
 
             // When
-            Assert.Throws<NoSuchElementException>(() => selector.FindElement(driver.Object));
+            Action action = () => selector.FindElement(driver.Object);
 
             // Then
+            Assert.Throws<NoSuchElementException>(action);
         }
 
         [Fact]
@@ -170,7 +174,7 @@
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
             driver.As<IJavaScriptExecutor>()
-                .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('body > div')")), It.IsAny<object[]>()))
+                .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("body > div")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
 
             var element = new Mock<ISearchContext>();
@@ -210,8 +214,10 @@
             var selector = By.SizzleSelector("div");
 
             // When
+            Action action = () => selector.FindElement(element.Object);
+
             // Then
-            Assert.Throws<NotSupportedException>(() => selector.FindElement(element.Object));
+            Assert.Throws<NotSupportedException>(action);
         }
 
         [Fact]
@@ -224,8 +230,10 @@
             var selector = By.SizzleSelector("div");
 
             // When
+            Action action = () => selector.FindElement(element.Object);
+
             // Then
-            Assert.Throws<NotSupportedException>(() => selector.FindElement(element.Object));
+            Assert.Throws<NotSupportedException>(action);
         }
     }
 }
