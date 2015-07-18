@@ -3,6 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
     using By = OpenQA.Selenium.Extensions.By;
@@ -95,7 +96,7 @@
         [Fact]
         public void ExpectedConditionsSupport()
         {
-            //Given
+            // Given
             var condition = ExpectedConditions.ElementIsVisible(By.JQuerySelector("h1"));
 
             // When
@@ -104,6 +105,20 @@
 
             // Then
             Assert.True(true);
+        }
+
+        [Fact]
+        public void PageObjectsSupport()
+        {
+            // Given
+            var page = new TestPage(this.Browser);
+
+            // When
+            PageFactory.InitElements(this.Browser, page);
+
+            // Then
+            Assert.NotNull(page.HeadingJQuery);
+            Assert.Equal("H1 Header", page.HeadingJQuery.Text);
         }
     }
 }
