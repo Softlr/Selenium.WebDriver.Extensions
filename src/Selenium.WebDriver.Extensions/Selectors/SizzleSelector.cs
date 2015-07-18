@@ -33,7 +33,7 @@
         /// <summary>
         /// Gets the selector.
         /// </summary>
-        protected override string Selector
+        public override string Selector
         {
             get
             {

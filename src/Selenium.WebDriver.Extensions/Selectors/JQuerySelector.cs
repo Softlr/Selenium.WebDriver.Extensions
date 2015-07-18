@@ -63,12 +63,13 @@
         /// <summary>
         /// Gets the selector.
         /// </summary>
-        protected override string Selector
+        public override string Selector
         {
             get
             {
                 return this.Variable + "('" + this.RawSelector.Replace('\'', '"') + "'"
-                    + (this.Context != null ? ", " + this.Context.Selector : string.Empty) + ")";
+                    + (this.Context != null ? ", " + this.Context.Selector : string.Empty) + ")"
+                    + (string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain);
             }
         }
 
@@ -77,7 +78,7 @@
         /// </summary>
         protected override string ResultResolver
         {
-            get { return (string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain) + ".get()"; }
+            get { return ".get()"; }
         }
 
         /// <summary>
@@ -703,7 +704,9 @@
         /// <returns>The Selenium jQuery selector.</returns>
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
-            selector = selector == null ? string.Empty : (noWrap ? selector.Trim() : "'" + selector.Trim() + "'");
+            selector = selector == null
+                ? string.Empty : (noWrap ? selector.Trim().Replace('\'', '"')
+                : "'" + selector.Trim().Replace('\'', '"') + "'");
 
             return new JQuerySelector(
                 this.RawSelector,
@@ -725,7 +728,7 @@
                 this.RawSelector,
                 this.Context,
                 this.Variable,
-                "." + name + "('" + selector + "', " + context + ")");
+                "." + name + "('" + selector.Replace('\'', '"') + "', " + context.Selector + ")");
         }
     }
 }
