@@ -81,17 +81,17 @@
         public void ShouldFindElementBySizzleSelector()
         {
             // Given
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("window.Sizzle")), It.IsAny<object[]>()))
                 .Returns(true);
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
             var selector = By.SizzleSelector("div");
 
             // When
-            var result = selector.FindElement(driver.Object);
+            var result = selector.FindElement(driverMock.Object);
 
             // Then
             Assert.NotNull(result);
@@ -101,17 +101,17 @@
         public void ShouldFindElementsBySizzleSelector()
         {
             // Given
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("window.Sizzle")), It.IsAny<object[]>()))
                 .Returns(true);
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object, new Mock<IWebElement>().Object });
             var selector = By.SizzleSelector("div");
 
             // When
-            var result = selector.FindElements(driver.Object);
+            var result = selector.FindElements(driverMock.Object);
 
             // Then
             Assert.NotNull(result);
@@ -122,17 +122,17 @@
         public void ShouldThrowExceptionWhenElementIsNotFoundWithSizzleSelector()
         {
             // Given
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("window.Sizzle")), It.IsAny<object[]>()))
                 .Returns(true);
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement>());
             var selector = By.SizzleSelector("div");
 
             // When
-            Action action = () => selector.FindElement(driver.Object);
+            Action action = () => selector.FindElement(driverMock.Object);
 
             // Then
             Assert.Throws<NoSuchElementException>(action);
@@ -142,17 +142,17 @@
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithSizzleSelector()
         {
             // Given
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("window.Sizzle")), It.IsAny<object[]>()))
                 .Returns(true);
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement>());
             var selector = By.SizzleSelector("div");
 
             // When
-            var result = selector.FindElements(driver.Object);
+            var result = selector.FindElements(driverMock.Object);
 
             // Then
             Assert.NotNull(result);
@@ -163,28 +163,28 @@
         public void ShouldFindElementWithNestedSizzleSelector()
         {
             // Given
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("window.Sizzle")), It.IsAny<object[]>()))
                 .Returns(true);
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("function(element)")), It.IsAny<object[]>()))
                 .Returns("body > div");
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("body > div")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
 
-            var element = new Mock<ISearchContext>();
-            element.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(driver.Object);
-            element.As<IWebElement>();
+            var elementMock = new Mock<ISearchContext>();
+            elementMock.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(driverMock.Object);
+            elementMock.As<IWebElement>();
 
             var selector = By.SizzleSelector("div");
 
             // When
-            var result = selector.FindElement(element.Object);
+            var result = selector.FindElement(elementMock.Object);
 
             // Then
             Assert.NotNull(result);
@@ -194,27 +194,27 @@
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement()
         {
             // Given
-            var driver = new Mock<IWebDriver>();
-            driver.As<IJavaScriptExecutor>()
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("window.Sizzle")), It.IsAny<object[]>()))
                 .Returns(true);
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("function(element)")), It.IsAny<object[]>()))
                 .Returns("body > div");
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
-            driver.As<IJavaScriptExecutor>()
+            driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("Sizzle('body > div')")), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
 
-            var element = new Mock<ISearchContext>();
-            element.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(driver.Object);
+            var elementMock = new Mock<ISearchContext>();
+            elementMock.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(driverMock.Object);
 
             var selector = By.SizzleSelector("div");
 
             // When
-            Action action = () => selector.FindElement(element.Object);
+            Action action = () => selector.FindElement(elementMock.Object);
 
             // Then
             Assert.Throws<NotSupportedException>(action);
@@ -224,13 +224,13 @@
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver()
         {
             // Given
-            var element = new Mock<ISearchContext>();
-            element.As<IWebElement>();
+            var elementMock = new Mock<ISearchContext>();
+            elementMock.As<IWebElement>();
 
             var selector = By.SizzleSelector("div");
 
             // When
-            Action action = () => selector.FindElement(element.Object);
+            Action action = () => selector.FindElement(elementMock.Object);
 
             // Then
             Assert.Throws<NotSupportedException>(action);

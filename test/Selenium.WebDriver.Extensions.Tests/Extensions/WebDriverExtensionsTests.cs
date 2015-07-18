@@ -58,6 +58,23 @@
         }
 
         [Fact]
+        public void ShouldLoadExternalLibraryWithLoaderDetaultUri()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+
+            // When
+            driverMock.Object.LoadExternalLibrary(
+                new JQueryLoader(),
+                null,
+                TimeSpan.FromMilliseconds(100));
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact]
         public void ShouldThrowExceptionWhenLoadingExternalLibraryWithNullDriver()
         {
             // Given
@@ -166,14 +183,131 @@
         [Fact]
         public void ShouldThrowExceptionWhenExecutingWhiteSpaceOnlyScript()
         {
+            // Given
             var driverMock = new Mock<IWebDriver>();
 
-            // Given
+            //When
             Action action = () => driverMock.Object.ExecuteScript(" ");
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
             Assert.Equal("script", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldLoadJQuery()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+
+            // When
+            driverMock.Object.LoadJQuery(
+                new Uri("http://example.com"),
+                TimeSpan.FromMilliseconds(100));
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingJQueryWithNullVersion()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+
+            // When
+            Action action = () => driverMock.Object.LoadJQuery((string)null);
+
+            // Then
+            var ex = Assert.Throws<ArgumentNullException>(action);
+            Assert.Equal("version", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingJQueryWithEmptyVersion()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+
+            // When
+            Action action = () => driverMock.Object.LoadJQuery(string.Empty);
+
+            // Then
+            var ex = Assert.Throws<ArgumentException>(action);
+            Assert.Equal("version", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingJQueryWithWhiteSpaceOnlyVersion()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+
+            // When
+            Action action = () => driverMock.Object.LoadJQuery("\t");
+
+            // Then
+            var ex = Assert.Throws<ArgumentException>(action);
+            Assert.Equal("version", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldLoadSizzle()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+
+            // When
+            driverMock.Object.LoadSizzle(
+                new Uri("http://example.com"),
+                TimeSpan.FromMilliseconds(100));
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingSizzleWithNullVersion()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+
+            // When
+            Action action = () => driverMock.Object.LoadSizzle((string)null);
+
+            // Then
+            var ex = Assert.Throws<ArgumentNullException>(action);
+            Assert.Equal("version", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingSizzleWithEmptyVersion()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+
+            // When
+            Action action = () => driverMock.Object.LoadSizzle(string.Empty);
+
+            // Then
+            var ex = Assert.Throws<ArgumentException>(action);
+            Assert.Equal("version", ex.ParamName);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingSizzleWithWhiteSpaceOnlyVersion()
+        {
+            // Given
+            var driverMock = new Mock<IWebDriver>();
+
+            // When
+            Action action = () => driverMock.Object.LoadSizzle("\t");
+
+            // Then
+            var ex = Assert.Throws<ArgumentException>(action);
+            Assert.Equal("version", ex.ParamName);
         }
     }
 }
