@@ -1,6 +1,7 @@
 ﻿namespace OpenQA.Selenium
 {
     using System;
+    using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Extensions;
 
     /// <summary>
@@ -8,6 +9,18 @@
     /// </summary>
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression.</param>
+        [SuppressMessage("ReSharper", "RedundantOverload.Global")]
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
+        public JQuerySelector(string selector)
+            : this(selector, null, "jQuery")
+        {
+        }
+
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
@@ -22,7 +35,7 @@
         /// Selector is empty.
         /// -or- jQuery variable name is empty.
         /// </exception>
-        public JQuerySelector(string selector, JQuerySelector context = null, string variable = "jQuery")
+        public JQuerySelector(string selector, JQuerySelector context, string variable)
             : base(selector, context)
         {
             if (variable == null)
