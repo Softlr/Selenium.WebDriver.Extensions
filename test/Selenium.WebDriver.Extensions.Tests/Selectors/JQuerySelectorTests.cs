@@ -15,6 +15,236 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
+        public static IEnumerable<object[]> SelectorsTests
+        {
+            get
+            {
+                // simple selector
+                yield return new object[]
+                {
+                    By.JQuerySelector("div"),
+                    "jQuery('div')"
+                };
+
+                // escaping
+                yield return new object[]
+                {
+                    By.JQuerySelector("[name='foo']"),
+                    "jQuery('[name=\"foo\"]')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("[name=\"foo\"]"),
+                    "jQuery('[name=\"foo\"]')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Add("[name='foo']"),
+                    "jQuery('div').add('[name=\"foo\"]')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Add("[name=\"foo\"]"),
+                    "jQuery('div').add('[name=\"foo\"]')"
+                };
+
+                // chained methods
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Add("span"),
+                    "jQuery('div').add('span')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Add("span", By.JQuerySelector("#id")),
+                    "jQuery('div').add('span', jQuery('#id'))"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").AddBack(),
+                    "jQuery('div').addBack()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").AddBack("span"),
+                    "jQuery('div').addBack('span')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").AndSelf(),
+                    "jQuery('div').andSelf()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Children(),
+                    "jQuery('div').children()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Children("span"),
+                    "jQuery('div').children('span')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Closest("span"),
+                    "jQuery('div').closest('span')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Closest("span", By.JQuerySelector("#id1")),
+                    "jQuery('div').closest('span', jQuery('#id1'))"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Contents(),
+                    "jQuery('div').contents()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").End(),
+                    "jQuery('div').end()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Eq(1),
+                    "jQuery('div').eq(1)"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Filter(".test"),
+                    "jQuery('div').filter('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Find(".test"),
+                    "jQuery('div').find('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").First(),
+                    "jQuery('div').first()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Last(),
+                    "jQuery('div').last()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Has(".test"),
+                    "jQuery('div').has('.test')"
+                };
+
+                // todo: chained context
+                // todo: multiple chained elements
+                // todo: chain exceptions
+            }
+        }
+
+        public static IEnumerable<object[]> SelectorExceptionTests
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Add(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Add(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Add(null, By.JQuerySelector("#id1")))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Add(string.Empty, By.JQuerySelector("#id1")))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Add("span", null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").AddBack(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Children(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Closest(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Closest(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Closest(null, By.JQuerySelector("#id1")))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Closest(string.Empty, By.JQuerySelector("#id1")))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Closest("span", null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Filter(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Filter(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Find(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Find(string.Empty))
+                };
+            }
+        }
+
+        [Theory]
+        [MemberData("SelectorsTests")]
+        public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector)
+        {
+            // Given
+            // When
+            // Then
+            Assert.Equal(expectedSelector, selector.Selector);
+        }
+
+        [Theory]
+        [MemberData("SelectorExceptionTests")]
+        public void ShouldThrowExceptionForInvalidSelectors(Type exceptionType, Action selectorAction)
+        {
+            Assert.Throws(exceptionType, selectorAction);
+        }
+
         [Fact]
         public void ShouldCreateJQuerySelector()
         {
