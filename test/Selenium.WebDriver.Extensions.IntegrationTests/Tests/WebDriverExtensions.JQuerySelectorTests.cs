@@ -15,52 +15,94 @@
         [Fact]
         public void FindElement()
         {
-            var element = this.Browser.FindElement(By.JQuerySelector("#id1"));
+            // Given
+            var selector = By.JQuerySelector("#id1");
+
+            // When
+            var element = this.Browser.FindElement(selector);
+
+            // Then
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            Assert.Throws<NoSuchElementException>(() => this.Browser.FindElement(By.JQuerySelector("#id-not")));
+            // Given
+            var selector = By.JQuerySelector("#id-not");
+
+            // When
+            Action action = () => this.Browser.FindElement(selector);
+
+            // Then
+            Assert.Throws<NoSuchElementException>(action);
         }
 
         [Fact]
         public void FindElements()
         {
-            var elements = this.Browser.FindElements(By.JQuerySelector("div.main"));
+            // Given
+            var selector = By.JQuerySelector("div.main");
+
+            // When
+            var elements = this.Browser.FindElements(selector);
+
+            // Then
             Assert.Equal(2, elements.Count);
         }
 
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            var elements = this.Browser.FindElements(By.JQuerySelector("div.mainNot"));
+            // Given
+            var selector = By.JQuerySelector("div.mainNot");
+
+            // When
+            var elements = this.Browser.FindElements(selector);
+
+            // Then
             Assert.Equal(0, elements.Count);
         }
 
         [Fact]
         public void FindInnerElement()
         {
+            // Given
             var root = this.Browser.FindElement(By.CssSelector("body"));
-            var element = root.FindElement(By.JQuerySelector("div"));
+            var selector = By.JQuerySelector("div");
+
+            // When
+            var element = root.FindElement(selector);
+
+            // Then
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindInnerElements()
         {
+            // Given
             var root = this.Browser.FindElement(By.JQuerySelector("body"));
-            var elements = root.FindElements(By.JQuerySelector("div"));
+            var selector = By.JQuerySelector("div");
+
+            // When
+            var elements = root.FindElements(selector);
+
+            // Then
             Assert.Equal(2, elements.Count);
         }
 
         [Fact]
         public void ExpectedConditionsSupport()
         {
-            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
-            wait.Until(ExpectedConditions.ElementIsVisible(By.JQuerySelector("h1")));
+            //Given
+            var condition = ExpectedConditions.ElementIsVisible(By.JQuerySelector("h1"));
 
+            // When
+            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
+            wait.Until(condition);
+
+            // Then
             Assert.True(true);
         }
     }
