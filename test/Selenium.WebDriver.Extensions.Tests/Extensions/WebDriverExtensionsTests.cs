@@ -1,7 +1,6 @@
 ﻿namespace OpenQA.Selenium.Tests.Extensions
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium;
@@ -60,7 +59,7 @@
         }
 
         [Fact]
-        public void ShouldLoadExternalLibraryWithLoaderDetaultUri()
+        public void ShouldLoadExternalLibraryWithLoaderDefaultUri()
         {
             // Given
             var driverMock = new Mock<IWebDriver>();
@@ -188,7 +187,7 @@
             // Given
             var driverMock = new Mock<IWebDriver>();
 
-            //When
+            // When
             Action action = () => driverMock.Object.ExecuteScript(" ");
 
             // Then

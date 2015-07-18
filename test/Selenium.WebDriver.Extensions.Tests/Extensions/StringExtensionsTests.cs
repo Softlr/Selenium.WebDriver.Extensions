@@ -4,7 +4,6 @@
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Extensions;
     using Xunit;
-    using By = OpenQA.Selenium.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
