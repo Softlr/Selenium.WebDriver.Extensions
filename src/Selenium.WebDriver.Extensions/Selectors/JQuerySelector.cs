@@ -686,8 +686,8 @@
             if (selector != null)
             {
                 data = string.IsNullOrEmpty(filter)
-                    ? "'" + selector + "'"
-                    : "'" + selector + "', '" + filter + "'";
+                    ? "'" + selector.Replace('\'', '"') + "'"
+                    : "'" + selector.Replace('\'', '"') + "', '" + filter.Replace('\'', '"') + "'";
             }
 
             return data;
@@ -705,14 +705,15 @@
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
             selector = selector == null
-                ? string.Empty : (noWrap ? selector.Trim().Replace('\'', '"')
-                : "'" + selector.Trim().Replace('\'', '"') + "'");
+                ? string.Empty
+                : (noWrap ? selector.Trim() : "'" + selector.Trim().Replace('\'', '"') + "'");
+            var callChain = string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain;
 
             return new JQuerySelector(
                 this.RawSelector,
                 this.Context,
                 this.Variable,
-                "." + name + "(" + selector + ")");
+                callChain + "." + name + "(" + selector + ")");
         }
 
         /// <summary>
