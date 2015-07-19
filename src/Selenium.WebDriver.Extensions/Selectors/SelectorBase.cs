@@ -103,7 +103,7 @@
         /// <summary>
         /// Gets the selector.
         /// </summary>
-        protected abstract string Selector { get; }
+        public abstract string Selector { get; }
 
         /// <summary>
         /// Gets the result resolver string.
