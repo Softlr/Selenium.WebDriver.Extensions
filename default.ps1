@@ -1,6 +1,6 @@
 properties {
     $solution = '.\Selenium.WebDriver.Extensions.sln'
-    $version = '1.8.0'
+    $version = '2.0.0'
     $unitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
     $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
     $coverageXml = '.\.artifacts\coverage.xml'
@@ -8,7 +8,15 @@ properties {
 
 FormatTaskName '-------- {0} --------'
 
-Task default -Depends Compile, Test, Coverage, Docs, Pack
+Task default -Depends Clean, Compile, Test, Coverage, Docs, Pack
+
+Task CleanArtifacts -Description 'Cleans the artifacts directory' {
+    $artifactsDir = '.\.artifacts'
+    If (Test-Path $artifactsDir) {
+        Remove-Item $artifactsDir -Recurse
+    }
+    New-Item -ItemType directory -Path $artifactsDir
+}
 
 Task CleanNet45 -Description 'Cleans the output directory of the default .NET 4.5 build configuration' {
     New-Build -Solution $solution -Target Clean
@@ -36,7 +44,7 @@ Task CleanDocs -Description 'Cleans the output directory of the documentation bu
     }
 }
 
-Task Clean -Description 'Cleans the output directory of all build configurations' -Depends CleanNet45, CleanNet40, CleanNet35, CleanDocs
+Task Clean -Description 'Cleans the output directory of all build configurations' -Depends CleanNet45, CleanNet40, CleanNet35, CleanDocs, CleanArtifacts
 
 Task CompileNet45 -Description 'Compiles the default .NET 4.5 build configuration' -Depends CleanNet45 {
     New-Build -Solution $solution
@@ -64,6 +72,8 @@ Task Docs -Description 'Compiles the documentation build configuration' -Depends
             $env:SHFBROOT = $null
         }
     }
+    
+    Move-Item '.\docs\bin\Docs' '.\.artifacts'
 }
 
 Task Test -Description 'Runs the unit tests' -Depends CompileNet45 {
@@ -102,4 +112,5 @@ Task Coveralls -Description 'Sends coverage data to coveralls.io' -Depends Analy
 
 Task Pack -Description 'Packs NuGet package' -Depends Compile {
     New-NugetPackage -Specification .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
+    Move-Item '.\*.nupkg' '.\.artifacts'
 }
