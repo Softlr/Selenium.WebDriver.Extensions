@@ -64,6 +64,13 @@ Invoke jQuery selectors on the WebDriver.
 driver.FindElements(By.JQuerySelector("input:visible"))
 ```
 
+#### jQuery Traversing methods
+You can also chain jQuery traversing methods.
+```csharp
+var selector = By.JQuerySelector("div.myclass").Parents(".someClass").NextAll();
+driver.FindElement(selector);
+```
+
 #### jQuery loading
 If the site that you are testing with Selenium does not include jQuery this extension will automatically load the latest version when you run any of the `Find*` methods. If you want you can choose to load a different version of jQuery. The library uses jQuery CDN by default, but if you want to use a completely different source, that's also supported
 
