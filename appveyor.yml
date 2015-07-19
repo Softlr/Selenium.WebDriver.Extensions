@@ -191,7 +191,7 @@
     - packages\coveralls.io.1.3.4\tools\coveralls.net.exe --opencover coverage.xml -f
 
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.0-rc.1
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.0-rc1
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
   deploy:
