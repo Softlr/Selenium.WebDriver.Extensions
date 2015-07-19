@@ -3,7 +3,7 @@
 [![Coverage Status](https://coveralls.io/repos/RaYell/selenium-webdriver-extensions/badge.svg?branch=master)](https://coveralls.io/r/RaYell/selenium-webdriver-extensions?branch=master)
 
 # Description
-Extensions for Selenium WebDriver.
+Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 
 # Version 2.0
 The work on the second major version of this extensions library has started. 
