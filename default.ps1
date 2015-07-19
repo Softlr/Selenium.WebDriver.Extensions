@@ -3,7 +3,7 @@ properties {
     $version = '1.8.0'
     $unitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
     $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
-    $coverageXml = '.\coverage.xml'
+    $coverageXml = '.\.artifacts\coverage.xml'
 }
 
 FormatTaskName '-------- {0} --------'
@@ -93,7 +93,7 @@ Task AnalyzeCoverage -Description 'Analyzes the code coverage' -Depends CompileN
 }
 
 Task Coverage -Description 'Generates the code coverage HTML report' -Depends AnalyzeCoverage {
-    New-CoverageReport -CoverageXml $coverageXml -Output .\CoverageReport
+    New-CoverageReport -CoverageXml $coverageXml -Output .\.artifacts\CoverageReport
 }
 
 Task Coveralls -Description 'Sends coverage data to coveralls.io' -Depends AnalyzeCoverage {
