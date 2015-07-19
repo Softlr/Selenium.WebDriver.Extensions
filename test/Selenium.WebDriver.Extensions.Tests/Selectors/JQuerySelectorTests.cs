@@ -26,6 +26,18 @@
                     "jQuery('div')"
                 };
 
+                // constructor
+                yield return new object[]
+                {
+                    new JQuerySelector("div"),
+                    "jQuery('div')"
+                };
+                yield return new object[]
+                {
+                    new JQuerySelector("div", new JQuerySelector("body"), "$", ".children()"),
+                    "$('div', jQuery('body')).children()"
+                };
+
                 // escaping
                 yield return new object[]
                 {
@@ -91,8 +103,8 @@
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Closest("span", By.JQuerySelector("#id1")),
-                    "jQuery('div').closest('span', jQuery('#id1'))"
+                    By.JQuerySelector("div").Closest("span", By.JQuerySelector("#id")),
+                    "jQuery('div').closest('span', jQuery('#id'))"
                 };
                 yield return new object[]
                 {
@@ -134,10 +146,168 @@
                     By.JQuerySelector("div").Has(".test"),
                     "jQuery('div').has('.test')"
                 };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Is(".test"),
+                    "jQuery('div').is('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Next(),
+                    "jQuery('div').next()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Next(".test"),
+                    "jQuery('div').next('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").NextAll(),
+                    "jQuery('div').nextAll()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").NextAll(".test"),
+                    "jQuery('div').nextAll('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").NextUntil(),
+                    "jQuery('div').nextUntil()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").NextUntil(".test"),
+                    "jQuery('div').nextUntil('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").NextUntil(".test", "div"),
+                    "jQuery('div').nextUntil('.test', 'div')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").NextUntil(null, "div"),
+                    "jQuery('div').nextUntil('', 'div')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Prev(),
+                    "jQuery('div').prev()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Prev(".test"),
+                    "jQuery('div').prev('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").PrevAll(),
+                    "jQuery('div').prevAll()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").PrevAll(".test"),
+                    "jQuery('div').prevAll('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").PrevUntil(),
+                    "jQuery('div').prevUntil()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").PrevUntil(".test"),
+                    "jQuery('div').prevUntil('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").PrevUntil(".test", "div"),
+                    "jQuery('div').prevUntil('.test', 'div')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").PrevUntil(null, "div"),
+                    "jQuery('div').prevUntil('', 'div')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Not(".test"),
+                    "jQuery('div').not('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").OffsetParent(),
+                    "jQuery('div').offsetParent()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Parent(),
+                    "jQuery('div').parent()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Parent(".test"),
+                    "jQuery('div').parent('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Parents(),
+                    "jQuery('div').parents()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Parents(".test"),
+                    "jQuery('div').parents('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").ParentsUntil(),
+                    "jQuery('div').parentsUntil()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").ParentsUntil(".test"),
+                    "jQuery('div').parentsUntil('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").ParentsUntil(".test", "div"),
+                    "jQuery('div').parentsUntil('.test', 'div')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").ParentsUntil(null, "div"),
+                    "jQuery('div').parentsUntil('', 'div')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Siblings(),
+                    "jQuery('div').siblings()"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Siblings(".test"),
+                    "jQuery('div').siblings('.test')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Slice(0),
+                    "jQuery('div').slice(0)"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector("div").Slice(0, 1),
+                    "jQuery('div').slice(0, 1)"
+                };
 
-                // todo: chained context
-                // todo: multiple chained elements
-                // todo: chain exceptions
+                // chained methods with context
+                yield return new object[]
+                {
+                    By.JQuerySelector("div", By.JQuerySelector("#id")).Children().First(),
+                    "jQuery('div', jQuery('#id')).children().first()"
+                };
             }
         }
 
@@ -158,12 +328,12 @@
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Add(null, By.JQuerySelector("#id1")))
+                    (Action)(() => By.JQuerySelector("div").Add(null, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Add(string.Empty, By.JQuerySelector("#id1")))
+                    (Action)(() => By.JQuerySelector("div").Add(string.Empty, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
                 {
@@ -193,12 +363,12 @@
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Closest(null, By.JQuerySelector("#id1")))
+                    (Action)(() => By.JQuerySelector("div").Closest(null, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Closest(string.Empty, By.JQuerySelector("#id1")))
+                    (Action)(() => By.JQuerySelector("div").Closest(string.Empty, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
                 {
@@ -224,6 +394,116 @@
                 {
                     typeof(ArgumentException),
                     (Action)(() => By.JQuerySelector("div").Find(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Has(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Has(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Is(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Is(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Next(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").NextAll(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").NextUntil(string.Empty, ".test"))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").NextUntil("span", string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").NextUntil(null, string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Prev(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").PrevAll(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").PrevUntil(string.Empty, ".test"))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").PrevUntil("span", string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").PrevUntil(null, string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => By.JQuerySelector("div").Not(null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Not(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Parent(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Parents(string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").ParentsUntil(string.Empty, ".test"))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").ParentsUntil("span", string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").ParentsUntil(null, string.Empty))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentException),
+                    (Action)(() => By.JQuerySelector("div").Siblings(string.Empty))
                 };
             }
         }
