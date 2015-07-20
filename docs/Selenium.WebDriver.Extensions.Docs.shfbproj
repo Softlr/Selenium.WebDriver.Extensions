@@ -14,7 +14,6 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
-    <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
