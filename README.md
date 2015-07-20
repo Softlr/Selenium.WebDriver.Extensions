@@ -9,7 +9,7 @@ Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 The work on the second major version of this extensions library has started. 
 
 The features planned for the new version are:
-* Selectors inheriting from OpenQA.Selenium.By class. V1 of the application used the trick to run the custom selectors (extension methods, object wrappers etc.) and in the end it was quite difficult to tell which part it handled by the extensions and which by Selenium core. V2 will include completely rewritten JQuery and Sizzle selectors that will inherit from By class to avoid those kind of tricks.
+* Selectors inheriting from `OpenQA.Selenium.By` class. V1 of the application used the trick to run the custom selectors (extension methods, object wrappers etc.) and in the end it was quite difficult to tell which part it handled by the extensions and which by Selenium core. V2 will include completely rewritten JQuery and Sizzle selectors that will inherit from By class to avoid those kind of tricks.
 * Removal of redundant core selectors. V1 contains implementation of core Selenium selectors using custom QuerySelector class. The purpose of this class is to wrap the results in custom WebElement class for them to be reused while determining the context of the subsequent call. With the implementation of By class, they will no longer be needed and will be removed from the library.
 * Removal of query selector. As described above, QuerySelector class will no longer be necessary and will be removed in V2.
 * Single NuGet package. There will be only one NuGet package containing all of the extenions instead of four separate packages that V1 included. The extensions library is small enough for all of the important code to be merged into one package.
@@ -51,9 +51,9 @@ API documentation can be found [here](https://rayell.github.io/selenium-webdrive
 # Usage
 
 #### Include extensions
-Overwrite the `By` to be used.
+Create alias for the extension `By` to be used.
 ```csharp
-using By = Selenium.WebDriver.Extensions.By;
+using By = OpenQA.Selenium.Extensions.By;
 ```
 
 If you don't want to override the `By` to be used, you can always create `JQuerySelector` and `SizzleSelector` instances with `new` keyword.
