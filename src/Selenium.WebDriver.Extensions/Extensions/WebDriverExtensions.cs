@@ -1,15 +1,10 @@
-﻿namespace Selenium.WebDriver.Extensions
+﻿namespace OpenQA.Selenium.Extensions
 {
     using System;
     using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Reflection;
-    using System.Reflection.Emit;
-    using System.Runtime.InteropServices;
-    using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.Core;
-    using Selenium.WebDriver.Extensions.JQuery;
-    using Selenium.WebDriver.Extensions.Sizzle;
+    using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium.Loaders;
+    using OpenQA.Selenium.Support.UI;
 
     /// <summary>
     /// Web driver extensions.
@@ -17,104 +12,102 @@
     public static class WebDriverExtensions
     {
         /// <summary>
-        /// Returns the query selector helper, that can be used to access query selector specific functionalities.
+        /// Checks if jQuery is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <returns>The query selector helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static QuerySelectorHelper QuerySelector(this IWebDriver driver)
+        /// <param name="version">
+        /// The version of jQuery to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://code.jquery.com/jquery"/>. The default value will
+        /// get the latest stable version.
+        /// </param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">Version is null.</exception>
+        /// <exception cref="ArgumentException">Version is empty.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
+        public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            return Core.WebDriverExtensions.QuerySelector(driver);
+            if (version == null)
+            {
+                throw new ArgumentNullException("version");
+            }
+
+            if (version.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Version cannot be empty", "version");
+            }
+
+            driver.LoadExternalLibrary(
+                new JQueryLoader(),
+                new Uri("https://code.jquery.com/jquery-" + version + ".min.js"),
+                timeout);
         }
 
         /// <summary>
-        /// Searches for DOM element using given selector.
+        /// Checks if jQuery is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The Selenium selector.</param>
-        /// <returns>The first DOM element matching given JavaScript query selector.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Selector is null.
-        /// </exception>
-        /// <exception cref="NoSuchElementException">The requested element is not found.</exception>
-        /// <exception cref="InvalidOperationException">The source sequence is empty.</exception>
-        /// <exception cref="TargetInvocationException">The constructor being called throws an exception.</exception>
-        /// <exception cref="MethodAccessException">
-        /// The caller does not have permission to call this constructor.
-        /// </exception>
-        /// <exception cref="MemberAccessException">
-        /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
-        /// </exception>
-        /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or
-        /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
-        /// </exception>
-        /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
-        /// <exception cref="COMException">
-        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class
-        /// is not registered.
-        /// </exception>
-        /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
-        /// <exception cref="ArgumentException">
-        /// Type is not a RuntimeType.
-        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" />
-        /// property returns true).
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="TypeBuilder" />.
-        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and
-        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
-        /// -or- The assembly that contains type is a dynamic assembly that was created with
-        /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
-        /// </exception>
-        public static WebElement FindElement(this IWebDriver driver, ISelector selector)
+        /// <param name="uri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadJQuery(this IWebDriver driver, Uri uri, TimeSpan? timeout = null)
         {
-            return Core.WebDriverExtensions.FindElement(driver, selector);
+            driver.LoadExternalLibrary(new JQueryLoader(), uri, timeout);
         }
 
         /// <summary>
-        /// Searches for DOM elements using given selector.
+        /// Checks if Sizzle is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns>The DOM elements matching given JavaScript query selector.</returns>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Selector is null.
-        /// </exception>
-        /// <exception cref="TargetInvocationException">The constructor being called throws an exception.</exception>
-        /// <exception cref="MethodAccessException">
-        /// The caller does not have permission to call this constructor.
-        /// </exception>
-        /// <exception cref="MemberAccessException">
-        /// Cannot create an instance of an abstract class, or this member was invoked with a late-binding mechanism.
-        /// </exception>
-        /// <exception cref="InvalidComObjectException">
-        /// The COM type was not obtained through <see cref="Type.GetTypeFromProgID(string)" /> or
-        /// <see cref="Type.GetTypeFromCLSID(System.Guid)" />.
-        /// </exception>
-        /// <exception cref="MissingMethodException">No matching public constructor was found.</exception>
-        /// <exception cref="COMException">
-        /// Type is a COM object but the class identifier used to obtain the type is invalid, or the identified class
-        /// is not registered.
-        /// </exception>
-        /// <exception cref="TypeLoadException">Type is not a valid type.</exception>
-        /// <exception cref="ArgumentException">
-        /// Type is not a RuntimeType.
-        /// -or- Type is an open generic type (that is, the <see cref="P:System.Type.ContainsGenericParameters" />
-        /// property returns true).
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// Type cannot be a <see cref="TypeBuilder" />.
-        /// -or- Creation of <see cref="TypedReference" />, <see cref="ArgIterator" />, <see cref="Void" />, and
-        /// <see cref="RuntimeArgumentHandle" /> types, or arrays of those types, is not supported.
-        /// -or- The assembly that contains type is a dynamic assembly that was created with
-        /// <see cref="F:System.Reflection.Emit.AssemblyBuilderAccess.Save" />.
-        /// </exception>
-        public static ReadOnlyCollection<WebElement> FindElements(this IWebDriver driver, ISelector selector)
+        /// <param name="version">
+        /// The version of Sizzle to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://github.com/jquery/sizzle"/>.
+        /// </param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        /// <exception cref="ArgumentNullException">Version is null.</exception>
+        /// <exception cref="ArgumentException">Version is empty.</exception>
+        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
+        public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
         {
-            return Core.WebDriverExtensions.FindElements(driver, selector);
+            if (version == null)
+            {
+                throw new ArgumentNullException("version");
+            }
+
+            if (version.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Version cannot be empty", "version");
+            }
+
+            driver.LoadExternalLibrary(
+                new SizzleLoader(),
+                new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
+                timeout);
+        }
+
+        /// <summary>
+        /// Checks if Sizzle is loaded and loads it if needed.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="uri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver, Uri uri, TimeSpan? timeout = null)
+        {
+            driver.LoadExternalLibrary(new SizzleLoader(), uri, timeout);
         }
 
         /// <summary>
@@ -124,10 +117,14 @@
         /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        /// <exception cref="ArgumentException">Script is empty.</exception>
         public static void ExecuteScript(this IWebDriver driver, string script, params object[] args)
         {
-            Core.WebDriverExtensions.ExecuteScript(driver, script, args);
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            driver.ExecuteScript<object>(script, args);
         }
 
         /// <summary>
@@ -153,7 +150,23 @@
         /// <exception cref="ArgumentException">Script is empty.</exception>
         public static T ExecuteScript<T>(this IWebDriver driver, string script, params object[] args)
         {
-            return Core.WebDriverExtensions.ExecuteScript<T>(driver, script, args);
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            if (script == null)
+            {
+                throw new ArgumentNullException("script");
+            }
+
+            if (script.IsNullOrWhiteSpace())
+            {
+                throw new ArgumentException("Script cannot be empty", "script");
+            }
+
+            var result = ((IJavaScriptExecutor)driver).ExecuteScript(script, args);
+            return (T)result;
         }
 
         /// <summary>
@@ -169,7 +182,18 @@
         /// <exception cref="ArgumentException">Script is empty.</exception>
         public static bool CheckSelectorPrerequisites(this IWebDriver driver, ILoader loader)
         {
-            return Core.WebDriverExtensions.CheckSelectorPrerequisites(driver, loader);
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            if (loader == null)
+            {
+                throw new ArgumentNullException("loader");
+            }
+
+            var result = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";").Value;
+            return result;
         }
 
         /// <summary>
@@ -189,72 +213,49 @@
         /// Driver is null.
         /// -or- Loader is null.
         /// </exception>
-        /// <exception cref="OverflowException">
-        /// Value is less than <see cref="TimeSpan.MinValue" /> or greater than <see cref="TimeSpan.MaxValue" />.
-        /// -or- Value is <see cref="double.PositiveInfinity" />.
-        /// -or- Value is <see cref="double.NegativeInfinity" />.
-        /// </exception>
-        /// <exception cref="ArgumentException">Value is equal to <see cref="double.NaN" />.</exception>
-        /// <exception cref="InvalidOperationException">
-        /// This instance represents a relative URI, and this property is valid only for absolute URIs.
-        /// </exception>
         public static void LoadExternalLibrary(
             this IWebDriver driver,
             ILoader loader,
             Uri libraryUri,
             TimeSpan? timeout = null)
         {
-            Core.WebDriverExtensions.LoadExternalLibrary(driver, loader, libraryUri, timeout);
+            if (driver == null)
+            {
+                throw new ArgumentNullException("driver");
+            }
+
+            if (loader == null)
+            {
+                throw new ArgumentNullException("loader");
+            }
+
+            driver.LoadPrerequisites(
+                loader,
+                timeout ?? TimeSpan.FromSeconds(3),
+                libraryUri == null ? loader.LibraryUri.OriginalString : libraryUri.OriginalString);
         }
 
         /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
+        /// Loads the prerequisites for the selector.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
-        /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static JQueryHelper JQuery(this IWebDriver driver)
+        /// <param name="loader">The loader.</param>
+        /// <param name="timeout">The timeout value for the prerequisites load.</param>
+        /// <param name="loadParams">The additional parameters for load script.</param>
+        private static void LoadPrerequisites(
+            this IWebDriver driver,
+            ILoader loader,
+            TimeSpan timeout,
+            params string[] loadParams)
         {
-            return Extensions.JQuery.WebDriverExtensions.JQuery(driver);
-        }
+            if (driver.CheckSelectorPrerequisites(loader))
+            {
+                return;
+            }
 
-        /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        /// <exception cref="ArgumentException">
-        /// Selector is empty.
-        /// -or- jQuery variable name is empty.
-        /// </exception>
-        public static ChainJQueryHelper JQuery(this IWebDriver driver, string selector)
-        {
-            return Extensions.JQuery.WebDriverExtensions.JQuery(driver, selector);
-        }
-
-        /// <summary>
-        /// Returns the jQuery helper, that can be used to access jQuery-specific functionalities.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns>The jQuery helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static ChainJQueryHelper JQuery(this IWebDriver driver, JQuerySelector selector)
-        {
-            return Extensions.JQuery.WebDriverExtensions.JQuery(driver, selector);
-        }
-
-        /// <summary>
-        /// Returns the Sizzle helper, that can be used to access Sizzle-specific functionalities.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <returns>The Sizzle helper.</returns>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static SizzleHelper Sizzle(this IWebDriver driver)
-        {
-            return Extensions.Sizzle.WebDriverExtensions.Sizzle(driver);
+            driver.ExecuteScript(loader.LoadScript(loadParams));
+            var wait = new WebDriverWait(driver, timeout);
+            wait.Until(d => driver.CheckSelectorPrerequisites(loader));
         }
     }
 }

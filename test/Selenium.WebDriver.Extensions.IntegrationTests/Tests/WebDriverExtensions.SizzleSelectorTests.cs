@@ -1,9 +1,12 @@
 ﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
+    using OpenQA.Selenium.Support.PageObjects;
+    using OpenQA.Selenium.Support.UI;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.By;
+    using By = OpenQA.Selenium.Extensions.By;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
@@ -13,51 +16,107 @@
         [Fact]
         public void FindElement()
         {
-            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
+            // Given
+            var selector = By.SizzleSelector("#id1");
+
+            // When
+            var element = this.Browser.FindElement(selector);
+
+            // Then
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            Assert.Throws<NoSuchElementException>(() => this.Browser.FindElement(By.SizzleSelector("#id-not")));
+            // Given
+            var selector = By.SizzleSelector("#id-not");
+
+            // When
+            Action action = () => this.Browser.FindElement(selector);
+
+            // Then
+            Assert.Throws<NoSuchElementException>(action);
         }
 
         [Fact]
         public void FindElements()
         {
-            var elements = this.Browser.FindElements(By.SizzleSelector("div.main"));
+            // Given
+            var selector = By.SizzleSelector("div.main");
+
+            // When
+            var elements = this.Browser.FindElements(selector);
+
+            // Then
             Assert.Equal(2, elements.Count);
         }
 
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            var elements = this.Browser.FindElements(By.SizzleSelector("div.mainNot"));
-            Assert.Equal(0, elements.Count);
-        }
+            // Given
+            var selector = By.SizzleSelector("div.mainNot");
 
-        [Fact]
-        public void FindElementPath()
-        {
-            var element = this.Browser.FindElement(By.SizzleSelector("#id1"));
-            Assert.Equal("body > div#id1", element.Path);
+            // When
+            var elements = this.Browser.FindElements(selector);
+
+            // Then
+            Assert.Equal(0, elements.Count);
         }
 
         [Fact]
         public void FindInnerElement()
         {
-            var root = this.Browser.FindElement(By.SizzleSelector("body"));
-            var element = root.FindElement(By.SizzleSelector("div"));
+            // Given
+            var root = this.Browser.FindElement(By.CssSelector("body"));
+            var selector = By.SizzleSelector("div");
+
+            // When
+            var element = root.FindElement(selector);
+
+            // Then
             Assert.NotNull(element);
         }
 
         [Fact]
         public void FindInnerElements()
         {
+            // Given
             var root = this.Browser.FindElement(By.SizzleSelector("body"));
-            var elements = root.FindElements(By.SizzleSelector("h1"));
+            var selector = By.SizzleSelector("h1");
+
+            // When
+            var elements = root.FindElements(selector);
             Assert.Equal(1, elements.Count);
+        }
+
+        [Fact]
+        public void ExpectedConditionsSupport()
+        {
+            // Given
+            var condition = ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
+
+            // When
+            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
+            wait.Until(condition);
+
+            // Then
+            Assert.True(true);
+        }
+
+        [Fact]
+        public void PageObjectsSupport()
+        {
+            // Given
+            var page = new TestPage(this.Browser);
+
+            // When
+            PageFactory.InitElements(this.Browser, page);
+
+            // Then
+            Assert.NotNull(page.HeadingSizzle);
+            Assert.Equal("H1 Header", page.HeadingSizzle.Text);
         }
     }
 }

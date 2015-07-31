@@ -67,6 +67,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="WebDriver.Support, Version=2.46.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Selenium.Support.2.46.0\lib\net40\WebDriver.Support.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="xunit.abstractions, Version=2.0.0.0, Culture=neutral, PublicKeyToken=8d05b1bb7a6fdb6c, processorArchitecture=MSIL">
       <HintPath>..\..\packages\xunit.abstractions.2.0.0\lib\net35\xunit.abstractions.dll</HintPath>
     </Reference>
@@ -81,67 +86,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChromeTests\WebDriverExtensions.QuerySelectorChromeTests.cs" />
     <Compile Include="ChromeTests\WebDriverExtensions.SizzleLoadedSelectorChromeTests.cs" />
     <Compile Include="ChromeTests\WebDriverExtensions.JQueryLoadedSelectorChromeTests.cs" />
-    <Compile Include="ChromeTests\WebDriverExtensions.JQueryLoadedSetterChromeTests.cs" />
     <Compile Include="ChromeTests\WebDriverExtensions.SizzleUnloadedSelectorChromeTests.cs" />
     <Compile Include="ChromeTests\WebDriverExtensions.JQueryUnloadedSelectorChromeTests.cs" />
-    <Compile Include="ChromeTests\WebDriverExtensions.JQueryUnloadedSetterChromeTests.cs" />
-    <Compile Include="ChromeTests\WebDriverExtensions.CoreChromeTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.JQueryLoadedSelectorFirefoxTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryLoadedSetterFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.JQueryUnloadedSelectorFirefoxTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryUnloadedSetterFirefoxTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.QuerySelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.SizzleLoadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensions.SizzleUnloadedSelectorFirefoxTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.CoreInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSelectorInternetExplorerTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSetterInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryUnloadedSelectorInternetExplorerTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryUnloadedSetterInternetExplorerTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.QuerySelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.SizzleLoadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensions.SizzleUnloadedSelectorInternetExplorerTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.CorePhantomJsTests.cs" />
     <Compile Include="Fixtures\PhantomJsFixture.cs" />
     <Compile Include="Fixtures\InternetExplorerFixture.cs" />
     <Compile Include="Fixtures\ChromeFixture.cs" />
     <Compile Include="Fixtures\FirefoxFixture.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.CoreFirefoxTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryLoadedSelectorPhantomJsTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryLoadedSetterPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryUnloadedSelectorPhantomJsTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryUnloadedSetterPhantomJsTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.QuerySelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleLoadedSelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleUnloadedSelectorPhantomJsTests.cs" />
     <Compile Include="TestCaseModule.cs" />
+    <Compile Include="TestPage.cs" />
     <Compile Include="TestsBase.cs" />
-    <Compile Include="Tests\WebDriverExtensions.CoreTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\WebDriverExtensions.JQuerySetterTests.cs" />
     <Compile Include="Tests\WebDriverExtensions.JQuerySelectorTests.cs" />
-    <Compile Include="Tests\WebDriverExtensions.QuerySelectorTests.cs" />
     <Compile Include="Tests\WebDriverExtensions.SizzleSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Core\Selenium.WebDriver.Extensions.Core.csproj">
-      <Project>{bac59c4a-bb67-4e40-ac8a-0690cc7223e1}</Project>
-      <Name>Selenium.WebDriver.Extensions.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.JQuery\Selenium.WebDriver.Extensions.JQuery.csproj">
-      <Project>{e62ebb89-ae2a-4675-a56a-259b17a513e7}</Project>
-      <Name>Selenium.WebDriver.Extensions.JQuery</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions.Sizzle\Selenium.WebDriver.Extensions.Sizzle.csproj">
-      <Project>{b0f5e6ec-6f3b-4c84-a852-3f21ad9b9c22}</Project>
-      <Name>Selenium.WebDriver.Extensions.Sizzle</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj">
       <Project>{f10536ec-8fbf-437a-840d-55ce6bf44161}</Project>
       <Name>Selenium.WebDriver.Extensions</Name>
@@ -160,7 +137,6 @@
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
-    <EmbeddedResource Include="TestCases\QuerySelector\TestCase.html" />
     <EmbeddedResource Include="TestCases\Sizzle\Unloaded.html" />
     <EmbeddedResource Include="TestCases\Sizzle\Loaded.html" />
     <EmbeddedResource Include="TestCases\JQuery\Unloaded.html" />

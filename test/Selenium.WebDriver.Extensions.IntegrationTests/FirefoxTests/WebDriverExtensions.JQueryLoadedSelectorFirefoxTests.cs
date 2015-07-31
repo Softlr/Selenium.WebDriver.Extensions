@@ -8,13 +8,14 @@
     [Trait("Browser", "Firefox")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [Collection("Integration")]
     public class WebDriverExtensionsJQueryLoadedSelectorFirefoxTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<FirefoxFixture>
     {
         public WebDriverExtensionsJQueryLoadedSelectorFirefoxTests(FirefoxFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri("http://localhost:50502/JQueryLoaded"));
+            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/JQueryLoaded"));
         }
     }
 }

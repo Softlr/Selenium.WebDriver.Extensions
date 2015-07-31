@@ -14,7 +14,6 @@
     <Name>Documentation</Name>
     <!-- SHFB properties -->
     <FrameworkVersion>.NET Framework 4.5</FrameworkVersion>
-    <OutputPath>.\Help\</OutputPath>
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <BuildAssemblerVerbosity>OnlyWarningsAndErrors</BuildAssemblerVerbosity>
@@ -27,20 +26,9 @@
     <DocumentationSources>
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.dll" />
       <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.JQuery.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.JQuery.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Sizzle.xml" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Core.dll" />
-      <DocumentationSource sourceFile="..\src\Selenium.WebDriver.Extensions\bin\Release\Selenium.WebDriver.Extensions.Core.xml" />
     </DocumentationSources>
     <NamespaceSummaries>
       <NamespaceSummaryItem name="(global)" isDocumented="False" />
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions" isDocumented="True">Contains the extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.JQuery" isDocumented="True">Contains the jQuery extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.QuerySelector" isDocumented="True">Contains the query selector extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Sizzle" isDocumented="True">Contains the Sizzle extensions for the Selenium WebDriver.</NamespaceSummaryItem>
-      <NamespaceSummaryItem name="Selenium.WebDriver.Extensions.Core" isDocumented="True">Contains the implementation of overrides for standard Selenium WebDriver selectors.</NamespaceSummaryItem>
     </NamespaceSummaries>
     <MaximumGroupParts>2</MaximumGroupParts>
     <NamespaceGrouping>False</NamespaceGrouping>
@@ -61,25 +49,15 @@
         </configuration>
       </PlugInConfig>
     </PlugInConfigurations>
-    <MissingTags>Summary, Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
+    <MissingTags>Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|Win32' ">
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|Win32' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-Net40' ">
     <OutputPath>bin\Release-Net40\</OutputPath>

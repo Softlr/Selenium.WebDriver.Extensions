@@ -182,7 +182,5 @@ docs/Help/
 # 3rd party licences
 phantomjs-license.txt
 
-# Test files
-tests.xml
-coverage.xml
-CoverageReport/
+# build artifacts
+.artifacts/
