@@ -8,7 +8,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 2.0.0.{build}
+  version: 2.0.1.{build}
   configuration: Release
 
   install:
@@ -17,7 +17,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "2.0.0"
+    assembly_version: "2.0.1"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
 
@@ -59,7 +59,7 @@
     - path: CoverageReport
 
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.0
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
   deploy:
@@ -67,7 +67,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 2.0.0
+      release: 2.0.1
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
@@ -98,7 +98,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 2.0.0.{build}
+  version: 2.0.1.{build}
   configuration: Release
 
   install:
@@ -107,7 +107,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "2.0.0"
+    assembly_version: "2.0.1"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-dev"
 
@@ -147,7 +147,7 @@
     - path: CoverageReport
 
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.0-dev
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1-dev
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
 # release branch configuration
@@ -160,7 +160,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 2.0.0.{build}
+  version: 2.0.1.{build}
   configuration: Release
 
   install:
@@ -169,7 +169,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "2.0.0"
+    assembly_version: "2.0.1"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-rc.2"
 
@@ -209,7 +209,7 @@
     - path: CoverageReport
     
   before_deploy:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.0-rc2
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1-rc2
     - ps: Get-ChildItem .\*.nupkg | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 
   deploy:
@@ -217,7 +217,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 2.0.0-rc.2
+      release: 2.0.1-rc.2
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L

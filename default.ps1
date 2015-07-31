@@ -1,6 +1,6 @@
 properties {
     $solution = '.\Selenium.WebDriver.Extensions.sln'
-    $version = '2.0.0'
+    $version = '2.0.1'
     $unitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
     $integrationTests = '.\test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\Selenium.WebDriver.Extensions.IntegrationTests.dll'
     $coverageXml = '.\.artifacts\coverage.xml'
