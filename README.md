@@ -5,20 +5,18 @@
 # Description
 Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 
-# Version 2.0
-The work on the second major version of this extensions library has started. 
-
-The features planned for the new version are:
-* Selectors inheriting from `OpenQA.Selenium.By` class. V1 of the application used the trick to run the custom selectors (extension methods, object wrappers etc.) and in the end it was quite difficult to tell which part it handled by the extensions and which by Selenium core. V2 will include completely rewritten JQuery and Sizzle selectors that will inherit from By class to avoid those kind of tricks.
-* Removal of redundant core selectors. V1 contains implementation of core Selenium selectors using custom QuerySelector class. The purpose of this class is to wrap the results in custom WebElement class for them to be reused while determining the context of the subsequent call. With the implementation of By class, they will no longer be needed and will be removed from the library.
-* Removal of query selector. As described above, QuerySelector class will no longer be necessary and will be removed in V2.
-* Single NuGet package. There will be only one NuGet package containing all of the extenions instead of four separate packages that V1 included. The extensions library is small enough for all of the important code to be merged into one package.
-* Support for JQuery getters and setters will be dropped. V1 included a mechanism to run JQuery getters and setters as most of the calls used JQueryHelper class as an mediator between Selenium core and extensions library. With the new architecture there is no place for the JQueryHelper anymore and the support for those methods will be dropped. The only jQuery methods supported are now [traversing methods](https://api.jquery.com/category/traversing/).
-* Semantic versioning. V2 will utilize SemVer from the first release rather than V1's {major}.{minor}.{build} schema.
-* Support for ExpectedConditions. By implementing the By class, V2 of the extensions library will come with the support for ExpectedConditions.
-* Support for page objects. By implementing the By class, V2 of the exntesions library will come with the support for Selenium page objects.
-* Changes to the static By implementations. There will still be a By class provided with static methods for creating all sorts of selectors, however it will simply be a wrapper on a base class that will also provide methods for the new selectors.
-Namespace change. The namespace of the extensions library is going to be changed from Selenium.WebDriver.Extensions to OpenQA.Selenium which will make integration with Selenium even easier.
+# Version 2.0 Released
+The version 2.0 of the extensions library has been released. The new features of it include:
+* Selectors inheriting from `OpenQA.Selenium.By` class. V1 of the application used the trick to run the custom selectors (extension methods, object wrappers etc.) and in the end it was quite difficult to tell which part it handled by the extensions and which by Selenium core. V2 includes completely rewritten JQuery and Sizzle selectors that inherit from `By` class to avoid those kind of tricks.
+* Removal of redundant core selectors. V1 contains implementation of core Selenium selectors using custom QuerySelector class. The purpose of this class is to wrap the results in custom WebElement class for them to be reused while determining the context of the subsequent call. With the implementation of `By` class, they are no longer be needed and has been removed from the library.
+* Removal of query selector. As described above, `QuerySelector` class is no longer necessary and has been removed in V2.
+* Single NuGet package. There is only one NuGet package containing all of the extenions instead of four separate packages that V1 included. The extensions library is small enough for all of the important code to be merged into one package.
+* Support for JQuery getters and setters was dropped. V1 included a mechanism to run JQuery getters and setters as most of the calls used JQueryHelper class as an mediator between Selenium core and extensions library. With the new architecture there is no place for the JQueryHelper anymore and the support for those methods was dropped. The only jQuery methods supported are now [traversing methods](https://api.jquery.com/category/traversing/).
+* Semantic versioning. V2 utilizse SemVer from the first release rather than V1's {major}.{minor}.{build} schema.
+* Support for `ExpectedConditions`. By implementing the `By` class, V2 of the extensions library comes with the support for `ExpectedConditions`.
+* Support for page objects. By implementing the By class, V2 of the exntesions library comes with the support for [Selenium Page Objects](https://code.google.com/p/selenium/wiki/PageObjects).
+* Changes to the static `By` implementations. There still is a `By` class provided with static methods for creating all sorts of selectors, however it is now simply be a wrapper on a base class that will also provide methods for the new selectors.
+* Namespace change. The namespace of the extensions library is going to be changed from Selenium.WebDriver.Extensions to OpenQA.Selenium which makes integration with Selenium even easier.
 
 # Features
 * Main
