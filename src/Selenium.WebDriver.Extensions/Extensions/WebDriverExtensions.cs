@@ -180,6 +180,7 @@
         /// -or- Loader is null.
         /// </exception>
         /// <exception cref="ArgumentException">Script is empty.</exception>
+        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         public static bool CheckSelectorPrerequisites(this IWebDriver driver, ILoader loader)
         {
             if (driver == null)
@@ -192,8 +193,7 @@
                 throw new ArgumentNullException("loader");
             }
 
-            var scriptResult = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";");
-            var result = scriptResult != null && scriptResult.Value;
+            var result = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";").Value;
             return result;
         }
 
