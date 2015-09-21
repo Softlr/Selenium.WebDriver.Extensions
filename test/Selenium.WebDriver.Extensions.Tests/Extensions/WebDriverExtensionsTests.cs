@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Moq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Loaders;
@@ -30,10 +29,10 @@
         public void ShouldThrowExceptionWhenCheckingSelectorPrerequisitesWithoutLoader()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.CheckSelectorPrerequisites(null);
+            Action action = () => driver.CheckSelectorPrerequisites(null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -44,12 +43,10 @@
         public void ShouldLoadExternalLibrary()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().SetupSequence(x => x.ExecuteScript(It.IsAny<string>()))
-                .Returns(false).Returns(null).Returns(true);
+            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driverMock.Object.LoadExternalLibrary(
+            driver.LoadExternalLibrary(
                 new JQueryLoader(),
                 new Uri("http://example.com"),
                 TimeSpan.FromMilliseconds(100));
@@ -62,11 +59,10 @@
         public void ShouldLoadExternalLibraryWithLoaderDefaultUri()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driverMock.Object.LoadExternalLibrary(
+            driver.LoadExternalLibrary(
                 new JQueryLoader(),
                 null,
                 TimeSpan.FromMilliseconds(100));
@@ -91,10 +87,10 @@
         public void ShouldThrowExceptionWhenLoadingExternalLibraryWithoutLoader()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadExternalLibrary(null, null);
+            Action action = () => driver.LoadExternalLibrary(null, null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -129,38 +125,23 @@
         public void ShouldExecuteScript()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
+            var driver = new WebDriverBuilder().ThatHasTestMethodDefined().Build();
 
             // When
-            driverMock.Object.ExecuteScript("myMethod();");
+            driver.ExecuteScript("myMethod();");
 
             // Then
             Assert.True(true);
         }
 
         [Fact]
-        public void ShouldExecuteScriptThatReturnsValue()
-        {
-            // Given
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns("foo");
-
-            // When
-            var result = driverMock.Object.ExecuteScript<string>("return 'foo';");
-
-            // Then
-            Assert.Equal("foo", result);
-        }
-
-        [Fact]
         public void ShouldThrowExceptionWhenExecutingNullScript()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.ExecuteScript(null);
+            Action action = () => driver.ExecuteScript(null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -171,10 +152,10 @@
         public void ShouldThrowExceptionWhenExecutingEmptyScript()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.ExecuteScript(string.Empty);
+            Action action = () => driver.ExecuteScript(string.Empty);
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
@@ -185,10 +166,10 @@
         public void ShouldThrowExceptionWhenExecutingWhiteSpaceOnlyScript()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.ExecuteScript(" ");
+            Action action = () => driver.ExecuteScript(" ");
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
@@ -199,11 +180,10 @@
         public void ShouldLoadJQuery()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driverMock.Object.LoadJQuery(
+            driver.LoadJQuery(
                 new Uri("http://example.com"),
                 TimeSpan.FromMilliseconds(100));
 
@@ -215,10 +195,10 @@
         public void ShouldThrowExceptionWhenLoadingJQueryWithNullVersion()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadJQuery((string)null);
+            Action action = () => driver.LoadJQuery((string)null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -229,10 +209,10 @@
         public void ShouldThrowExceptionWhenLoadingJQueryWithEmptyVersion()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadJQuery(string.Empty);
+            Action action = () => driver.LoadJQuery(string.Empty);
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
@@ -243,10 +223,10 @@
         public void ShouldThrowExceptionWhenLoadingJQueryWithWhiteSpaceOnlyVersion()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadJQuery("\t");
+            Action action = () => driver.LoadJQuery("\t");
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
@@ -257,11 +237,10 @@
         public void ShouldLoadSizzle()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
-            driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript(It.IsAny<string>())).Returns(true);
+            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driverMock.Object.LoadSizzle(
+            driver.LoadSizzle(
                 new Uri("http://example.com"),
                 TimeSpan.FromMilliseconds(100));
 
@@ -273,10 +252,10 @@
         public void ShouldThrowExceptionWhenLoadingSizzleWithNullVersion()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadSizzle((string)null);
+            Action action = () => driver.LoadSizzle((string)null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -287,10 +266,10 @@
         public void ShouldThrowExceptionWhenLoadingSizzleWithEmptyVersion()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadSizzle(string.Empty);
+            Action action = () => driver.LoadSizzle(string.Empty);
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
@@ -301,10 +280,10 @@
         public void ShouldThrowExceptionWhenLoadingSizzleWithWhiteSpaceOnlyVersion()
         {
             // Given
-            var driverMock = new Mock<IWebDriver>();
+            var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driverMock.Object.LoadSizzle("\t");
+            Action action = () => driver.LoadSizzle("\t");
 
             // Then
             var ex = Assert.Throws<ArgumentException>(action);
