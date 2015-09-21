@@ -30,9 +30,7 @@
             this.Description = "By.SizzleSelector: " + this.RawSelector;
         }
 
-        /// <summary>
-        /// Gets the selector.
-        /// </summary>
+        /// <inheritdoc/>
         public override string Selector
         {
             get
@@ -42,20 +40,13 @@
             }
         }
 
-        /// <summary>
-        /// Loads the external library.
-        /// </summary>
-        /// <param name="driver">The web driver.</param>
+        /// <inheritdoc/>
         protected override void LoadExternalLibrary(IWebDriver driver)
         {
             driver.LoadSizzle();
         }
 
-        /// <summary>
-        /// Creates the context.
-        /// </summary>
-        /// <param name="contextSelector">The context selector.</param>
-        /// <returns>The context.</returns>
+        /// <inheritdoc/>
         protected override SizzleSelector CreateContext(string contextSelector)
         {
             return new SizzleSelector(contextSelector);
