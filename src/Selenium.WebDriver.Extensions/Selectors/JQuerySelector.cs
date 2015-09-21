@@ -71,7 +71,7 @@
         protected override string ResultResolver => ".get()";
 
         /// <summary>
-        /// Gets or sets the jQuery call chain methods.
+        /// Gets the jQuery call chain methods.
         /// </summary>
         private string CallChain { get; }
 
