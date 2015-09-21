@@ -81,7 +81,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ByTests.cs" />
-    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="Loaders\SizzleLoaderTests.cs" />
     <Compile Include="Loaders\JQueryLoaderTests.cs" />

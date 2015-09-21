@@ -60,7 +60,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }

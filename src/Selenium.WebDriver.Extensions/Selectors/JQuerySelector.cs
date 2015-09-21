@@ -45,7 +45,7 @@
                 throw new ArgumentNullException(nameof(variable));
             }
 
-            if (variable.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(variable))
             {
                 throw new ArgumentException("jQuery variable cannot be empty", nameof(variable));
             }
@@ -94,7 +94,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -123,7 +123,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -146,7 +146,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector AddBack(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -172,7 +172,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Children(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -195,7 +195,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -222,7 +222,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -278,7 +278,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -301,7 +301,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -333,7 +333,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -356,7 +356,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -382,7 +382,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Next(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -399,7 +399,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector NextAll(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -422,12 +422,12 @@
         /// </exception>
         public JQuerySelector NextUntil(string selector = null, string filter = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
-            if (filter != null && filter.IsNullOrWhiteSpace())
+            if (filter != null && string.IsNullOrWhiteSpace(filter))
             {
                 throw new ArgumentException("Filter cannot be empty", nameof(filter));
             }
@@ -458,7 +458,7 @@
                 throw new ArgumentNullException(nameof(selector));
             }
 
-            if (selector.IsNullOrWhiteSpace())
+            if (string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -483,7 +483,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Parent(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -500,7 +500,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Parents(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -523,12 +523,12 @@
         /// </exception>
         public JQuerySelector ParentsUntil(string selector = null, string filter = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
-            if (filter != null && filter.IsNullOrWhiteSpace())
+            if (filter != null && string.IsNullOrWhiteSpace(filter))
             {
                 throw new ArgumentException("Filter cannot be empty", nameof(filter));
             }
@@ -551,7 +551,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Prev(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -568,7 +568,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector PrevAll(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
@@ -591,12 +591,12 @@
         /// </exception>
         public JQuerySelector PrevUntil(string selector = null, string filter = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
-            if (filter != null && filter.IsNullOrWhiteSpace())
+            if (filter != null && string.IsNullOrWhiteSpace(filter))
             {
                 throw new ArgumentException("Filter cannot be empty", nameof(filter));
             }
@@ -618,7 +618,7 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         public JQuerySelector Siblings(string selector = null)
         {
-            if (selector != null && selector.IsNullOrWhiteSpace())
+            if (selector != null && string.IsNullOrWhiteSpace(selector))
             {
                 throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
