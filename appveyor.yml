@@ -27,7 +27,6 @@
     disable_publish_on_pr: true
 
   environment:
-    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\EWSoftware.SHFB.2015.7.25.0\tools'
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
     GH_ACCESS_TOKEN:
@@ -117,7 +116,6 @@
     disable_publish_on_pr: true
 
   environment:
-    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\EWSoftware.SHFB.2015.7.25.0\tools'
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
@@ -179,7 +177,6 @@
     disable_publish_on_pr: true
 
   environment:
-    SHFBROOT: '%APPVEYOR_BUILD_FOLDER%\packages\EWSoftware.SHFB.2015.7.25.0\tools'
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 

@@ -61,17 +61,7 @@ Task CompileNet35 -Description 'Compiles the .NET 3.5 build configuration' -Depe
 Task Compile -Description 'Compiles all of the build configurations' -Depends CompileNet45, CompileNet40, CompileNet35
 
 Task Docs -Description 'Compiles the documentation build configuration' -Depends CleanDocs, CleanArtifacts, CompileNet45 {
-    $envVarNotDefined = $env:SHFBROOT -eq $null
-    If ($envVarNotDefined) {
-        $env:SHFBROOT = $PWD.Path + '\packages\SHFB.2014.5.31\tools\Sandcastle Help File Builder'
-    }
-    Try {
-        New-Build -Solution $solution -BuildConfiguration Docs
-    } Finally {
-        If ($envVarNotDefined) {
-            $env:SHFBROOT = $null
-        }
-    }
+    New-Build -Solution $solution -BuildConfiguration Docs
     
     Move-Item '.\docs\bin\Docs' '.\.artifacts'
 }
