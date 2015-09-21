@@ -24,7 +24,7 @@
             this.Dispose(false);
         }
 
-        public IWebDriver Browser { get; private set; }
+        public IWebDriver Browser { get; }
 
         public void Dispose()
         {

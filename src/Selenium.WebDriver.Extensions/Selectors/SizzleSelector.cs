@@ -33,14 +33,8 @@
         /// <summary>
         /// Gets the selector.
         /// </summary>
-        public override string Selector
-        {
-            get
-            {
-                return "Sizzle('" + this.RawSelector.Replace('\'', '"') + "'"
-                    + (this.Context != null ? ", " + this.Context.Selector + "[0]" : string.Empty) + ")";
-            }
-        }
+        public override string Selector => "Sizzle('" + this.RawSelector.Replace('\'', '"') + "'"
+            + (this.Context != null ? ", " + this.Context.Selector + "[0]" : string.Empty) + ")";
 
         /// <summary>
         /// Loads the external library.

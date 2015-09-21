@@ -35,10 +35,7 @@
             }
             finally
             {
-                if (stream != null)
-                {
-                    stream.Dispose();
-                }
+                stream?.Dispose();
             }
         }
     }

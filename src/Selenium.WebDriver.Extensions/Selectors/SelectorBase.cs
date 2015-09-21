@@ -57,12 +57,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             this.Context = context;
@@ -93,7 +93,7 @@
         /// <summary>
         /// Gets the query raw selector.
         /// </summary>
-        public virtual string RawSelector { get; private set; }
+        public virtual string RawSelector { get; }
 
         /// <summary>
         /// Gets the context.
@@ -108,10 +108,7 @@
         /// <summary>
         /// Gets the result resolver string.
         /// </summary>
-        protected virtual string ResultResolver
-        {
-            get { return string.Empty; }
-        }
+        protected virtual string ResultResolver => string.Empty;
 
         /// <summary>
         /// Loads the external library.

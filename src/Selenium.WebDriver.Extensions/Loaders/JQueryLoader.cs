@@ -14,13 +14,7 @@
         /// Gets the default URI of the external library.
         /// </summary>
         [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-        public override Uri LibraryUri
-        {
-            get
-            {
-                return new Uri("https://code.jquery.com/jquery-latest.min.js");
-            }
-        }
+        public override Uri LibraryUri => new Uri("https://code.jquery.com/jquery-latest.min.js");
 
         /// <summary>
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
@@ -28,13 +22,7 @@
         /// </summary>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
             Justification = "False positive.")]
-        public override string CheckScript
-        {
-            get
-            {
-                return DetectScriptCode + "(window.jQuery)";
-            }
-        }
+        public override string CheckScript => DetectScriptCode + "(window.jQuery)";
 
         /// <summary>
         /// Gets the JavaScript to load the prerequisites for the selector.
@@ -49,7 +37,7 @@
         {
             if (args == null)
             {
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             }
 
             if (args.Length == 0)
