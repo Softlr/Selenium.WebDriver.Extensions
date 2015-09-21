@@ -23,7 +23,7 @@
         [Theory]
         [MemberData("TestData")]
         [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
-        public void ShouldCreateSelector(string testValue, bool expected)
+        public void ShouldDetectNullsAndWhiteSpaces(string testValue, bool expected)
         {
             // Given
             // When
