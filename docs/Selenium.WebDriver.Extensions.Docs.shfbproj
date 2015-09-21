@@ -50,7 +50,7 @@
       </PlugInConfig>
     </PlugInConfigurations>
     <MissingTags>Parameter, Returns, AutoDocumentCtors, Namespace, TypeParameter, AutoDocumentDispose</MissingTags>
-    <ComponentPath>..\packages\EWSoftware.SHFB.NETFramework.4.6.0</ComponentPath>
+    <ComponentPath>..\packages\EWSoftware.SHFB.NETFramework.4.6.0\tools\Data\.NETFramework</ComponentPath>
   </PropertyGroup>
   <!-- There are no properties for these groups.  AnyCPU needs to appear in order for Visual Studio to perform
 			 the build.  The others are optional common platform types that may appear. -->
