@@ -134,21 +134,23 @@
         private IWebDriver ResolveDriver(ISearchContext searchContext)
         {
             var driver = searchContext as IWebDriver;
-            if (driver == null)
+            if (driver != null)
             {
-                var driverWrapper = searchContext as IWrapsDriver;
-                if (searchContext is IWebElement && driverWrapper != null)
-                {
-                    // nested query
-                    driver = driverWrapper.WrappedDriver;
-                    var baseElementSelector = ((IJavaScriptExecutor)driver)
-                        .ExecuteScript(FindDomPathScript, driverWrapper) as string;
-                    this.Context = this.CreateContext(baseElementSelector);
-                }
-                else
-                {
-                    throw new NotSupportedException("Context is not a valid driver");
-                }
+                return driver;
+            }
+
+            var driverWrapper = searchContext as IWrapsDriver;
+            if (searchContext is IWebElement && driverWrapper != null)
+            {
+                // nested query
+                driver = driverWrapper.WrappedDriver;
+                var baseElementSelector = ((IJavaScriptExecutor)driver)
+                    .ExecuteScript(FindDomPathScript, driverWrapper) as string;
+                this.Context = this.CreateContext(baseElementSelector);
+            }
+            else
+            {
+                throw new NotSupportedException("Context is not a valid driver");
             }
 
             return driver;
