@@ -235,7 +235,7 @@
   os: Visual Studio 2015
 
   install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+    - SET PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
@@ -252,9 +252,6 @@
   environment:
     COVERALLS_REPO_TOKEN:
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
-
-  install:
-    - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
 
   before_build:
     - nuget restore
