@@ -219,7 +219,7 @@
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       prerelease: true
-	  
+
 # csharp6 branch
 -
   branches:
@@ -255,7 +255,7 @@
 
   install:
     - set PATH=C:\Program Files (x86)\MSBuild\14.0\Bin;%PATH%
-	  
+
   before_build:
     - nuget restore
 
