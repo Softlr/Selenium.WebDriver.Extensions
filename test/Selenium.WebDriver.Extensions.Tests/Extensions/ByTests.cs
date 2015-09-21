@@ -26,7 +26,7 @@
 
         [Theory]
         [MemberData("CoreSelectors")]
-        public void ShouldCreateSelector(OpenQA.Selenium.By selector)
+        public void ShouldCreateSelector(Selenium.By selector)
         {
             // Given
             // When

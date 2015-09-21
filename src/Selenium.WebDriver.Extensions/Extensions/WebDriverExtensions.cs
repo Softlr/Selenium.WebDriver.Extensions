@@ -192,7 +192,8 @@
                 throw new ArgumentNullException("loader");
             }
 
-            var result = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";").Value;
+            var scriptResult = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";");
+            var result = scriptResult != null && scriptResult.Value;
             return result;
         }
 

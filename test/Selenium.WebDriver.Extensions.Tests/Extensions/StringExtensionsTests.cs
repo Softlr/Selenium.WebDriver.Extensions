@@ -22,6 +22,7 @@
 
         [Theory]
         [MemberData("TestData")]
+        [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
         public void ShouldCreateSelector(string testValue, bool expected)
         {
             // Given

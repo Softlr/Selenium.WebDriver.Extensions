@@ -11,6 +11,7 @@
     public class ParseUtilTests
     {
         [Fact]
+        [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
         public void ShouldCorrectlyHandleDefaultValue()
         {
             // Given
