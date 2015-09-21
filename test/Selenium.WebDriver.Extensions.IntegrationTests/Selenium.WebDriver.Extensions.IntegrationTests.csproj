@@ -129,7 +129,7 @@
     <Content Include="..\..\packages\PhantomJS.2.0.0\tools\phantomjs\phantomjs.exe">
       <Link>Drivers\phantomjs.exe</Link>
     </Content>
-    <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.16.0.0\driver\chromedriver.exe">
+    <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.19.0.0\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
     </Content>
     <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.44\content\IEDriverServer.exe">
