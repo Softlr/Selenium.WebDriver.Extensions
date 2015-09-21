@@ -60,9 +60,7 @@
         /// </summary>
         public virtual string Variable { get; }
 
-        /// <summary>
-        /// Gets the selector.
-        /// </summary>
+        /// <inheritdoc/>
         public override string Selector => this.Variable + "('" + this.RawSelector.Replace('\'', '"') + "'"
             + (this.Context != null ? ", " + this.Context.Selector : string.Empty) + ")"
             + (string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain);
@@ -646,20 +644,13 @@
             return this.Chain("slice", data, true);
         }
 
-        /// <summary>
-        /// Loads the external library.
-        /// </summary>
-        /// <param name="driver">The web driver.</param>
+        /// <inheritdoc/>
         protected override void LoadExternalLibrary(IWebDriver driver)
         {
             driver.LoadJQuery();
         }
 
-        /// <summary>
-        /// Creates the context.
-        /// </summary>
-        /// <param name="contextSelector">The context selector.</param>
-        /// <returns>The context.</returns>
+        /// <inheritdoc/>
         protected override JQuerySelector CreateContext(string contextSelector)
         {
             return new JQuerySelector(contextSelector, null, this.Variable, null);
