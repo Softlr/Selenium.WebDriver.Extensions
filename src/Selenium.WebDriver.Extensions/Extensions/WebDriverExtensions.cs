@@ -35,7 +35,7 @@
                 throw new ArgumentNullException(nameof(version));
             }
 
-            if (string.IsNullOrWhiteSpace(version))
+            if (version.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Version cannot be empty", nameof(version));
             }
@@ -84,7 +84,7 @@
                 throw new ArgumentNullException(nameof(version));
             }
 
-            if (string.IsNullOrWhiteSpace(version))
+            if (version.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Version cannot be empty", nameof(version));
             }
@@ -160,7 +160,7 @@
                 throw new ArgumentNullException(nameof(script));
             }
 
-            if (string.IsNullOrWhiteSpace(script))
+            if (script.IsNullOrWhiteSpace())
             {
                 throw new ArgumentException("Script cannot be empty", nameof(script));
             }
