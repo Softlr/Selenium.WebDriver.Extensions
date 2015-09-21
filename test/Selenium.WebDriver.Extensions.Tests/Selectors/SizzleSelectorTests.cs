@@ -27,6 +27,18 @@
         }
 
         [Fact]
+        public void ShouldCreateSizzleSelectorDirectly()
+        {
+            // Given
+            // When
+            var selector = new SizzleSelector("div");
+
+            // Then
+            Assert.NotNull(selector);
+            Assert.Equal("div", selector.RawSelector);
+        }
+
+        [Fact]
         public void ShouldCreateSizzleSelectorWithContext()
         {
             // Given
