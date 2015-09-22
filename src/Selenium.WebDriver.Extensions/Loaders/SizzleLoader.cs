@@ -2,7 +2,6 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using System.Linq;
 
     /// <summary>
@@ -36,7 +35,7 @@
                 throw new LoaderException("No Sizzle URI given");
             }
 
-            return string.Format(CultureInfo.InvariantCulture, "{0}('{1}')", LoadScriptCode, args.First());
+            return $"{LoadScriptCode}('{args.First()}')";
         }
     }
 }
