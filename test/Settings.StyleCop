@@ -6,6 +6,7 @@
       <Value>Git</Value>
       <Value>Lucene</Value>
     </CollectionProperty>
+    <BooleanProperty Name="WriteCache">False</BooleanProperty>
   </GlobalSettings>
   <Parsers>
     <Parser ParserId="StyleCop.CSharp.CsParser">
