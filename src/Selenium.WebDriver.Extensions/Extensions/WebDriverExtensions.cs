@@ -32,12 +32,12 @@
         {
             if (version == null)
             {
-                throw new ArgumentNullException("version");
+                throw new ArgumentNullException(nameof(version));
             }
 
             if (version.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Version cannot be empty", "version");
+                throw new ArgumentException("Version cannot be empty", nameof(version));
             }
 
             driver.LoadExternalLibrary(
@@ -81,12 +81,12 @@
         {
             if (version == null)
             {
-                throw new ArgumentNullException("version");
+                throw new ArgumentNullException(nameof(version));
             }
 
             if (version.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Version cannot be empty", "version");
+                throw new ArgumentException("Version cannot be empty", nameof(version));
             }
 
             driver.LoadExternalLibrary(
@@ -121,7 +121,7 @@
         {
             if (driver == null)
             {
-                throw new ArgumentNullException("driver");
+                throw new ArgumentNullException(nameof(driver));
             }
 
             driver.ExecuteScript<object>(script, args);
@@ -152,17 +152,17 @@
         {
             if (driver == null)
             {
-                throw new ArgumentNullException("driver");
+                throw new ArgumentNullException(nameof(driver));
             }
 
             if (script == null)
             {
-                throw new ArgumentNullException("script");
+                throw new ArgumentNullException(nameof(script));
             }
 
             if (script.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Script cannot be empty", "script");
+                throw new ArgumentException("Script cannot be empty", nameof(script));
             }
 
             var result = ((IJavaScriptExecutor)driver).ExecuteScript(script, args);
@@ -185,12 +185,12 @@
         {
             if (driver == null)
             {
-                throw new ArgumentNullException("driver");
+                throw new ArgumentNullException(nameof(driver));
             }
 
             if (loader == null)
             {
-                throw new ArgumentNullException("loader");
+                throw new ArgumentNullException(nameof(loader));
             }
 
             var result = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";").Value;
@@ -222,18 +222,18 @@
         {
             if (driver == null)
             {
-                throw new ArgumentNullException("driver");
+                throw new ArgumentNullException(nameof(driver));
             }
 
             if (loader == null)
             {
-                throw new ArgumentNullException("loader");
+                throw new ArgumentNullException(nameof(loader));
             }
 
             driver.LoadPrerequisites(
                 loader,
                 timeout ?? TimeSpan.FromSeconds(3),
-                libraryUri == null ? loader.LibraryUri.OriginalString : libraryUri.OriginalString);
+                libraryUri?.OriginalString ?? loader.LibraryUri.OriginalString);
         }
 
         /// <summary>

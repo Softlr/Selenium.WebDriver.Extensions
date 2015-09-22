@@ -10,6 +10,7 @@
 
   version: 2.0.1.{build}
   configuration: Release
+  os: Visual Studio 2015
 
   install:
     - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
@@ -99,6 +100,7 @@
 
   version: 2.0.1.{build}
   configuration: Release
+  os: Visual Studio 2015
 
   install:
     - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
@@ -160,6 +162,7 @@
 
   version: 2.0.1.{build}
   configuration: Release
+  os: Visual Studio 2015
 
   install:
     - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%

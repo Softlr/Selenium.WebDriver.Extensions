@@ -29,7 +29,7 @@
         protected IWebDriver Browser { get; set; }
 
         [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
-        protected string ServerUrl { get; private set; }
+        protected string ServerUrl { get; }
 
         public void Dispose()
         {

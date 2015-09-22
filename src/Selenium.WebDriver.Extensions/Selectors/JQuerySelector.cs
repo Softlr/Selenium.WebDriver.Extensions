@@ -42,12 +42,12 @@
         {
             if (variable == null)
             {
-                throw new ArgumentNullException("variable");
+                throw new ArgumentNullException(nameof(variable));
             }
 
             if (variable.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("jQuery variable cannot be empty", "variable");
+                throw new ArgumentException("jQuery variable cannot be empty", nameof(variable));
             }
 
             this.Variable = variable;
@@ -58,31 +58,22 @@
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.
         /// </summary>
-        public virtual string Variable { get; private set; }
+        public virtual string Variable { get; }
 
         /// <inheritdoc/>
-        public override string Selector
-        {
-            get
-            {
-                return this.Variable + "('" + this.RawSelector.Replace('\'', '"') + "'"
-                    + (this.Context != null ? ", " + this.Context.Selector : string.Empty) + ")"
-                    + (string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain);
-            }
-        }
+        public override string Selector => this.Variable + "('" + this.RawSelector.Replace('\'', '"') + "'"
+            + (this.Context != null ? ", " + this.Context.Selector : string.Empty) + ")"
+            + (string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain);
 
         /// <summary>
         /// Gets the result resolver string.
         /// </summary>
-        protected override string ResultResolver
-        {
-            get { return ".get()"; }
-        }
+        protected override string ResultResolver => ".get()";
 
         /// <summary>
-        /// Gets or sets the jQuery call chain methods.
+        /// Gets the jQuery call chain methods.
         /// </summary>
-        private string CallChain { get; set; }
+        private string CallChain { get; }
 
         /// <summary>
         /// Adds elements to the set of matched elements.
@@ -98,12 +89,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("add", selector);
@@ -127,17 +118,17 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
 
             return this.ChainWithContext("add", selector, context);
@@ -155,7 +146,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("addBack", selector);
@@ -181,7 +172,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("children", selector);
@@ -199,12 +190,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("closest", selector);
@@ -226,17 +217,17 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             if (context == null)
             {
-                throw new ArgumentNullException("context");
+                throw new ArgumentNullException(nameof(context));
             }
 
             return this.ChainWithContext("closest", selector, context);
@@ -282,12 +273,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("filter", selector);
@@ -305,12 +296,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("find", selector);
@@ -337,12 +328,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("has", selector);
@@ -360,12 +351,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("is", selector);
@@ -391,7 +382,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("next", selector);
@@ -408,7 +399,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("nextAll", selector);
@@ -431,12 +422,12 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             if (filter != null && filter.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Filter cannot be empty", "filter");
+                throw new ArgumentException("Filter cannot be empty", nameof(filter));
             }
 
             if (selector == null && filter != null)
@@ -462,12 +453,12 @@
         {
             if (selector == null)
             {
-                throw new ArgumentNullException("selector");
+                throw new ArgumentNullException(nameof(selector));
             }
 
             if (selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("not", selector);
@@ -492,7 +483,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("parent", selector);
@@ -509,7 +500,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("parents", selector);
@@ -532,12 +523,12 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             if (filter != null && filter.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Filter cannot be empty", "filter");
+                throw new ArgumentException("Filter cannot be empty", nameof(filter));
             }
 
             if (selector == null && filter != null)
@@ -560,7 +551,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("prev", selector);
@@ -577,7 +568,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("prevAll", selector);
@@ -600,12 +591,12 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             if (filter != null && filter.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Filter cannot be empty", "filter");
+                throw new ArgumentException("Filter cannot be empty", nameof(filter));
             }
 
             if (selector == null && filter != null)
@@ -627,7 +618,7 @@
         {
             if (selector != null && selector.IsNullOrWhiteSpace())
             {
-                throw new ArgumentException("Selector cannot be empty", "selector");
+                throw new ArgumentException("Selector cannot be empty", nameof(selector));
             }
 
             return this.Chain("siblings", selector);

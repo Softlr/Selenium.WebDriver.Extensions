@@ -12,24 +12,12 @@
     {
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-        public override Uri LibraryUri
-        {
-            get
-            {
-                return new Uri("https://code.jquery.com/jquery-latest.min.js");
-            }
-        }
+        public override Uri LibraryUri => new Uri("https://code.jquery.com/jquery-latest.min.js");
 
         /// <inheritdoc/>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
             Justification = "False positive.")]
-        public override string CheckScript
-        {
-            get
-            {
-                return DetectScriptCode + "(window.jQuery)";
-            }
-        }
+        public override string CheckScript => DetectScriptCode + "(window.jQuery)";
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
@@ -40,7 +28,7 @@
         {
             if (args == null)
             {
-                throw new ArgumentNullException("args");
+                throw new ArgumentNullException(nameof(args));
             }
 
             if (args.Length == 0)
