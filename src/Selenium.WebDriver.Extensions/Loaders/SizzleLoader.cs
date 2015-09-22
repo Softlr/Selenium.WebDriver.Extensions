@@ -22,12 +22,6 @@
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
         /// <exception cref="LoaderException">No URI given as first parameter.</exception>
-        /// <exception cref="FormatException">
-        /// Format is invalid.
-        /// -or- The index of a format item is less than zero, or greater than or equal to the length of the
-        /// <paramref name="args" /> array.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">The source sequence is empty.</exception>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
             Justification = "False positive.")]
         public override string LoadScript(params string[] args)
