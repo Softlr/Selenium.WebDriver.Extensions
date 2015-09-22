@@ -32,6 +32,10 @@
             GC.SuppressFinalize(this);
         }
 
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2213:DisposableFieldsShouldBeDisposed",
+            MessageId = "<Browser>k__BackingField")]
         protected virtual void Dispose(bool disposing)
         {
             if (this.disposed || !disposing)
