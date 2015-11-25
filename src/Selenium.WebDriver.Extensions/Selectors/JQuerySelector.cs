@@ -37,6 +37,7 @@
         /// Selector is empty.
         /// -or- jQuery variable name is empty.
         /// </exception>
+        [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
         public JQuerySelector(string selector, JQuerySelector context, string variable, string chain)
             : base(selector, context)
         {
