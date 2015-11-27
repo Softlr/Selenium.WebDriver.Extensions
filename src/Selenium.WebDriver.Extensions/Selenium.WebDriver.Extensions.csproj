@@ -107,21 +107,21 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(Configuration)'=='Debug' Or '$(Configuration)'=='Release' Or '$(Configuration)'=='Debug-Net40' Or '$(Configuration)'=='Release-Net40' Or '$(Configuration)'=='Mono'">
-    <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.47.0\lib\net40\WebDriver.dll</HintPath>
+    <Reference Include="WebDriver, Version=2.48.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Selenium.WebDriver.2.48.2\lib\net40\WebDriver.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="WebDriver.Support">
-      <HintPath>..\..\packages\Selenium.Support.2.47.0\lib\net40\WebDriver.Support.dll</HintPath>
+    <Reference Include="WebDriver.Support, Version=2.48.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Selenium.Support.2.48.2\lib\net40\WebDriver.Support.dll</HintPath>
+      <Private>True</Private>
     </Reference>
   </ItemGroup>
   <ItemGroup Condition="'$(Configuration)'=='Debug-Net35' Or '$(Configuration)'=='Release-Net35'">
     <Reference Include="WebDriver">
-      <HintPath>..\..\packages\Selenium.WebDriver.2.47.0\lib\net35\WebDriver.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.WebDriver.2.48.2\lib\net35\WebDriver.dll</HintPath>
     </Reference>
     <Reference Include="WebDriver.Support">
-      <HintPath>..\..\packages\Selenium.Support.2.47.0\lib\net35\WebDriver.Support.dll</HintPath>
+      <HintPath>..\..\packages\Selenium.Support.2.48.2\lib\net35\WebDriver.Support.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
