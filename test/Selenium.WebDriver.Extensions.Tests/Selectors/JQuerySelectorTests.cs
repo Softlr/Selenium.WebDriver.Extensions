@@ -13,6 +13,7 @@
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> SelectorsTests
         {
             get
@@ -309,6 +310,7 @@
             }
         }
 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> SelectorExceptionTests
         {
             get
@@ -508,6 +510,7 @@
 
         [Theory]
         [MemberData("SelectorsTests")]
+        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector)
         {
             // Given

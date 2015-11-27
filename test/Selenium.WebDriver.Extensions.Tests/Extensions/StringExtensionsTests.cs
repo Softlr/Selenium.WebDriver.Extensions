@@ -9,6 +9,7 @@
     [ExcludeFromCodeCoverage]
     public class StringExtensionsTests
     {
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> TestData
         {
             get

@@ -9,6 +9,7 @@
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> CoreSelectors
         {
             get
