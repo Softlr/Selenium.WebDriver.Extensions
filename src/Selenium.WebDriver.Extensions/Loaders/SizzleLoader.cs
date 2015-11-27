@@ -14,15 +14,13 @@
         public override Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
 
         /// <inheritdoc/>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
-            Justification = "False positive.")]
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
         public override string CheckScript => DetectScriptCode + "(window.Sizzle)";
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
         /// <exception cref="LoaderException">No URI given as first parameter.</exception>
-        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly",
-            Justification = "False positive.")]
+        [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
         public override string LoadScript(params string[] args)
         {
             if (args == null)
