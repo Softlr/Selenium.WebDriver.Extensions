@@ -44,7 +44,7 @@
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By ClassName(string classNameToFind)
+        public static new Selenium.By ClassName(string classNameToFind)
         {
             return Selenium.By.ClassName(classNameToFind);
         }
@@ -54,7 +54,7 @@
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By CssSelector(string cssSelectorToFind)
+        public static new Selenium.By CssSelector(string cssSelectorToFind)
         {
             return Selenium.By.CssSelector(cssSelectorToFind);
         }
@@ -64,7 +64,7 @@
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By Id(string idToFind)
+        public static new Selenium.By Id(string idToFind)
         {
             return Selenium.By.Id(idToFind);
         }
@@ -74,7 +74,7 @@
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By LinkText(string linkTextToFind)
+        public static new Selenium.By LinkText(string linkTextToFind)
         {
             return Selenium.By.LinkText(linkTextToFind);
         }
@@ -84,7 +84,7 @@
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By Name(string nameToFind)
+        public static new Selenium.By Name(string nameToFind)
         {
             return Selenium.By.Name(nameToFind);
         }
@@ -94,7 +94,7 @@
         /// </summary>
         /// <param name="partialLinkTextToFind">The partial link text to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By PartialLinkText(string partialLinkTextToFind)
+        public static new Selenium.By PartialLinkText(string partialLinkTextToFind)
         {
             return Selenium.By.PartialLinkText(partialLinkTextToFind);
         }
@@ -104,7 +104,7 @@
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public new static Selenium.By TagName(string tagNameToFind)
+        public static new Selenium.By TagName(string tagNameToFind)
         {
             return Selenium.By.TagName(tagNameToFind);
         }
@@ -118,7 +118,7 @@
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
         [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
-        public new static Selenium.By XPath(string xpathToFind)
+        public static new Selenium.By XPath(string xpathToFind)
         {
             return Selenium.By.XPath(xpathToFind);
         }
