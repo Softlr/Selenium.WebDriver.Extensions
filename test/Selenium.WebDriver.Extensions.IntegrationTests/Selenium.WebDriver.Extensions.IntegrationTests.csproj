@@ -87,32 +87,32 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChromeTests\WebDriverExtensions.SizzleLoadedSelectorChromeTests.cs" />
-    <Compile Include="ChromeTests\WebDriverExtensions.JQueryLoadedSelectorChromeTests.cs" />
-    <Compile Include="ChromeTests\WebDriverExtensions.SizzleUnloadedSelectorChromeTests.cs" />
-    <Compile Include="ChromeTests\WebDriverExtensions.JQueryUnloadedSelectorChromeTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryLoadedSelectorFirefoxTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.JQueryUnloadedSelectorFirefoxTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.SizzleLoadedSelectorFirefoxTests.cs" />
-    <Compile Include="FirefoxTests\WebDriverExtensions.SizzleUnloadedSelectorFirefoxTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryLoadedSelectorInternetExplorerTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.JQueryUnloadedSelectorInternetExplorerTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.SizzleLoadedSelectorInternetExplorerTests.cs" />
-    <Compile Include="InternetExplorerTests\WebDriverExtensions.SizzleUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensionsJQueryLoadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensionsJQueryUnloadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensionsSizzleLoadedSelectorChromeTests.cs" />
+    <Compile Include="ChromeTests\WebDriverExtensionsSizzleUnloadedSelectorChromeTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensionsJQueryLoadedSelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensionsSizzleLoadedSelectorFirefoxTests.cs" />
+    <Compile Include="FirefoxTests\WebDriverExtensionsSizzleUnloadedSelectorFirefoxTests.cs" />
     <Compile Include="Fixtures\PhantomJsFixture.cs" />
     <Compile Include="Fixtures\InternetExplorerFixture.cs" />
     <Compile Include="Fixtures\ChromeFixture.cs" />
     <Compile Include="Fixtures\FirefoxFixture.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryLoadedSelectorPhantomJsTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.JQueryUnloadedSelectorPhantomJsTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleLoadedSelectorPhantomJsTests.cs" />
-    <Compile Include="PhantomJsTests\WebDriverExtensions.SizzleUnloadedSelectorPhantomJsTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="InternetExplorerTests\WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests.cs" />
+    <Compile Include="PhantomJsTests\WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests.cs" />
     <Compile Include="TestCaseModule.cs" />
     <Compile Include="TestPage.cs" />
     <Compile Include="TestsBase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tests\WebDriverExtensions.JQuerySelectorTests.cs" />
-    <Compile Include="Tests\WebDriverExtensions.SizzleSelectorTests.cs" />
+    <Compile Include="Tests\WebDriverExtensionsJQuerySelectorTests.cs" />
+    <Compile Include="Tests\WebDriverExtensionsSizzleSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config">
