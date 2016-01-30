@@ -7,6 +7,7 @@
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class InternetExplorerFixture : IDisposable
     {
         private bool disposed;
