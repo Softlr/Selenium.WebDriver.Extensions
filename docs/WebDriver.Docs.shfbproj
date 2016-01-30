@@ -18,8 +18,8 @@
     <HtmlHelpName>Documentation</HtmlHelpName>
     <Language>en-US</Language>
     <DocumentationSources>
-      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.48.2\lib\net40\WebDriver.dll" />
-      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.48.2\lib\net40\WebDriver.xml" />
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.50.1\lib\net40\WebDriver.dll" />
+      <DocumentationSource sourceFile="..\packages\Selenium.WebDriver.2.50.1\lib\net40\WebDriver.xml" />
     </DocumentationSources>
 	<ComponentPath>..\packages</ComponentPath>
 	<SHFBROOT Condition=" '$(SHFBROOT)' == '' ">$(MSBuildThisFileDirectory)..\packages\EWSoftware.SHFB.2015.10.10.0\tools\</SHFBROOT>
