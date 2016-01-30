@@ -15,7 +15,7 @@ Task CleanArtifacts -Description 'Cleans the artifacts directory' {
     If (Test-Path $artifactsDir) {
         Remove-Item $artifactsDir -Recurse
     }
-    New-Item -ItemType directory -Path $artifactsDir
+    New-Item -ItemType directory -Path $artifactsDir | Out-Null
 }
 
 Task CleanNet45 -Description 'Cleans the output directory of the default .NET 4.5 build configuration' {
