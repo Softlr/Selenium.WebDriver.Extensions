@@ -33,7 +33,7 @@ Task CleanNet35 -Description 'Cleans the output directory of the .NET 3.5 build 
 Task CleanDocs -Description 'Cleans the output directory of the documentation build configuration' {
     $envVarNotDefined = $env:SHFBROOT -eq $null
     If ($envVarNotDefined) {
-        $env:SHFBROOT = $PWD.Path + '\packages\EWSoftware.SHFB.2015.7.25.0\tools'
+        $env:SHFBROOT = $PWD.Path + '\packages\EWSoftware.SHFB.2015.10.10.0\tools'
     }
     Try {
         New-Build -Solution $solution -BuildConfiguration Docs -Target Clean
