@@ -1,4 +1,4 @@
-properties {
+Properties {
     $solution = '.\Selenium.WebDriver.Extensions.sln'
     $version = '2.0.1'
     $unitTests = '.\test\Selenium.WebDriver.Extensions.Tests\bin\Release\Selenium.WebDriver.Extensions.Tests.dll'
