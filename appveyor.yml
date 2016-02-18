@@ -16,7 +16,7 @@
     - packages -> **\packages.config
 
   install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
@@ -112,7 +112,7 @@
     - packages -> **\packages.config
 
   install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
@@ -180,7 +180,7 @@
     - packages -> **\packages.config
 
   install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.0.0\tools\phantomjs;%PATH%
+    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
