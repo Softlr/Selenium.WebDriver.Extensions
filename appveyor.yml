@@ -63,6 +63,7 @@
     - path: coverage.xml
     - path: docs\bin\Docs
     - path: CoverageReport
+    - path: src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nupkg
 
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1
@@ -157,6 +158,7 @@
     - path: coverage.xml
     - path: docs\bin\Docs
     - path: CoverageReport
+    - path: src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nupkg
 
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1-dev
@@ -225,6 +227,7 @@
     - path: coverage.xml
     - path: docs\bin\Docs
     - path: CoverageReport
+    - path: src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nupkg
     
   before_deploy:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1-rc2
