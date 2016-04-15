@@ -141,7 +141,7 @@
     <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.21.0.0\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
     </Content>
-    <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.44\content\IEDriverServer.exe">
+    <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.53\content\IEDriverServer.exe">
       <Link>Drivers\IEDriverServer.exe</Link>
     </Content>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
