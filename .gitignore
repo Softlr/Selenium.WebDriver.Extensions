@@ -185,3 +185,4 @@ phantomjs-license.txt
 # build artifacts
 .artifacts/
 .vs/
+ReSharper.xml
