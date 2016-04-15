@@ -61,20 +61,26 @@
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <OutputPath>bin\Debug\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release-Net45' ">
+    <OutputPath>bin\Release-Net45\</OutputPath>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-Net40' ">
     <OutputPath>bin\Release-Net40\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net40' ">
-    <OutputPath>bin\Debug-Net40\</OutputPath>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Docs' ">
-    <OutputPath>bin\Docs\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release-Net35' ">
     <OutputPath>bin\Release-Net35\</OutputPath>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net45' ">
+    <OutputPath>bin\Debug-Net45\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net40' ">
+    <OutputPath>bin\Debug-Net40\</OutputPath>
+  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug-Net35' ">
     <OutputPath>bin\Debug-Net35\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Docs' ">
+    <OutputPath>bin\Docs\</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Mono' ">
     <OutputPath>bin\Mono\</OutputPath>

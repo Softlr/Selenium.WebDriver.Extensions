@@ -18,6 +18,10 @@ Task CleanArtifacts -Description 'Cleans the artifacts directory' {
     New-Item -ItemType directory -Path $artifactsDir | Out-Null
 }
 
+Task CleanNet46 -Description 'Cleans the output directory of the default .NET 4.6 build configuration' {
+    New-Build -Solution $solution -Target Clean
+}
+
 Task CleanNet45 -Description 'Cleans the output directory of the default .NET 4.5 build configuration' {
     New-Build -Solution $solution -Target Clean
 }
@@ -44,10 +48,14 @@ Task CleanDocs -Description 'Cleans the output directory of the documentation bu
     }
 }
 
-Task Clean -Description 'Cleans the output directory of all build configurations' -Depends CleanNet45, CleanNet40, CleanNet35, CleanDocs, CleanArtifacts
+Task Clean -Description 'Cleans the output directory of all build configurations' -Depends CleanNet46, CleanNet45, CleanNet40, CleanNet35, CleanDocs, CleanArtifacts
+
+Task CompileNet46 -Description 'Compiles the default .NET 4.6 build configuration' -Depends CleanNet46 {
+    New-Build -Solution $solution
+}
 
 Task CompileNet45 -Description 'Compiles the default .NET 4.5 build configuration' -Depends CleanNet45 {
-    New-Build -Solution $solution
+    New-Build -Solution $solution -BuildConfiguration Release-Net45
 }
 
 Task CompileNet40 -Description 'Compiles the .NET 4.0 build configuration' -Depends CleanNet40 {
@@ -58,37 +66,37 @@ Task CompileNet35 -Description 'Compiles the .NET 3.5 build configuration' -Depe
     New-Build -Solution $solution -BuildConfiguration Release-Net35
 }
 
-Task Compile -Description 'Compiles all of the build configurations' -Depends CompileNet45, CompileNet40, CompileNet35
+Task Compile -Description 'Compiles all of the build configurations' -Depends CompileNet46, CompileNet45, CompileNet40, CompileNet35
 
-Task Docs -Description 'Compiles the documentation build configuration' -Depends CleanDocs, CleanArtifacts, CompileNet45 {
+Task Docs -Description 'Compiles the documentation build configuration' -Depends CleanDocs, CleanArtifacts, CompileNet46 {
     New-Build -Solution $solution -BuildConfiguration Docs
     
     Move-Item '.\docs\bin\Docs' '.\.artifacts'
 }
 
-Task Test -Description 'Runs the unit tests' -Depends CompileNet45 {
+Task Test -Description 'Runs the unit tests' -Depends CompileNet46 {
     Test-Assembly -Tests $unitTests
 }
 
-Task IntegrationPhantomJs -Description 'Runs the PhantomJS integration tests' -Depends CompileNet45 {
+Task IntegrationPhantomJs -Description 'Runs the PhantomJS integration tests' -Depends CompileNet46 {
     Test-Assembly -Tests $integrationTests -Trait Browser=PhantomJS
 }
 
-Task IntegrationChrome -Description 'Runs the Chrome integration tests' -Depends CompileNet45 {
+Task IntegrationChrome -Description 'Runs the Chrome integration tests' -Depends CompileNet46 {
     Test-Assembly -Tests $integrationTests -Trait Browser=Chrome
 }
 
-Task IntegrationFirefox -Description 'Runs the Firefox integration tests' -Depends CompileNet45 {
+Task IntegrationFirefox -Description 'Runs the Firefox integration tests' -Depends CompileNet46 {
     Test-Assembly -Tests $integrationTests -Trait Browser=Firefox
 }
 
-Task IntegrationInternetExplorer -Description 'Runs the Internet Explorer integration tests' -Depends CompileNet45 {
+Task IntegrationInternetExplorer -Description 'Runs the Internet Explorer integration tests' -Depends CompileNet46 {
     Test-Assembly -Tests $integrationTests -Trait Browser=InternetExplorer
 }
 
 Task Integration -Description 'Runs all of the integration tests' -Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
 
-Task AnalyzeCoverage -Description 'Analyzes the code coverage' -Depends CompileNet45 {
+Task AnalyzeCoverage -Description 'Analyzes the code coverage' -Depends CompileNet46 {
     New-CoverageAnalysis -Tests $unitTests -Output $coverageXml -Filter '+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*'
 }
 
