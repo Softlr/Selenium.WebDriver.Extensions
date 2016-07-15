@@ -12,7 +12,7 @@ The version 2.0 of the extensions library has been released. The new features of
 * Removal of query selector. As described above, `QuerySelector` class is no longer necessary and has been removed in V2.
 * Single NuGet package. There is only one NuGet package containing all of the extenions instead of four separate packages that V1 included. The extensions library is small enough for all of the important code to be merged into one package.
 * Support for JQuery getters and setters was dropped. V1 included a mechanism to run JQuery getters and setters as most of the calls used JQueryHelper class as an mediator between Selenium core and extensions library. With the new architecture there is no place for the JQueryHelper anymore and the support for those methods was dropped. The only jQuery methods supported are now [traversing methods](https://api.jquery.com/category/traversing/).
-* Semantic versioning. V2 utilizse SemVer from the first release rather than V1's {major}.{minor}.{build} schema.
+* Semantic versioning. V2 utilizes SemVer from the first release rather than V1's {major}.{minor}.{build} schema.
 * Support for `ExpectedConditions`. By implementing the `By` class, V2 of the extensions library comes with the support for `ExpectedConditions`.
 * Support for page objects. By implementing the By class, V2 of the exntesions library comes with the support for [Selenium Page Objects](https://code.google.com/p/selenium/wiki/PageObjects).
 * Changes to the static `By` implementations. There still is a `By` class provided with static methods for creating all sorts of selectors, however it is now simply be a wrapper on a base class that will also provide methods for the new selectors.
