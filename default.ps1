@@ -12,8 +12,8 @@ Task default -Depends Clean, Compile, Test, Coverage, Docs, Pack
 
 Task CleanArtifacts -Description 'Cleans the artifacts directory' {
     $artifactsDir = '.\.artifacts'
-    If (Test-Path $artifactsDir) {
-        Remove-Item $artifactsDir -Recurse
+    If (Test-Path -Path $artifactsDir) {
+        Remove-Item -Path $artifactsDir -Recurse
     }
     New-Item -ItemType directory -Path $artifactsDir | Out-Null
 }
@@ -71,7 +71,7 @@ Task Compile -Description 'Compiles all of the build configurations' -Depends Co
 Task Docs -Description 'Compiles the documentation build configuration' -Depends CleanDocs, CleanArtifacts, CompileNet46 {
     New-Build -Solution $solution -BuildConfiguration Docs
     
-    Move-Item '.\docs\bin\Docs' '.\.artifacts'
+    Move-Item -Path .\docs\bin\Docs -Destination .\.artifacts
 }
 
 Task Test -Description 'Runs the unit tests' -Depends CompileNet46 {
@@ -110,5 +110,5 @@ Task Coveralls -Description 'Sends coverage data to coveralls.io' -Depends Analy
 
 Task Pack -Description 'Packs NuGet package' -Depends Compile {
     New-NugetPackage -Specification .\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version $version
-    Move-Item '.\*.nupkg' '.\.artifacts'
+    Move-Item -Path .\*.nupkg -Destination .\.artifacts
 }
