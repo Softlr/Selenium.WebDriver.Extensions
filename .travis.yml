@@ -1,7 +1,7 @@
 language: csharp
 solution: Selenium.WebDriver.Extensions.sln
 install:
-  - mono ./.nuget/nuget.exe restore ./Selenium.WebDriver.Extensions.sln -Verbosity detailed
+  - mono ./.nuget/NuGet.exe restore ./Selenium.WebDriver.Extensions.sln -Verbosity detailed
   - export SHFBROOT=$TRAVIS_BUILD_DIR/packages/SHFB.2014.5.31/tools/Sandcastle\ Help\ File\ Builder
 script:
   - xbuild /p:Configuration=Mono ./Selenium.WebDriver.Extensions.sln
