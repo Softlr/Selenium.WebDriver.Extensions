@@ -15,7 +15,7 @@
 
         /// <inheritdoc/>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
-        public override string CheckScript => DetectScriptCode + "(window.Sizzle)";
+        public override string CheckScript => $"{DetectScriptCode}(window.Sizzle)";
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>

@@ -76,7 +76,7 @@
                     return results.First();
                 }
 
-                throw new NoSuchElementException("No element found for selector: " + this.RawSelector);
+                throw new NoSuchElementException($"No element found for selector: {this.RawSelector}");
             };
 
             this.FindElementsMethod = searchContext =>
@@ -85,7 +85,7 @@
 
                 this.LoadExternalLibrary(driver);
                 var result = ParseUtil.ParseResult<IEnumerable<IWebElement>>(
-                    driver.ExecuteScript<object>("return " + this.Selector + this.ResultResolver + ";"));
+                    driver.ExecuteScript<object>($"return {this.Selector}{this.ResultResolver};"));
                 return new ReadOnlyCollection<IWebElement>(result.ToList());
             };
         }

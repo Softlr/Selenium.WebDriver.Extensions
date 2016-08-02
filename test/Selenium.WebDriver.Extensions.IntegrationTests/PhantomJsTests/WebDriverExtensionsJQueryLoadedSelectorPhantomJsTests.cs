@@ -15,7 +15,7 @@
         public WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/JQueryLoaded"));
+            this.Browser.Navigate().GoToUrl(new Uri($"{this.ServerUrl}/JQueryLoaded"));
         }
     }
 }

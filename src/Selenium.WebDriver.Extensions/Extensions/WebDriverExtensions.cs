@@ -42,7 +42,7 @@
 
             driver.LoadExternalLibrary(
                 new JQueryLoader(),
-                new Uri("https://code.jquery.com/jquery-" + version + ".min.js"),
+                new Uri($"https://code.jquery.com/jquery-{version}.min.js"),
                 timeout);
         }
 
@@ -91,7 +91,7 @@
 
             driver.LoadExternalLibrary(
                 new SizzleLoader(),
-                new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/" + version + "/sizzle.min.js"),
+                new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"),
                 timeout);
         }
 
@@ -193,7 +193,7 @@
                 throw new ArgumentNullException(nameof(loader));
             }
 
-            var result = driver.ExecuteScript<bool?>("return " + loader.CheckScript + ";").Value;
+            var result = driver.ExecuteScript<bool?>($"return {loader.CheckScript};").Value;
             return result;
         }
 

@@ -53,7 +53,7 @@
 
             this.Variable = variable;
             this.CallChain = chain;
-            this.Description = "By.JQuerySelector: " + this.RawSelector;
+            this.Description = $"By.JQuerySelector: {this.RawSelector}";
         }
 
         /// <summary>
@@ -62,8 +62,8 @@
         public virtual string Variable { get; }
 
         /// <inheritdoc/>
-        public override string Selector => this.Variable + "('" + this.RawSelector.Replace('\'', '"') + "'"
-            + (this.Context != null ? ", " + this.Context.Selector : string.Empty) + ")"
+        public override string Selector => $"{this.Variable}('{this.RawSelector.Replace('\'', '"')}'"
+            + (this.Context != null ? $", {this.Context.Selector}" : string.Empty) + ")"
             + (string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain);
 
         /// <summary>
@@ -640,7 +640,7 @@
         public JQuerySelector Slice(int start, int? end = null)
         {
             var data = end.HasValue
-                ? start + ", " + end
+                ? $"{start}, {end}"
                 : start.ToString(CultureInfo.InvariantCulture);
             return this.Chain("slice", data, true);
         }
@@ -669,8 +669,8 @@
             if (selector != null)
             {
                 data = string.IsNullOrEmpty(filter)
-                    ? "'" + selector.Replace('\'', '"') + "'"
-                    : "'" + selector.Replace('\'', '"') + "', '" + filter.Replace('\'', '"') + "'";
+                    ? $"'{selector.Replace('\'', '"')}'"
+                    : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'";
             }
 
             return data;
@@ -689,14 +689,14 @@
         {
             selector = selector == null
                 ? string.Empty
-                : (noWrap ? selector.Trim() : "'" + selector.Trim().Replace('\'', '"') + "'");
+                : (noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'");
             var callChain = string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain;
 
             return new JQuerySelector(
                 this.RawSelector,
                 this.Context,
                 this.Variable,
-                callChain + "." + name + "(" + selector + ")");
+                $"{callChain}.{name}({selector})");
         }
 
         /// <summary>
@@ -712,7 +712,7 @@
                 this.RawSelector,
                 this.Context,
                 this.Variable,
-                "." + name + "('" + selector.Replace('\'', '"') + "', " + context.Selector + ")");
+                $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
         }
     }
 }

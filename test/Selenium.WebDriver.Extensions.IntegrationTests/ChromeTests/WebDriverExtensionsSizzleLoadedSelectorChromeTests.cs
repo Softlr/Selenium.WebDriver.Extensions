@@ -15,7 +15,7 @@
         public WebDriverExtensionsSizzleLoadedSelectorChromeTests(ChromeFixture fixture)
         {
             this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri(this.ServerUrl + "/SizzleLoaded"));
+            this.Browser.Navigate().GoToUrl(new Uri($"{this.ServerUrl}/SizzleLoaded"));
         }
     }
 }
