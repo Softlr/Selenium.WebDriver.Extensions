@@ -1,8 +1,8 @@
 language: csharp
 solution: Selenium.WebDriver.Extensions.sln
 install:
-  - mono ./.nuget/NuGet.exe restore ./Selenium.WebDriver.Extensions.sln -Verbosity detailed
-  - export SHFBROOT=$TRAVIS_BUILD_DIR/packages/SHFB.2014.5.31/tools/Sandcastle\ Help\ File\ Builder
+  - mono ./.nuget/NuGet.exe restore ./Selenium.WebDriver.Extensions.sln
+  - export SHFBROOT=$TRAVIS_BUILD_DIR/packages/EWSoftware.SHFB.2016.5.28.0/tools
 script:
   - xbuild /p:Configuration=Mono ./Selenium.WebDriver.Extensions.sln
 sudo: false
