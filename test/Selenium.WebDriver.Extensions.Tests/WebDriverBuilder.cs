@@ -40,7 +40,7 @@
 
         public WebDriverBuilder ThatContainsElementLocatedByJQuery(string selector)
         {
-            selector = "jQuery('" + selector + "')";
+            selector = $"jQuery('{selector}')";
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains(selector)), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
@@ -49,7 +49,7 @@
 
         public WebDriverBuilder ThatContainsElementsLocatedByJQuery(string selector)
         {
-            selector = "jQuery('" + selector + "')";
+            selector = $"jQuery('{selector}')";
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains(selector)), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object, new Mock<IWebElement>().Object });
@@ -58,7 +58,7 @@
 
         public WebDriverBuilder ThatDoesNotContainElementLocatedByJQuery(string selector)
         {
-            selector = "jQuery('" + selector + "')";
+            selector = $"jQuery('{selector}')";
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains(selector)), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement>());
@@ -69,7 +69,7 @@
         {
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains("function(element)")), It.IsAny<object[]>()))
-                .Returns("body > " + selector);
+                .Returns($"body > {selector}");
             return this;
         }
 
@@ -83,7 +83,7 @@
 
         public WebDriverBuilder ThatContainsElementLocatedBySizzle(string selector)
         {
-            selector = "Sizzle('" + selector + "')";
+            selector = $"Sizzle('{selector}')";
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains(selector)), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object });
@@ -92,7 +92,7 @@
 
         public WebDriverBuilder ThatContainsElementsLocatedBySizzle(string selector)
         {
-            selector = "Sizzle('" + selector + "')";
+            selector = $"Sizzle('{selector}')";
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains(selector)), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement> { new Mock<IWebElement>().Object, new Mock<IWebElement>().Object });
@@ -101,7 +101,7 @@
 
         public WebDriverBuilder ThatDoesNotContainElementLocatedBySizzle(string selector)
         {
-            selector = "Sizzle('" + selector + "')";
+            selector = $"Sizzle('{selector}')";
             this.driverMock.As<IJavaScriptExecutor>()
                 .Setup(x => x.ExecuteScript(It.Is<string>(s => s.Contains(selector)), It.IsAny<object[]>()))
                 .Returns(new List<IWebElement>());

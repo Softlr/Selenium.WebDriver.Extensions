@@ -22,7 +22,7 @@
         }
 
         [Theory]
-        [MemberData("TestData")]
+        [MemberData(nameof(TestData))]
         [SuppressMessage("ReSharper", "InvokeAsExtensionMethod")]
         public void ShouldDetectNullsAndWhiteSpaces(string testValue, bool expected)
         {
