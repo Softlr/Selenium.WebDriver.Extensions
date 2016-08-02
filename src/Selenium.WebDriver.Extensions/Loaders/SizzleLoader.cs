@@ -19,7 +19,7 @@
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
-        /// <exception cref="LoaderException">No URI given as first parameter.</exception>
+        /// <exception cref="ArgumentException">No URI given.</exception>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
         public override string LoadScript(string url)
         {

@@ -156,7 +156,6 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
-    <Compile Include="Exceptions\LoaderException.cs" />
     <Compile Include="Extensions\By.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
