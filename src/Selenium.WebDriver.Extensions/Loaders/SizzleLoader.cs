@@ -8,21 +8,21 @@
     /// <summary>
     /// The Sizzle loader.
     /// </summary>
-    public class SizzleLoader : LoaderBase
+    public class SizzleLoader : ILoader
     {
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-        public override Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
+        public Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
 
         /// <inheritdoc/>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
-        public override string CheckScript => $"{DetectScriptCode}(window.Sizzle)";
+        public string CheckScript => $"{DetectScriptCode}(window.Sizzle)";
 
         /// <inheritdoc/>
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
         /// <exception cref="ArgumentException">No URI given.</exception>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
-        public override string LoadScript(string url)
+        public string LoadScript(string url)
         {
             if (url == null)
             {
