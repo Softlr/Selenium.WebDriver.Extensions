@@ -23,7 +23,7 @@ Task CleanNet46 -Description 'Cleans the output directory of the default .NET 4.
 }
 
 Task CleanNet45 -Description 'Cleans the output directory of the default .NET 4.5 build configuration' {
-    New-Build -Solution $solution -Target Clean
+    New-Build -Solution $solution -BuildConfiguration Release-Net45 -Target Clean
 }
 
 Task CleanNet40 -Description 'Cleans the output directory of the .NET 4.0 build configuration' {
