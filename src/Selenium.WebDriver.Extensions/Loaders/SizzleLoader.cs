@@ -3,11 +3,12 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using static OpenQA.Selenium.Loaders.Constants;
 
     /// <summary>
     /// The Sizzle loader.
     /// </summary>
-    public class SizzleLoader : ExternalLibraryLoaderBase
+    public class SizzleLoader : LoaderBase
     {
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]

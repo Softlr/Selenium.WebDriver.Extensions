@@ -3,11 +3,12 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using static OpenQA.Selenium.Loaders.Constants;
 
     /// <summary>
     /// The jQuery loader.
     /// </summary>
-    public class JQueryLoader : ExternalLibraryLoaderBase
+    public class JQueryLoader : LoaderBase
     {
         /// <inheritdoc/>
         [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]

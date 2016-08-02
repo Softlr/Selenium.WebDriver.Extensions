@@ -3,12 +3,12 @@
     /// <summary>
     /// The external library loader base.
     /// </summary>
-    public abstract class ExternalLibraryLoaderBase : LoaderBase
+    internal static class Constants
     {
         /// <summary>
         /// The JavaScript to load jQuery.
         /// </summary>
-        protected const string LoadScriptCode = @"(function(source) {
+        public const string LoadScriptCode = @"(function(source) {
             'use strict';
             var script = document.createElement('script');
             script.src = source;
