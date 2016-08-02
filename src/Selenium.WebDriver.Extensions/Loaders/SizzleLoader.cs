@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using static OpenQA.Selenium.Loaders.Constants;
+    using static OpenQA.Selenium.Loaders.JavaScriptSnippets;
 
     /// <summary>
     /// The Sizzle loader.
