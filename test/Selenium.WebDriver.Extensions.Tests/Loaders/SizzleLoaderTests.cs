@@ -23,7 +23,7 @@
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("args", ex.ParamName);
+            Assert.Equal("url", ex.ParamName);
         }
 
         [Fact]
