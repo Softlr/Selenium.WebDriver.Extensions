@@ -120,39 +120,40 @@
     <DocumentationFile>bin\Mono\Selenium.WebDriver.Extensions.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="JetBrains.Annotations, Version=10.1.4.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\JetBrains.Annotations.10.1.4\lib\net20\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=10.1.5.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JetBrains.Annotations.10.1.5\lib\net\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(Configuration)'!='Debug-Net35' And '$(Configuration)'!='Release-Net35'">
       <ItemGroup>
-        <Reference Include="WebDriver, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\..\packages\Selenium.WebDriver.2.53.0\lib\net40\WebDriver.dll</HintPath>
+        <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="WebDriver.Support, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\..\packages\Selenium.Support.2.53.0\lib\net40\WebDriver.Support.dll</HintPath>
+        <Reference Include="WebDriver.Support, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.dll</HintPath>
           <Private>True</Private>
         </Reference>
       </ItemGroup>
-	</When>
-	<Otherwise>
+    </When>
+    <Otherwise>
       <ItemGroup>
-        <Reference Include="WebDriver, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\..\packages\Selenium.WebDriver.2.53.0\lib\net35\WebDriver.dll</HintPath>
+        <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Selenium.WebDriver.2.53.1\lib\net35\WebDriver.dll</HintPath>
           <Private>True</Private>
         </Reference>
-        <Reference Include="WebDriver.Support, Version=2.53.0.0, Culture=neutral, processorArchitecture=MSIL">
-          <HintPath>..\..\packages\Selenium.Support.2.53.0\lib\net35\WebDriver.Support.dll</HintPath>
+        <Reference Include="WebDriver.Support, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Selenium.Support.2.53.1\lib\net35\WebDriver.Support.dll</HintPath>
           <Private>True</Private>
         </Reference>
       </ItemGroup>
-	</Otherwise>
+    </Otherwise>
   </Choose>
   <ItemGroup>
     <Compile Include="Exceptions\LoaderException.cs" />
