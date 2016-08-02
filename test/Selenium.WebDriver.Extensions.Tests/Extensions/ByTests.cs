@@ -26,7 +26,7 @@
         }
 
         [Theory]
-        [MemberData("CoreSelectors")]
+        [MemberData(nameof(CoreSelectors))]
         public void ShouldCreateSelector(Selenium.By selector)
         {
             // Given

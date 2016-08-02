@@ -509,7 +509,7 @@
         }
 
         [Theory]
-        [MemberData("SelectorsTests")]
+        [MemberData(nameof(SelectorsTests))]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector)
         {
@@ -520,7 +520,7 @@
         }
 
         [Theory]
-        [MemberData("SelectorExceptionTests")]
+        [MemberData(nameof(SelectorExceptionTests))]
         public void ShouldThrowExceptionForInvalidSelectors(Type exceptionType, Action selectorAction)
         {
             Assert.Throws(exceptionType, selectorAction);
