@@ -21,19 +21,19 @@
         /// <exception cref="ArgumentNullException">Arguments array is null.</exception>
         /// <exception cref="LoaderException">No URI given as first parameter.</exception>
         [SuppressMessage("StyleCop.CSharp.ReadabilityRules", "SA1126:PrefixCallsCorrectly")]
-        public override string LoadScript(params string[] args)
+        public override string LoadScript(string url)
         {
-            if (args == null)
+            if (url == null)
             {
-                throw new ArgumentNullException(nameof(args));
+                throw new ArgumentNullException(nameof(url));
             }
 
-            if (args.Length == 0)
+            if (url.Length == 0)
             {
-                throw new LoaderException("No jQuery URI given");
+                throw new ArgumentException("URL must not be empty", nameof(url));
             }
 
-            return $"{LoadScriptCode}('{args.First()}')";
+            return $"{LoadScriptCode}('{url}')";
         }
     }
 }

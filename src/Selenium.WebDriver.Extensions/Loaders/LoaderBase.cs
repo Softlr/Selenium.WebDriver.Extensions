@@ -15,22 +15,13 @@
             return typeof value === 'function';
         })";
 
-        /// <summary>
-        /// Gets the default URI of the external library.
-        /// </summary>
+        /// <inheritdoc/>
         public abstract Uri LibraryUri { get; }
 
-        /// <summary>
-        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
-        /// return <c>true</c> if the prerequisites are met; otherwise, <c>false</c>.
-        /// </summary>
+        /// <inheritdoc/>
         public abstract string CheckScript { get; }
 
-        /// <summary>
-        /// Gets the JavaScript to load the prerequisites for the selector.
-        /// </summary>
-        /// <param name="args">Load script arguments.</param>
-        /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
-        public abstract string LoadScript(params string[] args);
+        /// <inheritdoc/>
+        public abstract string LoadScript(string url);
     }
 }

@@ -1,68 +1,69 @@
-﻿﻿namespace OpenQA.Selenium.Tests.Loaders
- {
-     using System;
-     using System.Diagnostics.CodeAnalysis;
-     using System.Linq;
-     using OpenQA.Selenium.Loaders;
-     using Xunit;
+﻿namespace OpenQA.Selenium.Tests.Loaders
+{
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using OpenQA.Selenium.Loaders;
+    using Xunit;
 
-     [Trait("Category", "Unit")]
-     [ExcludeFromCodeCoverage]
-     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-     public class SizzleLoaderTests
-     {
-         [Fact]
-         public void ShouldThrowExceptionWhenLoadingScriptWithNullArguments()
-         {
-             // Given
-             var loader = new SizzleLoader();
+    [Trait("Category", "Unit")]
+    [ExcludeFromCodeCoverage]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
+    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    public class SizzleLoaderTests
+    {
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingScriptWithNullArguments()
+        {
+            // Given
+            var loader = new SizzleLoader();
 
-             // When
-             Action action = () => loader.LoadScript(null);
+            // When
+            Action action = () => loader.LoadScript(null);
 
-             // Then
-             var ex = Assert.Throws<ArgumentNullException>(action);
-             Assert.Equal("args", ex.ParamName);
-         }
+            // Then
+            var ex = Assert.Throws<ArgumentNullException>(action);
+            Assert.Equal("args", ex.ParamName);
+        }
 
-         [Fact]
-         public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyArguments()
-         {
-             // Given
-             var loader = new SizzleLoader();
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyUrl()
+        {
+            // Given
+            var loader = new SizzleLoader();
 
-             // When
-             Action action = () => loader.LoadScript(Enumerable.Empty<string>().ToArray());
+            // When
+            Action action = () => loader.LoadScript(string.Empty);
 
-             // Then
-             Assert.Throws<LoaderException>(action);
-         }
+            // Then
+            var ex = Assert.Throws<ArgumentException>(action);
+            Assert.Equal("url", ex.ParamName);
+        }
 
-         [Fact]
-         public void ShouldGetLibraryUri()
-         {
-             // Given
-             var loader = new SizzleLoader();
+        [Fact]
+        public void ShouldGetLibraryUri()
+        {
+            // Given
+            var loader = new SizzleLoader();
 
-             // When
-             var uri = loader.LibraryUri;
+            // When
+            var uri = loader.LibraryUri;
 
-             // Then
-             Assert.NotNull(uri);
-         }
+            // Then
+            Assert.NotNull(uri);
+        }
 
-         [Fact]
-         public void ShouldLoadScript()
-         {
-             // Given
-             var loader = new SizzleLoader();
+        [Fact]
+        public void ShouldLoadScript()
+        {
+            // Given
+            var loader = new SizzleLoader();
 
-             // When
-             var uri = loader.LoadScript("http://example.com");
+            // When
+            var uri = loader.LoadScript("http://example.com");
 
-             // Then
-             Assert.NotNull(uri);
-         }
-     }
- }
+            // Then
+            Assert.NotNull(uri);
+        }
+    }
+}

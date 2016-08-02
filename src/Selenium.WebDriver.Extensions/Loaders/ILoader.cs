@@ -21,8 +21,8 @@
         /// <summary>
         /// Gets the JavaScript to load the prerequisites for the selector.
         /// </summary>
-        /// <param name="args">Load script arguments.</param>
+        /// <param name="url">The script URL.</param>
         /// <returns>The JavaScript code to load the prerequisites for the selector.</returns>
-        string LoadScript(params string[] args);
+        string LoadScript(string url);
     }
 }

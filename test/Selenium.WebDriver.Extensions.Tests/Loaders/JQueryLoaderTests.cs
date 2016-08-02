@@ -27,16 +27,17 @@
          }
 
          [Fact]
-         public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyArguments()
+         public void ShouldThrowExceptionWhenLoadingLoadScriptWithEmptyUrl()
          {
              // Given
              var loader = new JQueryLoader();
 
              // When
-             Action action = () => loader.LoadScript(Enumerable.Empty<string>().ToArray());
+             Action action = () => loader.LoadScript(string.Empty);
 
              // Then
-             Assert.Throws<LoaderException>(action);
+             var ex = Assert.Throws<ArgumentException>(action);
+            Assert.Equal("url", ex.ParamName);
          }
 
          [Fact]

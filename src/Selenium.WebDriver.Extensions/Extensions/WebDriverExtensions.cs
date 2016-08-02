@@ -242,19 +242,19 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="loader">The loader.</param>
         /// <param name="timeout">The timeout value for the prerequisites load.</param>
-        /// <param name="loadParams">The additional parameters for load script.</param>
+        /// <param name="url">The URL for the script.</param>
         private static void LoadPrerequisites(
             this IWebDriver driver,
             ILoader loader,
             TimeSpan timeout,
-            params string[] loadParams)
+            string url)
         {
             if (driver.CheckSelectorPrerequisites(loader))
             {
                 return;
             }
 
-            driver.ExecuteScript(loader.LoadScript(loadParams));
+            driver.ExecuteScript(loader.LoadScript(url));
             var wait = new WebDriverWait(driver, timeout);
             wait.Until(d => driver.CheckSelectorPrerequisites(loader));
         }
