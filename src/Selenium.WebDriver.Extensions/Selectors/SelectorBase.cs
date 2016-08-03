@@ -7,6 +7,7 @@
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
+    using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
     /// The selector base.
@@ -14,37 +15,6 @@
     /// <typeparam name="T">The type of the selector.</typeparam>
     public abstract class SelectorBase<T> : By
     {
-        /// <summary>
-        /// The script to get the DOM path.
-        /// </summary>
-        private const string FindDomPathScript = @"return (function(element) {
-            'use strict';
-            var stack = [], siblingsCount, siblingIndex, i, sibling;
-            while (element.parentNode !== null) {
-                siblingsCount = 0;
-                siblingIndex = 0;
-                for (i = 0; i < element.parentNode.childNodes.length; i += 1) {
-                    sibling = element.parentNode.childNodes[i];
-                    if (sibling.nodeName === element.nodeName) {
-                        if (sibling === element) {
-                            siblingIndex = siblingsCount;
-                        }
-                        siblingsCount += 1;
-                    }
-                }
-                if (element.hasAttribute('id') && element.id !== '') {
-                    stack.unshift(element.nodeName.toLowerCase() + '#' + element.id);
-                } else if (siblingsCount > 1) {
-                    stack.unshift(element.nodeName.toLowerCase() + ':eq(' + siblingIndex + ')');
-                } else {
-                    stack.unshift(element.nodeName.toLowerCase());
-                }
-                element = element.parentNode;
-            }
-            stack = stack.slice(1); // removes the html element
-            return stack.join(' > ');
-            })(arguments[0]);";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
         /// </summary>
