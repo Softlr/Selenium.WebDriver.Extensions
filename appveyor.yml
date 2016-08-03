@@ -37,9 +37,8 @@
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   before_build:
-    - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-    - nuget restore nuget\packages.config -PackagesDirectory packages -DisableParallelProcessing
-    - nuget restore Selenium.WebDriver.Extensions.sln -DisableParallelProcessing
+    - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
+    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
     project: Selenium.WebDriver.Extensions.sln
@@ -134,9 +133,8 @@
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
   before_build:
-    - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-    - nuget restore .nuget\packages.config -PackagesDirectory packages -DisableParallelProcessing
-    - nuget restore Selenium.WebDriver.Extensions.sln -DisableParallelProcessing
+    - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
+    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
     project: Selenium.WebDriver.Extensions.sln
@@ -205,9 +203,8 @@
       secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
 
   before_build:
-    - appveyor DownloadFile https://dist.nuget.org/win-x86-commandline/latest/nuget.exe
-    - nuget restore .nuget\packages.config -PackagesDirectory packages -DisableParallelProcessing
-    - nuget restore Selenium.WebDriver.Extensions.sln -DisableParallelProcessing
+    - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
+    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
     project: Selenium.WebDriver.Extensions.sln
