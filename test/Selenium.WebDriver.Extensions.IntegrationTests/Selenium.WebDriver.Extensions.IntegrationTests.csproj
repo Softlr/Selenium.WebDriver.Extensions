@@ -147,6 +147,10 @@
     <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.21.0.0\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
     </Content>
+    <Content Include="..\..\packages\WebDriver.GeckoDriver.0.9.0\content\wires.exe">
+      <Link>wires.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.53\content\IEDriverServer.exe">
       <Link>Drivers\IEDriverServer.exe</Link>
     </Content>

@@ -14,7 +14,10 @@
 
         public FirefoxFixture()
         {
-            this.Browser = new FirefoxDriver();
+            var service = FirefoxDriverService.CreateDefaultService();
+            service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+            this.Browser = new FirefoxDriver(service);
+
         }
 
         ~FirefoxFixture()
