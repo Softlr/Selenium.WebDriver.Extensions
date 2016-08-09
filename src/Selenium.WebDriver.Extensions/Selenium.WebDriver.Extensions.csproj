@@ -159,7 +159,7 @@
     <Compile Include="Extensions\By.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
-    <Compile Include="Loaders\JavaScriptSnippets.cs" />
+    <Compile Include="JavaScriptSnippets.cs" />
     <Compile Include="Loaders\ILoader.cs" />
     <Compile Include="Loaders\JQueryLoader.cs" />
     <Compile Include="Loaders\SizzleLoader.cs" />
