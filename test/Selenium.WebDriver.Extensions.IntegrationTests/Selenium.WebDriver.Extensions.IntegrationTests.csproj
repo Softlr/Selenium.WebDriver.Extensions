@@ -110,6 +110,7 @@
     <Compile Include="FirefoxTests\WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensionsSizzleLoadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensionsSizzleUnloadedSelectorFirefoxTests.cs" />
+    <Compile Include="Fixtures\EdgeFixture.cs" />
     <Compile Include="Fixtures\PhantomJsFixture.cs" />
     <Compile Include="Fixtures\InternetExplorerFixture.cs" />
     <Compile Include="Fixtures\ChromeFixture.cs" />
@@ -118,6 +119,10 @@
     <Compile Include="InternetExplorerTests\WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsJQueryLoadedSelectorEdgeTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsJQueryUnloadedSelectorEdgeTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsSizzleLoadedSelectorEdgeTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsSizzleUnloadedSelectorEdgeTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests.cs" />
@@ -146,6 +151,9 @@
     </Content>
     <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.21.0.0\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
+    </Content>
+    <Content Include="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.10586.0\driver\MicrosoftWebDriver.exe">
+      <Link>Drivers\MicrosoftWebDriver.exe</Link>
     </Content>
     <Content Include="..\..\packages\WebDriver.GeckoDriver.0.9.0\content\wires.exe">
       <Link>wires.exe</Link>

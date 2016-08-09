@@ -118,7 +118,7 @@
 
             // Then
             Assert.NotNull(page.HeadingJQuery);
-            Assert.Equal("H1 Header", page.HeadingJQuery.Text);
+            Assert.Equal("H1 Header", page.HeadingJQuery.Text.Trim());
         }
     }
 }

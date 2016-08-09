@@ -116,7 +116,7 @@
 
             // Then
             Assert.NotNull(page.HeadingSizzle);
-            Assert.Equal("H1 Header", page.HeadingSizzle.Text);
+            Assert.Equal("H1 Header", page.HeadingSizzle.Text.Trim());
         }
     }
 }
