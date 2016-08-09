@@ -174,7 +174,7 @@
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="loader">The loader.</param>
-        /// <returns><c>true</c> if prerequisites are met; otherwise, <c>false</c></returns>
+        /// <returns><see langword="true"/> if prerequisites are met; otherwise, <see langword="false"/></returns>
         /// <exception cref="ArgumentNullException">
         /// Driver is null.
         /// -or- Loader is null.

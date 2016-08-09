@@ -682,7 +682,7 @@
         /// <param name="name">The jQuery method name.</param>
         /// <param name="selector">The jQuery method selector.</param>
         /// <param name="noWrap">
-        /// <c>true</c> to not to wrap the selector into quotes; otherwise, <c>false</c>.
+        /// <see langword="true"/> to not to wrap the selector into quotes; otherwise, <see langword="false"/>.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)

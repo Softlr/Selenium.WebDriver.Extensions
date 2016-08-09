@@ -6,14 +6,15 @@
     public static class StringExtensions
     {
         /// <summary>
-        /// Indicates whether the specified string is <c>null</c> or an empty string.
+        /// Indicates whether the specified string is <see langword="null"/> or an empty string.
         /// </summary>
         /// <param name="value">The string to test. </param>
         /// <returns>
-        /// <c>true</c> if the value parameter is <c>null</c> or an empty string (<c>""</c>); otherwise, <c>false</c>.
+        /// <see langword="true"/> if the value parameter is <see langword="null"/> or an empty string (<c>""</c>);
+        /// otherwise, <see langword="false"/>.
         /// </returns>
         /// <remarks>
-        /// This method is a implementation for <c>IsNullOrWhiteSpace</c> for <see cref="string"/> for .NET 3.5.
+        /// This method is a implementation for <see cref="IsNullOrWhiteSpace"/> for <see cref="string"/> for .NET 3.5.
         /// </remarks>
         public static bool IsNullOrWhiteSpace(this string value)
         {
