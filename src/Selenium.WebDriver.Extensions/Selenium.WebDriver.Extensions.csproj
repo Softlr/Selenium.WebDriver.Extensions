@@ -164,7 +164,6 @@
     <Compile Include="Selectors\SizzleSelector.cs" />
     <Compile Include="Selectors\JQuerySelector.cs" />
     <Compile Include="Selectors\SelectorBase.cs" />
-    <Compile Include="Utils\ParseUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">

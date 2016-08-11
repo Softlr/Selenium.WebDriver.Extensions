@@ -54,7 +54,7 @@
                 var driver = this.ResolveDriver(searchContext);
 
                 this.LoadExternalLibrary(driver);
-                var result = ParseUtil.ParseResult<IEnumerable<IWebElement>>(
+                var result = ParseResult<IEnumerable<IWebElement>>(
                     driver.ExecuteScript<object>($"return {this.Selector}{this.ResultResolver};"));
                 return new ReadOnlyCollection<IWebElement>(result.ToList());
             };
@@ -103,6 +103,37 @@
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract T CreateContext(string contextSelector);
+
+        /// <summary>
+        /// Parses the result of executed jQuery script.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
+        /// <param name="result">The result of jQuery script.</param>
+        /// <returns>Parsed result of invoking the script.</returns>
+        /// <remarks>
+        /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
+        /// to long integer type.
+        /// </remarks>
+        private static TResult ParseResult<TResult>(object result)
+        {
+            if (result == null)
+            {
+                return default(TResult);
+            }
+
+            if (typeof(TResult) == typeof(IEnumerable<IWebElement>)
+                && result.GetType() == typeof(ReadOnlyCollection<object>))
+            {
+                result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
+            }
+
+            if (result is double)
+            {
+                result = (long?)(double)result;
+            }
+
+            return (TResult)result;
+        }
 
         /// <summary>
         /// Resolves the <see cref="IWebDriver"/>.

@@ -103,7 +103,6 @@
     <Compile Include="SearchContextBuilder.cs" />
     <Compile Include="Selectors\SizzleSelectorTests.cs" />
     <Compile Include="Selectors\JQuerySelectorTests.cs" />
-    <Compile Include="Utils\ParseUtilTests.cs" />
     <Compile Include="WebDriverBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
