@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <CodeAnalysisRuleSet>..\CodeAnalysis.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -75,8 +75,13 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Runtime.4.1.0\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="WebDriver, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Selenium.WebDriver.3.0.0-beta1\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
@@ -110,6 +115,7 @@
     <Compile Include="FirefoxTests\WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensionsSizzleLoadedSelectorFirefoxTests.cs" />
     <Compile Include="FirefoxTests\WebDriverExtensionsSizzleUnloadedSelectorFirefoxTests.cs" />
+    <Compile Include="Fixtures\EdgeFixture.cs" />
     <Compile Include="Fixtures\PhantomJsFixture.cs" />
     <Compile Include="Fixtures\InternetExplorerFixture.cs" />
     <Compile Include="Fixtures\ChromeFixture.cs" />
@@ -118,6 +124,10 @@
     <Compile Include="InternetExplorerTests\WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests.cs" />
     <Compile Include="InternetExplorerTests\WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsJQueryLoadedSelectorEdgeTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsJQueryUnloadedSelectorEdgeTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsSizzleLoadedSelectorEdgeTests.cs" />
+    <Compile Include="EdgeTests\WebDriverExtensionsSizzleUnloadedSelectorEdgeTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests.cs" />
     <Compile Include="PhantomJsTests\WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests.cs" />
@@ -144,8 +154,15 @@
     <Content Include="..\..\packages\PhantomJS.2.1.1\tools\phantomjs\phantomjs.exe">
       <Link>Drivers\phantomjs.exe</Link>
     </Content>
-    <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.21.0.0\driver\chromedriver.exe">
+    <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.23.0.1\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
+    </Content>
+    <Content Include="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.10586.0\driver\MicrosoftWebDriver.exe">
+      <Link>Drivers\MicrosoftWebDriver.exe</Link>
+    </Content>
+    <Content Include="..\..\packages\WebDriver.GeckoDriver.0.9.0\content\wires.exe">
+      <Link>wires.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.2.53\content\IEDriverServer.exe">
       <Link>Drivers\IEDriverServer.exe</Link>
@@ -174,9 +191,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
-    <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.22.0.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.2.22.0.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
+    <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.23.0.1\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.2.23.0.1\build\Selenium.WebDriver.ChromeDriver.targets'))" />
   </Target>
-  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.22.0.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.22.0.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.23.0.1\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.23.0.1\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

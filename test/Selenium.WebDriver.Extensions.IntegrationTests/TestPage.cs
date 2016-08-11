@@ -4,6 +4,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
 
+    [ExcludeFromCodeCoverage]
     internal class TestPage
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]

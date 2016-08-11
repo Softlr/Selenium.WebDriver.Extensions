@@ -8,7 +8,7 @@
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Util")]
-    public class ParseUtilTests
+    public class SelectorBaseTests
     {
         [Fact]
         [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
@@ -18,7 +18,7 @@
             object rawResult = null;
 
             // When
-            var result = ParseUtil.ParseResult<bool>(rawResult);
+            var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
             // Then
             Assert.False(result);
@@ -31,7 +31,7 @@
             const double RawResult = 1.23d;
 
             // When
-            var result = ParseUtil.ParseResult<long>(RawResult);
+            var result = SelectorBase<JQuerySelector>.ParseResult<long>(RawResult);
 
             // Then
             Assert.IsType<long>(result);
@@ -44,7 +44,7 @@
             var rawResult = new ReadOnlyCollection<object>(new List<object>());
 
             // When
-            var result = ParseUtil.ParseResult<IEnumerable<IWebElement>>(rawResult);
+            var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
             // Then
             Assert.NotNull(result);
