@@ -11,6 +11,7 @@
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [SuppressMessage("ReSharper", "AccessToStaticMemberViaDerivedType")]
     public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
     {
         [Fact]
