@@ -12,8 +12,8 @@
     /// <summary>
     /// The selector base.
     /// </summary>
-    /// <typeparam name="T">The type of the selector.</typeparam>
-    public abstract class SelectorBase<T> : By
+    /// <typeparam name="TSelector">The type of the selector.</typeparam>
+    public abstract class SelectorBase<TSelector> : By
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
@@ -23,7 +23,7 @@
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected SelectorBase(string selector, T context)
+        protected SelectorBase(string selector, TSelector context)
         {
             if (selector == null)
             {
@@ -79,7 +79,7 @@
         /// <summary>
         /// Gets the context.
         /// </summary>
-        public virtual T Context { get; private set; }
+        public virtual TSelector Context { get; private set; }
 
         /// <summary>
         /// Gets the selector.
@@ -102,7 +102,7 @@
         /// </summary>
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
-        protected abstract T CreateContext(string contextSelector);
+        protected abstract TSelector CreateContext(string contextSelector);
 
         /// <summary>
         /// Parses the result of executed jQuery script.

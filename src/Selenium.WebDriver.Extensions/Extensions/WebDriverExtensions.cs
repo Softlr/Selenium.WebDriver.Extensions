@@ -126,7 +126,7 @@
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
         /// </summary>
-        /// <typeparam name="T">The type of the result.</typeparam>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
@@ -144,7 +144,7 @@
         /// -or- Script is null.
         /// </exception>
         /// <exception cref="ArgumentException">Script is empty.</exception>
-        public static T ExecuteScript<T>(this IWebDriver driver, string script, params object[] args)
+        public static TResult ExecuteScript<TResult>(this IWebDriver driver, string script, params object[] args)
         {
             if (driver == null)
             {
@@ -162,13 +162,13 @@
             }
 
             var result = ((IJavaScriptExecutor)driver).ExecuteScript(script, args);
-            return (T)result;
+            return (TResult)result;
         }
 
         /// <summary>
         /// Checks if prerequisites for the selector has been met.
         /// </summary>
-        /// <typeparam name="T">The type of the selector.</typeparam>
+        /// <typeparam name="TSelector">The type of the selector.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The selector.</param>
         /// <returns><see langword="true"/> if prerequisites are met; otherwise, <see langword="false"/></returns>
@@ -178,7 +178,8 @@
         /// </exception>
         /// <exception cref="ArgumentException">Script is empty.</exception>
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
-        public static bool CheckSelectorPrerequisites<T>(this IWebDriver driver, SelectorBase<T> selector)
+        public static bool CheckSelectorPrerequisites<TSelector>(
+            this IWebDriver driver, SelectorBase<TSelector> selector)
         {
             if (driver == null)
             {
@@ -197,7 +198,7 @@
         /// <summary>
         /// Checks if external library is loaded and loads it if needed.
         /// </summary>
-        /// <typeparam name="T">The type of the selector.</typeparam>
+        /// <typeparam name="TSelector">The type of the selector.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The selector.</param>
         /// <param name="libraryUri">
@@ -212,11 +213,8 @@
         /// Driver is null.
         /// -or- Loader is null.
         /// </exception>
-        public static void LoadExternalLibrary<T>(
-            this IWebDriver driver,
-            SelectorBase<T> selector,
-            Uri libraryUri,
-            TimeSpan? timeout = null)
+        public static void LoadExternalLibrary<TSelector>(
+            this IWebDriver driver, SelectorBase<TSelector> selector, Uri libraryUri, TimeSpan? timeout = null)
         {
             if (driver == null)
             {
@@ -237,16 +235,13 @@
         /// <summary>
         /// Loads the prerequisites for the selector.
         /// </summary>
-        /// <typeparam name="T">The type of the selector.</typeparam>
+        /// <typeparam name="TSelector">The type of the selector.</typeparam>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="selector">The selector.</param>
         /// <param name="timeout">The timeout value for the prerequisites load.</param>
         /// <param name="url">The URL for the script.</param>
-        private static void LoadPrerequisites<T>(
-            this IWebDriver driver,
-            SelectorBase<T> selector,
-            TimeSpan timeout,
-            Uri url)
+        private static void LoadPrerequisites<TSelector>(
+            this IWebDriver driver, SelectorBase<TSelector> selector, TimeSpan timeout, Uri url)
         {
             if (driver.CheckSelectorPrerequisites(selector))
             {
