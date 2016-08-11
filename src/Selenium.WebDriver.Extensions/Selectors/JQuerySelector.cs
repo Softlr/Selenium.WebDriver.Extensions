@@ -4,23 +4,14 @@
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using OpenQA.Selenium.Extensions;
+    using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
     /// Searches the DOM elements using jQuery selector.
     /// </summary>
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression.</param>
-        [SuppressMessage("ReSharper", "RedundantOverload.Global")]
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
-        public JQuerySelector(string selector)
-            : this(selector, null, "jQuery", null)
-        {
-        }
+        private const string LibraryVariable = "window.jQuery";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
@@ -38,7 +29,8 @@
         /// -or- jQuery variable name is empty.
         /// </exception>
         [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
-        public JQuerySelector(string selector, JQuerySelector context, string variable, string chain)
+        public JQuerySelector(
+            string selector, JQuerySelector context = null, string variable = "jQuery", string chain = null)
             : base(selector, context)
         {
             if (variable == null)
@@ -55,6 +47,17 @@
             this.CallChain = chain;
             this.Description = $"By.JQuerySelector: {this.RawSelector}";
         }
+
+        /// <summary>
+        /// Gets the empty selector.
+        /// </summary>
+        public static JQuerySelector Empty { get; } = new JQuerySelector("*");
+
+        /// <inheritdoc/>
+        public override Uri LibraryUri => new Uri("https://code.jquery.com/jquery-latest.min.js");
+
+        /// <inheritdoc/>
+        public override string CheckScript => CheckScriptCode(LibraryVariable);
 
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.
@@ -654,7 +657,7 @@
         /// <inheritdoc/>
         protected override JQuerySelector CreateContext(string contextSelector)
         {
-            return new JQuerySelector(contextSelector, null, this.Variable, null);
+            return new JQuerySelector(contextSelector, null, this.Variable);
         }
 
         /// <summary>

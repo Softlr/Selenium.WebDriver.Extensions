@@ -4,7 +4,6 @@
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Extensions;
-    using OpenQA.Selenium.Loaders;
     using Xunit;
 
     [Trait("Category", "Unit")]
@@ -18,7 +17,7 @@
         {
             // Given
             // When
-            Action action = () => WebDriverExtensions.CheckSelectorPrerequisites(null, null);
+            Action action = () => WebDriverExtensions.CheckSelectorPrerequisites<JQuerySelector>(null, null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -32,11 +31,11 @@
             var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driver.CheckSelectorPrerequisites(null);
+            Action action = () => driver.CheckSelectorPrerequisites<JQuerySelector>(null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("loader", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]
@@ -47,7 +46,7 @@
 
             // When
             driver.LoadExternalLibrary(
-                new JQueryLoader(),
+                JQuerySelector.Empty,
                 new Uri("http://example.com"),
                 TimeSpan.FromMilliseconds(100));
 
@@ -63,7 +62,7 @@
 
             // When
             driver.LoadExternalLibrary(
-                new JQueryLoader(),
+                JQuerySelector.Empty,
                 null,
                 TimeSpan.FromMilliseconds(100));
 
@@ -76,7 +75,7 @@
         {
             // Given
             // When
-            Action action = () => WebDriverExtensions.LoadExternalLibrary(null, null, null);
+            Action action = () => WebDriverExtensions.LoadExternalLibrary<JQuerySelector>(null, null, null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
@@ -90,11 +89,11 @@
             var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driver.LoadExternalLibrary(null, null);
+            Action action = () => driver.LoadExternalLibrary<JQuerySelector>(null, null);
 
             // Then
             var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("loader", ex.ParamName);
+            Assert.Equal("selector", ex.ParamName);
         }
 
         [Fact]

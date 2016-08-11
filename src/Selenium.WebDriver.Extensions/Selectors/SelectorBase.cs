@@ -61,6 +61,17 @@
         }
 
         /// <summary>
+        /// Gets the default URI of the external library.
+        /// </summary>
+        public abstract Uri LibraryUri { get; }
+
+        /// <summary>
+        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
+        /// return <see langword="true"/> if the prerequisites are met; otherwise, <see langword="false"/>.
+        /// </summary>
+        public abstract string CheckScript { get; }
+
+        /// <summary>
         /// Gets the query raw selector.
         /// </summary>
         public virtual string RawSelector { get; }
