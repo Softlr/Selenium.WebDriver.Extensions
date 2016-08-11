@@ -10,13 +10,15 @@
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class FirefoxFixture : IDisposable
     {
+        private readonly FirefoxDriverService service;
+
         private bool disposed;
 
         public FirefoxFixture()
         {
-            var service = FirefoxDriverService.CreateDefaultService();
-            service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-            this.Browser = new FirefoxDriver(service);
+            this.service = FirefoxDriverService.CreateDefaultService();
+            this.service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+            this.Browser = new FirefoxDriver(this.service);
         }
 
         ~FirefoxFixture()
@@ -44,6 +46,7 @@
             }
 
             this.Browser.Dispose();
+            this.service.Dispose();
             this.disposed = true;
         }
     }
