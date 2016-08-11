@@ -104,8 +104,10 @@
     <Compile Include="Extensions\ByTests.cs" />
     <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
+    <Compile Include="JavaScriptSnippetsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SearchContextBuilder.cs" />
+    <Compile Include="Selectors\SelectorBaseTests.cs" />
     <Compile Include="Selectors\SizzleSelectorTests.cs" />
     <Compile Include="Selectors\JQuerySelectorTests.cs" />
     <Compile Include="WebDriverBuilder.cs" />

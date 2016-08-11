@@ -114,7 +114,7 @@
         /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
         /// to long integer type.
         /// </remarks>
-        private static TResult ParseResult<TResult>(object result)
+        internal static TResult ParseResult<TResult>(object result)
         {
             if (result == null)
             {
