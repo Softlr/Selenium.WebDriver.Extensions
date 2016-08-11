@@ -16,9 +16,6 @@
         /// <remarks>
         /// This method is a implementation for <see cref="IsNullOrWhiteSpace"/> for <see cref="string"/> for .NET 3.5.
         /// </remarks>
-        public static bool IsNullOrWhiteSpace(this string value)
-        {
-            return string.IsNullOrEmpty(value?.Trim());
-        }
+        public static bool IsNullOrWhiteSpace(this string value) => string.IsNullOrEmpty(value?.Trim());
     }
 }

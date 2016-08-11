@@ -21,12 +21,8 @@
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
         public static JQuerySelector JQuerySelector(
-            string selector,
-            JQuerySelector context = null,
-            string variable = "jQuery")
-        {
-            return new JQuerySelector(selector, context, variable, null);
-        }
+            string selector, JQuerySelector context = null, string variable = "jQuery") =>
+            new JQuerySelector(selector, context, variable);
 
         /// <summary>
         /// Gets a mechanism to find elements matching Sizzle selector.
@@ -34,9 +30,7 @@
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or Sizzle selector to use as context.</param>
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
-        public static SizzleSelector SizzleSelector(string selector, SizzleSelector context = null)
-        {
-            return new SizzleSelector(selector, context);
-        }
+        public static SizzleSelector SizzleSelector(string selector, SizzleSelector context = null) =>
+            new SizzleSelector(selector, context);
     }
 }
