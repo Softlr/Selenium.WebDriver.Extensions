@@ -1,8 +1,10 @@
 ﻿namespace OpenQA.Selenium.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
     using OpenQA.Selenium.Internal;
 
+    [ExcludeFromCodeCoverage]
     internal class SearchContextBuilder
     {
         private readonly Mock<ISearchContext> contextMock;

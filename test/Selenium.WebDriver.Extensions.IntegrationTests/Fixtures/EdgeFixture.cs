@@ -3,25 +3,21 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Firefox;
+    using OpenQA.Selenium.Edge;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class FirefoxFixture : IDisposable
+    public class EdgeFixture : IDisposable
     {
-        private readonly FirefoxDriverService service;
-
         private bool disposed;
 
-        public FirefoxFixture()
+        public EdgeFixture()
         {
-            this.service = FirefoxDriverService.CreateDefaultService();
-            this.service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-            this.Browser = new FirefoxDriver(this.service);
+            this.Browser = new EdgeDriver();
         }
 
-        ~FirefoxFixture()
+        ~EdgeFixture()
         {
             this.Dispose(false);
         }
@@ -46,7 +42,6 @@
             }
 
             this.Browser.Dispose();
-            this.service.Dispose();
             this.disposed = true;
         }
     }

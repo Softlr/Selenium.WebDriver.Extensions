@@ -201,5 +201,18 @@
             // Then
             Assert.Throws<NotSupportedException>(action);
         }
+
+        [Fact]
+        public void ShouldGetLibraryUri()
+        {
+            // Given
+            var loader = SizzleSelector.Empty;
+
+            // When
+            var uri = loader.LibraryUri;
+
+            // Then
+            Assert.NotNull(uri);
+        }
     }
 }

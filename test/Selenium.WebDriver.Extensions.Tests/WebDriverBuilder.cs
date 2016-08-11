@@ -1,8 +1,10 @@
 ﻿namespace OpenQA.Selenium.Tests
 {
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Moq;
 
+    [ExcludeFromCodeCoverage]
     internal class WebDriverBuilder
     {
         private readonly Mock<IWebDriver> driverMock;

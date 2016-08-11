@@ -11,6 +11,7 @@
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
     [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
+    [SuppressMessage("ReSharper", "AccessToStaticMemberViaDerivedType")]
     public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
     {
         [Fact]
@@ -116,7 +117,7 @@
 
             // Then
             Assert.NotNull(page.HeadingSizzle);
-            Assert.Equal("H1 Header", page.HeadingSizzle.Text);
+            Assert.Equal("H1 Header", page.HeadingSizzle.Text.Trim());
         }
     }
 }

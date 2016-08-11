@@ -1,18 +1,21 @@
 ﻿namespace OpenQA.Selenium
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Extensions;
+    using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
     /// Searches the DOM elements using Sizzle selector.
     /// </summary>
     public class SizzleSelector : SelectorBase<SizzleSelector>
     {
+        private const string LibraryVariable = "window.Sizzle";
+
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
-        [SuppressMessage("ReSharper", "RedundantOverload.Global")]
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public SizzleSelector(string selector)
             : this(selector, null)
@@ -30,6 +33,17 @@
         {
             this.Description = $"By.SizzleSelector: {this.RawSelector}";
         }
+
+        /// <summary>
+        /// Gets the empty selector.
+        /// </summary>
+        public static SizzleSelector Empty { get; } = new SizzleSelector("*");
+
+        /// <inheritdoc/>
+        public override Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
+
+        /// <inheritdoc/>
+        public override string CheckScript => CheckScriptCode(LibraryVariable);
 
         /// <inheritdoc/>
         public override string Selector => $"Sizzle('{this.RawSelector.Replace('\'', '"')}'"

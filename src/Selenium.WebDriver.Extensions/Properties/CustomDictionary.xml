@@ -1,9 +1,14 @@
 ﻿<Dictionary>
-	<Words>
-		<Recognized>
-			<Word>Eq</Word>
-			<Word>Prev</Word>
-			<Word>xpath</Word>
-		</Recognized>
-	</Words>
+  <Words>
+    <Recognized>
+      <Word>Eq</Word>
+      <Word>Prev</Word>
+      <Word>xpath</Word>
+    </Recognized>
+  </Words>
+  <Acronyms>
+    <CasingExceptions>
+      <Acronym>Eq</Acronym>
+    </CasingExceptions>
+  </Acronyms>
 </Dictionary>

@@ -10,14 +10,15 @@
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class PhantomJsFixture : IDisposable
     {
+        private readonly PhantomJSDriverService service;
+
         private bool disposed;
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope")]
         public PhantomJsFixture()
         {
-            var phantomJsService = PhantomJSDriverService.CreateDefaultService();
-            phantomJsService.SslProtocol = "any";
-            this.Browser = new PhantomJSDriver(phantomJsService);
+            this.service = PhantomJSDriverService.CreateDefaultService();
+            this.service.SslProtocol = "any";
+            this.Browser = new PhantomJSDriver(this.service);
         }
 
         ~PhantomJsFixture()
@@ -45,6 +46,7 @@
             }
 
             this.Browser.Dispose();
+            this.service.Dispose();
             this.disposed = true;
         }
     }

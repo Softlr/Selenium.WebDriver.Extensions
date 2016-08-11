@@ -5,6 +5,7 @@
     using System.Reflection;
     using Nancy;
 
+    [ExcludeFromCodeCoverage]
     public class TestCaseModule : NancyModule
     {
         public TestCaseModule()

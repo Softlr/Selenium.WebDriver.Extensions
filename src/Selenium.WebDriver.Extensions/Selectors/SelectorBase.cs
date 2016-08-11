@@ -7,44 +7,14 @@
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
+    using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
     /// The selector base.
     /// </summary>
-    /// <typeparam name="T">The type of the selector.</typeparam>
-    public abstract class SelectorBase<T> : By
+    /// <typeparam name="TSelector">The type of the selector.</typeparam>
+    public abstract class SelectorBase<TSelector> : By
     {
-        /// <summary>
-        /// The script to get the DOM path.
-        /// </summary>
-        private const string FindDomPathScript = @"return (function(element) {
-            'use strict';
-            var stack = [], siblingsCount, siblingIndex, i, sibling;
-            while (element.parentNode !== null) {
-                siblingsCount = 0;
-                siblingIndex = 0;
-                for (i = 0; i < element.parentNode.childNodes.length; i += 1) {
-                    sibling = element.parentNode.childNodes[i];
-                    if (sibling.nodeName === element.nodeName) {
-                        if (sibling === element) {
-                            siblingIndex = siblingsCount;
-                        }
-                        siblingsCount += 1;
-                    }
-                }
-                if (element.hasAttribute('id') && element.id !== '') {
-                    stack.unshift(element.nodeName.toLowerCase() + '#' + element.id);
-                } else if (siblingsCount > 1) {
-                    stack.unshift(element.nodeName.toLowerCase() + ':eq(' + siblingIndex + ')');
-                } else {
-                    stack.unshift(element.nodeName.toLowerCase());
-                }
-                element = element.parentNode;
-            }
-            stack = stack.slice(1); // removes the html element
-            return stack.join(' > ');
-            })(arguments[0]);";
-
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
         /// </summary>
@@ -53,7 +23,7 @@
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected SelectorBase(string selector, T context)
+        protected SelectorBase(string selector, TSelector context)
         {
             if (selector == null)
             {
@@ -84,11 +54,22 @@
                 var driver = this.ResolveDriver(searchContext);
 
                 this.LoadExternalLibrary(driver);
-                var result = ParseUtil.ParseResult<IEnumerable<IWebElement>>(
+                var result = ParseResult<IEnumerable<IWebElement>>(
                     driver.ExecuteScript<object>($"return {this.Selector}{this.ResultResolver};"));
                 return new ReadOnlyCollection<IWebElement>(result.ToList());
             };
         }
+
+        /// <summary>
+        /// Gets the default URI of the external library.
+        /// </summary>
+        public abstract Uri LibraryUri { get; }
+
+        /// <summary>
+        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
+        /// return <see langword="true"/> if the prerequisites are met; otherwise, <see langword="false"/>.
+        /// </summary>
+        public abstract string CheckScript { get; }
 
         /// <summary>
         /// Gets the query raw selector.
@@ -98,7 +79,7 @@
         /// <summary>
         /// Gets the context.
         /// </summary>
-        public virtual T Context { get; private set; }
+        public virtual TSelector Context { get; private set; }
 
         /// <summary>
         /// Gets the selector.
@@ -121,7 +102,38 @@
         /// </summary>
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
-        protected abstract T CreateContext(string contextSelector);
+        protected abstract TSelector CreateContext(string contextSelector);
+
+        /// <summary>
+        /// Parses the result of executed jQuery script.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
+        /// <param name="result">The result of jQuery script.</param>
+        /// <returns>Parsed result of invoking the script.</returns>
+        /// <remarks>
+        /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
+        /// to long integer type.
+        /// </remarks>
+        internal static TResult ParseResult<TResult>(object result)
+        {
+            if (result == null)
+            {
+                return default(TResult);
+            }
+
+            if (typeof(TResult) == typeof(IEnumerable<IWebElement>)
+                && result.GetType() == typeof(ReadOnlyCollection<object>))
+            {
+                result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
+            }
+
+            if (result is double)
+            {
+                result = (long?)(double)result;
+            }
+
+            return (TResult)result;
+        }
 
         /// <summary>
         /// Resolves the <see cref="IWebDriver"/>.
