@@ -92,19 +92,6 @@
         protected virtual string ResultResolver => string.Empty;
 
         /// <summary>
-        /// Loads the external library.
-        /// </summary>
-        /// <param name="driver">The web driver.</param>
-        protected abstract void LoadExternalLibrary(IWebDriver driver);
-
-        /// <summary>
-        /// Creates the context.
-        /// </summary>
-        /// <param name="contextSelector">The context selector.</param>
-        /// <returns>The context.</returns>
-        protected abstract TSelector CreateContext(string contextSelector);
-
-        /// <summary>
         /// Parses the result of executed jQuery script.
         /// </summary>
         /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
@@ -134,6 +121,19 @@
 
             return (TResult)result;
         }
+
+        /// <summary>
+        /// Loads the external library.
+        /// </summary>
+        /// <param name="driver">The web driver.</param>
+        protected abstract void LoadExternalLibrary(IWebDriver driver);
+
+        /// <summary>
+        /// Creates the context.
+        /// </summary>
+        /// <param name="contextSelector">The context selector.</param>
+        /// <returns>The context.</returns>
+        protected abstract TSelector CreateContext(string contextSelector);
 
         /// <summary>
         /// Resolves the <see cref="IWebDriver"/>.
