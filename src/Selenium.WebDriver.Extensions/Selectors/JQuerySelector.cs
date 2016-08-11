@@ -17,6 +17,16 @@
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
+        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
+        public JQuerySelector(string selector)
+            : this(selector, null)
+        {
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <param name="chain">The jQuery method chain.</param>
@@ -30,7 +40,7 @@
         /// </exception>
         [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
         public JQuerySelector(
-            string selector, JQuerySelector context = null, string variable = "jQuery", string chain = null)
+            string selector, JQuerySelector context, string variable = "jQuery", string chain = null)
             : base(selector, context)
         {
             if (variable == null)
