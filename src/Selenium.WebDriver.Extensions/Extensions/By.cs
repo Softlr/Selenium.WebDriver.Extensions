@@ -32,5 +32,69 @@
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
         public static SizzleSelector SizzleSelector(string selector, SizzleSelector context = null) =>
             new SizzleSelector(selector, context);
+            
+        /// <summary>
+        /// Gets a mechanism to find elements by their CSS class.
+        /// </summary>
+        /// <param name="classNameToFind">The CSS class to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By ClassName(string classNameToFind) => Selenium.By.ClassName(classNameToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements by their cascading style sheet (CSS) selector.
+        /// </summary>
+        /// <param name="cssSelectorToFind">The CSS selector to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By CssSelector(string cssSelectorToFind) => Selenium.By.CssSelector(cssSelectorToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements by their ID.
+        /// </summary>
+        /// <param name="idToFind">The ID to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By Id(string idToFind)
+        {
+            return Selenium.By.Id(idToFind);
+        }
+
+        /// <summary>
+        /// Gets a mechanism to find elements by their link text.
+        /// </summary>
+        /// <param name="linkTextToFind">The link text to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By LinkText(string linkTextToFind) => Selenium.By.LinkText(linkTextToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements by their name.
+        /// </summary>
+        /// <param name="nameToFind">The name to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By Name(string nameToFind) => Selenium.By.Name(nameToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements by a partial match on their link text.
+        /// </summary>
+        /// <param name="partialLinkTextToFind">The partial link text to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By PartialLinkText(string partialLinkTextToFind) =>
+            Selenium.By.PartialLinkText(partialLinkTextToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements by their tag name.
+        /// </summary>
+        /// <param name="tagNameToFind">The tag name to find.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        public static new Selenium.By TagName(string tagNameToFind) => Selenium.By.TagName(tagNameToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements by an XPath query. When searching within a WebElement using xpath be
+        /// aware that WebDriver follows standard conventions: a search prefixed with "//" will search the entire
+        /// document, not just the children of this current node.  Use ".//" to limit your search to the children of
+        /// this WebElement.
+        /// </summary>
+        /// <param name="xpathToFind">The XPath query to use.</param>
+        /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
+        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
+        public static new Selenium.By XPath(string xpathToFind) => Selenium.By.XPath(xpathToFind);
     }
 }
