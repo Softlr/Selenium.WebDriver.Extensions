@@ -11,20 +11,16 @@
     /// The attribute to validate null or not-empty string.
     /// </summary>
     [ExcludeFromCodeCoverage]
-    public class NullOrNotEmptyAttribute : LocationContractAttribute, ILocationValidationAspect<string>
+    [AttributeUsage(AttributeTargets.Parameter)]
+    public sealed class NullOrNotEmptyAttribute : LocationContractAttribute, ILocationValidationAspect<string>
     {
         /// <inheritdoc/>
-        public Exception ValidateValue(string value, string locationName, LocationKind locationKind)
-        {
-            return value != null && string.IsNullOrEmpty(value.Trim())
+        public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
+            value != null && string.IsNullOrEmpty(value.Trim())
                 ? this.CreateArgumentException(value, locationName, locationKind)
                 : null;
-        }
 
         /// <inheritdoc/>
-        protected override string GetErrorMessage()
-        {
-            return "Argument must be null or not-empty";
-        }
+        protected override string GetErrorMessage() => "Argument must be null or not-empty";
     }
 }
