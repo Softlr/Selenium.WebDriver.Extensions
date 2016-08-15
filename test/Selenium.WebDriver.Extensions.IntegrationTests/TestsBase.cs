@@ -37,6 +37,7 @@
             GC.SuppressFinalize(this);
         }
 
+        [SuppressMessage("ReSharper", "VirtualMemberNeverOverridden.Global")]
         protected virtual void Dispose(bool disposing)
         {
             if (this.disposed || !disposing)

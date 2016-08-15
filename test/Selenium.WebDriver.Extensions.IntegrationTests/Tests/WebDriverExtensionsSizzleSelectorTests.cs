@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
@@ -24,7 +25,7 @@
             var element = this.Browser.FindElement(selector);
 
             // Then
-            Assert.NotNull(element);
+            element.Should().NotBeNull();
         }
 
         [Fact]
@@ -37,7 +38,7 @@
             Action action = () => this.Browser.FindElement(selector);
 
             // Then
-            Assert.Throws<NoSuchElementException>(action);
+            action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
@@ -50,7 +51,7 @@
             var elements = this.Browser.FindElements(selector);
 
             // Then
-            Assert.Equal(2, elements.Count);
+            elements.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
@@ -63,7 +64,7 @@
             var elements = this.Browser.FindElements(selector);
 
             // Then
-            Assert.Equal(0, elements.Count);
+            elements.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
@@ -77,7 +78,7 @@
             var element = root.FindElement(selector);
 
             // Then
-            Assert.NotNull(element);
+            element.Should().NotBeNull();
         }
 
         [Fact]
@@ -89,7 +90,9 @@
 
             // When
             var elements = root.FindElements(selector);
-            Assert.Equal(1, elements.Count);
+
+            // Then
+            elements.Should().NotBeNull().And.HaveCount(1);
         }
 
         [Fact]
@@ -103,7 +106,7 @@
             wait.Until(condition);
 
             // Then
-            Assert.True(true);
+            true.Should().BeTrue(); // assert pass
         }
 
         [Fact]
@@ -116,8 +119,8 @@
             PageFactory.InitElements(this.Browser, page);
 
             // Then
-            Assert.NotNull(page.HeadingSizzle);
-            Assert.Equal("H1 Header", page.HeadingSizzle.Text.Trim());
+            page.HeadingJQuery.Should().NotBeNull();
+            page.HeadingJQuery.Text.Trim().Should().Be("H1 Header");
         }
     }
 }

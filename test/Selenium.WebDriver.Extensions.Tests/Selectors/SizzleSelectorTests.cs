@@ -23,8 +23,8 @@
             var selector = By.SizzleSelector("div");
 
             // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
         }
 
         [Fact]
@@ -35,8 +35,8 @@
             var selector = new SizzleSelector("div");
 
             // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
         }
 
         [Fact]
@@ -49,9 +49,9 @@
             var selector = By.SizzleSelector("div", context);
 
             // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
-            Assert.Equal("body", selector.Context.RawSelector);
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
+            selector.Context.RawSelector.Should().Be("body");
         }
 
         [Fact]
@@ -99,7 +99,7 @@
             var result = selector.FindElement(driver);
 
             // Then
-            Assert.NotNull(result);
+            result.Should().NotBeNull();
         }
 
         [Fact]
@@ -114,8 +114,7 @@
             var result = selector.FindElements(driver);
 
             // Then
-            Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
+            result.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
@@ -130,7 +129,7 @@
             Action action = () => selector.FindElement(driver);
 
             // Then
-            Assert.Throws<NoSuchElementException>(action);
+            action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
@@ -145,8 +144,7 @@
             var result = selector.FindElements(driver);
 
             // Then
-            Assert.NotNull(result);
-            Assert.Equal(0, result.Count);
+            result.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
@@ -164,7 +162,7 @@
             var result = selector.FindElement(element);
 
             // Then
-            Assert.NotNull(result);
+            result.Should().NotBeNull();
         }
 
         [Fact]
@@ -182,7 +180,7 @@
             Action action = () => selector.FindElement(element);
 
             // Then
-            Assert.Throws<NotSupportedException>(action);
+            action.ShouldThrow<NotSupportedException>();
         }
 
         [Fact]
@@ -197,7 +195,7 @@
             Action action = () => selector.FindElement(element);
 
             // Then
-            Assert.Throws<NotSupportedException>(action);
+            action.ShouldThrow<NotSupportedException>();
         }
 
         [Fact]
@@ -210,7 +208,7 @@
             var uri = loader.LibraryUri;
 
             // Then
-            Assert.NotNull(uri);
+            uri.Should().NotBeNull();
         }
     }
 }

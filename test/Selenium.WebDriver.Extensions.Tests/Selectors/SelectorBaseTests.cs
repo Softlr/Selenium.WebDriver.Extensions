@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using Xunit;
 
     [Trait("Category", "Unit")]
@@ -21,7 +22,7 @@
             var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
             // Then
-            Assert.False(result);
+            result.Should().BeFalse();
         }
 
         [Fact]
@@ -34,7 +35,7 @@
             var result = SelectorBase<JQuerySelector>.ParseResult<long>(RawResult);
 
             // Then
-            Assert.IsType<long>(result);
+            result.GetType().Should().Be(typeof(long));
         }
 
         [Fact]
@@ -47,7 +48,7 @@
             var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
             // Then
-            Assert.NotNull(result);
+            result.Should().NotBeNull();
         }
     }
 }

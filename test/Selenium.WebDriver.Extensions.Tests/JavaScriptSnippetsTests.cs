@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium.Extensions;
     using Xunit;
 
@@ -19,8 +20,7 @@
             Action action = () => JavaScriptSnippets.LoadScriptCode(null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("url", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("url");
         }
 
         [Fact]
@@ -31,8 +31,7 @@
             Action action = () => JavaScriptSnippets.CheckScriptCode(null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("variable", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
         }
     }
 }
