@@ -30,10 +30,6 @@ Task CleanNet40 -Description 'Cleans the output directory of the .NET 4.0 build 
     New-Build -Solution $solution -BuildConfiguration Release-Net40 -Target Clean
 }
 
-Task CleanNet35 -Description 'Cleans the output directory of the .NET 3.5 build configuration' {
-    New-Build -Solution $solution -BuildConfiguration Release-Net35 -Target Clean
-}
-
 Task CleanDocs -Description 'Cleans the output directory of the documentation build configuration' {
     $envVarNotDefined = $env:SHFBROOT -eq $null
     If ($envVarNotDefined) {
@@ -48,7 +44,7 @@ Task CleanDocs -Description 'Cleans the output directory of the documentation bu
     }
 }
 
-Task Clean -Description 'Cleans the output directory of all build configurations' -Depends CleanNet46, CleanNet45, CleanNet40, CleanNet35, CleanDocs, CleanArtifacts
+Task Clean -Description 'Cleans the output directory of all build configurations' -Depends CleanNet46, CleanNet45, CleanNet40, CleanDocs, CleanArtifacts
 
 Task CompileNet46 -Description 'Compiles the default .NET 4.6 build configuration' -Depends CleanNet46 {
     New-Build -Solution $solution
@@ -62,11 +58,7 @@ Task CompileNet40 -Description 'Compiles the .NET 4.0 build configuration' -Depe
     New-Build -Solution $solution -BuildConfiguration Release-Net40
 }
 
-Task CompileNet35 -Description 'Compiles the .NET 3.5 build configuration' -Depends CleanNet35 {
-    New-Build -Solution $solution -BuildConfiguration Release-Net35
-}
-
-Task Compile -Description 'Compiles all of the build configurations' -Depends CompileNet46, CompileNet45, CompileNet40, CompileNet35
+Task Compile -Description 'Compiles all of the build configurations' -Depends CompileNet46, CompileNet45, CompileNet40
 
 Task Docs -Description 'Compiles the documentation build configuration' -Depends CleanDocs, CleanArtifacts, CompileNet46 {
     New-Build -Solution $solution -BuildConfiguration Docs
