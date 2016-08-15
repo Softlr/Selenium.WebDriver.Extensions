@@ -13,7 +13,7 @@
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
-    public abstract class SelectorBase<TSelector> : By
+    public abstract class SelectorBase<TSelector> : By, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.

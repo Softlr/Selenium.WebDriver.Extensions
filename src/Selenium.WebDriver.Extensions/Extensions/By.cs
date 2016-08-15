@@ -2,6 +2,7 @@
 {
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
+    using Selenium;
 
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.
@@ -45,7 +46,8 @@
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new Selenium.By CssSelector(string cssSelectorToFind) => Selenium.By.CssSelector(cssSelectorToFind);
+        public static new Selenium.By CssSelector(string cssSelectorToFind) =>
+            Selenium.By.CssSelector(cssSelectorToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their ID.
@@ -87,10 +89,10 @@
         public static new Selenium.By TagName(string tagNameToFind) => Selenium.By.TagName(tagNameToFind);
 
         /// <summary>
-        /// Gets a mechanism to find elements by an XPath query. When searching within a WebElement using xpath be
-        /// aware that WebDriver follows standard conventions: a search prefixed with "//" will search the entire
-        /// document, not just the children of this current node.  Use ".//" to limit your search to the children of
-        /// this WebElement.
+        /// Gets a mechanism to find elements by an XPath query. When searching within a <see cref="IWebElement"/>
+        /// using xpath be aware that <see cref="IWebDriver"/> follows standard conventions: a search prefixed with
+        /// <c>"//"</c> will search the entire document, not just the children of this current node. Use <c>".//"</c>
+        /// to limit your search to the children of this <see cref="IWebElement"/>.
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
