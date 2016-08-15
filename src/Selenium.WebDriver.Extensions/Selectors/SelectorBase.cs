@@ -7,7 +7,7 @@
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
-    using Seterlund.CodeGuard;
+    using PostSharp.Patterns.Contracts;
     using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
@@ -23,10 +23,8 @@
         /// <param name="context">The context.</param>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
-        protected SelectorBase(string selector, TSelector context)
+        protected SelectorBase([Required] string selector, TSelector context)
         {
-            Guard.That(() => selector).IsNotNull().IsNotNullOrWhiteSpace();
-
             this.Context = context;
             this.RawSelector = selector;
 

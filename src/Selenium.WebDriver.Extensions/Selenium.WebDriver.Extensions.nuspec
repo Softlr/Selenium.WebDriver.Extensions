@@ -13,7 +13,6 @@
     <dependencies>
       <dependency id="Selenium.WebDriver" version="2.42.0"/>
       <dependency id="Selenium.Support" version="2.42.0"/>
-      <dependency id="Seterlund.CodeGuard" version="2.0.0"/>
     </dependencies>
   </metadata>
   <files>

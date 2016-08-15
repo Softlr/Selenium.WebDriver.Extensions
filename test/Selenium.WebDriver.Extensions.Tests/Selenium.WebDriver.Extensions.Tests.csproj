@@ -112,7 +112,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\ByTests.cs" />
-    <Compile Include="Extensions\StringExtensionsTests.cs" />
     <Compile Include="Extensions\WebDriverExtensionsTests.cs" />
     <Compile Include="JavaScriptSnippetsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
