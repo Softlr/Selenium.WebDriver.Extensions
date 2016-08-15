@@ -129,12 +129,7 @@
         public static TResult ExecuteScript<TResult>(this IWebDriver driver, string script, params object[] args)
         {
             Guard.That(() => driver).IsNotNull();
-            Guard.That(() => script).IsNotNull();
-
-            if (script.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException("Script cannot be empty", nameof(script));
-            }
+            Guard.That(() => script).IsNotNull().IsNotNullOrWhiteSpace();
 
             var result = ((IJavaScriptExecutor)driver).ExecuteScript(script, args);
             return (TResult)result;

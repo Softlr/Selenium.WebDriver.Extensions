@@ -165,6 +165,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Extensions\By.cs" />
+    <Compile Include="Extensions\GuardExtensions.cs" />
     <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="JavaScriptSnippets.cs" />

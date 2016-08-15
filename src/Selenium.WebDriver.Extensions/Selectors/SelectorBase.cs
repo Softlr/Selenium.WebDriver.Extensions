@@ -26,12 +26,7 @@
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         protected SelectorBase(string selector, TSelector context)
         {
-            Guard.That(() => selector).IsNotNull();
-
-            if (selector.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException("Selector cannot be empty", nameof(selector));
-            }
+            Guard.That(() => selector).IsNotNull().IsNotNullOrWhiteSpace();
 
             this.Context = context;
             this.RawSelector = selector;
