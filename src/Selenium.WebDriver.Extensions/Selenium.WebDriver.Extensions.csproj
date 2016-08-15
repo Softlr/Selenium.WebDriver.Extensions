@@ -124,10 +124,6 @@
       <HintPath>..\..\packages\JetBrains.Annotations.10.1.5\lib\net\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Seterlund.CodeGuard, Version=2.3.4.1324, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Seterlund.CodeGuard.2.3.4\lib\net40\Seterlund.CodeGuard.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -148,6 +144,10 @@
           <HintPath>..\..\packages\Selenium.Support.2.53.1\lib\net40\WebDriver.Support.dll</HintPath>
           <Private>True</Private>
         </Reference>
+		<Reference Include="Seterlund.CodeGuard, Version=2.3.4.1324, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Seterlund.CodeGuard.2.3.4\lib\net40\Seterlund.CodeGuard.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
       </ItemGroup>
     </When>
     <Otherwise>
@@ -158,6 +158,10 @@
         </Reference>
         <Reference Include="WebDriver.Support, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
           <HintPath>..\..\packages\Selenium.Support.2.53.1\lib\net35\WebDriver.Support.dll</HintPath>
+          <Private>True</Private>
+        </Reference>
+		<Reference Include="Seterlund.CodeGuard, Version=2.3.4.1324, Culture=neutral, processorArchitecture=MSIL">
+          <HintPath>..\..\packages\Seterlund.CodeGuard.2.3.4\lib\net35\Seterlund.CodeGuard.dll</HintPath>
           <Private>True</Private>
         </Reference>
       </ItemGroup>
