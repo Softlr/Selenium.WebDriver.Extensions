@@ -10,8 +10,6 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]

@@ -7,7 +7,6 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "InternetExplorer")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [Collection("Integration")]
     public class WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>

@@ -7,7 +7,6 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "Edge")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [Collection("Integration")]
     public class WebDriverExtensionsSizzleUnloadedSelectorEdgeTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<EdgeFixture>

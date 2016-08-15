@@ -6,7 +6,6 @@
     using OpenQA.Selenium.Edge;
 
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class EdgeFixture : IDisposable
     {

@@ -7,7 +7,6 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "Firefox")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [Collection("Integration")]
     public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<FirefoxFixture>

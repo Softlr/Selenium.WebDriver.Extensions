@@ -7,7 +7,6 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "PhantomJs")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [Collection("Integration")]
     public class WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<PhantomJsFixture>

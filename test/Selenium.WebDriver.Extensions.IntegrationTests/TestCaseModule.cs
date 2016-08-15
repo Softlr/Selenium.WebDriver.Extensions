@@ -17,10 +17,6 @@
             this.Get["/SizzleUnloaded"] = _ => GetHtml($"{Prefix}Sizzle.Unloaded.html");
         }
 
-        [SuppressMessage(
-            "StyleCop.CSharp.ReadabilityRules",
-            "SA1126:PrefixCallsCorrectly",
-            Justification = "Reviewed.")]
         private static string GetHtml(string resourceName)
         {
             var assembly = Assembly.GetExecutingAssembly();

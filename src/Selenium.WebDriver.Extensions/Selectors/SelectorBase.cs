@@ -23,7 +23,6 @@
         /// <param name="context">The context.</param>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         protected SelectorBase(string selector, TSelector context)
         {
             Guard.That(() => selector).IsNotNull().IsNotNullOrWhiteSpace();

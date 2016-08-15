@@ -10,9 +10,6 @@
     using By = OpenQA.Selenium.Extensions.By;
 
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    [SuppressMessage("ReSharper", "AccessToStaticMemberViaDerivedType")]
     public abstract class WebDriverExtensionsJQuerySelectorTests : TestsBase
     {
         [Fact]

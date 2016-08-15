@@ -7,7 +7,6 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "Edge")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [Collection("Integration")]
     public class WebDriverExtensionsJQueryLoadedSelectorEdgeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<EdgeFixture>

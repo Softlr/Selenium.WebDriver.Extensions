@@ -6,7 +6,6 @@
     using OpenQA.Selenium.Chrome;
 
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class ChromeFixture : IDisposable
     {
