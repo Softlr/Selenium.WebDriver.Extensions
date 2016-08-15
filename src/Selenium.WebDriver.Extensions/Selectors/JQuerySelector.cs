@@ -327,12 +327,7 @@
             Guard.That(() => selector).IsNullOrIsNotWhitespace();
             Guard.That(() => filter).IsNullOrIsNotWhitespace();
 
-            if (selector == null && filter != null)
-            {
-                selector = string.Empty;
-            }
-
-            var data = HandleSelectorWithFilter(selector, filter);
+            var data = HandleSelectorWithFilter(selector == null && filter != null ? string.Empty : selector, filter);
             return this.Chain("nextUntil", data, true);
         }
 
@@ -404,12 +399,7 @@
             Guard.That(() => selector).IsNullOrIsNotWhitespace();
             Guard.That(() => filter).IsNullOrIsNotWhitespace();
 
-            if (selector == null && filter != null)
-            {
-                selector = string.Empty;
-            }
-
-            var data = HandleSelectorWithFilter(selector, filter);
+            var data = HandleSelectorWithFilter(selector == null && filter != null ? string.Empty : selector, filter);
             return this.Chain("parentsUntil", data, true);
         }
 
@@ -459,12 +449,7 @@
             Guard.That(() => selector).IsNullOrIsNotWhitespace();
             Guard.That(() => filter).IsNullOrIsNotWhitespace();
 
-            if (selector == null && filter != null)
-            {
-                selector = string.Empty;
-            }
-
-            var data = HandleSelectorWithFilter(selector, filter);
+            var data = HandleSelectorWithFilter(selector == null && filter != null ? string.Empty : selector, filter);
             return this.Chain("prevUntil", data, true);
         }
 
