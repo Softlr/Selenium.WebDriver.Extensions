@@ -2,6 +2,7 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Extensions;
     using Xunit;
@@ -20,8 +21,7 @@
             Action action = () => WebDriverExtensions.CheckSelectorPrerequisites<JQuerySelector>(null, null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
         }
 
         [Fact]
@@ -34,8 +34,7 @@
             Action action = () => driver.CheckSelectorPrerequisites<JQuerySelector>(null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -78,8 +77,7 @@
             Action action = () => WebDriverExtensions.LoadExternalLibrary<JQuerySelector>(null, null, null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
         }
 
         [Fact]
@@ -92,8 +90,7 @@
             Action action = () => driver.LoadExternalLibrary<JQuerySelector>(null, null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -104,8 +101,7 @@
             Action action = () => WebDriverExtensions.ExecuteScript(null, null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
         }
 
         [Fact]
@@ -116,8 +112,7 @@
             Action action = () => WebDriverExtensions.ExecuteScript<object>(null, null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
         }
 
         [Fact]

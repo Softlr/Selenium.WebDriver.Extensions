@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using Moq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
@@ -61,8 +62,7 @@
             Action action = () => By.SizzleSelector(null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -73,8 +73,7 @@
             Action action = () => By.SizzleSelector(string.Empty);
 
             // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -85,8 +84,7 @@
             Action action = () => By.SizzleSelector(" ");
 
             // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]

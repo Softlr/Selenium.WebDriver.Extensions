@@ -2,6 +2,7 @@
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium.Extensions;
     using Xunit;
 
@@ -31,7 +32,7 @@
             var result = StringExtensions.IsNullOrWhiteSpace(testValue);
 
             // Then
-            Assert.Equal(expected, result);
+            result.Should().Be(expected);
         }
     }
 }

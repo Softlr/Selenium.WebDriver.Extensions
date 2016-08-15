@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium;
     using Xunit;
     using By = OpenQA.Selenium.Extensions.By;
@@ -576,8 +577,7 @@
             Action action = () => By.JQuerySelector(null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -588,8 +588,7 @@
             Action action = () => By.JQuerySelector(string.Empty);
 
             // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -600,8 +599,7 @@
             Action action = () => By.JQuerySelector(" ");
 
             // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
