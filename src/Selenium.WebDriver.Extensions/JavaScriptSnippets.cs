@@ -1,6 +1,7 @@
 ﻿namespace OpenQA.Selenium
 {
     using System;
+    using Seterlund.CodeGuard;
 
     /// <summary>
     /// The external library loader base.
@@ -45,10 +46,7 @@
         /// <returns>The JavaScrpt to load URL.</returns>
         public static string LoadScriptCode(Uri url)
         {
-            if (url == null)
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
+            Guard.That(() => url).IsNotNull();
 
             const string Script = @"(function(source) {
                 'use strict';
@@ -66,10 +64,7 @@
         /// <returns>The JavaScrpt to test if library variable is defined.</returns>
         public static string CheckScriptCode(string variable)
         {
-            if (variable == null)
-            {
-                throw new ArgumentNullException(nameof(variable));
-            }
+            Guard.That(() => variable).IsNotNull();
 
             const string Script = @"(function(value) {
                 'use strict';

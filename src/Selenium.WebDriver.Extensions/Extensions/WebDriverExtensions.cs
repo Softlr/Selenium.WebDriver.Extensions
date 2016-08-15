@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Support.UI;
+    using Seterlund.CodeGuard;
     using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
@@ -30,15 +31,7 @@
         [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public static void LoadJQuery(this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
         {
-            if (version == null)
-            {
-                throw new ArgumentNullException(nameof(version));
-            }
-
-            if (version.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException("Version cannot be empty", nameof(version));
-            }
+            Guard.That(() => version).IsNotNull().IsNotNullOrWhiteSpace();
 
             driver.LoadExternalLibrary(
                 JQuerySelector.Empty,
@@ -77,15 +70,7 @@
         [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
         {
-            if (version == null)
-            {
-                throw new ArgumentNullException(nameof(version));
-            }
-
-            if (version.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException("Version cannot be empty", nameof(version));
-            }
+            Guard.That(() => version).IsNotNull().IsNotNullOrWhiteSpace();
 
             driver.LoadExternalLibrary(
                 SizzleSelector.Empty,
@@ -115,10 +100,7 @@
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static void ExecuteScript(this IWebDriver driver, string script, params object[] args)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
+            Guard.That(() => driver).IsNotNull();
 
             driver.ExecuteScript<object>(script, args);
         }
@@ -146,15 +128,8 @@
         /// <exception cref="ArgumentException">Script is empty.</exception>
         public static TResult ExecuteScript<TResult>(this IWebDriver driver, string script, params object[] args)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
-
-            if (script == null)
-            {
-                throw new ArgumentNullException(nameof(script));
-            }
+            Guard.That(() => driver).IsNotNull();
+            Guard.That(() => script).IsNotNull();
 
             if (script.IsNullOrWhiteSpace())
             {
@@ -180,15 +155,8 @@
         public static bool CheckSelectorPrerequisites(
             this IWebDriver driver, ISelector selector)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
-
-            if (selector == null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
+            Guard.That(() => driver).IsNotNull();
+            Guard.That(() => selector).IsNotNull();
 
             var result = driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
             return result;
@@ -214,15 +182,8 @@
         public static void LoadExternalLibrary(
             this IWebDriver driver, ISelector selector, Uri libraryUri, TimeSpan? timeout = null)
         {
-            if (driver == null)
-            {
-                throw new ArgumentNullException(nameof(driver));
-            }
-
-            if (selector == null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
+            Guard.That(() => driver).IsNotNull();
+            Guard.That(() => selector).IsNotNull();
 
             driver.LoadPrerequisites(
                 selector,

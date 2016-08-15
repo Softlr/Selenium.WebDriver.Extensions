@@ -7,6 +7,7 @@
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
+    using Seterlund.CodeGuard;
     using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
@@ -25,10 +26,7 @@
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         protected SelectorBase(string selector, TSelector context)
         {
-            if (selector == null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
+            Guard.That(() => selector).IsNotNull();
 
             if (selector.IsNullOrWhiteSpace())
             {
