@@ -641,7 +641,7 @@
         protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadJQuery();
 
         /// <inheritdoc/>
-        protected override JQuerySelector CreateContext(string contextSelector) => 
+        protected override JQuerySelector CreateContext(string contextSelector) =>
             new JQuerySelector(contextSelector, null, this.Variable);
 
         /// <summary>
