@@ -171,10 +171,7 @@
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
         /// <remarks>While this method is obsolete in jQuery 1.8+ we will support it.</remarks>
-        public JQuerySelector AndSelf()
-        {
-            return this.Chain("andSelf");
-        }
+        public JQuerySelector AndSelf() => this.Chain("andSelf");
 
         /// <summary>
         /// Get the children of each element in the set of matched elements, optionally filtered by a selector.
@@ -251,30 +248,21 @@
         /// Get the children of each element in the set of matched elements, including text and comment nodes.
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Contents()
-        {
-            return this.Chain("contents");
-        }
+        public JQuerySelector Contents() => this.Chain("contents");
 
         /// <summary>
         /// End the most recent filtering operation in the current chain and return the set of matched elements to its
         /// previous state.
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector End()
-        {
-            return this.Chain("end");
-        }
+        public JQuerySelector End() => this.Chain("end");
 
         /// <summary>
         /// Reduce the set of matched elements to the one at the specified index.
         /// </summary>
         /// <param name="index">An integer indicating the 0-based position of the element.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Eq(int index)
-        {
-            return this.Chain("eq", index.ToString(CultureInfo.InvariantCulture), true);
-        }
+        public JQuerySelector Eq(int index) => this.Chain("eq", index.ToString(CultureInfo.InvariantCulture), true);
 
         /// <summary>
         /// Reduce the set of matched elements to those that match the selector or pass the function's test.
@@ -325,10 +313,7 @@
         /// Reduce the set of matched elements to the first in the set.
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector First()
-        {
-            return this.Chain("first");
-        }
+        public JQuerySelector First() => this.Chain("first");
 
         /// <summary>
         /// Reduce the set of matched elements to those that have a descendant that matches the selector or DOM
@@ -380,10 +365,7 @@
         /// Reduce the set of matched elements to the final one in the set.
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Last()
-        {
-            return this.Chain("last");
-        }
+        public JQuerySelector Last() => this.Chain("last");
 
         /// <summary>
         /// Get the immediately following sibling of each element in the set of matched elements. If a selector is
@@ -482,10 +464,7 @@
         /// Get the closest ancestor element that is positioned.
         /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector OffsetParent()
-        {
-            return this.Chain("offsetParent");
-        }
+        public JQuerySelector OffsetParent() => this.Chain("offsetParent");
 
         /// <summary>
         /// Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
@@ -659,16 +638,11 @@
         }
 
         /// <inheritdoc/>
-        protected override void LoadExternalLibrary(IWebDriver driver)
-        {
-            driver.LoadJQuery();
-        }
+        protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadJQuery();
 
         /// <inheritdoc/>
-        protected override JQuerySelector CreateContext(string contextSelector)
-        {
-            return new JQuerySelector(contextSelector, null, this.Variable);
-        }
+        protected override JQuerySelector CreateContext(string contextSelector) =>
+            new JQuerySelector(contextSelector, null, this.Variable);
 
         /// <summary>
         /// Handles the selector with filter scenario by generating the proper chained function arguments.
@@ -719,13 +693,11 @@
         /// <param name="selector">The jQuery method selector.</param>
         /// <param name="context">The jQuery context selector.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context)
-        {
-            return new JQuerySelector(
+        private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
+            new JQuerySelector(
                 this.RawSelector,
                 this.Context,
                 this.Variable,
                 $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
-        }
     }
 }

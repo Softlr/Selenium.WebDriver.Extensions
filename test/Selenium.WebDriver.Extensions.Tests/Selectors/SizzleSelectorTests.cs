@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using Moq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
@@ -22,8 +23,8 @@
             var selector = By.SizzleSelector("div");
 
             // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
         }
 
         [Fact]
@@ -34,8 +35,8 @@
             var selector = new SizzleSelector("div");
 
             // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
         }
 
         [Fact]
@@ -48,9 +49,9 @@
             var selector = By.SizzleSelector("div", context);
 
             // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
-            Assert.Equal("body", selector.Context.RawSelector);
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
+            selector.Context.RawSelector.Should().Be("body");
         }
 
         [Fact]
@@ -61,8 +62,7 @@
             Action action = () => By.SizzleSelector(null);
 
             // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -73,8 +73,7 @@
             Action action = () => By.SizzleSelector(string.Empty);
 
             // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -85,8 +84,7 @@
             Action action = () => By.SizzleSelector(" ");
 
             // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -101,7 +99,7 @@
             var result = selector.FindElement(driver);
 
             // Then
-            Assert.NotNull(result);
+            result.Should().NotBeNull();
         }
 
         [Fact]
@@ -116,8 +114,7 @@
             var result = selector.FindElements(driver);
 
             // Then
-            Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
+            result.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
@@ -132,7 +129,7 @@
             Action action = () => selector.FindElement(driver);
 
             // Then
-            Assert.Throws<NoSuchElementException>(action);
+            action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
@@ -147,8 +144,7 @@
             var result = selector.FindElements(driver);
 
             // Then
-            Assert.NotNull(result);
-            Assert.Equal(0, result.Count);
+            result.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
@@ -166,7 +162,7 @@
             var result = selector.FindElement(element);
 
             // Then
-            Assert.NotNull(result);
+            result.Should().NotBeNull();
         }
 
         [Fact]
@@ -184,7 +180,7 @@
             Action action = () => selector.FindElement(element);
 
             // Then
-            Assert.Throws<NotSupportedException>(action);
+            action.ShouldThrow<NotSupportedException>();
         }
 
         [Fact]
@@ -199,7 +195,7 @@
             Action action = () => selector.FindElement(element);
 
             // Then
-            Assert.Throws<NotSupportedException>(action);
+            action.ShouldThrow<NotSupportedException>();
         }
 
         [Fact]
@@ -212,7 +208,7 @@
             var uri = loader.LibraryUri;
 
             // Then
-            Assert.NotNull(uri);
+            uri.Should().NotBeNull();
         }
     }
 }

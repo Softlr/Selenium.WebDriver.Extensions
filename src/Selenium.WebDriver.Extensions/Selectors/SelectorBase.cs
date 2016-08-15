@@ -74,12 +74,12 @@
         /// <summary>
         /// Gets the query raw selector.
         /// </summary>
-        public virtual string RawSelector { get; }
+        public string RawSelector { get; }
 
         /// <summary>
         /// Gets the context.
         /// </summary>
-        public virtual TSelector Context { get; private set; }
+        public TSelector Context { get; private set; }
 
         /// <summary>
         /// Gets the selector.

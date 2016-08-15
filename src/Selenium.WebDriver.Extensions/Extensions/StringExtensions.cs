@@ -1,7 +1,7 @@
 ﻿namespace OpenQA.Selenium.Extensions
 {
     /// <summary>
-    /// The class containing the extension methods for the <see cref="string"> class.
+    /// The class containing the extension methods for the <see cref="string"/> class.
     /// </summary>
     public static class StringExtensions
     {

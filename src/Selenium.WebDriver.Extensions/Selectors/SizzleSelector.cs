@@ -50,15 +50,9 @@
             + (this.Context != null ? $", {this.Context.Selector}[0]" : string.Empty) + ")";
 
         /// <inheritdoc/>
-        protected override void LoadExternalLibrary(IWebDriver driver)
-        {
-            driver.LoadSizzle();
-        }
+        protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadSizzle();
 
         /// <inheritdoc/>
-        protected override SizzleSelector CreateContext(string contextSelector)
-        {
-            return new SizzleSelector(contextSelector);
-        }
+        protected override SizzleSelector CreateContext(string contextSelector) => new SizzleSelector(contextSelector);
     }
 }

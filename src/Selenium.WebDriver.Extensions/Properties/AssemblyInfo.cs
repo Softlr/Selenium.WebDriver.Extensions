@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("SeleniumHelpers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Lukasz Rajchel")]
+[assembly: AssemblyCompany("Softlr")]
 [assembly: AssemblyProduct("Selenium WebDriver Extensions")]
-[assembly: AssemblyCopyright("Copyright © Lukasz Rajchel")]
+[assembly: AssemblyCopyright("Copyright © Softlr")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

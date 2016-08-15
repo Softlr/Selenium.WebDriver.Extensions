@@ -32,7 +32,7 @@
         /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
         public static SizzleSelector SizzleSelector(string selector, SizzleSelector context = null) =>
             new SizzleSelector(selector, context);
-            
+
         /// <summary>
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
