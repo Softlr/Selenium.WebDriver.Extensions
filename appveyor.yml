@@ -8,7 +8,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 2.0.1.{build}
+  version: 3.0.0.{build}
   configuration: Release
   os: Visual Studio 2015
   
@@ -21,7 +21,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "2.0.1"
+    assembly_version: "3.0.0"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
 
@@ -47,7 +47,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
@@ -74,7 +74,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 2.0.1
+      release: 3.0.0
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
@@ -105,7 +105,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 2.0.1.{build}
+  version: 3.0.0.{build}
   configuration: Release
   os: Visual Studio 2015
   
@@ -118,7 +118,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "2.0.1"
+    assembly_version: "3.0.0"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-dev"
 
@@ -142,7 +142,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1-dev
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-dev
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
@@ -174,7 +174,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 2.0.1.{build}
+  version: 3.0.0.{build}
   configuration: Release
   os: Visual Studio 2015
   
@@ -187,7 +187,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "2.0.1"
+    assembly_version: "3.0.0"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-rc.2"
 
@@ -211,7 +211,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 2.0.1-rc2
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-rc
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
@@ -238,7 +238,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 2.0.1-rc.2
+      release: 3.0.0-rc
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
