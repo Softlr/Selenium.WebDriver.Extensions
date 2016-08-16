@@ -6,7 +6,6 @@
     using OpenQA.Selenium.PhantomJS;
 
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class PhantomJsFixture : IDisposable
     {

@@ -10,8 +10,6 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -323,7 +321,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Add(string.Empty))
                 };
                 yield return new object[]
@@ -333,7 +331,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Add(string.Empty, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
@@ -358,7 +356,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Closest(string.Empty))
                 };
                 yield return new object[]
@@ -368,7 +366,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Closest(string.Empty, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
@@ -383,7 +381,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Filter(string.Empty))
                 };
                 yield return new object[]
@@ -393,7 +391,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Find(string.Empty))
                 };
                 yield return new object[]
@@ -403,7 +401,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Has(string.Empty))
                 };
                 yield return new object[]
@@ -413,7 +411,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Is(string.Empty))
                 };
                 yield return new object[]
@@ -473,7 +471,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Not(string.Empty))
                 };
                 yield return new object[]

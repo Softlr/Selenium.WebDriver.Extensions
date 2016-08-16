@@ -7,13 +7,14 @@
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
+    using PostSharp.Patterns.Contracts;
     using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
-    public abstract class SelectorBase<TSelector> : By
+    public abstract class SelectorBase<TSelector> : By, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
@@ -22,19 +23,8 @@
         /// <param name="context">The context.</param>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected SelectorBase(string selector, TSelector context)
+        protected SelectorBase([Required] string selector, TSelector context)
         {
-            if (selector == null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
-
-            if (selector.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException("Selector cannot be empty", nameof(selector));
-            }
-
             this.Context = context;
             this.RawSelector = selector;
 

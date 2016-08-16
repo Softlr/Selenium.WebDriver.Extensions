@@ -1,6 +1,7 @@
 ﻿namespace OpenQA.Selenium
 {
     using System;
+    using PostSharp.Patterns.Contracts;
 
     /// <summary>
     /// The external library loader base.
@@ -43,13 +44,8 @@
         /// </summary>
         /// <param name="url">The script URL.</param>
         /// <returns>The JavaScrpt to load URL.</returns>
-        public static string LoadScriptCode(Uri url)
+        public static string LoadScriptCode([Required] Uri url)
         {
-            if (url == null)
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
-
             const string Script = @"(function(source) {
                 'use strict';
                 var script = document.createElement('script');
@@ -64,13 +60,8 @@
         /// </summary>
         /// <param name="variable">The library variable to test.</param>
         /// <returns>The JavaScrpt to test if library variable is defined.</returns>
-        public static string CheckScriptCode(string variable)
+        public static string CheckScriptCode([Required] string variable)
         {
-            if (variable == null)
-            {
-                throw new ArgumentNullException(nameof(variable));
-            }
-
             const string Script = @"(function(value) {
                 'use strict';
                 return typeof value === 'function';

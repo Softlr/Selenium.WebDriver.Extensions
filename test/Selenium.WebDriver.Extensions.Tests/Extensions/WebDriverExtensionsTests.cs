@@ -9,8 +9,6 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsTests
     {
         [Fact]
@@ -18,7 +16,7 @@
         {
             // Given
             // When
-            Action action = () => WebDriverExtensions.CheckSelectorPrerequisites<JQuerySelector>(null, null);
+            Action action = () => WebDriverExtensions.CheckSelectorPrerequisites(null, null);
 
             // Then
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
@@ -31,7 +29,7 @@
             var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driver.CheckSelectorPrerequisites<JQuerySelector>(null);
+            Action action = () => driver.CheckSelectorPrerequisites(null);
 
             // Then
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
@@ -74,7 +72,7 @@
         {
             // Given
             // When
-            Action action = () => WebDriverExtensions.LoadExternalLibrary<JQuerySelector>(null, null, null);
+            Action action = () => WebDriverExtensions.LoadExternalLibrary(null, null, null);
 
             // Then
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
@@ -87,7 +85,7 @@
             var driver = new WebDriverBuilder().Build();
 
             // When
-            Action action = () => driver.LoadExternalLibrary<JQuerySelector>(null, null);
+            Action action = () => driver.LoadExternalLibrary(null, null);
 
             // Then
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");

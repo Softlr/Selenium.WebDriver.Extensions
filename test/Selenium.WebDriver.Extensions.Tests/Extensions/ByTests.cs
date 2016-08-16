@@ -8,7 +8,6 @@
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "AccessToStaticMemberViaDerivedType")]
     public class ByTests
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]

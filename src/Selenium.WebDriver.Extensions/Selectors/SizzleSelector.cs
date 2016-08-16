@@ -27,7 +27,6 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
-        [SuppressMessage("ReSharper", "VirtualMemberCallInContructor")]
         public SizzleSelector(string selector, SizzleSelector context)
             : base(selector, context)
         {

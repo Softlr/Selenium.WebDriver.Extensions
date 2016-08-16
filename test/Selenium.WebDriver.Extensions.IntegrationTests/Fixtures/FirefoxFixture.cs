@@ -6,7 +6,6 @@
     using OpenQA.Selenium.Firefox;
 
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class FirefoxFixture : IDisposable
     {
