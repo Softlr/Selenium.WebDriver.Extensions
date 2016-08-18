@@ -14,6 +14,7 @@
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
         private const string LibraryVariable = "window.jQuery";
+        private readonly string _chain;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
@@ -48,8 +49,8 @@
             : base(selector, context)
         {
             this.Variable = variable;
-            this.CallChain = chain;
             this.Description = $"By.JQuerySelector: {this.RawSelector}";
+            _chain = chain;
         }
 
         /// <summary>
@@ -77,11 +78,6 @@
         /// Gets the result resolver string.
         /// </summary>
         protected override string ResultResolver => ".get()";
-
-        /// <summary>
-        /// Gets the jQuery call chain methods.
-        /// </summary>
-        private string CallChain { get; }
 
         /// <summary>
         /// Adds elements to the set of matched elements.
@@ -430,7 +426,7 @@
             selector = selector == null
                 ? string.Empty
                 : (noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'");
-            var callChain = string.IsNullOrEmpty(this.CallChain) ? string.Empty : this.CallChain;
+            var chain = string.IsNullOrEmpty(_chain) ? string.Empty : _chain;
 
             return new JQuerySelector(
                 this.RawSelector,
