@@ -181,6 +181,17 @@
         }
 
         [Fact]
+        public void ShouldThrowExceptionWhenLoadingJQueryWithNullDriver()
+        {
+            // Given
+            // When
+            Action action = () => WebDriverExtensions.LoadJQuery(null);
+
+            // Then
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
+        }
+
+        [Fact]
         public void ShouldThrowExceptionWhenLoadingJQueryWithNullVersion()
         {
             // Given
@@ -191,6 +202,19 @@
 
             // Then
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("version");
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingJQueryWithNullDriverAndUrl()
+        {
+            // Given
+            var url = new Uri("http://example.com");
+
+            // When
+            Action action = () => WebDriverExtensions.LoadJQuery(null, url);
+
+            // Then
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
         }
 
         [Fact]
@@ -232,6 +256,30 @@
 
             // Then
             true.Should().BeTrue(); // assert pass
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingSizzleWithNullDriver()
+        {
+            // Given
+            // When
+            Action action = () => WebDriverExtensions.LoadSizzle(null);
+
+            // Then
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenLoadingSizzleWithNullDriverAndUrl()
+        {
+            // Given
+            var url = new Uri("http://example.com");
+
+            // When
+            Action action = () => WebDriverExtensions.LoadSizzle(null, url);
+
+            // Then
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("driver");
         }
 
         [Fact]
