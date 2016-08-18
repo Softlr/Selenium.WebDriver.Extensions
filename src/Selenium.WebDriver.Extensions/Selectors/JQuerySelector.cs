@@ -42,10 +42,7 @@
         /// -or- jQuery variable name is empty.
         /// </exception>
         public JQuerySelector(
-            [Required] string selector,
-            JQuerySelector context,
-            [Required] string variable = "jQuery",
-            string chain = null)
+            string selector, JQuerySelector context, [Required] string variable = "jQuery", string chain = null)
             : base(selector, context)
         {
             _chain = chain;
