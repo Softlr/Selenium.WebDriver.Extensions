@@ -124,11 +124,6 @@
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
 
-        /// <summary>
-        /// Resolves the <see cref="IWebDriver"/>.
-        /// </summary>
-        /// <param name="searchContext">The search context.</param>
-        /// <returns>The resolved <see cref="IWebDriver"/>.</returns>
         private IWebDriver ResolveDriver(ISearchContext searchContext)
         {
             var driver = searchContext as IWebDriver;

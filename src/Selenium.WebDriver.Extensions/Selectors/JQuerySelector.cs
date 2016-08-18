@@ -393,12 +393,6 @@
         protected override JQuerySelector CreateContext(string contextSelector) =>
             new JQuerySelector(contextSelector, null, Variable);
 
-        /// <summary>
-        /// Handles the selector with filter scenario by generating the proper chained function arguments.
-        /// </summary>
-        /// <param name="selector">The selector.</param>
-        /// <param name="filter">The filter.</param>
-        /// <returns>Chained function arguments string generated based on given selector and filter.</returns>
         private static string HandleSelectorWithFilter(string selector = null, string filter = null)
         {
             var data = string.Empty;
@@ -412,15 +406,6 @@
             return data;
         }
 
-        /// <summary>
-        /// Chain a jQuery method to a selector.
-        /// </summary>
-        /// <param name="name">The jQuery method name.</param>
-        /// <param name="selector">The jQuery method selector.</param>
-        /// <param name="noWrap">
-        /// <see langword="true"/> to not to wrap the selector into quotes; otherwise, <see langword="false"/>.
-        /// </param>
-        /// <returns>The Selenium jQuery selector.</returns>
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
         {
             selector = selector == null
@@ -435,13 +420,6 @@
                 $"{chain}.{name}({selector})");
         }
 
-        /// <summary>
-        /// Chain a jQuery method to a selector.
-        /// </summary>
-        /// <param name="name">The jQuery method name.</param>
-        /// <param name="selector">The jQuery method selector.</param>
-        /// <param name="context">The jQuery context selector.</param>
-        /// <returns>The Selenium jQuery selector.</returns>
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
             new JQuerySelector(
                 RawSelector,

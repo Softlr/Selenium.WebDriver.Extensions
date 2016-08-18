@@ -167,13 +167,6 @@
             driver.LoadPrerequisites(
                 selector, timeout ?? TimeSpan.FromSeconds(3), libraryUri ?? selector.LibraryUri);
 
-        /// <summary>
-        /// Loads the prerequisites for the selector.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <param name="timeout">The timeout value for the prerequisites load.</param>
-        /// <param name="url">The URL for the script.</param>
         private static void LoadPrerequisites(
             this IWebDriver driver, ISelector selector, TimeSpan timeout, Uri url)
         {
