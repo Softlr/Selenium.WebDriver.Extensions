@@ -13,7 +13,7 @@
     /// </summary>
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
-        private const string LibraryVariable = "window.jQuery";
+        private const string _libraryVariable = "window.jQuery";
         private readonly string _chain;
 
         /// <summary>
@@ -59,7 +59,7 @@
         public override Uri LibraryUri => new Uri("https://code.jquery.com/jquery-latest.min.js");
 
         /// <inheritdoc/>
-        public override string CheckScript => CheckScriptCode(LibraryVariable);
+        public override string CheckScript => CheckScriptCode(_libraryVariable);
 
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.

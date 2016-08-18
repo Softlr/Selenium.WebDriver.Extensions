@@ -12,6 +12,8 @@
     /// </summary>
     public static class WebDriverExtensions
     {
+        private const uint _defaultTimeout = 3;
+
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
         /// </summary>

@@ -10,7 +10,7 @@
     /// </summary>
     public class SizzleSelector : SelectorBase<SizzleSelector>
     {
-        private const string LibraryVariable = "window.Sizzle";
+        private const string _libraryVariable = "window.Sizzle";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
@@ -42,7 +42,7 @@
         public override Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
 
         /// <inheritdoc/>
-        public override string CheckScript => CheckScriptCode(LibraryVariable);
+        public override string CheckScript => CheckScriptCode(_libraryVariable);
 
         /// <inheritdoc/>
         public override string Selector => $"Sizzle('{RawSelector.Replace('\'', '"')}'"

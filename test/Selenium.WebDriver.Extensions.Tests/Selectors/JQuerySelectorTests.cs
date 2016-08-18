@@ -556,10 +556,10 @@
         public void ShouldCreateJQuerySelectorWithJQueryVariable()
         {
             // Given
-            const string Variable = "test";
+            const string variable = "test";
 
             // When
-            var selector = By.JQuerySelector("div", variable: Variable);
+            var selector = By.JQuerySelector("div", variable: variable);
 
             // Then
             selector.Should().NotBeNull();
