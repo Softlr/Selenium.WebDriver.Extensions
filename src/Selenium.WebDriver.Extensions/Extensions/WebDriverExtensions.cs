@@ -47,7 +47,7 @@
         /// </remarks>
         public static void LoadJQuery(
             [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
-            driver.LoadExternalLibrary(JQuerySelector.Empty, uri, timeout);
+            LoadExternalLibrary(driver, JQuerySelector.Empty, uri, timeout);
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
@@ -82,7 +82,7 @@
         /// </remarks>
         public static void LoadSizzle(
             [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
-            driver.LoadExternalLibrary(SizzleSelector.Empty, uri, timeout);
+            LoadExternalLibrary(driver, SizzleSelector.Empty, uri, timeout);
 
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
@@ -121,25 +121,25 @@
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static bool CheckSelectorPrerequisites(
-            this IWebDriver driver, ISelector selector) =>
+            IWebDriver driver, ISelector selector) =>
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
         private static void LoadExternalLibrary(
-            this IWebDriver driver, ISelector selector, Uri libraryUri, TimeSpan? timeout = null) =>
-            driver.LoadPrerequisites(
-                selector, timeout ?? TimeSpan.FromSeconds(3), libraryUri ?? selector.LibraryUri);
+            IWebDriver driver, ISelector selector, Uri libraryUri, TimeSpan? timeout = null) =>
+            LoadPrerequisites(
+                driver, selector, timeout ?? TimeSpan.FromSeconds(_defaultTimeout), libraryUri ?? selector.LibraryUri);
 
         private static void LoadPrerequisites(
-            this IWebDriver driver, ISelector selector, TimeSpan timeout, Uri url)
+            IWebDriver driver, ISelector selector, TimeSpan timeout, Uri url)
         {
-            if (driver.CheckSelectorPrerequisites(selector))
+            if (CheckSelectorPrerequisites(driver, selector))
             {
                 return;
             }
 
             driver.ExecuteScript(LoadScriptCode(url));
             var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => driver.CheckSelectorPrerequisites(selector));
+            wait.Until(d => CheckSelectorPrerequisites(driver, selector));
         }
     }
 }
