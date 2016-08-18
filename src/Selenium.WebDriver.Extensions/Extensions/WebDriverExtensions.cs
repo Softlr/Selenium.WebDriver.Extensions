@@ -125,20 +125,15 @@
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
         private static void LoadExternalLibrary(
-            IWebDriver driver, ISelector selector, Uri libraryUri, TimeSpan? timeout = null) =>
-            LoadPrerequisites(
-                driver, selector, timeout ?? TimeSpan.FromSeconds(_defaultTimeout), libraryUri ?? selector.LibraryUri);
-
-        private static void LoadPrerequisites(
-            IWebDriver driver, ISelector selector, TimeSpan timeout, Uri url)
+            IWebDriver driver, ISelector selector, Uri libraryUri, TimeSpan? timeout = null)
         {
             if (CheckSelectorPrerequisites(driver, selector))
             {
                 return;
             }
 
-            driver.ExecuteScript(LoadScriptCode(url));
-            var wait = new WebDriverWait(driver, timeout);
+            driver.ExecuteScript(LoadScriptCode(libraryUri ?? selector.LibraryUri));
+            var wait = new WebDriverWait(driver, timeout ?? TimeSpan.FromSeconds(_defaultTimeout));
             wait.Until(d => CheckSelectorPrerequisites(driver, selector));
         }
     }
