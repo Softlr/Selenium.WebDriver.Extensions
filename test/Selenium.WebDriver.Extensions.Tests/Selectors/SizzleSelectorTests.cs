@@ -200,10 +200,10 @@
         public void ShouldGetLibraryUri()
         {
             // Given
-            var loader = SizzleSelector.Empty;
+            var selector = SizzleSelector.Empty;
 
             // When
-            var uri = loader.LibraryUri;
+            var uri = selector.LibraryUri;
 
             // Then
             uri.Should().NotBeNull();
