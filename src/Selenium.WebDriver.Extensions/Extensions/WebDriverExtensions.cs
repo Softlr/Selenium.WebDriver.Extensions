@@ -117,44 +117,13 @@
             [Required] this IWebDriver driver, [Required] string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
 
-        /// <summary>
-        /// Checks if prerequisites for the selector has been met.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns><see langword="true"/> if prerequisites are met; otherwise, <see langword="false"/></returns>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Loader is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">Script is empty.</exception>
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
-        public static bool CheckSelectorPrerequisites(
-            [Required] this IWebDriver driver, [Required] ISelector selector) =>
+        private static bool CheckSelectorPrerequisites(
+            this IWebDriver driver, ISelector selector) =>
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
-        /// <summary>
-        /// Checks if external library is loaded and loads it if needed.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <param name="libraryUri">
-        /// The URI of external library to load if it's not already loaded on the tested page.
-        /// </param>
-        /// <param name="timeout">The timeout value for the load.</param>
-        /// <remarks>
-        /// If external library is already loaded on a page this method will do nothing, even if the loaded version
-        /// and version requested by invoking this method have different versions.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Loader is null.
-        /// </exception>
-        public static void LoadExternalLibrary(
-            [Required] this IWebDriver driver,
-            [Required] ISelector selector,
-            Uri libraryUri,
-            TimeSpan? timeout = null) =>
+        private static void LoadExternalLibrary(
+            this IWebDriver driver, ISelector selector, Uri libraryUri, TimeSpan? timeout = null) =>
             driver.LoadPrerequisites(
                 selector, timeout ?? TimeSpan.FromSeconds(3), libraryUri ?? selector.LibraryUri);
 
