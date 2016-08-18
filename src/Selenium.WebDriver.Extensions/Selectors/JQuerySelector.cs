@@ -56,9 +56,6 @@
         public static JQuerySelector Empty { get; } = new JQuerySelector("*");
 
         /// <inheritdoc/>
-        public override Uri LibraryUri => new Uri("https://code.jquery.com/jquery-latest.min.js");
-
-        /// <inheritdoc/>
         public override string CheckScript => CheckScriptCode(_libraryVariable);
 
         /// <summary>

@@ -39,9 +39,6 @@
         public static SizzleSelector Empty { get; } = new SizzleSelector("*");
 
         /// <inheritdoc/>
-        public override Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
-
-        /// <inheritdoc/>
         public override string CheckScript => CheckScriptCode(_libraryVariable);
 
         /// <inheritdoc/>
