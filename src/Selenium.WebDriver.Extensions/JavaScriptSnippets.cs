@@ -35,7 +35,7 @@
                 }
                 element = element.parentNode;
             }
-            stack = stack.slice(1); // removes the html element
+            stack = stack.slice(1);
             return stack.join(' > ');
             })(arguments[0]);";
 
