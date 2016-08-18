@@ -3,7 +3,7 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Extensions;
-    using static OpenQA.Selenium.JavaScriptSnippets;
+    using static JavaScriptSnippets;
 
     /// <summary>
     /// Searches the DOM elements using Sizzle selector.

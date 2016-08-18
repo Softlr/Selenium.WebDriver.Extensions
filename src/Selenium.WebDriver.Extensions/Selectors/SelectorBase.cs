@@ -3,12 +3,11 @@
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
     using PostSharp.Patterns.Contracts;
-    using static OpenQA.Selenium.JavaScriptSnippets;
+    using static JavaScriptSnippets;
 
     /// <summary>
     /// The selector base.

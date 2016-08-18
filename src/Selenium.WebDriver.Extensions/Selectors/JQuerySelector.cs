@@ -6,7 +6,7 @@
     using OpenQA.Selenium.Contracts;
     using OpenQA.Selenium.Extensions;
     using PostSharp.Patterns.Contracts;
-    using static OpenQA.Selenium.JavaScriptSnippets;
+    using static JavaScriptSnippets;
 
     /// <summary>
     /// Searches the DOM elements using jQuery selector.
