@@ -24,27 +24,27 @@
         /// <exception cref="ArgumentException">Selector is empty.</exception>
         protected SelectorBase([Required] string selector, TSelector context)
         {
-            this.Context = context;
-            this.RawSelector = selector;
+            Context = context;
+            RawSelector = selector;
 
-            this.FindElementMethod = searchContext =>
+            FindElementMethod = searchContext =>
             {
-                var results = this.FindElements(searchContext);
+                var results = FindElements(searchContext);
                 if (results.Count > 0)
                 {
                     return results.First();
                 }
 
-                throw new NoSuchElementException($"No element found for selector: {this.RawSelector}");
+                throw new NoSuchElementException($"No element found for selector: {RawSelector}");
             };
 
-            this.FindElementsMethod = searchContext =>
+            FindElementsMethod = searchContext =>
             {
-                var driver = this.ResolveDriver(searchContext);
+                var driver = ResolveDriver(searchContext);
 
-                this.LoadExternalLibrary(driver);
+                LoadExternalLibrary(driver);
                 var result = ParseResult<IEnumerable<IWebElement>>(
-                    driver.ExecuteScript<object>($"return {this.Selector}{this.ResultResolver};"));
+                    driver.ExecuteScript<object>($"return {Selector}{ResultResolver};"));
                 return new ReadOnlyCollection<IWebElement>(result.ToList());
             };
         }
@@ -138,18 +138,16 @@
             }
 
             var driverWrapper = searchContext as IWrapsDriver;
-            if (searchContext is IWebElement && driverWrapper != null)
-            {
-                // nested query
-                driver = driverWrapper.WrappedDriver;
-                var baseElementSelector = ((IJavaScriptExecutor)driver)
-                    .ExecuteScript(FindDomPathScript, driverWrapper) as string;
-                this.Context = this.CreateContext(baseElementSelector);
-            }
-            else
+            if (!(searchContext is IWebElement) || driverWrapper == null)
             {
                 throw new NotSupportedException("Context is not a valid driver");
             }
+
+            // nested query
+            driver = driverWrapper.WrappedDriver;
+            var baseElementSelector = ((IJavaScriptExecutor)driver)
+                .ExecuteScript(FindDomPathScript, driverWrapper) as string;
+            Context = CreateContext(baseElementSelector);
 
             return driver;
         }

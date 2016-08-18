@@ -11,10 +11,10 @@
         public TestCaseModule()
         {
             const string Prefix = "Selenium.WebDriver.Extensions.IntegrationTests.TestCases.";
-            this.Get["/jQueryLoaded"] = _ => GetHtml($"{Prefix}JQuery.Loaded.html");
-            this.Get["/jQueryUnloaded"] = _ => GetHtml($"{Prefix}JQuery.Unloaded.html");
-            this.Get["/SizzleLoaded"] = _ => GetHtml($"{Prefix}Sizzle.Loaded.html");
-            this.Get["/SizzleUnloaded"] = _ => GetHtml($"{Prefix}Sizzle.Unloaded.html");
+            Get["/jQueryLoaded"] = _ => GetHtml($"{Prefix}JQuery.Loaded.html");
+            Get["/jQueryUnloaded"] = _ => GetHtml($"{Prefix}JQuery.Unloaded.html");
+            Get["/SizzleLoaded"] = _ => GetHtml($"{Prefix}Sizzle.Loaded.html");
+            Get["/SizzleUnloaded"] = _ => GetHtml($"{Prefix}Sizzle.Unloaded.html");
         }
 
         private static string GetHtml(string resourceName)

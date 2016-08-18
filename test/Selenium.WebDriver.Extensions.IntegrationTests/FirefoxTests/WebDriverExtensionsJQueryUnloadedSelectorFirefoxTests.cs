@@ -13,8 +13,8 @@
     {
         public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FirefoxFixture fixture)
         {
-            this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri($"{this.ServerUrl}/JQueryUnloaded"));
+            Browser = fixture.Browser;
+            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));
         }
     }
 }

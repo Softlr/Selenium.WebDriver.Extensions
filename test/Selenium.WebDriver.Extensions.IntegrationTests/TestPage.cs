@@ -9,11 +9,11 @@
     {
         [SuppressMessage("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         [SuppressMessage("ReSharper", "NotAccessedField.Local")]
-        private IWebDriver driver;
+        private IWebDriver _driver;
 
         public TestPage(IWebDriver driver)
         {
-            this.driver = driver;
+            _driver = driver;
         }
 
         [FindsBy(How = How.Custom, CustomFinderType = typeof(JQuerySelector), Using = "h1")]

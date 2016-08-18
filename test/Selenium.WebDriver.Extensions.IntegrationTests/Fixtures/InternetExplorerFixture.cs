@@ -9,23 +9,23 @@
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class InternetExplorerFixture : IDisposable
     {
-        private bool disposed;
+        private bool _disposed;
 
         public InternetExplorerFixture()
         {
-            this.Browser = new InternetExplorerDriver();
+            Browser = new InternetExplorerDriver();
         }
 
         ~InternetExplorerFixture()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public IWebDriver Browser { get; }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -35,13 +35,13 @@
             MessageId = "<Browser>k__BackingField")]
         protected virtual void Dispose(bool disposing)
         {
-            if (this.disposed || !disposing)
+            if (_disposed || !disposing)
             {
                 return;
             }
 
-            this.Browser.Dispose();
-            this.disposed = true;
+            Browser.Dispose();
+            _disposed = true;
         }
     }
 }
