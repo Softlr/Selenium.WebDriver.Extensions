@@ -43,9 +43,7 @@
 
             // When
             driver.LoadExternalLibrary(
-                JQuerySelector.Empty,
-                new Uri("http://example.com"),
-                TimeSpan.FromMilliseconds(100));
+                JQuerySelector.Empty, new Uri("http://example.com"), TimeSpan.FromMilliseconds(100));
 
             // Then
             true.Should().BeTrue(); // assert pass
@@ -59,9 +57,7 @@
 
             // When
             driver.LoadExternalLibrary(
-                JQuerySelector.Empty,
-                null,
-                TimeSpan.FromMilliseconds(100));
+                JQuerySelector.Empty, null, TimeSpan.FromMilliseconds(100));
 
             // Then
             true.Should().BeTrue(); // assert pass
@@ -172,9 +168,7 @@
             var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driver.LoadJQuery(
-                new Uri("http://example.com"),
-                TimeSpan.FromMilliseconds(100));
+            driver.LoadJQuery(new Uri("http://example.com"), TimeSpan.FromMilliseconds(100));
 
             // Then
             true.Should().BeTrue(); // assert pass
@@ -250,9 +244,7 @@
             var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driver.LoadSizzle(
-                new Uri("http://example.com"),
-                TimeSpan.FromMilliseconds(100));
+            driver.LoadSizzle(new Uri("http://example.com"), TimeSpan.FromMilliseconds(100));
 
             // Then
             true.Should().BeTrue(); // assert pass

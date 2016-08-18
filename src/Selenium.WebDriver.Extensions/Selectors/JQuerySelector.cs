@@ -411,17 +411,11 @@
             var chain = string.IsNullOrEmpty(_chain) ? string.Empty : _chain;
 
             return new JQuerySelector(
-                RawSelector,
-                Context,
-                Variable,
-                $"{chain}.{name}({selector})");
+                RawSelector, Context, Variable, $"{chain}.{name}({selector})");
         }
 
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
             new JQuerySelector(
-                RawSelector,
-                Context,
-                Variable,
-                $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
+                RawSelector, Context, Variable, $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
     }
 }
