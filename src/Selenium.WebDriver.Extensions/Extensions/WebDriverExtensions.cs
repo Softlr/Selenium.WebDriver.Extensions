@@ -30,13 +30,9 @@
         /// <exception cref="ArgumentException">Version is empty.</exception>
         [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public static void LoadJQuery(
-            [Required] this IWebDriver driver, [Required] string version = "latest", TimeSpan? timeout = null)
-        {
+            [Required] this IWebDriver driver, [Required] string version = "latest", TimeSpan? timeout = null) =>
             driver.LoadExternalLibrary(
-                JQuerySelector.Empty,
-                new Uri($"https://code.jquery.com/jquery-{version}.min.js"),
-                timeout);
-        }
+                JQuerySelector.Empty, new Uri($"https://code.jquery.com/jquery-{version}.min.js"), timeout);
 
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
@@ -69,13 +65,11 @@
         /// <exception cref="ArgumentException">Version is empty.</exception>
         [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public static void LoadSizzle(
-            [Required] this IWebDriver driver, [Required] string version = "2.0.0", TimeSpan? timeout = null)
-        {
+            [Required] this IWebDriver driver, [Required] string version = "2.0.0", TimeSpan? timeout = null) =>
             driver.LoadExternalLibrary(
                 SizzleSelector.Empty,
                 new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"),
                 timeout);
-        }
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
