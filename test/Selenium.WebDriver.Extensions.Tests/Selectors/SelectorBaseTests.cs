@@ -28,10 +28,10 @@
         public void ShouldCorrectlyHandleDoubleValue()
         {
             // Given
-            const double RawResult = 1.23d;
+            const double rawResult = 1.23d;
 
             // When
-            var result = SelectorBase<JQuerySelector>.ParseResult<long>(RawResult);
+            var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
             // Then
             result.GetType().Should().Be(typeof(long));

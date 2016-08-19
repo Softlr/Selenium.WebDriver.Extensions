@@ -19,7 +19,7 @@
             var selector = By.SizzleSelector("#id1");
 
             // When
-            var element = this.Browser.FindElement(selector);
+            var element = Browser.FindElement(selector);
 
             // Then
             element.Should().NotBeNull();
@@ -32,7 +32,7 @@
             var selector = By.SizzleSelector("#id-not");
 
             // When
-            Action action = () => this.Browser.FindElement(selector);
+            Action action = () => Browser.FindElement(selector);
 
             // Then
             action.ShouldThrow<NoSuchElementException>();
@@ -45,7 +45,7 @@
             var selector = By.SizzleSelector("div.main");
 
             // When
-            var elements = this.Browser.FindElements(selector);
+            var elements = Browser.FindElements(selector);
 
             // Then
             elements.Should().NotBeNull().And.HaveCount(2);
@@ -58,7 +58,7 @@
             var selector = By.SizzleSelector("div.mainNot");
 
             // When
-            var elements = this.Browser.FindElements(selector);
+            var elements = Browser.FindElements(selector);
 
             // Then
             elements.Should().NotBeNull().And.HaveCount(0);
@@ -68,7 +68,7 @@
         public void FindInnerElement()
         {
             // Given
-            var root = this.Browser.FindElement(By.CssSelector("body"));
+            var root = Browser.FindElement(By.CssSelector("body"));
             var selector = By.SizzleSelector("div");
 
             // When
@@ -82,7 +82,7 @@
         public void FindInnerElements()
         {
             // Given
-            var root = this.Browser.FindElement(By.SizzleSelector("body"));
+            var root = Browser.FindElement(By.SizzleSelector("body"));
             var selector = By.SizzleSelector("h1");
 
             // When
@@ -99,7 +99,7 @@
             var condition = ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
 
             // When
-            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
+            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);
 
             // Then
@@ -110,10 +110,10 @@
         public void PageObjectsSupport()
         {
             // Given
-            var page = new TestPage(this.Browser);
+            var page = new TestPage(Browser);
 
             // When
-            PageFactory.InitElements(this.Browser, page);
+            PageFactory.InitElements(Browser, page);
 
             // Then
             page.HeadingJQuery.Should().NotBeNull();

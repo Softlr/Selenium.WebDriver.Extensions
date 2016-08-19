@@ -17,7 +17,7 @@
         /// <inheritdoc/>
         public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
             value != null && string.IsNullOrEmpty(value.Trim())
-                ? this.CreateArgumentException(value, locationName, locationKind)
+                ? CreateArgumentException(value, locationName, locationKind)
                 : null;
 
         /// <inheritdoc/>

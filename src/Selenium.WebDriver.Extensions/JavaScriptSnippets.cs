@@ -35,7 +35,7 @@
                 }
                 element = element.parentNode;
             }
-            stack = stack.slice(1); // removes the html element
+            stack = stack.slice(1);
             return stack.join(' > ');
             })(arguments[0]);";
 
@@ -46,13 +46,13 @@
         /// <returns>The JavaScrpt to load URL.</returns>
         public static string LoadScriptCode([Required] Uri url)
         {
-            const string Script = @"(function(source) {
+            const string script = @"(function(source) {
                 'use strict';
                 var script = document.createElement('script');
                 script.src = source;
                 document.getElementsByTagName('body')[0].appendChild(script);
             })";
-            return $"{Script}('{url}')";
+            return $"{script}('{url}')";
         }
 
         /// <summary>
@@ -62,11 +62,11 @@
         /// <returns>The JavaScrpt to test if library variable is defined.</returns>
         public static string CheckScriptCode([Required] string variable)
         {
-            const string Script = @"(function(value) {
+            const string script = @"(function(value) {
                 'use strict';
                 return typeof value === 'function';
             })";
-            return $"{Script}({variable})";
+            return $"{script}({variable})";
         }
     }
 }

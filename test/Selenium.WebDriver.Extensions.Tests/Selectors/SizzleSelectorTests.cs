@@ -195,18 +195,5 @@
             // Then
             action.ShouldThrow<NotSupportedException>();
         }
-
-        [Fact]
-        public void ShouldGetLibraryUri()
-        {
-            // Given
-            var loader = SizzleSelector.Empty;
-
-            // When
-            var uri = loader.LibraryUri;
-
-            // Then
-            uri.Should().NotBeNull();
-        }
     }
 }

@@ -8,22 +8,21 @@
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase : IDisposable
     {
-        private readonly NancyHost host;
-
-        private bool disposed;
+        private readonly NancyHost _host;
+        private bool _disposed;
 
         protected TestsBase()
         {
             var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
 
-            this.ServerUrl = "http://localhost:50502";
-            this.host = new NancyHost(config, new Uri(this.ServerUrl));
-            this.host.Start();
+            ServerUrl = "http://localhost:50502";
+            _host = new NancyHost(config, new Uri(ServerUrl));
+            _host.Start();
         }
 
         ~TestsBase()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         protected IWebDriver Browser { get; set; }
@@ -33,20 +32,20 @@
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
         [SuppressMessage("ReSharper", "VirtualMemberNeverOverridden.Global")]
         protected virtual void Dispose(bool disposing)
         {
-            if (this.disposed || !disposing)
+            if (_disposed || !disposing)
             {
                 return;
             }
 
-            this.host.Dispose();
-            this.disposed = true;
+            _host.Dispose();
+            _disposed = true;
         }
     }
 }

@@ -9,27 +9,26 @@
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class PhantomJsFixture : IDisposable
     {
-        private readonly PhantomJSDriverService service;
-
-        private bool disposed;
+        private readonly PhantomJSDriverService _service;
+        private bool _disposed;
 
         public PhantomJsFixture()
         {
-            this.service = PhantomJSDriverService.CreateDefaultService();
-            this.service.SslProtocol = "any";
-            this.Browser = new PhantomJSDriver(this.service);
+            _service = PhantomJSDriverService.CreateDefaultService();
+            _service.SslProtocol = "any";
+            Browser = new PhantomJSDriver(_service);
         }
 
         ~PhantomJsFixture()
         {
-            this.Dispose(false);
+            Dispose(false);
         }
 
         public IWebDriver Browser { get; }
 
         public void Dispose()
         {
-            this.Dispose(true);
+            Dispose(true);
             GC.SuppressFinalize(this);
         }
 
@@ -39,14 +38,14 @@
             MessageId = "<Browser>k__BackingField")]
         protected virtual void Dispose(bool disposing)
         {
-            if (this.disposed || !disposing)
+            if (_disposed || !disposing)
             {
                 return;
             }
 
-            this.Browser.Dispose();
-            this.service.Dispose();
-            this.disposed = true;
+            Browser.Dispose();
+            _service.Dispose();
+            _disposed = true;
         }
     }
 }

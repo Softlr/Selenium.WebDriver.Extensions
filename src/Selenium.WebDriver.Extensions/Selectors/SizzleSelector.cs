@@ -3,19 +3,23 @@
     using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Extensions;
-    using static OpenQA.Selenium.JavaScriptSnippets;
+    using static JavaScriptSnippets;
 
     /// <summary>
     /// Searches the DOM elements using Sizzle selector.
     /// </summary>
     public class SizzleSelector : SelectorBase<SizzleSelector>
     {
-        private const string LibraryVariable = "window.Sizzle";
+        private const string _libraryVariable = "window.Sizzle";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
+        /// <remarks>
+        /// This constructor cannot be merged with <see cref="SizzleSelector(string,SizzleSelector)"/> constructor as
+        /// it is resolved by reflection.
+        /// </remarks>
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public SizzleSelector(string selector)
             : this(selector, null)
@@ -30,7 +34,7 @@
         public SizzleSelector(string selector, SizzleSelector context)
             : base(selector, context)
         {
-            this.Description = $"By.SizzleSelector: {this.RawSelector}";
+            Description = $"By.SizzleSelector: {RawSelector}";
         }
 
         /// <summary>
@@ -39,14 +43,11 @@
         public static SizzleSelector Empty { get; } = new SizzleSelector("*");
 
         /// <inheritdoc/>
-        public override Uri LibraryUri => new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
+        public override string CheckScript => CheckScriptCode(_libraryVariable);
 
         /// <inheritdoc/>
-        public override string CheckScript => CheckScriptCode(LibraryVariable);
-
-        /// <inheritdoc/>
-        public override string Selector => $"Sizzle('{this.RawSelector.Replace('\'', '"')}'"
-            + (this.Context != null ? $", {this.Context.Selector}[0]" : string.Empty) + ")";
+        public override string Selector => $"Sizzle('{RawSelector.Replace('\'', '"')}'"
+            + (Context != null ? $", {Context.Selector}[0]" : string.Empty) + ")";
 
         /// <inheritdoc/>
         protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadSizzle();

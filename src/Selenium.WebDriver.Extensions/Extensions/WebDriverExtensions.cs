@@ -12,6 +12,8 @@
     /// </summary>
     public static class WebDriverExtensions
     {
+        private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(3);
+
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
         /// </summary>
@@ -28,15 +30,9 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">Version is null.</exception>
         /// <exception cref="ArgumentException">Version is empty.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public static void LoadJQuery(
-            [Required] this IWebDriver driver, [Required] string version = "latest", TimeSpan? timeout = null)
-        {
-            driver.LoadExternalLibrary(
-                JQuerySelector.Empty,
-                new Uri($"https://code.jquery.com/jquery-{version}.min.js"),
-                timeout);
-        }
+            this IWebDriver driver, [Required] string version = "latest", TimeSpan? timeout = null) =>
+            LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{version}.min.js"), timeout);
 
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
@@ -50,7 +46,7 @@
         /// </remarks>
         public static void LoadJQuery(
             [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
-            driver.LoadExternalLibrary(JQuerySelector.Empty, uri, timeout);
+            LoadExternalLibrary(driver, JQuerySelector.Empty, uri, timeout ?? _defaultTimeout);
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
@@ -67,15 +63,10 @@
         /// </remarks>
         /// <exception cref="ArgumentNullException">Version is null.</exception>
         /// <exception cref="ArgumentException">Version is empty.</exception>
-        [SuppressMessage("Microsoft.Design", "CA1057:StringUriOverloadsCallSystemUriOverloads")]
         public static void LoadSizzle(
-            [Required] this IWebDriver driver, [Required] string version = "2.0.0", TimeSpan? timeout = null)
-        {
-            driver.LoadExternalLibrary(
-                SizzleSelector.Empty,
-                new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"),
-                timeout);
-        }
+            this IWebDriver driver, [Required] string version = "2.0.0", TimeSpan? timeout = null) =>
+            LoadSizzle(
+                driver, new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"), timeout);
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
@@ -89,7 +80,7 @@
         /// </remarks>
         public static void LoadSizzle(
             [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
-            driver.LoadExternalLibrary(SizzleSelector.Empty, uri, timeout);
+            LoadExternalLibrary(driver, SizzleSelector.Empty, uri, timeout ?? _defaultTimeout);
 
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
@@ -98,8 +89,9 @@
         /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static void ExecuteScript([Required] this IWebDriver driver, string script, params object[] args) =>
-            driver.ExecuteScript<object>(script, args);
+        public static void ExecuteScript(
+            this IWebDriver driver, string script, params object[] args) =>
+            ExecuteScript<object>(driver, script, args);
 
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
@@ -126,65 +118,22 @@
             [Required] this IWebDriver driver, [Required] string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
 
-        /// <summary>
-        /// Checks if prerequisites for the selector has been met.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <returns><see langword="true"/> if prerequisites are met; otherwise, <see langword="false"/></returns>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Loader is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">Script is empty.</exception>
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
-        public static bool CheckSelectorPrerequisites(
-            [Required] this IWebDriver driver, [Required] ISelector selector) =>
+        private static bool CheckSelectorPrerequisites(
+            IWebDriver driver, ISelector selector) =>
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
-        /// <summary>
-        /// Checks if external library is loaded and loads it if needed.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <param name="libraryUri">
-        /// The URI of external library to load if it's not already loaded on the tested page.
-        /// </param>
-        /// <param name="timeout">The timeout value for the load.</param>
-        /// <remarks>
-        /// If external library is already loaded on a page this method will do nothing, even if the loaded version
-        /// and version requested by invoking this method have different versions.
-        /// </remarks>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Loader is null.
-        /// </exception>
-        public static void LoadExternalLibrary(
-            [Required] this IWebDriver driver,
-            [Required] ISelector selector,
-            Uri libraryUri,
-            TimeSpan? timeout = null) =>
-            driver.LoadPrerequisites(
-                selector, timeout ?? TimeSpan.FromSeconds(3), libraryUri ?? selector.LibraryUri);
-
-        /// <summary>
-        /// Loads the prerequisites for the selector.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="selector">The selector.</param>
-        /// <param name="timeout">The timeout value for the prerequisites load.</param>
-        /// <param name="url">The URL for the script.</param>
-        private static void LoadPrerequisites(
-            this IWebDriver driver, ISelector selector, TimeSpan timeout, Uri url)
+        private static void LoadExternalLibrary(
+            IWebDriver driver, ISelector selector, Uri url, TimeSpan timeout)
         {
-            if (driver.CheckSelectorPrerequisites(selector))
+            if (CheckSelectorPrerequisites(driver, selector))
             {
                 return;
             }
 
             driver.ExecuteScript(LoadScriptCode(url));
             var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => driver.CheckSelectorPrerequisites(selector));
+            wait.Until(d => CheckSelectorPrerequisites(driver, selector));
         }
     }
 }
