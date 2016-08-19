@@ -32,7 +32,7 @@
 
   environment:
     COVERALLS_REPO_TOKEN:
-      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+      secure: n5vX34kAXug3K9lxLnMO+m1+A1+UQPFDMIhqX7Soff3eKiREoB8j0IUedtWHdLr/
     GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
@@ -129,7 +129,7 @@
 
   environment:
     COVERALLS_REPO_TOKEN:
-      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+      secure: n5vX34kAXug3K9lxLnMO+m1+A1+UQPFDMIhqX7Soff3eKiREoB8j0IUedtWHdLr/
 
   before_build:
     - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
@@ -198,7 +198,7 @@
 
   environment:
     COVERALLS_REPO_TOKEN:
-      secure: HujWqUkCgrw2hC1t45W2wPYqn8+/JC7VGJq/vawDBShdzZ3GxGpuQjj/ObK0665W
+      secure: n5vX34kAXug3K9lxLnMO+m1+A1+UQPFDMIhqX7Soff3eKiREoB8j0IUedtWHdLr/
 
   before_build:
     - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
