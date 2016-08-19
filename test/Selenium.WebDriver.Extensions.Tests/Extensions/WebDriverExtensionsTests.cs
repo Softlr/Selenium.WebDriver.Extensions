@@ -118,12 +118,12 @@
 
         [Theory]
         [MemberData(nameof(InvalidParameters))]
-        public void ShouldThrowExceptionForInvalidParameters(Action action, string paramName)
+        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter)
         {
             // Given
             // When
             // Then
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(paramName);
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameter);
         }
 
         [Fact]
@@ -141,6 +141,7 @@
 
         [Theory]
         [MemberData(nameof(Loaders))]
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public void ShouldLoadLibrary(
             Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
