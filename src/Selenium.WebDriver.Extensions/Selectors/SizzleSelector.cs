@@ -16,6 +16,10 @@
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
+        /// <remarks>
+        /// This constructor cannot be merged with <see cref="SizzleSelector(string,SizzleSelector)"/> constructor as
+        /// it is resolved by reflection.
+        /// </remarks>
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public SizzleSelector(string selector)
             : this(selector, null)

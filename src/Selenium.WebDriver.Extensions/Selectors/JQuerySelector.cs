@@ -20,6 +20,10 @@
         /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
+        /// <remarks>
+        /// This constructor cannot be merged with <see cref="JQuerySelector(string,JQuerySelector,string,string)"/>
+        /// constructor as it is resolved by reflection.
+        /// </remarks>
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public JQuerySelector(string selector)
             : this(selector, null)
