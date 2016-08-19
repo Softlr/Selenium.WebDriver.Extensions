@@ -89,8 +89,9 @@
         /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
         /// <exception cref="ArgumentNullException">Driver is null.</exception>
-        public static void ExecuteScript([Required] this IWebDriver driver, string script, params object[] args) =>
-            driver.ExecuteScript<object>(script, args);
+        public static void ExecuteScript(
+            this IWebDriver driver, string script, params object[] args) =>
+            ExecuteScript<object>(driver, script, args);
 
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
