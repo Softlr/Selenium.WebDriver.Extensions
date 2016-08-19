@@ -13,71 +13,105 @@
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
+        private const string _script = "myMethod();";
+        private static readonly Uri _url = new Uri("http://example.com");
+
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> InvalidParameters
         {
             get
             {
                 var driver = new WebDriverBuilder().Build();
-                const string script = "myMethod();";
-                var url = new Uri("http://example.com");
+                const string driverParam = "driver";
+                const string scriptParam = "script";
+                const string versionParam = "version";
+                const string uriParam = "uri";
 
                 // ExecuteScript
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.ExecuteScript(null, script)),  "driver"
+                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _script)),  driverParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.ExecuteScript(null)), "script"
+                    (Action)(() => driver.ExecuteScript(null)), scriptParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.ExecuteScript(string.Empty)), "script"
+                    (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam
                 };
 
                 // LoadJQuery
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.LoadJQuery(null, script)), "driver"
+                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _script)), driverParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadJQuery((string)null)), "version"
+                    (Action)(() => driver.LoadJQuery((string)null)), versionParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadJQuery(string.Empty)), "version"
+                    (Action)(() => driver.LoadJQuery(string.Empty)), versionParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.LoadJQuery(null, url)), "driver"
+                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _url)), driverParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadJQuery((Uri)null)), "uri"
+                    (Action)(() => driver.LoadJQuery((Uri)null)), uriParam
                 };
 
                 // LoadSizzle
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.LoadSizzle(null, script)), "driver"
+                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _script)), driverParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadSizzle((string)null)), "version"
+                    (Action)(() => driver.LoadSizzle((string)null)), versionParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadSizzle(string.Empty)), "version"
+                    (Action)(() => driver.LoadSizzle(string.Empty)), versionParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.LoadSizzle(null, url)), "driver"
+                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _url)), driverParam
                 };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadSizzle((Uri)null)), "uri"
+                    (Action)(() => driver.LoadSizzle((Uri)null)), uriParam
+                };
+            }
+        }
+
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public static IEnumerable<object[]> Loaders
+        {
+            get
+            {
+                var timeSpan = TimeSpan.FromMilliseconds(100);
+
+                // LoadJQuery
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _url, null
+                };
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _url, timeSpan
+                };
+
+                // LoadSizzle
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _url, null
+                };
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _url, timeSpan
                 };
             }
         }
@@ -99,33 +133,22 @@
             var driver = new WebDriverBuilder().ThatHasTestMethodDefined().Build();
 
             // When
-            driver.ExecuteScript("myMethod();");
+            driver.ExecuteScript(_script);
 
             // Then
             true.Should().BeTrue(); // assert pass
         }
 
-        [Fact]
-        public void ShouldLoadJQuery()
+        [Theory]
+        [MemberData(nameof(Loaders))]
+        public void ShouldLoadLibrary(
+            Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             // Given
             var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
 
             // When
-            driver.LoadJQuery(new Uri("http://example.com"), TimeSpan.FromMilliseconds(100));
-
-            // Then
-            true.Should().BeTrue(); // assert pass
-        }
-
-        [Fact]
-        public void ShouldLoadSizzle()
-        {
-            // Given
-            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
-
-            // When
-            driver.LoadSizzle(new Uri("http://example.com"), TimeSpan.FromMilliseconds(100));
+            action.Invoke(driver, uri, timeSpan);
 
             // Then
             true.Should().BeTrue(); // assert pass
