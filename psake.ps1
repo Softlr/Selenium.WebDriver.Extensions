@@ -18,27 +18,29 @@ If ($process.ExitCode) {
 }
 
 # install/update psake
-If (-Not ((Get-PackageProvider -Name PowerShellGet).Version -gt [System.Version]'2.8.5.201')) {
+If (-Not ((Get-PackageProvider -Name NuGet).Version -gt [System.Version]'2.8.5.201')) {
 	Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
 }
 
 Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
 
-$installedModule = Get-InstalledModule | Where-Object -Property Name -EQ -Value psake
-$latestVersion = (Find-Module -Name psake).Version
-If (-Not $installedModule) {
-    'Installing psake {0}' -f $latestVersion | Write-Output
-    Find-Module -Name psake | Install-Module
-} ElseIf ($installedModule.Version -ne $latestVersion) {
-    'Updating psake from {0} to {1}' -f $installedModule.Version, $latestVersion | Write-Output
-    Find-Module -Name psake | Install-Module -Force
-} Else {
-    'psake in version {0} is up-to-date' -f $installedModule.Version | Write-Output
+'psake', 'Pester', 'PSScriptAnalyzer' | ForEach-Object -Process {
+	$installedModule = Get-InstalledModule | Where-Object -Property Name -EQ -Value $_
+	$latestVersion = (Find-Module -Name $_).Version
+	If (-Not $installedModule) {
+		'Installing {0} {1}' -f $_, $latestVersion | Write-Output
+		Find-Module -Name $_ | Install-Module
+	} ElseIf ($installedModule.Version -ne $latestVersion) {
+		'Updating {0} from {1} to {2}' -f $_, $installedModule.Version, $latestVersion | Write-Output
+		Update-Module -Name $_
+	} Else {
+		'{0} in version {1} is up-to-date' -f $_, $installedModule.Version | Write-Output
+	}
 }
 
 # invoke psake
 Import-Module -Name psake
-Import-Module -Name ($root | Join-Path -ChildPath build.psm1)
+Import-Module -Name ($root | Join-Path -ChildPath build | Join-Path -ChildPath build.psd1)
 Invoke-psake -BuildFile ($root | Join-Path -ChildPath default.ps1)
 
 # evaluate task status

@@ -92,8 +92,12 @@ Task IntegrationInternetExplorer -Description 'Runs the Internet Explorer integr
     Test-Assembly -Tests $integrationTests -Trait Browser=InternetExplorer
 }
 
+Task IntegrationEdge -Description 'Runs the Internet Explorer integration tests' -Depends CompileNet46 {
+    Test-Assembly -Tests $integrationTests -Trait Browser=Edge
+}
+
 Task Integration -Description 'Runs all of the integration tests' `
-	-Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer
+	-Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer, IntegrationEdge
 
 Task AnalyzeCoverage -Description 'Analyzes the code coverage' -Depends CompileNet46 {
     New-CoverageAnalysis -Tests $unitTests -Output $coverageXml `
@@ -102,10 +106,6 @@ Task AnalyzeCoverage -Description 'Analyzes the code coverage' -Depends CompileN
 
 Task Coverage -Description 'Generates the code coverage HTML report' -Depends AnalyzeCoverage {
     New-CoverageReport -CoverageXml $coverageXml -Output ($artifactsDir | Join-Path -ChildPath CoverageReport)
-}
-
-Task Coveralls -Description 'Sends coverage data to coveralls.io' -Depends AnalyzeCoverage {
-    Publish-Coveralls -CoverageXml $coverageXml
 }
 
 Task Pack -Description 'Packs NuGet package' -Depends Compile {
