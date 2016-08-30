@@ -15,107 +15,107 @@
         [Fact]
         public void FindElement()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("#id1");
 
-            // When
+            // Act
             var element = Browser.FindElement(selector);
 
-            // Then
+            // Assert
             element.Should().NotBeNull();
         }
 
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("#id-not");
 
-            // When
+            // Act
             Action action = () => Browser.FindElement(selector);
 
-            // Then
+            // Assert
             action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
         public void FindElements()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("div.main");
 
-            // When
+            // Act
             var elements = Browser.FindElements(selector);
 
-            // Then
+            // Assert
             elements.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("div.mainNot");
 
-            // When
+            // Act
             var elements = Browser.FindElements(selector);
 
-            // Then
+            // Assert
             elements.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
         public void FindInnerElement()
         {
-            // Given
+            // Arrange
             var root = Browser.FindElement(By.CssSelector("body"));
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var element = root.FindElement(selector);
 
-            // Then
+            // Assert
             element.Should().NotBeNull();
         }
 
         [Fact]
         public void FindInnerElements()
         {
-            // Given
+            // Arrange
             var root = Browser.FindElement(By.JQuerySelector("body"));
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var elements = root.FindElements(selector);
 
-            // Then
+            // Assert
             elements.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
         public void ExpectedConditionsSupport()
         {
-            // Given
+            // Arrange
             var condition = ExpectedConditions.ElementIsVisible(By.JQuerySelector("h1"));
 
-            // When
+            // Act
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);
 
-            // Then
+            // Assert
             true.Should().BeTrue(); // assert pass
         }
 
         [Fact]
         public void PageObjectsSupport()
         {
-            // Given
+            // Arrange
             var page = new TestPage(Browser);
 
-            // When
+            // Act
             PageFactory.InitElements(Browser, page);
 
-            // Then
+            // Assert
             page.HeadingJQuery.Should().NotBeNull();
             page.HeadingJQuery.Text.Trim().Should().Be("H1 Header");
         }

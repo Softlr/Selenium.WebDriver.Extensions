@@ -13,7 +13,8 @@
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
-        private const string _script = "myMethod();";
+        private const string _scriptMethod = "myMethod";
+        private static readonly string _script = $"{_scriptMethod}();";
         private static readonly Uri _url = new Uri("http://example.com");
 
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -120,23 +121,22 @@
         [MemberData(nameof(InvalidParameters))]
         public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter)
         {
-            // Given
-            // When
-            // Then
+            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameter);
         }
 
         [Fact]
         public void ShouldExecuteScript()
         {
-            // Given
-            var driver = new WebDriverBuilder().ThatHasTestMethodDefined().Build();
+            // Arrange
+            var driverMock = new WebDriverBuilder().ThatHasTestMethodDefined(_scriptMethod);
+            var driver = driverMock.Build();
 
-            // When
+            // Act
             driver.ExecuteScript(_script);
 
-            // Then
-            true.Should().BeTrue(); // assert pass
+            // Assert
+            driverMock.VerifyIfTestMethodWasCalled(_scriptMethod);
         }
 
         [Theory]
@@ -145,14 +145,15 @@
         public void ShouldLoadLibrary(
             Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
-            // Given
-            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
+            // Arrange
+            var driverMock = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
+            var driver = driverMock.Build();
 
-            // When
+            // Act
             action.Invoke(driver, uri, timeSpan);
 
-            // Then
-            true.Should().BeTrue(); // assert pass
+            // Assert
+            driverMock.VerifyIfExternalLibraryWasLoaded(); // assert pass
         }
     }
 }

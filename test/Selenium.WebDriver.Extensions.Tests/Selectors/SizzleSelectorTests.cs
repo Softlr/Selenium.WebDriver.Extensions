@@ -16,11 +16,11 @@
         [Fact]
         public void ShouldCreateSizzleSelector()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             var selector = By.SizzleSelector("div");
 
-            // Then
+            // Assert
             selector.Should().NotBeNull();
             selector.RawSelector.Should().Be("div");
         }
@@ -28,11 +28,11 @@
         [Fact]
         public void ShouldCreateSizzleSelectorDirectly()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             var selector = new SizzleSelector("div");
 
-            // Then
+            // Assert
             selector.Should().NotBeNull();
             selector.RawSelector.Should().Be("div");
         }
@@ -40,13 +40,13 @@
         [Fact]
         public void ShouldCreateSizzleSelectorWithContext()
         {
-            // Given
+            // Arrange
             var context = By.SizzleSelector("body");
 
-            // When
+            // Act
             var selector = By.SizzleSelector("div", context);
 
-            // Then
+            // Assert
             selector.Should().NotBeNull();
             selector.RawSelector.Should().Be("div");
             selector.Context.RawSelector.Should().Be("body");
@@ -55,100 +55,100 @@
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.SizzleSelector(null);
 
-            // Then
+            // Assert
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.SizzleSelector(string.Empty);
 
-            // Then
+            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.SizzleSelector(" ");
 
-            // Then
+            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldFindElementBySizzleSelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle("div")
                 .Build();
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             var result = selector.FindElement(driver);
 
-            // Then
+            // Assert
             result.Should().NotBeNull();
         }
 
         [Fact]
         public void ShouldFindElementsBySizzleSelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementsLocatedBySizzle("div")
                 .Build();
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             var result = selector.FindElements(driver);
 
-            // Then
+            // Assert
             result.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenElementIsNotFoundWithSizzleSelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatDoesNotContainElementLocatedBySizzle("div")
                 .Build();
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             Action action = () => selector.FindElement(driver);
 
-            // Then
+            // Assert
             action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithSizzleSelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatDoesNotContainElementLocatedBySizzle("div")
                 .Build();
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             var result = selector.FindElements(driver);
 
-            // Then
+            // Assert
             result.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
         public void ShouldFindElementWithNestedSizzleSelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle("div")
                 .ThatContainsElementLocatedBySizzle("body > div").ThatCanResolvePathToElement("div")
                 .Build();
@@ -156,17 +156,17 @@
 
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             var result = selector.FindElement(element);
 
-            // Then
+            // Assert
             result.Should().NotBeNull();
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle("div")
                 .ThatContainsElementLocatedBySizzle("body > div").ThatCanResolvePathToElement("div")
                 .Build();
@@ -174,25 +174,25 @@
 
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             Action action = () => selector.FindElement(element);
 
-            // Then
+            // Assert
             action.ShouldThrow<NotSupportedException>();
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver()
         {
-            // Given
+            // Arrange
             var element = new SearchContextBuilder().ThatIsWebElement().Build();
 
             var selector = By.SizzleSelector("div");
 
-            // When
+            // Act
             Action action = () => selector.FindElement(element);
 
-            // Then
+            // Assert
             action.ShouldThrow<NotSupportedException>();
         }
     }

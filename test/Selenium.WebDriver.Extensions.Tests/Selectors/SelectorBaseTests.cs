@@ -14,39 +14,39 @@
         [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
         public void ShouldCorrectlyHandleDefaultValue()
         {
-            // Given
+            // Arrange
             object rawResult = null;
 
-            // When
+            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
-            // Then
+            // Assert
             result.Should().BeFalse();
         }
 
         [Fact]
         public void ShouldCorrectlyHandleDoubleValue()
         {
-            // Given
+            // Arrange
             const double rawResult = 1.23d;
 
-            // When
+            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
-            // Then
+            // Assert
             result.GetType().Should().Be(typeof(long));
         }
 
         [Fact]
         public void ShouldCorrectlyHandleCollections()
         {
-            // Given
+            // Arrange
             var rawResult = new ReadOnlyCollection<object>(new List<object>());
 
-            // When
+            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
-            // Then
+            // Assert
             result.Should().NotBeNull();
         }
     }

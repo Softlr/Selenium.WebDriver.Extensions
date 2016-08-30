@@ -14,10 +14,7 @@
             _contextMock = new Mock<ISearchContext>();
         }
 
-        public ISearchContext Build()
-        {
-            return _contextMock.Object;
-        }
+        public ISearchContext Build() => _contextMock.Object;
 
         public SearchContextBuilder WithWrappedDriver(IWebDriver driver)
         {

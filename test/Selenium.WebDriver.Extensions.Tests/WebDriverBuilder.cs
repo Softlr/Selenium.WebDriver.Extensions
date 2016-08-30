@@ -1,8 +1,10 @@
 ﻿namespace OpenQA.Selenium.Tests
 {
+    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
+    using OpenQA.Selenium.Remote;
 
     [ExcludeFromCodeCoverage]
     internal class WebDriverBuilder
@@ -14,10 +16,7 @@
             _driverMock = new Mock<IWebDriver>();
         }
 
-        public IWebDriver Build()
-        {
-            return _driverMock.Object;
-        }
+        public IWebDriver Build() => _driverMock.Object;
 
         public WebDriverBuilder ThatDoesNotHaveExternalLibraryLoaded()
         {
@@ -26,11 +25,18 @@
             return this;
         }
 
-        public WebDriverBuilder ThatHasTestMethodDefined()
+        public void VerifyIfExternalLibraryWasLoaded() =>
+            _driverMock.As<IJavaScriptExecutor>().Verify(x => x.ExecuteScript(It.IsAny<string>()), Times.Exactly(3));
+
+        public WebDriverBuilder ThatHasTestMethodDefined(string methodName)
         {
-            _driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript("return myMethod();")).Returns("foo");
+            _driverMock.As<IJavaScriptExecutor>().Setup(x => x.ExecuteScript($"{methodName}();"))
+                .Returns("foo");
             return this;
         }
+
+        public void VerifyIfTestMethodWasCalled(string methodName) =>
+            _driverMock.As<IJavaScriptExecutor>().Verify(x => x.ExecuteScript($"{methodName}();"), Times.Once);
 
         public WebDriverBuilder ThatHasJQueryLoaded()
         {
