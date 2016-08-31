@@ -107,7 +107,7 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="PostSharp.Patterns.Common, Version=4.3.19.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\PostSharp.Patterns.Common.4.3.19\lib\net45\PostSharp.Patterns.Common.dll</HintPath>
+      <HintPath>..\..\packages\PostSharp.Patterns.Common.4.3.19\lib\net40\PostSharp.Patterns.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="PostSharp.Patterns.Model, Version=4.3.19.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
