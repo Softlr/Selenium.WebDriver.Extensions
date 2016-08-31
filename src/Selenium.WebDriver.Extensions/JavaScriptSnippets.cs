@@ -1,4 +1,4 @@
-namespace OpenQA.Selenium
+﻿namespace OpenQA.Selenium
 {
     using System;
 
