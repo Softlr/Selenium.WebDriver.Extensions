@@ -54,10 +54,7 @@
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
         /// <returns>A <see cref="Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new Selenium.By Id(string idToFind)
-        {
-            return Selenium.By.Id(idToFind);
-        }
+        public static new Selenium.By Id(string idToFind) => Selenium.By.Id(idToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their link text.
