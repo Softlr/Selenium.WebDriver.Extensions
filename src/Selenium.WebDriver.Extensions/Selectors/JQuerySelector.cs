@@ -46,7 +46,10 @@
         /// -or- jQuery variable name is empty.
         /// </exception>
         public JQuerySelector(
-            string selector, JQuerySelector context, [Required] string variable = "jQuery", string chain = null)
+            string selector,
+            JQuerySelector context,
+            [Required] string variable = "jQuery",
+            [NotNull] string chain = "")
             : base(selector, context)
         {
             _chain = chain;
@@ -69,8 +72,7 @@
 
         /// <inheritdoc/>
         public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
-            + (Context != null ? $", {Context.Selector}" : string.Empty) + ")"
-            + (string.IsNullOrEmpty(_chain) ? string.Empty : _chain);
+            + (Context != null ? $", {Context.Selector}" : string.Empty) + $"){_chain}";
 
         /// <summary>
         /// Gets the result resolver string.
@@ -289,10 +291,7 @@
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
-        public JQuerySelector Parent([NullOrNotEmpty] string selector = null)
-        {
-            return Chain("parent", selector);
-        }
+        public JQuerySelector Parent([NullOrNotEmpty] string selector = null) => Chain("parent", selector);
 
         /// <summary>
         /// Get the ancestors of each element in the current set of matched elements, optionally filtered by a
@@ -391,29 +390,21 @@
         protected override JQuerySelector CreateContext(string contextSelector) =>
             new JQuerySelector(contextSelector, null, Variable);
 
-        private static string HandleSelectorWithFilter(string selector = null, string filter = null)
-        {
-            var data = string.Empty;
-            if (selector != null)
-            {
-                data = string.IsNullOrEmpty(filter)
-                    ? $"'{selector.Replace('\'', '"')}'"
-                    : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'";
-            }
+        private static string HandleSelectorWithFilter(string selector = null, string filter = null) =>
+            selector != null
+            ? (string.IsNullOrEmpty(filter)
+                ? $"'{selector.Replace('\'', '"')}'"
+                : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'")
+            : string.Empty;
 
-            return data;
-        }
-
-        private JQuerySelector Chain(string name, string selector = null, bool noWrap = false)
-        {
-            selector = selector == null
+        private static string GetSelectorString(string selector, bool noWrap = false) =>
+            selector == null
                 ? string.Empty
                 : (noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'");
-            var chain = string.IsNullOrEmpty(_chain) ? string.Empty : _chain;
 
-            return new JQuerySelector(
-                RawSelector, Context, Variable, $"{chain}.{name}({selector})");
-        }
+        private JQuerySelector Chain(string name, string selector = null, bool noWrap = false) =>
+            new JQuerySelector(
+                RawSelector, Context, Variable, $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
 
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
             new JQuerySelector(
