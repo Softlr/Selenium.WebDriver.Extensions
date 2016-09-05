@@ -46,7 +46,7 @@
         /// </remarks>
         public static void LoadJQuery(
             [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
-            LoadExternalLibrary(driver, JQuerySelector.Empty, uri, timeout ?? _defaultTimeout);
+            driver.LoadExternalLibrary(JQuerySelector.Empty, uri, timeout ?? _defaultTimeout);
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
@@ -80,7 +80,7 @@
         /// </remarks>
         public static void LoadSizzle(
             [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
-            LoadExternalLibrary(driver, SizzleSelector.Empty, uri, timeout ?? _defaultTimeout);
+            driver.LoadExternalLibrary(SizzleSelector.Empty, uri, timeout ?? _defaultTimeout);
 
         /// <summary>
         /// Executes JavaScript in the context of the currently selected frame or window.
@@ -120,20 +120,19 @@
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static bool CheckSelectorPrerequisites(
-            IWebDriver driver, ISelector selector) =>
+            this IWebDriver driver, ISelector selector) =>
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
         private static void LoadExternalLibrary(
-            IWebDriver driver, ISelector selector, Uri url, TimeSpan timeout)
+            this IWebDriver driver, ISelector selector, Uri url, TimeSpan timeout)
         {
-            if (CheckSelectorPrerequisites(driver, selector))
+            if (driver.CheckSelectorPrerequisites(selector))
             {
                 return;
             }
 
             driver.ExecuteScript(LoadScriptCode(url));
-            var wait = new WebDriverWait(driver, timeout);
-            wait.Until(d => CheckSelectorPrerequisites(driver, selector));
+            new WebDriverWait(driver, timeout).Until(x => x.CheckSelectorPrerequisites(selector));
         }
     }
 }
