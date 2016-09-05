@@ -310,10 +310,16 @@
         }
 
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
         public static IEnumerable<object[]> SelectorExceptionTests
         {
             get
             {
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
+                    (Action)(() => new JQuerySelector("div", null, "jQuery", null))
+                };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
