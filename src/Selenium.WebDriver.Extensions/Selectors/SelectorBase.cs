@@ -26,27 +26,8 @@
         {
             Context = context;
             RawSelector = selector;
-
-            FindElementMethod = searchContext =>
-            {
-                var results = FindElements(searchContext);
-                if (results.Count > 0)
-                {
-                    return results.First();
-                }
-
-                throw new NoSuchElementException($"No element found for selector: {RawSelector}");
-            };
-
-            FindElementsMethod = searchContext =>
-            {
-                var driver = ResolveDriver(searchContext);
-
-                LoadExternalLibrary(driver);
-                var result = ParseResult<IEnumerable<IWebElement>>(
-                    driver.ExecuteScript<object>($"return {Selector}{ResultResolver};"));
-                return new ReadOnlyCollection<IWebElement>(result.ToList());
-            };
+            FindElementMethod = FindElementBySelector;
+            FindElementsMethod = FindElementsBySelector;
         }
 
         /// <summary>
@@ -118,6 +99,27 @@
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
+
+        private IWebElement FindElementBySelector(ISearchContext searchContext)
+        {
+            var results = FindElementsBySelector(searchContext);
+            if (results.Count > 0)
+            {
+                return results.First();
+            }
+
+            throw new NoSuchElementException($"No element found for selector: {RawSelector}");
+        }
+
+        private ReadOnlyCollection<IWebElement> FindElementsBySelector(ISearchContext searchContext)
+        {
+            var driver = ResolveDriver(searchContext);
+
+            LoadExternalLibrary(driver);
+            var result = ParseResult<IEnumerable<IWebElement>>(driver.ExecuteScript<object>(
+                $"return {Selector}{ResultResolver};"));
+            return new ReadOnlyCollection<IWebElement>(result.ToList());
+        }
 
         private IWebDriver ResolveDriver(ISearchContext searchContext)
         {
