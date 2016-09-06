@@ -4,7 +4,9 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Support.UI;
+    using PostSharp.Extensibility;
     using PostSharp.Patterns.Contracts;
+    using PostSharp.Patterns.Diagnostics;
     using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
@@ -114,6 +116,7 @@
         /// -or- Script is null.
         /// </exception>
         /// <exception cref="ArgumentException">Script is empty.</exception>
+        [Log]
         public static TResult ExecuteScript<TResult>(
             [Required] this IWebDriver driver, [Required] string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
