@@ -35,7 +35,7 @@
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   before_build:
-    - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
+    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -52,9 +52,9 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.1.20160414.162943\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-    - packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.3.4.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+    - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -125,7 +125,7 @@
     disable_publish_on_pr: true
 
   before_build:
-    - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
+    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -142,9 +142,9 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.1.20160414.162943\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-    - packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.3.4.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+    - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -189,7 +189,7 @@
     disable_publish_on_pr: true
 
   before_build:
-    - .nuget\nuget.exe restore .nuget\packages.config -PackagesDirectory packages
+    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -206,9 +206,9 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.1.20160414.162943\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-    - packages\OpenCover.4.6.166\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.3.4.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+    - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
