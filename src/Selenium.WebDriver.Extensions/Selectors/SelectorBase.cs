@@ -75,12 +75,12 @@
             if (typeof(TResult) == typeof(IEnumerable<IWebElement>)
                 && result.GetType() == typeof(ReadOnlyCollection<object>))
             {
-                result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
+                return (TResult)((ReadOnlyCollection<object>)result).Cast<IWebElement>();
             }
 
             if (result is double)
             {
-                result = (long?)(double)result;
+                return (TResult)(object)(long?)(double)result;
             }
 
             return (TResult)result;
