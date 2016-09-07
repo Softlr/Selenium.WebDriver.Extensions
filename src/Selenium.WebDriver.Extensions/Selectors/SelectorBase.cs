@@ -7,6 +7,7 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using PostSharp.Patterns.Contracts;
+    using Selenium.WebDriver.Extensions.Parsers;
 
     /// <summary>
     /// The selector base.
@@ -65,26 +66,7 @@
         /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
         /// to long integer type.
         /// </remarks>
-        internal static TResult ParseResult<TResult>(object result)
-        {
-            if (result == null)
-            {
-                return default(TResult);
-            }
-
-            if (typeof(TResult) == typeof(IEnumerable<IWebElement>)
-                && result.GetType() == typeof(ReadOnlyCollection<object>))
-            {
-                return (TResult)((ReadOnlyCollection<object>)result).Cast<IWebElement>();
-            }
-
-            if (result is double)
-            {
-                return (TResult)(object)(long?)(double)result;
-            }
-
-            return (TResult)result;
-        }
+        internal static TResult ParseResult<TResult>(object result) => InitParser<TResult>().Parse(result);
 
         /// <summary>
         /// Loads the external library.
@@ -98,6 +80,25 @@
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
+
+        private static ParserBase<TResult> InitParser<TResult>()
+        {
+            var parsers = new ParserBase<TResult>[]
+            {
+                new NullValueParser<TResult>(),
+                new WebElementCollectionParser<TResult>(),
+                new LongParser<TResult>(),
+                new DirectCastParser<TResult>()
+            };
+
+            // set successors
+            for (var i = 0; i < parsers.Length - 1; i++)
+            {
+                parsers[i].Successor = parsers[i + 1];
+            }
+
+            return parsers.First();
+        }
 
         private IWebElement FindElementBySelector(ISearchContext searchContext)
         {

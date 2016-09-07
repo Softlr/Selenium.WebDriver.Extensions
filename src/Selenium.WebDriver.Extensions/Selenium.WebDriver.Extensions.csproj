@@ -142,6 +142,11 @@
     <Compile Include="Extensions\By.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="JavaScriptSnippets.cs" />
+    <Compile Include="Parsers\DirectCastParser.cs" />
+    <Compile Include="Parsers\LongParser.cs" />
+    <Compile Include="Parsers\NullValueParser.cs" />
+    <Compile Include="Parsers\ParserBase.cs" />
+    <Compile Include="Parsers\WebElementCollectionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\ISelector.cs" />
     <Compile Include="Selectors\SizzleSelector.cs" />
