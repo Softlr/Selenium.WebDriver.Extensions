@@ -115,6 +115,9 @@
     <Compile Include="WebDriverBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\PostSharp.license">
+      <Link>PostSharp.license</Link>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

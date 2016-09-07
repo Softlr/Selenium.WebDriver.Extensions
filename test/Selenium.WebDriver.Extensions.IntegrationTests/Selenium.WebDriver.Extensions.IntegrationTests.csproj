@@ -157,6 +157,9 @@
     <Compile Include="Tests\WebDriverExtensionsSizzleSelectorTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\PostSharp.license">
+      <Link>PostSharp.license</Link>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config">
       <SubType>Designer</SubType>
