@@ -4,7 +4,6 @@
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Tests;
     using Selenium.WebDriver.Extensions;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;

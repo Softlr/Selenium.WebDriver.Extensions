@@ -1,7 +1,8 @@
-﻿namespace OpenQA.Selenium.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Diagnostics.CodeAnalysis;
     using Moq;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
 
     [ExcludeFromCodeCoverage]
