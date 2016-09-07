@@ -185,3 +185,4 @@ phantomjs-license.txt
 .artifacts/
 .vs/
 ReSharper.xml
+.sonar/
