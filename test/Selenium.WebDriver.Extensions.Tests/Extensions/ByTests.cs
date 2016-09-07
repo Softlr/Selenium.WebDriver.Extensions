@@ -1,4 +1,4 @@
-﻿namespace OpenQA.Selenium.Tests.Extensions
+﻿namespace Selenium.WebDriver.Extensions.Tests.Extensions
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
@@ -28,7 +28,7 @@
 
         [Theory]
         [MemberData(nameof(CoreSelectors))]
-        public void ShouldCreateSelector(Selenium.By selector)
+        public void ShouldCreateSelector(OpenQA.Selenium.By selector)
         {
             // Assert
             selector.Should().NotBeNull();
