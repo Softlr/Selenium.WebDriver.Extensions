@@ -4,8 +4,8 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
+    using global::Selenium.WebDriver.Extensions;
     using Moq;
-    using OpenQA.Selenium.Extensions;
     using OpenQA.Selenium.Internal;
     using Xunit;
 

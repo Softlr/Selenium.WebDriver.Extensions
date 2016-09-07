@@ -1,19 +1,18 @@
-﻿namespace OpenQA.Selenium
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using OpenQA.Selenium.Extensions;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using PostSharp.Patterns.Contracts;
-    using static JavaScriptSnippets;
 
     /// <summary>
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
-    public abstract class SelectorBase<TSelector> : By, ISelector
+    public abstract class SelectorBase<TSelector> : OpenQA.Selenium.By, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
@@ -138,7 +137,7 @@
             // nested query
             driver = driverWrapper.WrappedDriver;
             var baseElementSelector = ((IJavaScriptExecutor)driver)
-                .ExecuteScript(FindDomPathScript, driverWrapper) as string;
+                .ExecuteScript(JavaScriptSnippets.FindDomPathScript, driverWrapper) as string;
             Context = CreateContext(baseElementSelector);
 
             return driver;

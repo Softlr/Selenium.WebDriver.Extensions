@@ -7,7 +7,7 @@
     <ProjectGuid>{F10536EC-8FBF-437A-840D-55CE6BF44161}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenQA.Selenium</RootNamespace>
+    <RootNamespace>Selenium.WebDriver.Extensions</RootNamespace>
     <AssemblyName>Selenium.WebDriver.Extensions</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>

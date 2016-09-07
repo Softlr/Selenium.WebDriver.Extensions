@@ -4,9 +4,10 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
+    using global::Selenium.WebDriver.Extensions;
     using OpenQA.Selenium;
     using Xunit;
-    using By = OpenQA.Selenium.Extensions.By;
+    using By = global::Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]

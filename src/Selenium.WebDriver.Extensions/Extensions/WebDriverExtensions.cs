@@ -1,13 +1,12 @@
-﻿namespace OpenQA.Selenium.Extensions
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
-    using PostSharp.Extensibility;
     using PostSharp.Patterns.Contracts;
     using PostSharp.Patterns.Diagnostics;
-    using static OpenQA.Selenium.JavaScriptSnippets;
 
     /// <summary>
     /// Web driver extensions.
@@ -134,7 +133,7 @@
                 return;
             }
 
-            driver.ExecuteScript(LoadScriptCode(url));
+            driver.ExecuteScript(JavaScriptSnippets.LoadScriptCode(url));
             new WebDriverWait(driver, timeout).Until(x => x.CheckSelectorPrerequisites(selector));
         }
     }

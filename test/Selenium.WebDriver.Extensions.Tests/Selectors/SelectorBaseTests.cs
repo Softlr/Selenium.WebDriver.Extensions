@@ -4,6 +4,7 @@
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
+    using global::Selenium.WebDriver.Extensions;
     using Xunit;
 
     [Trait("Category", "Unit")]

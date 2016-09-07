@@ -7,7 +7,7 @@
     using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
-    using By = OpenQA.Selenium.Extensions.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [ExcludeFromCodeCoverage]
     public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
