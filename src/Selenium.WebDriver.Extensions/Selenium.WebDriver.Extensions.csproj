@@ -118,6 +118,10 @@
       <HintPath>..\..\packages\PostSharp.Patterns.Model.4.3.19\lib\net40\PostSharp.Patterns.Model.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="SimpleInjector, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.3.2.2\lib\net45\SimpleInjector.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
@@ -138,11 +142,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container.cs" />
     <Compile Include="Contracts\NullOrNotEmptyAttribute.cs" />
     <Compile Include="Extensions\By.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="JavaScriptSnippets.cs" />
     <Compile Include="Parsers\DirectCastParser.cs" />
+    <Compile Include="Parsers\ILongParser.cs" />
+    <Compile Include="Parsers\INullValueParser.cs" />
+    <Compile Include="Parsers\IDirectCastParser.cs" />
+    <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Parsers\IWebElementCollectionParser.cs" />
     <Compile Include="Parsers\LongParser.cs" />
     <Compile Include="Parsers\NullValueParser.cs" />
     <Compile Include="Parsers\ParserBase.cs" />

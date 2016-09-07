@@ -1,13 +1,15 @@
 ﻿namespace Selenium.WebDriver.Extensions.Parsers
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// The direct cast parser.
     /// </summary>
-    /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
-    internal class DirectCastParser<TResult> : ParserBase<TResult>
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    internal class DirectCastParser : ParserBase, IDirectCastParser
     {
         /// <inheritdoc/>
-        public override TResult Parse(object rawResult)
+        public override TResult Parse<TResult>(object rawResult)
         {
             return (TResult)rawResult;
         }

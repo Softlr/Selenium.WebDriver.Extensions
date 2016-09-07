@@ -1,15 +1,19 @@
 ﻿namespace Selenium.WebDriver.Extensions.Parsers
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
     /// The <see cref="long"/> parser.
     /// </summary>
-    /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
-    internal class LongParser<TResult> : ParserBase<TResult>
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    internal class LongParser : ParserBase, ILongParser
     {
         /// <inheritdoc/>
-        public override TResult Parse(object rawResult)
+        public override TResult Parse<TResult>(object rawResult)
         {
-            return rawResult is double ? (TResult)(object)(long?)(double)rawResult : Successor.Parse(rawResult);
+            return rawResult is double
+                ? (TResult)(object)(long?)(double)rawResult
+                : Successor.Parse<TResult>(rawResult);
         }
     }
 }

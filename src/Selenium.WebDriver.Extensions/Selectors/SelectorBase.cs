@@ -66,7 +66,8 @@
         /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
         /// to long integer type.
         /// </remarks>
-        internal static TResult ParseResult<TResult>(object result) => InitParser<TResult>().Parse(result);
+        internal static TResult ParseResult<TResult>(object result) =>
+            Container.Instance.GetInstance<IParser>().Parse<TResult>(result);
 
         /// <summary>
         /// Loads the external library.
@@ -80,25 +81,6 @@
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
-
-        private static ParserBase<TResult> InitParser<TResult>()
-        {
-            var parsers = new ParserBase<TResult>[]
-            {
-                new NullValueParser<TResult>(),
-                new WebElementCollectionParser<TResult>(),
-                new LongParser<TResult>(),
-                new DirectCastParser<TResult>()
-            };
-
-            // set successors
-            for (var i = 0; i < parsers.Length - 1; i++)
-            {
-                parsers[i].Successor = parsers[i + 1];
-            }
-
-            return parsers.First();
-        }
 
         private IWebElement FindElementBySelector(ISearchContext searchContext)
         {

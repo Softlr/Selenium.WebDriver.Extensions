@@ -2,22 +2,23 @@
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium;
 
     /// <summary>
     /// The <see cref="IWebElement"/> collection parser.
     /// </summary>
-    /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
-    internal class WebElementCollectionParser<TResult> : ParserBase<TResult>
+    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
+    internal class WebElementCollectionParser : ParserBase, IWebElementCollectionParser
     {
         /// <inheritdoc/>
-        public override TResult Parse(object rawResult)
+        public override TResult Parse<TResult>(object rawResult)
         {
             return typeof(TResult) == typeof(IEnumerable<IWebElement>)
                 && rawResult.GetType() == typeof(ReadOnlyCollection<object>)
                     ? (TResult)((ReadOnlyCollection<object>)rawResult).Cast<IWebElement>()
-                    : Successor.Parse(rawResult);
+                    : Successor.Parse<TResult>(rawResult);
         }
     }
 }
