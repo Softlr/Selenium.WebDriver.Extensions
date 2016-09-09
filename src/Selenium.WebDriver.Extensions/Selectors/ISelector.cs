@@ -1,4 +1,4 @@
-﻿namespace OpenQA.Selenium
+﻿namespace Selenium.WebDriver.Extensions
 {
     /// <summary>
     /// The selector inteface.

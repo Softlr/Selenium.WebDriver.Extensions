@@ -1,11 +1,12 @@
-﻿namespace OpenQA.Selenium.Extensions
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using PostSharp.Patterns.Contracts;
-    using static OpenQA.Selenium.JavaScriptSnippets;
+    using PostSharp.Patterns.Diagnostics;
 
     /// <summary>
     /// Web driver extensions.
@@ -45,7 +46,7 @@
         /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadJQuery(
-            [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
+            [NotNull] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
             driver.LoadExternalLibrary(JQuerySelector.Empty, uri, timeout ?? _defaultTimeout);
 
         /// <summary>
@@ -79,7 +80,7 @@
         /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadSizzle(
-            [Required] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
+            [NotNull] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
             driver.LoadExternalLibrary(SizzleSelector.Empty, uri, timeout ?? _defaultTimeout);
 
         /// <summary>
@@ -114,8 +115,9 @@
         /// -or- Script is null.
         /// </exception>
         /// <exception cref="ArgumentException">Script is empty.</exception>
+        [Log]
         public static TResult ExecuteScript<TResult>(
-            [Required] this IWebDriver driver, [Required] string script, params object[] args) =>
+            [NotNull] this IWebDriver driver, [Required] string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
@@ -131,7 +133,7 @@
                 return;
             }
 
-            driver.ExecuteScript(LoadScriptCode(url));
+            driver.ExecuteScript(JavaScriptSnippets.LoadScriptCode(url));
             new WebDriverWait(driver, timeout).Until(x => x.CheckSelectorPrerequisites(selector));
         }
     }

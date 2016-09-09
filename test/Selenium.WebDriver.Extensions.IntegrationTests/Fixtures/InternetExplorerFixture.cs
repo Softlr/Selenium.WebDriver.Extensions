@@ -4,44 +4,19 @@
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using OpenQA.Selenium.IE;
+    using PostSharp.Patterns.Model;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class InternetExplorerFixture : IDisposable
+    [Disposable]
+    public class InternetExplorerFixture
     {
-        private bool _disposed;
-
         public InternetExplorerFixture()
         {
             Browser = new InternetExplorerDriver();
         }
 
-        ~InternetExplorerFixture()
-        {
-            Dispose(false);
-        }
-
+        [Child]
         public IWebDriver Browser { get; }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        [SuppressMessage(
-            "Microsoft.Usage",
-            "CA2213:DisposableFieldsShouldBeDisposed",
-            MessageId = "<Browser>k__BackingField")]
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed || !disposing)
-            {
-                return;
-            }
-
-            Browser.Dispose();
-            _disposed = true;
-        }
     }
 }

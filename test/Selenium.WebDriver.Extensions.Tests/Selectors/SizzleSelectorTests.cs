@@ -1,13 +1,12 @@
-﻿namespace OpenQA.Selenium.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
-    using Moq;
-    using OpenQA.Selenium.Extensions;
-    using OpenQA.Selenium.Internal;
+    using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]

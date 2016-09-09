@@ -1,8 +1,7 @@
-﻿namespace OpenQA.Selenium.Contracts
+﻿namespace Selenium.WebDriver.Extensions.Contracts
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium.Extensions;
     using PostSharp.Aspects;
     using PostSharp.Patterns.Contracts;
     using PostSharp.Reflection;

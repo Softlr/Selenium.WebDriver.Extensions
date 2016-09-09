@@ -8,7 +8,7 @@
     <ProjectGuid>{41458FC5-B67A-456D-A085-8F6012E59A0C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenQA.Selenium.Tests</RootNamespace>
+    <RootNamespace>Selenium.WebDriver.Extensions.Tests</RootNamespace>
     <AssemblyName>Selenium.WebDriver.Extensions.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -17,6 +17,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+	<PostSharpDisableSystemBindingPolicies>False</PostSharpDisableSystemBindingPolicies>
+	<PostSharpDisableDefaultBindingRedirects>True</PostSharpDisableDefaultBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -119,6 +121,9 @@
     <Compile Include="WebDriverBuilder.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\PostSharp.license">
+      <Link>PostSharp.license</Link>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>

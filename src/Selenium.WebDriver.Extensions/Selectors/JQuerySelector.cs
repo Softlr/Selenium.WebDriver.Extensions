@@ -1,12 +1,11 @@
-﻿namespace OpenQA.Selenium
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using OpenQA.Selenium.Contracts;
-    using OpenQA.Selenium.Extensions;
+    using OpenQA.Selenium;
     using PostSharp.Patterns.Contracts;
-    using static JavaScriptSnippets;
+    using Selenium.WebDriver.Extensions.Contracts;
 
     /// <summary>
     /// Searches the DOM elements using jQuery selector.
@@ -63,7 +62,7 @@
         public static JQuerySelector Empty { get; } = new JQuerySelector("*");
 
         /// <inheritdoc/>
-        public override string CheckScript => CheckScriptCode(_libraryVariable);
+        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(_libraryVariable);
 
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.

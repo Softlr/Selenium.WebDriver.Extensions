@@ -1,19 +1,19 @@
-﻿namespace OpenQA.Selenium
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Linq;
-    using OpenQA.Selenium.Extensions;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using PostSharp.Patterns.Contracts;
-    using static JavaScriptSnippets;
+    using Selenium.WebDriver.Extensions.Parsers;
 
     /// <summary>
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
-    public abstract class SelectorBase<TSelector> : By, ISelector
+    public abstract class SelectorBase<TSelector> : OpenQA.Selenium.By, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
@@ -66,26 +66,8 @@
         /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
         /// to long integer type.
         /// </remarks>
-        internal static TResult ParseResult<TResult>(object result)
-        {
-            if (result == null)
-            {
-                return default(TResult);
-            }
-
-            if (typeof(TResult) == typeof(IEnumerable<IWebElement>)
-                && result.GetType() == typeof(ReadOnlyCollection<object>))
-            {
-                result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
-            }
-
-            if (result is double)
-            {
-                result = (long?)(double)result;
-            }
-
-            return (TResult)result;
-        }
+        internal static TResult ParseResult<TResult>(object result) =>
+            Container.Instance.GetInstance<IParser>().Parse<TResult>(result);
 
         /// <summary>
         /// Loads the external library.
@@ -138,7 +120,7 @@
             // nested query
             driver = driverWrapper.WrappedDriver;
             var baseElementSelector = ((IJavaScriptExecutor)driver)
-                .ExecuteScript(FindDomPathScript, driverWrapper) as string;
+                .ExecuteScript(JavaScriptSnippets.FindDomPathScript, driverWrapper) as string;
             Context = CreateContext(baseElementSelector);
 
             return driver;

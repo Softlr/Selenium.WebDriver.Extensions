@@ -1,10 +1,9 @@
-﻿namespace OpenQA.Selenium.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using Moq;
-    using OpenQA.Selenium.Remote;
+    using OpenQA.Selenium;
 
     [ExcludeFromCodeCoverage]
     internal class WebDriverBuilder

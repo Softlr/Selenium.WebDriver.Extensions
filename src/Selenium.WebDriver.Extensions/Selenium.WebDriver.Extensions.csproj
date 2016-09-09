@@ -7,13 +7,15 @@
     <ProjectGuid>{F10536EC-8FBF-437A-840D-55CE6BF44161}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>OpenQA.Selenium</RootNamespace>
+    <RootNamespace>Selenium.WebDriver.Extensions</RootNamespace>
     <AssemblyName>Selenium.WebDriver.Extensions</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
     <DontImportPostSharp>True</DontImportPostSharp>
+	<PostSharpDisableSystemBindingPolicies>False</PostSharpDisableSystemBindingPolicies>
+<PostSharpDisableDefaultBindingRedirects>True</PostSharpDisableDefaultBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -110,20 +112,28 @@
       <HintPath>..\..\packages\PostSharp.Patterns.Common.4.3.19\lib\net40\PostSharp.Patterns.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="PostSharp.Patterns.Diagnostics, Version=4.3.19.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\PostSharp.Patterns.Diagnostics.4.3.19\lib\net40\PostSharp.Patterns.Diagnostics.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="PostSharp.Patterns.Model, Version=4.3.19.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PostSharp.Patterns.Model.4.3.19\lib\net40\PostSharp.Patterns.Model.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="SimpleInjector, Version=3.2.2.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.3.2.2\lib\net40-client\SimpleInjector.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+  </ItemGroup>
+  <ItemGroup>
     <Reference Include="System.Runtime, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\..\packages\System.Runtime.4.1.0\lib\net462\System.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="WebDriver, Version=2.53.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Selenium.WebDriver.2.53.1\lib\net40\WebDriver.dll</HintPath>
       <Private>True</Private>
@@ -134,10 +144,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Container.cs" />
     <Compile Include="Contracts\NullOrNotEmptyAttribute.cs" />
     <Compile Include="Extensions\By.cs" />
     <Compile Include="Extensions\WebDriverExtensions.cs" />
     <Compile Include="JavaScriptSnippets.cs" />
+    <Compile Include="Parsers\DirectCastParser.cs" />
+    <Compile Include="Parsers\ILongParser.cs" />
+    <Compile Include="Parsers\INullValueParser.cs" />
+    <Compile Include="Parsers\IDirectCastParser.cs" />
+    <Compile Include="Parsers\IParser.cs" />
+    <Compile Include="Parsers\IWebElementCollectionParser.cs" />
+    <Compile Include="Parsers\LongParser.cs" />
+    <Compile Include="Parsers\NullValueParser.cs" />
+    <Compile Include="Parsers\ParserBase.cs" />
+    <Compile Include="Parsers\WebElementCollectionParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Selectors\ISelector.cs" />
     <Compile Include="Selectors\SizzleSelector.cs" />
@@ -150,9 +171,13 @@
     </CodeAnalysisDictionary>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="..\..\PostSharp.license">
+      <Link>PostSharp.license</Link>
+    </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="Selenium.WebDriver.Extensions.nuspec" />
+    <None Include="Selenium.WebDriver.Extensions.psproj" />
   </ItemGroup>
   <ItemGroup>
     <Analyzer Include="..\..\packages\StyleCop.Analyzers.1.0.0\analyzers\dotnet\cs\Newtonsoft.Json.dll" />
