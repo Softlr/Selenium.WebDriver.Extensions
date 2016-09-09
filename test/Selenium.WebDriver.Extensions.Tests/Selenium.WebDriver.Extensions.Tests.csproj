@@ -17,6 +17,8 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <TargetFrameworkProfile />
+	<PostSharpDisableSystemBindingPolicies>False</PostSharpDisableSystemBindingPolicies>
+	<PostSharpDisableDefaultBindingRedirects>True</PostSharpDisableDefaultBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
