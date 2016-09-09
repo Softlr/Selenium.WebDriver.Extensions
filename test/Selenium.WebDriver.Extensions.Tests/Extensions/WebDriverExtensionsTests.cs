@@ -30,6 +30,10 @@
                 // ExecuteScript
                 yield return new object[]
                 {
+                    (Action)(() => WebDriverExtensions.ExecuteScript(null, null)),  driverParam
+                };
+                yield return new object[]
+                {
                     (Action)(() => WebDriverExtensions.ExecuteScript(null, _script)),  driverParam
                 };
                 yield return new object[]
@@ -39,20 +43,6 @@
                 yield return new object[]
                 {
                     (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam
-                };
-
-                // ExecuteScript<T>
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.ExecuteScript<object>(null, _script)),  driverParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => driver.ExecuteScript<object>(null)), scriptParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => driver.ExecuteScript<object>(string.Empty)), scriptParam
                 };
 
                 // LoadJQuery
