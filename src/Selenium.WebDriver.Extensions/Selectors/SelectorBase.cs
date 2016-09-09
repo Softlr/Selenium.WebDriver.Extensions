@@ -1,19 +1,19 @@
-﻿namespace OpenQA.Selenium
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using OpenQA.Selenium.Extensions;
+    using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
-    using static OpenQA.Selenium.JavaScriptSnippets;
+    using PostSharp.Patterns.Contracts;
+    using Selenium.WebDriver.Extensions.Parsers;
 
     /// <summary>
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
-    public abstract class SelectorBase<TSelector> : By
+    public abstract class SelectorBase<TSelector> : OpenQA.Selenium.By, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
@@ -22,48 +22,13 @@
         /// <param name="context">The context.</param>
         /// <exception cref="ArgumentNullException">Selector is null.</exception>
         /// <exception cref="ArgumentException">Selector is empty.</exception>
-        [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        protected SelectorBase(string selector, TSelector context)
+        protected SelectorBase([Required] string selector, TSelector context)
         {
-            if (selector == null)
-            {
-                throw new ArgumentNullException(nameof(selector));
-            }
-
-            if (selector.IsNullOrWhiteSpace())
-            {
-                throw new ArgumentException("Selector cannot be empty", nameof(selector));
-            }
-
-            this.Context = context;
-            this.RawSelector = selector;
-
-            this.FindElementMethod = searchContext =>
-            {
-                var results = this.FindElements(searchContext);
-                if (results.Count > 0)
-                {
-                    return results.First();
-                }
-
-                throw new NoSuchElementException($"No element found for selector: {this.RawSelector}");
-            };
-
-            this.FindElementsMethod = searchContext =>
-            {
-                var driver = this.ResolveDriver(searchContext);
-
-                this.LoadExternalLibrary(driver);
-                var result = ParseResult<IEnumerable<IWebElement>>(
-                    driver.ExecuteScript<object>($"return {this.Selector}{this.ResultResolver};"));
-                return new ReadOnlyCollection<IWebElement>(result.ToList());
-            };
+            Context = context;
+            RawSelector = selector;
+            FindElementMethod = FindElementBySelector;
+            FindElementsMethod = FindElementsBySelector;
         }
-
-        /// <summary>
-        /// Gets the default URI of the external library.
-        /// </summary>
-        public abstract Uri LibraryUri { get; }
 
         /// <summary>
         /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
@@ -74,12 +39,12 @@
         /// <summary>
         /// Gets the query raw selector.
         /// </summary>
-        public virtual string RawSelector { get; }
+        public string RawSelector { get; }
 
         /// <summary>
         /// Gets the context.
         /// </summary>
-        public virtual TSelector Context { get; private set; }
+        public TSelector Context { get; private set; }
 
         /// <summary>
         /// Gets the selector.
@@ -101,26 +66,8 @@
         /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
         /// to long integer type.
         /// </remarks>
-        internal static TResult ParseResult<TResult>(object result)
-        {
-            if (result == null)
-            {
-                return default(TResult);
-            }
-
-            if (typeof(TResult) == typeof(IEnumerable<IWebElement>)
-                && result.GetType() == typeof(ReadOnlyCollection<object>))
-            {
-                result = ((ReadOnlyCollection<object>)result).Cast<IWebElement>();
-            }
-
-            if (result is double)
-            {
-                result = (long?)(double)result;
-            }
-
-            return (TResult)result;
-        }
+        internal static TResult ParseResult<TResult>(object result) =>
+            Container.Instance.GetInstance<IParser>().Parse<TResult>(result);
 
         /// <summary>
         /// Loads the external library.
@@ -135,11 +82,27 @@
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
 
-        /// <summary>
-        /// Resolves the <see cref="IWebDriver"/>.
-        /// </summary>
-        /// <param name="searchContext">The search context.</param>
-        /// <returns>The resolved <see cref="IWebDriver"/>.</returns>
+        private IWebElement FindElementBySelector(ISearchContext searchContext)
+        {
+            var results = FindElementsBySelector(searchContext);
+            if (results.Count > 0)
+            {
+                return results.First();
+            }
+
+            throw new NoSuchElementException($"No element found for selector: {RawSelector}");
+        }
+
+        private ReadOnlyCollection<IWebElement> FindElementsBySelector(ISearchContext searchContext)
+        {
+            var driver = ResolveDriver(searchContext);
+
+            LoadExternalLibrary(driver);
+            var result = ParseResult<IEnumerable<IWebElement>>(driver.ExecuteScript<object>(
+                $"return {Selector}{ResultResolver};"));
+            return new ReadOnlyCollection<IWebElement>(result.ToList());
+        }
+
         private IWebDriver ResolveDriver(ISearchContext searchContext)
         {
             var driver = searchContext as IWebDriver;
@@ -149,18 +112,16 @@
             }
 
             var driverWrapper = searchContext as IWrapsDriver;
-            if (searchContext is IWebElement && driverWrapper != null)
-            {
-                // nested query
-                driver = driverWrapper.WrappedDriver;
-                var baseElementSelector = ((IJavaScriptExecutor)driver)
-                    .ExecuteScript(FindDomPathScript, driverWrapper) as string;
-                this.Context = this.CreateContext(baseElementSelector);
-            }
-            else
+            if (!(searchContext is IWebElement) || driverWrapper == null)
             {
                 throw new NotSupportedException("Context is not a valid driver");
             }
+
+            // nested query
+            driver = driverWrapper.WrappedDriver;
+            var baseElementSelector = ((IJavaScriptExecutor)driver)
+                .ExecuteScript(JavaScriptSnippets.FindDomPathScript, driverWrapper) as string;
+            Context = CreateContext(baseElementSelector);
 
             return driver;
         }

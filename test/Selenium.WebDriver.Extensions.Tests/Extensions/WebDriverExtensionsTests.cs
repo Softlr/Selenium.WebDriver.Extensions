@@ -1,292 +1,158 @@
-﻿namespace OpenQA.Selenium.Tests.Extensions
+﻿namespace Selenium.WebDriver.Extensions.Tests.Extensions
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Extensions;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class WebDriverExtensionsTests
     {
-        [Fact]
-        public void ShouldThrowExceptionWhenCheckingSelectorPrerequisitesWithNullDriver()
-        {
-            // Given
-            // When
-            Action action = () => WebDriverExtensions.CheckSelectorPrerequisites<JQuerySelector>(null, null);
+        private const string _scriptMethod = "myMethod";
+        private static readonly string _script = $"{_scriptMethod}();";
+        private static readonly Uri _url = new Uri("http://example.com");
 
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public static IEnumerable<object[]> InvalidParameters
+        {
+            get
+            {
+                var driver = new WebDriverBuilder().Build();
+                const string driverParam = "driver";
+                const string scriptParam = "script";
+                const string versionParam = "version";
+                const string uriParam = "uri";
+
+                // ExecuteScript
+                yield return new object[]
+                {
+                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _script)),  driverParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.ExecuteScript(null)), scriptParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam
+                };
+
+                // LoadJQuery
+                yield return new object[]
+                {
+                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _script)), driverParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadJQuery((string)null)), versionParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadJQuery(string.Empty)), versionParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _url)), driverParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadJQuery((Uri)null)), uriParam
+                };
+
+                // LoadSizzle
+                yield return new object[]
+                {
+                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _script)), driverParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadSizzle((string)null)), versionParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadSizzle(string.Empty)), versionParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _url)), driverParam
+                };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadSizzle((Uri)null)), uriParam
+                };
+            }
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCheckingSelectorPrerequisitesWithoutLoader()
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public static IEnumerable<object[]> Loaders
         {
-            // Given
-            var driver = new WebDriverBuilder().Build();
+            get
+            {
+                var timeSpan = TimeSpan.FromMilliseconds(100);
 
-            // When
-            Action action = () => driver.CheckSelectorPrerequisites<JQuerySelector>(null);
+                // LoadJQuery
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _url, null
+                };
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _url, timeSpan
+                };
 
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+                // LoadSizzle
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _url, null
+                };
+                yield return new object[]
+                {
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _url, timeSpan
+                };
+            }
         }
 
-        [Fact]
-        public void ShouldLoadExternalLibrary()
+        [Theory]
+        [MemberData(nameof(InvalidParameters))]
+        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter)
         {
-            // Given
-            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
-
-            // When
-            driver.LoadExternalLibrary(
-                JQuerySelector.Empty,
-                new Uri("http://example.com"),
-                TimeSpan.FromMilliseconds(100));
-
-            // Then
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void ShouldLoadExternalLibraryWithLoaderDefaultUri()
-        {
-            // Given
-            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
-
-            // When
-            driver.LoadExternalLibrary(
-                JQuerySelector.Empty,
-                null,
-                TimeSpan.FromMilliseconds(100));
-
-            // Then
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingExternalLibraryWithNullDriver()
-        {
-            // Given
-            // When
-            Action action = () => WebDriverExtensions.LoadExternalLibrary<JQuerySelector>(null, null, null);
-
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingExternalLibraryWithoutLoader()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadExternalLibrary<JQuerySelector>(null, null);
-
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenExecutingScriptWithNullDriver()
-        {
-            // Given
-            // When
-            Action action = () => WebDriverExtensions.ExecuteScript(null, null);
-
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenExecutingScriptThatExpectsValueWithNullDriver()
-        {
-            // Given
-            // When
-            Action action = () => WebDriverExtensions.ExecuteScript<object>(null, null);
-
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("driver", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameter);
         }
 
         [Fact]
         public void ShouldExecuteScript()
         {
-            // Given
-            var driver = new WebDriverBuilder().ThatHasTestMethodDefined().Build();
+            // Arrange
+            var driverMock = new WebDriverBuilder().ThatHasTestMethodDefined(_scriptMethod);
+            var driver = driverMock.Build();
 
-            // When
-            driver.ExecuteScript("myMethod();");
+            // Act
+            driver.ExecuteScript(_script);
 
-            // Then
-            Assert.True(true);
+            // Assert
+            driverMock.VerifyIfTestMethodWasCalled(_scriptMethod);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenExecutingNullScript()
+        [Theory]
+        [MemberData(nameof(Loaders))]
+        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
+        public void ShouldLoadLibrary(
+            Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
-            // Given
-            var driver = new WebDriverBuilder().Build();
+            // Arrange
+            var driverMock = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
+            var driver = driverMock.Build();
 
-            // When
-            Action action = () => driver.ExecuteScript(null);
+            // Act
+            action.Invoke(driver, uri, timeSpan);
 
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("script", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenExecutingEmptyScript()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.ExecuteScript(string.Empty);
-
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("script", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenExecutingWhiteSpaceOnlyScript()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.ExecuteScript(" ");
-
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("script", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldLoadJQuery()
-        {
-            // Given
-            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
-
-            // When
-            driver.LoadJQuery(
-                new Uri("http://example.com"),
-                TimeSpan.FromMilliseconds(100));
-
-            // Then
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingJQueryWithNullVersion()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadJQuery((string)null);
-
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("version", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingJQueryWithEmptyVersion()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadJQuery(string.Empty);
-
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("version", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingJQueryWithWhiteSpaceOnlyVersion()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadJQuery("\t");
-
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("version", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldLoadSizzle()
-        {
-            // Given
-            var driver = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded().Build();
-
-            // When
-            driver.LoadSizzle(
-                new Uri("http://example.com"),
-                TimeSpan.FromMilliseconds(100));
-
-            // Then
-            Assert.True(true);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingSizzleWithNullVersion()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadSizzle((string)null);
-
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("version", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingSizzleWithEmptyVersion()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadSizzle(string.Empty);
-
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("version", ex.ParamName);
-        }
-
-        [Fact]
-        public void ShouldThrowExceptionWhenLoadingSizzleWithWhiteSpaceOnlyVersion()
-        {
-            // Given
-            var driver = new WebDriverBuilder().Build();
-
-            // When
-            Action action = () => driver.LoadSizzle("\t");
-
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("version", ex.ParamName);
+            // Assert
+            driverMock.VerifyIfExternalLibraryWasLoaded(); // assert pass
         }
     }
 }

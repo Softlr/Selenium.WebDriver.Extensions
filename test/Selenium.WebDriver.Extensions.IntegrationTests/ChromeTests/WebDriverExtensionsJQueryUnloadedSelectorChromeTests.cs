@@ -7,15 +7,14 @@
     [Trait("Category", "Integration")]
     [Trait("Browser", "Chrome")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     [Collection("Integration")]
     public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
     {
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
         {
-            this.Browser = fixture.Browser;
-            this.Browser.Navigate().GoToUrl(new Uri($"{this.ServerUrl}/JQueryUnloaded"));
+            Browser = fixture.Browser;
+            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));
         }
     }
 }

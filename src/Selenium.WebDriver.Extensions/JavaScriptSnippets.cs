@@ -1,4 +1,4 @@
-﻿namespace OpenQA.Selenium
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
 
@@ -10,7 +10,7 @@
         /// <summary>
         /// Gets the script to get the DOM path.
         /// </summary>
-        public static string FindDomPathScript { get; } = @"return (function(element) {
+        internal static string FindDomPathScript { get; } = @"return (function(element) {
             'use strict';
             var stack = [], siblingsCount, siblingIndex, i, sibling;
             while (element.parentNode !== null) {
@@ -34,48 +34,30 @@
                 }
                 element = element.parentNode;
             }
-            stack = stack.slice(1); // removes the html element
+            stack = stack.slice(1);
             return stack.join(' > ');
-            })(arguments[0]);";
+        })(arguments[0]);";
 
         /// <summary>
         /// Gets the JavaScript to load jQuery.
         /// </summary>
         /// <param name="url">The script URL.</param>
         /// <returns>The JavaScrpt to load URL.</returns>
-        public static string LoadScriptCode(Uri url)
-        {
-            if (url == null)
-            {
-                throw new ArgumentNullException(nameof(url));
-            }
-
-            const string Script = @"(function(source) {
-                'use strict';
-                var script = document.createElement('script');
-                script.src = source;
-                document.getElementsByTagName('body')[0].appendChild(script);
-            })";
-            return $"{Script}('{url}')";
-        }
+        internal static string LoadScriptCode(Uri url) => $@"(function(source) {{
+            'use strict';
+            var script = document.createElement('script');
+            script.src = source;
+            document.getElementsByTagName('body')[0].appendChild(script);
+        }})('{url}')";
 
         /// <summary>
         /// Gets the JavaScript to test if library variable is defined.
         /// </summary>
         /// <param name="variable">The library variable to test.</param>
         /// <returns>The JavaScrpt to test if library variable is defined.</returns>
-        public static string CheckScriptCode(string variable)
-        {
-            if (variable == null)
-            {
-                throw new ArgumentNullException(nameof(variable));
-            }
-
-            const string Script = @"(function(value) {
-                'use strict';
-                return typeof value === 'function';
-            })";
-            return $"{Script}({variable})";
-        }
+        internal static string CheckScriptCode(string variable) => $@"(function(value) {{
+            'use strict';
+            return typeof value === 'function';
+        }})({variable})";
     }
 }

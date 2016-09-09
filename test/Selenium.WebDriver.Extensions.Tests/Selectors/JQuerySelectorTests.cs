@@ -1,16 +1,16 @@
-﻿namespace OpenQA.Selenium.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = OpenQA.Selenium.Extensions.By;
+    using By = global::Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
     public class JQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -311,6 +311,7 @@
         }
 
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
         public static IEnumerable<object[]> SelectorExceptionTests
         {
             get
@@ -318,11 +319,16 @@
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
+                    (Action)(() => new JQuerySelector("div", null, "jQuery", null))
+                };
+                yield return new object[]
+                {
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Add(null))
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Add(string.Empty))
                 };
                 yield return new object[]
@@ -332,7 +338,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Add(string.Empty, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
@@ -357,7 +363,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Closest(string.Empty))
                 };
                 yield return new object[]
@@ -367,7 +373,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Closest(string.Empty, By.JQuerySelector("#id")))
                 };
                 yield return new object[]
@@ -382,7 +388,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Filter(string.Empty))
                 };
                 yield return new object[]
@@ -392,7 +398,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Find(string.Empty))
                 };
                 yield return new object[]
@@ -402,7 +408,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Has(string.Empty))
                 };
                 yield return new object[]
@@ -412,7 +418,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Is(string.Empty))
                 };
                 yield return new object[]
@@ -472,7 +478,7 @@
                 };
                 yield return new object[]
                 {
-                    typeof(ArgumentException),
+                    typeof(ArgumentNullException),
                     (Action)(() => By.JQuerySelector("div").Not(string.Empty))
                 };
                 yield return new object[]
@@ -513,10 +519,10 @@
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector)
         {
-            // Given
-            // When
-            // Then
-            Assert.Equal(expectedSelector, selector.Selector);
+            // Arrange
+            // Act
+            // Assert
+            selector.Selector.Should().Be(expectedSelector);
         }
 
         [Theory]
@@ -529,200 +535,192 @@
         [Fact]
         public void ShouldCreateJQuerySelector()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             var selector = By.JQuerySelector("div");
 
-            // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
+            // Assert
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
         }
 
         [Fact]
         public void ShouldCreateJQuerySelectorWithContext()
         {
-            // Given
+            // Arrange
             var context = By.JQuerySelector("body");
 
-            // When
+            // Act
             var selector = By.JQuerySelector("div", context);
 
-            // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
-            Assert.Equal("body", selector.Context.RawSelector);
+            // Assert
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
+            selector.Context.RawSelector.Should().Be("body");
         }
 
         [Fact]
         public void ShouldCreateJQuerySelectorWithJQueryVariable()
         {
-            // Given
-            const string Variable = "test";
+            // Arrange
+            const string variable = "test";
 
-            // When
-            var selector = By.JQuerySelector("div", variable: Variable);
+            // Act
+            var selector = By.JQuerySelector("div", variable: variable);
 
-            // Then
-            Assert.NotNull(selector);
-            Assert.Equal("div", selector.RawSelector);
-            Assert.Equal("test", selector.Variable);
+            // Assert
+            selector.Should().NotBeNull();
+            selector.RawSelector.Should().Be("div");
+            selector.Variable.Should().Be("test");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.JQuerySelector(null);
 
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.JQuerySelector(string.Empty);
 
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.JQuerySelector(" ");
 
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("selector", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.JQuerySelector("div", variable: null);
 
-            // Then
-            var ex = Assert.Throws<ArgumentNullException>(action);
-            Assert.Equal("variable", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.JQuerySelector("div", variable: string.Empty);
 
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("variable", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue()
         {
-            // Given
-            // When
+            // Arrange
+            // Act
             Action action = () => By.JQuerySelector("div", variable: " ");
 
-            // Then
-            var ex = Assert.Throws<ArgumentException>(action);
-            Assert.Equal("variable", ex.ParamName);
+            // Assert
+            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
         [Fact]
         public void ShouldFindElementByJQuerySelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery("div")
                 .Build();
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var result = selector.FindElement(driver);
 
-            // Then
-            Assert.NotNull(result);
+            // Assert
+            result.Should().NotBeNull();
         }
 
         [Fact]
         public void ShouldFindElementsByJQuerySelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementsLocatedByJQuery("div")
                 .Build();
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var result = selector.FindElements(driver);
 
-            // Then
-            Assert.NotNull(result);
-            Assert.Equal(2, result.Count);
+            // Assert
+            result.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery("div")
                 .Build();
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             Action action = () => selector.FindElement(driver);
 
-            // Then
-            Assert.Throws<NoSuchElementException>(action);
+            // Assert
+            action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery("div")
                 .Build();
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var result = selector.FindElements(driver);
 
-            // Then
-            Assert.NotNull(result);
-            Assert.Equal(0, result.Count);
+            // Assert
+            result.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
         public void ShouldFindElementWithNestedJQuerySelector()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery("div")
                 .ThatContainsElementLocatedByJQuery("body > div").ThatCanResolvePathToElement("div")
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).ThatIsWebElement().Build();
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var result = selector.FindElement(element);
 
-            // Then
-            Assert.NotNull(result);
+            // Assert
+            result.Should().NotBeNull();
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement()
         {
-            // Given
+            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery("div")
                 .ThatContainsElementLocatedByJQuery("body > div").ThatCanResolvePathToElement("div")
                 .Build();
@@ -730,26 +728,26 @@
 
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             Action action = () => selector.FindElement(element);
 
-            // Then
-            Assert.Throws<NotSupportedException>(action);
-       }
+            // Assert
+            action.ShouldThrow<NotSupportedException>();
+        }
 
         [Fact]
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver()
         {
-            // Given
+            // Arrange
             var element = new SearchContextBuilder().ThatIsWebElement().Build();
 
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             Action action = () => selector.FindElement(element);
 
-            // Then
-            Assert.Throws<NotSupportedException>(action);
+            // Assert
+            action.ShouldThrow<NotSupportedException>();
         }
     }
 }

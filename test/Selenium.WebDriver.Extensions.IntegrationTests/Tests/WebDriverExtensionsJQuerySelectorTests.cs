@@ -2,124 +2,122 @@
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
-    using By = OpenQA.Selenium.Extensions.By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumented")]
-    [SuppressMessage("ReSharper", "ExceptionNotDocumentedOptional")]
-    [SuppressMessage("ReSharper", "AccessToStaticMemberViaDerivedType")]
     public abstract class WebDriverExtensionsJQuerySelectorTests : TestsBase
     {
         [Fact]
         public void FindElement()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("#id1");
 
-            // When
-            var element = this.Browser.FindElement(selector);
+            // Act
+            var element = Browser.FindElement(selector);
 
-            // Then
-            Assert.NotNull(element);
+            // Assert
+            element.Should().NotBeNull();
         }
 
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("#id-not");
 
-            // When
-            Action action = () => this.Browser.FindElement(selector);
+            // Act
+            Action action = () => Browser.FindElement(selector);
 
-            // Then
-            Assert.Throws<NoSuchElementException>(action);
+            // Assert
+            action.ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]
         public void FindElements()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("div.main");
 
-            // When
-            var elements = this.Browser.FindElements(selector);
+            // Act
+            var elements = Browser.FindElements(selector);
 
-            // Then
-            Assert.Equal(2, elements.Count);
+            // Assert
+            elements.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            // Given
+            // Arrange
             var selector = By.JQuerySelector("div.mainNot");
 
-            // When
-            var elements = this.Browser.FindElements(selector);
+            // Act
+            var elements = Browser.FindElements(selector);
 
-            // Then
-            Assert.Equal(0, elements.Count);
+            // Assert
+            elements.Should().NotBeNull().And.HaveCount(0);
         }
 
         [Fact]
         public void FindInnerElement()
         {
-            // Given
-            var root = this.Browser.FindElement(By.CssSelector("body"));
+            // Arrange
+            var root = Browser.FindElement(By.CssSelector("body"));
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var element = root.FindElement(selector);
 
-            // Then
-            Assert.NotNull(element);
+            // Assert
+            element.Should().NotBeNull();
         }
 
         [Fact]
         public void FindInnerElements()
         {
-            // Given
-            var root = this.Browser.FindElement(By.JQuerySelector("body"));
+            // Arrange
+            var root = Browser.FindElement(By.JQuerySelector("body"));
             var selector = By.JQuerySelector("div");
 
-            // When
+            // Act
             var elements = root.FindElements(selector);
 
-            // Then
-            Assert.Equal(2, elements.Count);
+            // Assert
+            elements.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Fact]
         public void ExpectedConditionsSupport()
         {
-            // Given
+            // Arrange
             var condition = ExpectedConditions.ElementIsVisible(By.JQuerySelector("h1"));
 
-            // When
-            var wait = new WebDriverWait(this.Browser, TimeSpan.FromSeconds(3));
+            // Act
+            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);
 
-            // Then
-            Assert.True(true);
+            // Assert
+            true.Should().BeTrue(); // assert pass
         }
 
         [Fact]
         public void PageObjectsSupport()
         {
-            // Given
-            var page = new TestPage(this.Browser);
+            // Arrange
+            var page = new TestPage(Browser);
 
-            // When
-            PageFactory.InitElements(this.Browser, page);
+            // Act
+            PageFactory.InitElements(Browser, page);
 
-            // Then
-            Assert.NotNull(page.HeadingJQuery);
-            Assert.Equal("H1 Header", page.HeadingJQuery.Text.Trim());
+            // Assert
+            page.HeadingJQuery.Should().NotBeNull();
+            page.HeadingJQuery.Text.Trim().Should().Be("H1 Header");
         }
     }
 }

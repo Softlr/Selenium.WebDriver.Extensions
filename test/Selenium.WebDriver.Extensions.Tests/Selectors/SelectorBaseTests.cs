@@ -1,53 +1,55 @@
-﻿namespace OpenQA.Selenium.Tests
+﻿namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
+    using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions;
     using Xunit;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Util")]
     public class SelectorBaseTests
     {
         [Fact]
         [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
         public void ShouldCorrectlyHandleDefaultValue()
         {
-            // Given
+            // Arrange
             object rawResult = null;
 
-            // When
+            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
-            // Then
-            Assert.False(result);
+            // Assert
+            result.Should().BeFalse();
         }
 
         [Fact]
         public void ShouldCorrectlyHandleDoubleValue()
         {
-            // Given
-            const double RawResult = 1.23d;
+            // Arrange
+            const double rawResult = 1.23d;
 
-            // When
-            var result = SelectorBase<JQuerySelector>.ParseResult<long>(RawResult);
+            // Act
+            var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
-            // Then
-            Assert.IsType<long>(result);
+            // Assert
+            result.GetType().Should().Be(typeof(long));
         }
 
         [Fact]
         public void ShouldCorrectlyHandleCollections()
         {
-            // Given
+            // Arrange
             var rawResult = new ReadOnlyCollection<object>(new List<object>());
 
-            // When
+            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
-            // Then
-            Assert.NotNull(result);
+            // Assert
+            result.Should().NotBeNull();
         }
     }
 }

@@ -1,13 +1,13 @@
-﻿namespace OpenQA.Selenium.Tests.Extensions
+﻿namespace Selenium.WebDriver.Extensions.Tests.Extensions
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using FluentAssertions;
     using Xunit;
-    using By = OpenQA.Selenium.Extensions.By;
+    using By = global::Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "AccessToStaticMemberViaDerivedType")]
     public class ByTests
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
@@ -28,12 +28,10 @@
 
         [Theory]
         [MemberData(nameof(CoreSelectors))]
-        public void ShouldCreateSelector(Selenium.By selector)
+        public void ShouldCreateSelector(OpenQA.Selenium.By selector)
         {
-            // Given
-            // When
-            // Then
-            Assert.NotNull(selector);
+            // Assert
+            selector.Should().NotBeNull();
         }
     }
 }
