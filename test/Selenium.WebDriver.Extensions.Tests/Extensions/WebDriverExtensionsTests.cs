@@ -30,10 +30,6 @@
                 // ExecuteScript
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.ExecuteScript(null, null)),  driverParam
-                };
-                yield return new object[]
-                {
                     (Action)(() => WebDriverExtensions.ExecuteScript(null, _script)),  driverParam
                 };
                 yield return new object[]
