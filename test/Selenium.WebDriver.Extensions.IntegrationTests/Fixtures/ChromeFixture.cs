@@ -16,7 +16,7 @@
             Browser = new ChromeDriver();
         }
 
-        [Reference]
+        [Child]
         public IWebDriver Browser { get; }
     }
 }

@@ -16,7 +16,7 @@
             Browser = new EdgeDriver();
         }
 
-        [Reference]
+        [Child]
         public IWebDriver Browser { get; }
     }
 }

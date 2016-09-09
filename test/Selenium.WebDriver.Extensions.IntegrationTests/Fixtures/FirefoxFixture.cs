@@ -18,10 +18,10 @@
             Browser = new FirefoxDriver(Service);
         }
 
-        [Reference]
+        [Child]
         public IWebDriver Browser { get; }
 
-        [Reference]
+        [Child]
         private FirefoxDriverService Service { get; }
     }
 }

@@ -16,7 +16,7 @@
             Browser = new InternetExplorerDriver();
         }
 
-        [Reference]
+        [Child]
         public IWebDriver Browser { get; }
     }
 }

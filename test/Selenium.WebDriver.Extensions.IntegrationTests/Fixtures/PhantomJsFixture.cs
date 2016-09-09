@@ -18,10 +18,10 @@
             Browser = new PhantomJSDriver(Service);
         }
 
-        [Reference]
+        [Child]
         public IWebDriver Browser { get; }
 
-        [Reference]
+        [Child]
         private PhantomJSDriverService Service { get; }
     }
 }
