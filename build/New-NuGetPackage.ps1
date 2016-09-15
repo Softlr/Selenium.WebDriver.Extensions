@@ -59,6 +59,6 @@ function New-NugetPackage {
 
     Exec {
         $Specification `
-        | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output }
+        | ForEach-Object -Process { ./.nuget/NuGet.exe pack $_ -Version $Version -OutputDirectory $Output -Symbols }
     }
 }
