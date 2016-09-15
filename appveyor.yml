@@ -45,7 +45,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0 -Symbols
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
@@ -135,7 +135,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-dev
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-dev -Symbols
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
@@ -199,7 +199,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-rc
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-rc -Symbols
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
