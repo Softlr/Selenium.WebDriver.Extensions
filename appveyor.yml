@@ -52,7 +52,7 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
     - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
@@ -142,7 +142,7 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
     - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
@@ -206,7 +206,7 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
     - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
