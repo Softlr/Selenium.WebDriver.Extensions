@@ -25,6 +25,6 @@
     <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\net46\Selenium.WebDriver.Extensions.dll" />
     <file src="bin\Release\Selenium.WebDriver.Extensions.pdb" target="lib\net46\Selenium.WebDriver.Extensions.pdb" />
     <file src="bin\Release\Selenium.WebDriver.Extensions.xml" target="lib\net46\Selenium.WebDriver.Extensions.xml" />
-	<file src="**\*.cs" target="src" />
+	<file src="**\*.cs" target="src" exclude="obj\**" />
   </files>
 </package>
