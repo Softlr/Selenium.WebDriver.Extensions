@@ -35,7 +35,6 @@
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   before_build:
-    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -76,20 +75,6 @@
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
-  on_success:
-    - git clone -q -b gh-pages https://github.com/RaYell/selenium-webdriver-extensions.git docs\gh-pages
-    - cd docs\gh-pages
-    - git config --global credential.helper store
-    - git config user.email "agent@appveyor.com"
-    - git config user.name "AppVeyor Agent"
-    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GH_ACCESS_TOKEN):x-oauth-basic@github.com`n"
-    - git rm -r api
-    - xcopy ..\bin\Docs api /s /i
-    - git add api
-    - git commit -a -m "Documentation updated"
-    - git push
-    - cd ..\..
-
 # develop, feature & bugfix branches
 -
   branches:
@@ -125,7 +110,6 @@
     disable_publish_on_pr: true
 
   before_build:
-    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -189,7 +173,6 @@
     disable_publish_on_pr: true
 
   before_build:
-    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
