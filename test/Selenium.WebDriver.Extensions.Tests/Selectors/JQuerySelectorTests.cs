@@ -15,23 +15,24 @@
     [ExcludeFromCodeCoverage]
     public class JQuerySelectorTests
     {
+        private static readonly Fixture _fixture = new Fixture();
+
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> SelectorsTests
         {
             get
             {
-                var fixture = new Fixture();
-                var tag = fixture.Create<string>();
-                var parentTag = fixture.Create<string>();
-                var variable = fixture.Create<string>();
-                var chain = fixture.Create<string>();
-                var attrName = fixture.Create<string>();
-                var attrValue = fixture.Create<string>();
-                var innerTag = fixture.Create<string>();
-                var selector = fixture.Create<string>();
-                var index1 = fixture.Create<int>();
-                var index2 = fixture.Create<int>();
-                var filter = fixture.Create<string>();
+                var tag = _fixture.Create<string>();
+                var parentTag = _fixture.Create<string>();
+                var variable = _fixture.Create<string>();
+                var chain = _fixture.Create<string>();
+                var attrName = _fixture.Create<string>();
+                var attrValue = _fixture.Create<string>();
+                var innerTag = _fixture.Create<string>();
+                var selector = _fixture.Create<string>();
+                var index1 = _fixture.Create<int>();
+                var index2 = _fixture.Create<int>();
+                var filter = _fixture.Create<string>();
 
                 // simple selector
                 yield return new object[] { By.JQuerySelector(tag), $"jQuery('{tag}')" };
@@ -187,208 +188,211 @@
         {
             get
             {
-                var fixture = new Fixture();
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => new JQuerySelector(fixture.Create<string>(), null, fixture.Create<string>(), null))
+                    (Action)(() => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Add(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Add(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .Add(null, By.JQuerySelector(fixture.Create<string>())))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Add(null, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .Add(string.Empty, By.JQuerySelector(fixture.Create<string>())))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Add(string.Empty, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Add(fixture.Create<string>(), null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).AddBack(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).AddBack(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Children(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Children(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Closest(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Closest(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .Closest(null, By.JQuerySelector(fixture.Create<string>())))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(null, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .Closest(string.Empty, By.JQuerySelector(fixture.Create<string>())))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(string.Empty, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .Closest(fixture.Create<string>(), null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(_fixture.Create<string>(), null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Filter(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Filter(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Find(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Find(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Has(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Has(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Is(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Is(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Next(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Next(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).NextAll(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextAll(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).NextUntil(string.Empty, fixture.Create<string>()))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .NextUntil(string.Empty, _fixture.Create<string>()))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).NextUntil(fixture.Create<string>(), string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .NextUntil(_fixture.Create<string>(), string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).NextUntil(null, string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(null, string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Prev(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Prev(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).PrevAll(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevAll(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).PrevUntil(string.Empty, fixture.Create<string>()))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(string.Empty, _fixture.Create<string>()))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).PrevUntil(fixture.Create<string>(), string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(_fixture.Create<string>(), string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).PrevUntil(null, string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(null, string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Not(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Not(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Parent(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parent(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Parents(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parents(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .ParentsUntil(string.Empty, fixture.Create<string>()))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(string.Empty, _fixture.Create<string>()))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>())
-                        .ParentsUntil(fixture.Create<string>(), string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(_fixture.Create<string>(), string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).ParentsUntil(null, string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).ParentsUntil(null, string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector(fixture.Create<string>()).Siblings(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Siblings(string.Empty))
                 };
             }
         }
