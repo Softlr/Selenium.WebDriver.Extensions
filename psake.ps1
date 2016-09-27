@@ -19,15 +19,9 @@ If (-Not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 $root = Split-Path -Path $script:MyInvocation.MyCommand.Path -Parent
 $nugetPath = $root | Join-Path -ChildPath .nuget | Join-Path -ChildPath NuGet.exe
 $solutionPath = $root | Join-Path -ChildPath Selenium.WebDriver.Extensions.sln
-$toolsSolutionPath = $root | Join-Path -ChildPath Tools.sln
 
 # restore solution packages
 If (-Not $SkipRestore) {
-	$process = Start-Process -FilePath $nugetPath 'restore', $toolsSolutionPath -NoNewWindow -Wait -PassThru
-	If ($process.ExitCode) {
-		Throw 'Package restore failed'
-	}
-
 	$process = Start-Process -FilePath $nugetPath 'restore', $solutionPath -NoNewWindow -Wait -PassThru
 	If ($process.ExitCode) {
 		Throw 'Package restore failed'
