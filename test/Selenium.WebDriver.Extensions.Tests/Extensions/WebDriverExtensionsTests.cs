@@ -5,6 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
+    using Ploeh.AutoFixture;
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
@@ -92,7 +93,8 @@
         {
             get
             {
-                var timeSpan = TimeSpan.FromMilliseconds(100);
+                var fixture = new Fixture();
+                var timeSpan = fixture.Create<TimeSpan>();
 
                 // LoadJQuery
                 yield return new object[]
