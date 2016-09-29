@@ -1,6 +1,6 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu?svg=true)](https://ci.appveyor.com/project/RaYell/selenium-helpers)
-[![Build Status](https://travis-ci.org/Softlr/selenium-webdriver-extensions.svg)](https://travis-ci.org/Softlr/selenium-webdriver-extensions)
-[![Code Coverage](https://codecov.io/gh/Softlr/selenium-webdriver-extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/Softlr/selenium-webdriver-extensions)
+[![Build Status](https://travis-ci.org/Softlr/Selenium.WebDriver.Extensions.svg)](https://travis-ci.org/Softlr/selenium-webdriver-extensions)
+[![Code Coverage](https://codecov.io/gh/Softlr/Selenium.WebDriver.Extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/Softlr/selenium-webdriver-extensions)
 
 # Description
 Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
