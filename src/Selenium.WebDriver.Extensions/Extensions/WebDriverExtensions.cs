@@ -13,7 +13,7 @@
     /// </summary>
     public static class WebDriverExtensions
     {
-        private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(3);
+        private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(10);
 
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
