@@ -5,6 +5,7 @@
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
+    using Ploeh.AutoFixture.Xunit2;
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
@@ -26,12 +27,11 @@
             result.Should().BeFalse();
         }
 
-        [Fact]
-        public void ShouldCorrectlyHandleDoubleValue()
+        [Theory]
+        [AutoData]
+        public void ShouldCorrectlyHandleDoubleValue(double rawResult)
         {
             // Arrange
-            const double rawResult = 1.23d;
-
             // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
@@ -39,12 +39,11 @@
             result.GetType().Should().Be(typeof(long));
         }
 
-        [Fact]
-        public void ShouldCorrectlyHandleCollections()
+        [Theory]
+        [AutoData]
+        public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
         {
             // Arrange
-            var rawResult = new ReadOnlyCollection<object>(new List<object>());
-
             // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 

@@ -3,6 +3,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
+    using Ploeh.AutoFixture;
     using Xunit;
     using By = global::Selenium.WebDriver.Extensions.By;
 
@@ -15,14 +16,15 @@
         {
             get
             {
-                yield return new object[] { By.CssSelector("div") };
-                yield return new object[] { By.TagName("div") };
-                yield return new object[] { By.Id("test") };
-                yield return new object[] { By.Name("test") };
-                yield return new object[] { By.ClassName("test") };
-                yield return new object[] { By.LinkText("test") };
-                yield return new object[] { By.PartialLinkText("test") };
-                yield return new object[] { By.XPath("//div") };
+                var fixture = new Fixture();
+                yield return new object[] { By.CssSelector(fixture.Create<string>()) };
+                yield return new object[] { By.TagName(fixture.Create<string>()) };
+                yield return new object[] { By.Id(fixture.Create<string>()) };
+                yield return new object[] { By.Name(fixture.Create<string>()) };
+                yield return new object[] { By.ClassName(fixture.Create<string>()) };
+                yield return new object[] { By.LinkText(fixture.Create<string>()) };
+                yield return new object[] { By.PartialLinkText(fixture.Create<string>()) };
+                yield return new object[] { By.XPath(fixture.Create<string>()) };
             }
         }
 
