@@ -184,7 +184,7 @@
     <Content Include="..\..\packages\Selenium.WebDriver.ChromeDriver.2.24.0.0\driver\chromedriver.exe">
       <Link>Drivers\chromedriver.exe</Link>
     </Content>
-    <Content Include="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.10586.0\driver\MicrosoftWebDriver.exe">
+    <Content Include="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.14393.0\driver\MicrosoftWebDriver.exe">
       <Link>Drivers\MicrosoftWebDriver.exe</Link>
     </Content>
     <Content Include="..\..\packages\WebDriver.GeckoDriver.0.9.0\content\wires.exe">
