@@ -5,6 +5,8 @@
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Xunit2;
     using Selenium.WebDriver.Extensions;
     using Xunit;
     using By = global::Selenium.WebDriver.Extensions.By;
@@ -13,299 +15,169 @@
     [ExcludeFromCodeCoverage]
     public class JQuerySelectorTests
     {
+        private static readonly Fixture _fixture = new Fixture();
+
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> SelectorsTests
         {
             get
             {
+                var tag = _fixture.Create<string>();
+                var parentTag = _fixture.Create<string>();
+                var variable = _fixture.Create<string>();
+                var chain = _fixture.Create<string>();
+                var attrName = _fixture.Create<string>();
+                var attrValue = _fixture.Create<string>();
+                var innerTag = _fixture.Create<string>();
+                var selector = _fixture.Create<string>();
+                var index1 = _fixture.Create<int>();
+                var index2 = _fixture.Create<int>();
+                var filter = _fixture.Create<string>();
+
                 // simple selector
-                yield return new object[]
-                {
-                    By.JQuerySelector("div"),
-                    "jQuery('div')"
-                };
+                yield return new object[] { By.JQuerySelector(tag), $"jQuery('{tag}')" };
 
                 // constructor
+                yield return new object[] { new JQuerySelector(tag), $"jQuery('{tag}')" };
                 yield return new object[]
                 {
-                    new JQuerySelector("div"),
-                    "jQuery('div')"
-                };
-                yield return new object[]
-                {
-                    new JQuerySelector("div", new JQuerySelector("body"), "$", ".children()"),
-                    "$('div', jQuery('body')).children()"
+                    new JQuerySelector(tag, new JQuerySelector(parentTag), variable, chain),
+                    $"{variable}('{tag}', jQuery('{parentTag}')){chain}"
                 };
 
                 // escaping
                 yield return new object[]
                 {
-                    By.JQuerySelector("[name='foo']"),
-                    "jQuery('[name=\"foo\"]')"
+                    By.JQuerySelector($"[{attrName}='{attrValue}']"),
+                    $"jQuery('[{attrName}=\"{attrValue}\"]')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("[name=\"foo\"]"),
-                    "jQuery('[name=\"foo\"]')"
+                    By.JQuerySelector($"[{attrName}=\"{attrValue}\"]"),
+                    $"jQuery('[{attrName}=\"{attrValue}\"]')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Add("[name='foo']"),
-                    "jQuery('div').add('[name=\"foo\"]')"
+                    By.JQuerySelector(tag).Add($"[{attrName}='{attrValue}']"),
+                    $"jQuery('{tag}').add('[{attrName}=\"{attrValue}\"]')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Add("[name=\"foo\"]"),
-                    "jQuery('div').add('[name=\"foo\"]')"
+                    By.JQuerySelector(tag).Add($"[{attrName}=\"{attrValue}\"]"),
+                    $"jQuery('{tag}').add('[{attrName}=\"{attrValue}\"]')"
                 };
 
                 // chained methods
+                yield return new object[] { By.JQuerySelector(tag).Add(innerTag), $"jQuery('{tag}').add('{innerTag}')" };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Add("span"),
-                    "jQuery('div').add('span')"
+                    By.JQuerySelector(tag).Add(innerTag, By.JQuerySelector(selector)),
+                    $"jQuery('{tag}').add('{innerTag}', jQuery('{selector}'))"
+                };
+                yield return new object[] { By.JQuerySelector(tag).AddBack(), $"jQuery('{tag}').addBack()" };
+                yield return new object[] { By.JQuerySelector(tag).AddBack(innerTag), $"jQuery('{tag}').addBack('{innerTag}')" };
+                yield return new object[] { By.JQuerySelector(tag).AndSelf(), $"jQuery('{tag}').andSelf()" };
+                yield return new object[] { By.JQuerySelector(tag).Children(), $"jQuery('{tag}').children()" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Children(innerTag),
+                    $"jQuery('{tag}').children('{innerTag}')"
+                };
+                yield return new object[] { By.JQuerySelector(tag).Closest(innerTag), $"jQuery('{tag}').closest('{innerTag}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Closest(innerTag, By.JQuerySelector(selector)),
+                    $"jQuery('{tag}').closest('{innerTag}', jQuery('{selector}'))"
+                };
+                yield return new object[] { By.JQuerySelector(tag).Contents(), $"jQuery('{tag}').contents()" };
+                yield return new object[] { By.JQuerySelector(tag).End(), $"jQuery('{tag}').end()" };
+                yield return new object[] { By.JQuerySelector(tag).Eq(index1), $"jQuery('{tag}').eq({index1})" };
+                yield return new object[] { By.JQuerySelector(tag).Filter(selector), $"jQuery('{tag}').filter('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).Find(selector), $"jQuery('{tag}').find('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).First(), $"jQuery('{tag}').first()" };
+                yield return new object[] { By.JQuerySelector(tag).Last(), $"jQuery('{tag}').last()" };
+                yield return new object[] { By.JQuerySelector(tag).Has(selector), $"jQuery('{tag}').has('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).Is(selector), $"jQuery('{tag}').is('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).Next(), $"jQuery('{tag}').next()" };
+                yield return new object[] { By.JQuerySelector(tag).Next(selector), $"jQuery('{tag}').next('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).NextAll(), $"jQuery('{tag}').nextAll()" };
+                yield return new object[] { By.JQuerySelector(tag).NextAll(selector), $"jQuery('{tag}').nextAll('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).NextUntil(), $"jQuery('{tag}').nextUntil()" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).NextUntil(selector),
+                    $"jQuery('{tag}').nextUntil('{selector}')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Add("span", By.JQuerySelector("#id")),
-                    "jQuery('div').add('span', jQuery('#id'))"
+                    By.JQuerySelector(tag).NextUntil(selector, filter),
+                    $"jQuery('{tag}').nextUntil('{selector}', '{filter}')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").AddBack(),
-                    "jQuery('div').addBack()"
+                    By.JQuerySelector(tag).NextUntil(null, filter),
+                    $"jQuery('{tag}').nextUntil('', '{filter}')"
+                };
+                yield return new object[] { By.JQuerySelector(tag).Prev(), $"jQuery('{tag}').prev()" };
+                yield return new object[] { By.JQuerySelector(tag).Prev(selector), $"jQuery('{tag}').prev('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).PrevAll(), $"jQuery('{tag}').prevAll()" };
+                yield return new object[] { By.JQuerySelector(tag).PrevAll(selector), $"jQuery('{tag}').prevAll('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).PrevUntil(), $"jQuery('{tag}').prevUntil()" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).PrevUntil(selector),
+                    $"jQuery('{tag}').prevUntil('{selector}')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").AddBack("span"),
-                    "jQuery('div').addBack('span')"
+                    By.JQuerySelector(tag).PrevUntil(selector, filter),
+                    $"jQuery('{tag}').prevUntil('{selector}', '{filter}')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").AndSelf(),
-                    "jQuery('div').andSelf()"
+                    By.JQuerySelector(tag).PrevUntil(null, filter),
+                    $"jQuery('{tag}').prevUntil('', '{filter}')"
+                };
+                yield return new object[] { By.JQuerySelector(tag).Not(selector), $"jQuery('{tag}').not('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).OffsetParent(), $"jQuery('{tag}').offsetParent()" };
+                yield return new object[] { By.JQuerySelector(tag).Parent(), $"jQuery('{tag}').parent()" };
+                yield return new object[] { By.JQuerySelector(tag).Parent(selector), $"jQuery('{tag}').parent('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).Parents(), $"jQuery('{tag}').parents()" };
+                yield return new object[] { By.JQuerySelector(tag).Parents(selector), $"jQuery('{tag}').parents('{selector}')" };
+                yield return new object[] { By.JQuerySelector(tag).ParentsUntil(), $"jQuery('{tag}').parentsUntil()" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).ParentsUntil(selector),
+                    $"jQuery('{tag}').parentsUntil('{selector}')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Children(),
-                    "jQuery('div').children()"
+                    By.JQuerySelector(tag).ParentsUntil(selector, filter),
+                    $"jQuery('{tag}').parentsUntil('{selector}', '{filter}')"
                 };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Children("span"),
-                    "jQuery('div').children('span')"
+                    By.JQuerySelector(tag).ParentsUntil(null, filter),
+                    $"jQuery('{tag}').parentsUntil('', '{filter}')"
                 };
+                yield return new object[] { By.JQuerySelector(tag).Siblings(), $"jQuery('{tag}').siblings()" };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Closest("span"),
-                    "jQuery('div').closest('span')"
+                    By.JQuerySelector(tag).Siblings(selector),
+                    $"jQuery('{tag}').siblings('{selector}')"
                 };
+                yield return new object[] { By.JQuerySelector(tag).Slice(index1), $"jQuery('{tag}').slice({index1})" };
                 yield return new object[]
                 {
-                    By.JQuerySelector("div").Closest("span", By.JQuerySelector("#id")),
-                    "jQuery('div').closest('span', jQuery('#id'))"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Contents(),
-                    "jQuery('div').contents()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").End(),
-                    "jQuery('div').end()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Eq(1),
-                    "jQuery('div').eq(1)"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Filter(".test"),
-                    "jQuery('div').filter('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Find(".test"),
-                    "jQuery('div').find('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").First(),
-                    "jQuery('div').first()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Last(),
-                    "jQuery('div').last()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Has(".test"),
-                    "jQuery('div').has('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Is(".test"),
-                    "jQuery('div').is('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Next(),
-                    "jQuery('div').next()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Next(".test"),
-                    "jQuery('div').next('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").NextAll(),
-                    "jQuery('div').nextAll()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").NextAll(".test"),
-                    "jQuery('div').nextAll('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").NextUntil(),
-                    "jQuery('div').nextUntil()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").NextUntil(".test"),
-                    "jQuery('div').nextUntil('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").NextUntil(".test", "div"),
-                    "jQuery('div').nextUntil('.test', 'div')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").NextUntil(null, "div"),
-                    "jQuery('div').nextUntil('', 'div')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Prev(),
-                    "jQuery('div').prev()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Prev(".test"),
-                    "jQuery('div').prev('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").PrevAll(),
-                    "jQuery('div').prevAll()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").PrevAll(".test"),
-                    "jQuery('div').prevAll('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").PrevUntil(),
-                    "jQuery('div').prevUntil()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").PrevUntil(".test"),
-                    "jQuery('div').prevUntil('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").PrevUntil(".test", "div"),
-                    "jQuery('div').prevUntil('.test', 'div')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").PrevUntil(null, "div"),
-                    "jQuery('div').prevUntil('', 'div')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Not(".test"),
-                    "jQuery('div').not('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").OffsetParent(),
-                    "jQuery('div').offsetParent()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Parent(),
-                    "jQuery('div').parent()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Parent(".test"),
-                    "jQuery('div').parent('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Parents(),
-                    "jQuery('div').parents()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Parents(".test"),
-                    "jQuery('div').parents('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").ParentsUntil(),
-                    "jQuery('div').parentsUntil()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").ParentsUntil(".test"),
-                    "jQuery('div').parentsUntil('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").ParentsUntil(".test", "div"),
-                    "jQuery('div').parentsUntil('.test', 'div')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").ParentsUntil(null, "div"),
-                    "jQuery('div').parentsUntil('', 'div')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Siblings(),
-                    "jQuery('div').siblings()"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Siblings(".test"),
-                    "jQuery('div').siblings('.test')"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Slice(0),
-                    "jQuery('div').slice(0)"
-                };
-                yield return new object[]
-                {
-                    By.JQuerySelector("div").Slice(0, 1),
-                    "jQuery('div').slice(0, 1)"
+                    By.JQuerySelector(tag).Slice(index1, index2),
+                    $"jQuery('{tag}').slice({index1}, {index2})"
                 };
 
                 // chained methods with context
                 yield return new object[]
                 {
-                    By.JQuerySelector("div", By.JQuerySelector("#id")).Children().First(),
-                    "jQuery('div', jQuery('#id')).children().first()"
+                    By.JQuerySelector(tag, By.JQuerySelector(selector)).Children().First(),
+                    $"jQuery('{tag}', jQuery('{selector}')).children().first()"
                 };
             }
         }
@@ -319,197 +191,208 @@
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => new JQuerySelector("div", null, "jQuery", null))
+                    (Action)(() => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Add(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Add(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Add(null, By.JQuerySelector("#id")))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Add(null, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Add(string.Empty, By.JQuerySelector("#id")))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Add(string.Empty, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Add("span", null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").AddBack(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).AddBack(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Children(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Children(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Closest(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Closest(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Closest(null, By.JQuerySelector("#id")))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(null, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Closest(string.Empty, By.JQuerySelector("#id")))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(string.Empty, By.JQuerySelector(_fixture.Create<string>())))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Closest("span", null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(_fixture.Create<string>(), null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Filter(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Filter(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Find(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Find(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Has(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Has(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Is(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Is(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Next(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Next(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").NextAll(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextAll(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").NextUntil(string.Empty, ".test"))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .NextUntil(string.Empty, _fixture.Create<string>()))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").NextUntil("span", string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .NextUntil(_fixture.Create<string>(), string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").NextUntil(null, string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(null, string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Prev(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Prev(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").PrevAll(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevAll(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").PrevUntil(string.Empty, ".test"))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(string.Empty, _fixture.Create<string>()))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").PrevUntil("span", string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(_fixture.Create<string>(), string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").PrevUntil(null, string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(null, string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Not(null))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(null))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentNullException),
-                    (Action)(() => By.JQuerySelector("div").Not(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Parent(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parent(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Parents(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parents(string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").ParentsUntil(string.Empty, ".test"))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(string.Empty, _fixture.Create<string>()))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").ParentsUntil("span", string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(_fixture.Create<string>(), string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").ParentsUntil(null, string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).ParentsUntil(null, string.Empty))
                 };
                 yield return new object[]
                 {
                     typeof(ArgumentException),
-                    (Action)(() => By.JQuerySelector("div").Siblings(string.Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Siblings(string.Empty))
                 };
             }
         }
@@ -529,49 +412,53 @@
         [MemberData(nameof(SelectorExceptionTests))]
         public void ShouldThrowExceptionForInvalidSelectors(Type exceptionType, Action selectorAction)
         {
+            // Arrange
+            // Act
+            // Assert
             Assert.Throws(exceptionType, selectorAction);
         }
 
-        [Fact]
-        public void ShouldCreateJQuerySelector()
+        [Theory]
+        [AutoData]
+        public void ShouldCreateJQuerySelector(string rawSelector)
         {
             // Arrange
             // Act
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Assert
             selector.Should().NotBeNull();
-            selector.RawSelector.Should().Be("div");
+            selector.RawSelector.Should().Be(rawSelector);
         }
 
-        [Fact]
-        public void ShouldCreateJQuerySelectorWithContext()
+        [Theory]
+        [AutoData]
+        public void ShouldCreateJQuerySelectorWithContext(string contextRawSelector, string rawSelector)
         {
             // Arrange
-            var context = By.JQuerySelector("body");
+            var context = By.JQuerySelector(contextRawSelector);
 
             // Act
-            var selector = By.JQuerySelector("div", context);
+            var selector = By.JQuerySelector(rawSelector, context);
 
             // Assert
             selector.Should().NotBeNull();
-            selector.RawSelector.Should().Be("div");
-            selector.Context.RawSelector.Should().Be("body");
+            selector.RawSelector.Should().Be(rawSelector);
+            selector.Context.RawSelector.Should().Be(contextRawSelector);
         }
 
-        [Fact]
-        public void ShouldCreateJQuerySelectorWithJQueryVariable()
+        [Theory]
+        [AutoData]
+        public void ShouldCreateJQuerySelectorWithJQueryVariable(string rawSelector, string variable)
         {
             // Arrange
-            const string variable = "test";
-
             // Act
-            var selector = By.JQuerySelector("div", variable: variable);
+            var selector = By.JQuerySelector(rawSelector, variable: variable);
 
             // Assert
             selector.Should().NotBeNull();
-            selector.RawSelector.Should().Be("div");
-            selector.Variable.Should().Be("test");
+            selector.RawSelector.Should().Be(rawSelector);
+            selector.Variable.Should().Be(variable);
         }
 
         [Fact]
@@ -607,46 +494,50 @@
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue()
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector)
         {
             // Arrange
             // Act
-            Action action = () => By.JQuerySelector("div", variable: null);
+            Action action = () => By.JQuerySelector(rawSelector, variable: null);
 
             // Assert
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue()
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector)
         {
             // Arrange
             // Act
-            Action action = () => By.JQuerySelector("div", variable: string.Empty);
+            Action action = () => By.JQuerySelector(rawSelector, variable: string.Empty);
 
             // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue()
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(string rawSelector)
         {
             // Arrange
             // Act
-            Action action = () => By.JQuerySelector("div", variable: " ");
+            Action action = () => By.JQuerySelector(rawSelector, variable: " ");
 
             // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
-        [Fact]
-        public void ShouldFindElementByJQuerySelector()
+        [Theory]
+        [AutoData]
+        public void ShouldFindElementByJQuerySelector(string rawSelector)
         {
             // Arrange
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery("div")
+            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
                 .Build();
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             var result = selector.FindElement(driver);
@@ -655,13 +546,14 @@
             result.Should().NotBeNull();
         }
 
-        [Fact]
-        public void ShouldFindElementsByJQuerySelector()
+        [Theory]
+        [AutoData]
+        public void ShouldFindElementsByJQuerySelector(string rawSelector)
         {
             // Arrange
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementsLocatedByJQuery("div")
+            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementsLocatedByJQuery(rawSelector)
                 .Build();
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             var result = selector.FindElements(driver);
@@ -670,13 +562,14 @@
             result.Should().NotBeNull().And.HaveCount(2);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector()
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
         {
             // Arrange
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery("div")
+            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery(rawSelector)
                 .Build();
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             Action action = () => selector.FindElement(driver);
@@ -685,13 +578,14 @@
             action.ShouldThrow<NoSuchElementException>();
         }
 
-        [Fact]
-        public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector()
+        [Theory]
+        [AutoData]
+        public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector(string rawSelector)
         {
             // Arrange
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery("div")
+            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery(rawSelector)
                 .Build();
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             var result = selector.FindElements(driver);
@@ -700,15 +594,16 @@
             result.Should().NotBeNull().And.HaveCount(0);
         }
 
-        [Fact]
-        public void ShouldFindElementWithNestedJQuerySelector()
+        [Theory]
+        [AutoData]
+        public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
         {
             // Arrange
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery("div")
-                .ThatContainsElementLocatedByJQuery("body > div").ThatCanResolvePathToElement("div")
+            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
+                .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).ThatIsWebElement().Build();
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             var result = selector.FindElement(element);
@@ -717,16 +612,17 @@
             result.Should().NotBeNull();
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenSearchContextIsNotWebElement()
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
         {
             // Arrange
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery("div")
-                .ThatContainsElementLocatedByJQuery("body > div").ThatCanResolvePathToElement("div")
+            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
+                .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
 
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             Action action = () => selector.FindElement(element);
@@ -735,13 +631,14 @@
             action.ShouldThrow<NotSupportedException>();
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver()
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
         {
             // Arrange
             var element = new SearchContextBuilder().ThatIsWebElement().Build();
 
-            var selector = By.JQuerySelector("div");
+            var selector = By.JQuerySelector(rawSelector);
 
             // Act
             Action action = () => selector.FindElement(element);

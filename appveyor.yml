@@ -35,7 +35,6 @@
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
   before_build:
-    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -45,14 +44,14 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0 -Symbols
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
     - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
@@ -75,20 +74,6 @@
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
-
-  on_success:
-    - git clone -q -b gh-pages https://github.com/RaYell/selenium-webdriver-extensions.git docs\gh-pages
-    - cd docs\gh-pages
-    - git config --global credential.helper store
-    - git config user.email "agent@appveyor.com"
-    - git config user.name "AppVeyor Agent"
-    - ps: Add-Content "$env:USERPROFILE\.git-credentials" "https://$($env:GH_ACCESS_TOKEN):x-oauth-basic@github.com`n"
-    - git rm -r api
-    - xcopy ..\bin\Docs api /s /i
-    - git add api
-    - git commit -a -m "Documentation updated"
-    - git push
-    - cd ..\..
 
 # develop, feature & bugfix branches
 -
@@ -125,7 +110,6 @@
     disable_publish_on_pr: true
 
   before_build:
-    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -135,14 +119,14 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-dev
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-dev -Symbols
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
     - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
@@ -189,7 +173,6 @@
     disable_publish_on_pr: true
 
   before_build:
-    - .nuget\nuget.exe restore Tools.sln
     - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
@@ -199,14 +182,14 @@
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net45 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Release-Net40 /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-rc
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.0-rc -Symbols
 
   test_script:
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160818.172304\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
     - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"

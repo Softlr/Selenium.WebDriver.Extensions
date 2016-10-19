@@ -5,6 +5,8 @@
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
+    using Ploeh.AutoFixture;
+    using Ploeh.AutoFixture.Xunit2;
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
@@ -12,9 +14,7 @@
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
-        private const string _scriptMethod = "myMethod";
-        private static readonly string _script = $"{_scriptMethod}();";
-        private static readonly Uri _url = new Uri("http://example.com");
+        private static readonly Fixture _fixture = new Fixture();
 
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IEnumerable<object[]> InvalidParameters
@@ -30,60 +30,36 @@
                 // ExecuteScript
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _script)),  driverParam
+                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>())),  driverParam
                 };
-                yield return new object[]
-                {
-                    (Action)(() => driver.ExecuteScript(null)), scriptParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam
-                };
+                yield return new object[] { (Action)(() => driver.ExecuteScript(null)), scriptParam };
+                yield return new object[] { (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam };
 
                 // LoadJQuery
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _script)), driverParam
+                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _fixture.Create<string>())), driverParam
                 };
+                yield return new object[] { (Action)(() => driver.LoadJQuery((string)null)), versionParam };
+                yield return new object[] { (Action)(() => driver.LoadJQuery(string.Empty)), versionParam };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadJQuery((string)null)), versionParam
+                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _fixture.Create<Uri>())), driverParam
                 };
-                yield return new object[]
-                {
-                    (Action)(() => driver.LoadJQuery(string.Empty)), versionParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _url)), driverParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => driver.LoadJQuery((Uri)null)), uriParam
-                };
+                yield return new object[] { (Action)(() => driver.LoadJQuery((Uri)null)), uriParam };
 
                 // LoadSizzle
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _script)), driverParam
+                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _fixture.Create<string>())), driverParam
                 };
+                yield return new object[] { (Action)(() => driver.LoadSizzle((string)null)), versionParam };
+                yield return new object[] { (Action)(() => driver.LoadSizzle(string.Empty)), versionParam };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadSizzle((string)null)), versionParam
+                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _fixture.Create<Uri>())), driverParam
                 };
-                yield return new object[]
-                {
-                    (Action)(() => driver.LoadSizzle(string.Empty)), versionParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _url)), driverParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => driver.LoadSizzle((Uri)null)), uriParam
-                };
+                yield return new object[] { (Action)(() => driver.LoadSizzle((Uri)null)), uriParam };
             }
         }
 
@@ -92,26 +68,26 @@
         {
             get
             {
-                var timeSpan = TimeSpan.FromMilliseconds(100);
+                var timeSpan = _fixture.Create<TimeSpan>();
 
                 // LoadJQuery
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _url, null
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), null
                 };
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _url, timeSpan
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), timeSpan
                 };
 
                 // LoadSizzle
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _url, null
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), null
                 };
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _url, timeSpan
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), timeSpan
                 };
             }
         }
@@ -124,25 +100,26 @@
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameter);
         }
 
-        [Fact]
-        public void ShouldExecuteScript()
+        [Theory]
+        [AutoData]
+        public void ShouldExecuteScript(string scriptMethod)
         {
             // Arrange
-            var driverMock = new WebDriverBuilder().ThatHasTestMethodDefined(_scriptMethod);
+            var script = $"{scriptMethod}();";
+            var driverMock = new WebDriverBuilder().ThatHasTestMethodDefined(scriptMethod);
             var driver = driverMock.Build();
 
             // Act
-            driver.ExecuteScript(_script);
+            driver.ExecuteScript(script);
 
             // Assert
-            driverMock.VerifyIfTestMethodWasCalled(_scriptMethod);
+            driverMock.VerifyIfTestMethodWasCalled(scriptMethod);
         }
 
         [Theory]
         [MemberData(nameof(Loaders))]
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
-        public void ShouldLoadLibrary(
-            Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
+        public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             // Arrange
             var driverMock = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
