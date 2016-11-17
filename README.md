@@ -48,7 +48,7 @@ API documentation can be found [here](https://rayell.github.io/selenium-webdrive
 #### Include extensions
 Create alias for the extension `By` to be used.
 ```csharp
-using By = OpenQA.Selenium.Extensions.By;
+using By = Selenium.WebDriver.Extensions.By;
 ```
 
 If you don't want to override the `By` to be used, you can always create `JQuerySelector` and `SizzleSelector` instances with `new` keyword.
