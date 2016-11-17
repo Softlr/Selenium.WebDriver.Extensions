@@ -5,8 +5,8 @@
     <version>$version$</version>
     <title>Selenium WebDriver Extensions</title>
     <authors>Softlr</authors>
-    <licenseUrl>https://github.com/Softlr/selenium-webdriver-extensions/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Softlr/selenium-webdriver-extensions</projectUrl>
+    <licenseUrl>https://github.com/Softlr/Selenium.WebDriver.Extensions/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/Softlr/Selenium.WebDriver.Extensions</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</description>
     <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
