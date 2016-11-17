@@ -20,8 +20,6 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
-        /// <exception cref="ArgumentNullException">Selector is null.</exception>
-        /// <exception cref="ArgumentException">Selector is empty.</exception>
         protected SelectorBase([Required] string selector, TSelector context)
         {
             Context = context;
