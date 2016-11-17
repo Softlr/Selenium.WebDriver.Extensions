@@ -4,25 +4,23 @@
 # Description
 Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 
-# Version 2.0 Released
-The version 2.0 of the extensions library has been released. The new features of it include:
-* Selectors inheriting from `OpenQA.Selenium.By` class. V1 of the application used the trick to run the custom selectors (extension methods, object wrappers etc.) and in the end it was quite difficult to tell which part it handled by the extensions and which by Selenium core. V2 includes completely rewritten JQuery and Sizzle selectors that inherit from `By` class to avoid those kind of tricks.
-* Removal of redundant core selectors. V1 contains implementation of core Selenium selectors using custom QuerySelector class. The purpose of this class is to wrap the results in custom WebElement class for them to be reused while determining the context of the subsequent call. With the implementation of `By` class, they are no longer be needed and has been removed from the library.
-* Removal of query selector. As described above, `QuerySelector` class is no longer necessary and has been removed in V2.
-* Single NuGet package. There is only one NuGet package containing all of the extenions instead of four separate packages that V1 included. The extensions library is small enough for all of the important code to be merged into one package.
-* Support for JQuery getters and setters was dropped. V1 included a mechanism to run JQuery getters and setters as most of the calls used JQueryHelper class as an mediator between Selenium core and extensions library. With the new architecture there is no place for the JQueryHelper anymore and the support for those methods was dropped. The only jQuery methods supported are now [traversing methods](https://api.jquery.com/category/traversing/).
-* Semantic versioning. V2 utilizes SemVer from the first release rather than V1's {major}.{minor}.{build} schema.
-* Support for `ExpectedConditions`. By implementing the `By` class, V2 of the extensions library comes with the support for `ExpectedConditions`.
-* Support for page objects. By implementing the By class, V2 of the exntesions library comes with the support for [Selenium Page Objects](https://code.google.com/p/selenium/wiki/PageObjects).
-* Changes to the static `By` implementations. There still is a `By` class provided with static methods for creating all sorts of selectors, however it is now simply be a wrapper on a base class that will also provide methods for the new selectors.
-* Namespace change. The namespace of the extensions library is going to be changed from Selenium.WebDriver.Extensions to OpenQA.Selenium which makes integration with Selenium even easier.
+# Version 3.0 Released
+The version 3.0 of the extensions library has been released. The new features and changes include:
+* Selenium 3.0 support
+* .NET 3.5, 4.0 and Mono support dropped, maintaining that code was becomming more and more of a problem and it was causing performance degradation
+* Performance improvements in the code
+* Script loading reworked
+* PostSharp code contracts
+* Documentation added to NuGet packages
+* Symbols published to symbol server
+* Extension name reverted to Selenium.WebDriver.Extensions so that it is not confusing that this package comes from a different vendor
 
 # Features
 * Main
  * Support for nested selectors
  * Very easy setup: install packages with NuGet and start using it with your existing Selenium solution
  * High quality ensured by continuous integration setup with Appveyor, unit and integration testing and high code coverage
- * Well documented code following strict StyleCop and FxCop rules
+ * Well documented code following strict StyleCop.Analyzers and FxCop rules
 * jQuery support
  * jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
  * jQuery auto-load on pages on sites that don't use jQuery
@@ -35,7 +33,7 @@ The version 2.0 of the extensions library has been released. The new features of
  * Support for Sizzle context switching
  * Support for `ExpectedConditions` with Sizzle selectors
  * Support for Page Objects with Sizzle selectors
-
+ 
 # Installation
 Run the following command in Visual Studio Package Manager Console.
 ```posh
