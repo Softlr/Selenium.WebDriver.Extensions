@@ -22,16 +22,8 @@ Task CleanArtifacts -Description 'Cleans the artifacts directory' {
     New-Item -ItemType directory -Path $artifactsDir | Out-Null
 }
 
-Task CleanNet46 -Description 'Cleans the output directory of the default .NET 4.6 build configuration' {
+Task CleanCode -Description 'Cleans the output directory of the .NET build configuration' {
     Invoke-Build -Path $solution -Target Clean
-}
-
-Task CleanNet45 -Description 'Cleans the output directory of the default .NET 4.5 build configuration' {
-    Invoke-Build -Path $solution -BuildConfiguration Release-Net45 -Target Clean
-}
-
-Task CleanNet40 -Description 'Cleans the output directory of the .NET 4.0 build configuration' {
-    Invoke-Build -Path $solution -BuildConfiguration Release-Net40 -Target Clean
 }
 
 Task CleanDocs -Description 'Cleans the output directory of the documentation build configuration' {
@@ -49,57 +41,47 @@ Task CleanDocs -Description 'Cleans the output directory of the documentation bu
 }
 
 Task Clean -Description 'Cleans the output directory of all build configurations' `
-	-Depends CleanNet46, CleanNet45, CleanNet40, CleanDocs, CleanArtifacts
+	-Depends CleanCode, CleanDocs, CleanArtifacts
 
-Task BuildNet46 -Description 'Builds the default .NET 4.6 build configuration' -Depends CleanNet46 {
+Task Build -Description 'Builds the default build configuration' -Depends CleanCode {
     Invoke-Build -Path $solution
 }
 
-Task BuildNet45 -Description 'Builds the default .NET 4.5 build configuration' -Depends CleanNet45 {
-    Invoke-Build -Path $solution -BuildConfiguration Release-Net45
-}
-
-Task BuildNet40 -Description 'Builds the .NET 4.0 build configuration' -Depends CleanNet40 {
-    Invoke-Build -Path $solution -BuildConfiguration Release-Net40
-}
-
-Task Build -Description 'Builds all of the build configurations' -Depends BuildNet46, BuildNet45, BuildNet40
-
-Task Docs -Description 'Builds the documentation build configuration' -Depends CleanDocs, CleanArtifacts, BuildNet46 {
+Task Docs -Description 'Builds the documentation build configuration' -Depends CleanDocs, CleanArtifacts, BuildCode {
     Invoke-Build -Path $solution -BuildConfiguration Docs
     
 	$docsDir = $currentDir | Join-Path -ChildPath Docs | Join-Path -ChildPath bin | Join-Path -ChildPath Docs
     Move-Item -Path $docsDir -Destination $artifactsDir
 }
 
-Task Test -Description 'Runs the unit tests' -Depends BuildNet46 {
+Task Test -Description 'Runs the unit tests' -Depends BuildCode {
     Invoke-Test -Path $unitTests
 }
 
-Task IntegrationPhantomJs -Description 'Runs the PhantomJS integration tests' -Depends BuildNet46 {
+Task IntegrationPhantomJs -Description 'Runs the PhantomJS integration tests' -Depends BuildCode {
     Invoke-Test -Path $integrationTests -Trait Browser=PhantomJS
 }
 
-Task IntegrationChrome -Description 'Runs the Chrome integration tests' -Depends BuildNet46 {
+Task IntegrationChrome -Description 'Runs the Chrome integration tests' -Depends BuildCode {
     Invoke-Test -Path $integrationTests -Trait Browser=Chrome
 }
 
-Task IntegrationFirefox -Description 'Runs the Firefox integration tests' -Depends BuildNet46 {
+Task IntegrationFirefox -Description 'Runs the Firefox integration tests' -Depends BuildCode {
     Invoke-Test -Path $integrationTests -Trait Browser=Firefox
 }
 
-Task IntegrationInternetExplorer -Description 'Runs the Internet Explorer integration tests' -Depends BuildNet46 {
+Task IntegrationInternetExplorer -Description 'Runs the Internet Explorer integration tests' -Depends BuildCode {
     Invoke-Test -Path $integrationTests -Trait Browser=InternetExplorer
 }
 
-Task IntegrationEdge -Description 'Runs the Internet Explorer integration tests' -Depends BuildNet46 {
+Task IntegrationEdge -Description 'Runs the Internet Explorer integration tests' -Depends BuildCode {
     Invoke-Test -Path $integrationTests -Trait Browser=Edge
 }
 
 Task Integration -Description 'Runs all of the integration tests' `
 	-Depends IntegrationPhantomJs, IntegrationChrome, IntegrationFirefox, IntegrationInternetExplorer, IntegrationEdge
 
-Task Coverage -Description 'Generates the code coverage HTML report' -Depends BuildNet46 {
+Task Coverage -Description 'Generates the code coverage HTML report' -Depends BuildCode {
 	Invoke-Coverage -Path $unitTests -Destination $coverageXml `
 		-Filter '+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*'`
 		-ReportDestination ($artifactsDir | Join-Path -ChildPath CoverageReport)
