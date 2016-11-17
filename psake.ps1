@@ -4,9 +4,7 @@ Param(
     
     [string[]] $TaskList,
 	
-	[switch] $SkipUpdate,
-	
-	[switch] $SkipRestore
+	[switch] $SkipUpdate
 )
 
 # ensure admin privileges
@@ -17,16 +15,7 @@ If (-Not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdenti
 
 # resolve paths
 $root = Split-Path -Path $script:MyInvocation.MyCommand.Path -Parent
-$nugetPath = $root | Join-Path -ChildPath .nuget | Join-Path -ChildPath NuGet.exe
 $solutionPath = $root | Join-Path -ChildPath Selenium.WebDriver.Extensions.sln
-
-# restore solution packages
-If (-Not $SkipRestore) {
-	$process = Start-Process -FilePath $nugetPath 'restore', $solutionPath -NoNewWindow -Wait -PassThru
-	If ($process.ExitCode) {
-		Throw 'Package restore failed'
-	}
-}
 	
 # install/update psake
 If (-Not $SkipUpdate) {

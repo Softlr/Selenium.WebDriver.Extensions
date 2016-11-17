@@ -33,9 +33,9 @@
   environment:
     GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
-
+      
   before_build:
-    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
+    - nuget restore
 
   build:
     project: Selenium.WebDriver.Extensions.sln
@@ -53,7 +53,7 @@
   after_test:
     - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\ReportGenerator.2.5.1\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -108,9 +108,9 @@
     account_feed: true
     project_feed: true
     disable_publish_on_pr: true
-
+    
   before_build:
-    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
+    - nuget restore
 
   build:
     project: Selenium.WebDriver.Extensions.sln
@@ -128,7 +128,7 @@
   after_test:
     - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\ReportGenerator.2.5.1\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -171,9 +171,9 @@
     account_feed: true
     project_feed: true
     disable_publish_on_pr: true
-
+  
   before_build:
-    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
+  - nuget restore
 
   build:
     project: Selenium.WebDriver.Extensions.sln
@@ -191,7 +191,7 @@
   after_test:
     - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.4.5.0\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\ReportGenerator.2.5.1\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
