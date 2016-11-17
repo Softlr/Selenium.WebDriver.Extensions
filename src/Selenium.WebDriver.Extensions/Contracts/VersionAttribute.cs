@@ -18,8 +18,8 @@
         {
             Version version;
             return Version.TryParse(value, out version)
-                ? CreateArgumentException(value, locationName, locationKind)
-                : null;
+                ? null
+                : CreateArgumentException(value, locationName, locationKind);
         }
 
         /// <inheritdoc/>
