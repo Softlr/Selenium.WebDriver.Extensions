@@ -15,9 +15,9 @@
     {
         /// <inheritdoc/>
         public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
-            value != null && string.IsNullOrEmpty(value.Trim())
-                ? CreateArgumentException(value, locationName, locationKind)
-                : null;
+            value == null || !string.IsNullOrEmpty(value.Trim())
+                ? null
+                : CreateArgumentException(value, locationName, locationKind);
 
         /// <inheritdoc/>
         protected override string GetErrorMessage() => "Argument must be null or not-empty";
