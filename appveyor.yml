@@ -34,9 +34,6 @@
     GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
 
-  before_build:
-    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
-
   build:
     project: Selenium.WebDriver.Extensions.sln
 
@@ -109,9 +106,6 @@
     project_feed: true
     disable_publish_on_pr: true
 
-  before_build:
-    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
-
   build:
     project: Selenium.WebDriver.Extensions.sln
 
@@ -171,9 +165,6 @@
     account_feed: true
     project_feed: true
     disable_publish_on_pr: true
-
-  before_build:
-    - .nuget\nuget.exe restore Selenium.WebDriver.Extensions.sln
 
   build:
     project: Selenium.WebDriver.Extensions.sln
