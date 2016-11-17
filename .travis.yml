@@ -1,8 +1,0 @@
-language: csharp
-solution: Selenium.WebDriver.Extensions.sln
-install:
-  - nuget restore ./Selenium.WebDriver.Extensions.sln
-  - export SHFBROOT=$TRAVIS_BUILD_DIR/packages/EWSoftware.SHFB.2016.9.17.0/tools
-script:
-  - xbuild /p:Configuration=Mono ./Selenium.WebDriver.Extensions.sln
-sudo: false
