@@ -16,15 +16,9 @@
     </dependencies>
   </metadata>
   <files>
-    <file src="bin\Release-Net40\Selenium.WebDriver.Extensions.dll" target="lib\net40\Selenium.WebDriver.Extensions.dll" />
-    <file src="bin\Release-Net40\Selenium.WebDriver.Extensions.pdb" target="lib\net40\Selenium.WebDriver.Extensions.pdb" />
-    <file src="bin\Release-Net40\Selenium.WebDriver.Extensions.xml" target="lib\net40\Selenium.WebDriver.Extensions.xml" />
-    <file src="bin\Release-Net45\Selenium.WebDriver.Extensions.dll" target="lib\net45\Selenium.WebDriver.Extensions.dll" />
-    <file src="bin\Release-Net45\Selenium.WebDriver.Extensions.pdb" target="lib\net45\Selenium.WebDriver.Extensions.pdb" />
-    <file src="bin\Release-Net45\Selenium.WebDriver.Extensions.xml" target="lib\net45\Selenium.WebDriver.Extensions.xml" />
-    <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\net46\Selenium.WebDriver.Extensions.dll" />
-    <file src="bin\Release\Selenium.WebDriver.Extensions.pdb" target="lib\net46\Selenium.WebDriver.Extensions.pdb" />
-    <file src="bin\Release\Selenium.WebDriver.Extensions.xml" target="lib\net46\Selenium.WebDriver.Extensions.xml" />
+    <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\net40\Selenium.WebDriver.Extensions.dll" />
+    <file src="bin\Release\Selenium.WebDriver.Extensions.pdb" target="lib\net40\Selenium.WebDriver.Extensions.pdb" />
+    <file src="bin\Release\Selenium.WebDriver.Extensions.xml" target="lib\net40\Selenium.WebDriver.Extensions.xml" />
     <file src="**\*.cs" target="src" exclude="obj\**" />
   </files>
 </package>
