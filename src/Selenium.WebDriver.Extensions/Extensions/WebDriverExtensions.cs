@@ -7,6 +7,7 @@
     using OpenQA.Selenium.Support.UI;
     using PostSharp.Patterns.Contracts;
     using PostSharp.Patterns.Diagnostics;
+    using Selenium.WebDriver.Extensions.Contracts;
 
     /// <summary>
     /// Web driver extensions.
@@ -30,7 +31,7 @@
         /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadJQuery(
-            this IWebDriver driver, [Required] string version = "latest", TimeSpan? timeout = null) =>
+            this IWebDriver driver, [VersionOrLatest] string version = "latest", TimeSpan? timeout = null) =>
             LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{version}.min.js"), timeout);
 
         /// <summary>
@@ -61,7 +62,7 @@
         /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadSizzle(
-            this IWebDriver driver, [Required] string version = "2.0.0", TimeSpan? timeout = null) =>
+            this IWebDriver driver, [Version] string version = "2.0.0", TimeSpan? timeout = null) =>
             LoadSizzle(
                 driver, new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"), timeout);
 
