@@ -7,6 +7,7 @@
     using OpenQA.Selenium.Support.UI;
     using PostSharp.Patterns.Contracts;
     using PostSharp.Patterns.Diagnostics;
+    using Selenium.WebDriver.Extensions.Contracts;
 
     /// <summary>
     /// Web driver extensions.
@@ -29,10 +30,8 @@
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">Version is null.</exception>
-        /// <exception cref="ArgumentException">Version is empty.</exception>
         public static void LoadJQuery(
-            this IWebDriver driver, [Required] string version = "latest", TimeSpan? timeout = null) =>
+            this IWebDriver driver, [VersionOrLatest] string version = "latest", TimeSpan? timeout = null) =>
             LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{version}.min.js"), timeout);
 
         /// <summary>
@@ -62,10 +61,8 @@
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">Version is null.</exception>
-        /// <exception cref="ArgumentException">Version is empty.</exception>
         public static void LoadSizzle(
-            this IWebDriver driver, [Required] string version = "2.0.0", TimeSpan? timeout = null) =>
+            this IWebDriver driver, [Version] string version = "2.0.0", TimeSpan? timeout = null) =>
             LoadSizzle(
                 driver, new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"), timeout);
 
@@ -89,7 +86,6 @@
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
-        /// <exception cref="ArgumentNullException">Driver is null.</exception>
         public static void ExecuteScript(
             this IWebDriver driver, string script, params object[] args) =>
             ExecuteScript<object>(driver, script, args);
@@ -110,11 +106,6 @@
         /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type,
         /// following the rules above. Nested lists are not supported.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">
-        /// Driver is null.
-        /// -or- Script is null.
-        /// </exception>
-        /// <exception cref="ArgumentException">Script is empty.</exception>
         [Log]
         public static TResult ExecuteScript<TResult>(
             [NotNull] this IWebDriver driver, [Required] string script, params object[] args) =>

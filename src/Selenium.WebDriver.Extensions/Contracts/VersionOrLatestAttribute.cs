@@ -11,15 +11,18 @@
     /// </summary>
     [ExcludeFromCodeCoverage]
     [AttributeUsage(AttributeTargets.Parameter)]
-    public sealed class NullOrNotEmptyAttribute : LocationContractAttribute, ILocationValidationAspect<string>
+    public sealed class VersionOrLatestAttribute : LocationContractAttribute, ILocationValidationAspect<string>
     {
         /// <inheritdoc/>
-        public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
-            value == null || !string.IsNullOrEmpty(value.Trim())
+        public Exception ValidateValue(string value, string locationName, LocationKind locationKind)
+        {
+            Version version;
+            return value == "latest" || Version.TryParse(value, out version)
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);
+        }
 
         /// <inheritdoc/>
-        protected override string GetErrorMessage() => "Argument must be null or not-empty";
+        protected override string GetErrorMessage() => "Argument is not a valid library version";
     }
 }

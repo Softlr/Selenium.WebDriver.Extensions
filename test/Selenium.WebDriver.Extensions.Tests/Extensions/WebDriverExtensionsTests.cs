@@ -36,12 +36,13 @@
                 yield return new object[] { (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam };
 
                 // LoadJQuery
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _fixture.Create<string>())), driverParam
-                };
+                yield return new object[] { (Action)(() => WebDriverExtensions.LoadJQuery(null)), driverParam };
                 yield return new object[] { (Action)(() => driver.LoadJQuery((string)null)), versionParam };
                 yield return new object[] { (Action)(() => driver.LoadJQuery(string.Empty)), versionParam };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadJQuery(_fixture.Create<string>())), versionParam
+                };
                 yield return new object[]
                 {
                     (Action)(() => WebDriverExtensions.LoadJQuery(null, _fixture.Create<Uri>())), driverParam
@@ -49,12 +50,13 @@
                 yield return new object[] { (Action)(() => driver.LoadJQuery((Uri)null)), uriParam };
 
                 // LoadSizzle
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _fixture.Create<string>())), driverParam
-                };
+                yield return new object[] { (Action)(() => WebDriverExtensions.LoadSizzle(null)), driverParam };
                 yield return new object[] { (Action)(() => driver.LoadSizzle((string)null)), versionParam };
                 yield return new object[] { (Action)(() => driver.LoadSizzle(string.Empty)), versionParam };
+                yield return new object[]
+                {
+                    (Action)(() => driver.LoadSizzle(_fixture.Create<string>())), versionParam
+                };
                 yield return new object[]
                 {
                     (Action)(() => WebDriverExtensions.LoadSizzle(null, _fixture.Create<Uri>())), driverParam
