@@ -218,16 +218,16 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\xunit.runner.visualstudio.2.1.0\build\net20\xunit.runner.visualstudio.props'))" />
-    <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.24.0.0\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.2.24.0.0\build\Selenium.WebDriver.ChromeDriver.targets'))" />
     <Error Condition="!Exists('..\..\packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\build\JetBrains.ReSharper.CommandLineTools.Targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\build\JetBrains.ReSharper.CommandLineTools.Targets'))" />
+    <Error Condition="!Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.25.0.8\build\Selenium.WebDriver.ChromeDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\Selenium.WebDriver.ChromeDriver.2.25.0.8\build\Selenium.WebDriver.ChromeDriver.targets'))" />
   </Target>
-  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.24.0.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.24.0.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\..\packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\build\JetBrains.ReSharper.CommandLineTools.Targets" Condition="Exists('..\..\packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\build\JetBrains.ReSharper.CommandLineTools.Targets')" />
   <Import Project="..\..\packages\PostSharp.4.3.23\tools\PostSharp.targets" Condition="Exists('..\..\packages\PostSharp.4.3.23\tools\PostSharp.targets')" />
   <Target Name="EnsurePostSharpImported" BeforeTargets="BeforeBuild" Condition="'$(PostSharp30Imported)' == ''">
     <Error Condition="!Exists('..\..\packages\PostSharp.4.3.23\tools\PostSharp.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://www.postsharp.net/links/nuget-restore." />
     <Error Condition="Exists('..\..\packages\PostSharp.4.3.23\tools\PostSharp.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://www.postsharp.net/links/nuget-restore." />
   </Target>
+  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.25.0.8\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.25.0.8\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
