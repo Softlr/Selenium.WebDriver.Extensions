@@ -13,9 +13,8 @@
     <dependencies>
       <dependency id="Selenium.WebDriver" version="2.42.0"/>
       <dependency id="Selenium.Support" version="2.42.0"/>
-      <dependency id="SimpleInjector" version="3.0.0"/>
+      <dependency id="SimpleInjector" version="3.2.7"/>
       <dependency id="PostSharp.Patterns.Model" version="4.3.23"/>
-      <dependency id="PostSharp.Patterns.Diagnostics" version="4.3.23"/>
     </dependencies>
   </metadata>
   <files>
