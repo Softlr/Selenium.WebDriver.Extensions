@@ -41,8 +41,10 @@
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.1 -Symbols
 
   test_script:
-    - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
+  - ps: >-
+      & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    
+      & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
     - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
@@ -173,8 +175,10 @@
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-rc -Symbols
 
   test_script:
-    - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
+  - ps: >-
+      & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+    
+      & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
     - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
