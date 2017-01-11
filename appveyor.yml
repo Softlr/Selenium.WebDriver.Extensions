@@ -43,16 +43,19 @@
   test_script:
   - ps: >-
       & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    
+  - ps: >-
       & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-    - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
-    - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
-    - pip install codecov
-    - codecov -f coverage.xml
+  - ps: >-
+      & (Resolve-Path packages\JetBrains.ReSharper.CommandLineTools.*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+  - ps: >-
+      & (Resolve-Path packages\OpenCover.*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+  - ps: >-
+      & (Resolve-Path packages\ReportGenerator.*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
+  - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
+  - pip install codecov
+  - codecov -f coverage.xml
 
   artifacts:
     - path: ReSharper.xml
@@ -174,16 +177,19 @@
   test_script:
   - ps: >-
       & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-    
+  - ps: >-
       & (Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-    - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
-    - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
-    - pip install codecov
-    - codecov -f coverage.xml
+  - ps: >-
+      & (Resolve-Path packages\JetBrains.ReSharper.CommandLineTools.*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+  - ps: >-
+      & (Resolve-Path packages\OpenCover.*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+  - ps: >-
+      & (Resolve-Path packages\ReportGenerator.*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
+  - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
+  - pip install codecov
+  - codecov -f coverage.xml
 
   artifacts:
     - path: ReSharper.xml
