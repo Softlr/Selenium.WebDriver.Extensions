@@ -9,9 +9,6 @@
     internal class DirectCastParser : ParserBase, IDirectCastParser
     {
         /// <inheritdoc/>
-        public override TResult Parse<TResult>(object rawResult)
-        {
-            return (TResult)rawResult;
-        }
+        public override TResult Parse<TResult>(object rawResult) => (TResult)rawResult;
     }
 }

@@ -9,11 +9,8 @@
     internal class LongParser : ParserBase, ILongParser
     {
         /// <inheritdoc/>
-        public override TResult Parse<TResult>(object rawResult)
-        {
-            return rawResult is double
-                ? (TResult)(object)(long?)(double)rawResult
-                : Successor.Parse<TResult>(rawResult);
-        }
+        public override TResult Parse<TResult>(object rawResult) => rawResult is double
+            ? (TResult)(object)(long?)(double)rawResult
+            : Successor.Parse<TResult>(rawResult);
     }
 }
