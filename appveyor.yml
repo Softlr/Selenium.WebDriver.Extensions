@@ -15,9 +15,6 @@
   cache:
     - packages -> **\packages.config
 
-  install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
-
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -41,7 +38,6 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.1 -Symbols
 
   test_script:
@@ -49,9 +45,9 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.5.1\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -59,7 +55,6 @@
   artifacts:
     - path: ReSharper.xml
     - path: coverage.xml
-    - path: docs\bin\Docs
     - path: CoverageReport
     - path: .\*.nupkg
 
@@ -92,9 +87,6 @@
   cache:
     - packages -> **\packages.config
 
-  install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
-
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -114,7 +106,6 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-dev -Symbols
 
   test_script:
@@ -122,9 +113,9 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.5.1\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -132,7 +123,6 @@
   artifacts:
     - path: ReSharper.xml
     - path: coverage.xml
-    - path: docs\bin\Docs
     - path: CoverageReport
     - path: .\*.nupkg
 
@@ -153,9 +143,6 @@
   cache:
     - packages -> **\packages.config
 
-  install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
-
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -175,7 +162,6 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-rc -Symbols
 
   test_script:
@@ -183,9 +169,9 @@
     - packages\xunit.runner.console.2.1.0\tools\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
-    - packages\JetBrains.ReSharper.CommandLineTools.2016.2.20160913.100041\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+    - packages\JetBrains.ReSharper.CommandLineTools.2016.3.20161223.160402\tools\inspectcode.exe Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
     - packages\OpenCover.4.6.519\tools\OpenCover.Console.exe -register:user -target:"packages\xunit.runner.console.2.1.0\tools\xunit.console.exe" -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\%CONFIGURATION%\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-    - packages\ReportGenerator.2.5.1\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+    - packages\ReportGenerator.2.5.2\tools\ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
     - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
     - pip install codecov
     - codecov -f coverage.xml
@@ -193,7 +179,6 @@
   artifacts:
     - path: ReSharper.xml
     - path: coverage.xml
-    - path: docs\bin\Docs
     - path: CoverageReport
     - path: .\*.nupkg
 
