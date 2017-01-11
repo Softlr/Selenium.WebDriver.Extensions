@@ -15,9 +15,6 @@
   cache:
     - packages -> **\packages.config
 
-  install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
-
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -92,9 +89,6 @@
   cache:
     - packages -> **\packages.config
 
-  install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
-
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -152,9 +146,6 @@
   
   cache:
     - packages -> **\packages.config
-
-  install:
-    - SET PATH=%APPVEYOR_BUILD_FOLDER%\packages\PhantomJS.2.1.1\tools\phantomjs;%PATH%
 
   assembly_info:
     patch: true
