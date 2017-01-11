@@ -38,7 +38,6 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.1 -Symbols
 
   test_script:
@@ -56,7 +55,6 @@
   artifacts:
     - path: ReSharper.xml
     - path: coverage.xml
-    - path: docs\bin\Docs
     - path: CoverageReport
     - path: .\*.nupkg
 
@@ -108,7 +106,6 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-dev -Symbols
 
   test_script:
@@ -126,7 +123,6 @@
   artifacts:
     - path: ReSharper.xml
     - path: coverage.xml
-    - path: docs\bin\Docs
     - path: CoverageReport
     - path: .\*.nupkg
 
@@ -166,7 +162,6 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - msbuild Selenium.WebDriver.Extensions.sln /property:Configuration=Docs /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-rc -Symbols
 
   test_script:
@@ -184,7 +179,6 @@
   artifacts:
     - path: ReSharper.xml
     - path: coverage.xml
-    - path: docs\bin\Docs
     - path: CoverageReport
     - path: .\*.nupkg
 
