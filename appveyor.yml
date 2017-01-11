@@ -119,15 +119,15 @@
   after_test:
   - ps: >-
       & (Resolve-Path packages\JetBrains.ReSharper.CommandLineTools.*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-      
+
       & (Resolve-Path packages\OpenCover.*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path packages\xunit.runner.console.*\tools\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-      
+
       & (Resolve-Path packages\ReportGenerator.*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
-      
-      & SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
-      
+
+      $env:Path="C:\Python34;C:\Python34\Scripts;$env:Path"
+
       & pip install codecov
-      
+
       & codecov -f coverage.xml
 
   artifacts:
