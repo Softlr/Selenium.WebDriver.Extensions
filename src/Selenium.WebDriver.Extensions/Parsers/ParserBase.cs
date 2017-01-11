@@ -1,9 +1,5 @@
 ﻿namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using System;
-    using System.Text;
-    using System.Threading.Tasks;
-
     /// <summary>
     /// The base result parser.
     /// </summary>

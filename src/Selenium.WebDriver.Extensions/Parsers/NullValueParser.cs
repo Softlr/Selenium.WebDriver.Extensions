@@ -9,9 +9,8 @@
     internal class NullValueParser : ParserBase, INullValueParser
     {
         /// <inheritdoc/>
-        public override TResult Parse<TResult>(object rawResult)
-        {
-            return rawResult == null ? default(TResult) : Successor.Parse<TResult>(rawResult);
-        }
+        public override TResult Parse<TResult>(object rawResult) => rawResult == null
+            ? default(TResult)
+            : Successor.Parse<TResult>(rawResult);
     }
 }
