@@ -8,7 +8,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.0.1.{build}
+  version: 3.0.2.{build}
   configuration: Release
   os: Visual Studio 2017 RC
   
@@ -18,7 +18,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "3.0.1"
+    assembly_version: "3.0.2"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
 
@@ -38,7 +38,7 @@
     project: Selenium.WebDriver.Extensions.sln
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.1 -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2 -Symbols
 
   test_script:
   - ps: >-
@@ -68,7 +68,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 3.0.1
+      release: 3.0.2
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
