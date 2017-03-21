@@ -5,6 +5,7 @@
     using OpenQA.Selenium.Firefox;
     using PostSharp.Patterns.Model;
 
+    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     [Disposable]
