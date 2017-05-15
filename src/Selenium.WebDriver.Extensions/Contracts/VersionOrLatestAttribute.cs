@@ -16,7 +16,7 @@
         /// <inheritdoc/>
         public Exception ValidateValue(string value, string locationName, LocationKind locationKind)
         {
-            return value == "latest" || Version.TryParse(value, out var version)
+            return value == "latest" || Version.TryParse(value, out var _)
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);
         }
