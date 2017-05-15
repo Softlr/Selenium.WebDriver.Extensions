@@ -14,12 +14,10 @@
     public sealed class VersionAttribute : LocationContractAttribute, ILocationValidationAspect<string>
     {
         /// <inheritdoc/>
-        public Exception ValidateValue(string value, string locationName, LocationKind locationKind)
-        {
-            return Version.TryParse(value, out var _)
+        public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
+            Version.TryParse(value, out var _)
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);
-        }
 
         /// <inheritdoc/>
         protected override string GetErrorMessage() => "Argument is not a valid library version";
