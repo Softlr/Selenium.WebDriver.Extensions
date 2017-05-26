@@ -113,10 +113,9 @@
     - nuget restore
 
   build_script:
-    - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.analysis.mode=preview" /d:"sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:"sonar.github.repository=https://github.com/Softlr/Selenium.WebDriver.Extensions" /d:"sonar.github.oauth=$env:GitHubAccessToken" }
-    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" }
-    - msbuild Selenium.WebDriver.Extensions.sln
-    - ps: MSBuild.SonarQube.Runner.exe end /d:"sonar.login=$env:SonarQubeAccessToken"
+    - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.analysis.mode=preview" /d:"sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:"sonar.github.repository=https://github.com/Softlr/Selenium.WebDriver.Extensions" /d:"sonar.github.oauth=$env:GitHubAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+    - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-dev -Symbols
@@ -137,6 +136,7 @@
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
+  - ps: MSBuild.SonarQube.Runner.exe end /d:"sonar.login=$env:SonarQubeAccessToken"
 
   artifacts:
     - path: ReSharper.xml
