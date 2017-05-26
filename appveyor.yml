@@ -114,7 +114,7 @@
 
   build_script:
     - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.analysis.mode=preview" /d:"sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER" /d:"sonar.github.repository=https://github.com/Softlr/Selenium.WebDriver.Extensions" /d:"sonar.github.oauth=$env:GitHubAccessToken" }
-    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=SonarQubeAccessToken" }
+    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /k:"selenium.webdriver.extensions" /d:"sonar.host.url=https://sonarqube.com" /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" }
     - msbuild Selenium.WebDriver.Extensions.sln
     - ps: MSBuild.SonarQube.Runner.exe end /d:"sonar.login=$env:SonarQubeAccessToken"
 
