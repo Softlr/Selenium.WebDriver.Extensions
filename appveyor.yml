@@ -14,6 +14,9 @@
   
   cache:
     - packages -> **\packages.config
+  
+  install:
+    - choco install "msbuild-sonarqube-runner" -y
 
   assembly_info:
     patch: true
@@ -28,12 +31,18 @@
   environment:
     GH_ACCESS_TOKEN:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+    SonarQubeAccessToken:
+      secure: hZ+EdDQLy/K+ngEIPrw7DM//Lft9RldmiOoGNhNz8m9iyfJ3ZJhylBm0FduR6fWT
+    GitHubAccessToken:
+      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       
   before_build:
     - nuget restore
 
-  build:
-    project: Selenium.WebDriver.Extensions.sln
+  build_script:
+    - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:sonar.organization=rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.analysis.mode=preview /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+    - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2 -Symbols
@@ -54,6 +63,7 @@
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
+  - ps: MSBuild.SonarQube.Runner.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
   artifacts:
     - path: ReSharper.xml
@@ -89,7 +99,10 @@
   
   cache:
     - packages -> **\packages.config
-
+  
+  install:
+    - choco install "msbuild-sonarqube-runner" -y
+  
   assembly_info:
     patch: true
     file: AssemblyInfo.*
@@ -100,11 +113,19 @@
   nuget:
     disable_publish_on_pr: true
     
+  environment:
+    SonarQubeAccessToken:
+      secure: hZ+EdDQLy/K+ngEIPrw7DM//Lft9RldmiOoGNhNz8m9iyfJ3ZJhylBm0FduR6fWT
+    GitHubAccessToken:
+      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+    
   before_build:
     - nuget restore
 
-  build:
-    project: Selenium.WebDriver.Extensions.sln
+  build_script:
+    - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:sonar.organization=rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.analysis.mode=preview /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+    - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-dev -Symbols
@@ -125,6 +146,7 @@
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
+  - ps: MSBuild.SonarQube.Runner.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
   artifacts:
     - path: ReSharper.xml
@@ -148,6 +170,9 @@
   
   cache:
     - packages -> **\packages.config
+  
+  install:
+    - choco install "msbuild-sonarqube-runner" -y
 
   assembly_info:
     patch: true
@@ -158,12 +183,20 @@
 
   nuget:
     disable_publish_on_pr: true
+    
+  environment:
+    SonarQubeAccessToken:
+      secure: hZ+EdDQLy/K+ngEIPrw7DM//Lft9RldmiOoGNhNz8m9iyfJ3ZJhylBm0FduR6fWT
+    GitHubAccessToken:
+      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
   
   before_build:
   - nuget restore
 
-  build:
-    project: Selenium.WebDriver.Extensions.sln
+  build_script:
+    - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:sonar.organization=rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.analysis.mode=preview /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+    - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { MSBuild.SonarQube.Runner.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+    - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
     - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-rc -Symbols
@@ -184,6 +217,7 @@
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
+  - ps: MSBuild.SonarQube.Runner.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
   artifacts:
     - path: ReSharper.xml
