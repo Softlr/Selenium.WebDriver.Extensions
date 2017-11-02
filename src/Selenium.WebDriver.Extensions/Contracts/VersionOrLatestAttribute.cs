@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Extensions.Contracts
     /// <summary>
     /// The attribute to validate null or not-empty string.
     /// </summary>
+    /// <inheritdoc cref="LocationContractAttribute" />
     [ExcludeFromCodeCoverage]
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class VersionOrLatestAttribute : LocationContractAttribute, ILocationValidationAspect<string>

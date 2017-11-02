@@ -12,3 +12,9 @@ trim_trailing_whitespace = true
 
 [*.yml]
 indent_size = 2
+
+[*.config]
+indent_size = 2
+
+[*.nuspec]
+indent_size = 2

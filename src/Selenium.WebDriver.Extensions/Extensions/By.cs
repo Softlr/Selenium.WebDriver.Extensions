@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
@@ -11,6 +11,7 @@
     /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By"/>. The reason for that is
     /// to replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
+    /// <inheritdoc />
     [UsedImplicitly]
     public class By : OpenQA.Selenium.By
     {

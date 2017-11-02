@@ -1,8 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.Parsers
+namespace Selenium.WebDriver.Extensions.Parsers
 {
     /// <summary>
     /// The base result parser.
     /// </summary>
+    /// <inheritdoc />
     internal abstract class ParserBase : IParser
     {
         /// <inheritdoc/>

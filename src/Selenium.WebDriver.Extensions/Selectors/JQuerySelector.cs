@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
@@ -9,19 +9,21 @@
     /// <summary>
     /// Searches the DOM elements using jQuery selector.
     /// </summary>
+    /// <inheritdoc />
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
         private const string _libraryVariable = "window.jQuery";
         private readonly string _chain;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="JQuerySelector"/> class.
+        /// Initializes a new instance of the <see cref="T:Selenium.WebDriver.Extensions.JQuerySelector" /> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <remarks>
-        /// This constructor cannot be merged with <see cref="JQuerySelector(string,JQuerySelector,string,string)"/>
+        /// This constructor cannot be merged with <see cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
         /// constructor as it is resolved by reflection.
         /// </remarks>
+        /// <inheritdoc />
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public JQuerySelector(string selector)
             : this(selector, null)
@@ -35,6 +37,7 @@
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <param name="chain">The jQuery method chain.</param>
+        /// <inheritdoc />
         public JQuerySelector(
             string selector,
             JQuerySelector context,
@@ -64,9 +67,7 @@
         public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
             + (Context != null ? $", {Context.Selector}" : string.Empty) + $"){_chain}";
 
-        /// <summary>
-        /// Gets the result resolver string.
-        /// </summary>
+        /// <inheritdoc />
         protected override string ResultResolver => ".get()";
 
         /// <summary>

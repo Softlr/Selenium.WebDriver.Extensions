@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -13,6 +13,7 @@
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
+    /// <inheritdoc cref="ISelector" />
     public abstract class SelectorBase<TSelector> : OpenQA.Selenium.By, ISelector
     {
         /// <summary>
@@ -20,6 +21,7 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
+        /// <inheritdoc />
         protected SelectorBase([Required] string selector, TSelector context)
         {
             Context = context;
@@ -28,10 +30,7 @@
             FindElementsMethod = FindElementsBySelector;
         }
 
-        /// <summary>
-        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
-        /// return <see langword="true"/> if the prerequisites are met; otherwise, <see langword="false"/>.
-        /// </summary>
+        /// <inheritdoc />
         public abstract string CheckScript { get; }
 
         /// <summary>
@@ -103,14 +102,12 @@
 
         private IWebDriver ResolveDriver(ISearchContext searchContext)
         {
-            var driver = searchContext as IWebDriver;
-            if (driver != null)
+            if (searchContext is IWebDriver driver)
             {
                 return driver;
             }
 
-            var driverWrapper = searchContext as IWrapsDriver;
-            if (!(searchContext is IWebElement) || driverWrapper == null)
+            if (!(searchContext is IWebElement) || !(searchContext is IWrapsDriver driverWrapper))
             {
                 throw new NotSupportedException("Context is not a valid driver");
             }

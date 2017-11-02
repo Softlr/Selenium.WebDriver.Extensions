@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Parsers
+namespace Selenium.WebDriver.Extensions.Parsers
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -7,12 +7,13 @@
     using OpenQA.Selenium;
 
     /// <summary>
-    /// The <see cref="IWebElement"/> collection parser.
+    /// The <see cref="T:OpenQA.Selenium.IWebElement" /> collection parser.
     /// </summary>
+    /// <inheritdoc cref="ParserBase" />
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class WebElementCollectionParser : ParserBase, IWebElementCollectionParser
     {
-        /// <inheritdoc/>
+        /// <inheritdoc cref="ParserBase.Parse{TResult}" />
         public override TResult Parse<TResult>(object rawResult) =>
             typeof(TResult) == typeof(IEnumerable<IWebElement>)
                 && rawResult.GetType() == typeof(ReadOnlyCollection<object>)
