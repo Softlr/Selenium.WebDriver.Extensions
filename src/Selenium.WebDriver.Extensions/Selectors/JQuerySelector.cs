@@ -24,6 +24,7 @@ namespace Selenium.WebDriver.Extensions
         /// constructor as it is resolved by reflection.
         /// </remarks>
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public JQuerySelector(string selector)
             : this(selector, null)
         {
@@ -36,6 +37,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <param name="chain">The jQuery method chain.</param>
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public JQuerySelector(
             string selector,
             JQuerySelector context,

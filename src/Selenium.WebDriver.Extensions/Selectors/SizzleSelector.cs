@@ -20,6 +20,7 @@ namespace Selenium.WebDriver.Extensions
         /// it is resolved by reflection.
         /// </remarks>
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public SizzleSelector(string selector)
             : this(selector, null)
         {
@@ -30,6 +31,7 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public SizzleSelector(string selector, SizzleSelector context)
             : base(selector, context) => Description = $"By.SizzleSelector: {RawSelector}";
 
