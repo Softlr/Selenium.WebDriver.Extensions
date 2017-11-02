@@ -125,7 +125,9 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Selenium.WebDriver.Extensions.nuspec" />
+    <None Include="Selenium.WebDriver.Extensions.nuspec">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Selenium.WebDriver.Extensions.psproj" />
   </ItemGroup>
   <ItemGroup>
