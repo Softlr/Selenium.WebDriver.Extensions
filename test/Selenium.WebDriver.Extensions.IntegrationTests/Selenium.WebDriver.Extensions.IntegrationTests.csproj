@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="TestCases\JQuery\Loaded.html" />
+    <None Remove="TestCases\JQuery\Unloaded.html" />
+    <None Remove="TestCases\Sizzle\Loaded.html" />
+    <None Remove="TestCases\Sizzle\Unloaded.html" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\_stylecop\stylecop.json" />
   </ItemGroup>
 
@@ -28,6 +35,13 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.0-beta2-build3683" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="TestCases\JQuery\Loaded.html" />
+    <EmbeddedResource Include="TestCases\JQuery\Unloaded.html" />
+    <EmbeddedResource Include="TestCases\Sizzle\Loaded.html" />
+    <EmbeddedResource Include="TestCases\Sizzle\Unloaded.html" />
   </ItemGroup>
 
   <ItemGroup>
