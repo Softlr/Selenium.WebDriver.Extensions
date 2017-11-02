@@ -41,10 +41,7 @@
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      $env:PATH = "$env:PATH;{0}" -f (Resolve-Path $env:USERPROFILE\.nuget\packages\phantomjs\*\tools\phantomjs).Path
-      
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
-
   after_test:
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
@@ -116,10 +113,7 @@
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      $env:PATH = "$env:PATH;{0}" -f (Resolve-Path $env:USERPROFILE\.nuget\packages\phantomjs\*\tools\phantomjs).Path
-      
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
-
   after_test:
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
@@ -179,10 +173,7 @@
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      $env:PATH = "$env:PATH;{0}" -f (Resolve-Path $env:USERPROFILE\.nuget\packages\phantomjs\*\tools\phantomjs).Path
-      
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
-
   after_test:
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
