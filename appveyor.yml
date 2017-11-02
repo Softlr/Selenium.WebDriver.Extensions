@@ -15,13 +15,6 @@
   install:
     - choco install "msbuild-sonarqube-runner" -y
 
-  assembly_info:
-    patch: true
-    file: AssemblyInfo.*
-    assembly_version: "3.1.0"
-    assembly_file_version: "{version}"
-    assembly_informational_version: "{version}"
-
   nuget:
     disable_publish_on_pr: true
 
@@ -99,13 +92,6 @@
   install:
     - choco install "msbuild-sonarqube-runner" -y
   
-  assembly_info:
-    patch: true
-    file: AssemblyInfo.*
-    assembly_version: "3.1.0"
-    assembly_file_version: "{version}"
-    assembly_informational_version: "{version}-dev"
-
   nuget:
     disable_publish_on_pr: true
     
@@ -168,13 +154,6 @@
   
   install:
     - choco install "msbuild-sonarqube-runner" -y
-
-  assembly_info:
-    patch: true
-    file: AssemblyInfo.*
-    assembly_version: "3.1.0"
-    assembly_file_version: "{version}"
-    assembly_informational_version: "{version}-rc"
 
   nuget:
     disable_publish_on_pr: true
