@@ -62,8 +62,8 @@
     <Reference Include="PostSharp.Patterns.Model, Version=5.0.37.0, Culture=neutral, PublicKeyToken=e7f631e6ce13f078, processorArchitecture=MSIL">
       <HintPath>..\..\packages\PostSharp.Patterns.Model.Redist.5.0.37\lib\net40\PostSharp.Patterns.Model.dll</HintPath>
     </Reference>
-    <Reference Include="SimpleInjector, Version=4.0.6.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\SimpleInjector.4.0.6\lib\net45\SimpleInjector.dll</HintPath>
+    <Reference Include="SimpleInjector, Version=4.0.12.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\SimpleInjector.4.0.12\lib\net45\SimpleInjector.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
