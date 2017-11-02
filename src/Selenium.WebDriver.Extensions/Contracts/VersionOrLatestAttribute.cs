@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Contracts
+namespace Selenium.WebDriver.Extensions.Contracts
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -14,7 +14,8 @@
     public sealed class VersionOrLatestAttribute : LocationContractAttribute, ILocationValidationAspect<string>
     {
         /// <inheritdoc/>
-        public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
+        public Exception ValidateValue(
+            string value, string locationName, LocationKind locationKind, LocationValidationContext context) =>
             value == "latest" || Version.TryParse(value, out var _)
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);

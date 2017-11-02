@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Contracts
+namespace Selenium.WebDriver.Extensions.Contracts
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -14,7 +14,8 @@
     public sealed class NullOrNotEmptyAttribute : LocationContractAttribute, ILocationValidationAspect<string>
     {
         /// <inheritdoc/>
-        public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
+        public Exception ValidateValue(
+            string value, string locationName, LocationKind locationKind, LocationValidationContext context) =>
             value == null || !string.IsNullOrEmpty(value.Trim())
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);
