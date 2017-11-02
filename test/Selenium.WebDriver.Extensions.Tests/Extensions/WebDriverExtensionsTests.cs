@@ -104,12 +104,12 @@ namespace Selenium.WebDriver.Extensions.Tests.Extensions
         public void ShouldExecuteScript(string scriptMethod)
         {
             var script = $"{scriptMethod}();";
-            var driverMock = new WebDriverBuilder().ThatHasTestMethodDefined(scriptMethod);
-            var driver = driverMock.Build();
+            var driverBuilder = new WebDriverBuilder().ThatHasTestMethodDefined(scriptMethod);
+            var driver = driverBuilder.Build();
 
             driver.ExecuteScript(script);
 
-            driverMock.VerifyIfTestMethodWasCalled(scriptMethod);
+            driverBuilder.VerifyIfTestMethodWasCalled(scriptMethod);
         }
 
         [Theory]
@@ -117,12 +117,12 @@ namespace Selenium.WebDriver.Extensions.Tests.Extensions
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
-            var driverMock = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
-            var driver = driverMock.Build();
+            var driverBuilder = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
+            var driver = driverBuilder.Build();
 
             action.Invoke(driver, uri, timeSpan);
 
-            driverMock.VerifyIfExternalLibraryWasLoaded(); // assert pass
+            driverBuilder.VerifyIfExternalLibraryWasLoaded(); // assert pass
         }
     }
 }

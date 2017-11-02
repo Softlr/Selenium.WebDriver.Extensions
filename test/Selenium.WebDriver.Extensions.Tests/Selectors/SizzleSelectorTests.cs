@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests
+namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -129,7 +129,7 @@
             var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle(rawSelector)
                 .ThatContainsElementLocatedBySizzle($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
                 .Build();
-            var element = new SearchContextBuilder().WithWrappedDriver(driver).ThatIsWebElement().Build();
+            var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
 
             var selector = By.SizzleSelector(rawSelector);
 
@@ -158,13 +158,13 @@
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
         {
-            var element = new SearchContextBuilder().ThatIsWebElement().Build();
+            var element = new SearchContextBuilder().AsWebElement().Build();
 
             var selector = By.SizzleSelector(rawSelector);
 
             Action action = () => selector.FindElement(element);
 
-            action.ShouldThrow<NotSupportedException>();
+            action.ShouldThrow<InvalidCastException>();
         }
     }
 }

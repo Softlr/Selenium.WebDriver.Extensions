@@ -552,7 +552,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
                 .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
                 .Build();
-            var element = new SearchContextBuilder().WithWrappedDriver(driver).ThatIsWebElement().Build();
+            var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
             var selector = By.JQuerySelector(rawSelector);
 
             var result = selector.FindElement(element);
@@ -580,13 +580,13 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
         {
-            var element = new SearchContextBuilder().ThatIsWebElement().Build();
+            var element = new SearchContextBuilder().AsWebElement().Build();
 
             var selector = By.JQuerySelector(rawSelector);
 
             Action action = () => selector.FindElement(element);
 
-            action.ShouldThrow<NotSupportedException>();
+            action.ShouldThrow<InvalidCastException>();
         }
     }
 }
