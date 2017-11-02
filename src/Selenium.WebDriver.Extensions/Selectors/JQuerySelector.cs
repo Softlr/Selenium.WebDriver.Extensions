@@ -20,7 +20,8 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <remarks>
-        /// This constructor cannot be merged with <see cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
+        /// This constructor cannot be merged with
+        /// <see cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
         /// constructor as it is resolved by reflection.
         /// </remarks>
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
