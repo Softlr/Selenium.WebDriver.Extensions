@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
@@ -6,6 +6,7 @@
     /// <summary>
     /// Searches the DOM elements using Sizzle selector.
     /// </summary>
+    /// <inheritdoc />
     public class SizzleSelector : SelectorBase<SizzleSelector>
     {
         private const string _libraryVariable = "window.Sizzle";
@@ -18,6 +19,7 @@
         /// This constructor cannot be merged with <see cref="SizzleSelector(string,SizzleSelector)"/> constructor as
         /// it is resolved by reflection.
         /// </remarks>
+        /// <inheritdoc />
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public SizzleSelector(string selector)
             : this(selector, null)
@@ -29,11 +31,9 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        /// <inheritdoc />
         public SizzleSelector(string selector, SizzleSelector context)
-            : base(selector, context)
-        {
-            Description = $"By.SizzleSelector: {RawSelector}";
-        }
+            : base(selector, context) => Description = $"By.SizzleSelector: {RawSelector}";
 
         /// <summary>
         /// Gets the empty selector.

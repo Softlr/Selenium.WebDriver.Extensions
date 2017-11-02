@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -6,7 +6,6 @@
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using PostSharp.Patterns.Contracts;
-    using PostSharp.Patterns.Diagnostics;
     using Selenium.WebDriver.Extensions.Contracts;
 
     /// <summary>
@@ -106,7 +105,6 @@
         /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type,
         /// following the rules above. Nested lists are not supported.
         /// </remarks>
-        [Log]
         public static TResult ExecuteScript<TResult>(
             [NotNull] this IWebDriver driver, [Required] string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);

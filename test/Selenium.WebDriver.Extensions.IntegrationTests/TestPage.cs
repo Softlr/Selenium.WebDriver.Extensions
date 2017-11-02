@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
@@ -11,10 +11,7 @@
         [SuppressMessage("ReSharper", "NotAccessedField.Local")]
         private IWebDriver _driver;
 
-        public TestPage(IWebDriver driver)
-        {
-            _driver = driver;
-        }
+        public TestPage(IWebDriver driver) => _driver = driver;
 
         [FindsBy(How = How.Custom, CustomFinderType = typeof(JQuerySelector), Using = "h1")]
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]

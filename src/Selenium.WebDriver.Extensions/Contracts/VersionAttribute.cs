@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Contracts
+namespace Selenium.WebDriver.Extensions.Contracts
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -9,12 +9,14 @@
     /// <summary>
     /// The attribute to validate null or not-empty string.
     /// </summary>
+    /// <inheritdoc cref="LocationContractAttribute" />
     [ExcludeFromCodeCoverage]
     [AttributeUsage(AttributeTargets.Parameter)]
     public sealed class VersionAttribute : LocationContractAttribute, ILocationValidationAspect<string>
     {
         /// <inheritdoc/>
-        public Exception ValidateValue(string value, string locationName, LocationKind locationKind) =>
+        public Exception ValidateValue(
+            string value, string locationName, LocationKind locationKind, LocationValidationContext context) =>
             Version.TryParse(value, out var _)
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);

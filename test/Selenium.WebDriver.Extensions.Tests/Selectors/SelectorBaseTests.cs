@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests
+namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
@@ -17,13 +17,10 @@
         [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
         public void ShouldCorrectlyHandleDefaultValue()
         {
-            // Arrange
             object rawResult = null;
 
-            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
-            // Assert
             result.Should().BeFalse();
         }
 
@@ -31,11 +28,8 @@
         [AutoData]
         public void ShouldCorrectlyHandleDoubleValue(double rawResult)
         {
-            // Arrange
-            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
-            // Assert
             result.GetType().Should().Be(typeof(long));
         }
 
@@ -43,11 +37,8 @@
         [AutoData]
         public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
         {
-            // Arrange
-            // Act
             var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
-            // Assert
             result.Should().NotBeNull();
         }
     }

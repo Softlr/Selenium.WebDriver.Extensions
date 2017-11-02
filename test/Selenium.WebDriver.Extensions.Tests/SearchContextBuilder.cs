@@ -1,31 +1,28 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests
+namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Diagnostics.CodeAnalysis;
-    using Moq;
+    using NSubstitute;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
 
     [ExcludeFromCodeCoverage]
     internal class SearchContextBuilder
     {
-        private readonly Mock<ISearchContext> _contextMock;
+        private ISearchContext _searchContext;
 
-        public SearchContextBuilder()
-        {
-            _contextMock = new Mock<ISearchContext>();
-        }
+        public SearchContextBuilder() => _searchContext = Substitute.For<ISearchContext, IWrapsDriver>();
 
-        public ISearchContext Build() => _contextMock.Object;
+        public ISearchContext Build() => _searchContext;
 
         public SearchContextBuilder WithWrappedDriver(IWebDriver driver)
         {
-            _contextMock.As<IWrapsDriver>().SetupGet(x => x.WrappedDriver).Returns(driver);
+            ((IWrapsDriver)_searchContext).WrappedDriver.Returns(driver);
             return this;
         }
 
-        public SearchContextBuilder ThatIsWebElement()
+        public SearchContextBuilder AsWebElement()
         {
-            _contextMock.As<IWebElement>();
+            _searchContext = Substitute.For<ISearchContext, IWrapsDriver, IWebElement>();
             return this;
         }
     }

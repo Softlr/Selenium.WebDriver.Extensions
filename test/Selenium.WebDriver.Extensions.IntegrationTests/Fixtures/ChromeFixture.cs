@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
@@ -11,10 +11,7 @@
     [Disposable]
     public class ChromeFixture
     {
-        public ChromeFixture()
-        {
-            Browser = new ChromeDriver();
-        }
+        public ChromeFixture() => Browser = new ChromeDriver();
 
         [Child]
         public IWebDriver Browser { get; }
