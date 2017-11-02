@@ -1,15 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.4
+VisualStudioVersion = 15.0.27004.2006
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions", "src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj", "{F10536EC-8FBF-437A-840D-55CE6BF44161}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Extensions", "src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj", "{F10536EC-8FBF-437A-840D-55CE6BF44161}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Extensions.Tests", "test\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj", "{41458FC5-B67A-456D-A085-8F6012E59A0C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{D8CA6CE5-A741-4B80-8B9F-689B2301492A}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{D8CA6CE5-A741-4B80-8B9F-689B2301492A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Selenium.WebDriver.Extensions.IntegrationTests", "test\Selenium.WebDriver.Extensions.IntegrationTests\Selenium.WebDriver.Extensions.IntegrationTests.csproj", "{6394128B-6A58-482E-936E-D298726BA7F0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Extensions.IntegrationTests", "test\Selenium.WebDriver.Extensions.IntegrationTests\Selenium.WebDriver.Extensions.IntegrationTests.csproj", "{6394128B-6A58-482E-936E-D298726BA7F0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9221C76C-9270-4540-9B54-9A4063596B00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -34,7 +36,11 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{F10536EC-8FBF-437A-840D-55CE6BF44161} = {9221C76C-9270-4540-9B54-9A4063596B00}
 		{41458FC5-B67A-456D-A085-8F6012E59A0C} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 		{6394128B-6A58-482E-936E-D298726BA7F0} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {35C6D6A9-D5F9-421D-99CC-A137E1A95939}
 	EndGlobalSection
 EndGlobal

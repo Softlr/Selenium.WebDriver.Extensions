@@ -2,7 +2,14 @@
 
   <PropertyGroup>    
     <TargetFramework>net46</TargetFramework>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
+    <CodeAnalysisRuleSet>..\..\_stylecop\StyleCopRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\_stylecop\stylecop.json" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />

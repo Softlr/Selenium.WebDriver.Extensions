@@ -4,7 +4,14 @@
     <TargetFramework>net45</TargetFramework>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
+    <CodeAnalysisRuleSet>..\..\_stylecop\StyleCopRules.ruleset</CodeAnalysisRuleSet>
+    <DebugType>full</DebugType>
+    <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\_stylecop\stylecop.json" />
+  </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\net45\Selenium.WebDriver.Extensions.xml</DocumentationFile>
