@@ -12,9 +12,6 @@
   configuration: Release
   image: Visual Studio 2017
   
-  cache:
-    - packages -> **\packages.config
-  
   install:
     - choco install "msbuild-sonarqube-runner" -y
 
@@ -49,17 +46,19 @@
 
   test_script:
   - ps: >-
-      & (Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      & (Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
+      $env:PATH = "$env:PATH;{0}" -f (Resolve-Path $env:USERPROFILE\.nuget\packages\phantomjs\*\tools\phantomjs).Path
+      
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
   - ps: >-
-      & (Resolve-Path packages\JetBrains.ReSharper.CommandLineTools.*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ps: >-
-      & (Resolve-Path packages\OpenCover.*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: >-
-      & (Resolve-Path packages\ReportGenerator.*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
@@ -97,9 +96,6 @@
   configuration: Release
   image: Visual Studio 2017
   
-  cache:
-    - packages -> **\packages.config
-  
   install:
     - choco install "msbuild-sonarqube-runner" -y
   
@@ -132,17 +128,19 @@
 
   test_script:
   - ps: >-
-      & (Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      & (Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
+      $env:PATH = "$env:PATH;{0}" -f (Resolve-Path $env:USERPROFILE\.nuget\packages\phantomjs\*\tools\phantomjs).Path
+      
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
   - ps: >-
-      & (Resolve-Path packages\JetBrains.ReSharper.CommandLineTools.*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ps: >-
-      & (Resolve-Path packages\OpenCover.*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: >-
-      & (Resolve-Path packages\ReportGenerator.*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
@@ -167,9 +165,6 @@
   version: 3.1.0.{build}
   configuration: Release
   image: Visual Studio 2017
-  
-  cache:
-    - packages -> **\packages.config
   
   install:
     - choco install "msbuild-sonarqube-runner" -y
@@ -203,17 +198,19 @@
 
   test_script:
   - ps: >-
-      & (Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      & (Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
+      $env:PATH = "$env:PATH;{0}" -f (Resolve-Path $env:USERPROFILE\.nuget\packages\phantomjs\*\tools\phantomjs).Path
+      
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=PhantomJS
 
   after_test:
   - ps: >-
-      & (Resolve-Path packages\JetBrains.ReSharper.CommandLineTools.*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ps: >-
-      & (Resolve-Path packages\OpenCover.*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path packages\xunit.runner.console.*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net46\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: >-
-      & (Resolve-Path packages\ReportGenerator.*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
   - pip install codecov
   - codecov -f coverage.xml
