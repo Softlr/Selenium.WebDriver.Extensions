@@ -1,15 +1,14 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Firefox;
-    using PostSharp.Patterns.Model;
 
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    [Disposable]
-    public class FirefoxFixture
+    public class FirefoxFixture : IDisposable
     {
         public FirefoxFixture()
         {
@@ -18,10 +17,15 @@
             Browser = new FirefoxDriver(Service);
         }
 
-        [Child]
         public IWebDriver Browser { get; }
 
-        [Child]
         private FirefoxDriverService Service { get; }
+
+        public void Dispose()
+        {
+            Browser?.Quit();
+            Browser?.Dispose();
+            Service?.Dispose();
+        }
     }
 }
