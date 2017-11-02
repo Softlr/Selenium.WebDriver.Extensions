@@ -8,7 +8,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.0.2.{build}
+  version: 3.1.0.{build}
   configuration: Release
   image: Visual Studio 2017
   
@@ -21,7 +21,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "3.0.2"
+    assembly_version: "3.1.0"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}"
 
@@ -45,7 +45,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2 -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0 -Symbols
 
   test_script:
   - ps: >-
@@ -76,7 +76,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 3.0.2
+      release: 3.1.0
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
@@ -93,7 +93,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.0.2.{build}
+  version: 3.1.0.{build}
   configuration: Release
   image: Visual Studio 2017
   
@@ -106,7 +106,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "3.0.2"
+    assembly_version: "3.1.0"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-dev"
 
@@ -128,7 +128,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-dev -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0-dev -Symbols
 
   test_script:
   - ps: >-
@@ -164,7 +164,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.0.2.{build}
+  version: 3.1.0.{build}
   configuration: Release
   image: Visual Studio 2017
   
@@ -177,7 +177,7 @@
   assembly_info:
     patch: true
     file: AssemblyInfo.*
-    assembly_version: "3.0.2"
+    assembly_version: "3.1.0"
     assembly_file_version: "{version}"
     assembly_informational_version: "{version}-rc"
 
@@ -199,7 +199,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.0.2-rc -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0-rc -Symbols
 
   test_script:
   - ps: >-
@@ -230,7 +230,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 3.0.2-rc
+      release: 3.1.0-rc
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
