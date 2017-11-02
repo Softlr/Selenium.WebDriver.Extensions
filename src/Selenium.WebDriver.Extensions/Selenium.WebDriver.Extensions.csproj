@@ -16,9 +16,11 @@
 
   <ItemGroup>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.2.2" />
     <PackageReference Include="PostSharp.Patterns.Model" Version="5.0.37" />
     <PackageReference Include="Selenium.Support" Version="3.6.0" />
     <PackageReference Include="SimpleInjector" Version="4.0.12" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
   </ItemGroup>
 
 </Project>

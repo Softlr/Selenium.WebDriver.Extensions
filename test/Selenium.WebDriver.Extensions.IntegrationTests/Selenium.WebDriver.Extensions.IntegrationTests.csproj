@@ -6,10 +6,17 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.2.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
     <PackageReference Include="Nancy" Version="1.4.4" />
     <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
     <PackageReference Include="PhantomJS" Version="2.1.1" />
+    <PackageReference Include="ReportGenerator" Version="3.0.2" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.33.0" />
+    <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.16299" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.0.2" />
+    <PackageReference Include="WebDriver.GeckoDriver" Version="0.19.0" />
+    <PackageReference Include="WebDriver.IEDriverServer.win64" Version="3.6.0" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="xunit" Version="2.3.1" />
