@@ -1,26 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
-  <metadata>
-    <id>Selenium.WebDriver.Extensions</id>
-    <version>$version$</version>
-    <title>Selenium WebDriver Extensions</title>
-    <authors>Softlr</authors>
-    <licenseUrl>https://github.com/Softlr/Selenium.WebDriver.Extensions/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/Softlr/Selenium.WebDriver.Extensions</projectUrl>
-    <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</description>
-    <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
-    <dependencies>
-      <dependency id="Selenium.WebDriver" version="2.42.0"/>
-      <dependency id="Selenium.Support" version="2.42.0"/>
-      <dependency id="SimpleInjector" version="4.0.6"/>
-      <dependency id="PostSharp.Patterns.Model" version="4.3.33"/>
-    </dependencies>
-  </metadata>
-  <files>
-    <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\net45\Selenium.WebDriver.Extensions.dll" />
-    <file src="bin\Release\Selenium.WebDriver.Extensions.pdb" target="lib\net45\Selenium.WebDriver.Extensions.pdb" />
-    <file src="bin\Release\Selenium.WebDriver.Extensions.xml" target="lib\net45\Selenium.WebDriver.Extensions.xml" />
-    <file src="**\*.cs" target="src" exclude="obj\**" />
-  </files>
+    <metadata>
+        <id>Selenium.WebDriver.Extensions</id>
+        <version>$version$</version>
+        <title>Selenium WebDriver Extensions</title>
+        <authors>Softlr</authors>
+        <licenseUrl>https://github.com/Softlr/Selenium.WebDriver.Extensions/blob/master/LICENSE</licenseUrl>
+        <projectUrl>https://github.com/Softlr/Selenium.WebDriver.Extensions</projectUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</description>
+        <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
+        <dependencies>
+            <dependency id="Selenium.WebDriver" version="3.6.0" />
+            <dependency id="Selenium.Support" version="3.6.0" />
+            <dependency id="SimpleInjector" version="4.0.6" />
+            <dependency id="PostSharp.Patterns.Model" version="5.0.37" />
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\Release\Selenium.WebDriver.Extensions.dll" target="lib\net45\Selenium.WebDriver.Extensions.dll" />
+        <file src="bin\Release\Selenium.WebDriver.Extensions.pdb" target="lib\net45\Selenium.WebDriver.Extensions.pdb" />
+        <file src="bin\Release\Selenium.WebDriver.Extensions.xml" target="lib\net45\Selenium.WebDriver.Extensions.xml" />
+        <file src="**\*.cs" target="src" exclude="obj\**" />
+    </files>
 </package>
