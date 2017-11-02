@@ -11,6 +11,7 @@
         <description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</description>
         <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
         <dependencies>
+            <dependency id="JetBrains.Annotations" version="11.1.0" />
             <dependency id="Selenium.WebDriver" version="3.6.0" />
             <dependency id="Selenium.Support" version="3.6.0" />
             <dependency id="SimpleInjector" version="4.0.12" />
