@@ -167,10 +167,6 @@
     <CodeAnalysisDictionary Include="Properties\CustomDictionary.xml">
       <SubType>Designer</SubType>
     </CodeAnalysisDictionary>
-    <Content Include="..\..\packages\WebDriver.GeckoDriver.0.16.1\content\geckodriver.exe">
-      <Link>geckodriver.exe</Link>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <EmbeddedResource Include="TestCases\Sizzle\Unloaded.html" />
     <EmbeddedResource Include="TestCases\Sizzle\Loaded.html" />
     <EmbeddedResource Include="TestCases\JQuery\Unloaded.html" />
@@ -198,6 +194,10 @@
   <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.33.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.33.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
   <Import Project="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.16299\build\Selenium.WebDriver.MicrosoftWebDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.16299\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" />
   <ItemGroup>
+    <Content Include="..\..\packages\WebDriver.GeckoDriver.0.19.0\content\geckodriver.exe">
+      <Link>geckodriver.exe</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.3.6.0\content\IEDriverServer.exe">
       <Link>IEDriverServer.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
