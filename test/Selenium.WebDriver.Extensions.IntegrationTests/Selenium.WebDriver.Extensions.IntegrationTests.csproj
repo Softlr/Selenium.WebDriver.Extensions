@@ -200,14 +200,14 @@
   </Target>
   <Import Project="..\..\packages\PostSharp.5.0.37\build\PostSharp.targets" Condition="Exists('..\..\packages\PostSharp.5.0.37\build\PostSharp.targets')" />
   <Import Project="..\..\packages\JetBrains.ReSharper.CommandLineTools.2017.2.2\build\JetBrains.ReSharper.CommandLineTools.targets" Condition="Exists('..\..\packages\JetBrains.ReSharper.CommandLineTools.2017.2.2\build\JetBrains.ReSharper.CommandLineTools.targets')" />
+  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.33.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.33.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
+  <Import Project="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.16299\build\Selenium.WebDriver.MicrosoftWebDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.16299\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" />
   <ItemGroup>
-    <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.3.4.0\content\IEDriverServer.exe">
+    <Content Include="..\..\packages\WebDriver.IEDriverServer.win64.3.6.0\content\IEDriverServer.exe">
       <Link>IEDriverServer.exe</Link>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
-  <Import Project="..\..\packages\Selenium.WebDriver.ChromeDriver.2.33.0\build\Selenium.WebDriver.ChromeDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.ChromeDriver.2.33.0\build\Selenium.WebDriver.ChromeDriver.targets')" />
-  <Import Project="..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.16299\build\Selenium.WebDriver.MicrosoftWebDriver.targets" Condition="Exists('..\..\packages\Selenium.WebDriver.MicrosoftWebDriver.10.0.16299\build\Selenium.WebDriver.MicrosoftWebDriver.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
