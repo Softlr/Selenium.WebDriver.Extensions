@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests
+namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
     using System.Collections.Generic;
@@ -400,33 +400,20 @@
         [Theory]
         [MemberData(nameof(SelectorsTests))]
         [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
-        public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector)
-        {
-            // Arrange
-            // Act
-            // Assert
+        public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector) =>
             selector.Selector.Should().Be(expectedSelector);
-        }
 
         [Theory]
         [MemberData(nameof(SelectorExceptionTests))]
-        public void ShouldThrowExceptionForInvalidSelectors(Type exceptionType, Action selectorAction)
-        {
-            // Arrange
-            // Act
-            // Assert
+        public void ShouldThrowExceptionForInvalidSelectors(Type exceptionType, Action selectorAction) =>
             Assert.Throws(exceptionType, selectorAction);
-        }
 
         [Theory]
         [AutoData]
         public void ShouldCreateJQuerySelector(string rawSelector)
         {
-            // Arrange
-            // Act
             var selector = By.JQuerySelector(rawSelector);
 
-            // Assert
             selector.Should().NotBeNull();
             selector.RawSelector.Should().Be(rawSelector);
         }
@@ -435,13 +422,10 @@
         [AutoData]
         public void ShouldCreateJQuerySelectorWithContext(string contextRawSelector, string rawSelector)
         {
-            // Arrange
             var context = By.JQuerySelector(contextRawSelector);
 
-            // Act
             var selector = By.JQuerySelector(rawSelector, context);
 
-            // Assert
             selector.Should().NotBeNull();
             selector.RawSelector.Should().Be(rawSelector);
             selector.Context.RawSelector.Should().Be(contextRawSelector);
@@ -451,11 +435,8 @@
         [AutoData]
         public void ShouldCreateJQuerySelectorWithJQueryVariable(string rawSelector, string variable)
         {
-            // Arrange
-            // Act
             var selector = By.JQuerySelector(rawSelector, variable: variable);
 
-            // Assert
             selector.Should().NotBeNull();
             selector.RawSelector.Should().Be(rawSelector);
             selector.Variable.Should().Be(variable);
@@ -464,33 +445,24 @@
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue()
         {
-            // Arrange
-            // Act
             Action action = () => By.JQuerySelector(null);
 
-            // Assert
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue()
         {
-            // Arrange
-            // Act
             Action action = () => By.JQuerySelector(string.Empty);
 
-            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue()
         {
-            // Arrange
-            // Act
             Action action = () => By.JQuerySelector(" ");
 
-            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
@@ -498,11 +470,8 @@
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector)
         {
-            // Arrange
-            // Act
             Action action = () => By.JQuerySelector(rawSelector, variable: null);
 
-            // Assert
             action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
         }
 
@@ -510,11 +479,8 @@
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector)
         {
-            // Arrange
-            // Act
             Action action = () => By.JQuerySelector(rawSelector, variable: string.Empty);
 
-            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
@@ -522,11 +488,8 @@
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(string rawSelector)
         {
-            // Arrange
-            // Act
             Action action = () => By.JQuerySelector(rawSelector, variable: " ");
 
-            // Assert
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
@@ -534,15 +497,12 @@
         [AutoData]
         public void ShouldFindElementByJQuerySelector(string rawSelector)
         {
-            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             var result = selector.FindElement(driver);
 
-            // Assert
             result.Should().NotBeNull();
         }
 
@@ -550,15 +510,12 @@
         [AutoData]
         public void ShouldFindElementsByJQuerySelector(string rawSelector)
         {
-            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementsLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             var result = selector.FindElements(driver);
 
-            // Assert
             result.Should().NotBeNull().And.HaveCount(2);
         }
 
@@ -566,15 +523,12 @@
         [AutoData]
         public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
         {
-            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             Action action = () => selector.FindElement(driver);
 
-            // Assert
             action.ShouldThrow<NoSuchElementException>();
         }
 
@@ -582,15 +536,12 @@
         [AutoData]
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector(string rawSelector)
         {
-            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             var result = selector.FindElements(driver);
 
-            // Assert
             result.Should().NotBeNull().And.HaveCount(0);
         }
 
@@ -598,17 +549,14 @@
         [AutoData]
         public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
         {
-            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
                 .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).ThatIsWebElement().Build();
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             var result = selector.FindElement(element);
 
-            // Assert
             result.Should().NotBeNull();
         }
 
@@ -616,7 +564,6 @@
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
         {
-            // Arrange
             var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
                 .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
                 .Build();
@@ -624,10 +571,8 @@
 
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             Action action = () => selector.FindElement(element);
 
-            // Assert
             action.ShouldThrow<NotSupportedException>();
         }
 
@@ -635,15 +580,12 @@
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
         {
-            // Arrange
             var element = new SearchContextBuilder().ThatIsWebElement().Build();
 
             var selector = By.JQuerySelector(rawSelector);
 
-            // Act
             Action action = () => selector.FindElement(element);
 
-            // Assert
             action.ShouldThrow<NotSupportedException>();
         }
     }

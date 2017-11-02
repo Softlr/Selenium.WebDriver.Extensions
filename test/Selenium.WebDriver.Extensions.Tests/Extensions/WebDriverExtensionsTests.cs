@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.Tests.Extensions
+namespace Selenium.WebDriver.Extensions.Tests.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -96,25 +96,19 @@
 
         [Theory]
         [MemberData(nameof(InvalidParameters))]
-        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter)
-        {
-            // Assert
+        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
             action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameter);
-        }
 
         [Theory]
         [AutoData]
         public void ShouldExecuteScript(string scriptMethod)
         {
-            // Arrange
             var script = $"{scriptMethod}();";
             var driverMock = new WebDriverBuilder().ThatHasTestMethodDefined(scriptMethod);
             var driver = driverMock.Build();
 
-            // Act
             driver.ExecuteScript(script);
 
-            // Assert
             driverMock.VerifyIfTestMethodWasCalled(scriptMethod);
         }
 
@@ -123,14 +117,11 @@
         [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
-            // Arrange
             var driverMock = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
             var driver = driverMock.Build();
 
-            // Act
             action.Invoke(driver, uri, timeSpan);
 
-            // Assert
             driverMock.VerifyIfExternalLibraryWasLoaded(); // assert pass
         }
     }
