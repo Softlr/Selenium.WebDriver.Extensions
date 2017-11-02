@@ -185,3 +185,5 @@ phantomjs-license.txt
 .vs/
 ReSharper.xml
 .sonar/
+.coverage*
+.sonarqube/
