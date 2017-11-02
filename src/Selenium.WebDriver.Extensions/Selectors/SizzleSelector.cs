@@ -33,10 +33,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <inheritdoc />
         public SizzleSelector(string selector, SizzleSelector context)
-            : base(selector, context)
-        {
-            Description = $"By.SizzleSelector: {RawSelector}";
-        }
+            : base(selector, context) => Description = $"By.SizzleSelector: {RawSelector}";
 
         /// <summary>
         /// Gets the empty selector.

@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
@@ -11,10 +11,7 @@
     [Disposable]
     public class EdgeFixture
     {
-        public EdgeFixture()
-        {
-            Browser = new EdgeDriver();
-        }
+        public EdgeFixture() => Browser = new EdgeDriver();
 
         [Child]
         public IWebDriver Browser { get; }

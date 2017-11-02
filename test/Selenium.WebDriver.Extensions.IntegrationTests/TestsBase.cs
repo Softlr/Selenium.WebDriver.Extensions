@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -20,10 +20,7 @@
             _host.Start();
         }
 
-        ~TestsBase()
-        {
-            Dispose(false);
-        }
+        ~TestsBase() => Dispose(false);
 
         protected IWebDriver Browser { get; set; }
 
