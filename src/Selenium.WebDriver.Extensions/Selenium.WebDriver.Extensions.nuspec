@@ -15,7 +15,7 @@
       <dependency id="Selenium.WebDriver" version="3.6.0" />
       <dependency id="Selenium.Support" version="3.6.0" />
       <dependency id="SimpleInjector" version="4.0.12" />
-      <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.37" />
+      <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.39" />
     </dependencies>
   </metadata>
   <files>
