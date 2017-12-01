@@ -21,7 +21,6 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
-        /// <inheritdoc />
         protected SelectorBase([Required] string selector, TSelector context)
         {
             Context = context;
