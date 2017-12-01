@@ -1,4 +1,4 @@
-namespace Selenium.WebDriver.Extensions
+﻿namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;

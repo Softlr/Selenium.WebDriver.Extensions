@@ -141,7 +141,6 @@ AppPackages/
 sql/
 *.Cache
 ClientBin/
-[Ss]tyle[Cc]op.*
 ~$*
 *~
 *.dbmdl
@@ -186,3 +185,5 @@ phantomjs-license.txt
 .vs/
 ReSharper.xml
 .sonar/
+.coverage*
+.sonarqube/

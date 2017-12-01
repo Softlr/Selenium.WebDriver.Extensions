@@ -1,0 +1,1 @@
+(Get-Content .\sonar.json) -join "`n" | ConvertFrom-Json | .\Start-SonarAnalysis.ps1

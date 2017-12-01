@@ -16,15 +16,16 @@ namespace Selenium.WebDriver.Extensions
         private readonly string _chain;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="T:Selenium.WebDriver.Extensions.JQuerySelector" /> class.
+        /// Initializes a new instance of the <see cref="JQuerySelector" /> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <remarks>
-        /// This constructor cannot be merged with <see cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
+        /// This constructor cannot be merged with
+        /// <see cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
         /// constructor as it is resolved by reflection.
         /// </remarks>
-        /// <inheritdoc />
         [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public JQuerySelector(string selector)
             : this(selector, null)
         {
@@ -37,7 +38,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <param name="chain">The jQuery method chain.</param>
-        /// <inheritdoc />
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public JQuerySelector(
             string selector,
             JQuerySelector context,
