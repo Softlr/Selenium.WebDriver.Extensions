@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System;
     using System.Collections.Generic;
@@ -21,7 +21,6 @@
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
-        /// <inheritdoc />
         protected SelectorBase([Required] string selector, TSelector context)
         {
             Context = context;
