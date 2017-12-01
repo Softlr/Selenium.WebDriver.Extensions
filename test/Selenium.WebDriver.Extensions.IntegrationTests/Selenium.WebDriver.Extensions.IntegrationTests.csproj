@@ -27,7 +27,7 @@
     <PackageReference Include="ReportGenerator" Version="3.0.2" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.33.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.19.1" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.6.0" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.7.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.16299" />
     <PackageReference Include="Selenium.WebDriver.PhantomJS" Version="1.0.0" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta004" />
