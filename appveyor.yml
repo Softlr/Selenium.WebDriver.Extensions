@@ -8,7 +8,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.1.0.{build}
+  version: 3.1.1.{build}
   configuration: Release
   image: Visual Studio 2017
   
@@ -35,7 +35,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0 -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.1 -Symbols
 
   test_script:
   - ps: >-
@@ -65,7 +65,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 3.1.0
+      release: 3.1.1
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
@@ -82,7 +82,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.1.0.{build}
+  version: 3.1.1.{build}
   configuration: Release
   image: Visual Studio 2017
   
@@ -107,7 +107,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0-dev -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.1-dev -Symbols
 
   test_script:
   - ps: >-
@@ -142,7 +142,7 @@
   skip_commits:
     message: /Update.*\.md/
 
-  version: 3.1.0.{build}
+  version: 3.1.1.{build}
   configuration: Release
   image: Visual Studio 2017
   
@@ -167,7 +167,7 @@
     - msbuild Selenium.WebDriver.Extensions.sln /t:Rebuild
 
   after_build:
-    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0-rc -Symbols
+    - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.1-rc -Symbols
 
   test_script:
   - ps: >-
@@ -197,7 +197,7 @@
       api_key:
         secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
     - provider: GitHub
-      release: 3.1.0-rc
+      release: 3.1.1-rc
       artifact: /.*\.nupkg/
       auth_token:
         secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
