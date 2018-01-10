@@ -11,6 +11,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     {
         private IWebDriver _driver;
 
+        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0057)]
         public TestPage(IWebDriver driver) => _driver = driver;
 
         [FindsBy(How = How.Custom, CustomFinderType = typeof(JQuerySelector), Using = "h1")]

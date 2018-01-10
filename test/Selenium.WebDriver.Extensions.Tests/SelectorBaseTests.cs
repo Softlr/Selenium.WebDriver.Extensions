@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
-    [Trait("Category", "Unit")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class SelectorBaseTests
     {

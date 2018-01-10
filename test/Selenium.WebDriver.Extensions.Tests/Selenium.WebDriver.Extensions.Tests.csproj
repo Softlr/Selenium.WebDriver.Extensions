@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ve-ECC1.tmp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\_stylecop\stylecop.json" />
   </ItemGroup>
 

@@ -7,7 +7,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using JetBrains.Annotations;
     using Xunit;
 
-    [Trait("Category", "Unit")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class ByTests
     {

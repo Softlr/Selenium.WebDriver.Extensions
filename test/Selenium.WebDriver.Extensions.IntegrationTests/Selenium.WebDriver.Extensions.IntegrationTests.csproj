@@ -47,6 +47,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj" />
+    <ProjectReference Include="..\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj" />
   </ItemGroup>
 
   <ItemGroup>

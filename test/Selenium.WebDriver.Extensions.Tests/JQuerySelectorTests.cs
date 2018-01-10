@@ -12,7 +12,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Xunit;
     using By = global::Selenium.WebDriver.Extensions.By;
 
-    [Trait("Category", "Unit")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class JQuerySelectorTests
     {

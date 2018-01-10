@@ -11,7 +11,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
-    [Trait("Category", "Unit")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
@@ -22,7 +22,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             get
             {
-                var driver = new WebDriverBuilder().Build();
+                var webDriver = new WebDriverBuilder().Build();
                 const string driverParam = "driver";
                 const string scriptParam = "script";
                 const string versionParam = "version";
@@ -33,36 +33,36 @@ namespace Selenium.WebDriver.Extensions.Tests
                 {
                     (Action)(() => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>())),  driverParam
                 };
-                yield return new object[] { (Action)(() => driver.ExecuteScript(null)), scriptParam };
-                yield return new object[] { (Action)(() => driver.ExecuteScript(string.Empty)), scriptParam };
+                yield return new object[] { (Action)(() => webDriver.ExecuteScript(null)), scriptParam };
+                yield return new object[] { (Action)(() => webDriver.ExecuteScript(string.Empty)), scriptParam };
 
                 // LoadJQuery
                 yield return new object[] { (Action)(() => WebDriverExtensions.LoadJQuery(null)), driverParam };
-                yield return new object[] { (Action)(() => driver.LoadJQuery((string)null)), versionParam };
-                yield return new object[] { (Action)(() => driver.LoadJQuery(string.Empty)), versionParam };
+                yield return new object[] { (Action)(() => webDriver.LoadJQuery((string)null)), versionParam };
+                yield return new object[] { (Action)(() => webDriver.LoadJQuery(string.Empty)), versionParam };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadJQuery(_fixture.Create<string>())), versionParam
+                    (Action)(() => webDriver.LoadJQuery(_fixture.Create<string>())), versionParam
                 };
                 yield return new object[]
                 {
                     (Action)(() => WebDriverExtensions.LoadJQuery(null, _fixture.Create<Uri>())), driverParam
                 };
-                yield return new object[] { (Action)(() => driver.LoadJQuery((Uri)null)), uriParam };
+                yield return new object[] { (Action)(() => webDriver.LoadJQuery((Uri)null)), uriParam };
 
                 // LoadSizzle
                 yield return new object[] { (Action)(() => WebDriverExtensions.LoadSizzle(null)), driverParam };
-                yield return new object[] { (Action)(() => driver.LoadSizzle((string)null)), versionParam };
-                yield return new object[] { (Action)(() => driver.LoadSizzle(string.Empty)), versionParam };
+                yield return new object[] { (Action)(() => webDriver.LoadSizzle((string)null)), versionParam };
+                yield return new object[] { (Action)(() => webDriver.LoadSizzle(string.Empty)), versionParam };
                 yield return new object[]
                 {
-                    (Action)(() => driver.LoadSizzle(_fixture.Create<string>())), versionParam
+                    (Action)(() => webDriver.LoadSizzle(_fixture.Create<string>())), versionParam
                 };
                 yield return new object[]
                 {
                     (Action)(() => WebDriverExtensions.LoadSizzle(null, _fixture.Create<Uri>())), driverParam
                 };
-                yield return new object[] { (Action)(() => driver.LoadSizzle((Uri)null)), uriParam };
+                yield return new object[] { (Action)(() => webDriver.LoadSizzle((Uri)null)), uriParam };
             }
         }
 

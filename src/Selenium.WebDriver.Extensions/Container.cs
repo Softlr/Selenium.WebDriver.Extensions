@@ -32,6 +32,7 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the dependency container.
         /// </summary>
+        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0022)]
         public static SimpleInjector.Container Instance { get; } = new SimpleInjector.Container();
     }
 }
