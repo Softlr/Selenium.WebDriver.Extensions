@@ -15,7 +15,7 @@
     <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.0.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.0.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
-    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.2.2" />
+    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.3.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
     <PackageReference Include="ReportGenerator" Version="3.1.1" />
