@@ -22,7 +22,7 @@
     <PackageReference Include="Nancy" Version="1.4.4" />
     <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.34.0" />
-    <PackageReference Include="Selenium.WebDriver.GeckoDriver" Version="0.19.1" />
+    <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.19.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.8.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.16299" />
     <PackageReference Include="Selenium.WebDriver.PhantomJS" Version="1.0.0" />
