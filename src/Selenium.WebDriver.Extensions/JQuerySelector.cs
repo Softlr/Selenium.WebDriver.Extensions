@@ -1,10 +1,10 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using OpenQA.Selenium;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Contracts;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
 
     /// <summary>
     /// Searches the DOM elements using jQuery selector.

@@ -1,9 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using Nancy;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
-    using Nancy;
 
     [ExcludeFromCodeCoverage]
     public class TestCaseModule : NancyModule

@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.PhantomJsTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [Trait("Category", "Integration")]
@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.PhantomJsTests
     public class WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<PhantomJsFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests(PhantomJsFixture fixture)
+        public WebDriverExtensionsJQueryUnloadedSelectorPhantomJsTests(FixtureBase fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));

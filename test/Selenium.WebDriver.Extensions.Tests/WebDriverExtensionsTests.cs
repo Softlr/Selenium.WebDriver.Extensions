@@ -1,13 +1,13 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [Trait("Category", "Unit")]

@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [Trait("Category", "Integration")]
@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     public class WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
+        public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(FixtureBase fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));

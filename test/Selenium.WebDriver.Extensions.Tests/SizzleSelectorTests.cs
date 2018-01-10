@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 

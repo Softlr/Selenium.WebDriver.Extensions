@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
 
     [Trait("Category", "Integration")]
@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     public class WebDriverExtensionsJQueryLoadedSelectorEdgeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<EdgeFixture>
     {
-        public WebDriverExtensionsJQueryLoadedSelectorEdgeTests(EdgeFixture fixture)
+        public WebDriverExtensionsJQueryLoadedSelectorEdgeTests(FixtureBase fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryLoaded"));

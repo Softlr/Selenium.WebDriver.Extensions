@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using By = Selenium.WebDriver.Extensions.By;
 

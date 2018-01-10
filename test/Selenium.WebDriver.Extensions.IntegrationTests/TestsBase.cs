@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using Nancy.Hosting.Self;
     using OpenQA.Selenium;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase : IDisposable

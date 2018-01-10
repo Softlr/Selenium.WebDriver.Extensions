@@ -1,10 +1,10 @@
 namespace Selenium.WebDriver.Extensions.Contracts
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using PostSharp.Aspects;
     using PostSharp.Patterns.Contracts;
     using PostSharp.Reflection;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// The attribute to validate null or not-empty string.
