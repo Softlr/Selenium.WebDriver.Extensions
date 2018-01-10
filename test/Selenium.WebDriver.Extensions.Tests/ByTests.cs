@@ -1,9 +1,9 @@
-namespace Selenium.WebDriver.Extensions.Tests.Extensions
+namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using AutoFixture;
     using FluentAssertions;
-    using Ploeh.AutoFixture;
     using Xunit;
     using By = global::Selenium.WebDriver.Extensions.By;
 

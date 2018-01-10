@@ -1,4 +1,4 @@
-namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System;
     using System.Diagnostics.CodeAnalysis;

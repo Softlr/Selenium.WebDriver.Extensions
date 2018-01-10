@@ -3,6 +3,7 @@ namespace Selenium.WebDriver.Extensions
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
@@ -21,6 +22,7 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         protected SelectorBase([Required] string selector, TSelector context)
         {
             Context = context;

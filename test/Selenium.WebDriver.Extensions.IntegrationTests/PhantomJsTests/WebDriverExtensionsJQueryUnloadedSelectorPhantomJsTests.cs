@@ -1,7 +1,9 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.PhantomJsTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
     using Xunit;
 
     [Trait("Category", "Integration")]

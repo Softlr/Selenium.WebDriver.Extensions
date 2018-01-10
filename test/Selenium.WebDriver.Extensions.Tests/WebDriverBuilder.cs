@@ -2,10 +2,10 @@ namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using AutoFixture;
+    using AutoFixture.AutoNSubstitute;
     using NSubstitute;
     using OpenQA.Selenium;
-    using Ploeh.AutoFixture;
-    using Ploeh.AutoFixture.AutoNSubstitute;
 
     [ExcludeFromCodeCoverage]
     internal class WebDriverBuilder

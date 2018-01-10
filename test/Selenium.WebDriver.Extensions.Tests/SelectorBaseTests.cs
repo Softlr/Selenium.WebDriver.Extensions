@@ -3,9 +3,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
-    using Ploeh.AutoFixture.Xunit2;
     using Selenium.WebDriver.Extensions;
     using Xunit;
 
