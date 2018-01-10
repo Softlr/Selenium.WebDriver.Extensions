@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     public class WebDriverExtensionsSizzleUnloadedSelectorEdgeTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<EdgeFixture>
     {
-        public WebDriverExtensionsSizzleUnloadedSelectorEdgeTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsSizzleUnloadedSelectorEdgeTests(EdgeFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));

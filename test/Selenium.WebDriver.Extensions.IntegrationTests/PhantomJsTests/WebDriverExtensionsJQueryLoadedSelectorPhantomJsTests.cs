@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.PhantomJsTests
     public class WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<PhantomJsFixture>
     {
-        public WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsJQueryLoadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryLoaded"));

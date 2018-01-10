@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));

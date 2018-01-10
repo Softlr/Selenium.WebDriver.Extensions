@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     public class WebDriverExtensionsJQueryUnloadedSelectorEdgeTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<EdgeFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSelectorEdgeTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsJQueryUnloadedSelectorEdgeTests(EdgeFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));

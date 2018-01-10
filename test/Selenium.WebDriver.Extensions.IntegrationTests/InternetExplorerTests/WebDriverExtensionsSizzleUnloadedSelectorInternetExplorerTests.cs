@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     public class WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
     {
-        public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));

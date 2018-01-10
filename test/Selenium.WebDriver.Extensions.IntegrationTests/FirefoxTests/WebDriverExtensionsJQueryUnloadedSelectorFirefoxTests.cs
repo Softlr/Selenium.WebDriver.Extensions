@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<FirefoxFixture>
     {
-        public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FirefoxFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));

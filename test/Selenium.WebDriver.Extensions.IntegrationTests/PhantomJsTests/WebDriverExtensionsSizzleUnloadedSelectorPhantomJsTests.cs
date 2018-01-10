@@ -14,7 +14,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.PhantomJsTests
     public class WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {
-        public WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests(FixtureBase fixture)
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public WebDriverExtensionsSizzleUnloadedSelectorPhantomJsTests(PhantomJsFixture fixture)
         {
             Browser = fixture.Browser;
             Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));
