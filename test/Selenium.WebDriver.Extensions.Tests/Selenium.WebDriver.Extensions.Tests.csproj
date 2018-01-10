@@ -18,7 +18,7 @@
     <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.2.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
-    <PackageReference Include="ReportGenerator" Version="3.0.2" />
+    <PackageReference Include="ReportGenerator" Version="3.1.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta004" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
