@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using Selenium.WebDriver.Extensions.Parsers;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.Parsers;
 
     /// <summary>
     /// The dependency container.

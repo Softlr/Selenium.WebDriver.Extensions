@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using OpenQA.Selenium.PhantomJS;
     using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium.PhantomJS;
 
     [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
     [ExcludeFromCodeCoverage]

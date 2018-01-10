@@ -1,8 +1,8 @@
 namespace Selenium.WebDriver.Extensions
 {
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.

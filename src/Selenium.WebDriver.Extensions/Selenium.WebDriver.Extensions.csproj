@@ -22,6 +22,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="codecracker.CSharp" Version="1.0.3" />
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
     <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.3.1" />
     <PackageReference Include="PostSharp.Patterns.Model" Version="5.0.43" />

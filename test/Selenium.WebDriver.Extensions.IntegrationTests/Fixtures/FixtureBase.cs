@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using OpenQA.Selenium;
     using System;
+    using OpenQA.Selenium;
 
     public class FixtureBase : IDisposable
     {

@@ -1,10 +1,10 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using OpenQA.Selenium;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using OpenQA.Selenium;
 
     /// <summary>
     /// The <see cref="T:OpenQA.Selenium.IWebElement" /> collection parser.

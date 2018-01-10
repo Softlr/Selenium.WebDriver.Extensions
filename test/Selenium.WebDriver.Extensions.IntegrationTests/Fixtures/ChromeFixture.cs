@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using OpenQA.Selenium.Chrome;
     using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium.Chrome;
 
     [ExcludeFromCodeCoverage]
     [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
