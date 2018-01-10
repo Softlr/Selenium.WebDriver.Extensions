@@ -1,16 +1,16 @@
-﻿namespace Selenium.WebDriver.Extensions.Parsers
+namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
 
     /// <summary>
     /// The parser interface.
     /// </summary>
+    [PublicAPI]
     internal interface IParser
     {
         /// <summary>
         /// Gets or sets the successor parser.
         /// </summary>
-        [SuppressMessage("ReSharper", "UnusedMemberInSuper.Global")]
         IParser Successor { get; set; }
 
         /// <summary>

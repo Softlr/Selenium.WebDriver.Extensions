@@ -19,8 +19,8 @@ namespace Selenium.WebDriver.Extensions
         /// This constructor cannot be merged with <see cref="SizzleSelector(string,SizzleSelector)"/> constructor as
         /// it is resolved by reflection.
         /// </remarks>
-        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
+        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public SizzleSelector(string selector)
             : this(selector, null)
         {

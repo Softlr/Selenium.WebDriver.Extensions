@@ -24,8 +24,8 @@ namespace Selenium.WebDriver.Extensions
         /// <see cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
         /// constructor as it is resolved by reflection.
         /// </remarks>
-        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
+        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public JQuerySelector(string selector)
             : this(selector, null)
         {

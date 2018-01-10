@@ -6,6 +6,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
+    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
@@ -17,7 +18,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     {
         private static readonly Fixture _fixture = new Fixture();
 
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [PublicAPI]
         public static IEnumerable<object[]> SelectorsTests
         {
             get
@@ -182,7 +183,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             }
         }
 
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [PublicAPI]
         [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
         public static IEnumerable<object[]> SelectorExceptionTests
         {
@@ -399,7 +400,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(SelectorsTests))]
-        [SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters")]
         public void ShouldCreateCorrectSelector(JQuerySelector selector, string expectedSelector) =>
             selector.Selector.Should().Be(expectedSelector);
 

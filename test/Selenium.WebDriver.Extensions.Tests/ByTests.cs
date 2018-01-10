@@ -4,14 +4,14 @@ namespace Selenium.WebDriver.Extensions.Tests
     using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using FluentAssertions;
+    using JetBrains.Annotations;
     using Xunit;
-    using By = global::Selenium.WebDriver.Extensions.By;
 
     [Trait("Category", "Unit")]
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [PublicAPI]
         public static IEnumerable<object[]> CoreSelectors
         {
             get

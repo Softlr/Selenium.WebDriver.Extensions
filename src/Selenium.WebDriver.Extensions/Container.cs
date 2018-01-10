@@ -8,7 +8,6 @@ namespace Selenium.WebDriver.Extensions
     /// </summary>
     public static class Container
     {
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static Container()
         {
             // parsers

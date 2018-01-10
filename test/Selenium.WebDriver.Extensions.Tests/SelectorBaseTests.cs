@@ -14,10 +14,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     public class SelectorBaseTests
     {
         [Fact]
-        [SuppressMessage("ReSharper", "ExpressionIsAlwaysNull")]
         public void ShouldCorrectlyHandleDefaultValue()
         {
-            object rawResult = null;
+            const object rawResult = null;
 
             var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 

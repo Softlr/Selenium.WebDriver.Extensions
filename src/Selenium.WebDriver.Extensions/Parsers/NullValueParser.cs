@@ -6,7 +6,6 @@ namespace Selenium.WebDriver.Extensions.Parsers
     /// The <see langword="null"/> value parser.
     /// </summary>
     /// <inheritdoc cref="ParserBase" />
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class NullValueParser : ParserBase, INullValueParser
     {
         /// <inheritdoc cref="ParserBase.Parse{TResult}" />

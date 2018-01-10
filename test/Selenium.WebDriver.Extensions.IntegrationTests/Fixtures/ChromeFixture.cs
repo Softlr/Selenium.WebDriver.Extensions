@@ -1,10 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
     using OpenQA.Selenium.Chrome;
 
+    [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class ChromeFixture : FixtureBase
     {
         public ChromeFixture() => Browser = new ChromeDriver();

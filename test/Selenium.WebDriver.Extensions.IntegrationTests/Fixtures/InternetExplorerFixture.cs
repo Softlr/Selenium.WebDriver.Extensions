@@ -1,10 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
     using OpenQA.Selenium.IE;
 
+    [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class InternetExplorerFixture : FixtureBase
     {
         public InternetExplorerFixture() => Browser = new InternetExplorerDriver();

@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
     using OpenQA.Selenium.Firefox;
 
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     public class FirefoxFixture : FixtureBase<FirefoxDriverService>
     {
         public FirefoxFixture()

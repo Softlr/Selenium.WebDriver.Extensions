@@ -94,7 +94,6 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        [SuppressMessage("Microsoft.Naming", "CA1702:CompoundWordsShouldBeCasedCorrectly", MessageId = "XPath")]
         public static new OpenQA.Selenium.By XPath(string xpathToFind) => OpenQA.Selenium.By.XPath(xpathToFind);
     }
 }

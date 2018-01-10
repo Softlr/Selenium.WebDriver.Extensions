@@ -6,6 +6,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
+    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
@@ -16,7 +17,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     {
         private static readonly Fixture _fixture = new Fixture();
 
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [PublicAPI]
         public static IEnumerable<object[]> InvalidParameters
         {
             get
@@ -65,7 +66,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             }
         }
 
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [PublicAPI]
         public static IEnumerable<object[]> Loaders
         {
             get
@@ -114,7 +115,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(Loaders))]
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures")]
         public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             var driverBuilder = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
