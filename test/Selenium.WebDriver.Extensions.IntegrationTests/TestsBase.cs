@@ -2,6 +2,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
     using Nancy.Hosting.Self;
     using OpenQA.Selenium;
 
@@ -24,7 +25,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
 
         protected IWebDriver Browser { get; set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
         protected string ServerUrl { get; }
 
         public void Dispose()

@@ -8,20 +8,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ve-ECC1.tmp" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AdditionalFiles Include="..\..\_stylecop\stylecop.json" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoFixture" Version="3.51.0" />
-    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="3.51.0" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="3.51.0" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.0.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.0.0" />
     <PackageReference Include="FluentAssertions" Version="4.19.4" />
-    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2017.2.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
-    <PackageReference Include="NSubstitute" Version="3.1.0" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
-    <PackageReference Include="ReportGenerator" Version="3.0.2" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta004" />
+    <PackageReference Include="ReportGenerator" Version="3.1.1" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
     <PackageReference Include="xunit" Version="2.3.1" />

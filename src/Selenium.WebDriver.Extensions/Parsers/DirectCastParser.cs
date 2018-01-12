@@ -6,7 +6,6 @@ namespace Selenium.WebDriver.Extensions.Parsers
     /// The direct cast parser.
     /// </summary>
     /// <inheritdoc cref="ParserBase" />
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class DirectCastParser : ParserBase, IDirectCastParser
     {
         /// <inheritdoc cref="ParserBase.Parse{TResult}" />

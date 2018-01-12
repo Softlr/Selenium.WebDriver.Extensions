@@ -1,8 +1,7 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using System.Reflection;
     using Nancy;
 
     [ExcludeFromCodeCoverage]
@@ -10,35 +9,25 @@
     {
         public TestCaseModule()
         {
-            const string prefix = "Selenium.WebDriver.Extensions.IntegrationTests.TestCases.";
-            Get["/jQueryLoaded"] = _ => GetHtml($"{prefix}JQuery.Loaded.html");
-            Get["/jQueryUnloaded"] = _ => GetHtml($"{prefix}JQuery.Unloaded.html");
-            Get["/SizzleLoaded"] = _ => GetHtml($"{prefix}Sizzle.Loaded.html");
-            Get["/SizzleUnloaded"] = _ => GetHtml($"{prefix}Sizzle.Unloaded.html");
+            Get["/jQueryLoaded"] = _ => GetHtml(new Uri("https://code.jquery.com/jquery-2.1.1.min.js"));
+            Get["/jQueryUnloaded"] = _ => GetHtml();
+            Get["/SizzleLoaded"] = _ => GetHtml(new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js"));
+            Get["/SizzleUnloaded"] = _ => GetHtml();
         }
 
-        private static string GetHtml(string resourceName)
-        {
-            var assembly = Assembly.GetExecutingAssembly();
-            Stream stream = null;
-            try
-            {
-                stream = assembly.GetManifestResourceStream(resourceName);
-                if (stream == null)
-                {
-                    return null;
-                }
-
-                using (var reader = new StreamReader(stream))
-                {
-                    stream = null;
-                    return reader.ReadToEnd();
-                }
-            }
-            finally
-            {
-                stream?.Dispose();
-            }
-        }
+        private static string GetHtml(Uri externalLibUrl = null) =>
+            $@"<!DOCTYPE html>
+            <html>
+            <head>
+                <meta charset=""utf-8"" />
+                <title>Selenium.WebDriver.Extensions Tests</title>
+            </head>
+            <body>
+                <h1 class=""main"">H1 Header</h1>
+                <div class=""main"" id=""id1"">Selector</div>
+                <div class=""main"">Selenium WebDriver Extensions</div>
+                {(externalLibUrl != null ? $@"<script src = ""{externalLibUrl.AbsoluteUri}"" type=""text/javascript""></script>" : string.Empty)}
+            </body>
+            </html>";
     }
 }

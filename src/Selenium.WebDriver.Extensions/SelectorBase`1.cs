@@ -3,6 +3,7 @@ namespace Selenium.WebDriver.Extensions
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
@@ -21,6 +22,7 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
+        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         protected SelectorBase([Required] string selector, TSelector context)
         {
             Context = context;
@@ -59,8 +61,8 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="result">The result of jQuery script.</param>
         /// <returns>Parsed result of invoking the script.</returns>
         /// <remarks>
-        /// IE is returning numbers as doubles, while other browsers return them as long. This method casts IE-doubles
-        /// to long integer type.
+        /// Internet Explorer is returning numbers as <see langword="double"/>, while other browsers return them as
+        /// <see langword="long"/>. This method casts Internet Explorer's <see langword="double"/> to <see langword="long"/>.
         /// </remarks>
         internal static TResult ParseResult<TResult>(object result) =>
             Container.Instance.GetInstance<IParser>().Parse<TResult>(result);

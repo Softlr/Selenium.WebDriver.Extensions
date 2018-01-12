@@ -10,7 +10,6 @@ namespace Selenium.WebDriver.Extensions.Parsers
     /// The <see cref="T:OpenQA.Selenium.IWebElement" /> collection parser.
     /// </summary>
     /// <inheritdoc cref="ParserBase" />
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class WebElementCollectionParser : ParserBase, IWebElementCollectionParser
     {
         /// <inheritdoc cref="ParserBase.Parse{TResult}" />

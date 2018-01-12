@@ -1,23 +1,13 @@
-namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium;
+    using JetBrains.Annotations;
     using OpenQA.Selenium.IE;
 
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class InternetExplorerFixture : IDisposable
+    public class InternetExplorerFixture : FixtureBase
     {
         public InternetExplorerFixture() => Browser = new InternetExplorerDriver();
-
-        public IWebDriver Browser { get; }
-
-        public void Dispose()
-        {
-            Browser?.Quit();
-            Browser?.Dispose();
-        }
     }
 }

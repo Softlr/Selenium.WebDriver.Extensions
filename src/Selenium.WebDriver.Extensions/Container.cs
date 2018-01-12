@@ -1,4 +1,4 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Parsers;
@@ -8,7 +8,6 @@
     /// </summary>
     public static class Container
     {
-        [SuppressMessage("Microsoft.Performance", "CA1810:InitializeReferenceTypeStaticFieldsInline")]
         static Container()
         {
             // parsers
@@ -33,6 +32,7 @@
         /// <summary>
         /// Gets the dependency container.
         /// </summary>
+        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0022)]
         public static SimpleInjector.Container Instance { get; } = new SimpleInjector.Container();
     }
 }

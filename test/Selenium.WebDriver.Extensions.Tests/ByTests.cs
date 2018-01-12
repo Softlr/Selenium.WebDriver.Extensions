@@ -1,17 +1,17 @@
-namespace Selenium.WebDriver.Extensions.Tests.Extensions
+namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using AutoFixture;
     using FluentAssertions;
-    using Ploeh.AutoFixture;
+    using JetBrains.Annotations;
     using Xunit;
-    using By = global::Selenium.WebDriver.Extensions.By;
 
-    [Trait("Category", "Unit")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
-        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        [PublicAPI]
         public static IEnumerable<object[]> CoreSelectors
         {
             get

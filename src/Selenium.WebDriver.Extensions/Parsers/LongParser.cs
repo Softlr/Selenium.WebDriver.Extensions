@@ -6,7 +6,6 @@ namespace Selenium.WebDriver.Extensions.Parsers
     /// The <see cref="long"/> parser.
     /// </summary>
     /// <inheritdoc cref="ParserBase" />
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
     internal class LongParser : ParserBase, ILongParser
     {
         /// <inheritdoc cref="ParserBase.Parse{TResult}" />
