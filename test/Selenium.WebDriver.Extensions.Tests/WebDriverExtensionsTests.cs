@@ -122,7 +122,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             action.Invoke(driver, uri, timeSpan);
 
-            driverBuilder.VerifyIfExternalLibraryWasLoaded(); // assert pass
+            driverBuilder.VerifyIfExternalLibraryWasLoaded();
         }
     }
 }
