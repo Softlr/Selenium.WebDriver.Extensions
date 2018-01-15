@@ -5,8 +5,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using JetBrains.Annotations;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
-    using static Suppress.Category;
-    using static Suppress.CodeCracker;
 
     [PublicAPI]
     [ExcludeFromCodeCoverage]
@@ -14,7 +12,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     {
         private IWebDriver _driver;
 
-        [SuppressMessage(CODE_CRACKER, CC0057)]
         public TestPage(IWebDriver driver)
         {
             _driver = driver ?? throw new ArgumentNullException(nameof(driver));
