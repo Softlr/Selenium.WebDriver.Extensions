@@ -1,6 +1,5 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
 

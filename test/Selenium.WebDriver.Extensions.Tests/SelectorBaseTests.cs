@@ -17,28 +17,27 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldCorrectlyHandleDefaultValue()
         {
             const object rawResult = null;
+            var sut = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
-            var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
-
-            result.Should().BeFalse();
+            sut.Should().BeFalse();
         }
 
         [Theory]
         [AutoData]
         public void ShouldCorrectlyHandleDoubleValue(double rawResult)
         {
-            var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
+            var sut = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
-            result.GetType().Should().Be(typeof(long));
+            sut.GetType().Should().Be(typeof(long));
         }
 
         [Theory]
         [AutoData]
         public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
         {
-            var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
+            var sut = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
-            result.Should().NotBeNull();
+            sut.Should().NotBeNull();
         }
     }
 }

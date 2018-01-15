@@ -1,6 +1,5 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
@@ -16,9 +15,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorChromeTests(ChromeFixture fixture)
+            : base(fixture.Browser, true)
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));
         }
     }
 }

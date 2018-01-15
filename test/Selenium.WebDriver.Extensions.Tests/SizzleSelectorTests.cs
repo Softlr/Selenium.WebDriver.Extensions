@@ -7,7 +7,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.By;
+    using By = By;
 
     [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
@@ -17,20 +17,20 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldCreateSizzleSelector(string rawSelector)
         {
-            var selector = By.SizzleSelector(rawSelector);
+            var sut = By.SizzleSelector(rawSelector);
 
-            selector.Should().NotBeNull();
-            selector.RawSelector.Should().Be(rawSelector);
+            sut.Should().NotBeNull();
+            sut.RawSelector.Should().Be(rawSelector);
         }
 
         [Theory]
         [AutoData]
         public void ShouldCreateSizzleSelectorDirectly(string rawSelector)
         {
-            var selector = new SizzleSelector(rawSelector);
+            var sut = new SizzleSelector(rawSelector);
 
-            selector.Should().NotBeNull();
-            selector.RawSelector.Should().Be(rawSelector);
+            sut.Should().NotBeNull();
+            sut.RawSelector.Should().Be(rawSelector);
         }
 
         [Theory]
@@ -38,12 +38,11 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldCreateSizzleSelectorWithContext(string contextRawSelector, string rawSelector)
         {
             var context = By.SizzleSelector(contextRawSelector);
+            var sut = By.SizzleSelector(rawSelector, context);
 
-            var selector = By.SizzleSelector(rawSelector, context);
-
-            selector.Should().NotBeNull();
-            selector.RawSelector.Should().Be(rawSelector);
-            selector.Context.RawSelector.Should().Be(contextRawSelector);
+            sut.Should().NotBeNull();
+            sut.RawSelector.Should().Be(rawSelector);
+            sut.Context.RawSelector.Should().Be(contextRawSelector);
         }
 
         [Fact]
@@ -77,10 +76,9 @@ namespace Selenium.WebDriver.Extensions.Tests
             var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
+            var sut = selector.FindElement(driver);
 
-            var result = selector.FindElement(driver);
-
-            result.Should().NotBeNull();
+            sut.Should().NotBeNull();
         }
 
         [Theory]
@@ -90,10 +88,9 @@ namespace Selenium.WebDriver.Extensions.Tests
             var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementsLocatedBySizzle(rawSelector)
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
+            var sut = selector.FindElements(driver);
 
-            var result = selector.FindElements(driver);
-
-            result.Should().NotBeNull().And.HaveCount(2);
+            sut.Should().NotBeNull().And.HaveCount(2);
         }
 
         [Theory]
@@ -102,9 +99,9 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
                 .Build();
-            var selector = By.SizzleSelector(rawSelector);
+            var sut = By.SizzleSelector(rawSelector);
 
-            void Action() => selector.FindElement(driver);
+            void Action() => sut.FindElement(driver);
 
             ((Action)Action).ShouldThrow<NoSuchElementException>();
         }
@@ -115,9 +112,8 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
                 .Build();
-            var selector = By.SizzleSelector(rawSelector);
-
-            var result = selector.FindElements(driver);
+            var sut = By.SizzleSelector(rawSelector);
+            var result = sut.FindElements(driver);
 
             result.Should().NotBeNull().And.HaveCount(0);
         }
@@ -130,10 +126,8 @@ namespace Selenium.WebDriver.Extensions.Tests
                 .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
-
-            var selector = By.SizzleSelector(rawSelector);
-
-            var result = selector.FindElement(element);
+            var sut = By.SizzleSelector(rawSelector);
+            var result = sut.FindElement(element);
 
             result.Should().NotBeNull();
         }
@@ -146,10 +140,9 @@ namespace Selenium.WebDriver.Extensions.Tests
                 .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
+            var sut = By.SizzleSelector(rawSelector);
 
-            var selector = By.SizzleSelector(rawSelector);
-
-            void Action() => selector.FindElement(element);
+            void Action() => sut.FindElement(element);
 
             ((Action)Action).ShouldThrow<NotSupportedException>();
         }
@@ -159,10 +152,9 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
         {
             var element = new SearchContextBuilder().AsWebElement().Build();
+            var sut = By.SizzleSelector(rawSelector);
 
-            var selector = By.SizzleSelector(rawSelector);
-
-            void Action() => selector.FindElement(element);
+            void Action() => sut.FindElement(element);
 
             ((Action)Action).ShouldThrow<InvalidCastException>();
         }

@@ -7,17 +7,24 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.By;
+    using By = By;
 
     [ExcludeFromCodeCoverage]
     public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
     {
+        private const string LOADED_PATH = "/SizzleLoaded";
+        private const string UNLOADED_PATH = "/SizzleUnloaded";
+
+        protected WebDriverExtensionsSizzleSelectorTests(IWebDriver browser, bool loaded)
+            : base(browser, loaded ? LOADED_PATH : UNLOADED_PATH)
+        {
+        }
+
         [Fact]
         public void FindElement()
         {
-            var selector = By.SizzleSelector("#id1");
-
-            var element = Browser.FindElement(selector);
+            var sut = By.SizzleSelector("#id1");
+            var element = Browser.FindElement(sut);
 
             element.Should().NotBeNull();
         }
@@ -25,9 +32,9 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            var selector = By.SizzleSelector("#id-not");
+            var sut = By.SizzleSelector("#id-not");
 
-            void Action() => Browser.FindElement(selector);
+            void Action() => Browser.FindElement(sut);
 
             ((Action)Action).ShouldThrow<NoSuchElementException>();
         }
@@ -35,9 +42,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void FindElements()
         {
-            var selector = By.SizzleSelector("div.main");
-
-            var elements = Browser.FindElements(selector);
+            var sut = By.SizzleSelector("div.main");
+            var elements = Browser.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(2);
         }
@@ -45,9 +51,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            var selector = By.SizzleSelector("div.mainNot");
-
-            var elements = Browser.FindElements(selector);
+            var sut = By.SizzleSelector("div.mainNot");
+            var elements = Browser.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(0);
         }
@@ -56,9 +61,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         public void FindInnerElement()
         {
             var root = Browser.FindElement(By.CssSelector("body"));
-            var selector = By.SizzleSelector("div");
-
-            var element = root.FindElement(selector);
+            var sut = By.SizzleSelector("div");
+            var element = root.FindElement(sut);
 
             element.Should().NotBeNull();
         }
@@ -67,9 +71,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         public void FindInnerElements()
         {
             var root = Browser.FindElement(By.SizzleSelector("body"));
-            var selector = By.SizzleSelector("h1");
-
-            var elements = root.FindElements(selector);
+            var sut = By.SizzleSelector("h1");
+            var elements = root.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(1);
         }

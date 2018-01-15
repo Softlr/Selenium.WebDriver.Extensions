@@ -1,7 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// The <see langword="null"/> value parser.
     /// </summary>

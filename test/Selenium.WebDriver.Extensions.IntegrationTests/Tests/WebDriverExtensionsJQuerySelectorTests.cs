@@ -7,17 +7,24 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
-    using By = Selenium.WebDriver.Extensions.By;
+    using By = By;
 
     [ExcludeFromCodeCoverage]
-    public abstract class WebDriverExtensionsJQuerySelectorTests : TestsBase
+    public class WebDriverExtensionsJQuerySelectorTests : TestsBase
     {
+        private const string LOADED_PATH = "/JQueryLoaded";
+        private const string UNLOADED_PATH = "/JQueryUnloaded";
+
+        protected WebDriverExtensionsJQuerySelectorTests(IWebDriver browser, bool loaded)
+            : base(browser, loaded ? LOADED_PATH : UNLOADED_PATH)
+        {
+        }
+
         [Fact]
         public void FindElement()
         {
-            var selector = By.JQuerySelector("#id1");
-
-            var element = Browser.FindElement(selector);
+            var sut = By.JQuerySelector("#id1");
+            var element = Browser.FindElement(sut);
 
             element.Should().NotBeNull();
         }
@@ -25,9 +32,9 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void FindElementThatDoesNotExist()
         {
-            var selector = By.JQuerySelector("#id-not");
+            var sut = By.JQuerySelector("#id-not");
 
-            void Action() => Browser.FindElement(selector);
+            void Action() => Browser.FindElement(sut);
 
             ((Action)Action).ShouldThrow<NoSuchElementException>();
         }
@@ -35,9 +42,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void FindElements()
         {
-            var selector = By.JQuerySelector("div.main");
-
-            var elements = Browser.FindElements(selector);
+            var sut = By.JQuerySelector("div.main");
+            var elements = Browser.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(2);
         }
@@ -45,9 +51,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void FindElementsThatDoesNotExist()
         {
-            var selector = By.JQuerySelector("div.mainNot");
-
-            var elements = Browser.FindElements(selector);
+            var sut = By.JQuerySelector("div.mainNot");
+            var elements = Browser.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(0);
         }
@@ -56,9 +61,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         public void FindInnerElement()
         {
             var root = Browser.FindElement(By.CssSelector("body"));
-            var selector = By.JQuerySelector("div");
-
-            var element = root.FindElement(selector);
+            var sut = By.JQuerySelector("div");
+            var element = root.FindElement(sut);
 
             element.Should().NotBeNull();
         }
@@ -67,9 +71,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         public void FindInnerElements()
         {
             var root = Browser.FindElement(By.JQuerySelector("body"));
-            var selector = By.JQuerySelector("div");
-
-            var elements = root.FindElements(selector);
+            var sut = By.JQuerySelector("div");
+            var elements = root.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(2);
         }

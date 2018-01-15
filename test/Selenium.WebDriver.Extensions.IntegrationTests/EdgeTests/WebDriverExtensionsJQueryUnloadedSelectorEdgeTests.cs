@@ -1,6 +1,5 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
@@ -16,9 +15,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorEdgeTests(EdgeFixture fixture)
+            : base(fixture.Browser, false)
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));
         }
     }
 }
