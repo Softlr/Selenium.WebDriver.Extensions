@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net47</TargetFramework>
+    <TargetFramework>net45</TargetFramework>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <CodeAnalysisRuleSet>..\..\_stylecop\StyleCopRules.ruleset</CodeAnalysisRuleSet>
@@ -15,11 +15,11 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\net47\Selenium.WebDriver.Extensions.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\net45\Selenium.WebDriver.Extensions.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>bin\Release\net47\Selenium.WebDriver.Extensions.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\net45\Selenium.WebDriver.Extensions.xml</DocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
