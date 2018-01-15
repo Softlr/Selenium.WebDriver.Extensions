@@ -497,7 +497,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementByJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
@@ -510,7 +510,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementsByJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementsLocatedByJQuery(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementsLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
@@ -523,7 +523,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
@@ -536,7 +536,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatDoesNotContainElementLocatedByJQuery(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector)
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
@@ -549,8 +549,8 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
-                .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
+                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
             var selector = By.JQuerySelector(rawSelector);
@@ -564,8 +564,8 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasJQueryLoaded().ThatContainsElementLocatedByJQuery(rawSelector)
-                .ThatContainsElementLocatedByJQuery($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
+                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
 

@@ -74,7 +74,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementBySizzleSelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
 
@@ -87,7 +87,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementsBySizzleSelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementsLocatedBySizzle(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementsLocatedBySizzle(rawSelector)
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
 
@@ -100,7 +100,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenElementIsNotFoundWithSizzleSelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatDoesNotContainElementLocatedBySizzle(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
 
@@ -113,7 +113,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithSizzleSelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatDoesNotContainElementLocatedBySizzle(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
 
@@ -126,8 +126,8 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementWithNestedSizzleSelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle(rawSelector)
-                .ThatContainsElementLocatedBySizzle($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
+                .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
 
@@ -142,8 +142,8 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
         {
-            var driver = new WebDriverBuilder().ThatHasSizzleLoaded().ThatContainsElementLocatedBySizzle(rawSelector)
-                .ThatContainsElementLocatedBySizzle($"body > {rawSelector}").ThatCanResolvePathToElement(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
+                .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
 
