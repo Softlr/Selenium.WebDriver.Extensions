@@ -5,11 +5,14 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.PhantomJsTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
     using Selenium.WebDriver.Extensions.Tests;
     using Xunit;
+    using static Extensions.Tests.Trait.Browser;
+    using static Extensions.Tests.Trait.Category;
+    using static Extensions.Tests.Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.PHANTOM_JS)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, PHANTOM_JS)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
+    [Collection(INTEGRATION)]
     public class WebDriverExtensionsSizzleLoadedSelectorPhantomJsTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<PhantomJsFixture>
     {

@@ -5,11 +5,14 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
     using Selenium.WebDriver.Extensions.Tests;
     using Xunit;
+    using static Extensions.Tests.Trait.Browser;
+    using static Extensions.Tests.Trait.Category;
+    using static Extensions.Tests.Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.FIREFOX)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, FIREFOX)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
+    [Collection(INTEGRATION)]
     public class WebDriverExtensionsSizzleLoadedSelectorFirefoxTests :
         WebDriverExtensionsSizzleSelectorTests, IClassFixture<FirefoxFixture>
     {

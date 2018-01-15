@@ -8,8 +8,10 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Selenium.WebDriver.Extensions;
     using Xunit;
     using By = By;
+    using static Trait.Category;
+    using static Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class SizzleSelectorTests
     {

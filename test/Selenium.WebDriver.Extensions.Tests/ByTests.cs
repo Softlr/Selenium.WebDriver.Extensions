@@ -6,8 +6,10 @@ namespace Selenium.WebDriver.Extensions.Tests
     using FluentAssertions;
     using JetBrains.Annotations;
     using Xunit;
+    using static Trait.Category;
+    using static Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
