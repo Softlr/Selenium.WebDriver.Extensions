@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Extensions
     /// <inheritdoc />
     public class SizzleSelector : SelectorBase<SizzleSelector>
     {
-        private const string _libraryVariable = "window.Sizzle";
+        private const string VARIABLE = "window.Sizzle";
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SizzleSelector"/> class.
@@ -41,7 +41,7 @@ namespace Selenium.WebDriver.Extensions
         public static SizzleSelector Empty { get; } = new SizzleSelector("*");
 
         /// <inheritdoc/>
-        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(_libraryVariable);
+        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
 
         /// <inheritdoc/>
         public override string Selector => $"Sizzle('{RawSelector.Replace('\'', '"')}'"
