@@ -1,5 +1,6 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
@@ -11,8 +12,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     {
         private IWebDriver _driver;
 
-        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0057)]
-        public TestPage(IWebDriver driver) => _driver = driver;
+        public TestPage(IWebDriver driver)
+        {
+            _driver = driver ?? throw new ArgumentNullException(nameof(driver));
+            PageFactory.InitElements(driver, this);
+        }
 
         [FindsBy(How = How.Custom, CustomFinderType = typeof(JQuerySelector), Using = "h1")]
         public IWebElement HeadingJQuery { get; set; }

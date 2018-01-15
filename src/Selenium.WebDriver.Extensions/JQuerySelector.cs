@@ -12,7 +12,7 @@ namespace Selenium.WebDriver.Extensions
     /// <inheritdoc />
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
-        private const string _libraryVariable = "window.jQuery";
+        private const string VARIABLE = "window.jQuery";
         private readonly string _chain;
 
         /// <summary>
@@ -54,7 +54,7 @@ namespace Selenium.WebDriver.Extensions
         public static JQuerySelector Empty { get; } = new JQuerySelector("*");
 
         /// <inheritdoc/>
-        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(_libraryVariable);
+        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
 
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.

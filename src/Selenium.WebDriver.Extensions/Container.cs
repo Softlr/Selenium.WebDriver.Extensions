@@ -2,6 +2,8 @@ namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.Parsers;
+    using static Suppress.Category;
+    using static Suppress.CodeCracker;
 
     /// <summary>
     /// The dependency container.
@@ -32,7 +34,7 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the dependency container.
         /// </summary>
-        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0022)]
+        [SuppressMessage(CODE_CRACKER, CC0022)]
         public static SimpleInjector.Container Instance { get; } = new SimpleInjector.Container();
     }
 }
