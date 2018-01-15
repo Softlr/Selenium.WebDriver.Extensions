@@ -5,6 +5,7 @@
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <CodeAnalysisRuleSet>..\..\_stylecop\StyleCopRules.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <ItemGroup>
