@@ -27,9 +27,9 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         {
             var selector = By.SizzleSelector("#id-not");
 
-            Action action = () => Browser.FindElement(selector);
+            void Action() => Browser.FindElement(selector);
 
-            action.ShouldThrow<NoSuchElementException>();
+            ((Action)Action).ShouldThrow<NoSuchElementException>();
         }
 
         [Fact]

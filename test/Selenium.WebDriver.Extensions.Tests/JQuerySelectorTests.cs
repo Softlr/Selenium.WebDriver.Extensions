@@ -445,52 +445,52 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue()
         {
-            Action action = () => By.JQuerySelector(null);
+            void Action() => By.JQuerySelector(null);
 
-            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue()
         {
-            Action action = () => By.JQuerySelector(string.Empty);
+            void Action() => By.JQuerySelector(string.Empty);
 
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue()
         {
-            Action action = () => By.JQuerySelector(" ");
+            void Action() => By.JQuerySelector(" ");
 
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Theory]
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector)
         {
-            Action action = () => By.JQuerySelector(rawSelector, variable: null);
+            void Action() => By.JQuerySelector(rawSelector, variable: null);
 
-            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
+            ((Action)Action).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
         }
 
         [Theory]
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector)
         {
-            Action action = () => By.JQuerySelector(rawSelector, variable: string.Empty);
+            void Action() => By.JQuerySelector(rawSelector, variable: string.Empty);
 
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
+            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
         [Theory]
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(string rawSelector)
         {
-            Action action = () => By.JQuerySelector(rawSelector, variable: " ");
+            void Action() => By.JQuerySelector(rawSelector, variable: " ");
 
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
+            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
         [Theory]
@@ -527,9 +527,9 @@ namespace Selenium.WebDriver.Extensions.Tests
                 .Build();
             var selector = By.JQuerySelector(rawSelector);
 
-            Action action = () => selector.FindElement(driver);
+            void Action() => selector.FindElement(driver);
 
-            action.ShouldThrow<NoSuchElementException>();
+            ((Action)Action).ShouldThrow<NoSuchElementException>();
         }
 
         [Theory]
@@ -571,9 +571,9 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             var selector = By.JQuerySelector(rawSelector);
 
-            Action action = () => selector.FindElement(element);
+            void Action() => selector.FindElement(element);
 
-            action.ShouldThrow<NotSupportedException>();
+            ((Action)Action).ShouldThrow<NotSupportedException>();
         }
 
         [Theory]
@@ -584,9 +584,9 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             var selector = By.JQuerySelector(rawSelector);
 
-            Action action = () => selector.FindElement(element);
+            void Action() => selector.FindElement(element);
 
-            action.ShouldThrow<InvalidCastException>();
+            ((Action)Action).ShouldThrow<InvalidCastException>();
         }
     }
 }

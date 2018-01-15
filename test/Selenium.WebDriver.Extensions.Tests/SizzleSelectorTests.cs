@@ -49,25 +49,25 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue()
         {
-            Action action = () => By.SizzleSelector(null);
+            void Action() => By.SizzleSelector(null);
 
-            action.ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue()
         {
-            Action action = () => By.SizzleSelector(string.Empty);
+            void Action() => By.SizzleSelector(string.Empty);
 
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue()
         {
-            Action action = () => By.SizzleSelector(" ");
+            void Action() => By.SizzleSelector(" ");
 
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Theory]
@@ -104,9 +104,9 @@ namespace Selenium.WebDriver.Extensions.Tests
                 .Build();
             var selector = By.SizzleSelector(rawSelector);
 
-            Action action = () => selector.FindElement(driver);
+            void Action() => selector.FindElement(driver);
 
-            action.ShouldThrow<NoSuchElementException>();
+            ((Action)Action).ShouldThrow<NoSuchElementException>();
         }
 
         [Theory]
@@ -149,9 +149,9 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             var selector = By.SizzleSelector(rawSelector);
 
-            Action action = () => selector.FindElement(element);
+            void Action() => selector.FindElement(element);
 
-            action.ShouldThrow<NotSupportedException>();
+            ((Action)Action).ShouldThrow<NotSupportedException>();
         }
 
         [Theory]
@@ -162,9 +162,9 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             var selector = By.SizzleSelector(rawSelector);
 
-            Action action = () => selector.FindElement(element);
+            void Action() => selector.FindElement(element);
 
-            action.ShouldThrow<InvalidCastException>();
+            ((Action)Action).ShouldThrow<InvalidCastException>();
         }
     }
 }
