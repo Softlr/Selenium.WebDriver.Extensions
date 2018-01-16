@@ -7,11 +7,14 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using JetBrains.Annotations;
+    using NSubstitute;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
+    using static Trait.Category;
+    using static Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsTests
     {
@@ -105,24 +108,22 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldExecuteScript(string scriptMethod)
         {
             var script = $"{scriptMethod}();";
-            var driverBuilder = new WebDriverBuilder().ThatHasTestMethodDefined(scriptMethod);
-            var driver = driverBuilder.Build();
+            var driver = new WebDriverBuilder().WithTestMethodDefined(scriptMethod).Build();
 
             driver.ExecuteScript(script);
 
-            driverBuilder.VerifyIfTestMethodWasCalled(scriptMethod);
+            ((IJavaScriptExecutor)driver).Received(1).ExecuteScript(script);
         }
 
         [Theory]
         [MemberData(nameof(Loaders))]
         public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
-            var driverBuilder = new WebDriverBuilder().ThatDoesNotHaveExternalLibraryLoaded();
-            var driver = driverBuilder.Build();
+            var driver = new WebDriverBuilder().WithNoExternalLibraryLoaded().Build();
 
             action.Invoke(driver, uri, timeSpan);
 
-            driverBuilder.VerifyIfExternalLibraryWasLoaded(); // assert pass
+            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
         }
     }
 }

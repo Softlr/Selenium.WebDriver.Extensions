@@ -10,7 +10,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     [ExcludeFromCodeCoverage]
     internal class TestPage
     {
-        private IWebDriver _driver;
+        private readonly IWebDriver _driver;
 
         public TestPage(IWebDriver driver)
         {

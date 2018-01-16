@@ -1,7 +1,6 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
     using System.Diagnostics.CodeAnalysis;
-    using JetBrains.Annotations;
 
     [ExcludeFromCodeCoverage]
     internal static class Trait

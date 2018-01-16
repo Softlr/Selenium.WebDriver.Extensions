@@ -1,24 +1,25 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
     using Selenium.WebDriver.Extensions.Tests;
     using Xunit;
+    using static Extensions.Tests.Trait.Browser;
+    using static Extensions.Tests.Trait.Category;
+    using static Extensions.Tests.Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.INTERNET_EXPLORER)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
+    [Collection(INTEGRATION)]
     public class WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests :
         WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
+            : base(fixture.Browser, true)
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryLoaded"));
         }
     }
 }

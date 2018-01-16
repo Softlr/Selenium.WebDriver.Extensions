@@ -1,7 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using System.Diagnostics.CodeAnalysis;
-
     /// <summary>
     /// The <see langword="null"/> value parser.
     /// </summary>
@@ -10,7 +8,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
     {
         /// <inheritdoc cref="ParserBase.Parse{TResult}" />
         public override TResult Parse<TResult>(object rawResult) => rawResult == null
-            ? default(TResult)
+            ? default
             : Successor.Parse<TResult>(rawResult);
     }
 }

@@ -8,8 +8,10 @@ namespace Selenium.WebDriver.Extensions.Tests
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
+    using static Trait.Category;
+    using static Trait.Name;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class SelectorBaseTests
     {
@@ -17,28 +19,27 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldCorrectlyHandleDefaultValue()
         {
             const object rawResult = null;
+            var sut = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
 
-            var result = SelectorBase<JQuerySelector>.ParseResult<bool>(rawResult);
-
-            result.Should().BeFalse();
+            sut.Should().BeFalse();
         }
 
         [Theory]
         [AutoData]
         public void ShouldCorrectlyHandleDoubleValue(double rawResult)
         {
-            var result = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
+            var sut = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
-            result.GetType().Should().Be(typeof(long));
+            sut.GetType().Should().Be(typeof(long));
         }
 
         [Theory]
         [AutoData]
         public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
         {
-            var result = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
+            var sut = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
 
-            result.Should().NotBeNull();
+            sut.Should().NotBeNull();
         }
     }
 }

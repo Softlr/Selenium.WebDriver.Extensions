@@ -2,7 +2,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using JetBrains.Annotations;
     using Nancy.Hosting.Self;
     using OpenQA.Selenium;
 
@@ -12,20 +11,21 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         private readonly NancyHost _host;
         private bool _disposed;
 
-        protected TestsBase()
+        protected TestsBase(IWebDriver browser, string path)
         {
             var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
 
-            ServerUrl = "http://localhost:50502";
-            _host = new NancyHost(config, new Uri(ServerUrl));
+            const string serverUrl = "http://localhost:50502";
+            _host = new NancyHost(config, new Uri(serverUrl));
             _host.Start();
+
+            Browser = browser;
+            Browser.Navigate().GoToUrl(new Uri($"{serverUrl}{path}"));
         }
 
         ~TestsBase() => Dispose(false);
 
-        protected IWebDriver Browser { get; set; }
-
-        protected string ServerUrl { get; }
+        protected IWebDriver Browser { get; }
 
         public void Dispose()
         {
