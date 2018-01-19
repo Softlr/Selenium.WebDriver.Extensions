@@ -1,33 +1,21 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System;
     using OpenQA.Selenium;
+    using PostSharp.Patterns.Model;
 
-    public class FixtureBase : IDisposable
+    [Disposable]
+    public class FixtureBase
     {
         protected FixtureBase()
         {
         }
 
-        ~FixtureBase() => Dispose(false);
-
+        [Child]
         public IWebDriver Browser { get; protected set; }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposing)
-            {
-                return;
-            }
-
             Browser?.Quit();
-            Browser?.Dispose();
         }
     }
 }
