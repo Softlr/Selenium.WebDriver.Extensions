@@ -15,6 +15,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 
         protected virtual void Dispose(bool disposing)
         {
+            Browser?.Close();
             Browser?.Quit();
         }
     }
