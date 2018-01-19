@@ -17,6 +17,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         {
             Browser?.Close();
             Browser?.Quit();
+            Browser?.Dispose();
         }
     }
 }
