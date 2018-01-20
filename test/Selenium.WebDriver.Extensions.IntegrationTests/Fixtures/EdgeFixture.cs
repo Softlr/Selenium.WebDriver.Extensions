@@ -6,7 +6,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    public class EdgeFixture : FixtureBase
+    public class EdgeFixture : FixtureBase<EdgeDriverService>
     {
         public EdgeFixture() => Browser = new EdgeDriver();
     }

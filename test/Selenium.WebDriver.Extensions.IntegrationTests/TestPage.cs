@@ -10,13 +10,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     [ExcludeFromCodeCoverage]
     internal class TestPage
     {
-        private readonly IWebDriver _driver;
-
-        public TestPage(IWebDriver driver)
-        {
-            _driver = driver ?? throw new ArgumentNullException(nameof(driver));
-            PageFactory.InitElements(driver, this);
-        }
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
+        public TestPage(IWebDriver driver) => PageFactory.InitElements(driver, this);
 
         [FindsBy(How = How.Custom, CustomFinderType = typeof(JQuerySelector), Using = "h1")]
         public IWebElement HeadingJQuery { get; set; }
