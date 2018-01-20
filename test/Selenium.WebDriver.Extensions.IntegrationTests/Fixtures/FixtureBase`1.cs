@@ -4,6 +4,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
 
+    [ExcludeFromCodeCoverage]
     public class FixtureBase<TDriverService> : IDisposable
         where TDriverService : DriverService
     {
