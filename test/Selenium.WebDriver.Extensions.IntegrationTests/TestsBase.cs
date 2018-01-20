@@ -16,7 +16,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         {
             var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
 
-            const string serverUrl = "http://localhost:54321";
+            const string serverUrl = "http://localhost:50502";
             Host = new NancyHost(config, new Uri(serverUrl));
             Host.Start();
 
