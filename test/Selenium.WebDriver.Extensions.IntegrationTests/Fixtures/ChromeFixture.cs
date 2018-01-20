@@ -6,7 +6,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    public class ChromeFixture : FixtureBase
+    public class ChromeFixture : FixtureBase<ChromeDriverService>
     {
         public ChromeFixture() => Browser = new ChromeDriver();
     }
