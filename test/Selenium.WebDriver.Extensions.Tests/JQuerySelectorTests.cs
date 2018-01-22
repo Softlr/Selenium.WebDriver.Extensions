@@ -10,9 +10,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Xunit;
-    using By = By;
     using static Trait.Category;
     using static Trait.Name;
+    using By = By;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
