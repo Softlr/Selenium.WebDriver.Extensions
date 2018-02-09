@@ -13,7 +13,6 @@
     <dependencies>
       <dependency id="JetBrains.Annotations" version="11.1.0" />
       <dependency id="Selenium.Support" version="3.8.0" />
-      <dependency id="SimpleInjector" version="4.0.12" />
       <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.43" />
     </dependencies>
   </metadata>
