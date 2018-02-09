@@ -52,7 +52,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.SizzleSelector(null);
 
-            ((Action)Action).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -60,7 +60,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.SizzleSelector(string.Empty);
 
-            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -68,7 +68,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.SizzleSelector(" ");
 
-            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Theory]
@@ -105,7 +105,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             void Action() => sut.FindElement(driver);
 
-            ((Action)Action).ShouldThrow<NoSuchElementException>();
+            ((Action)Action).Should().Throw<NoSuchElementException>();
         }
 
         [Theory]
@@ -146,7 +146,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             void Action() => sut.FindElement(element);
 
-            ((Action)Action).ShouldThrow<NotSupportedException>();
+            ((Action)Action).Should().Throw<NotSupportedException>();
         }
 
         [Theory]
@@ -158,7 +158,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             void Action() => sut.FindElement(element);
 
-            ((Action)Action).ShouldThrow<InvalidCastException>();
+            ((Action)Action).Should().Throw<InvalidCastException>();
         }
     }
 }

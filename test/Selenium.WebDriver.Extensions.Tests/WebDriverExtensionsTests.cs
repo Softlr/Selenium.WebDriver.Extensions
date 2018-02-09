@@ -101,7 +101,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Theory]
         [MemberData(nameof(InvalidParameters))]
         public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
-            action.ShouldThrow<ArgumentException>().And.ParamName.Should().Be(parameter);
+            action.Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
 
         [Theory]
         [AutoData]

@@ -36,7 +36,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
 
             void Action() => Browser.FindElement(sut);
 
-            ((Action)Action).ShouldThrow<NoSuchElementException>();
+            ((Action)Action).Should().Throw<NoSuchElementException>();
         }
 
         [Fact]
