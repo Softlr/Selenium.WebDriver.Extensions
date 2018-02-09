@@ -9,9 +9,9 @@ namespace Selenium.WebDriver.Extensions.Parsers
     internal interface IParser
     {
         /// <summary>
-        /// Gets or sets the successor parser.
+        /// Gets the successor parser.
         /// </summary>
-        IParser Successor { get; set; }
+        IParser Successor { get; }
 
         /// <summary>
         /// Parses the raw result.
