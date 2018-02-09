@@ -448,7 +448,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.JQuerySelector(null);
 
-            ((Action)Action).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -456,7 +456,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.JQuerySelector(string.Empty);
 
-            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Fact]
@@ -464,7 +464,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.JQuerySelector(" ");
 
-            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)Action).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
         }
 
         [Theory]
@@ -473,7 +473,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.JQuerySelector(rawSelector, variable: null);
 
-            ((Action)Action).ShouldThrow<ArgumentNullException>().And.ParamName.Should().Be("variable");
+            ((Action)Action).Should().Throw<ArgumentNullException>().And.ParamName.Should().Be("variable");
         }
 
         [Theory]
@@ -482,7 +482,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.JQuerySelector(rawSelector, variable: string.Empty);
 
-            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
+            ((Action)Action).Should().Throw<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
         [Theory]
@@ -491,7 +491,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             void Action() => By.JQuerySelector(rawSelector, variable: " ");
 
-            ((Action)Action).ShouldThrow<ArgumentException>().And.ParamName.Should().Be("variable");
+            ((Action)Action).Should().Throw<ArgumentException>().And.ParamName.Should().Be("variable");
         }
 
         [Theory]
@@ -528,7 +528,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             void Action() => sut.FindElement(driver);
 
-            ((Action)Action).ShouldThrow<NoSuchElementException>();
+            ((Action)Action).Should().Throw<NoSuchElementException>();
         }
 
         [Theory]
@@ -569,7 +569,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             void Action() => sut.FindElement(element);
 
-            ((Action)Action).ShouldThrow<NotSupportedException>();
+            ((Action)Action).Should().Throw<NotSupportedException>();
         }
 
         [Theory]
@@ -581,7 +581,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             void Action() => sut.FindElement(element);
 
-            ((Action)Action).ShouldThrow<InvalidCastException>();
+            ((Action)Action).Should().Throw<InvalidCastException>();
         }
     }
 }

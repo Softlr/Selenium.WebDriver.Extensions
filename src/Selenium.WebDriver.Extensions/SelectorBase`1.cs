@@ -64,8 +64,7 @@ namespace Selenium.WebDriver.Extensions
         /// Internet Explorer is returning numbers as <see langword="double"/>, while other browsers return them as
         /// <see langword="long"/>. This method casts Internet Explorer's <see langword="double"/> to <see langword="long"/>.
         /// </remarks>
-        internal static TResult ParseResult<TResult>(object result) =>
-            Container.Instance.GetInstance<IParser>().Parse<TResult>(result);
+        internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
         /// <summary>
         /// Loads the external library.

@@ -2,6 +2,7 @@ namespace Selenium.WebDriver.Extensions
 {
     using JetBrains.Annotations;
     using OpenQA.Selenium;
+    using SeleniumBy = OpenQA.Selenium.By;
 
     /// <summary>
     /// Extends the selenium <see cref="OpenQA.Selenium.By"/> additional selectors to be used.
@@ -12,7 +13,7 @@ namespace Selenium.WebDriver.Extensions
     /// </remarks>
     /// <inheritdoc />
     [UsedImplicitly]
-    public class By : OpenQA.Selenium.By
+    public class By : SeleniumBy
     {
         /// <summary>
         /// Gets a mechanism to find elements matching jQuery selector.
@@ -39,51 +40,50 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By ClassName(string classNameToFind) => OpenQA.Selenium.By.ClassName(classNameToFind);
+        public static new SeleniumBy ClassName(string classNameToFind) => SeleniumBy.ClassName(classNameToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their cascading style sheet (CSS) selector.
         /// </summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By CssSelector(string cssSelectorToFind) =>
-            OpenQA.Selenium.By.CssSelector(cssSelectorToFind);
+        public static new SeleniumBy CssSelector(string cssSelectorToFind) => SeleniumBy.CssSelector(cssSelectorToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their ID.
         /// </summary>
         /// <param name="idToFind">The ID to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By Id(string idToFind) => OpenQA.Selenium.By.Id(idToFind);
+        public static new SeleniumBy Id(string idToFind) => SeleniumBy.Id(idToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their link text.
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By LinkText(string linkTextToFind) => OpenQA.Selenium.By.LinkText(linkTextToFind);
+        public static new SeleniumBy LinkText(string linkTextToFind) => SeleniumBy.LinkText(linkTextToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their name.
         /// </summary>
         /// <param name="nameToFind">The name to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By Name(string nameToFind) => OpenQA.Selenium.By.Name(nameToFind);
+        public static new SeleniumBy Name(string nameToFind) => SeleniumBy.Name(nameToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by a partial match on their link text.
         /// </summary>
         /// <param name="partialLinkTextToFind">The partial link text to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By PartialLinkText(string partialLinkTextToFind) =>
-            OpenQA.Selenium.By.PartialLinkText(partialLinkTextToFind);
+        public static new SeleniumBy PartialLinkText(string partialLinkTextToFind) =>
+            SeleniumBy.PartialLinkText(partialLinkTextToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by their tag name.
         /// </summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By TagName(string tagNameToFind) => OpenQA.Selenium.By.TagName(tagNameToFind);
+        public static new SeleniumBy TagName(string tagNameToFind) => SeleniumBy.TagName(tagNameToFind);
 
         /// <summary>
         /// Gets a mechanism to find elements by an XPath query. When searching within a <see cref="IWebElement"/> using xpath be
@@ -93,6 +93,6 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
-        public static new OpenQA.Selenium.By XPath(string xpathToFind) => OpenQA.Selenium.By.XPath(xpathToFind);
+        public static new SeleniumBy XPath(string xpathToFind) => SeleniumBy.XPath(xpathToFind);
     }
 }

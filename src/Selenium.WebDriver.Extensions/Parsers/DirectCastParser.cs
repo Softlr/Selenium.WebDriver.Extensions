@@ -4,7 +4,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
     /// The direct cast parser.
     /// </summary>
     /// <inheritdoc cref="ParserBase" />
-    internal class DirectCastParser : ParserBase, IDirectCastParser
+    internal class DirectCastParser : ParserBase
     {
         /// <inheritdoc cref="ParserBase.Parse{TResult}" />
         public override TResult Parse<TResult>(object rawResult) => (TResult)rawResult;
