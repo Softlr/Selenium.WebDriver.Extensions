@@ -187,3 +187,5 @@ ReSharper.xml
 .sonar/
 .coverage*
 .sonarqube/
+tools/
+coverage.xml

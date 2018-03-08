@@ -55,20 +55,13 @@ Function Invoke-Build {
 
         [string] $Target = 'Rebuild',
 		
-		[string] $TargetFramework = 'v4.6.2',
-        
-        [string] $MSBuildToolsVersion = '14.0'
+		[string] $MSBuildToolsVersion = '15.0'
     )
 	
 	Begin {
-        $msBuildPaths = ,($Env:ProgramFiles | Join-Path -ChildPath MSBuild | Join-Path -ChildPath $MSBuildToolsVersion `
-            | Join-Path -ChildPath Bin | Join-Path -ChildPath amd64 | Join-Path -ChildPath MSBuild.exe)
-        If ($Env:ProgramFiles -ne ${Env:ProgramFiles(x86)}) {
-            $msBuildPaths += ${Env:ProgramFiles(x86)} | Join-Path -ChildPath MSBuild | Join-Path -ChildPath $MSBuildToolsVersion `
-                | Join-Path -ChildPath Bin | Join-Path -ChildPath amd64 | Join-Path -ChildPath MSBuild.exe
-        }
-		$msBuild = $msBuildPaths | Where-Object -FilterScript { $_ | Test-Path } | Resolve-Path | Sort-Object -Descending `
-            | Select-Object -First 1
+        $msBuild = ${Env:ProgramFiles(x86)} | Join-Path -ChildPath 'Microsoft Visual Studio' | Join-Path -ChildPath * `
+			| Join-Path -ChildPath *  | Join-Path -ChildPath MSBuild | Join-Path -ChildPath $MSBuildToolsVersion `
+			| Join-Path -ChildPath Bin | Join-Path -ChildPath MSBuild.exe | Resolve-Path
         If (-Not $msBuild) {
             Throw 'MSBuild is not installed'
         }
@@ -76,8 +69,7 @@ Function Invoke-Build {
 	
 	Process {
         $Path | ForEach-Object -Process {
-            $arguments = $_, ('/p:Configuration={0}' -f $BuildConfiguration), ('/v:{0}' -f $Verbosity), ('/t:{0}' -f $Target), `
-                ('/p:TargetFrameworkVersion={0}' -f $TargetFramework)
+            $arguments = $_, ('/p:Configuration={0}' -f $BuildConfiguration), ('/v:{0}' -f $Verbosity), ('/t:{0}' -f $Target)
             $process = Start-Process -FilePath $msBuild -ArgumentList $arguments -NoNewWindow -Wait -PassThru
             If ($process.ExitCode) {
                 Throw 'Build failed'
