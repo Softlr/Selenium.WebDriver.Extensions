@@ -87,16 +87,5 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
 
             true.Should().BeTrue(); // assert pass
         }
-
-        [Fact]
-        public void PageObjectsSupport()
-        {
-            var page = new TestPage(Browser);
-
-            PageFactory.InitElements(Browser, page);
-
-            page.HeadingJQuery.Should().NotBeNull();
-            page.HeadingJQuery.Text.Trim().Should().Be("H1 Header");
-        }
     }
 }
