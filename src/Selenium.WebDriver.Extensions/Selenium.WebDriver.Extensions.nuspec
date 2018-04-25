@@ -12,8 +12,8 @@
     <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
     <dependencies>
       <dependency id="JetBrains.Annotations" version="11.1.0" />
-      <dependency id="Selenium.Support" version="3.10.0" />
-      <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.46" />
+      <dependency id="Selenium.Support" version="3.11.2" />
+      <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.50" />
     </dependencies>
   </metadata>
   <files>
