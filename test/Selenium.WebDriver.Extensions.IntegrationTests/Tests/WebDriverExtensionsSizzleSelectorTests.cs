@@ -80,7 +80,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void ExpectedConditionsSupport()
         {
-            var condition = ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
+            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
 
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);
