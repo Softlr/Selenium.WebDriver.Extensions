@@ -15,7 +15,6 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.20.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.11.1" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.16299" />
-    <PackageReference Include="Selenium.WebDriver.PhantomJS" Version="1.0.0" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
