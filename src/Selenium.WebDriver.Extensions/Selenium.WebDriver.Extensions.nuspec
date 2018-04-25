@@ -11,12 +11,12 @@
     <description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</description>
     <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
     <dependencies>
-      <group targetframework="netstandard2.0">
+      <group targetFramework="netstandard2.0">
         <dependency id="JetBrains.Annotations" version="11.1.0" />
         <dependency id="Selenium.Support" version="3.11.2" />
         <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.50" />
       </group>
-      <group targetframework="net45">
+      <group targetFramework="net45">
         <dependency id="JetBrains.Annotations" version="11.1.0" />
         <dependency id="Selenium.Support" version="3.11.2" />
         <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.50" />
