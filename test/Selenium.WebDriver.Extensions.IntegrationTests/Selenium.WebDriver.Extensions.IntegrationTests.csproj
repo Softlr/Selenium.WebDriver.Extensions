@@ -9,7 +9,6 @@
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NETCore.App" Version="2.0.7" />
     <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.38.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.20.1" />
