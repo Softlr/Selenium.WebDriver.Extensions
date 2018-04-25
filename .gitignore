@@ -189,3 +189,4 @@ ReSharper.xml
 .sonarqube/
 tools/
 coverage.xml
+.idea/
