@@ -8,6 +8,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     [ExcludeFromCodeCoverage]
     public class ChromeFixture : FixtureBase<ChromeDriverService>
     {
-        public ChromeFixture() => Browser = new ChromeDriver();
+        public ChromeFixture()
+        {
+            var options = new ChromeOptions();
+            options.AddArgument("--headless");
+            Browser = new ChromeDriver(options);
+        }
     }
 }

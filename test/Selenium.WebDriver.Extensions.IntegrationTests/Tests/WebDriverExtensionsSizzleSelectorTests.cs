@@ -80,23 +80,12 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
         [Fact]
         public void ExpectedConditionsSupport()
         {
-            var condition = ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
+            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(By.SizzleSelector("h1"));
 
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);
 
             true.Should().BeTrue(); // assert pass
-        }
-
-        [Fact]
-        public void PageObjectsSupport()
-        {
-            var page = new TestPage(Browser);
-
-            PageFactory.InitElements(Browser, page);
-
-            page.HeadingJQuery.Should().NotBeNull();
-            page.HeadingJQuery.Text.Trim().Should().Be("H1 Header");
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Selenium.WebDriver.Extensions.Contracts
         /// <inheritdoc/>
         public Exception ValidateValue(
             string value, string locationName, LocationKind locationKind, LocationValidationContext context) =>
-            Version.TryParse(value, out var _)
+            Version.TryParse(value, out _)
                 ? null
                 : CreateArgumentException(value, locationName, locationKind);
 
