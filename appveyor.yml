@@ -38,14 +38,14 @@
 
   test_script:
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
   after_test:
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
@@ -109,14 +109,14 @@
 
   test_script:
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
   after_test:
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
@@ -168,14 +168,14 @@
 
   test_script:
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
   after_test:
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ps: >-
-      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\$env:Configuration\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+      & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: >-
       & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
   - SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
