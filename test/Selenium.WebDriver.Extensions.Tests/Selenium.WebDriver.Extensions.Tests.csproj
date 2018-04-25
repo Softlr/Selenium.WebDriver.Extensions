@@ -3,7 +3,6 @@
   <PropertyGroup>    
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <DebugType>full</DebugType>
-    <DebugSymbols>True</DebugSymbols>
     <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
