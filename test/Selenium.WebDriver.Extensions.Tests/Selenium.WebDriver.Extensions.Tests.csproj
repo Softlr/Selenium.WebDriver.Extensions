@@ -1,21 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>    
+  <PropertyGroup>
     <TargetFrameworks>netcoreapp2.0</TargetFrameworks>
     <DebugType>full</DebugType>
     <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.2.1" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.2.1" />
     <PackageReference Include="FluentAssertions" Version="5.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
+    <PackageReference Include="Microsoft.NETCore.App" Version="2.0.7" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
     <PackageReference Include="ReportGenerator" Version="3.1.2" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
@@ -24,9 +22,7 @@
     <PackageReference Include="xunit" Version="2.3.1" />
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj" />
   </ItemGroup>
-
 </Project>
