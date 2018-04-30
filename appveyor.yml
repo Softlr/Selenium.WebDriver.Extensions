@@ -5,6 +5,7 @@
       - master
 
   skip_tags: true
+  skip_branch_with_pr: true
   skip_commits:
     message: /Update.*\.md/
 
@@ -78,6 +79,7 @@
       - /bugfix.*/
 
   skip_tags: true
+  skip_branch_with_pr: true
   skip_commits:
     message: /Update.*\.md/
 
@@ -137,6 +139,7 @@
       - /release.*/
 
   skip_tags: true
+  skip_branch_with_pr: true
   skip_commits:
     message: /Update.*\.md/
 
