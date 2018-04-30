@@ -29,6 +29,9 @@
     </dependencies>
   </metadata>
   <files>
+    <file src="bin\Release\net40\Selenium.WebDriver.Extensions.dll" target="lib\net40\Selenium.WebDriver.Extensions.dll" />
+    <file src="bin\Release\net40\Selenium.WebDriver.Extensions.pdb" target="lib\net40\Selenium.WebDriver.Extensions.pdb" />
+    <file src="bin\Release\net40\Selenium.WebDriver.Extensions.xml" target="lib\net40\Selenium.WebDriver.Extensions.xml" />
     <file src="bin\Release\net45\Selenium.WebDriver.Extensions.dll" target="lib\net45\Selenium.WebDriver.Extensions.dll" />
     <file src="bin\Release\net45\Selenium.WebDriver.Extensions.pdb" target="lib\net45\Selenium.WebDriver.Extensions.pdb" />
     <file src="bin\Release\net45\Selenium.WebDriver.Extensions.xml" target="lib\net45\Selenium.WebDriver.Extensions.xml" />
