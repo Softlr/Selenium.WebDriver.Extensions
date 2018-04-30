@@ -4,7 +4,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.PageObjects;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
     using By = By;
