@@ -1,9 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    /// <summary>
-    /// The <see langword="null"/> value parser.
-    /// </summary>
-    /// <inheritdoc cref="ParserBase" />
     internal class NullValueParser : ParserBase
     {
         public NullValueParser()
@@ -11,7 +7,6 @@ namespace Selenium.WebDriver.Extensions.Parsers
         {
         }
 
-        /// <inheritdoc cref="ParserBase.Parse{TResult}" />
         public override TResult Parse<TResult>(object rawResult) => rawResult == null
             ? default
             : Successor.Parse<TResult>(rawResult);

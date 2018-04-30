@@ -17,23 +17,23 @@ The version 3.0 of the extensions library has been released. The new features an
 * Extension name reverted to Selenium.WebDriver.Extensions so that it is not confusing that this package comes from a different vendor
 
 # Features
-* Main
- * Support for nested selectors
- * Very easy setup: install packages with NuGet and start using it with your existing Selenium solution
- * High quality ensured by continuous integration setup with Appveyor, unit and integration testing and high code coverage
- * Well documented code following strict StyleCop.Analyzers and FxCop rules
-* jQuery support
- * jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
- * jQuery auto-load on pages on sites that don't use jQuery
- * Support for jQuery context switching
- * Support for `ExpectedConditions` with jQuery selectors
- * Support for Page Objects with jQuery selectors
-* Sizzle support
- * Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
- * Sizzle auto-load on pages on sites that don't use Sizzle
- * Support for Sizzle context switching
- * Support for `ExpectedConditions` with Sizzle selectors
- * Support for Page Objects with Sizzle selectors
+## Main
+* Support for nested selectors
+* Very easy setup: install packages with NuGet and start using it with your existing Selenium solution
+* High quality ensured by continuous integration setup with Appveyor, unit and integration testing and high code coverage
+* Well documented code following strict StyleCop.Analyzers and FxCop rules
+## jQuery support
+* jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
+* jQuery auto-load on pages on sites that don't use jQuery
+* Support for jQuery context switching
+* Support for `ExpectedConditions` with jQuery selectors
+* Support for Page Objects with jQuery selectors
+## Sizzle support
+* Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
+* Sizzle auto-load on pages on sites that don't use Sizzle
+* Support for Sizzle context switching
+* Support for `ExpectedConditions` with Sizzle selectors
+* Support for Page Objects with Sizzle selectors
  
 # Installation
 Run the following command in Visual Studio Package Manager Console.
