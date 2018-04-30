@@ -54,16 +54,6 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         protected virtual string ResultResolver => string.Empty;
 
-        /// <summary>
-        /// Parses the result of executed jQuery script.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result to be returned.</typeparam>
-        /// <param name="result">The result of jQuery script.</param>
-        /// <returns>Parsed result of invoking the script.</returns>
-        /// <remarks>
-        /// Internet Explorer is returning numbers as <see langword="double"/>, while other browsers return them as
-        /// <see langword="long"/>. This method casts Internet Explorer's <see langword="double"/> to <see langword="long"/>.
-        /// </remarks>
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
         /// <summary>
