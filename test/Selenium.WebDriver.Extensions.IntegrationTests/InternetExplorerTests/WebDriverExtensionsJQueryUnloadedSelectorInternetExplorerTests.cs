@@ -3,7 +3,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
-    using Selenium.WebDriver.Extensions.Tests;
     using Xunit;
     using static Extensions.Tests.Shared.Trait.Browser;
     using static Extensions.Tests.Shared.Trait.Category;
