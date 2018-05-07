@@ -9,8 +9,8 @@
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.2.1" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.2.1" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.3.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.3.0" />
     <PackageReference Include="FluentAssertions" Version="5.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
     <PackageReference Include="OpenCover" Version="4.6.519" />
