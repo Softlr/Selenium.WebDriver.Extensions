@@ -10,6 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="FluentAssertions" Version="5.3.0" />
     <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.38.0.1" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.20.1" />
@@ -23,6 +24,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj" />
-    <ProjectReference Include="..\Selenium.WebDriver.Extensions.Tests\Selenium.WebDriver.Extensions.Tests.csproj" />
+    <ProjectReference Include="..\Selenium.WebDriver.Extensions.Tests.Shared\Selenium.WebDriver.Extensions.Tests.Shared.csproj" />
   </ItemGroup>
 </Project>

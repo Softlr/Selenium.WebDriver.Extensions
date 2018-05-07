@@ -5,9 +5,9 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
     using Selenium.WebDriver.Extensions.Tests;
     using Xunit;
-    using static Extensions.Tests.Trait.Browser;
-    using static Extensions.Tests.Trait.Category;
-    using static Extensions.Tests.Trait.Name;
+    using static Extensions.Tests.Shared.Trait.Browser;
+    using static Extensions.Tests.Shared.Trait.Category;
+    using static Extensions.Tests.Shared.Trait.Name;
 
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, CHROME)]
