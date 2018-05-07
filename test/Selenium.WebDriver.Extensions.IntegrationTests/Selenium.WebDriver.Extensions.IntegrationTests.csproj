@@ -9,6 +9,7 @@
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="codecracker.CSharp" Version="1.0.3" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="FluentAssertions" Version="5.3.0" />
     <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
@@ -16,6 +17,7 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.20.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.11.1" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta006" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
