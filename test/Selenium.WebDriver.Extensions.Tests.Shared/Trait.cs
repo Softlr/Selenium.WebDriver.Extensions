@@ -1,9 +1,9 @@
-namespace Selenium.WebDriver.Extensions.Tests
+namespace Selenium.WebDriver.Extensions.Tests.Shared
 {
     using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
-    internal static class Trait
+    public static class Trait
     {
         public static class Name
         {

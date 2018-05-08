@@ -9,12 +9,12 @@
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.2.1" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.2.1" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.3.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.3.0" />
+    <PackageReference Include="codecracker.CSharp" Version="1.0.3" />
     <PackageReference Include="FluentAssertions" Version="5.3.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.0" />
-    <PackageReference Include="OpenCover" Version="4.6.519" />
-    <PackageReference Include="ReportGenerator" Version="3.1.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta006" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="xunit.runner.console" Version="2.3.1" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
@@ -23,5 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj" />
+    <ProjectReference Include="..\Selenium.WebDriver.Extensions.Tests.Shared\Selenium.WebDriver.Extensions.Tests.Shared.csproj" />
   </ItemGroup>
 </Project>
