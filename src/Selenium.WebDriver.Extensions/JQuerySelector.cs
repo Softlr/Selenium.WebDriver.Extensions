@@ -321,6 +321,7 @@ namespace Selenium.WebDriver.Extensions
             new JQuerySelector(contextSelector, null, Variable);
 
         [SuppressMessage(SONARQUBE, S3358)]
+        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private static string FilteredSelector(string selector = null, string filter = null) =>
             selector != null
             ? (string.IsNullOrEmpty(filter)
