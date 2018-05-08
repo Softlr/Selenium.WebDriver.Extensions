@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, FIREFOX)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<FirefoxFixture>
+    [Collection(FIREFOX)]
+    public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests : WebDriverExtensionsJQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FirefoxFixture fixture)

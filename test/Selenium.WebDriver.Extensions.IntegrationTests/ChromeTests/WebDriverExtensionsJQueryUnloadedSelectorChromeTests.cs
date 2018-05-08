@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, CHROME)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
+    [Collection(CHROME)]
+    public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests : WebDriverExtensionsJQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)

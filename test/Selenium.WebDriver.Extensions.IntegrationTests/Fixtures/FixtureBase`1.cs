@@ -2,16 +2,22 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using Nancy.Hosting.Self;
     using OpenQA.Selenium;
 
     [ExcludeFromCodeCoverage]
     public class FixtureBase<TDriverService> : IDisposable
         where TDriverService : DriverService
     {
+        private readonly NancyHost _host;
         private bool _disposed;
 
         protected FixtureBase()
         {
+            var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
+
+            _host = new NancyHost(config, new Uri(Fixture.SERVER_URL));
+            _host.Start();
         }
 
         ~FixtureBase() => Dispose(false);
@@ -36,6 +42,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
             Service?.Dispose();
             Browser?.Quit();
             Browser?.Dispose();
+            _host.Dispose();
             _disposed = true;
         }
     }

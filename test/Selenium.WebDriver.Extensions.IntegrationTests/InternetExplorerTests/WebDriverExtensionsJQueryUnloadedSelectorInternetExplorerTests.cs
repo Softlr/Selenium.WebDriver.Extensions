@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<InternetExplorerFixture>
+    [Collection(INTERNET_EXPLORER)]
+    public class WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests : WebDriverExtensionsJQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
