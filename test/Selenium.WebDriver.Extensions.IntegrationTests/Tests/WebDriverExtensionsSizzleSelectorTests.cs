@@ -6,8 +6,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
+    using static Extensions.Tests.Shared.Trait.Category;
+    using static Extensions.Tests.Shared.Trait.Name;
     using By = By;
 
+    [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
     public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
     {
