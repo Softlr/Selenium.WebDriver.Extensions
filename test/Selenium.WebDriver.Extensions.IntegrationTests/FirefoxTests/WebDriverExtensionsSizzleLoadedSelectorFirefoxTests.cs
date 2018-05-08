@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, FIREFOX)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsSizzleLoadedSelectorFirefoxTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<FirefoxFixture>
+    [Collection(FIREFOX)]
+    public class WebDriverExtensionsSizzleLoadedSelectorFirefoxTests : WebDriverExtensionsSizzleSelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorFirefoxTests(FirefoxFixture fixture)

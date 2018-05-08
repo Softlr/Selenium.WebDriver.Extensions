@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, EDGE)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsSizzleLoadedSelectorEdgeTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<EdgeFixture>
+    [Collection(EDGE)]
+    public class WebDriverExtensionsSizzleLoadedSelectorEdgeTests : WebDriverExtensionsSizzleSelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorEdgeTests(EdgeFixture fixture)

@@ -6,16 +6,17 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using Xunit;
+    using static Extensions.Tests.Shared.Trait.Category;
+    using static Extensions.Tests.Shared.Trait.Name;
+    using static TestCaseModule;
     using By = By;
 
+    [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
     public class WebDriverExtensionsJQuerySelectorTests : TestsBase
     {
-        private const string LOADED_PATH = "/JQueryLoaded";
-        private const string UNLOADED_PATH = "/JQueryUnloaded";
-
         protected WebDriverExtensionsJQuerySelectorTests(IWebDriver browser, bool loaded)
-            : base(browser, loaded ? LOADED_PATH : UNLOADED_PATH)
+            : base(browser, loaded ? JQUERY_LOADED : JQUERY_UNLOADED)
         {
         }
 

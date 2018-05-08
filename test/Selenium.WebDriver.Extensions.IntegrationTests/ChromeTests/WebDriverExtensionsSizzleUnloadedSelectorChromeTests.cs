@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, CHROME)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsSizzleUnloadedSelectorChromeTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<ChromeFixture>
+    [Collection(CHROME)]
+    public class WebDriverExtensionsSizzleUnloadedSelectorChromeTests : WebDriverExtensionsSizzleSelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorChromeTests(ChromeFixture fixture)

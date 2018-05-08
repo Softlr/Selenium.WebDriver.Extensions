@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, EDGE)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsJQueryLoadedSelectorEdgeTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<EdgeFixture>
+    [Collection(EDGE)]
+    public class WebDriverExtensionsJQueryLoadedSelectorEdgeTests : WebDriverExtensionsJQuerySelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorEdgeTests(EdgeFixture fixture)

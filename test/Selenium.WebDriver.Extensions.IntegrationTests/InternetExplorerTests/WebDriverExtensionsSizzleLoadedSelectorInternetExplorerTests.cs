@@ -11,9 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     [Trait(CATEGORY, INTEGRATION)]
     [Trait(BROWSER, INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection(INTEGRATION)]
-    public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
+    [Collection(INTERNET_EXPLORER)]
+    public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests : WebDriverExtensionsSizzleSelectorTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
