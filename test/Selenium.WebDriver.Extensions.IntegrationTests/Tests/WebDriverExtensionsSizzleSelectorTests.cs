@@ -8,17 +8,15 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using Xunit;
     using static Extensions.Tests.Shared.Trait.Category;
     using static Extensions.Tests.Shared.Trait.Name;
+    using static TestCaseModule;
     using By = By;
 
     [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
     public abstract class WebDriverExtensionsSizzleSelectorTests : TestsBase
     {
-        private const string LOADED_PATH = "/SizzleLoaded";
-        private const string UNLOADED_PATH = "/SizzleUnloaded";
-
         protected WebDriverExtensionsSizzleSelectorTests(IWebDriver browser, bool loaded)
-            : base(browser, loaded ? LOADED_PATH : UNLOADED_PATH)
+            : base(browser, loaded ? SIZZLE_LOADED : SIZZLE_UNLOADED)
         {
         }
 
