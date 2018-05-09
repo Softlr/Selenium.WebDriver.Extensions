@@ -46,8 +46,6 @@ test_script:
 - ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
 - ps: >-
-    & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Firefox
-- ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=InternetExplorer
 after_test:
 - ps: >-
