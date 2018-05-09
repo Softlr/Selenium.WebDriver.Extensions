@@ -44,7 +44,7 @@ test_script:
 - ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.Tests\bin\Release\net47\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
 - ps: >-
-    & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
+    & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net47\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome -trait Browser=Firefox
 after_test:
 - ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
