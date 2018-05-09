@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         public FirefoxFixture()
         {
             Service = FirefoxDriverService.CreateDefaultService();
-            Service.FirefoxBinaryPath = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles"), "Mozilla Firefox", "firefox.exe");
+            Service.FirefoxBinaryPath = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "Mozilla Firefox", "firefox.exe");
             Browser = new FirefoxDriver(Service);
         }
     }
