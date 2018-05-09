@@ -1,6 +1,8 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using JetBrains.Annotations;
     using OpenQA.Selenium.Firefox;
 
@@ -8,10 +10,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     [ExcludeFromCodeCoverage]
     public class FirefoxFixture : FixtureBase<FirefoxDriverService>
     {
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public FirefoxFixture()
         {
             Service = FirefoxDriverService.CreateDefaultService();
-            Service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
+            Service.FirefoxBinaryPath = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles"), "Mozilla Firefox", "firefox.exe");
             Browser = new FirefoxDriver(Service);
         }
     }
