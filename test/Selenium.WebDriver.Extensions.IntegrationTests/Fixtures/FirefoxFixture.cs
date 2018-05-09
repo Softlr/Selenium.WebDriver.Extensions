@@ -1,8 +1,6 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
-    using System.IO;
     using JetBrains.Annotations;
     using OpenQA.Selenium.Firefox;
 
@@ -13,9 +11,9 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public FirefoxFixture()
         {
-            Service = FirefoxDriverService.CreateDefaultService();
-            Service.FirefoxBinaryPath = Path.Combine(Environment.GetEnvironmentVariable("ProgramFiles(x86)"), "Mozilla Firefox", "firefox.exe");
-            Browser = new FirefoxDriver(Service);
+            var options = new FirefoxOptions();
+            options.AddArguments("--headless");
+            Browser = new FirefoxDriver(options);
         }
     }
 }

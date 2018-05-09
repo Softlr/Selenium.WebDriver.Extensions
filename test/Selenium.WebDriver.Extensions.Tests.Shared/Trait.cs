@@ -25,7 +25,7 @@ namespace Selenium.WebDriver.Extensions.Tests.Shared
 
             public const string FIREFOX = "Firefox";
 
-            public const string INTERNET_EXPLORER = "Internet Explorer";
+            public const string INTERNET_EXPLORER = "InternetExplorer";
 
             public const string EDGE = "Edge";
 
