@@ -8,11 +8,12 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     [ExcludeFromCodeCoverage]
     public class FirefoxFixture : FixtureBase<FirefoxDriverService>
     {
+        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public FirefoxFixture()
         {
-            Service = FirefoxDriverService.CreateDefaultService();
-            Service.FirefoxBinaryPath = @"C:\Program Files (x86)\Mozilla Firefox\firefox.exe";
-            Browser = new FirefoxDriver(Service);
+            var options = new FirefoxOptions();
+            options.AddArguments("--headless");
+            Browser = new FirefoxDriver(options);
         }
     }
 }
