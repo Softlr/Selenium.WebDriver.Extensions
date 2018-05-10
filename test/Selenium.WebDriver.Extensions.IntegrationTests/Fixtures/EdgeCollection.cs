@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Extensions.Tests.Shared.Trait.Browser;
 
     [ExcludeFromCodeCoverage]
-    [CollectionDefinition(EDGE)]
+    [CollectionDefinition(Trait.Browser.EDGE)]
     public class EdgeCollection : ICollectionFixture<EdgeFixture>
     {
     }

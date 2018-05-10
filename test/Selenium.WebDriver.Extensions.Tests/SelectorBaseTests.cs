@@ -7,11 +7,10 @@ namespace Selenium.WebDriver.Extensions.Tests
     using FluentAssertions;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Shared.Trait.Category;
-    using static Shared.Trait.Name;
 
-    [Trait(CATEGORY, UNIT)]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class SelectorBaseTests
     {

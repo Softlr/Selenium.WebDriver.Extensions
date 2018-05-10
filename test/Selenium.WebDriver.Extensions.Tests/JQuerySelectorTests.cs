@@ -9,12 +9,11 @@ namespace Selenium.WebDriver.Extensions.Tests
     using JetBrains.Annotations;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Shared.Trait.Category;
-    using static Shared.Trait.Name;
     using By = Selenium.WebDriver.Extensions.By;
 
-    [Trait(CATEGORY, UNIT)]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
     public class JQuerySelectorTests
     {
