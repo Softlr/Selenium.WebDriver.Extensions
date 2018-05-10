@@ -1,22 +1,20 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
 {
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Extensions.Tests.Shared.Trait.Browser;
-    using static Extensions.Tests.Shared.Trait.Category;
-    using static Extensions.Tests.Shared.Trait.Name;
 
-    [Trait(CATEGORY, INTEGRATION)]
-    [Trait(BROWSER, FIREFOX)]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.FIREFOX)]
     [ExcludeFromCodeCoverage]
-    [Collection(FIREFOX)]
-    public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests : WebDriverExtensionsJQuerySelectorTests
+    [Collection(Trait.Browser.FIREFOX)]
+    public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests : SelectorTests<JQuerySelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FirefoxFixture fixture)
-            : base(fixture.Browser, false)
+            : base(fixture.Browser, TestCaseModule.JQUERY_UNLOADED, x => By.JQuerySelector(x))
         {
         }
     }

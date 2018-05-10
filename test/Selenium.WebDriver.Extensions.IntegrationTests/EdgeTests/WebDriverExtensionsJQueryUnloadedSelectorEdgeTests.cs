@@ -1,22 +1,20 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Extensions.Tests.Shared.Trait.Browser;
-    using static Extensions.Tests.Shared.Trait.Category;
-    using static Extensions.Tests.Shared.Trait.Name;
 
-    [Trait(CATEGORY, INTEGRATION)]
-    [Trait(BROWSER, EDGE)]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.EDGE)]
     [ExcludeFromCodeCoverage]
-    [Collection(EDGE)]
-    public class WebDriverExtensionsJQueryUnloadedSelectorEdgeTests : WebDriverExtensionsJQuerySelectorTests
+    [Collection(Trait.Browser.EDGE)]
+    public class WebDriverExtensionsJQueryUnloadedSelectorEdgeTests : SelectorTests<JQuerySelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture.Browser, false)
+            : base(fixture.Browser, TestCaseModule.JQUERY_UNLOADED, x => By.JQuerySelector(x))
         {
         }
     }

@@ -2,15 +2,12 @@ namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
-    using static Selenium.WebDriver.Extensions.Suppress.Category;
-    using static Selenium.WebDriver.Extensions.Suppress.CodeCracker;
-    using static Selenium.WebDriver.Extensions.Suppress.FxCop;
 
     internal static class Suppress
     {
         [PublicAPI]
-        [SuppressMessage(FXCOP, CA1034)]
-        [SuppressMessage(CODE_CRACKER, CC0021)]
+        [SuppressMessage(FXCOP, FxCop.CA1034)]
+        [SuppressMessage(CODE_CRACKER, CodeCracker.CC0021)]
         public static class Category
         {
             public const string CODE_CRACKER = "CodeCracker.CSharp";
@@ -20,7 +17,7 @@ namespace Selenium.WebDriver.Extensions
         }
 
         [PublicAPI]
-        [SuppressMessage(FXCOP, CA1034)]
+        [SuppressMessage(Category.FXCOP, FxCop.CA1034)]
         public static class CodeCracker
         {
             public const string CC0001 = "CC0001:AlwaysUseVarAnalyzer_NonPrimitives";
@@ -153,7 +150,7 @@ namespace Selenium.WebDriver.Extensions
         }
 
         [PublicAPI]
-        [SuppressMessage(FXCOP, CA1034)]
+        [SuppressMessage(Category.FXCOP, CA1034)]
         public static class FxCop
         {
             public const string CA1000 = "CA1000:Do not declare static members on generic types";
@@ -405,7 +402,7 @@ namespace Selenium.WebDriver.Extensions
         }
 
         [PublicAPI]
-        [SuppressMessage(FXCOP, CA1034)]
+        [SuppressMessage(Category.FXCOP, FxCop.CA1034)]
         public static class SonarQube
         {
             public const string S3884 = "S3884:CoSetProxyBlanket and CoInitializeSecurity should not be used";
@@ -776,7 +773,7 @@ namespace Selenium.WebDriver.Extensions
         }
 
         [PublicAPI]
-        [SuppressMessage(FXCOP, CA1034)]
+        [SuppressMessage(Category.FXCOP, FxCop.CA1034)]
         public static class StyleCop
         {
             public const string SA0001 = "SA0001:XmlCommentAnalysisDisabled";

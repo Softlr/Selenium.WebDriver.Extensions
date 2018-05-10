@@ -1,22 +1,20 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
 {
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Extensions.Tests.Shared.Trait.Browser;
-    using static Extensions.Tests.Shared.Trait.Category;
-    using static Extensions.Tests.Shared.Trait.Name;
 
-    [Trait(CATEGORY, INTEGRATION)]
-    [Trait(BROWSER, CHROME)]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.CHROME)]
     [ExcludeFromCodeCoverage]
-    [Collection(CHROME)]
-    public class WebDriverExtensionsSizzleUnloadedSelectorChromeTests : WebDriverExtensionsSizzleSelectorTests
+    [Collection(Trait.Browser.CHROME)]
+    public class WebDriverExtensionsSizzleUnloadedSelectorChromeTests : SelectorTests<SizzleSelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorChromeTests(ChromeFixture fixture)
-            : base(fixture.Browser, false)
+            : base(fixture.Browser, TestCaseModule.SIZZLE_UNLOADED, x => By.SizzleSelector(x))
         {
         }
     }

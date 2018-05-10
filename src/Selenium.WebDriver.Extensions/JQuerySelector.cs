@@ -5,8 +5,6 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Contracts;
-    using static Suppress.Category;
-    using static Suppress.SonarQube;
 
     /// <summary>
     /// Searches the DOM elements using jQuery selector.
@@ -320,7 +318,7 @@ namespace Selenium.WebDriver.Extensions
         protected override JQuerySelector CreateContext(string contextSelector) =>
             new JQuerySelector(contextSelector, null, Variable);
 
-        [SuppressMessage(SONARQUBE, S3358)]
+        [SuppressMessage(Suppress.Category.SONARQUBE, Suppress.SonarQube.S3358)]
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private static string FilteredSelector(string selector = null, string filter = null) =>
             selector != null
@@ -329,7 +327,7 @@ namespace Selenium.WebDriver.Extensions
                 : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'")
             : string.Empty;
 
-        [SuppressMessage(SONARQUBE, S3358)]
+        [SuppressMessage(Suppress.Category.SONARQUBE, Suppress.SonarQube.S3358)]
         private static string GetSelectorString(string selector, bool noWrap = false) =>
             selector == null
                 ? string.Empty
