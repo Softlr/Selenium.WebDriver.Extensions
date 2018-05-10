@@ -1,4 +1,4 @@
-namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
+namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
@@ -16,6 +16,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     {
         private readonly Func<string, TSelector> _selectorAccessor;
 
+        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0057)]
         protected SelectorTests(IWebDriver browser, string path, Func<string, TSelector> selectorAccessor)
             : base(browser, path) => _selectorAccessor = selectorAccessor;
 

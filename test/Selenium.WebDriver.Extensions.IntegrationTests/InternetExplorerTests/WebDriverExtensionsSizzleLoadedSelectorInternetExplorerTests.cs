@@ -1,8 +1,8 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
 {
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Tests;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
 
