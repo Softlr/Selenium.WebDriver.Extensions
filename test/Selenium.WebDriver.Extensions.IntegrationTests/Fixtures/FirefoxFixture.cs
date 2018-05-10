@@ -6,7 +6,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    public class FirefoxFixture : FixtureBase<FirefoxDriverService>
+    public class FirefoxFixture : FixtureBase
     {
         [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public FirefoxFixture()

@@ -6,7 +6,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    public class InternetExplorerFixture : FixtureBase<InternetExplorerDriverService>
+    public class InternetExplorerFixture : FixtureBase
     {
         public InternetExplorerFixture() => Browser = new InternetExplorerDriver();
     }

@@ -6,8 +6,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using OpenQA.Selenium;
 
     [ExcludeFromCodeCoverage]
-    public class FixtureBase<TDriverService> : IDisposable
-        where TDriverService : DriverService
+    public class FixtureBase : IDisposable
     {
         private readonly NancyHost _host;
         private bool _disposed;
@@ -23,7 +22,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         ~FixtureBase() => Dispose(false);
 
         public IWebDriver Browser { get; protected set; }
-        protected TDriverService Service { get; set; }
 
         public void Dispose()
         {
@@ -39,7 +37,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
                 return;
             }
 
-            Service?.Dispose();
             Browser?.Quit();
             Browser?.Dispose();
             _host.Dispose();
