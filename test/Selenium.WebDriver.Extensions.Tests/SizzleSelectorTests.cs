@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Xunit;
     using static Shared.Trait.Category;
     using static Shared.Trait.Name;
-    using By = By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]

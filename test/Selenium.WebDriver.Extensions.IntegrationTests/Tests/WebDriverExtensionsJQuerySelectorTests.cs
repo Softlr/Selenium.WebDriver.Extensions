@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Tests
     using static Extensions.Tests.Shared.Trait.Category;
     using static Extensions.Tests.Shared.Trait.Name;
     using static TestCaseModule;
-    using By = By;
+    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
