@@ -14,7 +14,7 @@
       <group targetFramework="netstandard2.0">
         <dependency id="JetBrains.Annotations" version="11.1.0" />
         <dependency id="Selenium.Support" version="3.12.0" />
-        <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.50" />
+        <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.51" />
       </group>
       <group targetFramework="net45">
         <dependency id="JetBrains.Annotations" version="11.1.0" />
