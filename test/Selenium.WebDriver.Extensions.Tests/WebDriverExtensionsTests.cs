@@ -12,6 +12,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static System.String;
 
     [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
     [ExcludeFromCodeCoverage]
@@ -36,12 +37,12 @@ namespace Selenium.WebDriver.Extensions.Tests
                     (Action)(() => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>())),  driverParam
                 };
                 yield return new object[] { (Action)(() => webDriver.ExecuteScript(null)), scriptParam };
-                yield return new object[] { (Action)(() => webDriver.ExecuteScript(string.Empty)), scriptParam };
+                yield return new object[] { (Action)(() => webDriver.ExecuteScript(Empty)), scriptParam };
 
                 // LoadJQuery
                 yield return new object[] { (Action)(() => WebDriverExtensions.LoadJQuery(null)), driverParam };
                 yield return new object[] { (Action)(() => webDriver.LoadJQuery((string)null)), versionParam };
-                yield return new object[] { (Action)(() => webDriver.LoadJQuery(string.Empty)), versionParam };
+                yield return new object[] { (Action)(() => webDriver.LoadJQuery(Empty)), versionParam };
                 yield return new object[]
                 {
                     (Action)(() => webDriver.LoadJQuery(_fixture.Create<string>())), versionParam
@@ -55,7 +56,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                 // LoadSizzle
                 yield return new object[] { (Action)(() => WebDriverExtensions.LoadSizzle(null)), driverParam };
                 yield return new object[] { (Action)(() => webDriver.LoadSizzle((string)null)), versionParam };
-                yield return new object[] { (Action)(() => webDriver.LoadSizzle(string.Empty)), versionParam };
+                yield return new object[] { (Action)(() => webDriver.LoadSizzle(Empty)), versionParam };
                 yield return new object[]
                 {
                     (Action)(() => webDriver.LoadSizzle(_fixture.Create<string>())), versionParam

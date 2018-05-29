@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium.Internal;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Parsers;
+    using static System.String;
 
     /// <summary>
     /// The selector base.
@@ -52,7 +53,7 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Gets the result resolver string.
         /// </summary>
-        protected virtual string ResultResolver => string.Empty;
+        protected virtual string ResultResolver => Empty;
 
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
