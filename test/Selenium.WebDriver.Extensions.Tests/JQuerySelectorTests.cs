@@ -311,7 +311,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(SelectorArgumentExceptionTests))]
-        public void ShouldThrowExceptionForInvalidArguments(Action sut) => sut.Should().Throw<ArgumentNullException>();
+        public void ShouldThrowExceptionForInvalidArguments(Action sut) => sut.Should().Throw<ArgumentException>();
 
         [Theory]
         [AutoData]
