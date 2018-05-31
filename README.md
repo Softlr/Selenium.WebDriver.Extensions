@@ -8,7 +8,7 @@ Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 # Version 3.0 Released
 The version 3.0 of the extensions library has been released. The new features and changes include:
 * Selenium 3.0 support
-* .NET 3.5, 4.0 and Mono support dropped, maintaining that code was becomming more and more of a problem and it was causing performance degradation
+* .NET 3.5 and Mono support dropped, maintaining that code was becomming more and more of a problem and it was causing performance degradation
 * Performance improvements in the code
 * Script loading reworked
 * PostSharp code contracts
