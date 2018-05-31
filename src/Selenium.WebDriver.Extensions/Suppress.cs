@@ -3,6 +3,7 @@ namespace Selenium.WebDriver.Extensions
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
 
+    [ExcludeFromCodeCoverage]
     internal static class Suppress
     {
         [PublicAPI]
