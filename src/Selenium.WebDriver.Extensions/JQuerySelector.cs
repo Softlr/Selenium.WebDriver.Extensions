@@ -5,6 +5,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Contracts;
+    using static System.String;
 
     /// <summary>
     /// Searches the DOM elements using jQuery selector.
@@ -322,7 +323,7 @@ namespace Selenium.WebDriver.Extensions
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private static string FilteredSelector(string selector = null, string filter = null) =>
             selector != null
-            ? (string.IsNullOrEmpty(filter)
+            ? (IsNullOrEmpty(filter)
                 ? $"'{selector.Replace('\'', '"')}'"
                 : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'")
             : string.Empty;

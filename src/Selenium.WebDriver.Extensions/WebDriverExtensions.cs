@@ -3,6 +3,7 @@ namespace Selenium.WebDriver.Extensions
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Threading.Tasks;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using PostSharp.Patterns.Contracts;

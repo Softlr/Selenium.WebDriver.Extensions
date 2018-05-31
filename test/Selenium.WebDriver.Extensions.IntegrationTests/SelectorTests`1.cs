@@ -34,9 +34,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         {
             var sut = _selectorAccessor.Invoke("#id-not");
 
-            void Action() => Browser.FindElement(sut);
-
-            ((Action)Action).Should().Throw<NoSuchElementException>();
+            ((Action)(() => Browser.FindElement(sut))).Should().Throw<NoSuchElementException>();
         }
 
         [Fact]
@@ -85,7 +83,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);
 
-            true.Should().BeTrue(); // assert pass
+            var element = Browser.FindElement(_selectorAccessor.Invoke("h1"));
+            element.Should().NotBeNull();
         }
     }
 }

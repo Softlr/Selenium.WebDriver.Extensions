@@ -4,6 +4,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Nancy;
+    using static System.String;
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
@@ -33,7 +34,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
                 <h1 class=""main"">H1 Header</h1>
                 <div class=""main"" id=""id1"">Selector</div>
                 <div class=""main"">Selenium WebDriver Extensions</div>
-                {(externalLibUrl != null ? $@"<script src = ""{externalLibUrl.AbsoluteUri}"" type=""text/javascript""></script>" : string.Empty)}
+                {(externalLibUrl != null ? $@"<script src = ""{externalLibUrl.AbsoluteUri}"" type=""text/javascript""></script>" : Empty)}
             </body>
             </html>";
     }
