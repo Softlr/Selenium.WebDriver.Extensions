@@ -12,7 +12,7 @@ skip_branch_with_pr: true
 skip_commits:
   message: /Update.*\.md/
 
-version: 3.1.0.{build}
+version: 3.2.0.{build}
 image: Visual Studio 2017
   
 install:
@@ -39,7 +39,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.1.0 -Symbols
+  - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.2.0 -Symbols
 
 test_script:
 - ps: >-
@@ -75,7 +75,7 @@ deploy:
   - provider: GitHub
     on:
       branch: master
-    release: 3.1.0
+    release: 3.2.0
     artifact: /.*\.nupkg/
     auth_token:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
