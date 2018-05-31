@@ -1,23 +1,18 @@
-namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium;
+    using JetBrains.Annotations;
     using OpenQA.Selenium.Chrome;
 
-    [SuppressMessage("Microsoft.Design", "CA1001:TypesThatOwnDisposableFieldsShouldBeDisposable")]
+    [UsedImplicitly]
     [ExcludeFromCodeCoverage]
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    public class ChromeFixture : IDisposable
+    public class ChromeFixture : FixtureBase
     {
-        public ChromeFixture() => Browser = new ChromeDriver();
-
-        public IWebDriver Browser { get; }
-
-        public void Dispose()
+        public ChromeFixture()
         {
-            Browser?.Quit();
-            Browser?.Dispose();
+            var options = new ChromeOptions();
+            options.AddArgument("--headless");
+            Browser = new ChromeDriver(options);
         }
     }
 }

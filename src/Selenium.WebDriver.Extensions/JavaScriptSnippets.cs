@@ -1,16 +1,10 @@
-﻿namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions
 {
     using System;
 
-    /// <summary>
-    /// The external library loader base.
-    /// </summary>
     internal static class JavaScriptSnippets
     {
-        /// <summary>
-        /// Gets the script to get the DOM path.
-        /// </summary>
-        internal static string FindDomPathScript { get; } = @"return (function(element) {
+        public static string FindDomPathScript { get; } = @"return (function(element) {
             'use strict';
             var stack = [], siblingsCount, siblingIndex, i, sibling;
             while (element.parentNode !== null) {
@@ -38,24 +32,14 @@
             return stack.join(' > ');
         })(arguments[0]);";
 
-        /// <summary>
-        /// Gets the JavaScript to load jQuery.
-        /// </summary>
-        /// <param name="url">The script URL.</param>
-        /// <returns>The JavaScrpt to load URL.</returns>
-        internal static string LoadScriptCode(Uri url) => $@"(function(source) {{
+        public static string LoadScriptCode(Uri url) => $@"(function(source) {{
             'use strict';
             var script = document.createElement('script');
             script.src = source;
             document.getElementsByTagName('body')[0].appendChild(script);
         }})('{url}')";
 
-        /// <summary>
-        /// Gets the JavaScript to test if library variable is defined.
-        /// </summary>
-        /// <param name="variable">The library variable to test.</param>
-        /// <returns>The JavaScrpt to test if library variable is defined.</returns>
-        internal static string CheckScriptCode(string variable) => $@"(function(value) {{
+        public static string CheckScriptCode(string variable) => $@"(function(value) {{
             'use strict';
             return typeof value === 'function';
         }})({variable})";

@@ -1,20 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
 
-    [Trait("Category", "Integration")]
-    [Trait("Browser", "Edge")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.EDGE)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
-    public class WebDriverExtensionsSizzleLoadedSelectorEdgeTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<EdgeFixture>
+    [Collection(Trait.Browser.EDGE)]
+    public class WebDriverExtensionsSizzleLoadedSelectorEdgeTests : SelectorTests<SizzleSelector>
     {
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorEdgeTests(EdgeFixture fixture)
+            : base(fixture.Browser, TestCaseModule.SIZZLE_LOADED, x => By.SizzleSelector(x))
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));
         }
     }
 }

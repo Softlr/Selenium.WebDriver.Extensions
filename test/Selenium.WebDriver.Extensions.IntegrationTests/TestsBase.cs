@@ -2,47 +2,18 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Nancy.Hosting.Self;
     using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
 
     [ExcludeFromCodeCoverage]
-    public abstract class TestsBase : IDisposable
+    public abstract class TestsBase
     {
-        private readonly NancyHost _host;
-        private bool _disposed;
-
-        protected TestsBase()
+        protected TestsBase(IWebDriver browser, string path)
         {
-            var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
-
-            ServerUrl = "http://localhost:50502";
-            _host = new NancyHost(config, new Uri(ServerUrl));
-            _host.Start();
+            Browser = browser;
+            Browser.Navigate().GoToUrl(new Uri($"{Fixture.SERVER_URL}{path}"));
         }
 
-        ~TestsBase() => Dispose(false);
-
-        protected IWebDriver Browser { get; set; }
-
-        [SuppressMessage("Microsoft.Design", "CA1056:UriPropertiesShouldNotBeStrings")]
-        protected string ServerUrl { get; }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        [SuppressMessage("ReSharper", "VirtualMemberNeverOverridden.Global")]
-        protected virtual void Dispose(bool disposing)
-        {
-            if (_disposed || !disposing)
-            {
-                return;
-            }
-
-            _host.Dispose();
-            _disposed = true;
-        }
+        protected IWebDriver Browser { get; }
     }
 }

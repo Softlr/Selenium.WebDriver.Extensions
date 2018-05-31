@@ -1,20 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
 
-    [Trait("Category", "Integration")]
-    [Trait("Browser", "InternetExplorer")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
-    public class WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<InternetExplorerFixture>
+    [Collection(Trait.Browser.INTERNET_EXPLORER)]
+    public class WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests : SelectorTests<SizzleSelector>
     {
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
+            : base(fixture.Browser, TestCaseModule.SIZZLE_UNLOADED, x => By.SizzleSelector(x))
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));
         }
     }
 }

@@ -11,16 +11,33 @@
     <description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</description>
     <tags>selenium, extension, extensions, web, driver, webdriver, jquery, sizzle, selector, selectors</tags>
     <dependencies>
-      <dependency id="JetBrains.Annotations" version="11.1.0" />
-      <dependency id="Selenium.Support" version="3.7.0" />
-      <dependency id="SimpleInjector" version="4.0.12" />
-      <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.39" />
+      <group targetFramework="netstandard2.0">
+        <dependency id="JetBrains.Annotations" version="11.1.0" />
+        <dependency id="Selenium.Support" version="3.12.1" />
+        <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.51" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="JetBrains.Annotations" version="11.1.0" />
+        <dependency id="Selenium.Support" version="3.12.1" />
+        <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.51" />
+      </group>
+      <group targetFramework="net40">
+        <dependency id="JetBrains.Annotations" version="11.1.0" />
+        <dependency id="Selenium.Support" version="3.12.1" />
+        <dependency id="PostSharp.Patterns.Model.Redist" version="5.0.51" />
+      </group>
     </dependencies>
   </metadata>
   <files>
+    <file src="bin\Release\net40\Selenium.WebDriver.Extensions.dll" target="lib\net40\Selenium.WebDriver.Extensions.dll" />
+    <file src="bin\Release\net40\Selenium.WebDriver.Extensions.pdb" target="lib\net40\Selenium.WebDriver.Extensions.pdb" />
+    <file src="bin\Release\net40\Selenium.WebDriver.Extensions.xml" target="lib\net40\Selenium.WebDriver.Extensions.xml" />
     <file src="bin\Release\net45\Selenium.WebDriver.Extensions.dll" target="lib\net45\Selenium.WebDriver.Extensions.dll" />
     <file src="bin\Release\net45\Selenium.WebDriver.Extensions.pdb" target="lib\net45\Selenium.WebDriver.Extensions.pdb" />
     <file src="bin\Release\net45\Selenium.WebDriver.Extensions.xml" target="lib\net45\Selenium.WebDriver.Extensions.xml" />
+    <file src="bin\Release\netstandard2.0\Selenium.WebDriver.Extensions.dll" target="lib\netstandard2.0\Selenium.WebDriver.Extensions.dll" />
+    <file src="bin\Release\netstandard2.0\Selenium.WebDriver.Extensions.pdb" target="lib\netstandard2.0\Selenium.WebDriver.Extensions.pdb" />
+    <file src="bin\Release\netstandard2.0\Selenium.WebDriver.Extensions.xml" target="lib\netstandard2.0\Selenium.WebDriver.Extensions.xml" />
     <file src="**\*.cs" target="src" exclude="obj\**" />
   </files>
 </package>

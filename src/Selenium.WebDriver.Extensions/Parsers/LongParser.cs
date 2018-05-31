@@ -1,17 +1,14 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    /// <summary>
-    /// The <see cref="long"/> parser.
-    /// </summary>
-    /// <inheritdoc cref="ParserBase" />
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    internal class LongParser : ParserBase, ILongParser
+    internal class LongParser : ParserBase
     {
-        /// <inheritdoc cref="ParserBase.Parse{TResult}" />
-        public override TResult Parse<TResult>(object rawResult) => rawResult is double
-            ? (TResult)(object)(long?)(double)rawResult
+        public LongParser()
+            : base(new DirectCastParser())
+        {
+        }
+
+        public override TResult Parse<TResult>(object rawResult) => rawResult is double d
+            ? (TResult)(object)(long?)d
             : Successor.Parse<TResult>(rawResult);
     }
 }

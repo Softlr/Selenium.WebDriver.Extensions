@@ -1,20 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
 
-    [Trait("Category", "Integration")]
-    [Trait("Browser", "Chrome")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.CHROME)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
-    public class WebDriverExtensionsSizzleLoadedSelectorChromeTests :
-        WebDriverExtensionsSizzleSelectorTests, IClassFixture<ChromeFixture>
+    [Collection(Trait.Browser.CHROME)]
+    public class WebDriverExtensionsSizzleLoadedSelectorChromeTests : SelectorTests<SizzleSelector>
     {
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorChromeTests(ChromeFixture fixture)
+            : base(fixture.Browser, TestCaseModule.SIZZLE_LOADED, x => By.SizzleSelector(x))
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/SizzleLoaded"));
         }
     }
 }

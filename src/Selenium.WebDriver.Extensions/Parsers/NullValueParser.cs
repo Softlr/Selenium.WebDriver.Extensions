@@ -1,17 +1,14 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using System.Diagnostics.CodeAnalysis;
-
-    /// <summary>
-    /// The <see langword="null"/> value parser.
-    /// </summary>
-    /// <inheritdoc cref="ParserBase" />
-    [SuppressMessage("ReSharper", "ClassNeverInstantiated.Global")]
-    internal class NullValueParser : ParserBase, INullValueParser
+    internal class NullValueParser : ParserBase
     {
-        /// <inheritdoc cref="ParserBase.Parse{TResult}" />
+        public NullValueParser()
+            : base(new WebElementCollectionParser())
+        {
+        }
+
         public override TResult Parse<TResult>(object rawResult) => rawResult == null
-            ? default(TResult)
+            ? default
             : Successor.Parse<TResult>(rawResult);
     }
 }

@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Extensio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{9221C76C-9270-4540-9B54-9A4063596B00}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Selenium.WebDriver.Extensions.Tests.Shared", "test\Selenium.WebDriver.Extensions.Tests.Shared\Selenium.WebDriver.Extensions.Tests.Shared.csproj", "{4271229D-DEE1-4C10-84C7-3EF4FC546A14}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{6394128B-6A58-482E-936E-D298726BA7F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6394128B-6A58-482E-936E-D298726BA7F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6394128B-6A58-482E-936E-D298726BA7F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4271229D-DEE1-4C10-84C7-3EF4FC546A14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4271229D-DEE1-4C10-84C7-3EF4FC546A14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4271229D-DEE1-4C10-84C7-3EF4FC546A14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4271229D-DEE1-4C10-84C7-3EF4FC546A14}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -39,6 +45,7 @@ Global
 		{F10536EC-8FBF-437A-840D-55CE6BF44161} = {9221C76C-9270-4540-9B54-9A4063596B00}
 		{41458FC5-B67A-456D-A085-8F6012E59A0C} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 		{6394128B-6A58-482E-936E-D298726BA7F0} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
+		{4271229D-DEE1-4C10-84C7-3EF4FC546A14} = {D8CA6CE5-A741-4B80-8B9F-689B2301492A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {35C6D6A9-D5F9-421D-99CC-A137E1A95939}

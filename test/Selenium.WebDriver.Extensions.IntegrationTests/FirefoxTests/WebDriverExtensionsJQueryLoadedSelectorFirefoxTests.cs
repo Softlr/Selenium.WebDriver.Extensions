@@ -1,20 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
 
-    [Trait("Category", "Integration")]
-    [Trait("Browser", "Firefox")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.FIREFOX)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
-    public class WebDriverExtensionsJQueryLoadedSelectorFirefoxTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<FirefoxFixture>
+    [Collection(Trait.Browser.FIREFOX)]
+    public class WebDriverExtensionsJQueryLoadedSelectorFirefoxTests : SelectorTests<JQuerySelector>
     {
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorFirefoxTests(FirefoxFixture fixture)
+            : base(fixture.Browser, TestCaseModule.JQUERY_LOADED, x => By.JQuerySelector(x))
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryLoaded"));
         }
     }
 }

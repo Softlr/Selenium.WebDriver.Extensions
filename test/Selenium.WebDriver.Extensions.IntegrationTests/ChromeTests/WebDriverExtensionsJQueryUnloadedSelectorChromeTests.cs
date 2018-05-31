@@ -1,20 +1,21 @@
-﻿namespace Selenium.WebDriver.Extensions.IntegrationTests
+namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
 
-    [Trait("Category", "Integration")]
-    [Trait("Browser", "Chrome")]
+    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(Trait.Name.BROWSER, Trait.Browser.CHROME)]
     [ExcludeFromCodeCoverage]
-    [Collection("Integration")]
-    public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests :
-        WebDriverExtensionsJQuerySelectorTests, IClassFixture<ChromeFixture>
+    [Collection(Trait.Browser.CHROME)]
+    public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests : SelectorTests<JQuerySelector>
     {
+        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
+            : base(fixture.Browser, TestCaseModule.JQUERY_UNLOADED, x => By.JQuerySelector(x))
         {
-            Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{ServerUrl}/JQueryUnloaded"));
         }
     }
 }

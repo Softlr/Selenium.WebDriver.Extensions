@@ -1,0 +1,19 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net47</TargetFrameworks>
+    <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
+    <PackageReference Include="OpenCover" Version="4.6.519" />
+    <PackageReference Include="ReportGenerator" Version="3.1.2" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta007" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj" />
+  </ItemGroup>
+</Project>
