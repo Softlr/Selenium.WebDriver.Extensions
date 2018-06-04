@@ -5,17 +5,6 @@
 # Description
 Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 
-# Version 3.0 Released
-The version 3.0 of the extensions library has been released. The new features and changes include:
-* Selenium 3.0 support
-* .NET 3.5 and Mono support dropped, maintaining that code was becomming more and more of a problem and it was causing performance degradation
-* Performance improvements in the code
-* Script loading reworked
-* PostSharp code contracts
-* Documentation added to NuGet packages
-* Symbols published to symbol server
-* Extension name reverted to Selenium.WebDriver.Extensions so that it is not confusing that this package comes from a different vendor
-
 # Features
 ## Main
 * Support for nested selectors
