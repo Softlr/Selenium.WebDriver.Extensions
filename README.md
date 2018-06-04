@@ -1,6 +1,6 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu?svg=true)](https://ci.appveyor.com/project/RaYell/Selenium.WebDriver.Extensions)
 [![Code Coverage](https://codecov.io/gh/Softlr/Selenium.WebDriver.Extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/Softlr/selenium-webdriver-extensions)
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=selenium.webdriver.extensions)](https://sonarcloud.io/dashboard?id=selenium.webdriver.extensions)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=selenium.webdriver.extensions&metric=alert_status)](https://sonarcloud.io/dashboard?id=selenium.webdriver.extensions)
 
 # Description
 Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
