@@ -71,14 +71,22 @@ namespace Selenium.WebDriver.Extensions.Tests
                 };
 
                 // chained methods
-                yield return new object[] { By.JQuerySelector(tag).Add(innerTag), $"jQuery('{tag}').add('{innerTag}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Add(innerTag),
+                    $"jQuery('{tag}').add('{innerTag}')"
+                };
                 yield return new object[]
                 {
                     By.JQuerySelector(tag).Add(innerTag, By.JQuerySelector(selector)),
                     $"jQuery('{tag}').add('{innerTag}', jQuery('{selector}'))"
                 };
                 yield return new object[] { By.JQuerySelector(tag).AddBack(), $"jQuery('{tag}').addBack()" };
-                yield return new object[] { By.JQuerySelector(tag).AddBack(innerTag), $"jQuery('{tag}').addBack('{innerTag}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).AddBack(innerTag),
+                    $"jQuery('{tag}').addBack('{innerTag}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).AndSelf(), $"jQuery('{tag}').andSelf()" };
                 yield return new object[] { By.JQuerySelector(tag).Children(), $"jQuery('{tag}').children()" };
                 yield return new object[]
@@ -86,7 +94,11 @@ namespace Selenium.WebDriver.Extensions.Tests
                     By.JQuerySelector(tag).Children(innerTag),
                     $"jQuery('{tag}').children('{innerTag}')"
                 };
-                yield return new object[] { By.JQuerySelector(tag).Closest(innerTag), $"jQuery('{tag}').closest('{innerTag}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Closest(innerTag),
+                    $"jQuery('{tag}').closest('{innerTag}')"
+                };
                 yield return new object[]
                 {
                     By.JQuerySelector(tag).Closest(innerTag, By.JQuerySelector(selector)),
@@ -95,16 +107,36 @@ namespace Selenium.WebDriver.Extensions.Tests
                 yield return new object[] { By.JQuerySelector(tag).Contents(), $"jQuery('{tag}').contents()" };
                 yield return new object[] { By.JQuerySelector(tag).End(), $"jQuery('{tag}').end()" };
                 yield return new object[] { By.JQuerySelector(tag).Eq(index1), $"jQuery('{tag}').eq({index1})" };
-                yield return new object[] { By.JQuerySelector(tag).Filter(selector), $"jQuery('{tag}').filter('{selector}')" };
-                yield return new object[] { By.JQuerySelector(tag).Find(selector), $"jQuery('{tag}').find('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Filter(selector),
+                    $"jQuery('{tag}').filter('{selector}')"
+                };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Find(selector),
+                    $"jQuery('{tag}').find('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).First(), $"jQuery('{tag}').first()" };
                 yield return new object[] { By.JQuerySelector(tag).Last(), $"jQuery('{tag}').last()" };
-                yield return new object[] { By.JQuerySelector(tag).Has(selector), $"jQuery('{tag}').has('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Has(selector),
+                    $"jQuery('{tag}').has('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).Is(selector), $"jQuery('{tag}').is('{selector}')" };
                 yield return new object[] { By.JQuerySelector(tag).Next(), $"jQuery('{tag}').next()" };
-                yield return new object[] { By.JQuerySelector(tag).Next(selector), $"jQuery('{tag}').next('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Next(selector),
+                    $"jQuery('{tag}').next('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).NextAll(), $"jQuery('{tag}').nextAll()" };
-                yield return new object[] { By.JQuerySelector(tag).NextAll(selector), $"jQuery('{tag}').nextAll('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).NextAll(selector),
+                    $"jQuery('{tag}').nextAll('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).NextUntil(), $"jQuery('{tag}').nextUntil()" };
                 yield return new object[]
                 {
@@ -122,9 +154,17 @@ namespace Selenium.WebDriver.Extensions.Tests
                     $"jQuery('{tag}').nextUntil('', '{filter}')"
                 };
                 yield return new object[] { By.JQuerySelector(tag).Prev(), $"jQuery('{tag}').prev()" };
-                yield return new object[] { By.JQuerySelector(tag).Prev(selector), $"jQuery('{tag}').prev('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Prev(selector),
+                    $"jQuery('{tag}').prev('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).PrevAll(), $"jQuery('{tag}').prevAll()" };
-                yield return new object[] { By.JQuerySelector(tag).PrevAll(selector), $"jQuery('{tag}').prevAll('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).PrevAll(selector),
+                    $"jQuery('{tag}').prevAll('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).PrevUntil(), $"jQuery('{tag}').prevUntil()" };
                 yield return new object[]
                 {
@@ -141,12 +181,24 @@ namespace Selenium.WebDriver.Extensions.Tests
                     By.JQuerySelector(tag).PrevUntil(null, filter),
                     $"jQuery('{tag}').prevUntil('', '{filter}')"
                 };
-                yield return new object[] { By.JQuerySelector(tag).Not(selector), $"jQuery('{tag}').not('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Not(selector),
+                    $"jQuery('{tag}').not('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).OffsetParent(), $"jQuery('{tag}').offsetParent()" };
                 yield return new object[] { By.JQuerySelector(tag).Parent(), $"jQuery('{tag}').parent()" };
-                yield return new object[] { By.JQuerySelector(tag).Parent(selector), $"jQuery('{tag}').parent('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Parent(selector),
+                    $"jQuery('{tag}').parent('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).Parents(), $"jQuery('{tag}').parents()" };
-                yield return new object[] { By.JQuerySelector(tag).Parents(selector), $"jQuery('{tag}').parents('{selector}')" };
+                yield return new object[]
+                {
+                    By.JQuerySelector(tag).Parents(selector),
+                    $"jQuery('{tag}').parents('{selector}')"
+                };
                 yield return new object[] { By.JQuerySelector(tag).ParentsUntil(), $"jQuery('{tag}').parentsUntil()" };
                 yield return new object[]
                 {
@@ -193,7 +245,8 @@ namespace Selenium.WebDriver.Extensions.Tests
             {
                 yield return new object[]
                 {
-                    (Action)(() => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null))
+                    (Action)(() => new JQuerySelector(
+                        _fixture.Create<string>(), null, _fixture.Create<string>(), null))
                 };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(null)) };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(Empty)) };
@@ -211,8 +264,14 @@ namespace Selenium.WebDriver.Extensions.Tests
                 {
                     (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null))
                 };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(Empty)) };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(null))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(Empty))
+                };
                 yield return new object[]
                 {
                     (Action)(() => By.JQuerySelector(_fixture.Create<string>())
@@ -225,10 +284,17 @@ namespace Selenium.WebDriver.Extensions.Tests
                 };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(_fixture.Create<string>(), null))
+                    (Action)(() => By.JQuerySelector(
+                        _fixture.Create<string>()).Closest(_fixture.Create<string>(), null))
                 };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(Empty)) };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(null))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(Empty))
+                };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(null)) };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(Empty)) };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(null)) };
@@ -246,48 +312,69 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             get
             {
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).AddBack(Empty)) };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).AddBack(Empty))
+                };
                 yield return new object[]
                 {
                     (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Children(Empty))
                 };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Next(Empty)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextAll(Empty)) };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(Empty, _fixture.Create<string>()))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextAll(Empty))
                 };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(_fixture.Create<string>(), Empty))
+                    (Action)(() => By.JQuerySelector(
+                        _fixture.Create<string>()).NextUntil(Empty, _fixture.Create<string>()))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(
+                        _fixture.Create<string>()).NextUntil(_fixture.Create<string>(), Empty))
                 };
                 yield return new object[]
                 {
                     (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(null, Empty))
                 };
                 yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Prev(Empty)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevAll(Empty)) };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(Empty, _fixture.Create<string>()))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevAll(Empty))
                 };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(_fixture.Create<string>(), Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(Empty, _fixture.Create<string>()))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(_fixture.Create<string>(), Empty))
                 };
                 yield return new object[]
                 {
                     (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(null, Empty))
                 };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parent(Empty)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parents(Empty)) };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).ParentsUntil(Empty, _fixture.Create<string>()))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parent(Empty))
                 };
                 yield return new object[]
                 {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).ParentsUntil(_fixture.Create<string>(), Empty))
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parents(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(Empty, _fixture.Create<string>()))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(_fixture.Create<string>(), Empty))
                 };
                 yield return new object[]
                 {
@@ -352,11 +439,13 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue() =>
-            ((Action)(() => By.JQuerySelector(Empty))).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)(() => By.JQuerySelector(Empty))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue() =>
-            ((Action)(() => By.JQuerySelector(" "))).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)(() => By.JQuerySelector(" "))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
 
         [Theory]
         [AutoData]
@@ -372,7 +461,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(string rawSelector) =>
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(
+            string rawSelector) =>
             ((Action)(() => By.JQuerySelector(rawSelector, variable: " "))).Should().Throw<ArgumentException>()
                 .And.ParamName.Should().Be("variable");
 

@@ -7,6 +7,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using OpenQA.Selenium.Support.UI;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Suppress.Category;
+    using static Suppress.CodeCracker;
     using By = Selenium.WebDriver.Extensions.By;
 
     [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
@@ -16,7 +18,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     {
         private readonly Func<string, TSelector> _selectorAccessor;
 
-        [SuppressMessage(Suppress.Category.CODE_CRACKER, Suppress.CodeCracker.CC0057)]
+        [SuppressMessage(CODE_CRACKER, CC0057)]
         protected SelectorTests(IWebDriver browser, string path, Func<string, TSelector> selectorAccessor)
             : base(browser, path) => _selectorAccessor = selectorAccessor;
 
@@ -78,7 +80,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         [Fact]
         public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
         {
-            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(_selectorAccessor.Invoke("h1"));
+            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(
+                _selectorAccessor.Invoke("h1"));
 
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);

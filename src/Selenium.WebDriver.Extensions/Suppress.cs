@@ -354,7 +354,9 @@ namespace Selenium.WebDriver.Extensions
             public const string CA2145 =
                 "CA2145:Transparent methods should not be decorated with the SuppressUnmanagedCodeSecurityAttribute";
 
-            public const string CA2146 = "CA2146:Types must be at least as critical as their base types and interfaces";
+            public const string CA2146 =
+                "CA2146:Types must be at least as critical as their base types and interfaces";
+
             public const string CA2147 = "CA2147:Transparent methods may not use security asserts";
             public const string CA2149 = "CA2149:Transparent methods must not call into native code";
             public const string CA2151 = "CA2151:Fields with critical types should be security critical";
@@ -408,7 +410,10 @@ namespace Selenium.WebDriver.Extensions
         {
             public const string S3884 = "S3884:CoSetProxyBlanket and CoInitializeSecurity should not be used";
             public const string S3649 = "S3649:User-provided values should be sanitized before use in SQL statements";
-            public const string S2278 = "S2278:Neither DES (Data Encryption Standard) nor DESede (3DES) should be used";
+
+            public const string S2278 =
+                "S2278:Neither DES (Data Encryption Standard) nor DESede (3DES) should be used";
+
             public const string S2068 = "S2068:Credentials should not be hard-coded";
             public const string S4159 = "S4159:Classes should implement their ExportAttribute interfaces";
             public const string S3889 = "S3889:Neither Thread.Resume nor Thread.Suspend should be used";
@@ -416,7 +421,10 @@ namespace Selenium.WebDriver.Extensions
             public const string S3693 = "S3693:Exception constructors should not throw exceptions";
             public const string S3464 = "S3464:Type inheritance should not be recursive";
             public const string S2930 = "S2930:IDisposables should be disposed";
-            public const string S2275 = "S2275:Composite format strings should not lead to unexpected behavior at runtime";
+
+            public const string S2275 =
+                "S2275:Composite format strings should not lead to unexpected behavior at runtime";
+
             public const string S2190 = "S2190:Recursion should not be infinite";
             public const string S3877 = "S3877:Exceptions should not be thrown from unexpected methods";
             public const string S3875 = "S3875:operator== should not be overloaded on reference types";
@@ -432,7 +440,10 @@ namespace Selenium.WebDriver.Extensions
             public const string S2187 = "S2187:TestCases should contain tests";
             public const string S2178 = "S2178:Short-circuit logic should be used in boolean contexts";
             public const string S3449 = "S3449:Right operands of shift operators should be integers";
-            public const string S927 = "S927:parameter names should match base declaration and other partial definitions";
+
+            public const string S927 =
+                "S927:parameter names should match base declaration and other partial definitions";
+
             public const string S4019 = "S4019:Base class methods should not be hidden";
             public const string S4015 = "S4015:Inherited member visibility should not be decreased";
             public const string S3998 = "S3998:Threads should not lock on objects with weak identity";
@@ -442,10 +453,16 @@ namespace Selenium.WebDriver.Extensions
             public const string S3871 = "S3871:Exception types should be public";
             public const string S3776 = "S3776:Cognitive Complexity of methods should not be too high";
             public const string S3600 = "S3600:params should not be introduced on overrides";
-            public const string S3451 = "S3451:[DefaultValue] should not be used when [DefaultParameterValue] is meant";
+
+            public const string S3451 =
+                "S3451:[DefaultValue] should not be used when [DefaultParameterValue] is meant";
+
             public const string S3447 = "S3447:[Optional] should not be used on ref or out parameters";
             public const string S3265 = "S3265:Non-flags enums should not be used in bitwise operations";
-            public const string S3218 = "S3218:Inner class members should not shadow outer class static or type members";
+
+            public const string S3218 =
+                "S3218:Inner class members should not shadow outer class static or type members";
+
             public const string S3217 = "S3217:Explicit conversions of foreach loops should not be used";
             public const string S2696 = "S2696:Instance members should not write to static fields";
             public const string S2692 = "S2692:IndexOf checks should not be for positive numbers";
@@ -474,9 +491,15 @@ namespace Selenium.WebDriver.Extensions
             public const string S3466 = "S3466:Optional parameters should be passed to base calls";
             public const string S3453 = "S3453:Classes should not have only private constructors";
             public const string S3346 = "S3346:Expressions used in Debug.Assert should not produce side effects";
-            public const string S3343 = "S3343:Caller information parameters should come at the end of the parameter list";
+
+            public const string S3343 =
+                "S3343:Caller information parameters should come at the end of the parameter list";
+
             public const string S3263 = "S3263:Static fields should appear in the order they must be initialized ";
-            public const string S3249 = "S3249:Classes directly extending object should not call base in GetHashCode or Equals";
+
+            public const string S3249 =
+                "S3249:Classes directly extending object should not call base in GetHashCode or Equals";
+
             public const string S3244 = "S3244:Anonymous delegates should not be used to unsubscribe from Events";
             public const string S3172 = "S3172:Delegates should not be subtracted";
             public const string S3168 = "S3168:async methods should not return void";
@@ -494,12 +517,20 @@ namespace Selenium.WebDriver.Extensions
             public const string S2583 = "S2583:Conditionally executed blocks should be reachable";
             public const string S2259 = "S2259:Null pointers should not be dereferenced";
             public const string S2225 = "S2225:ToString() method should not return null";
-            public const string S2201 = "S2201:Return values from functions without side effects should not be ignored";
+
+            public const string S2201 =
+                "S2201:Return values from functions without side effects should not be ignored";
+
             public const string S2123 = "S2123:Values should not be uselessly incremented";
             public const string S2114 = "S2114:Collections should not be passed as arguments to their own methods";
             public const string S1862 = "S1862:Related if/else if statements should not have the same condition";
-            public const string S1848 = "S1848:Objects should not be created to be dropped immediately without being used";
-            public const string S1764 = "S1764:Identical expressions should not be used on both sides of a binary operator";
+
+            public const string S1848 =
+                "S1848:Objects should not be created to be dropped immediately without being used";
+
+            public const string S1764 =
+                "S1764:Identical expressions should not be used on both sides of a binary operator";
+
             public const string S1656 = "S1656:Variables should not be self-assigned";
             public const string S907 = "S907:goto statement should not be used";
             public const string S4277 = "S4277:Shared parts should not be created with new";
@@ -517,7 +548,10 @@ namespace Selenium.WebDriver.Extensions
             public const string S3925 = "S3925:ISerializable should be implemented correctly";
             public const string S3885 = "S3885:Assembly.Load should be used";
             public const string S3881 = "S3881:IDisposable should be implemented correctly";
-            public const string S3597 = "S3597:ServiceContract and OperationContract attributes should be used together";
+
+            public const string S3597 =
+                "S3597:ServiceContract and OperationContract attributes should be used together";
+
             public const string S3457 = "S3457:Composite format strings should be used correctly";
             public const string S3445 = "S3445:Exceptions should not be explicitly rethrown";
             public const string S3442 = "S3442:abstract classes should not have public constructors";
@@ -575,8 +609,13 @@ namespace Selenium.WebDriver.Extensions
 
             public const string S2345 = "S2345:Flags enumerations should explicitly initialize all their members";
             public const string S2328 = "S2328:GetHashCode should not reference mutable fields";
-            public const string S2184 = "S2184:Results of integer division should not be assigned to floating point variables";
-            public const string S2183 = "S2183:Ints and longs should not be shifted by zero or more than their number of bits-1";
+
+            public const string S2184 =
+                "S2184:Results of integer division should not be assigned to floating point variables";
+
+            public const string S2183 =
+                "S2183:Ints and longs should not be shifted by zero or more than their number of bits-1";
+
             public const string S1206 = "S1206:Equals(Object) and GetHashCode() should be overridden in pairs";
             public const string S818 = "S818:Literal suffixes should be upper case";
             public const string S3897 = "S3897:Classes that provide Equals(<T>) should implement IEquatable<T>";
@@ -588,8 +627,11 @@ namespace Selenium.WebDriver.Extensions
             public const string S3450 =
                 "S3450:Parameters with [DefaultParameterValue] attributes should also be marked [Optional]";
 
-            public const string S3444 = "S3444:Interfaces should not simply inherit from base interfaces with colliding members";
-            public const string S3440 = "S3440:Variables should not be checked against the values they're about to be assigned";
+            public const string S3444 =
+                "S3444:Interfaces should not simply inherit from base interfaces with colliding members";
+
+            public const string S3440 =
+                "S3440:Variables should not be checked against the values they're about to be assigned";
 
             public const string S3376 =
                 "S3376:Attribute, EventArgs, and Exception type names should end with the type being extended";
@@ -638,7 +680,10 @@ namespace Selenium.WebDriver.Extensions
             public const string S1147 = "S1147:Exit methods should not be called";
             public const string S4212 = "S4212:Serialization constructors should be secured";
             public const string S2070 = "S2070:SHA-1 and Message-Digest hash algorithms should not be used";
-            public const string S2952 = "S2952:Classes should Dispose of members from the classes' own Dispose methods";
+
+            public const string S2952 =
+                "S2952:Classes should Dispose of members from the classes' own Dispose methods";
+
             public const string S2551 = "S2551:Types and this should not be used for locking";
             public const string S4039 = "S4039:Interface methods should be callable by derived types";
 
@@ -660,7 +705,8 @@ namespace Selenium.WebDriver.Extensions
             public const string S1541 = "S1541:Methods and properties should not be too complex";
 
             public const string S134 =
-                "S134:Control flow statements if, switch, for, foreach, while, do  and try should not be nested too deeply";
+                "S134:Control flow statements if, switch, for, foreach, while, do  and try should not be nested too "
+                + "deeply";
 
             public const string S131 = "S131:switch/Select statements should end with default/Case Else clauses";
             public const string S126 = "S126:if ... else if constructs should end with else clauses";
@@ -719,7 +765,8 @@ namespace Selenium.WebDriver.Extensions
             public const string S2674 = "S2674:The length returned from a stream read should be checked";
 
             public const string S1226 =
-                "S1226:Method parameters, caught exceptions and foreach variables' initial values should not be ignored";
+                "S1226:Method parameters, caught exceptions and foreach variables' initial values should not be "
+                + "ignored";
 
             public const string S4226 = "S4226:Extensions should be in separate namespaces";
             public const string S4225 = "S4225:Extension methods should not extend object";
@@ -727,7 +774,10 @@ namespace Selenium.WebDriver.Extensions
             public const string S4061 = "S4061:params should be used instead of varargs";
             public const string S4060 = "S4060:Non-abstract attributes should be sealed";
             public const string S4058 = "S4058:Overloads with a StringComparison parameter should be used";
-            public const string S4056 = "S4056:Overloads with a CultureInfo or an IFormatProvider parameter should be used";
+
+            public const string S4056 =
+                "S4056:Overloads with a CultureInfo or an IFormatProvider parameter should be used";
+
             public const string S4052 = "S4052:Types should not extend outdated base types";
             public const string S4049 = "S4049:Properties should be preferred";
             public const string S4047 = "S4047:Generics should be used when appropriate";
@@ -752,11 +802,17 @@ namespace Selenium.WebDriver.Extensions
             public const string S3242 = "S3242:Method parameters should be declared with base types";
             public const string S3240 = "S3240:The simplest possible condition syntax should be used";
             public const string S3235 = "S3235:Redundant parentheses should not be used";
-            public const string S3234 = "S3234:GC.SuppressFinalize should not be invoked for types without destructors";
+
+            public const string S3234 =
+                "S3234:GC.SuppressFinalize should not be invoked for types without destructors";
+
             public const string S3052 = "S3052:Members should not be initialized to default values";
             public const string S2760 = "S2760:Sequential tests should not check the same condition";
             public const string S2333 = "S2333:Redundant modifiers should not be used";
-            public const string S2325 = "S2325:Methods and properties that don't access instance data should be static";
+
+            public const string S2325 =
+                "S2325:Methods and properties that don't access instance data should be static";
+
             public const string S2221 = "S2221:Exception should not be caught when not required by called methods";
             public const string S2156 = "S2156:sealed classes should not have protected members";
             public const string S1858 = "S1858:ToString() calls should not be redundant";
@@ -805,7 +861,10 @@ namespace Selenium.WebDriver.Extensions
             public const string SA1023 = "SA1023:DereferenceAndAccessOfMustBeSpacedCorrectly";
             public const string SA1024 = "SA1024:ColonsMustBeSpacedCorrectly";
             public const string SA1025 = "SA1025:CodeMustNotContainMultipleWhitespaceInARow";
-            public const string SA1026 = "SA1026:CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation";
+
+            public const string SA1026 =
+                "SA1026:CodeMustNotContainSpaceAfterNewKeywordInImplicitlyTypedArrayAllocation";
+
             public const string SA1027 = "SA1027:UseTabsCorrectly";
             public const string SA1028 = "SA1028:CodeMustNotContainTrailingWhitespace";
             public const string SA1100 = "SA1100:DoNotPrefixCallsWithBaseUnlessLocalImplementationExists";
