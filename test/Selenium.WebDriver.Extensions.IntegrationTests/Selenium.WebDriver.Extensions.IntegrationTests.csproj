@@ -11,7 +11,7 @@
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
-    <PackageReference Include="FluentAssertions" Version="5.4.0" />
+    <PackageReference Include="FluentAssertions" Version="5.4.1" />
     <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.40.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.20.1" />
