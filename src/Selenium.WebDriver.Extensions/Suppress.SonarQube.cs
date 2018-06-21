@@ -71,7 +71,7 @@ namespace Selenium.WebDriver.Extensions
         public const string S1313 = "S1313:IP addresses should not be hardcoded";
 
         public const string S134 =
-            "S134:Control flow statements if, switch, for, foreach, while, do  and try should not be nested too deeply";
+            "S134:Control flow statements if, switch, for, foreach, while, do and try should not be nested too deeply";
 
         public const string S138 = "S138:Functions should not have too many lines of code";
         public const string S1449 = "S1449:Culture should be specified for string operations";
