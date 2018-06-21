@@ -190,3 +190,4 @@ ReSharper.xml
 tools/
 coverage.xml
 .idea/
+.sonarlint/

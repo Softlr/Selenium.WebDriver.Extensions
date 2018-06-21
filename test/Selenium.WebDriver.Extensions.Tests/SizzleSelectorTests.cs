@@ -53,11 +53,13 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue() =>
-            ((Action)(() => By.SizzleSelector(Empty))).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)(() => By.SizzleSelector(Empty))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue() =>
-            ((Action)(() => By.SizzleSelector(" "))).Should().Throw<ArgumentException>().And.ParamName.Should().Be("selector");
+            ((Action)(() => By.SizzleSelector(" "))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
 
         [Theory]
         [AutoData]

@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium.Internal;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Parsers;
+    using static Suppress;
     using static System.String;
 
     /// <summary>
@@ -55,6 +56,7 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         protected virtual string ResultResolver => Empty;
 
+        [SuppressMessage(SONARQUBE, S4018)]
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
         /// <summary>

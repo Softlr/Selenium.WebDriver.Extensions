@@ -79,21 +79,25 @@ namespace Selenium.WebDriver.Extensions.Tests
                 // LoadJQuery
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), null
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(),
+                    null
                 };
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), timeSpan
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(),
+                    timeSpan
                 };
 
                 // LoadSizzle
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), null
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(),
+                    null
                 };
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), timeSpan
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(),
+                    timeSpan
                 };
             }
         }
