@@ -3,6 +3,7 @@
     <TargetFrameworks>net47</TargetFrameworks>
     <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
+	<IsPackable>false</IsPackable>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
