@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium.Support.UI;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Contracts;
+    using static Suppress;
 
     /// <summary>
     /// Web driver extensions.
@@ -105,6 +106,7 @@ namespace Selenium.WebDriver.Extensions
         /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type,
         /// following the rules above. Nested lists are not supported.
         /// </remarks>
+        [SuppressMessage(SONARQUBE, S4018)]
         public static TResult ExecuteScript<TResult>(
             [NotNull] this IWebDriver driver, [Required] string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
