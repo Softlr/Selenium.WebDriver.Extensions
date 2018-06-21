@@ -36,7 +36,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - dotnet pack --include-symbols --include-source --no-build /p:Version:3.2.1
+  - dotnet pack --include-symbols --include-source --no-build /p:Version=3.2.1
 
 test_script:
 - ps: >-
