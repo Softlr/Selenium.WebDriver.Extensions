@@ -357,6 +357,7 @@ namespace Selenium.WebDriver.Extensions
             new JQuerySelector(
                 RawSelector, Context, Variable, $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
 
+        [SuppressMessage(SONARQUBE, S3242)]
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
             new JQuerySelector(
                 RawSelector, Context, Variable, $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
