@@ -39,7 +39,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - nuget pack src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.nuspec -Version 3.2.1 -Symbols
+  - dotnet pack --include-symbols --include-source --no-build -o %APPVEYOR_BUILD_FOLDER% /p:Version:3.2.1
 
 test_script:
 - ps: >-
