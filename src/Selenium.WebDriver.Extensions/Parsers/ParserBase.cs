@@ -1,8 +1,7 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
     using System.Diagnostics.CodeAnalysis;
-    using static Suppress.Category;
-    using static Suppress.CodeCracker;
+    using static Suppress;
 
     internal abstract class ParserBase : IParser
     {
@@ -11,6 +10,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
 
         public IParser Successor { get; }
 
+        [SuppressMessage(SONARQUBE, S4018)]
         public abstract TResult Parse<TResult>(object rawResult);
     }
 }

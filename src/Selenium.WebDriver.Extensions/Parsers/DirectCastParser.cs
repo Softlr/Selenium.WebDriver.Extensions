@@ -1,8 +1,7 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
     using System.Diagnostics.CodeAnalysis;
-    using static Suppress.Category;
-    using static Suppress.SonarQube;
+    using static Suppress;
 
     internal class DirectCastParser : ParserBase
     {

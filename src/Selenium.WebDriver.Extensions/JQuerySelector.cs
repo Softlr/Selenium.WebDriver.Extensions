@@ -5,8 +5,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Contracts;
-    using static Suppress.Category;
-    using static Suppress.SonarQube;
+    using static Suppress;
     using static System.String;
 
     /// <summary>
