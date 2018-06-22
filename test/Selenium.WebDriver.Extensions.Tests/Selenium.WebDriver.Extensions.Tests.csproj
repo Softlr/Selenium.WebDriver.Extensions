@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
+    <TargetFrameworks>net472</TargetFrameworks>
     <DebugType>full</DebugType>
     <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
