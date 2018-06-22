@@ -20,10 +20,10 @@
     <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2018.1.2">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="PostSharp.Patterns.Model" Version="5.0.51">
+    <PackageReference Include="PostSharp.Patterns.Model" Version="6.0.15-rc">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-	<PackageReference Include="PostSharp.Patterns.Model.Redist" Version="5.0.51" />
+	<PackageReference Include="PostSharp.Patterns.Model.Redist" Version="6.0.15-rc" />
     <PackageReference Include="Selenium.Support" Version="3.12.1" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
 		<PrivateAssets>all</PrivateAssets>

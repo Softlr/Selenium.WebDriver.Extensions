@@ -8,21 +8,15 @@ Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 # Features
 ## Main
 * Support for nested selectors
-* Very easy setup: install packages with NuGet and start using it with your existing Selenium solution
-* High quality ensured by continuous integration setup with Appveyor, unit and integration testing and high code coverage
-* Well documented code following strict StyleCop.Analyzers and FxCop rules
-## jQuery support
-* jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
-* jQuery auto-load on pages on sites that don't use jQuery
-* Support for jQuery context switching
-* Support for `ExpectedConditions` with jQuery selectors
-* Support for Page Objects with jQuery selectors
-## Sizzle support
-* Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
-* Sizzle auto-load on pages on sites that don't use Sizzle
-* Support for Sizzle context switching
-* Support for `ExpectedConditions` with Sizzle selectors
-* Support for Page Objects with Sizzle selectors
+* Easy setup: install NuGet package and start using it with your existing Selenium solution
+* High quality ensured by continuous integration setup with Appveyor, unit and integration tests and high code coverage
+* Well documented code using [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details)
+## jQuery/Sizzle support
+* jQuery/Sizzle selectors support for Selenium WebDriver
+* jQuery/Sizzle auto-load on pages on sites that don't use jQuery
+* Support for context switching
+* Support for `ExpectedConditions`
+* Support for Page Objects
  
 # Installation
 Run the following command in Visual Studio Package Manager Console.
