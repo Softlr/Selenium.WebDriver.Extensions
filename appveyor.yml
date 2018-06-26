@@ -18,7 +18,6 @@ install:
   - choco install msbuild-sonarqube-runner -y
   - choco install googlechrome -y --ignore-checksums
   - choco install opencover.portable -y
-  - choco install reportgenerator.portable -y
   - choco install codecov -y
 
 nuget:
@@ -45,16 +44,14 @@ test_script:
       & $env:xunit20\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
   - ps: >-
       & $env:xunit20\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=InternetExplorer
-  - OpenCover.Console.exe -register:user -target:xunit.console.exe -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+  - ps: OpenCover.Console.exe -register:user -target:$env:xunit20\xunit.console.exe -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
   - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
 after_test:
-  - ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
   - codecov -f coverage.xml
 
 artifacts:
   - path: coverage.xml
-  - path: CoverageReport
   - path: .\*.nupkg
 
 deploy:
