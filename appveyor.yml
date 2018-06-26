@@ -17,7 +17,7 @@ image: Visual Studio 2017
   
 install:
   - choco install msbuild-sonarqube-runner -y
-  - choco install googlechrome -y
+  - choco install googlechrome -y --ignore-checksums
 
 nuget:
   disable_publish_on_pr: true
