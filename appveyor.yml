@@ -18,6 +18,7 @@ image: Visual Studio 2017
 install:
   - choco install msbuild-sonarqube-runner -y
   - choco install googlechrome -y --ignore-checksums
+  - choco install opencover.portable
   - choco install codecov
 
 nuget:
@@ -47,7 +48,7 @@ test_script:
 - ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=InternetExplorer
 - ps: >-
-    & (Resolve-Path $env:USERPROFILE\.nuget\packages\OpenCover\*\tools\OpenCover.Console.exe) -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+    OpenCover.Console.exe -register:user -target:(Resolve-Path $env:USERPROFILE\.nuget\packages\xunit.runner.console\*\tools\net452\xunit.console.exe) -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
 - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
 after_test:
 - ps: >-
