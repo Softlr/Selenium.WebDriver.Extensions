@@ -18,7 +18,6 @@ image: Visual Studio 2017
 install:
   - choco install msbuild-sonarqube-runner -y
   - choco install googlechrome -y --ignore-checksums
-  - choco install xunit -y
   - choco install opencover.portable -y
   - choco install reportgenerator.portable -y
   - choco install codecov -y
@@ -41,11 +40,14 @@ after_build:
   - dotnet pack -c Release --include-symbols --include-source --no-build -o %APPVEYOR_BUILD_FOLDER% /p:Version=3.2.1
 
 test_script:
-  - ps: xunit.console.exe test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
-  - ps: xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
-  - ps: xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=InternetExplorer
-  - ps: OpenCover.Console.exe -register:user -target:xunit.console.exe -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
-  - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
+- ps: >-
+    & $env:xunit20\xunit.console test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all -appveyor
+- ps: >-
+    & $env:xunit20\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=Chrome
+- ps: >-
+    & $env:xunit20\xunit.console.exe test\Selenium.WebDriver.Extensions.IntegrationTests\bin\Release\net472\Selenium.WebDriver.Extensions.IntegrationTests.dll -noshadow -parallel all -appveyor -trait Browser=InternetExplorer
+- OpenCover.Console.exe -register:user -target:xunit.console.exe -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
+- ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
 after_test:
   - ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
