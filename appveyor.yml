@@ -18,6 +18,7 @@ image: Visual Studio 2017
 install:
   - choco install msbuild-sonarqube-runner -y
   - choco install googlechrome -y --ignore-checksums
+  - choco install codecov
 
 nuget:
   disable_publish_on_pr: true
@@ -53,8 +54,6 @@ after_test:
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
 - ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
-- SET PATH=C:\Python34;C:\Python34\Scripts;%PATH%"
-- pip install codecov
 - codecov -f coverage.xml
 
 artifacts:
