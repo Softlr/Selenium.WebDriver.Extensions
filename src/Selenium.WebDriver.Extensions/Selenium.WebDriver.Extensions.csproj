@@ -17,14 +17,14 @@
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2018.1.2">
-		<PrivateAssets>all</PrivateAssets>
-	</PackageReference>
     <PackageReference Include="PostSharp.Patterns.Model" Version="6.0.15-rc">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
 	<PackageReference Include="PostSharp.Patterns.Model.Redist" Version="6.0.15-rc" />
-    <PackageReference Include="Selenium.Support" Version="3.12.1" />
+    <PackageReference Include="Selenium.Support" Version="3.13.0" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463">
+		<PrivateAssets>all</PrivateAssets>
+	</PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
