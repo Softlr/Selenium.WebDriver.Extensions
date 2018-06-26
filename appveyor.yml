@@ -1,4 +1,3 @@
-# master branch configuration
 branches:
   only:
     - master
