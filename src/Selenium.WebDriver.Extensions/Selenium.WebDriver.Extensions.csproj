@@ -24,7 +24,7 @@
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
 	<PackageReference Include="PostSharp.Patterns.Model.Redist" Version="6.0.15-rc" />
-    <PackageReference Include="Selenium.Support" Version="3.12.1" />
+    <PackageReference Include="Selenium.Support" Version="3.13.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
