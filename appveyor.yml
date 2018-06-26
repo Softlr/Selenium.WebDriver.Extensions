@@ -54,13 +54,10 @@ test_script:
 - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
 after_test:
-- ps: >-
-    & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
   - ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
   - codecov -f coverage.xml
 
 artifacts:
-  - path: ReSharper.xml
   - path: coverage.xml
   - path: CoverageReport
   - path: .\*.nupkg

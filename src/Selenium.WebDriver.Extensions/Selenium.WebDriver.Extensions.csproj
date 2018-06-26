@@ -17,9 +17,6 @@
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2018.1.2">
-		<PrivateAssets>all</PrivateAssets>
-	</PackageReference>
     <PackageReference Include="PostSharp.Patterns.Model" Version="6.0.15-rc">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
