@@ -20,6 +20,7 @@ install:
   - choco install googlechrome -y --ignore-checksums
   - choco install xunit
   - choco install opencover.portable
+  - choco install reportgenerator.portable
   - choco install codecov
 
 nuget:
@@ -51,12 +52,12 @@ test_script:
 - ps: >-
     OpenCover.Console.exe -register:user -target:xunit.console.exe -targetargs:"test\Selenium.WebDriver.Extensions.Tests\bin\Release\net472\Selenium.WebDriver.Extensions.Tests.dll -noshadow -parallel all" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*"
 - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
+
 after_test:
 - ps: >-
     & (Resolve-Path $env:USERPROFILE\.nuget\packages\JetBrains.ReSharper.CommandLineTools\*\tools\inspectcode.exe) Selenium.WebDriver.Extensions.sln --output=ReSharper.xml /no-swea
-- ps: >-
-    & (Resolve-Path $env:USERPROFILE\.nuget\packages\ReportGenerator\*\tools\ReportGenerator.exe) -reports:coverage.xml -targetdir:CoverageReport
-- codecov -f coverage.xml
+  - ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
+  - codecov -f coverage.xml
 
 artifacts:
   - path: ReSharper.xml
