@@ -18,7 +18,6 @@ install:
   - choco install msbuild-sonarqube-runner -y
   - choco install googlechrome -y --ignore-checksums
   - choco install opencover.portable -y
-  - choco install reportgenerator.portable -y
   - choco install codecov -y
 
 nuget:
@@ -49,12 +48,10 @@ test_script:
   - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
 
 after_test:
-  - ReportGenerator.exe -reports:coverage.xml -targetdir:CoverageReport
   - codecov -f coverage.xml
 
 artifacts:
   - path: coverage.xml
-  - path: CoverageReport
   - path: .\*.nupkg
 
 deploy:
