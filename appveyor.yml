@@ -10,7 +10,7 @@ branches:
 skip_tags: true
 skip_branch_with_pr: true
 skip_commits:
-  message: /Update.*\.md/
+  message: /\[(skip ci|ci skip)\]/
 
 version: 3.2.1.{build}
 image: Visual Studio 2017
