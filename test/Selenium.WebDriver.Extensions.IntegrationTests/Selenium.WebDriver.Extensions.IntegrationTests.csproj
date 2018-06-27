@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <DebugType>full</DebugType>
     <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
@@ -9,10 +9,21 @@
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Views\*.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
     <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
     <PackageReference Include="FluentAssertions" Version="5.4.1" />
-    <PackageReference Include="Nancy.Hosting.Self" Version="1.4.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
+    <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.40.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.21.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.13.0" />

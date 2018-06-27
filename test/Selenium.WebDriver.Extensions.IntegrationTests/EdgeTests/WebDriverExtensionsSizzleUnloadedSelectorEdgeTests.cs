@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture.Browser, TestCaseModule.SIZZLE_UNLOADED, x => By.SizzleSelector(x))
+            : base(fixture.Browser, TestCaseModule.UNLOADED, x => By.SizzleSelector(x))
         {
         }
     }
