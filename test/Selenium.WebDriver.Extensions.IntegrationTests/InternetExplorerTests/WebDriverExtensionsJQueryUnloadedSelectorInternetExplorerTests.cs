@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
-            : base(fixture.Browser, TestCaseModule.JQUERY_UNLOADED, x => By.JQuerySelector(x))
+            : base(fixture.Browser, TestCaseModule.UNLOADED, x => By.JQuerySelector(x))
         {
         }
     }
