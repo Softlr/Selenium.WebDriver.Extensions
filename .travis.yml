@@ -3,7 +3,6 @@ mono: none
 os:  
   - linux
   - osx
-osx_image: xcode9.4 
 dotnet: 2.1.301
 script:
   - dotnet restore
