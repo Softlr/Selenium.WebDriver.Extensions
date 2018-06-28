@@ -32,16 +32,16 @@ namespace Selenium.WebDriver.Extensions
             return stack.join(' > ');
         })(arguments[0]);";
 
+        public static string CheckScriptCode(string variable) => $@"(function(value) {{
+            'use strict';
+            return typeof value === 'function';
+        }})({variable})";
+
         public static string LoadScriptCode(Uri url) => $@"(function(source) {{
             'use strict';
             var script = document.createElement('script');
             script.src = source;
             document.getElementsByTagName('body')[0].appendChild(script);
         }})('{url}')";
-
-        public static string CheckScriptCode(string variable) => $@"(function(value) {{
-            'use strict';
-            return typeof value === 'function';
-        }})({variable})";
     }
 }

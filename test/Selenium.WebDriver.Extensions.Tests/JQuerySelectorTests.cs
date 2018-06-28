@@ -21,6 +21,156 @@ namespace Selenium.WebDriver.Extensions.Tests
         private static readonly Fixture _fixture = new Fixture();
 
         [PublicAPI]
+        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
+        public static IEnumerable<object[]> SelectorArgumentExceptionTests
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).AddBack(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Children(Empty))
+                };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Next(Empty)) };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextAll(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(
+                        _fixture.Create<string>()).NextUntil(Empty, _fixture.Create<string>()))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(
+                        _fixture.Create<string>()).NextUntil(_fixture.Create<string>(), Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(null, Empty))
+                };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Prev(Empty)) };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevAll(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(Empty, _fixture.Create<string>()))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .PrevUntil(_fixture.Create<string>(), Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(null, Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parent(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parents(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(Empty, _fixture.Create<string>()))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .ParentsUntil(_fixture.Create<string>(), Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).ParentsUntil(null, Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Siblings(Empty))
+                };
+            }
+        }
+
+        [PublicAPI]
+        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
+        public static IEnumerable<object[]> SelectorNullArgumentExceptionTests
+        {
+            get
+            {
+                yield return new object[]
+                {
+                    (Action)(() => new JQuerySelector(
+                        _fixture.Create<string>(), null, _fixture.Create<string>(), null))
+                };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(null)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(Empty)) };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Add(null, By.JQuerySelector(_fixture.Create<string>())))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Add(Empty, By.JQuerySelector(_fixture.Create<string>())))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(null))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(Empty))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(null, By.JQuerySelector(_fixture.Create<string>())))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
+                        .Closest(Empty, By.JQuerySelector(_fixture.Create<string>())))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(
+                        _fixture.Create<string>()).Closest(_fixture.Create<string>(), null))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(null))
+                };
+                yield return new object[]
+                {
+                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(Empty))
+                };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(null)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(Empty)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(null)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(Empty)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(null)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(Empty)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(null)) };
+                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(Empty)) };
+            }
+        }
+
+        [PublicAPI]
         public static IEnumerable<object[]> SelectorsTests
         {
             get
@@ -237,168 +387,10 @@ namespace Selenium.WebDriver.Extensions.Tests
             }
         }
 
-        [PublicAPI]
-        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
-        public static IEnumerable<object[]> SelectorNullArgumentExceptionTests
-        {
-            get
-            {
-                yield return new object[]
-                {
-                    (Action)(() => new JQuerySelector(
-                        _fixture.Create<string>(), null, _fixture.Create<string>(), null))
-                };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(Empty)) };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .Add(null, By.JQuerySelector(_fixture.Create<string>())))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .Add(Empty, By.JQuerySelector(_fixture.Create<string>())))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(null))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Closest(Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .Closest(null, By.JQuerySelector(_fixture.Create<string>())))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .Closest(Empty, By.JQuerySelector(_fixture.Create<string>())))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(
-                        _fixture.Create<string>()).Closest(_fixture.Create<string>(), null))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(null))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Filter(Empty))
-                };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Find(Empty)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Has(Empty)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Is(Empty)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(null)) };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Not(Empty)) };
-            }
-        }
-
-        [PublicAPI]
-        [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
-        public static IEnumerable<object[]> SelectorArgumentExceptionTests
-        {
-            get
-            {
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).AddBack(Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Children(Empty))
-                };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Next(Empty)) };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextAll(Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(
-                        _fixture.Create<string>()).NextUntil(Empty, _fixture.Create<string>()))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(
-                        _fixture.Create<string>()).NextUntil(_fixture.Create<string>(), Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).NextUntil(null, Empty))
-                };
-                yield return new object[] { (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Prev(Empty)) };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevAll(Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .PrevUntil(Empty, _fixture.Create<string>()))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .PrevUntil(_fixture.Create<string>(), Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).PrevUntil(null, Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parent(Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Parents(Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .ParentsUntil(Empty, _fixture.Create<string>()))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>())
-                        .ParentsUntil(_fixture.Create<string>(), Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).ParentsUntil(null, Empty))
-                };
-                yield return new object[]
-                {
-                    (Action)(() => By.JQuerySelector(_fixture.Create<string>()).Siblings(Empty))
-                };
-            }
-        }
-
         [Theory]
         [MemberData(nameof(SelectorsTests))]
         public void ShouldCreateCorrectSelector(JQuerySelector sut, string expectedSelector) =>
             sut.Selector.Should().Be(expectedSelector);
-
-        [Theory]
-        [MemberData(nameof(SelectorNullArgumentExceptionTests))]
-        public void ShouldThrowExceptionForNullArguments(Action sut) => sut.Should().Throw<ArgumentNullException>();
-
-        [Theory]
-        [MemberData(nameof(SelectorArgumentExceptionTests))]
-        public void ShouldThrowExceptionForInvalidArguments(Action sut) => sut.Should().Throw<ArgumentException>();
 
         [Theory]
         [AutoData]
@@ -432,40 +424,6 @@ namespace Selenium.WebDriver.Extensions.Tests
             sut.Variable.Should().Be(variable);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue() =>
-            ((Action)(() => By.JQuerySelector(null))).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("selector");
-
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue() =>
-            ((Action)(() => By.JQuerySelector(Empty))).Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be("selector");
-
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue() =>
-            ((Action)(() => By.JQuerySelector(" "))).Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be("selector");
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector) =>
-            ((Action)(() => By.JQuerySelector(rawSelector, variable: null))).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("variable");
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector) =>
-            ((Action)(() => By.JQuerySelector(rawSelector, variable: Empty))).Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("variable");
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(
-            string rawSelector) =>
-            ((Action)(() => By.JQuerySelector(rawSelector, variable: " "))).Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("variable");
-
         [Theory]
         [AutoData]
         public void ShouldFindElementByJQuerySelector(string rawSelector)
@@ -492,13 +450,16 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
+        public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector)
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
+                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector)
                 .Build();
-            var sut = By.JQuerySelector(rawSelector);
+            var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
+            var selector = By.JQuerySelector(rawSelector);
+            var sut = selector.FindElement(element);
 
-            ((Action)(() => sut.FindElement(driver))).Should().Throw<NoSuchElementException>();
+            sut.Should().NotBeNull();
         }
 
         [Theory]
@@ -514,17 +475,66 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Theory]
-        [AutoData]
-        public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
-                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector)
-                .Build();
-            var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
-            var selector = By.JQuerySelector(rawSelector);
-            var sut = selector.FindElement(element);
+        [MemberData(nameof(SelectorArgumentExceptionTests))]
+        public void ShouldThrowExceptionForInvalidArguments(Action sut) => sut.Should().Throw<ArgumentException>();
 
-            sut.Should().NotBeNull();
+        [Theory]
+        [MemberData(nameof(SelectorNullArgumentExceptionTests))]
+        public void ShouldThrowExceptionForNullArguments(Action sut) => sut.Should().Throw<ArgumentNullException>();
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue() =>
+            ((Action)(() => By.JQuerySelector(Empty))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector) =>
+            ((Action)(() => By.JQuerySelector(rawSelector, variable: Empty))).Should().Throw<ArgumentException>()
+                .And.ParamName.Should().Be("variable");
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue() =>
+            ((Action)(() => By.JQuerySelector(null))).Should().Throw<ArgumentNullException>()
+                .And.ParamName.Should().Be("selector");
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector) =>
+            ((Action)(() => By.JQuerySelector(rawSelector, variable: null))).Should().Throw<ArgumentNullException>()
+                .And.ParamName.Should().Be("variable");
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue() =>
+            ((Action)(() => By.JQuerySelector(" "))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(
+            string rawSelector) =>
+            ((Action)(() => By.JQuerySelector(rawSelector, variable: " "))).Should().Throw<ArgumentException>()
+                .And.ParamName.Should().Be("variable");
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector)
+                .Build();
+            var sut = By.JQuerySelector(rawSelector);
+
+            ((Action)(() => sut.FindElement(driver))).Should().Throw<NoSuchElementException>();
+        }
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
+        {
+            var element = new SearchContextBuilder().AsWebElement().Build();
+            var sut = By.JQuerySelector(rawSelector);
+
+            ((Action)(() => sut.FindElement(element))).Should().Throw<InvalidCastException>();
         }
 
         [Theory]
@@ -538,16 +548,6 @@ namespace Selenium.WebDriver.Extensions.Tests
             var sut = By.JQuerySelector(rawSelector);
 
             ((Action)(() => sut.FindElement(element))).Should().Throw<NotSupportedException>();
-        }
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
-        {
-            var element = new SearchContextBuilder().AsWebElement().Build();
-            var sut = By.JQuerySelector(rawSelector);
-
-            ((Action)(() => sut.FindElement(element))).Should().Throw<InvalidCastException>();
         }
     }
 }

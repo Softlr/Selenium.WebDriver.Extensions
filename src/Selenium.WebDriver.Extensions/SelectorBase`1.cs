@@ -37,14 +37,14 @@ namespace Selenium.WebDriver.Extensions
         public abstract string CheckScript { get; }
 
         /// <summary>
-        /// Gets the query raw selector.
-        /// </summary>
-        public string RawSelector { get; }
-
-        /// <summary>
         /// Gets the context.
         /// </summary>
         public TSelector Context { get; private set; }
+
+        /// <summary>
+        /// Gets the query raw selector.
+        /// </summary>
+        public string RawSelector { get; }
 
         /// <summary>
         /// Gets the selector.
@@ -60,17 +60,17 @@ namespace Selenium.WebDriver.Extensions
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
         /// <summary>
-        /// Loads the external library.
-        /// </summary>
-        /// <param name="driver">The web driver.</param>
-        protected abstract void LoadExternalLibrary(IWebDriver driver);
-
-        /// <summary>
         /// Creates the context.
         /// </summary>
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
+
+        /// <summary>
+        /// Loads the external library.
+        /// </summary>
+        /// <param name="driver">The web driver.</param>
+        protected abstract void LoadExternalLibrary(IWebDriver driver);
 
         private IWebElement FindElementBySelector(ISearchContext searchContext)
         {
