@@ -5,12 +5,13 @@ namespace Selenium.WebDriver.Extensions
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
+    using System.Linq.Expressions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
-    using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Parsers;
     using static Suppress;
     using static System.String;
+    using static Validate;
 
     /// <summary>
     /// The selector base.
@@ -25,10 +26,10 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
         [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
-        protected SelectorBase([Required] string selector, TSelector context)
+        protected SelectorBase(string selector, TSelector context)
         {
             Context = context;
-            RawSelector = selector;
+            RawSelector = Required(() => selector);
             FindElementMethod = FindElementBySelector;
             FindElementsMethod = FindElementsBySelector;
         }

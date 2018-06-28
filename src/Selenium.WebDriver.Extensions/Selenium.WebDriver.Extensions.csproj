@@ -1,7 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
-	<DebugType>full</DebugType>
+	<TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0</TargetFrameworks>
+    <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
@@ -17,10 +18,6 @@
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="PostSharp.Patterns.Model" Version="6.0.16-rc">
-		<PrivateAssets>all</PrivateAssets>
-	</PackageReference>
-	<PackageReference Include="PostSharp.Patterns.Model.Redist" Version="6.0.16-rc" />
     <PackageReference Include="Selenium.Support" Version="3.13.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463">
 		<PrivateAssets>all</PrivateAssets>
