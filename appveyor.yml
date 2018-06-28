@@ -39,7 +39,7 @@ test_script:
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
-  - OpenCover.Console -register:user -target:dotnet -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
+  - OpenCover.Console -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
   - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarQubeAccessToken
 
 after_test:
