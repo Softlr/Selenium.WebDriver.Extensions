@@ -6,6 +6,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using static Suppress;
+    using static Validate;
 
     /// <summary>
     /// Web driver extensions.
@@ -43,7 +44,7 @@ namespace Selenium.WebDriver.Extensions
         [SuppressMessage(SONARQUBE, S4018)]
         public static TResult ExecuteScript<TResult>(
             this IWebDriver driver, string script, params object[] args) =>
-            (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
+            (TResult)((IJavaScriptExecutor)NotNull(() => driver)).ExecuteScript(Required(() => script), args);
 
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
@@ -60,8 +61,11 @@ namespace Selenium.WebDriver.Extensions
         /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadJQuery(
-            this IWebDriver driver, string version = "latest", TimeSpan? timeout = null) =>
-            LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{version}.min.js"), timeout);
+            this IWebDriver driver, string version = "latest", TimeSpan? timeout = null)
+        {
+            var validatedVersion = VersionOrLatest(() => version);
+            LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{validatedVersion}.min.js"), timeout);
+        }
 
         /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
@@ -75,7 +79,8 @@ namespace Selenium.WebDriver.Extensions
         /// </remarks>
         public static void LoadJQuery(
             this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
-            driver.LoadExternalLibrary(JQuerySelector.Empty, uri, timeout ?? _defaultTimeout);
+            NotNull(() => driver).LoadExternalLibrary(
+                JQuerySelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
@@ -91,9 +96,14 @@ namespace Selenium.WebDriver.Extensions
         /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadSizzle(
-            this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null) =>
+            this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
+        {
+            var validatedVersion = Version(() => version);
             LoadSizzle(
-                driver, new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{version}/sizzle.min.js"), timeout);
+                driver,
+                new Uri($"https://cdnjs.cloudflare.com/ajax/libs/sizzle/{validatedVersion}/sizzle.min.js"),
+                timeout);
+        }
 
         /// <summary>
         /// Checks if Sizzle is loaded and loads it if needed.
@@ -107,7 +117,8 @@ namespace Selenium.WebDriver.Extensions
         /// </remarks>
         public static void LoadSizzle(
             this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
-            driver.LoadExternalLibrary(SizzleSelector.Empty, uri, timeout ?? _defaultTimeout);
+            NotNull(() => driver).LoadExternalLibrary(
+                SizzleSelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static bool CheckSelectorPrerequisites(
