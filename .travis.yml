@@ -3,4 +3,4 @@ mono: none
 dotnet: 2.1.301
 script:
   - dotnet restore
-  - dotnet build -f netstandard2.0
+  - dotnet build
