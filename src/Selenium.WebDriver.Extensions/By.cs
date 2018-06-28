@@ -16,26 +16,6 @@ namespace Selenium.WebDriver.Extensions
     public class By : SeleniumBy
     {
         /// <summary>
-        /// Gets a mechanism to find elements matching jQuery selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression.</param>
-        /// <param name="context">A DOM Element, Document, or jQuery selector to use as context.</param>
-        /// <param name="variable">A variable that has been assigned to jQuery.</param>
-        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
-        public static JQuerySelector JQuerySelector(
-            string selector, JQuerySelector context = null, string variable = "jQuery") =>
-            new JQuerySelector(selector, context, variable);
-
-        /// <summary>
-        /// Gets a mechanism to find elements matching Sizzle selector.
-        /// </summary>
-        /// <param name="selector">A string containing a selector expression.</param>
-        /// <param name="context">A DOM Element, Document, or Sizzle selector to use as context.</param>
-        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
-        public static SizzleSelector SizzleSelector(string selector, SizzleSelector context = null) =>
-            new SizzleSelector(selector, context);
-
-        /// <summary>
         /// Gets a mechanism to find elements by their CSS class.
         /// </summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
@@ -58,6 +38,17 @@ namespace Selenium.WebDriver.Extensions
         public static new SeleniumBy Id(string idToFind) => SeleniumBy.Id(idToFind);
 
         /// <summary>
+        /// Gets a mechanism to find elements matching jQuery selector.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression.</param>
+        /// <param name="context">A DOM Element, Document, or jQuery selector to use as context.</param>
+        /// <param name="variable">A variable that has been assigned to jQuery.</param>
+        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
+        public static JQuerySelector JQuerySelector(
+            string selector, JQuerySelector context = null, string variable = "jQuery") =>
+            new JQuerySelector(selector, context, variable);
+
+        /// <summary>
         /// Gets a mechanism to find elements by their link text.
         /// </summary>
         /// <param name="linkTextToFind">The link text to find.</param>
@@ -78,6 +69,15 @@ namespace Selenium.WebDriver.Extensions
         /// <returns>A <see cref="OpenQA.Selenium.By"/> object the driver can use to find the elements.</returns>
         public static new SeleniumBy PartialLinkText(string partialLinkTextToFind) =>
             SeleniumBy.PartialLinkText(partialLinkTextToFind);
+
+        /// <summary>
+        /// Gets a mechanism to find elements matching Sizzle selector.
+        /// </summary>
+        /// <param name="selector">A string containing a selector expression.</param>
+        /// <param name="context">A DOM Element, Document, or Sizzle selector to use as context.</param>
+        /// <returns>A <see cref="JQuerySelector"/> object the driver can use to find the elements.</returns>
+        public static SizzleSelector SizzleSelector(string selector, SizzleSelector context = null) =>
+            new SizzleSelector(selector, context);
 
         /// <summary>
         /// Gets a mechanism to find elements by their tag name.

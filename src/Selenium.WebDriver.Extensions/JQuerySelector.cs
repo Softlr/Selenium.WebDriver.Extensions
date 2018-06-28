@@ -61,14 +61,14 @@ namespace Selenium.WebDriver.Extensions
         /// <inheritdoc/>
         public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
 
+        /// <inheritdoc/>
+        public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
+            + (Context != null ? $", {Context.Selector}" : string.Empty) + $"){_chain}";
+
         /// <summary>
         /// Gets the variable that has been assigned to jQuery.
         /// </summary>
         public virtual string Variable { get; }
-
-        /// <inheritdoc/>
-        public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
-            + (Context != null ? $", {Context.Selector}" : string.Empty) + $"){_chain}";
 
         /// <inheritdoc />
         protected override string ResultResolver => ".get()";
@@ -332,11 +332,11 @@ namespace Selenium.WebDriver.Extensions
             Chain("slice", end.HasValue ? $"{start}, {end}" : start.ToString(CultureInfo.InvariantCulture), true);
 
         /// <inheritdoc/>
-        protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadJQuery();
-
-        /// <inheritdoc/>
         protected override JQuerySelector CreateContext(string contextSelector) =>
             new JQuerySelector(contextSelector, null, Variable);
+
+        /// <inheritdoc/>
+        protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadJQuery();
 
         [SuppressMessage(SONARQUBE, S3358)]
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]

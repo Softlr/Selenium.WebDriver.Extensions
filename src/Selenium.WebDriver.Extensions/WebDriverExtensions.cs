@@ -17,6 +17,37 @@ namespace Selenium.WebDriver.Extensions
         private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(10);
 
         /// <summary>
+        /// Executes JavaScript in the context of the currently selected frame or window.
+        /// </summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="script">The script to be executed.</param>
+        /// <param name="args">The arguments to the script.</param>
+        public static void ExecuteScript(
+            this IWebDriver driver, string script, params object[] args) =>
+            ExecuteScript<object>(driver, script, args);
+
+        /// <summary>
+        /// Executes JavaScript in the context of the currently selected frame or window.
+        /// </summary>
+        /// <typeparam name="TResult">The type of the result.</typeparam>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="script">The script to be executed.</param>
+        /// <param name="args">The arguments to the script.</param>
+        /// <returns>The value returned by the script.</returns>
+        /// <remarks>
+        /// For an HTML element, this method returns a <see cref="IWebElement"/>.
+        /// For a number, a <see cref="long"/> is returned.
+        /// For a boolean, a <see cref="bool"/> is returned.
+        /// For all other cases a <see cref="string"/> is returned.
+        /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type,
+        /// following the rules above. Nested lists are not supported.
+        /// </remarks>
+        [SuppressMessage(SONARQUBE, S4018)]
+        public static TResult ExecuteScript<TResult>(
+            [NotNull] this IWebDriver driver, [Required] string script, params object[] args) =>
+            (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
+
+        /// <summary>
         /// Checks if jQuery is loaded and loads it if needed.
         /// </summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -79,37 +110,6 @@ namespace Selenium.WebDriver.Extensions
         public static void LoadSizzle(
             [NotNull] this IWebDriver driver, [Required] Uri uri, TimeSpan? timeout = null) =>
             driver.LoadExternalLibrary(SizzleSelector.Empty, uri, timeout ?? _defaultTimeout);
-
-        /// <summary>
-        /// Executes JavaScript in the context of the currently selected frame or window.
-        /// </summary>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="script">The script to be executed.</param>
-        /// <param name="args">The arguments to the script.</param>
-        public static void ExecuteScript(
-            this IWebDriver driver, string script, params object[] args) =>
-            ExecuteScript<object>(driver, script, args);
-
-        /// <summary>
-        /// Executes JavaScript in the context of the currently selected frame or window.
-        /// </summary>
-        /// <typeparam name="TResult">The type of the result.</typeparam>
-        /// <param name="driver">The Selenium web driver.</param>
-        /// <param name="script">The script to be executed.</param>
-        /// <param name="args">The arguments to the script.</param>
-        /// <returns>The value returned by the script.</returns>
-        /// <remarks>
-        /// For an HTML element, this method returns a <see cref="IWebElement"/>.
-        /// For a number, a <see cref="long"/> is returned.
-        /// For a boolean, a <see cref="bool"/> is returned.
-        /// For all other cases a <see cref="string"/> is returned.
-        /// For an array,we check the first element, and attempt to return a <see cref="List{T}"/> of that type,
-        /// following the rules above. Nested lists are not supported.
-        /// </remarks>
-        [SuppressMessage(SONARQUBE, S4018)]
-        public static TResult ExecuteScript<TResult>(
-            [NotNull] this IWebDriver driver, [Required] string script, params object[] args) =>
-            (TResult)((IJavaScriptExecutor)driver).ExecuteScript(script, args);
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static bool CheckSelectorPrerequisites(

@@ -46,21 +46,6 @@ namespace Selenium.WebDriver.Extensions.Tests
             sut.Context.RawSelector.Should().Be(contextRawSelector);
         }
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue() =>
-            ((Action)(() => By.SizzleSelector(null))).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("selector");
-
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue() =>
-            ((Action)(() => By.SizzleSelector(Empty))).Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be("selector");
-
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue() =>
-            ((Action)(() => By.SizzleSelector(" "))).Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be("selector");
-
         [Theory]
         [AutoData]
         public void ShouldFindElementBySizzleSelector(string rawSelector)
@@ -87,29 +72,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldThrowExceptionWhenElementIsNotFoundWithSizzleSelector(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
-                .Build();
-            var sut = By.SizzleSelector(rawSelector);
-
-            ((Action)(() => sut.FindElement(driver))).Should().Throw<NoSuchElementException>();
-        }
-
-        [Theory]
-        [AutoData]
-        public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithSizzleSelector(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
-                .Build();
-            var sut = By.SizzleSelector(rawSelector);
-            var result = sut.FindElements(driver);
-
-            result.Should().NotBeNull().And.HaveCount(0);
-        }
-
-        [Theory]
-        [AutoData]
         public void ShouldFindElementWithNestedSizzleSelector(string rawSelector)
         {
             var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
@@ -124,15 +86,40 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
+        public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithSizzleSelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
-                .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector)
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
                 .Build();
-            var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
+            var sut = By.SizzleSelector(rawSelector);
+            var result = sut.FindElements(driver);
+
+            result.Should().NotBeNull().And.HaveCount(0);
+        }
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue() =>
+            ((Action)(() => By.SizzleSelector(Empty))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue() =>
+            ((Action)(() => By.SizzleSelector(null))).Should().Throw<ArgumentNullException>()
+                .And.ParamName.Should().Be("selector");
+
+        [Fact]
+        public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue() =>
+            ((Action)(() => By.SizzleSelector(" "))).Should().Throw<ArgumentException>()
+            .And.ParamName.Should().Be("selector");
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenElementIsNotFoundWithSizzleSelector(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithNoElementLocatedBySizzle(rawSelector)
+                .Build();
             var sut = By.SizzleSelector(rawSelector);
 
-            ((Action)(() => sut.FindElement(element))).Should().Throw<NotSupportedException>();
+            ((Action)(() => sut.FindElement(driver))).Should().Throw<NoSuchElementException>();
         }
 
         [Theory]
@@ -143,6 +130,19 @@ namespace Selenium.WebDriver.Extensions.Tests
             var sut = By.SizzleSelector(rawSelector);
 
             ((Action)(() => sut.FindElement(element))).Should().Throw<InvalidCastException>();
+        }
+
+        [Theory]
+        [AutoData]
+        public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
+                .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector)
+                .Build();
+            var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
+            var sut = By.SizzleSelector(rawSelector);
+
+            ((Action)(() => sut.FindElement(element))).Should().Throw<NotSupportedException>();
         }
     }
 }

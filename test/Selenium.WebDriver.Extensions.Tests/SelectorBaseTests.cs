@@ -14,6 +14,15 @@ namespace Selenium.WebDriver.Extensions.Tests
     [ExcludeFromCodeCoverage]
     public class SelectorBaseTests
     {
+        [Theory]
+        [AutoData]
+        public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
+        {
+            var sut = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
+
+            sut.Should().NotBeNull();
+        }
+
         [Fact]
         public void ShouldCorrectlyHandleDefaultValue()
         {
@@ -30,15 +39,6 @@ namespace Selenium.WebDriver.Extensions.Tests
             var sut = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
             sut.GetType().Should().Be(typeof(long));
-        }
-
-        [Theory]
-        [AutoData]
-        public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
-        {
-            var sut = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
-
-            sut.Should().NotBeNull();
         }
     }
 }

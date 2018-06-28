@@ -22,20 +22,25 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
             : base(browser, path) => _selectorAccessor = selectorAccessor;
 
         [Fact]
+        public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
+        {
+            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(
+                _selectorAccessor.Invoke("h1"));
+
+            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
+            wait.Until(condition);
+
+            var element = Browser.FindElement(_selectorAccessor.Invoke("h1"));
+            element.Should().NotBeNull();
+        }
+
+        [Fact]
         public void GivenSelector_WhenFindElement_ThenFound()
         {
             var sut = _selectorAccessor.Invoke("#id1");
             var element = Browser.FindElement(sut);
 
             element.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void GivenSelector_WhenFindElementThatDoesNotExist_ThenException()
-        {
-            var sut = _selectorAccessor.Invoke("#id-not");
-
-            ((Action)(() => Browser.FindElement(sut))).Should().Throw<NoSuchElementException>();
         }
 
         [Fact]
@@ -57,6 +62,14 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         }
 
         [Fact]
+        public void GivenSelector_WhenFindElementThatDoesNotExist_ThenException()
+        {
+            var sut = _selectorAccessor.Invoke("#id-not");
+
+            ((Action)(() => Browser.FindElement(sut))).Should().Throw<NoSuchElementException>();
+        }
+
+        [Fact]
         public void GivenSelector_WhenFindInnerElement_ThenFound()
         {
             var root = Browser.FindElement(By.CssSelector("body"));
@@ -74,19 +87,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
             var elements = root.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(2);
-        }
-
-        [Fact]
-        public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
-        {
-            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(
-                _selectorAccessor.Invoke("h1"));
-
-            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
-            wait.Until(condition);
-
-            var element = Browser.FindElement(_selectorAccessor.Invoke("h1"));
-            element.Should().NotBeNull();
         }
     }
 }
