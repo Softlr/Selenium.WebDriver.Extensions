@@ -2,9 +2,6 @@ branches:
   only:
     - master
     - develop
-    - /feature.*/
-    - /bugfix.*/
-    - /release.*/      
 
 skip_tags: true
 skip_branch_with_pr: true
@@ -30,20 +27,20 @@ environment:
     secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       
 build_script:
-  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:sonar.organization=rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.analysis.mode=preview /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
-  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild.exe begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:sonar.organization=rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.analysis.mode=preview /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
   - dotnet build -c Release
 
 after_build:
-  - dotnet pack -c Release --include-symbols --include-source --no-build -o %APPVEYOR_BUILD_FOLDER% /p:Version=3.2.1
+  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER% /p:Version=3.2.1
 
 test_script:
   - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
-  - OpenCover.Console.exe -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
-  - ps: SonarScanner.MSBuild.exe end /d:sonar.login=$env:SonarQubeAccessToken
+  - OpenCover.Console -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
+  - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarQubeAccessToken
 
 after_test:
   - codecov -f coverage.xml

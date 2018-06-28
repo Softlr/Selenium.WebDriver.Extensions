@@ -103,11 +103,6 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Theory]
-        [MemberData(nameof(InvalidParameters))]
-        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
-            action.Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
-
-        [Theory]
         [AutoData]
         public void ShouldExecuteScript(string scriptMethod)
         {
@@ -129,5 +124,10 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
         }
+
+        [Theory]
+        [MemberData(nameof(InvalidParameters))]
+        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
+            action.Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
     }
 }
