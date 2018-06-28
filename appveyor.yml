@@ -1,10 +1,7 @@
 branches:
   only:
     - master
-    - develop
-    - /feature.*/
-    - /bugfix.*/
-    - /release.*/      
+    - develop      
 
 skip_tags: true
 skip_branch_with_pr: true
