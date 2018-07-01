@@ -7,7 +7,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using OpenQA.Selenium.Support.UI;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Suppress;
+    using static Softlr.Suppress;
     using By = Selenium.WebDriver.Extensions.By;
 
     [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]

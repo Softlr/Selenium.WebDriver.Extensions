@@ -4,7 +4,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using JetBrains.Annotations;
     using Microsoft.AspNetCore.Builder;
     using Nancy.Owin;
-    using static Suppress;
+    using static Softlr.Suppress;
 
     [PublicAPI]
     public class Startup
