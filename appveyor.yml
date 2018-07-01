@@ -32,7 +32,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER% /p:Version=3.2.1
+  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.2.1
 
 test_script:
   - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build
