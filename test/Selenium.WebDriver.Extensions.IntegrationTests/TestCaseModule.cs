@@ -3,7 +3,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Nancy;
-    using static Suppress;
+    using static Softlr.Suppress;
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]

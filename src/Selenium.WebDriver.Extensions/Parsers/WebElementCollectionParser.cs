@@ -5,7 +5,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium;
-    using static Suppress;
+    using static Softlr.Suppress;
 
     internal class WebElementCollectionParser : ParserBase
     {

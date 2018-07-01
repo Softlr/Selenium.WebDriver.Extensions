@@ -5,7 +5,7 @@ namespace Selenium.WebDriver.Extensions
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
-    using static Suppress;
+    using static Softlr.Suppress;
     using static Validate;
 
     /// <summary>

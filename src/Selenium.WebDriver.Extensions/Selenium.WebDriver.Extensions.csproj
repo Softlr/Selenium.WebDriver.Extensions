@@ -18,7 +18,8 @@
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
     <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="Selenium.Support" Version="3.13.0" />
+    <PackageReference Include="Selenium.Support" Version="3.13.1" />
+    <PackageReference Include="Softlr.Suppress" Version="1.0.2" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>

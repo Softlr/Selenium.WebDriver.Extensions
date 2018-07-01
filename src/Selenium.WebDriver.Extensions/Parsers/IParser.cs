@@ -2,7 +2,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
 {
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
-    using static Suppress;
+    using static Softlr.Suppress;
 
     [PublicAPI]
     internal interface IParser
