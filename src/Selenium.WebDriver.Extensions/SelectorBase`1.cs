@@ -5,12 +5,11 @@ namespace Selenium.WebDriver.Extensions
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using System.Linq.Expressions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using Selenium.WebDriver.Extensions.Parsers;
-    using static Softlr.Suppress;
     using static System.String;
+    using static Softlr.Suppress;
     using static Validate;
 
     /// <summary>

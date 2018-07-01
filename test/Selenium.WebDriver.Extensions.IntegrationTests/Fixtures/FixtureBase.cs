@@ -3,14 +3,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Linq;
-    using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Hosting.Server.Features;
-    using Microsoft.Extensions.Configuration;
-    using Nancy;
-    using Nancy.Owin;
-    using Nancy.TinyIoc;
     using OpenQA.Selenium;
 
     [ExcludeFromCodeCoverage]

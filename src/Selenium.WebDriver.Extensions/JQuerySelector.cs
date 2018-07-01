@@ -1,11 +1,10 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using System;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using OpenQA.Selenium;
-    using static Softlr.Suppress;
     using static System.String;
+    using static Softlr.Suppress;
     using static Validate;
 
     /// <summary>
