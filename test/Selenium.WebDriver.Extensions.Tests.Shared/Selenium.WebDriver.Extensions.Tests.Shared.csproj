@@ -1,15 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.Tests.Shared.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
 	<IsPackable>false</IsPackable>
+	<SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
+    <PackageReference Include="Softlr.Suppress" Version="1.0.3" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.2.0.5463" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
   </ItemGroup>

@@ -1,15 +1,16 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.Tests.Shared;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.EDGE)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, EDGE)]
     [ExcludeFromCodeCoverage]
-    [Collection(Trait.Browser.EDGE)]
+    [Collection(EDGE)]
     public class WebDriverExtensionsJQueryUnloadedSelectorEdgeTests : SelectorTests<JQuerySelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]

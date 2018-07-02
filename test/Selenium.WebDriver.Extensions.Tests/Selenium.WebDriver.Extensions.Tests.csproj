@@ -2,8 +2,9 @@
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.Tests.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />

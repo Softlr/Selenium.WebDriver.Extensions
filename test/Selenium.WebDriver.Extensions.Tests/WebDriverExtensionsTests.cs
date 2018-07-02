@@ -1,8 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
@@ -11,11 +8,17 @@ namespace Selenium.WebDriver.Extensions.Tests
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static Softlr.Suppress;
     using static System.String;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S3900)]
     public class WebDriverExtensionsTests
     {
         private static readonly Fixture _fixture = new Fixture();
