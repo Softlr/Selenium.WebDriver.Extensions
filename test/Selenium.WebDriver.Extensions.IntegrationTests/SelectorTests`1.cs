@@ -1,16 +1,17 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using Selenium.WebDriver.Extensions.Tests.Shared;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
     using static Softlr.Suppress;
     using By = Selenium.WebDriver.Extensions.By;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
+    [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
     public class SelectorTests<TSelector> : TestsBase
         where TSelector : OpenQA.Selenium.By

@@ -1,8 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
@@ -10,12 +7,18 @@ namespace Selenium.WebDriver.Extensions.Tests
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static Softlr.Suppress;
     using static System.String;
     using By = Selenium.WebDriver.Extensions.By;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S3900)]
     public class JQuerySelectorTests
     {
         private static readonly Fixture _fixture = new Fixture();
@@ -389,6 +392,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(SelectorsTests))]
+        [SuppressMessage(SONARQUBE, S3242)]
         public void ShouldCreateCorrectSelector(JQuerySelector sut, string expectedSelector) =>
             sut.Selector.Should().Be(expectedSelector);
 

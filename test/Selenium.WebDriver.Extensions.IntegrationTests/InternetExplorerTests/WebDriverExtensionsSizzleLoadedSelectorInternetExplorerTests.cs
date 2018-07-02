@@ -1,15 +1,16 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.Tests.Shared;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.INTERNET_EXPLORER)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection(Trait.Browser.INTERNET_EXPLORER)]
+    [Collection(INTERNET_EXPLORER)]
     public class WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests : SelectorTests<SizzleSelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]

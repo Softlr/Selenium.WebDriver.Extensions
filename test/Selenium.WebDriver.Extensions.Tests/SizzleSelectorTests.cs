@@ -1,17 +1,18 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
     using static System.String;
     using By = Selenium.WebDriver.Extensions.By;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class SizzleSelectorTests
     {

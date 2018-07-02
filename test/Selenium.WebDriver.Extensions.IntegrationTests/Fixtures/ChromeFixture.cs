@@ -1,10 +1,10 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
+    using JetBrains.Annotations;
+    using OpenQA.Selenium.Chrome;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Reflection;
-    using JetBrains.Annotations;
-    using OpenQA.Selenium.Chrome;
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         {
             var options = new ChromeOptions();
             options.AddArgument("--headless");
-            Browser = new ChromeDriver(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), options);
+            Browser = new ChromeDriver(Path.GetDirectoryName(typeof(ChromeFixture).Assembly.Location), options);
         }
     }
 }

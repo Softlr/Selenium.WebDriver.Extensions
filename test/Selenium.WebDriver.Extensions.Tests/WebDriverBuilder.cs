@@ -1,13 +1,15 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using AutoFixture.AutoNSubstitute;
     using NSubstitute;
     using OpenQA.Selenium;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S4058)]
     internal class WebDriverBuilder
     {
         private readonly IWebDriver _driver;

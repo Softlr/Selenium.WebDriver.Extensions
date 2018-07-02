@@ -1,12 +1,13 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Nancy;
+    using System.Diagnostics.CodeAnalysis;
     using static Softlr.Suppress;
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S2339)]
     public class TestCaseModule : NancyModule
     {
         public const string JQUERY_LOADED = "/jQueryLoaded";
