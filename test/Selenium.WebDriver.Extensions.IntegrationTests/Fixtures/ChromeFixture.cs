@@ -4,7 +4,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using OpenQA.Selenium.Chrome;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using System.Reflection;
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]
