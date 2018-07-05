@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using OpenQA.Selenium;
     using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium;
 
     /// <summary>
     /// Searches the DOM elements using Sizzle selector.

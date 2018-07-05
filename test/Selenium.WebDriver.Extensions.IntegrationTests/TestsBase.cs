@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using System;
     using System.Diagnostics.CodeAnalysis;
+    using OpenQA.Selenium;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
 
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase

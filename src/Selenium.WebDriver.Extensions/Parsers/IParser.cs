@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions.Parsers
 {
-    using JetBrains.Annotations;
     using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
     using static Softlr.Suppress;
 
     [PublicAPI]

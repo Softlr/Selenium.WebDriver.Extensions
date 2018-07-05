@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Microsoft.AspNetCore.Builder;
     using Nancy.Owin;
-    using System.Diagnostics.CodeAnalysis;
     using static Softlr.Suppress;
 
     [PublicAPI]

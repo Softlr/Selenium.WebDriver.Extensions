@@ -1,13 +1,13 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Diagnostics.CodeAnalysis;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
-    using System.Collections.Generic;
-    using System.Collections.ObjectModel;
-    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 

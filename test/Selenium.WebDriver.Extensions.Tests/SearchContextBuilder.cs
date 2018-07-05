@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using NSubstitute;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
-    using System.Diagnostics.CodeAnalysis;
 
     [ExcludeFromCodeCoverage]
     internal class SearchContextBuilder
