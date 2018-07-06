@@ -11,7 +11,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
-    <PackageReference Include="Softlr.Suppress" Version="1.0.3" />
+    <PackageReference Include="Softlr.Suppress" Version="1.1.0" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.3.0.5690" />
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
   </ItemGroup>

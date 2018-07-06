@@ -21,7 +21,7 @@
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
     <PackageReference Include="Selenium.Support" Version="3.13.1" />
-    <PackageReference Include="Softlr.Suppress" Version="1.0.3">
+    <PackageReference Include="Softlr.Suppress" Version="1.1.0">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.3.0.5690">
