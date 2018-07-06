@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using static Softlr.Suppress;
 
     [PublicAPI]
+    [ExcludeFromCodeCoverage]
     public class Startup
     {
         [SuppressMessage(SONARQUBE, S2325)]
