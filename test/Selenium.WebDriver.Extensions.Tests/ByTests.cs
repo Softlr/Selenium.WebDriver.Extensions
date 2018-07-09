@@ -9,6 +9,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Xunit;
     using static Selenium.WebDriver.Extensions.By;
     using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using SeleniumBy = OpenQA.Selenium.By;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
@@ -33,6 +34,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(CoreSelectors))]
-        public void ShouldCreateSelector(OpenQA.Selenium.By sut) => sut.Should().NotBeNull();
+        public void ShouldCreateSelector(SeleniumBy sut) => sut.Should().NotBeNull();
     }
 }

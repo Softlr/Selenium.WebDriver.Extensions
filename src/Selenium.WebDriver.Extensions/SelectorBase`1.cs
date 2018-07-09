@@ -11,13 +11,14 @@ namespace Selenium.WebDriver.Extensions
     using static Softlr.Suppress;
     using static System.String;
     using static Validate;
+    using SeleniumBy = OpenQA.Selenium.By;
 
     /// <summary>
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
     /// <inheritdoc cref="ISelector" />
-    public abstract class SelectorBase<TSelector> : OpenQA.Selenium.By, ISelector
+    public abstract class SelectorBase<TSelector> : SeleniumBy, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
