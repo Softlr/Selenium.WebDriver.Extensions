@@ -3,8 +3,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using System.Linq;
     using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Hosting.Server.Features;
     using OpenQA.Selenium;
+    using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]
     public class FixtureBase : IDisposable
@@ -17,15 +20,18 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
             _host = new WebHostBuilder()
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
-                .UseUrls(Fixture.SERVER_URL)
                 .UseStartup<Startup>()
                 .Build();
             _host.Start();
+            ServerUrl = _host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.First();
         }
 
         ~FixtureBase() => Dispose(false);
 
         public IWebDriver Browser { get; protected set; }
+
+        [SuppressMessage(SONARQUBE, S3996)]
+        public string ServerUrl { get; }
 
         public void Dispose()
         {

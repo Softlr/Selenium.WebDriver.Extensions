@@ -5,22 +5,23 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.By;
     using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
     using static Softlr.Suppress;
-    using By = Selenium.WebDriver.Extensions.By;
 
     [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
     public class SelectorTests<TSelector> : TestsBase
-        where TSelector : OpenQA.Selenium.By
+        where TSelector : By
     {
         private readonly Func<string, TSelector> _selectorAccessor;
 
         [SuppressMessage(CODE_CRACKER, CC0057)]
-        protected SelectorTests(IWebDriver browser, string path, Func<string, TSelector> selectorAccessor)
-            : base(browser, path) => _selectorAccessor = selectorAccessor;
+        protected SelectorTests(FixtureBase fixture, string path, Func<string, TSelector> selectorAccessor)
+            : base(fixture, path) => _selectorAccessor = selectorAccessor;
 
         [Fact]
         public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
@@ -73,7 +74,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         [Fact]
         public void GivenSelector_WhenFindInnerElement_ThenFound()
         {
-            var root = Browser.FindElement(By.CssSelector("body"));
+            var root = Browser.FindElement(CssSelector("body"));
             var sut = _selectorAccessor.Invoke("div");
             var element = root.FindElement(sut);
 

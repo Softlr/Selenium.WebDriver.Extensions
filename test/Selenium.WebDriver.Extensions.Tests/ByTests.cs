@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.By;
     using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
     [Trait(CATEGORY, UNIT)]
@@ -19,14 +20,14 @@ namespace Selenium.WebDriver.Extensions.Tests
             get
             {
                 var fixture = new Fixture();
-                yield return new object[] { By.CssSelector(fixture.Create<string>()) };
-                yield return new object[] { By.TagName(fixture.Create<string>()) };
-                yield return new object[] { By.Id(fixture.Create<string>()) };
-                yield return new object[] { By.Name(fixture.Create<string>()) };
-                yield return new object[] { By.ClassName(fixture.Create<string>()) };
-                yield return new object[] { By.LinkText(fixture.Create<string>()) };
-                yield return new object[] { By.PartialLinkText(fixture.Create<string>()) };
-                yield return new object[] { By.XPath(fixture.Create<string>()) };
+                yield return new object[] { CssSelector(fixture.Create<string>()) };
+                yield return new object[] { TagName(fixture.Create<string>()) };
+                yield return new object[] { Id(fixture.Create<string>()) };
+                yield return new object[] { Name(fixture.Create<string>()) };
+                yield return new object[] { ClassName(fixture.Create<string>()) };
+                yield return new object[] { LinkText(fixture.Create<string>()) };
+                yield return new object[] { PartialLinkText(fixture.Create<string>()) };
+                yield return new object[] { XPath(fixture.Create<string>()) };
             }
         }
 
