@@ -26,7 +26,7 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
-    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.40.0" />
+    <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="2.41.0" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.21.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.13.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
