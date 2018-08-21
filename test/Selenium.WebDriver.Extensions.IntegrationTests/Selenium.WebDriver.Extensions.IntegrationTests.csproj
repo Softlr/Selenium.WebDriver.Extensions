@@ -30,7 +30,10 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.21.0" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.14.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.3.1.5982" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.4.0.6452">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
