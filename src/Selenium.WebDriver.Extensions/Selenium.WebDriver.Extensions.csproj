@@ -24,7 +24,7 @@
     <PackageReference Include="Softlr.Suppress" Version="1.2.0">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.4.0.6452">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.5.0.6605">
 		<PrivateAssets>all</PrivateAssets>
 		<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 	</PackageReference>
