@@ -8,7 +8,7 @@ skip_branch_with_pr: true
 skip_commits:
   message: /\[(skip ci|ci skip)\]/
 
-version: 3.2.1.{build}
+version: 3.3.0.{build}
 image: Visual Studio 2017
   
 install:
@@ -32,7 +32,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.2.1
+  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.3.0
 
 test_script:
   - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build
@@ -58,7 +58,7 @@ deploy:
   - provider: GitHub
     on:
       branch: master
-    release: 3.2.1
+    release: 3.3.0
     artifact: /.*\.nupkg/
     auth_token:
       secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
