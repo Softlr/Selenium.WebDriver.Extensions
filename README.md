@@ -1,39 +1,23 @@
 [![Build Status](https://ci.appveyor.com/api/projects/status/xva7kjm1lyi3fqcu?svg=true)](https://ci.appveyor.com/project/RaYell/Selenium.WebDriver.Extensions)
-[![Code Coverage](https://codecov.io/gh/Softlr/Selenium.WebDriver.Extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/Softlr/selenium-webdriver-extensions)
-[![Quality Gate](https://sonarcloud.io/api/badges/gate?key=selenium.webdriver.extensions)](https://sonarcloud.io/dashboard?id=selenium.webdriver.extensions)
+[![Build Status](https://travis-ci.org/Softlr/Selenium.WebDriver.Extensions.svg?branch=develop)](https://travis-ci.org/Softlr/Selenium.WebDriver.Extensions)
+[![Code Coverage](https://codecov.io/gh/Softlr/Selenium.WebDriver.Extensions/branch/develop/graph/badge.svg)](https://codecov.io/gh/Softlr/Selenium.WebDriver.Extensions)
+[![Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=selenium.webdriver.extensions&metric=alert_status)](https://sonarcloud.io/dashboard?id=selenium.webdriver.extensions)
 
 # Description
 Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 
-# Version 3.0 Released
-The version 3.0 of the extensions library has been released. The new features and changes include:
-* Selenium 3.0 support
-* .NET 3.5, 4.0 and Mono support dropped, maintaining that code was becomming more and more of a problem and it was causing performance degradation
-* Performance improvements in the code
-* Script loading reworked
-* PostSharp code contracts
-* Documentation added to NuGet packages
-* Symbols published to symbol server
-* Extension name reverted to Selenium.WebDriver.Extensions so that it is not confusing that this package comes from a different vendor
-
 # Features
 ## Main
 * Support for nested selectors
-* Very easy setup: install packages with NuGet and start using it with your existing Selenium solution
-* High quality ensured by continuous integration setup with Appveyor, unit and integration testing and high code coverage
-* Well documented code following strict StyleCop.Analyzers and FxCop rules
-## jQuery support
-* jQuery selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
-* jQuery auto-load on pages on sites that don't use jQuery
-* Support for jQuery context switching
-* Support for `ExpectedConditions` with jQuery selectors
-* Support for Page Objects with jQuery selectors
-## Sizzle support
-* Sizzle selectors support for Selenium WebDriver to perform DOM-element selections that CSS can't do
-* Sizzle auto-load on pages on sites that don't use Sizzle
-* Support for Sizzle context switching
-* Support for `ExpectedConditions` with Sizzle selectors
-* Support for Page Objects with Sizzle selectors
+* Easy setup: install NuGet package and start using it with your existing Selenium solution
+* High quality ensured by continuous integration setup with Appveyor, unit and integration tests and high code coverage
+* Well documented code using [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details)
+## jQuery/Sizzle support
+* jQuery/Sizzle selectors support for Selenium WebDriver
+* jQuery/Sizzle auto-load on pages on sites that don't use jQuery
+* Support for context switching
+* Support for `ExpectedConditions`
+* Support for Page Objects
  
 # Installation
 Run the following command in Visual Studio Package Manager Console.
@@ -42,7 +26,7 @@ Install-Package Selenium.WebDriver.Extensions
 ```
 
 # Documentation
-API documentation can be found [here](https://rayell.github.io/selenium-webdriver-extensions/api) and user guide is on the [wiki](https://github.com/RaYell/selenium-webdriver-extensions/wiki).
+API documentation can be found on [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details) and user guide is on the [wiki](https://github.com/Softlr/Selenium.WebDriver.Extensions/wiki).
 
 # Usage
 

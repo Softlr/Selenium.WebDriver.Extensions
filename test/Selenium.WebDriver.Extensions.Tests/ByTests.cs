@@ -7,8 +7,11 @@ namespace Selenium.WebDriver.Extensions.Tests
     using JetBrains.Annotations;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.By;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using SeleniumBy = OpenQA.Selenium.By;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
@@ -18,19 +21,19 @@ namespace Selenium.WebDriver.Extensions.Tests
             get
             {
                 var fixture = new Fixture();
-                yield return new object[] { By.CssSelector(fixture.Create<string>()) };
-                yield return new object[] { By.TagName(fixture.Create<string>()) };
-                yield return new object[] { By.Id(fixture.Create<string>()) };
-                yield return new object[] { By.Name(fixture.Create<string>()) };
-                yield return new object[] { By.ClassName(fixture.Create<string>()) };
-                yield return new object[] { By.LinkText(fixture.Create<string>()) };
-                yield return new object[] { By.PartialLinkText(fixture.Create<string>()) };
-                yield return new object[] { By.XPath(fixture.Create<string>()) };
+                yield return new object[] { CssSelector(fixture.Create<string>()) };
+                yield return new object[] { TagName(fixture.Create<string>()) };
+                yield return new object[] { Id(fixture.Create<string>()) };
+                yield return new object[] { Name(fixture.Create<string>()) };
+                yield return new object[] { ClassName(fixture.Create<string>()) };
+                yield return new object[] { LinkText(fixture.Create<string>()) };
+                yield return new object[] { PartialLinkText(fixture.Create<string>()) };
+                yield return new object[] { XPath(fixture.Create<string>()) };
             }
         }
 
         [Theory]
         [MemberData(nameof(CoreSelectors))]
-        public void ShouldCreateSelector(OpenQA.Selenium.By sut) => sut.Should().NotBeNull();
+        public void ShouldCreateSelector(SeleniumBy sut) => sut.Should().NotBeNull();
     }
 }

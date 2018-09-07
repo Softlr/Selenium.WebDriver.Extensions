@@ -1,25 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net47</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1</TargetFrameworks>
     <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.Tests.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.4.0" />
-    <PackageReference Include="AutoFixture.Xunit2" Version="4.4.0" />
+    <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.5.0" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="4.5.0" />
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
-    <PackageReference Include="FluentAssertions" Version="5.3.2" />
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta007" />
+    <PackageReference Include="FluentAssertions" Version="5.4.1" />
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.5.0.6605">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008" />
     <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
-    <PackageReference Include="xunit.runner.console" Version="2.3.1" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
-    <PackageReference Include="xunit" Version="2.3.1" />
-    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+    <PackageReference Include="xunit" Version="2.4.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Selenium.WebDriver.Extensions\Selenium.WebDriver.Extensions.csproj" />

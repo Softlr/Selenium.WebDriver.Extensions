@@ -1,21 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net40;netstandard2.0</TargetFrameworks>
+	<TargetFrameworks Condition="'$(OS)' != 'Windows_NT'">netstandard2.0</TargetFrameworks>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
-    <CodeAnalysisRuleSet>..\..\_analysis\SWE.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+	<Authors>Softlr</Authors>
+    <Description>Contains Selenium WebDriver extensions including jQuery, Sizzle selector support.</Description>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
-    <PackageReference Include="JetBrains.Annotations" Version="11.1.0" />
-    <PackageReference Include="JetBrains.ReSharper.CommandLineTools" Version="2018.1.2" />
-    <PackageReference Include="PostSharp.Patterns.Model" Version="5.0.51" />
-    <PackageReference Include="Selenium.Support" Version="3.12.1" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta007" />
+    <PackageReference Include="codecracker.CSharp" Version="1.1.0">
+		<PrivateAssets>all</PrivateAssets>
+	</PackageReference>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1">
+		<PrivateAssets>all</PrivateAssets>
+	</PackageReference>
+    <PackageReference Include="Selenium.Support" Version="3.14.0" />
+    <PackageReference Include="Softlr.Suppress" Version="1.2.0">
+		<PrivateAssets>all</PrivateAssets>
+	</PackageReference>
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.5.0.6605">
+		<PrivateAssets>all</PrivateAssets>
+		<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+	</PackageReference>
+    <PackageReference Include="StyleCop.Analyzers" Version="1.1.0-beta008">
+		<PrivateAssets>all</PrivateAssets>
+	</PackageReference>
   </ItemGroup>
 </Project>

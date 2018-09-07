@@ -7,16 +7,18 @@ namespace Selenium.WebDriver.Extensions
     using System.Linq;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
-    using PostSharp.Patterns.Contracts;
     using Selenium.WebDriver.Extensions.Parsers;
+    using static Softlr.Suppress;
     using static System.String;
+    using static Validate;
+    using SeleniumBy = OpenQA.Selenium.By;
 
     /// <summary>
     /// The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
     /// <inheritdoc cref="ISelector" />
-    public abstract class SelectorBase<TSelector> : OpenQA.Selenium.By, ISelector
+    public abstract class SelectorBase<TSelector> : SeleniumBy, ISelector
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
@@ -24,10 +26,10 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
         [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
-        protected SelectorBase([Required] string selector, TSelector context)
+        protected SelectorBase(string selector, TSelector context)
         {
             Context = context;
-            RawSelector = selector;
+            RawSelector = Required(() => selector);
             FindElementMethod = FindElementBySelector;
             FindElementsMethod = FindElementsBySelector;
         }
@@ -36,14 +38,14 @@ namespace Selenium.WebDriver.Extensions
         public abstract string CheckScript { get; }
 
         /// <summary>
-        /// Gets the query raw selector.
-        /// </summary>
-        public string RawSelector { get; }
-
-        /// <summary>
         /// Gets the context.
         /// </summary>
         public TSelector Context { get; private set; }
+
+        /// <summary>
+        /// Gets the query raw selector.
+        /// </summary>
+        public string RawSelector { get; }
 
         /// <summary>
         /// Gets the selector.
@@ -55,13 +57,8 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         protected virtual string ResultResolver => Empty;
 
+        [SuppressMessage(SONARQUBE, S4018)]
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
-
-        /// <summary>
-        /// Loads the external library.
-        /// </summary>
-        /// <param name="driver">The web driver.</param>
-        protected abstract void LoadExternalLibrary(IWebDriver driver);
 
         /// <summary>
         /// Creates the context.
@@ -69,6 +66,12 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
+
+        /// <summary>
+        /// Loads the external library.
+        /// </summary>
+        /// <param name="driver">The web driver.</param>
+        protected abstract void LoadExternalLibrary(IWebDriver driver);
 
         private IWebElement FindElementBySelector(ISearchContext searchContext)
         {

@@ -5,16 +5,19 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.By;
+    using static Selenium.WebDriver.Extensions.IntegrationTests.TestCaseModule;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.INTERNET_EXPLORER)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection(Trait.Browser.INTERNET_EXPLORER)]
+    [Collection(INTERNET_EXPLORER)]
     public class WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests : SelectorTests<JQuerySelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
-            : base(fixture.Browser, TestCaseModule.JQUERY_UNLOADED, x => By.JQuerySelector(x))
+            : base(fixture, UNLOADED, x => JQuerySelector(x))
         {
         }
     }

@@ -5,16 +5,19 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.By;
+    using static Selenium.WebDriver.Extensions.IntegrationTests.TestCaseModule;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.EDGE)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, EDGE)]
     [ExcludeFromCodeCoverage]
-    [Collection(Trait.Browser.EDGE)]
+    [Collection(EDGE)]
     public class WebDriverExtensionsSizzleLoadedSelectorEdgeTests : SelectorTests<SizzleSelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture.Browser, TestCaseModule.SIZZLE_LOADED, x => By.SizzleSelector(x))
+            : base(fixture, SIZZLE_LOADED, x => SizzleSelector(x))
         {
         }
     }

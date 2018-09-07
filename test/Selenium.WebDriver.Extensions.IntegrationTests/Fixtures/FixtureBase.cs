@@ -2,26 +2,36 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using Nancy.Hosting.Self;
+    using System.IO;
+    using System.Linq;
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Hosting.Server.Features;
     using OpenQA.Selenium;
+    using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]
     public class FixtureBase : IDisposable
     {
-        private readonly NancyHost _host;
+        private readonly IWebHost _host;
         private bool _disposed;
 
         protected FixtureBase()
         {
-            var config = new HostConfiguration { UrlReservations = { CreateAutomatically = true } };
-
-            _host = new NancyHost(config, new Uri(Fixture.SERVER_URL));
+            _host = new WebHostBuilder()
+                .UseContentRoot(Directory.GetCurrentDirectory())
+                .UseKestrel()
+                .UseStartup<Startup>()
+                .Build();
             _host.Start();
+            ServerUrl = _host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.First();
         }
 
         ~FixtureBase() => Dispose(false);
 
         public IWebDriver Browser { get; protected set; }
+
+        [SuppressMessage(SONARQUBE, S3996)]
+        public string ServerUrl { get; }
 
         public void Dispose()
         {

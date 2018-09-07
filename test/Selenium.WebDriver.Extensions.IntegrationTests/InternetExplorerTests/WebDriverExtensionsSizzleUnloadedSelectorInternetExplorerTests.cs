@@ -5,16 +5,19 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.By;
+    using static Selenium.WebDriver.Extensions.IntegrationTests.TestCaseModule;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.INTEGRATION)]
-    [Trait(Trait.Name.BROWSER, Trait.Browser.INTERNET_EXPLORER)]
+    [Trait(CATEGORY, INTEGRATION)]
+    [Trait(BROWSER, INTERNET_EXPLORER)]
     [ExcludeFromCodeCoverage]
-    [Collection(Trait.Browser.INTERNET_EXPLORER)]
+    [Collection(INTERNET_EXPLORER)]
     public class WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests : SelectorTests<SizzleSelector>
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
-            : base(fixture.Browser, TestCaseModule.SIZZLE_UNLOADED, x => By.SizzleSelector(x))
+            : base(fixture, UNLOADED, x => SizzleSelector(x))
         {
         }
     }

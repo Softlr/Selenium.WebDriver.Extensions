@@ -12,10 +12,13 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static Softlr.Suppress;
     using static System.String;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S3900)]
     public class WebDriverExtensionsTests
     {
         private static readonly Fixture _fixture = new Fixture();
@@ -79,29 +82,28 @@ namespace Selenium.WebDriver.Extensions.Tests
                 // LoadJQuery
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), null
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(),
+                    null
                 };
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), timeSpan
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(),
+                    timeSpan
                 };
 
                 // LoadSizzle
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), null
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(),
+                    null
                 };
                 yield return new object[]
                 {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), timeSpan
+                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(),
+                    timeSpan
                 };
             }
         }
-
-        [Theory]
-        [MemberData(nameof(InvalidParameters))]
-        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
-            action.Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
 
         [Theory]
         [AutoData]
@@ -125,5 +127,10 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
         }
+
+        [Theory]
+        [MemberData(nameof(InvalidParameters))]
+        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
+            action.Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
     }
 }

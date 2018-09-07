@@ -4,14 +4,16 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase
     {
-        protected TestsBase(IWebDriver browser, string path)
+        [SuppressMessage(SONARQUBE, S3900)]
+        protected TestsBase(FixtureBase fixture, string path)
         {
-            Browser = browser;
-            Browser.Navigate().GoToUrl(new Uri($"{Fixture.SERVER_URL}{path}"));
+            Browser = fixture.Browser;
+            Browser.Navigate().GoToUrl(new Uri($"{fixture.ServerUrl}{path}"));
         }
 
         protected IWebDriver Browser { get; }

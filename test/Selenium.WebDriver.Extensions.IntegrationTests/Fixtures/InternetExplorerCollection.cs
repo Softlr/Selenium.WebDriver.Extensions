@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
     [ExcludeFromCodeCoverage]
-    [CollectionDefinition(Trait.Browser.INTERNET_EXPLORER)]
+    [CollectionDefinition(INTERNET_EXPLORER)]
     public class InternetExplorerCollection : ICollectionFixture<InternetExplorerFixture>
     {
     }

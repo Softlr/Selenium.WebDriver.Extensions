@@ -9,11 +9,21 @@ namespace Selenium.WebDriver.Extensions.Tests
     using Selenium.WebDriver.Extensions;
     using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
+    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 
-    [Trait(Trait.Name.CATEGORY, Trait.Category.UNIT)]
+    [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class SelectorBaseTests
     {
+        [Theory]
+        [AutoData]
+        public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
+        {
+            var sut = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
+
+            sut.Should().NotBeNull();
+        }
+
         [Fact]
         public void ShouldCorrectlyHandleDefaultValue()
         {
@@ -30,15 +40,6 @@ namespace Selenium.WebDriver.Extensions.Tests
             var sut = SelectorBase<JQuerySelector>.ParseResult<long>(rawResult);
 
             sut.GetType().Should().Be(typeof(long));
-        }
-
-        [Theory]
-        [AutoData]
-        public void ShouldCorrectlyHandleCollections(ReadOnlyCollection<object> rawResult)
-        {
-            var sut = SelectorBase<JQuerySelector>.ParseResult<IEnumerable<IWebElement>>(rawResult);
-
-            sut.Should().NotBeNull();
         }
     }
 }

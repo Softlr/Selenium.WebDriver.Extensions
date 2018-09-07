@@ -48,9 +48,9 @@ namespace Selenium.WebDriver.Extensions
             + (Context != null ? $", {Context.Selector}[0]" : string.Empty) + ")";
 
         /// <inheritdoc/>
-        protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadSizzle();
+        protected override SizzleSelector CreateContext(string contextSelector) => new SizzleSelector(contextSelector);
 
         /// <inheritdoc/>
-        protected override SizzleSelector CreateContext(string contextSelector) => new SizzleSelector(contextSelector);
+        protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadSizzle();
     }
 }
