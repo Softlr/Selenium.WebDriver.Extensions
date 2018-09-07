@@ -16,7 +16,7 @@
     <PackageReference Include="FluentAssertions" Version="5.4.1" />
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.8.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.4.0.6452">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.5.0.6605">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
