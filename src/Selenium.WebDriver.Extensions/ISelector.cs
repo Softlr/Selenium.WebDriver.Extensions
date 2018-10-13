@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions
 {
     /// <summary>
-    /// The selector inteface.
+    /// The selector interface.
     /// </summary>
     public interface ISelector
     {

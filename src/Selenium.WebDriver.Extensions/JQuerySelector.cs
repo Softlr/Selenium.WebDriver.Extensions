@@ -343,16 +343,16 @@ namespace Selenium.WebDriver.Extensions
         [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private static string FilteredSelector(string selector = null, string filter = null) =>
             selector != null
-            ? (IsNullOrEmpty(filter)
+            ? IsNullOrEmpty(filter)
                 ? $"'{selector.Replace('\'', '"')}'"
-                : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'")
+                : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'"
             : string.Empty;
 
         [SuppressMessage(SONARQUBE, S3358)]
         private static string GetSelectorString(string selector, bool noWrap = false) =>
             selector == null
                 ? string.Empty
-                : (noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'");
+                : noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'";
 
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false) =>
             new JQuerySelector(
