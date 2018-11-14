@@ -8,6 +8,7 @@
     <Rule Id="S104" Action="Warning" />
     <Rule Id="S1048" Action="Warning" />
     <Rule Id="S105" Action="Warning" />
+    <Rule Id="S106" Action="None" />
     <Rule Id="S1066" Action="Warning" />
     <Rule Id="S1067" Action="Warning" />
     <Rule Id="S107" Action="Warning" />
@@ -88,13 +89,10 @@
     <Rule Id="S1994" Action="Warning" />
     <Rule Id="S2068" Action="Warning" />
     <Rule Id="S2070" Action="Warning" />
-    <Rule Id="S2076" Action="Warning" />
-    <Rule Id="S2078" Action="Warning" />
-    <Rule Id="S2083" Action="Warning" />
-    <Rule Id="S2091" Action="Warning" />
     <Rule Id="S2092" Action="Warning" />
     <Rule Id="S2114" Action="Warning" />
     <Rule Id="S2123" Action="Warning" />
+    <Rule Id="S2148" Action="Warning" />
     <Rule Id="S2156" Action="Warning" />
     <Rule Id="S2178" Action="Warning" />
     <Rule Id="S2183" Action="Warning" />
@@ -144,7 +142,6 @@
     <Rule Id="S2551" Action="Warning" />
     <Rule Id="S2583" Action="Warning" />
     <Rule Id="S2589" Action="Warning" />
-    <Rule Id="S2631" Action="Warning" />
     <Rule Id="S2674" Action="Warning" />
     <Rule Id="S2681" Action="Warning" />
     <Rule Id="S2688" Action="Warning" />
@@ -240,7 +237,6 @@
     <Rule Id="S3604" Action="Warning" />
     <Rule Id="S3610" Action="Warning" />
     <Rule Id="S3626" Action="Warning" />
-    <Rule Id="S3649" Action="Warning" />
     <Rule Id="S3655" Action="Warning" />
     <Rule Id="S3693" Action="Warning" />
     <Rule Id="S3717" Action="Warning" />
@@ -272,6 +268,7 @@
     <Rule Id="S3926" Action="Warning" />
     <Rule Id="S3927" Action="Warning" />
     <Rule Id="S3928" Action="Warning" />
+    <Rule Id="S3937" Action="Warning" />
     <Rule Id="S3956" Action="Warning" />
     <Rule Id="S3962" Action="Warning" />
     <Rule Id="S3963" Action="Warning" />
@@ -353,5 +350,13 @@
     <Rule Id="S881" Action="Warning" />
     <Rule Id="S907" Action="Warning" />
     <Rule Id="S927" Action="Warning" />
+  </Rules>
+  <Rules AnalyzerId="SonarAnalyzer.Security" RuleNamespace="SonarAnalyzer.Security">
+    <Rule Id="S2076" Action="Warning" />
+    <Rule Id="S2078" Action="Warning" />
+    <Rule Id="S2083" Action="Warning" />
+    <Rule Id="S2091" Action="Warning" />
+    <Rule Id="S2631" Action="Warning" />
+    <Rule Id="S3649" Action="Warning" />
   </Rules>
 </RuleSet>
