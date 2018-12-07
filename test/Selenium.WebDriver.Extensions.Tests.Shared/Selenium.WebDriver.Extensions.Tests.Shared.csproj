@@ -11,8 +11,8 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
-    <PackageReference Include="Softlr.Suppress" Version="1.3.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.8.0.7320">
+    <PackageReference Include="Softlr.Suppress" Version="1.4.0" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.9.1.7622">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
