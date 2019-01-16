@@ -6,11 +6,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.By;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static By;
+    using static Tests.Shared.Trait;
     using static Softlr.Suppress;
+    using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
     [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
@@ -26,7 +26,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         [Fact]
         public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
         {
-            var condition = SeleniumExtras.WaitHelpers.ExpectedConditions.ElementIsVisible(
+            var condition = ExpectedConditions.ElementIsVisible(
                 _selectorAccessor.Invoke("h1"));
 
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));

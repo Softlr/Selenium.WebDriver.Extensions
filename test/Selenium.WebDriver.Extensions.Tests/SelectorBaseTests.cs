@@ -6,10 +6,8 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static Shared.Trait;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]

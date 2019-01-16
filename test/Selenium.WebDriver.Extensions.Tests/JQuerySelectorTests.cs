@@ -8,11 +8,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using FluentAssertions;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.By;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static By;
+    using static Shared.Trait;
     using static Softlr.Suppress;
     using static System.String;
 
@@ -113,7 +111,10 @@ namespace Selenium.WebDriver.Extensions.Tests
                 yield return new object[]
                 {
                     (Action)(() => new JQuerySelector(
-                        _fixture.Create<string>(), null, _fixture.Create<string>(), null))
+                        _fixture.Create<string>(),
+                        null,
+                        _fixture.Create<string>(),
+                        null))
                 };
                 yield return new object[] { (Action)(() => JQuerySelector(_fixture.Create<string>()).Add(null)) };
                 yield return new object[] { (Action)(() => JQuerySelector(_fixture.Create<string>()).Add(Empty)) };
@@ -495,18 +496,18 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector) =>
             ((Action)(() => JQuerySelector(rawSelector, variable: Empty))).Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("variable");
+            .And.ParamName.Should().Be("variable");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue() =>
             ((Action)(() => JQuerySelector(null))).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("selector");
+            .And.ParamName.Should().Be("selector");
 
         [Theory]
         [AutoData]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector) =>
             ((Action)(() => JQuerySelector(rawSelector, variable: null))).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("variable");
+            .And.ParamName.Should().Be("variable");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue() =>
@@ -518,7 +519,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(
             string rawSelector) =>
             ((Action)(() => JQuerySelector(rawSelector, variable: " "))).Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("variable");
+            .And.ParamName.Should().Be("variable");
 
         [Theory]
         [AutoData]

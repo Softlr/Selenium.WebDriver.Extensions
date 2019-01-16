@@ -14,14 +14,14 @@ namespace Selenium.WebDriver.Extensions
     using SeleniumBy = OpenQA.Selenium.By;
 
     /// <summary>
-    /// The selector base.
+    ///     The selector base.
     /// </summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
     /// <inheritdoc cref="ISelector" />
     public abstract class SelectorBase<TSelector> : SeleniumBy, ISelector
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
+        ///     Initializes a new instance of the <see cref="SelectorBase{T}" /> class.
         /// </summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
@@ -38,22 +38,22 @@ namespace Selenium.WebDriver.Extensions
         public abstract string CheckScript { get; }
 
         /// <summary>
-        /// Gets the context.
+        ///     Gets the context.
         /// </summary>
         public TSelector Context { get; private set; }
 
         /// <summary>
-        /// Gets the query raw selector.
+        ///     Gets the query raw selector.
         /// </summary>
         public string RawSelector { get; }
 
         /// <summary>
-        /// Gets the selector.
+        ///     Gets the selector.
         /// </summary>
         public abstract string Selector { get; }
 
         /// <summary>
-        /// Gets the result resolver string.
+        ///     Gets the result resolver string.
         /// </summary>
         protected virtual string ResultResolver => Empty;
 
@@ -61,14 +61,14 @@ namespace Selenium.WebDriver.Extensions
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
         /// <summary>
-        /// Creates the context.
+        ///     Creates the context.
         /// </summary>
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
 
         /// <summary>
-        /// Loads the external library.
+        ///     Loads the external library.
         /// </summary>
         /// <param name="driver">The web driver.</param>
         protected abstract void LoadExternalLibrary(IWebDriver driver);
@@ -89,8 +89,9 @@ namespace Selenium.WebDriver.Extensions
             var driver = ResolveDriver(searchContext);
 
             LoadExternalLibrary(driver);
-            var result = ParseResult<IEnumerable<IWebElement>>(driver.ExecuteScript<object>(
-                $"return {Selector}{ResultResolver};"));
+            var result = ParseResult<IEnumerable<IWebElement>>(
+                driver.ExecuteScript<object>(
+                    $"return {Selector}{ResultResolver};"));
             return new ReadOnlyCollection<IWebElement>(result.ToList());
         }
 

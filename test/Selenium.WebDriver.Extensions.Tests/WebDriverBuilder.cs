@@ -91,7 +91,8 @@ namespace Selenium.WebDriver.Extensions.Tests
         public WebDriverBuilder WithSizzleLoaded()
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript(
-                    Arg.Is<string>(s => s.Contains("window.Sizzle")), Arg.Any<object[]>())
+                    Arg.Is<string>(s => s.Contains("window.Sizzle")),
+                    Arg.Any<object[]>())
                 .Returns(true);
             return this;
         }

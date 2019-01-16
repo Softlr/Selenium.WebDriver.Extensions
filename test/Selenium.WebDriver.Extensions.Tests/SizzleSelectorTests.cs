@@ -5,11 +5,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.By;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static By;
+    using static Shared.Trait;
     using static System.String;
 
     [Trait(CATEGORY, UNIT)]
@@ -105,7 +103,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue() =>
             ((Action)(() => SizzleSelector(null))).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("selector");
+            .And.ParamName.Should().Be("selector");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue() =>

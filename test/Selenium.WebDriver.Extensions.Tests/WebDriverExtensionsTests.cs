@@ -9,10 +9,8 @@ namespace Selenium.WebDriver.Extensions.Tests
     using JetBrains.Annotations;
     using NSubstitute;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static Shared.Trait;
     using static Softlr.Suppress;
     using static System.String;
 
@@ -37,7 +35,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                 // ExecuteScript
                 yield return new object[]
                 {
-                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>())),  driverParam
+                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>())), driverParam
                 };
                 yield return new object[] { (Action)(() => webDriver.ExecuteScript(null)), scriptParam };
                 yield return new object[] { (Action)(() => webDriver.ExecuteScript(Empty)), scriptParam };

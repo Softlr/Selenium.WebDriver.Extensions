@@ -5,10 +5,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture;
     using FluentAssertions;
     using JetBrains.Annotations;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.By;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
+    using static By;
+    using static Shared.Trait;
     using SeleniumBy = OpenQA.Selenium.By;
 
     [Trait(CATEGORY, UNIT)]
