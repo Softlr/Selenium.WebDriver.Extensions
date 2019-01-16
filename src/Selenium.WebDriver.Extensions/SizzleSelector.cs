@@ -1,12 +1,14 @@
 namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
+    using JetBrains.Annotations;
     using OpenQA.Selenium;
 
     /// <summary>
     ///     Searches the DOM elements using Sizzle selector.
     /// </summary>
     /// <inheritdoc />
+    [PublicAPI]
     public class SizzleSelector : SelectorBase<SizzleSelector>
     {
         private const string VARIABLE = "window.Sizzle";

@@ -2,6 +2,7 @@ namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
+    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using static Softlr.Suppress;
     using static System.String;
@@ -11,6 +12,7 @@ namespace Selenium.WebDriver.Extensions
     ///     Searches the DOM elements using jQuery selector.
     /// </summary>
     /// <inheritdoc />
+    [PublicAPI]
     public class JQuerySelector : SelectorBase<JQuerySelector>
     {
         private const string VARIABLE = "window.jQuery";
