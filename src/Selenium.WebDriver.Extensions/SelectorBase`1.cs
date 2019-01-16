@@ -14,17 +14,13 @@ namespace Selenium.WebDriver.Extensions
     using static Validate;
     using SeleniumBy = OpenQA.Selenium.By;
 
-    /// <summary>
-    ///     The selector base.
-    /// </summary>
+    /// <summary>The selector base.</summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
     /// <inheritdoc cref="ISelector" />
     [PublicAPI]
     public abstract class SelectorBase<TSelector> : SeleniumBy, ISelector
     {
-        /// <summary>
-        ///     Initializes a new instance of the <see cref="SelectorBase{T}" /> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="SelectorBase{T}" /> class.</summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
         [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
@@ -39,39 +35,27 @@ namespace Selenium.WebDriver.Extensions
         /// <inheritdoc />
         public abstract string CheckScript { get; }
 
-        /// <summary>
-        ///     Gets the context.
-        /// </summary>
+        /// <summary>Gets the context.</summary>
         public TSelector Context { get; private set; }
 
-        /// <summary>
-        ///     Gets the query raw selector.
-        /// </summary>
+        /// <summary>Gets the query raw selector.</summary>
         public string RawSelector { get; }
 
-        /// <summary>
-        ///     Gets the selector.
-        /// </summary>
+        /// <summary>Gets the selector.</summary>
         public abstract string Selector { get; }
 
-        /// <summary>
-        ///     Gets the result resolver string.
-        /// </summary>
+        /// <summary>Gets the result resolver string.</summary>
         protected virtual string ResultResolver => Empty;
 
         [SuppressMessage(SONARQUBE, S4018)]
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
-        /// <summary>
-        ///     Creates the context.
-        /// </summary>
+        /// <summary>Creates the context.</summary>
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
 
-        /// <summary>
-        ///     Loads the external library.
-        /// </summary>
+        /// <summary>Loads the external library.</summary>
         /// <param name="driver">The web driver.</param>
         protected abstract void LoadExternalLibrary(IWebDriver driver);
 
