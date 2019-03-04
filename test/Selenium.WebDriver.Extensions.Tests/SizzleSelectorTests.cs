@@ -6,9 +6,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using FluentAssertions;
     using OpenQA.Selenium;
     using Xunit;
+    using static System.String;
     using static By;
     using static Shared.Trait;
-    using static System.String;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]

@@ -4,8 +4,8 @@ namespace Selenium.WebDriver.Extensions
     using System.Globalization;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
-    using static Softlr.Suppress;
     using static System.String;
+    using static Softlr.Suppress;
     using static Validate;
 
     /// <summary>Searches the DOM elements using jQuery selector.</summary>

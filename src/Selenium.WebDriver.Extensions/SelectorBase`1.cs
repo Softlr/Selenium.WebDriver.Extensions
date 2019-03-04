@@ -9,8 +9,8 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using Selenium.WebDriver.Extensions.Parsers;
-    using static Softlr.Suppress;
     using static System.String;
+    using static Softlr.Suppress;
     using static Validate;
     using SeleniumBy = OpenQA.Selenium.By;
 

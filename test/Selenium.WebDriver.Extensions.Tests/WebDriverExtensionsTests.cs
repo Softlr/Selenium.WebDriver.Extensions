@@ -10,9 +10,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     using NSubstitute;
     using OpenQA.Selenium;
     using Xunit;
+    using static System.String;
     using static Shared.Trait;
     using static Softlr.Suppress;
-    using static System.String;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
@@ -105,6 +105,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
+        [SuppressMessage(SONARQUBE, S2699)]
         public void ShouldExecuteScript(string scriptMethod)
         {
             var script = $"{scriptMethod}();";
@@ -117,6 +118,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(Loaders))]
+        [SuppressMessage(SONARQUBE, S2699)]
         public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             var driver = new WebDriverBuilder().WithNoExternalLibraryLoaded().Build();
