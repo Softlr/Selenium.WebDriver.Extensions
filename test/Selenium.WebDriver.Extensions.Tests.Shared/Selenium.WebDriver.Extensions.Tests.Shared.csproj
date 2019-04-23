@@ -12,7 +12,7 @@
   <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0" />
     <PackageReference Include="Softlr.Suppress" Version="1.5.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.11.0.8083">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
