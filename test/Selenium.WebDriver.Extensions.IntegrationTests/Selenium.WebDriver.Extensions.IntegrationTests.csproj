@@ -28,7 +28,7 @@
     <PackageReference Include="Nancy" Version="2.0.0-clinteastwood" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="73.0.3683.68" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.24.0" />
-    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.5" />
+    <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.59" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="7.13.0.8313">
       <PrivateAssets>all</PrivateAssets>
