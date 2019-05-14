@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
+    using System;
+    using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
     using static Softlr.Suppress;
     using static Validate;
 
@@ -32,10 +32,10 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="args">The arguments to the script.</param>
         /// <returns>The value returned by the script.</returns>
         /// <remarks>
-        ///     For an HTML element, this method returns a <see cref="IWebElement" />. For a number, a
-        ///     <see cref="long" /> is returned. For a boolean, a <see cref="bool" /> is returned. For all other cases
-        ///     a <see cref="string" /> is returned. For an array,we check the first element, and attempt to return a
-        ///     <see cref="List{T}" /> of that type, following the rules above. Nested lists are not supported.
+        /// For an HTML element, this method returns a <see cref="IWebElement" />. For a number, a <see cref="long" />
+        /// is returned. For a boolean, a <see cref="bool" /> is returned. For all other cases a <see cref="string" />
+        /// is returned. For an array,we check the first element, and attempt to return a <see cref="List{T}" /> of
+        /// that type, following the rules above. Nested lists are not supported.
         /// </remarks>
         [SuppressMessage(SONARQUBE, S4018)]
         public static TResult ExecuteScript<TResult>(
@@ -47,14 +47,14 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="version">
-        ///     The version of jQuery to load if it's not already loaded on the tested page. It must
-        ///     be the full version number matching one of the versions at
-        ///     <see href="https://code.jquery.com/jquery" />. The default value will get the latest stable version.
+        /// The version of jQuery to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://code.jquery.com/jquery" />. The default value
+        /// will get the latest stable version.
         /// </param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
         /// <remarks>
-        ///     If jQuery is already loaded on a page this method will do nothing, even if the loaded version and
-        ///     version requested by invoking this method have different versions.
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadJQuery(
             this IWebDriver driver,
@@ -70,8 +70,8 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="uri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
         /// <remarks>
-        ///     If jQuery is already loaded on a page this method will do nothing, even if the loaded version and
-        ///     version requested by invoking this method have different versions.
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadJQuery(
             this IWebDriver driver,
@@ -85,14 +85,13 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="version">
-        ///     The version of Sizzle to load if it's not already loaded on the tested page. It must
-        ///     be the full version number matching one of the versions at
-        ///     <see href="https://github.com/jquery/sizzle" />.
+        /// The version of Sizzle to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://github.com/jquery/sizzle" />.
         /// </param>
         /// <param name="timeout">The timeout value for the Sizzle load.</param>
         /// <remarks>
-        ///     If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and
-        ///     version requested by invoking this method have different versions.
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadSizzle(
             this IWebDriver driver,
@@ -111,8 +110,8 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="uri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
         /// <param name="timeout">The timeout value for the Sizzle load.</param>
         /// <remarks>
-        ///     If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and
-        ///     version requested by invoking this method have different versions.
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
         /// </remarks>
         public static void LoadSizzle(
             this IWebDriver driver,

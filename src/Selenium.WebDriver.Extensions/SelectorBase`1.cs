@@ -1,16 +1,16 @@
 namespace Selenium.WebDriver.Extensions
 {
+    using JetBrains.Annotations;
+    using OpenQA.Selenium;
+    using OpenQA.Selenium.Internal;
+    using Selenium.WebDriver.Extensions.Parsers;
     using System;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using JetBrains.Annotations;
-    using OpenQA.Selenium;
-    using OpenQA.Selenium.Internal;
-    using Selenium.WebDriver.Extensions.Parsers;
-    using static System.String;
     using static Softlr.Suppress;
+    using static System.String;
     using static Validate;
     using SeleniumBy = OpenQA.Selenium.By;
 

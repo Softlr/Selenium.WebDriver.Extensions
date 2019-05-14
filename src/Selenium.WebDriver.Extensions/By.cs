@@ -6,8 +6,8 @@ namespace Selenium.WebDriver.Extensions
 
     /// <summary>Extends the selenium <see cref="OpenQA.Selenium.By" /> additional selectors to be used.</summary>
     /// <remarks>
-    ///     This class shadows all of the static members of the <see cref="OpenQA.Selenium.By" />. The reason
-    ///     for that is to replace the type of the returned selectors to further expand their possibilities.
+    /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By" />. The reason for that is
+    /// to replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
     /// <inheritdoc />
     [UsedImplicitly]
@@ -69,11 +69,10 @@ namespace Selenium.WebDriver.Extensions
         public static new SeleniumBy TagName(string tagNameToFind) => SeleniumBy.TagName(tagNameToFind);
 
         /// <summary>
-        ///     Gets a mechanism to find elements by an XPath query. When searching within a
-        ///     <see cref="IWebElement" /> using xpath be aware that <see cref="IWebDriver" /> follows standard
-        ///     conventions: a search prefixed with <c>"//"</c> will search the entire document, not just the children
-        ///     of this current node. Use <c>".//"</c> to limit your search to the children of this
-        ///     <see cref="IWebElement" />.
+        /// Gets a mechanism to find elements by an XPath query. When searching within a <see cref="IWebElement" />
+        /// using xpath be aware that <see cref="IWebDriver" /> follows standard conventions: a search prefixed with
+        /// <c>"//"</c> will search the entire document, not just the children of this current node. Use <c>".//"</c>
+        /// to limit your search to the children of this <see cref="IWebElement" />.
         /// </summary>
         /// <param name="xpathToFind">The XPath query to use.</param>
         /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>

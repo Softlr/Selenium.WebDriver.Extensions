@@ -1,8 +1,8 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Nancy;
+    using System.Diagnostics.CodeAnalysis;
     using static Softlr.Suppress;
 
     [UsedImplicitly]
