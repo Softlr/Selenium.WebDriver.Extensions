@@ -1,14 +1,14 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
-    using static System.String;
     using static By;
     using static Shared.Trait;
+    using static System.String;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]

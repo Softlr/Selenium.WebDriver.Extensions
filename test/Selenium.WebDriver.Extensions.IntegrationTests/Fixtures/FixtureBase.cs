@@ -1,12 +1,12 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Hosting.Server.Features;
+    using OpenQA.Selenium;
     using System;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
     using System.Linq;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Hosting.Server.Features;
-    using OpenQA.Selenium;
     using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]

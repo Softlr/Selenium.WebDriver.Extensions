@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
-    using System.Diagnostics.CodeAnalysis;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
     using static TestCaseModule;

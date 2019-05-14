@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using FluentAssertions;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
     using static Softlr.Suppress;
