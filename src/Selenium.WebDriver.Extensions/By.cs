@@ -4,10 +4,10 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using SeleniumBy = OpenQA.Selenium.By;
 
-    /// <summary>Extends the selenium <see cref="OpenQA.Selenium.By" /> additional selectors to be used.</summary>
+    /// <summary>Extends the selenium <see cref="SeleniumBy" /> additional selectors to be used.</summary>
     /// <remarks>
-    /// This class shadows all of the static members of the <see cref="OpenQA.Selenium.By" />. The reason for that is
-    /// to replace the type of the returned selectors to further expand their possibilities.
+    /// This class shadows all of the static members of the <see cref="SeleniumBy" />. The reason for that is to
+    /// replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
     /// <inheritdoc />
     [UsedImplicitly]
@@ -15,18 +15,18 @@ namespace Selenium.WebDriver.Extensions
     {
         /// <summary>Gets a mechanism to find elements by their CSS class.</summary>
         /// <param name="classNameToFind">The CSS class to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy ClassName(string classNameToFind) => SeleniumBy.ClassName(classNameToFind);
 
         /// <summary>Gets a mechanism to find elements by their cascading style sheet (CSS) selector.</summary>
         /// <param name="cssSelectorToFind">The CSS selector to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy CssSelector(string cssSelectorToFind) =>
             SeleniumBy.CssSelector(cssSelectorToFind);
 
         /// <summary>Gets a mechanism to find elements by their ID.</summary>
         /// <param name="idToFind">The ID to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy Id(string idToFind) => SeleniumBy.Id(idToFind);
 
         /// <summary>Gets a mechanism to find elements matching jQuery selector.</summary>
@@ -42,17 +42,17 @@ namespace Selenium.WebDriver.Extensions
 
         /// <summary>Gets a mechanism to find elements by their link text.</summary>
         /// <param name="linkTextToFind">The link text to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy LinkText(string linkTextToFind) => SeleniumBy.LinkText(linkTextToFind);
 
         /// <summary>Gets a mechanism to find elements by their name.</summary>
         /// <param name="nameToFind">The name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy Name(string nameToFind) => SeleniumBy.Name(nameToFind);
 
         /// <summary>Gets a mechanism to find elements by a partial match on their link text.</summary>
         /// <param name="partialLinkTextToFind">The partial link text to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy PartialLinkText(string partialLinkTextToFind) =>
             SeleniumBy.PartialLinkText(partialLinkTextToFind);
 
@@ -65,7 +65,7 @@ namespace Selenium.WebDriver.Extensions
 
         /// <summary>Gets a mechanism to find elements by their tag name.</summary>
         /// <param name="tagNameToFind">The tag name to find.</param>
-        /// <returns>A <see cref="OpenQA.Selenium.By" /> object the driver can use to find the elements.</returns>
+        /// <returns>A <see cref="SeleniumBy" /> object the driver can use to find the elements.</returns>
         public static new SeleniumBy TagName(string tagNameToFind) => SeleniumBy.TagName(tagNameToFind);
 
         /// <summary>
