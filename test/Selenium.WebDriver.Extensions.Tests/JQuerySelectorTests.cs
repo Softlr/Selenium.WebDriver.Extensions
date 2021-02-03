@@ -50,29 +50,27 @@ namespace Selenium.WebDriver.Extensions.Tests
         public static TheoryData<Action> SelectorNullArgumentExceptionTests =>
             new TheoryData<Action>
             {
-                () => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null),
-                () => JQuerySelector(_fixture.Create<string>()).Add(null),
-                () => JQuerySelector(_fixture.Create<string>()).Add(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Add(null, JQuerySelector(_fixture.Create<string>())),
-                () => JQuerySelector(_fixture.Create<string>()).Add(Empty, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null),
-                () => JQuerySelector(_fixture.Create<string>()).Closest(null),
-                () => JQuerySelector(_fixture.Create<string>()).Closest(Empty),
-                () => JQuerySelector(_fixture.Create<string>())
-                    .Closest(null, JQuerySelector(_fixture.Create<string>())),
-                () => JQuerySelector(_fixture.Create<string>())
-                    .Closest(Empty, JQuerySelector(_fixture.Create<string>())),
+                () => JQuerySelector(_fixture.Create<string>()).Add(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Add(Empty, JQuerySelector(_fixture.Create<string>())),
+                () => JQuerySelector(_fixture.Create<string>()).Add(null),
+                () => JQuerySelector(_fixture.Create<string>()).Add(null, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Closest(_fixture.Create<string>(), null),
-                () => JQuerySelector(_fixture.Create<string>()).Filter(null),
+                () => JQuerySelector(_fixture.Create<string>()).Closest(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Closest(Empty, JQuerySelector(_fixture.Create<string>())),
+                () => JQuerySelector(_fixture.Create<string>()).Closest(null),
+                () => JQuerySelector(_fixture.Create<string>()).Closest(null, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Filter(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Find(null),
+                () => JQuerySelector(_fixture.Create<string>()).Filter(null),
                 () => JQuerySelector(_fixture.Create<string>()).Find(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Has(null),
+                () => JQuerySelector(_fixture.Create<string>()).Find(null),
                 () => JQuerySelector(_fixture.Create<string>()).Has(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Is(null),
+                () => JQuerySelector(_fixture.Create<string>()).Has(null),
                 () => JQuerySelector(_fixture.Create<string>()).Is(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Is(null),
+                () => JQuerySelector(_fixture.Create<string>()).Not(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Not(null),
-                () => JQuerySelector(_fixture.Create<string>()).Not(Empty)
+                () => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null)
             };
 
         [PublicAPI]
@@ -105,23 +103,20 @@ namespace Selenium.WebDriver.Extensions.Tests
                     },
 
                     // escaping
-                    { JQuerySelector($"[{attrName}='{attrValue}']"), $"jQuery('[{attrName}=\"{attrValue}\"]')" },
                     { JQuerySelector($"[{attrName}=\"{attrValue}\"]"), $"jQuery('[{attrName}=\"{attrValue}\"]')" },
-                    {
-                        JQuerySelector(tag).Add($"[{attrName}='{attrValue}']"),
-                        $"jQuery('{tag}').add('[{attrName}=\"{attrValue}\"]')"
-                    },
+                    { JQuerySelector($"[{attrName}='{attrValue}']"), $"jQuery('[{attrName}=\"{attrValue}\"]')" },
                     {
                         JQuerySelector(tag).Add($"[{attrName}=\"{attrValue}\"]"),
-                        $"jQuery('{tag}').add('[{attrName}=\"{attrValue}\"]')"
-                    },
+                        $"jQuery('{tag}').add('[{attrName}=\"{attrValue}\"]')" },
+                    {
+                        JQuerySelector(tag).Add($"[{attrName}='{attrValue}']"),
+                        $"jQuery('{tag}').add('[{attrName}=\"{attrValue}\"]')" },
 
                     // chained methods
                     { JQuerySelector(tag).Add(innerTag), $"jQuery('{tag}').add('{innerTag}')" },
                     {
                         JQuerySelector(tag).Add(innerTag, JQuerySelector(selector)),
-                        $"jQuery('{tag}').add('{innerTag}', jQuery('{selector}'))"
-                    },
+                        $"jQuery('{tag}').add('{innerTag}', jQuery('{selector}'))" },
                     { JQuerySelector(tag).AddBack(), $"jQuery('{tag}').addBack()" },
                     { JQuerySelector(tag).AddBack(innerTag), $"jQuery('{tag}').addBack('{innerTag}')" },
                     { JQuerySelector(tag).AndSelf(), $"jQuery('{tag}').andSelf()" },
@@ -130,55 +125,50 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).Closest(innerTag), $"jQuery('{tag}').closest('{innerTag}')" },
                     {
                         JQuerySelector(tag).Closest(innerTag, JQuerySelector(selector)),
-                        $"jQuery('{tag}').closest('{innerTag}', jQuery('{selector}'))"
-                    },
+                        $"jQuery('{tag}').closest('{innerTag}', jQuery('{selector}'))" },
                     { JQuerySelector(tag).Contents(), $"jQuery('{tag}').contents()" },
                     { JQuerySelector(tag).End(), $"jQuery('{tag}').end()" },
                     { JQuerySelector(tag).Eq(index1), $"jQuery('{tag}').eq({index1})" },
+                    { JQuerySelector(tag).Even(), $"jQuery('{tag}').even()" },
                     { JQuerySelector(tag).Filter(selector), $"jQuery('{tag}').filter('{selector}')" },
                     { JQuerySelector(tag).Find(selector), $"jQuery('{tag}').find('{selector}')" },
                     { JQuerySelector(tag).First(), $"jQuery('{tag}').first()" },
-                    { JQuerySelector(tag).Last(), $"jQuery('{tag}').last()" },
                     { JQuerySelector(tag).Has(selector), $"jQuery('{tag}').has('{selector}')" },
                     { JQuerySelector(tag).Is(selector), $"jQuery('{tag}').is('{selector}')" },
+                    { JQuerySelector(tag).Last(), $"jQuery('{tag}').last()" },
                     { JQuerySelector(tag).Next(), $"jQuery('{tag}').next()" },
                     { JQuerySelector(tag).Next(selector), $"jQuery('{tag}').next('{selector}')" },
                     { JQuerySelector(tag).NextAll(), $"jQuery('{tag}').nextAll()" },
                     { JQuerySelector(tag).NextAll(selector), $"jQuery('{tag}').nextAll('{selector}')" },
                     { JQuerySelector(tag).NextUntil(), $"jQuery('{tag}').nextUntil()" },
+                    { JQuerySelector(tag).NextUntil(null, filter), $"jQuery('{tag}').nextUntil('', '{filter}')" },
                     { JQuerySelector(tag).NextUntil(selector), $"jQuery('{tag}').nextUntil('{selector}')" },
                     {
                         JQuerySelector(tag).NextUntil(selector, filter),
-                        $"jQuery('{tag}').nextUntil('{selector}', '{filter}')"
-                    },
-                    { JQuerySelector(tag).NextUntil(null, filter), $"jQuery('{tag}').nextUntil('', '{filter}')" },
-                    { JQuerySelector(tag).Prev(), $"jQuery('{tag}').prev()" },
-                    { JQuerySelector(tag).Prev(selector), $"jQuery('{tag}').prev('{selector}')" },
-                    { JQuerySelector(tag).PrevAll(), $"jQuery('{tag}').prevAll()" },
-                    { JQuerySelector(tag).PrevAll(selector), $"jQuery('{tag}').prevAll('{selector}')" },
-                    { JQuerySelector(tag).PrevUntil(), $"jQuery('{tag}').prevUntil()" },
-                    { JQuerySelector(tag).PrevUntil(selector), $"jQuery('{tag}').prevUntil('{selector}')" },
-                    {
-                        JQuerySelector(tag).PrevUntil(selector, filter),
-                        $"jQuery('{tag}').prevUntil('{selector}', '{filter}')"
-                    },
-                    { JQuerySelector(tag).PrevUntil(null, filter), $"jQuery('{tag}').prevUntil('', '{filter}')" },
+                        $"jQuery('{tag}').nextUntil('{selector}', '{filter}')" },
                     { JQuerySelector(tag).Not(selector), $"jQuery('{tag}').not('{selector}')" },
+                    { JQuerySelector(tag).Odd(), $"jQuery('{tag}').odd()" },
                     { JQuerySelector(tag).OffsetParent(), $"jQuery('{tag}').offsetParent()" },
                     { JQuerySelector(tag).Parent(), $"jQuery('{tag}').parent()" },
                     { JQuerySelector(tag).Parent(selector), $"jQuery('{tag}').parent('{selector}')" },
                     { JQuerySelector(tag).Parents(), $"jQuery('{tag}').parents()" },
                     { JQuerySelector(tag).Parents(selector), $"jQuery('{tag}').parents('{selector}')" },
                     { JQuerySelector(tag).ParentsUntil(), $"jQuery('{tag}').parentsUntil()" },
+                    { JQuerySelector(tag).ParentsUntil(null, filter), $"jQuery('{tag}').parentsUntil('', '{filter}')" },
                     { JQuerySelector(tag).ParentsUntil(selector), $"jQuery('{tag}').parentsUntil('{selector}')" },
                     {
                         JQuerySelector(tag).ParentsUntil(selector, filter),
-                        $"jQuery('{tag}').parentsUntil('{selector}', '{filter}')"
-                    },
+                        $"jQuery('{tag}').parentsUntil('{selector}', '{filter}')" },
+                    { JQuerySelector(tag).Prev(), $"jQuery('{tag}').prev()" },
+                    { JQuerySelector(tag).Prev(selector), $"jQuery('{tag}').prev('{selector}')" },
+                    { JQuerySelector(tag).PrevAll(), $"jQuery('{tag}').prevAll()" },
+                    { JQuerySelector(tag).PrevAll(selector), $"jQuery('{tag}').prevAll('{selector}')" },
+                    { JQuerySelector(tag).PrevUntil(), $"jQuery('{tag}').prevUntil()" },
+                    { JQuerySelector(tag).PrevUntil(null, filter), $"jQuery('{tag}').prevUntil('', '{filter}')" },
+                    { JQuerySelector(tag).PrevUntil(selector), $"jQuery('{tag}').prevUntil('{selector}')" },
                     {
-                        JQuerySelector(tag).ParentsUntil(null, filter),
-                        $"jQuery('{tag}').parentsUntil('', '{filter}')"
-                    },
+                        JQuerySelector(tag).PrevUntil(selector, filter),
+                        $"jQuery('{tag}').prevUntil('{selector}', '{filter}')" },
                     { JQuerySelector(tag).Siblings(), $"jQuery('{tag}').siblings()" },
                     { JQuerySelector(tag).Siblings(selector), $"jQuery('{tag}').siblings('{selector}')" },
                     { JQuerySelector(tag).Slice(index1), $"jQuery('{tag}').slice({index1})" },
