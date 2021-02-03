@@ -16,7 +16,6 @@ install:
   - choco install googlechrome -y --ignore-checksums
   - choco install opencover.portable -y
   - choco install codecov -y
-  - choco install selenium-chromium-edge-driver -y
 
 nuget:
   disable_publish_on_pr: true
