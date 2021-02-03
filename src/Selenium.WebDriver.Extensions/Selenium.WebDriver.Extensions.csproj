@@ -17,21 +17,24 @@
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
   </ItemGroup>
   <ItemGroup>
+    <AdditionalFiles Include="..\..\.sonarlint\selenium.webdriver.extensions\CSharp\SonarLint.xml" Link="SonarLint.xml" />
+  </ItemGroup>
+  <ItemGroup>
     <PackageReference Include="codecracker.CSharp" Version="1.1.0">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="JetBrains.Annotations" Version="2019.1.1">
+    <PackageReference Include="JetBrains.Annotations" Version="2020.3.0">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Selenium.Support" Version="3.141.0" />
-    <PackageReference Include="Softlr.Suppress" Version="1.5.0">
+    <PackageReference Include="Softlr.Suppress" Version="1.6.1">
 		<PrivateAssets>all</PrivateAssets>
 	</PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="7.14.0.8411">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.17.0.26580">
 		<PrivateAssets>all</PrivateAssets>
 		<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 	</PackageReference>
