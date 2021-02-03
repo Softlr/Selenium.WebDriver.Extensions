@@ -22,14 +22,14 @@ namespace Selenium.WebDriver.Extensions.Tests
             {
                 return new TheoryData<SeleniumBy>
                 {
-                    CssSelector(_fixture.Create<string>()),
-                    TagName(_fixture.Create<string>()),
-                    Id(_fixture.Create<string>()),
-                    Name(_fixture.Create<string>()),
                     ClassName(_fixture.Create<string>()),
+                    CssSelector(_fixture.Create<string>()),
+                    Id(_fixture.Create<string>()),
                     LinkText(_fixture.Create<string>()),
+                    Name(_fixture.Create<string>()),
                     PartialLinkText(_fixture.Create<string>()),
-                    XPath(_fixture.Create<string>()),
+                    TagName(_fixture.Create<string>()),
+                    XPath(_fixture.Create<string>())
                 };
             }
         }
