@@ -4,7 +4,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
-    using static TestCaseModule;
     using static Tests.Shared.Trait;
 
     [Trait(CATEGORY, INTEGRATION)]
@@ -15,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
-            : base(fixture, SIZZLE_LOADED, x => SizzleSelector(x))
+            : base(fixture, "/SizzleLoaded", x => SizzleSelector(x))
         {
         }
     }
