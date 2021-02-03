@@ -18,7 +18,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         protected FixtureBase()
         {
             _host = new WebHostBuilder()
-                .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseKestrel()
                 .UseStartup<Startup>()
                 .Build();
