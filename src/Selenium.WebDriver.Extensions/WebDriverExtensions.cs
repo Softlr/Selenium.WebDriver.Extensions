@@ -48,8 +48,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="version">
         /// The version of jQuery to load if it's not already loaded on the tested page. It must be the full version
-        /// number matching one of the versions at <see href="https://code.jquery.com/jquery" />. The default value
-        /// will get the latest stable version.
+        /// number matching one of the versions at <see href="https://code.jquery.com/jquery" />.
         /// </param>
         /// <param name="timeout">The timeout value for the jQuery load.</param>
         /// <remarks>
@@ -58,7 +57,7 @@ namespace Selenium.WebDriver.Extensions
         /// </remarks>
         public static void LoadJQuery(
             this IWebDriver driver,
-            string version = "latest",
+            string version = "3.5.1",
             TimeSpan? timeout = null)
         {
             var validatedVersion = VersionOrLatest(() => version);
