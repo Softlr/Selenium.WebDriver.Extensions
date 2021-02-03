@@ -57,9 +57,11 @@ namespace Selenium.WebDriver.Extensions.Tests
                 () => JQuerySelector(_fixture.Create<string>()).Add(null, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Closest(_fixture.Create<string>(), null),
                 () => JQuerySelector(_fixture.Create<string>()).Closest(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Closest(Empty, JQuerySelector(_fixture.Create<string>())),
+                () => JQuerySelector(_fixture.Create<string>())
+                    .Closest(Empty, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Closest(null),
-                () => JQuerySelector(_fixture.Create<string>()).Closest(null, JQuerySelector(_fixture.Create<string>())),
+                () => JQuerySelector(_fixture.Create<string>())
+                    .Closest(null, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Filter(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Filter(null),
                 () => JQuerySelector(_fixture.Create<string>()).Find(Empty),
