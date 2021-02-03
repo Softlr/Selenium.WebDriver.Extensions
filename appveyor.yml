@@ -16,6 +16,7 @@ install:
   - choco install googlechrome -y --ignore-checksums
   - choco install opencover.portable -y
   - choco install codecov -y
+  - choco install selenium-chromium-edge-driver -y
 
 nuget:
   disable_publish_on_pr: true
@@ -38,10 +39,10 @@ after_build:
 
 test_script:
   - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build
+  - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Edge
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
-  - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Edge
   - OpenCover.Console -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
   - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarCloudAccessToken
 
