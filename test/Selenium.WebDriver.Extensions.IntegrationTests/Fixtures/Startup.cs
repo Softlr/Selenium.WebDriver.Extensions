@@ -3,10 +3,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using JetBrains.Annotations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
-    using Microsoft.Extensions.FileProviders;
-    using Nancy.Owin;
     using System.Diagnostics.CodeAnalysis;
-    using System.IO;
     using static Softlr.Suppress;
 
     [PublicAPI]
@@ -15,8 +12,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     {
         [SuppressMessage(SONARQUBE, S2325)]
         [SuppressMessage(CODE_CRACKER, CC0091)]
-        public void Configure(IApplicationBuilder app)
-        {
+        public void Configure(IApplicationBuilder app) =>
             app.Run(async context =>
             {
                 if (context.Request.Path == "/jQueryLoaded")
@@ -70,13 +66,5 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
                     await context.Response.WriteAsync(content);
                 }
             });
-            //app.UseStaticFiles(new StaticFileOptions
-            //{
-            //    FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Views")),
-            //    RequestPath = ""
-            //});
-
-            //app.UseOwin(x => x.UseNancy());
-        }
     }
 }

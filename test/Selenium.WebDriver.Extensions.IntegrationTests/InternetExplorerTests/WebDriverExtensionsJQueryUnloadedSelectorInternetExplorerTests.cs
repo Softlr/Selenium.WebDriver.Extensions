@@ -4,7 +4,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
-    using static TestCaseModule;
     using static Tests.Shared.Trait;
 
     [Trait(CATEGORY, INTEGRATION)]
@@ -15,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
-            : base(fixture, UNLOADED, x => JQuerySelector(x))
+            : base(fixture, "/Unloaded", x => JQuerySelector(x))
         {
         }
     }

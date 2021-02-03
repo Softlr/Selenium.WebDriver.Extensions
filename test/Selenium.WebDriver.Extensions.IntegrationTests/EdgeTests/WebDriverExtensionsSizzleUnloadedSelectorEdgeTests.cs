@@ -4,7 +4,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
-    using static TestCaseModule;
     using static Tests.Shared.Trait;
 
     [Trait(CATEGORY, INTEGRATION)]
@@ -15,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture, UNLOADED, x => SizzleSelector(x))
+            : base(fixture, "/Unloaded", x => SizzleSelector(x))
         {
         }
     }
