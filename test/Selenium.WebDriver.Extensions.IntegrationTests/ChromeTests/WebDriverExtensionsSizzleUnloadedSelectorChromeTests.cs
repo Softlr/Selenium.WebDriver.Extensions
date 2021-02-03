@@ -1,7 +1,7 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
 {
-    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Xunit;
     using static By;
     using static Tests.Shared.Trait;

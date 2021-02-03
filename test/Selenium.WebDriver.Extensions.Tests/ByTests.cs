@@ -1,10 +1,9 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using FluentAssertions;
     using JetBrains.Annotations;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
     using static Shared.Trait;
