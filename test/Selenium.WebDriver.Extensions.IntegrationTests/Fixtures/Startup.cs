@@ -27,7 +27,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
                         <h1 class=""main"">H1 Header</h1>
                         <div class=""main"" id=""id1"">Selector</div>
                         <div class=""main"">Selenium WebDriver Extensions</div>
-                        <script src=""https://code.jquery.com/jquery-2.1.1.min.js"" type=""text/javascript""></script>
+                        <script src=""https://code.jquery.com/jquery-3.5.1.min.js"" type=""text/javascript""></script>
                     </body>
                     </html>";
                     await context.Response.WriteAsync(content);

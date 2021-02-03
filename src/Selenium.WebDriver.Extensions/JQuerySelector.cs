@@ -133,6 +133,10 @@ namespace Selenium.WebDriver.Extensions
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Eq(int index) => Chain("eq", index.ToString(CultureInfo.InvariantCulture), true);
 
+        /// <summary>Reduce the set of matched elements to the even ones in the set, numbered from zero.</summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Even() => Chain("even");
+
         /// <summary>Reduce the set of matched elements to those that match the selector or pass the function's test.</summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
@@ -211,6 +215,10 @@ namespace Selenium.WebDriver.Extensions
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Not(string selector) => Chain("not", Required(() => selector));
+
+        /// <summary>Reduce the set of matched elements to the odd ones in the set, numbered from zero.</summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Odd() => Chain("odd");
 
         /// <summary>Get the closest ancestor element that is positioned.</summary>
         /// <returns>The Selenium jQuery selector.</returns>
