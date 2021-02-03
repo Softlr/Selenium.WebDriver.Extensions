@@ -68,7 +68,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         {
             var sut = _selectorAccessor.Invoke("#id-not");
 
-            ((Action)(() => Browser.FindElement(sut))).Should().Throw<NoSuchElementException>();
+            FluentActions.Invoking(() => Browser.FindElement(sut)).Should().Throw<NoSuchElementException>();
         }
 
         [Fact]
