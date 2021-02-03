@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
+    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.PageObjects;
-    using System.Diagnostics.CodeAnalysis;
     using static OpenQA.Selenium.Support.PageObjects.How;
 
     [PublicAPI]

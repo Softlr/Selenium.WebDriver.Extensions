@@ -1,10 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
 {
-    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using System.Diagnostics.CodeAnalysis;
+    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Xunit;
     using static By;
-    using static TestCaseModule;
     using static Tests.Shared.Trait;
 
     [Trait(CATEGORY, INTEGRATION)]
@@ -15,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture, JQUERY_LOADED, x => JQuerySelector(x))
+            : base(fixture, "/jQueryLoaded", x => JQuerySelector(x))
         {
         }
     }

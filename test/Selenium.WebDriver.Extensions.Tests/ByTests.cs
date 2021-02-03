@@ -1,10 +1,9 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using FluentAssertions;
     using JetBrains.Annotations;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Xunit;
     using static By;
     using static Shared.Trait;
@@ -14,20 +13,24 @@ namespace Selenium.WebDriver.Extensions.Tests
     [ExcludeFromCodeCoverage]
     public class ByTests
     {
+        private static readonly IFixture _fixture = new Fixture();
+
         [PublicAPI]
-        public static IEnumerable<object[]> CoreSelectors
+        public static TheoryData<SeleniumBy> CoreSelectors
         {
             get
             {
-                var fixture = new Fixture();
-                yield return new object[] { CssSelector(fixture.Create<string>()) };
-                yield return new object[] { TagName(fixture.Create<string>()) };
-                yield return new object[] { Id(fixture.Create<string>()) };
-                yield return new object[] { Name(fixture.Create<string>()) };
-                yield return new object[] { ClassName(fixture.Create<string>()) };
-                yield return new object[] { LinkText(fixture.Create<string>()) };
-                yield return new object[] { PartialLinkText(fixture.Create<string>()) };
-                yield return new object[] { XPath(fixture.Create<string>()) };
+                return new TheoryData<SeleniumBy>
+                {
+                    CssSelector(_fixture.Create<string>()),
+                    TagName(_fixture.Create<string>()),
+                    Id(_fixture.Create<string>()),
+                    Name(_fixture.Create<string>()),
+                    ClassName(_fixture.Create<string>()),
+                    LinkText(_fixture.Create<string>()),
+                    PartialLinkText(_fixture.Create<string>()),
+                    XPath(_fixture.Create<string>()),
+                };
             }
         }
 

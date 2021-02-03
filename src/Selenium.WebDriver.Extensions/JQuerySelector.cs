@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using JetBrains.Annotations;
-    using OpenQA.Selenium;
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
-    using static Softlr.Suppress;
+    using JetBrains.Annotations;
+    using OpenQA.Selenium;
     using static System.String;
+    using static Softlr.Suppress;
     using static Validate;
 
     /// <summary>Searches the DOM elements using jQuery selector.</summary>

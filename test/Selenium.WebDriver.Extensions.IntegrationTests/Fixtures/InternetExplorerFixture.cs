@@ -1,9 +1,9 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using JetBrains.Annotations;
-    using OpenQA.Selenium.IE;
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
+    using JetBrains.Annotations;
+    using OpenQA.Selenium.IE;
 
     [UsedImplicitly]
     [ExcludeFromCodeCoverage]

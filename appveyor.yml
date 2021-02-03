@@ -9,7 +9,7 @@ skip_commits:
   message: /\[(skip ci|ci skip)\]/
 
 version: 3.3.0.{build}
-image: Visual Studio 2017
+image: Visual Studio 2019
   
 install:
   - choco install sonarscanner-msbuild-net46 -y
@@ -21,14 +21,16 @@ nuget:
   disable_publish_on_pr: true
 
 environment:
-  SonarQubeAccessToken:
+  SonarCloudAccessToken:
     secure: hZ+EdDQLy/K+ngEIPrw7DM//Lft9RldmiOoGNhNz8m9iyfJ3ZJhylBm0FduR6fWT
   GitHubAccessToken:
     secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
       
 build_script:
-  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /o:rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
-  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /o:rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+  - set JAVA_HOME=C:\Program Files\Java\jdk11
+  - set PATH=%JAVA_HOME%\bin;%PATH%
+  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarcloud.io /o:rayell-github /d:sonar.login=$env:SonarCloudAccessToken /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarcloud.io /o:rayell-github /d:sonar.login=$env:SonarCloudAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
   - dotnet build -c Release
 
 after_build:
@@ -40,7 +42,7 @@ test_script:
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
   - OpenCover.Console -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
-  - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarQubeAccessToken
+  - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarCloudAccessToken
 
 after_test:
   - codecov -f coverage.xml

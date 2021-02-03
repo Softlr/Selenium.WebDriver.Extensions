@@ -3,8 +3,8 @@ mono: none
 os:  
   - linux
   - osx
-dotnet: 2.1.301
+dotnet: 5.0.102
 script:
   - dotnet restore
-  - dotnet build
-  - dotnet test test/Selenium.WebDriver.Extensions.Tests
+  - dotnet build --no-restore
+  - dotnet test test/Selenium.WebDriver.Extensions.Tests --no-build

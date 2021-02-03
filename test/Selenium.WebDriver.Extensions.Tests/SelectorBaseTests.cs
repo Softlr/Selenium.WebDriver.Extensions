@@ -1,11 +1,11 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using AutoFixture.Xunit2;
-    using FluentAssertions;
-    using OpenQA.Selenium;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
+    using AutoFixture.Xunit2;
+    using FluentAssertions;
+    using OpenQA.Selenium;
     using Xunit;
     using static Shared.Trait;
 

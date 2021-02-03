@@ -1,14 +1,14 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using OpenQA.Selenium;
-    using System;
-    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static System.String;
     using static By;
     using static Shared.Trait;
-    using static System.String;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
@@ -97,18 +97,18 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithEmptyValue() =>
-            ((Action)(() => SizzleSelector(Empty))).Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be("selector");
+            FluentActions.Invoking(() => SizzleSelector(Empty)).Should().Throw<ArgumentException>()
+                .And.ParamName.Should().Be("selector");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithNullValue() =>
-            ((Action)(() => SizzleSelector(null))).Should().Throw<ArgumentNullException>()
-            .And.ParamName.Should().Be("selector");
+            FluentActions.Invoking(() => SizzleSelector(null)).Should().Throw<ArgumentNullException>()
+                .And.ParamName.Should().Be("selector");
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingSizzleSelectorWithWhiteSpaceOnlyValue() =>
-            ((Action)(() => SizzleSelector(" "))).Should().Throw<ArgumentException>()
-            .And.ParamName.Should().Be("selector");
+            FluentActions.Invoking(() => SizzleSelector(" ")).Should().Throw<ArgumentException>()
+                .And.ParamName.Should().Be("selector");
 
         [Theory]
         [AutoData]
@@ -118,7 +118,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                 .Build();
             var sut = SizzleSelector(rawSelector);
 
-            ((Action)(() => sut.FindElement(driver))).Should().Throw<NoSuchElementException>();
+            FluentActions.Invoking(() => sut.FindElement(driver)).Should().Throw<NoSuchElementException>();
         }
 
         [Theory]
@@ -128,7 +128,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             var element = new SearchContextBuilder().AsWebElement().Build();
             var sut = SizzleSelector(rawSelector);
 
-            ((Action)(() => sut.FindElement(element))).Should().Throw<InvalidCastException>();
+            FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<InvalidCastException>();
         }
 
         [Theory]
@@ -141,7 +141,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
             var sut = SizzleSelector(rawSelector);
 
-            ((Action)(() => sut.FindElement(element))).Should().Throw<NotSupportedException>();
+            FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<NotSupportedException>();
         }
     }
 }
