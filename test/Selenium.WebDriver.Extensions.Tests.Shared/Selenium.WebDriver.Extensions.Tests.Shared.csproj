@@ -3,8 +3,8 @@
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.Tests.Shared.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
-	<IsPackable>false</IsPackable>
-	<SonarQubeTestProject>false</SonarQubeTestProject>
+    <IsPackable>false</IsPackable>
+    <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\_analysis\stylecop.json" />

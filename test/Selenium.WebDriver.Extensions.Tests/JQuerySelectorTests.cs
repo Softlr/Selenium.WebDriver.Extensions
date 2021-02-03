@@ -1,18 +1,17 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
-    using System;
-    using System.Collections.Generic;
-    using System.Diagnostics.CodeAnalysis;
     using Xunit;
+    using static System.String;
     using static By;
     using static Shared.Trait;
     using static Softlr.Suppress;
-    using static System.String;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
