@@ -66,7 +66,7 @@ namespace Selenium.WebDriver.Extensions
         /// </remarks>
         public static void LoadJQuery(this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
             NotNull(() => driver).LoadExternalLibrary(
-                JQuerySelector.All, NotNull(() => uri), timeout ?? _defaultTimeout);
+                JQuerySelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
         /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -98,7 +98,7 @@ namespace Selenium.WebDriver.Extensions
         /// </remarks>
         public static void LoadSizzle(this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
             NotNull(() => driver).LoadExternalLibrary(
-                SizzleSelector.All, NotNull(() => uri), timeout ?? _defaultTimeout);
+                SizzleSelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static bool CheckSelectorPrerequisites(this IWebDriver driver, ISelector selector) =>

@@ -46,14 +46,14 @@ namespace Selenium.WebDriver.Extensions
         }
 
         /// <summary>Gets the empty selector.</summary>
-        public static JQuerySelector All { get; } = new JQuerySelector("*");
+        public static JQuerySelector Empty { get; } = new JQuerySelector("*");
 
         /// <inheritdoc />
         public override string CheckScript => CheckScriptCode(VARIABLE);
 
         /// <inheritdoc />
         public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
-            + (Context != null ? $", {Context.Selector}" : All) + $"){_chain}";
+            + (Context != null ? $", {Context.Selector}" : string.Empty) + $"){_chain}";
 
         /// <summary>Gets the variable that has been assigned to jQuery.</summary>
         public virtual string Variable { get; }
@@ -208,7 +208,9 @@ namespace Selenium.WebDriver.Extensions
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
-            var filteredSelector = validatedSelector == null && validatedFilter != null ? Empty : validatedSelector;
+            var filteredSelector = validatedSelector == null && validatedFilter != null
+                ? string.Empty
+                : validatedSelector;
             return Chain("nextUntil", FilteredSelector(filteredSelector, validatedFilter), true);
         }
 
@@ -255,7 +257,9 @@ namespace Selenium.WebDriver.Extensions
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
-            var filteredSelector = validatedSelector == null && validatedFilter != null ? Empty : validatedSelector;
+            var filteredSelector = validatedSelector == null && validatedFilter != null
+                ? string.Empty
+                : validatedSelector;
             return Chain("parentsUntil", FilteredSelector(filteredSelector, validatedFilter), true);
         }
 
@@ -288,7 +292,9 @@ namespace Selenium.WebDriver.Extensions
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
-            var filteredSelector = validatedSelector == null && validatedFilter != null ? Empty : validatedSelector;
+            var filteredSelector = validatedSelector == null && validatedFilter != null
+                ? string.Empty
+                : validatedSelector;
             return Chain("prevUntil", FilteredSelector(filteredSelector, validatedFilter), true);
         }
 
@@ -326,11 +332,11 @@ namespace Selenium.WebDriver.Extensions
                 ? IsNullOrEmpty(filter)
                     ? $"'{selector.Replace('\'', '"')}'"
                     : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'"
-                : Empty;
+                : string.Empty;
 
         [SuppressMessage(SONARQUBE, S3358)]
         private static string GetSelectorString(string selector, bool noWrap = false) =>
-            selector == null ? Empty : noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'";
+            selector == null ? string.Empty : noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'";
 
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false) =>
             new JQuerySelector(
