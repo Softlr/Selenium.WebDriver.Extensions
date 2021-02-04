@@ -1,9 +1,11 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
+    using static System.String;
     using static Softlr.Suppress;
 
     [PublicAPI]
@@ -15,26 +17,21 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         public void Configure(IApplicationBuilder app) =>
             app.Run(async context =>
             {
+                Uri uri = null;
                 if (context.Request.Path == "/jQueryLoaded")
                 {
-                    var content = @"<!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset=""utf-8"" />
-                        <title>Selenium.WebDriver.Extensions Tests</title>
-                    </head>
-                    <body>
-                        <h1 class=""main"">H1 Header</h1>
-                        <div class=""main"" id=""id1"">Selector</div>
-                        <div class=""main"">Selenium WebDriver Extensions</div>
-                        <script src=""https://code.jquery.com/jquery-3.5.1.min.js"" type=""text/javascript""></script>
-                    </body>
-                    </html>";
-                    await context.Response.WriteAsync(content);
+                    uri = new Uri("https://code.jquery.com/jquery-3.5.1.min.js");
                 }
-                else if (context.Request.Path == "/SizzleLoaded")
+
+                if (context.Request.Path == "/SizzleLoaded")
                 {
-                    var content = @"<!DOCTYPE html>
+                    uri = new Uri("https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js");
+                }
+
+                var scriptTag = uri == null
+                    ? Empty
+                    : $"<script src=\"{uri.AbsoluteUri}\" type=\"text/javascript\"></script>";
+                var contentStart = @$"<!DOCTYPE html>
                     <html>
                     <head>
                         <meta charset=""utf-8"" />
@@ -44,27 +41,10 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
                         <h1 class=""main"">H1 Header</h1>
                         <div class=""main"" id=""id1"">Selector</div>
                         <div class=""main"">Selenium WebDriver Extensions</div>
-                        <script src=""https://cdnjs.cloudflare.com/ajax/libs/sizzle/2.0.0/sizzle.min.js"" type=""text/javascript""></script>
+                        {scriptTag}
                     </body>
                     </html>";
-                    await context.Response.WriteAsync(content);
-                }
-                else
-                {
-                    var content = @"<!DOCTYPE html>
-                    <html>
-                    <head>
-                        <meta charset=""utf-8"" />
-                        <title>Selenium.WebDriver.Extensions Tests</title>
-                    </head>
-                    <body>
-                        <h1 class=""main"">H1 Header</h1>
-                        <div class=""main"" id=""id1"">Selector</div>
-                        <div class=""main"">Selenium WebDriver Extensions</div>
-                    </body>
-                    </html>";
-                    await context.Response.WriteAsync(content);
-                }
+                await context.Response.WriteAsync(contentStart);
             });
     }
 }

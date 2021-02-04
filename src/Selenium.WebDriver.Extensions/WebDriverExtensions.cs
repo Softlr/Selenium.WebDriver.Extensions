@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using static Softlr.Suppress;
+    using static Selenium.WebDriver.Extensions.JavaScriptSnippets;
     using static Validate;
 
     /// <summary>Web driver extensions.</summary>
@@ -19,10 +20,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="script">The script to be executed.</param>
         /// <param name="args">The arguments to the script.</param>
-        public static void ExecuteScript(
-            this IWebDriver driver,
-            string script,
-            params object[] args) =>
+        public static void ExecuteScript(this IWebDriver driver, string script, params object[] args) =>
             ExecuteScript<object>(driver, script, args);
 
         /// <summary>Executes JavaScript in the context of the currently selected frame or window.</summary>
@@ -38,10 +36,7 @@ namespace Selenium.WebDriver.Extensions
         /// that type, following the rules above. Nested lists are not supported.
         /// </remarks>
         [SuppressMessage(SONARQUBE, S4018)]
-        public static TResult ExecuteScript<TResult>(
-            this IWebDriver driver,
-            string script,
-            params object[] args) =>
+        public static TResult ExecuteScript<TResult>(this IWebDriver driver, string script, params object[] args) =>
             (TResult)((IJavaScriptExecutor)NotNull(() => driver)).ExecuteScript(Required(() => script), args);
 
         /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
@@ -55,10 +50,7 @@ namespace Selenium.WebDriver.Extensions
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadJQuery(
-            this IWebDriver driver,
-            string version = "3.5.1",
-            TimeSpan? timeout = null)
+        public static void LoadJQuery(this IWebDriver driver, string version = "3.5.1", TimeSpan? timeout = null)
         {
             var validatedVersion = VersionOrLatest(() => version);
             LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{validatedVersion}.min.js"), timeout);
@@ -72,14 +64,9 @@ namespace Selenium.WebDriver.Extensions
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadJQuery(
-            this IWebDriver driver,
-            Uri uri,
-            TimeSpan? timeout = null) =>
+        public static void LoadJQuery(this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
             NotNull(() => driver).LoadExternalLibrary(
-                JQuerySelector.Empty,
-                NotNull(() => uri),
-                timeout ?? _defaultTimeout);
+                JQuerySelector.All, NotNull(() => uri), timeout ?? _defaultTimeout);
 
         /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -92,10 +79,7 @@ namespace Selenium.WebDriver.Extensions
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadSizzle(
-            this IWebDriver driver,
-            string version = "2.0.0",
-            TimeSpan? timeout = null)
+        public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
         {
             var validatedVersion = Version(() => version);
             LoadSizzle(
@@ -112,33 +96,22 @@ namespace Selenium.WebDriver.Extensions
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadSizzle(
-            this IWebDriver driver,
-            Uri uri,
-            TimeSpan? timeout = null) =>
+        public static void LoadSizzle(this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
             NotNull(() => driver).LoadExternalLibrary(
-                SizzleSelector.Empty,
-                NotNull(() => uri),
-                timeout ?? _defaultTimeout);
+                SizzleSelector.All, NotNull(() => uri), timeout ?? _defaultTimeout);
 
         [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
-        private static bool CheckSelectorPrerequisites(
-            this IWebDriver driver,
-            ISelector selector) =>
+        private static bool CheckSelectorPrerequisites(this IWebDriver driver, ISelector selector) =>
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
-        private static void LoadExternalLibrary(
-            this IWebDriver driver,
-            ISelector selector,
-            Uri url,
-            TimeSpan timeout)
+        private static void LoadExternalLibrary(this IWebDriver driver, ISelector selector, Uri url, TimeSpan timeout)
         {
             if (driver.CheckSelectorPrerequisites(selector))
             {
                 return;
             }
 
-            driver.ExecuteScript(JavaScriptSnippets.LoadScriptCode(url));
+            driver.ExecuteScript(LoadScriptCode(url));
             new WebDriverWait(driver, timeout).Until(x => x.CheckSelectorPrerequisites(selector));
         }
     }

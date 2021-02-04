@@ -5,6 +5,7 @@ namespace Selenium.WebDriver.Extensions
     using JetBrains.Annotations;
     using OpenQA.Selenium;
     using static System.String;
+    using static Selenium.WebDriver.Extensions.JavaScriptSnippets;
     using static Softlr.Suppress;
     using static Validate;
 
@@ -45,14 +46,14 @@ namespace Selenium.WebDriver.Extensions
         }
 
         /// <summary>Gets the empty selector.</summary>
-        public static JQuerySelector Empty { get; } = new JQuerySelector("*");
+        public static JQuerySelector All { get; } = new JQuerySelector("*");
 
         /// <inheritdoc />
-        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
+        public override string CheckScript => CheckScriptCode(VARIABLE);
 
         /// <inheritdoc />
         public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
-            + (Context != null ? $", {Context.Selector}" : string.Empty) + $"){_chain}";
+            + (Context != null ? $", {Context.Selector}" : All) + $"){_chain}";
 
         /// <summary>Gets the variable that has been assigned to jQuery.</summary>
         public virtual string Variable { get; }
@@ -117,7 +118,9 @@ namespace Selenium.WebDriver.Extensions
         public JQuerySelector Closest(string selector, JQuerySelector context) =>
             ChainWithContext("closest", Required(() => selector), NotNull(() => context));
 
-        /// <summary>Get the children of each element in the set of matched elements, including text and comment nodes.</summary>
+        /// <summary>
+        /// Get the children of each element in the set of matched elements, including text and comment nodes.
+        /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Contents() => Chain("contents");
 
@@ -137,7 +140,9 @@ namespace Selenium.WebDriver.Extensions
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Even() => Chain("even");
 
-        /// <summary>Reduce the set of matched elements to those that match the selector or pass the function's test.</summary>
+        /// <summary>
+        /// Reduce the set of matched elements to those that match the selector or pass the function's test.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Filter(string selector) => Chain("filter", Required(() => selector));
@@ -203,9 +208,7 @@ namespace Selenium.WebDriver.Extensions
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
-            var filteredSelector = validatedSelector == null && validatedFilter != null
-                ? string.Empty
-                : validatedSelector;
+            var filteredSelector = validatedSelector == null && validatedFilter != null ? Empty : validatedSelector;
             return Chain("nextUntil", FilteredSelector(filteredSelector, validatedFilter), true);
         }
 
@@ -252,9 +255,7 @@ namespace Selenium.WebDriver.Extensions
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
-            var filteredSelector = validatedSelector == null && validatedFilter != null
-                ? string.Empty
-                : validatedSelector;
+            var filteredSelector = validatedSelector == null && validatedFilter != null ? Empty : validatedSelector;
             return Chain("parentsUntil", FilteredSelector(filteredSelector, validatedFilter), true);
         }
 
@@ -287,9 +288,7 @@ namespace Selenium.WebDriver.Extensions
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
-            var filteredSelector = validatedSelector == null && validatedFilter != null
-                ? string.Empty
-                : validatedSelector;
+            var filteredSelector = validatedSelector == null && validatedFilter != null ? Empty : validatedSelector;
             return Chain("prevUntil", FilteredSelector(filteredSelector, validatedFilter), true);
         }
 
@@ -327,29 +326,19 @@ namespace Selenium.WebDriver.Extensions
                 ? IsNullOrEmpty(filter)
                     ? $"'{selector.Replace('\'', '"')}'"
                     : $"'{selector.Replace('\'', '"')}', '{filter.Replace('\'', '"')}'"
-                : string.Empty;
+                : Empty;
 
         [SuppressMessage(SONARQUBE, S3358)]
         private static string GetSelectorString(string selector, bool noWrap = false) =>
-            selector == null
-                ? string.Empty
-                : noWrap
-                    ? selector.Trim()
-                    : $"'{selector.Trim().Replace('\'', '"')}'";
+            selector == null ? Empty : noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'";
 
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false) =>
             new JQuerySelector(
-                RawSelector,
-                Context,
-                Variable,
-                $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
+                RawSelector, Context, Variable, $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
 
         [SuppressMessage(SONARQUBE, S3242)]
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
             new JQuerySelector(
-                RawSelector,
-                Context,
-                Variable,
-                $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
+                RawSelector, Context, Variable, $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
     }
 }

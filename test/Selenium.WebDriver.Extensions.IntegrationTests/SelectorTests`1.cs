@@ -26,8 +26,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         [Fact]
         public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
         {
-            var condition = ExpectedConditions.ElementIsVisible(
-                _selectorAccessor.Invoke("h1"));
+            var condition = ExpectedConditions.ElementIsVisible(_selectorAccessor.Invoke("h1"));
 
             var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
             wait.Until(condition);

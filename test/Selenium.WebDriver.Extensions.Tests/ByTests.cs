@@ -16,23 +16,18 @@ namespace Selenium.WebDriver.Extensions.Tests
         private static readonly IFixture _fixture = new Fixture();
 
         [PublicAPI]
-        public static TheoryData<SeleniumBy> CoreSelectors
-        {
-            get
+        public static TheoryData<SeleniumBy> CoreSelectors =>
+            new TheoryData<SeleniumBy>
             {
-                return new TheoryData<SeleniumBy>
-                {
-                    ClassName(_fixture.Create<string>()),
-                    CssSelector(_fixture.Create<string>()),
-                    Id(_fixture.Create<string>()),
-                    LinkText(_fixture.Create<string>()),
-                    Name(_fixture.Create<string>()),
-                    PartialLinkText(_fixture.Create<string>()),
-                    TagName(_fixture.Create<string>()),
-                    XPath(_fixture.Create<string>())
-                };
-            }
-        }
+                ClassName(_fixture.Create<string>()),
+                CssSelector(_fixture.Create<string>()),
+                Id(_fixture.Create<string>()),
+                LinkText(_fixture.Create<string>()),
+                Name(_fixture.Create<string>()),
+                PartialLinkText(_fixture.Create<string>()),
+                TagName(_fixture.Create<string>()),
+                XPath(_fixture.Create<string>())
+            };
 
         [Theory]
         [MemberData(nameof(CoreSelectors))]

@@ -8,15 +8,9 @@ namespace Selenium.WebDriver.Extensions.Tests
     [ExcludeFromCodeCoverage]
     internal class SearchContextBuilder
     {
-        private ISearchContext _searchContext;
+        private readonly ISearchContext _searchContext;
 
-        public SearchContextBuilder() => _searchContext = Substitute.For<ISearchContext, IWrapsDriver>();
-
-        public SearchContextBuilder AsWebElement()
-        {
-            _searchContext = Substitute.For<ISearchContext, IWrapsDriver, IWebElement>();
-            return this;
-        }
+        public SearchContextBuilder() => _searchContext = Substitute.For<ISearchContext, IWrapsDriver, IWebElement>();
 
         public ISearchContext Build() => _searchContext;
 

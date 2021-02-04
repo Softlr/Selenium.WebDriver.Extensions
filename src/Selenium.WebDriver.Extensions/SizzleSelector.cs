@@ -3,6 +3,8 @@ namespace Selenium.WebDriver.Extensions
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
+    using static System.String;
+    using static Selenium.WebDriver.Extensions.JavaScriptSnippets;
 
     /// <summary>Searches the DOM elements using Sizzle selector.</summary>
     /// <inheritdoc />
@@ -32,14 +34,14 @@ namespace Selenium.WebDriver.Extensions
             : base(selector, context) => Description = $"By.SizzleSelector: {RawSelector}";
 
         /// <summary>Gets the empty selector.</summary>
-        public static SizzleSelector Empty { get; } = new SizzleSelector("*");
+        public static SizzleSelector All { get; } = new SizzleSelector("*");
 
         /// <inheritdoc />
-        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
+        public override string CheckScript => CheckScriptCode(VARIABLE);
 
         /// <inheritdoc />
         public override string Selector => $"Sizzle('{RawSelector.Replace('\'', '"')}'"
-            + (Context != null ? $", {Context.Selector}[0]" : string.Empty) + ")";
+            + (Context != null ? $", {Context.Selector}[0]" : Empty) + ")";
 
         /// <inheritdoc />
         protected override SizzleSelector CreateContext(string contextSelector) => new SizzleSelector(contextSelector);

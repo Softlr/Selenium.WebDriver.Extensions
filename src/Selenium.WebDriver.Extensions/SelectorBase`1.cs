@@ -10,6 +10,7 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium.Internal;
     using Selenium.WebDriver.Extensions.Parsers;
     using static System.String;
+    using static Selenium.WebDriver.Extensions.JavaScriptSnippets;
     using static Softlr.Suppress;
     using static Validate;
     using SeleniumBy = OpenQA.Selenium.By;
@@ -76,8 +77,7 @@ namespace Selenium.WebDriver.Extensions
 
             LoadExternalLibrary(driver);
             var result = ParseResult<IEnumerable<IWebElement>>(
-                driver.ExecuteScript<object>(
-                    $"return {Selector}{ResultResolver};"));
+                driver.ExecuteScript<object>($"return {Selector}{ResultResolver};"));
             return new ReadOnlyCollection<IWebElement>(result.ToList());
         }
 
@@ -95,8 +95,8 @@ namespace Selenium.WebDriver.Extensions
 
             // nested query
             driver = driverWrapper.WrappedDriver;
-            var baseElementSelector = ((IJavaScriptExecutor)driver)
-                .ExecuteScript(JavaScriptSnippets.FindDomPathScript, driverWrapper) as string;
+            var baseElementSelector = ((IJavaScriptExecutor)driver).ExecuteScript(FindDomPathScript, driverWrapper)
+                as string;
             Context = CreateContext(baseElementSelector);
 
             return driver;
