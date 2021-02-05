@@ -4,7 +4,7 @@ namespace Selenium.WebDriver.Extensions
 
     internal static class JavaScriptSnippets
     {
-        public static string FindDomPathScript { get; } =
+        public const string FindDomPathScript =
             @"return (function(element) {
                 'use strict';
                 var stack = [], siblingsCount, siblingIndex, i, sibling;
