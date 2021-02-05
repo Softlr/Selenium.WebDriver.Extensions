@@ -73,7 +73,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         {
             var driver = new WebDriverBuilder().WithSizzleLoaded().WithElementLocatedBySizzle(rawSelector)
                 .WithElementLocatedBySizzle($"body > {rawSelector}").WithPathToElement(rawSelector).Build();
-            var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
+            var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
             var sut = SizzleSelector(rawSelector);
             var result = sut.FindElement(element);
 
@@ -120,7 +120,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
         {
-            var element = new SearchContextBuilder().AsWebElement().Build();
+            var element = new SearchContextBuilder().Build();
             var sut = SizzleSelector(rawSelector);
 
             FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<InvalidCastException>();
