@@ -12,7 +12,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     [Collection(INTERNET_EXPLORER)]
     public class WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests : SelectorTests<JQuerySelector>
     {
-        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
             : base(fixture, JQueryTestPath, x => JQuerySelector(x))
         {

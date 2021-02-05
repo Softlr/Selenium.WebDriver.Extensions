@@ -24,7 +24,6 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>Initializes a new instance of the <see cref="SelectorBase{T}" /> class.</summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
-        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         protected SelectorBase(string selector, TSelector context)
         {
             Context = context;

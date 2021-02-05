@@ -12,7 +12,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     [Collection(INTERNET_EXPLORER)]
     public class WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests : SelectorTests<SizzleSelector>
     {
-        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
             : base(fixture, "/Unloaded", x => SizzleSelector(x))
         {

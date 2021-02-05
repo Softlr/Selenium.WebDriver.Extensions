@@ -37,7 +37,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
             GC.SuppressFinalize(this);
         }
 
-        [SuppressMessage("ReSharper", "VirtualMemberNeverOverridden.Global")]
         protected virtual void Dispose(bool disposing)
         {
             if (_disposed || !disposing)

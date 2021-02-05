@@ -12,7 +12,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.InternetExplorerTests
     [Collection(INTERNET_EXPLORER)]
     public class WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests : SelectorTests<JQuerySelector>
     {
-        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorInternetExplorerTests(InternetExplorerFixture fixture)
             : base(fixture, "/Unloaded", x => JQuerySelector(x))
         {

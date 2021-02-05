@@ -8,7 +8,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     [ExcludeFromCodeCoverage]
     public class FirefoxFixture : FixtureBase
     {
-        [SuppressMessage("ReSharper", "AssignNullToNotNullAttribute")]
         public FirefoxFixture()
         {
             var options = new FirefoxOptions();

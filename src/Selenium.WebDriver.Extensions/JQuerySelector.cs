@@ -24,8 +24,6 @@ namespace Selenium.WebDriver.Extensions
         /// cref="M:Selenium.WebDriver.Extensions.JQuerySelector.#ctor(System.String,Selenium.WebDriver.Extensions.JQuerySelector,System.String,System.String)" />
         /// constructor as it is resolved by reflection.
         /// </remarks>
-        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
-        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public JQuerySelector(string selector)
             : this(selector, null)
         {
@@ -36,7 +34,6 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <param name="chain">The jQuery method chain.</param>
-        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public JQuerySelector(string selector, JQuerySelector context, string variable = "jQuery", string chain = "")
             : base(selector, context)
         {
@@ -326,7 +323,6 @@ namespace Selenium.WebDriver.Extensions
         protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadJQuery();
 
         [SuppressMessage(SONARQUBE, S3358)]
-        [SuppressMessage("ReSharper", "PossibleNullReferenceException")]
         private static string FilteredSelector(string selector = null, string filter = null) =>
             selector != null
                 ? IsNullOrEmpty(filter)
