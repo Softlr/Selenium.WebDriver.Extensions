@@ -88,7 +88,7 @@ namespace Selenium.WebDriver.Extensions
                 return driver;
             }
 
-            if (!(searchContext is IWebElement) || !(searchContext is IWrapsDriver driverWrapper))
+            if (!(searchContext is IWebElement) || searchContext is not IWrapsDriver driverWrapper)
             {
                 throw new NotSupportedException("Context is not a valid driver");
             }
