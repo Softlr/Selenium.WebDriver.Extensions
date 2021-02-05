@@ -237,8 +237,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementByJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
-                .Build();
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector).Build();
             var selector = JQuerySelector(rawSelector);
             var sut = selector.FindElement(driver);
 
@@ -249,8 +248,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldFindElementsByJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementsLocatedByJQuery(rawSelector)
-                .Build();
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementsLocatedByJQuery(rawSelector).Build();
             var selector = JQuerySelector(rawSelector);
             var sut = selector.FindElements(driver);
 
@@ -262,8 +260,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
         {
             var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
-                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector)
-                .Build();
+                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector).Build();
             var element = new SearchContextBuilder().AsWebElement().WithWrappedDriver(driver).Build();
             var selector = JQuerySelector(rawSelector);
             var sut = selector.FindElement(element);
@@ -275,8 +272,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector)
-                .Build();
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector).Build();
             var selector = JQuerySelector(rawSelector);
             var sut = selector.FindElements(driver);
 
@@ -295,8 +291,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue() =>
-            FluentActions.Invoking(() => JQuerySelector(Empty)).Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("selector");
+            FluentActions.Invoking(() => JQuerySelector(Empty)).Should().Throw<ArgumentException>().And.ParamName
+                .Should().Be("selector");
 
         [Theory]
         [AutoData]
@@ -306,8 +302,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue() =>
-            FluentActions.Invoking(() => JQuerySelector(null)).Should().Throw<ArgumentNullException>()
-                .And.ParamName.Should().Be("selector");
+            FluentActions.Invoking(() => JQuerySelector(null)).Should().Throw<ArgumentNullException>().And.ParamName
+                .Should().Be("selector");
 
         [Theory]
         [AutoData]
@@ -317,8 +313,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue() =>
-            FluentActions.Invoking(() => JQuerySelector(" ")).Should().Throw<ArgumentException>()
-                .And.ParamName.Should().Be("selector");
+            FluentActions.Invoking(() => JQuerySelector(" ")).Should().Throw<ArgumentException>().And.ParamName
+                .Should().Be("selector");
 
         [Theory]
         [AutoData]
@@ -331,8 +327,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [AutoData]
         public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
         {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector)
-                .Build();
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector).Build();
             var sut = JQuerySelector(rawSelector);
 
             FluentActions.Invoking(() => sut.FindElement(driver)).Should().Throw<NoSuchElementException>();
@@ -353,8 +348,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
         {
             var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
-                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector)
-                .Build();
+                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector).Build();
             var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
             var sut = JQuerySelector(rawSelector);
 

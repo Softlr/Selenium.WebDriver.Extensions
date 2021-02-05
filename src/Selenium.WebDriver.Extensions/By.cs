@@ -35,9 +35,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <returns>A <see cref="JQuerySelector" /> object the driver can use to find the elements.</returns>
         public static JQuerySelector JQuerySelector(
-            string selector,
-            JQuerySelector context = null,
-            string variable = "jQuery") =>
+            string selector, JQuerySelector context = null, string variable = "jQuery") =>
             new JQuerySelector(selector, context, variable);
 
         /// <summary>Gets a mechanism to find elements by their link text.</summary>

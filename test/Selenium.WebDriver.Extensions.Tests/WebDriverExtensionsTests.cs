@@ -10,6 +10,7 @@ namespace Selenium.WebDriver.Extensions.Tests
     using OpenQA.Selenium;
     using Xunit;
     using static System.String;
+    using static NSubstitute.Arg;
     using static Shared.Trait;
     using static Softlr.Suppress;
 
@@ -86,7 +87,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             action.Invoke(driver, uri, timeSpan);
 
-            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
+            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Any<string>());
         }
 
         [Theory]

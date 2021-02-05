@@ -6,9 +6,13 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using static Softlr.Suppress;
 
+    [SuppressMessage(SONARQUBE, S2339)]
     [ExcludeFromCodeCoverage]
     public abstract class TestsBase
     {
+        public const string JQueryTestPath = "/jQueryLoaded";
+        public const string SizzleTestPath = "/SizzleLoaded";
+
         [SuppressMessage(SONARQUBE, S3900)]
         protected TestsBase(FixtureBase fixture, string path)
         {

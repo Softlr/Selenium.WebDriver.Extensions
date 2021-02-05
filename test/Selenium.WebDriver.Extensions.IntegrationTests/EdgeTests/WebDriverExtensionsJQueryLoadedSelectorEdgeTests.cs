@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture, "/jQueryLoaded", x => JQuerySelector(x))
+            : base(fixture, JQueryTestPath, x => JQuerySelector(x))
         {
         }
     }

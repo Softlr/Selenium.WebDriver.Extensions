@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsSizzleLoadedSelectorChromeTests(ChromeFixture fixture)
-            : base(fixture, "/SizzleLoaded", x => SizzleSelector(x))
+            : base(fixture, SizzleTestPath, x => SizzleSelector(x))
         {
         }
     }
