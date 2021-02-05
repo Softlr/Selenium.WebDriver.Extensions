@@ -67,7 +67,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        [SuppressMessage(SONARQUBE, S2699)]
         public void ShouldExecuteScript(string scriptMethod)
         {
             var script = $"{scriptMethod}();";
@@ -80,7 +79,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(Loaders))]
-        [SuppressMessage(SONARQUBE, S2699)]
         public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             var driver = new WebDriverBuilder().WithNoExternalLibraryLoaded().Build();
