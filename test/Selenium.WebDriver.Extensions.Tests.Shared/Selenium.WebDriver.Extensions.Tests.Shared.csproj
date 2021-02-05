@@ -13,10 +13,6 @@
     <AdditionalFiles Include="..\..\.sonarlint\selenium.webdriver.extensions\CSharp\SonarLint.xml" Link="SonarLint.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="coverlet.msbuild" Version="3.0.2">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="Softlr.Suppress" Version="1.6.1" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.17.0.26580">
       <PrivateAssets>all</PrivateAssets>
