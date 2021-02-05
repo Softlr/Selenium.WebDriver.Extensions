@@ -7,7 +7,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     using NSubstitute;
     using OpenQA.Selenium;
     using static NSubstitute.Arg;
-    using static NSubstitute.Substitute;
     using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]
@@ -17,7 +16,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         private readonly IWebDriver _driver;
         private readonly IFixture _fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
 
-        public WebDriverBuilder() => _driver = For<IWebDriver, IJavaScriptExecutor>();
+        public WebDriverBuilder() => _driver = Substitute.For<IWebDriver, IJavaScriptExecutor>();
 
         public IWebDriver Build() => _driver;
 

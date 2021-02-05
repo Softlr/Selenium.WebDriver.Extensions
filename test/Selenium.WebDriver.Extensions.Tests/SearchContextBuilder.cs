@@ -4,14 +4,19 @@ namespace Selenium.WebDriver.Extensions.Tests
     using NSubstitute;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
-    using static NSubstitute.Substitute;
 
     [ExcludeFromCodeCoverage]
     internal class SearchContextBuilder
     {
-        private readonly ISearchContext _searchContext;
+        private ISearchContext _searchContext;
 
-        public SearchContextBuilder() => _searchContext = For<ISearchContext, IWrapsDriver, IWebElement>();
+        public SearchContextBuilder() => _searchContext = Substitute.For<ISearchContext, IWrapsDriver>();
+
+        public SearchContextBuilder AsWebElement()
+        {
+            _searchContext = Substitute.For<ISearchContext, IWrapsDriver, IWebElement>();
+            return this;
+        }
 
         public ISearchContext Build() => _searchContext;
 
