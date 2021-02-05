@@ -13,8 +13,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     [ExcludeFromCodeCoverage]
     public class Startup
     {
+        [SuppressMessage(FXCOP, CA1822)]
         [SuppressMessage(SONARQUBE, S2325)]
-        [SuppressMessage(CODE_CRACKER, CC0091)]
         public void Configure(IApplicationBuilder app)
         {
             app.Run(async context =>

@@ -5,7 +5,6 @@ namespace Selenium.WebDriver.Extensions.Parsers
 
     internal abstract class ParserBase : IParser
     {
-        [SuppressMessage(CODE_CRACKER, CC0057)]
         protected ParserBase(IParser successor = null) => Successor = successor;
 
         public IParser Successor { get; }
