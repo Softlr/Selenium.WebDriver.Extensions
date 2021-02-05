@@ -21,7 +21,6 @@ namespace Selenium.WebDriver.Extensions.Tests
         private static readonly Fixture _fixture = new Fixture();
 
         [PublicAPI]
-        [SuppressMessage(FXCOP, CA1806)]
         [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
         public static TheoryData<Action> SelectorArgumentExceptionTests =>
             new TheoryData<Action>
@@ -47,6 +46,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             };
 
         [PublicAPI]
+        [SuppressMessage(FXCOP, CA1806)]
         [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
         public static TheoryData<Action> SelectorNullArgumentExceptionTests =>
             new TheoryData<Action>
