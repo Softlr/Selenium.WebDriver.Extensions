@@ -14,7 +14,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     {
         [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryLoadedSelectorChromeTests(ChromeFixture fixture)
-            : base(fixture, "/jQueryLoaded", x => JQuerySelector(x))
+            : base(fixture, JQueryTestPath, x => JQuerySelector(x))
         {
         }
     }

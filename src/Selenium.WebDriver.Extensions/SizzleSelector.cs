@@ -3,6 +3,7 @@ namespace Selenium.WebDriver.Extensions
     using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
+    using static JavaScriptSnippets;
 
     /// <summary>Searches the DOM elements using Sizzle selector.</summary>
     /// <inheritdoc />
@@ -35,7 +36,7 @@ namespace Selenium.WebDriver.Extensions
         public static SizzleSelector Empty { get; } = new SizzleSelector("*");
 
         /// <inheritdoc />
-        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
+        public override string CheckScript => CheckScriptCode(VARIABLE);
 
         /// <inheritdoc />
         public override string Selector => $"Sizzle('{RawSelector.Replace('\'', '"')}'"

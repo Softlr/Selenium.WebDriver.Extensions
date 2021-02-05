@@ -1,10 +1,11 @@
 namespace Selenium.WebDriver.Extensions
 {
     using System.Diagnostics.CodeAnalysis;
-    using System.Globalization;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
+    using static System.Globalization.CultureInfo;
     using static System.String;
+    using static JavaScriptSnippets;
     using static Softlr.Suppress;
     using static Validate;
 
@@ -48,7 +49,7 @@ namespace Selenium.WebDriver.Extensions
         public static JQuerySelector Empty { get; } = new JQuerySelector("*");
 
         /// <inheritdoc />
-        public override string CheckScript => JavaScriptSnippets.CheckScriptCode(VARIABLE);
+        public override string CheckScript => CheckScriptCode(VARIABLE);
 
         /// <inheritdoc />
         public override string Selector => $"{Variable}('{RawSelector.Replace('\'', '"')}'"
@@ -117,7 +118,9 @@ namespace Selenium.WebDriver.Extensions
         public JQuerySelector Closest(string selector, JQuerySelector context) =>
             ChainWithContext("closest", Required(() => selector), NotNull(() => context));
 
-        /// <summary>Get the children of each element in the set of matched elements, including text and comment nodes.</summary>
+        /// <summary>
+        /// Get the children of each element in the set of matched elements, including text and comment nodes.
+        /// </summary>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Contents() => Chain("contents");
 
@@ -131,13 +134,15 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>Reduce the set of matched elements to the one at the specified index.</summary>
         /// <param name="index">An integer indicating the 0-based position of the element.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Eq(int index) => Chain("eq", index.ToString(CultureInfo.InvariantCulture), true);
+        public JQuerySelector Eq(int index) => Chain("eq", index.ToString(InvariantCulture), true);
 
         /// <summary>Reduce the set of matched elements to the even ones in the set, numbered from zero.</summary>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Even() => Chain("even");
 
-        /// <summary>Reduce the set of matched elements to those that match the selector or pass the function's test.</summary>
+        /// <summary>
+        /// Reduce the set of matched elements to those that match the selector or pass the function's test.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Filter(string selector) => Chain("filter", Required(() => selector));
@@ -311,7 +316,7 @@ namespace Selenium.WebDriver.Extensions
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
         public JQuerySelector Slice(int start, int? end = null) =>
-            Chain("slice", end.HasValue ? $"{start}, {end}" : start.ToString(CultureInfo.InvariantCulture), true);
+            Chain("slice", end.HasValue ? $"{start}, {end}" : start.ToString(InvariantCulture), true);
 
         /// <inheritdoc />
         protected override JQuerySelector CreateContext(string contextSelector) =>
@@ -331,25 +336,15 @@ namespace Selenium.WebDriver.Extensions
 
         [SuppressMessage(SONARQUBE, S3358)]
         private static string GetSelectorString(string selector, bool noWrap = false) =>
-            selector == null
-                ? string.Empty
-                : noWrap
-                    ? selector.Trim()
-                    : $"'{selector.Trim().Replace('\'', '"')}'";
+            selector == null ? string.Empty : noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'";
 
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false) =>
             new JQuerySelector(
-                RawSelector,
-                Context,
-                Variable,
-                $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
+                RawSelector, Context, Variable, $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
 
         [SuppressMessage(SONARQUBE, S3242)]
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
             new JQuerySelector(
-                RawSelector,
-                Context,
-                Variable,
-                $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
+                RawSelector, Context, Variable, $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
     }
 }
