@@ -14,7 +14,6 @@ image: Visual Studio 2019
 install:
   - choco install sonarscanner-msbuild-net46 -y
   - choco install googlechrome -y --ignore-checksums
-  - choco install opencover.portable -y
   - choco install codecov -y
 
 nuget:
@@ -37,12 +36,12 @@ after_build:
   - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.3.0
 
 test_script:
-  - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build
+  - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Edge
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
   - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
-  - OpenCover.Console -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
+  - ps: mv .\coverage.net5.0.xml .\coverage.xml
   - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarCloudAccessToken
 
 after_test:
