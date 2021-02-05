@@ -46,6 +46,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             };
 
         [PublicAPI]
+        [SuppressMessage(FXCOP, CA1806)]
         [SuppressMessage("ReSharper", "ObjectCreationAsStatement")]
         public static TheoryData<Action> SelectorNullArgumentExceptionTests =>
             new TheoryData<Action>

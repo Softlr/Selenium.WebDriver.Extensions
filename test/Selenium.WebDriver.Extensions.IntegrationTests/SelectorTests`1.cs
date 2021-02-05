@@ -19,7 +19,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     {
         private readonly Func<string, TSelector> _selectorAccessor;
 
-        [SuppressMessage(CODE_CRACKER, CC0057)]
         protected SelectorTests(FixtureBase fixture, string path, Func<string, TSelector> selectorAccessor)
             : base(fixture, path) => _selectorAccessor = selectorAccessor;
 
