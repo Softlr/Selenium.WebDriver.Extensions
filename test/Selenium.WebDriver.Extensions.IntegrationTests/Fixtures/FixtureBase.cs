@@ -21,15 +21,14 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
                 .UseStartup<Startup>()
                 .Build();
             _host.Start();
-            ServerUrl = _host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.First();
+            ServerUrl = new Uri(_host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.First());
         }
 
         ~FixtureBase() => Dispose(false);
 
         public IWebDriver Browser { get; protected set; }
 
-        [SuppressMessage(SONARQUBE, S3996)]
-        public string ServerUrl { get; }
+        public Uri ServerUrl { get; }
 
         public void Dispose()
         {
