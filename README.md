@@ -26,7 +26,7 @@ Install-Package Selenium.WebDriver.Extensions
 ```
 
 # Documentation
-API documentation can be found on [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details) and user guide is on the [wiki](https://github.com/Softlr/Selenium.WebDriver.Extensions/wiki).
+API documentation can be found on [GitBook](https://app.gitbook.com/@softlr/s/selenium-webdriver-extensions/) and user guide is on the [wiki](https://github.com/Softlr/Selenium.WebDriver.Extensions/wiki).
 
 # Usage
 
