@@ -17,7 +17,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         protected TestsBase(FixtureBase fixture, string path)
         {
             Browser = fixture.Browser;
-            Browser.Navigate().GoToUrl(new Uri($"{fixture.ServerUrl}{path}"));
+            Browser.Navigate().GoToUrl(new Uri(fixture.ServerUrl, path));
         }
 
         protected IWebDriver Browser { get; }
