@@ -12,7 +12,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     [Collection(CHROME)]
     public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests : SelectorTests<JQuerySelector>
     {
-        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
             : base(fixture, "/Unloaded", x => JQuerySelector(x))
         {

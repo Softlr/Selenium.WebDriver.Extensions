@@ -12,7 +12,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     [Collection(FIREFOX)]
     public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests : SelectorTests<JQuerySelector>
     {
-        [SuppressMessage("ReSharper", "SuggestBaseTypeForParameter")]
         public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FirefoxFixture fixture)
             : base(fixture, "/Unloaded", x => JQuerySelector(x))
         {

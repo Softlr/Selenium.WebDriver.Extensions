@@ -1,6 +1,5 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using System.Diagnostics.CodeAnalysis;
     using JetBrains.Annotations;
     using OpenQA.Selenium;
     using static JavaScriptSnippets;
@@ -18,8 +17,6 @@ namespace Selenium.WebDriver.Extensions
         /// This constructor cannot be merged with <see cref="SizzleSelector(string,SizzleSelector)" /> constructor as
         /// it is resolved by reflection.
         /// </remarks>
-        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
-        [SuppressMessage("ReSharper", "IntroduceOptionalParameters.Global")]
         public SizzleSelector(string selector)
             : this(selector, null)
         {
@@ -28,7 +25,6 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>Initializes a new instance of the <see cref="SizzleSelector" /> class.</summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
-        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         public SizzleSelector(string selector, SizzleSelector context)
             : base(selector, context) => Description = $"By.SizzleSelector: {RawSelector}";
 

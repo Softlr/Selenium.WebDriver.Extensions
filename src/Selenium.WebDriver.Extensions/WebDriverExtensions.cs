@@ -100,7 +100,6 @@ namespace Selenium.WebDriver.Extensions
             NotNull(() => driver).LoadExternalLibrary(
                 SizzleSelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
-        [SuppressMessage("ReSharper", "PossibleInvalidOperationException")]
         private static bool CheckSelectorPrerequisites(
             this IWebDriver driver,
             ISelector selector) =>
