@@ -3,7 +3,6 @@ namespace Selenium.WebDriver.Extensions
     using System;
     using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
-    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Support.UI;
     using static JavaScriptSnippets;
@@ -11,7 +10,6 @@ namespace Selenium.WebDriver.Extensions
     using static Validate;
 
     /// <summary>Web driver extensions.</summary>
-    [PublicAPI]
     public static class WebDriverExtensions
     {
         private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(10);

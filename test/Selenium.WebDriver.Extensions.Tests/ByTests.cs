@@ -3,7 +3,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using FluentAssertions;
-    using JetBrains.Annotations;
     using Xunit;
     using static By;
     using static Shared.Trait;
@@ -15,7 +14,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     {
         private static readonly IFixture _fixture = new Fixture();
 
-        [PublicAPI]
         public static TheoryData<SeleniumBy> CoreSelectors
         {
             get

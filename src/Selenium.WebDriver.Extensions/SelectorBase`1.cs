@@ -5,7 +5,6 @@ namespace Selenium.WebDriver.Extensions
     using System.Collections.ObjectModel;
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
-    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using Selenium.WebDriver.Extensions.Parsers;
@@ -18,7 +17,6 @@ namespace Selenium.WebDriver.Extensions
     /// <summary>The selector base.</summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
     /// <inheritdoc cref="ISelector" />
-    [PublicAPI]
     public abstract class SelectorBase<TSelector> : SeleniumBy, ISelector
     {
         /// <summary>Initializes a new instance of the <see cref="SelectorBase{T}" /> class.</summary>

@@ -5,7 +5,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
-    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using Xunit;
     using static System.String;
@@ -20,7 +19,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     {
         private static readonly Fixture _fixture = new Fixture();
 
-        [PublicAPI]
         public static TheoryData<Action> SelectorArgumentExceptionTests =>
             new TheoryData<Action>
             {
@@ -44,7 +42,6 @@ namespace Selenium.WebDriver.Extensions.Tests
                 () => JQuerySelector(_fixture.Create<string>()).Siblings(Empty),
             };
 
-        [PublicAPI]
         [SuppressMessage(FXCOP, CA1806)]
         public static TheoryData<Action> SelectorNullArgumentExceptionTests =>
             new TheoryData<Action>
@@ -74,7 +71,6 @@ namespace Selenium.WebDriver.Extensions.Tests
                 () => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null)
             };
 
-        [PublicAPI]
         public static TheoryData<JQuerySelector, string> SelectorsTests
         {
             get

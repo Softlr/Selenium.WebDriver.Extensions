@@ -2,10 +2,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using JetBrains.Annotations;
     using OpenQA.Selenium.Chrome;
 
-    [UsedImplicitly]
     [ExcludeFromCodeCoverage]
     public class ChromeFixture : FixtureBase
     {

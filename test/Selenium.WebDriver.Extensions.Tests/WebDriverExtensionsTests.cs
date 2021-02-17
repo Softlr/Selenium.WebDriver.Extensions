@@ -5,7 +5,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
-    using JetBrains.Annotations;
     using NSubstitute;
     using OpenQA.Selenium;
     using Xunit;
@@ -26,7 +25,6 @@ namespace Selenium.WebDriver.Extensions.Tests
         private static readonly Fixture _fixture = new Fixture();
         private static readonly IWebDriver _webDriver = new WebDriverBuilder().Build();
 
-        [PublicAPI]
         public static TheoryData<Action, string> InvalidParameters =>
             new TheoryData<Action, string>
             {
@@ -52,7 +50,6 @@ namespace Selenium.WebDriver.Extensions.Tests
                 { () => _webDriver.LoadSizzle((Uri)null), UriParam }
             };
 
-        [PublicAPI]
         public static TheoryData<Action<IWebDriver, Uri, TimeSpan?>, Uri, TimeSpan?> Loaders =>
             new TheoryData<Action<IWebDriver, Uri, TimeSpan?>, Uri, TimeSpan?>
             {
