@@ -2,14 +2,12 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System;
     using System.Diagnostics.CodeAnalysis;
-    using JetBrains.Annotations;
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Http;
     using static System.String;
     using static Softlr.Suppress;
     using static TestsBase;
 
-    [PublicAPI]
     [ExcludeFromCodeCoverage]
     public class Startup
     {

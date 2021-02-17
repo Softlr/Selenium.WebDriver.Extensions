@@ -1,6 +1,5 @@
 namespace Selenium.WebDriver.Extensions
 {
-    using JetBrains.Annotations;
     using OpenQA.Selenium;
     using SeleniumBy = OpenQA.Selenium.By;
 
@@ -10,7 +9,6 @@ namespace Selenium.WebDriver.Extensions
     /// replace the type of the returned selectors to further expand their possibilities.
     /// </remarks>
     /// <inheritdoc />
-    [UsedImplicitly]
     public class By : SeleniumBy
     {
         /// <summary>Gets a mechanism to find elements by their CSS class.</summary>
