@@ -56,7 +56,7 @@ If the site that you are testing with Selenium does not include jQuery this exte
 
 ```csharp
 driver.LoadJQuery("1.11.0"); // load specific version from default CDN
-driver.LoadJQuery(new Uri("http://some.server/jquery.js")); // load a library from other source
+driver.LoadJQuery(new Uri("https://some.server/jquery.js")); // load a library from other source
 ```
 
 #### jQuery variable name
@@ -86,7 +86,7 @@ If the site that you are testing with Selenium does not include Sizzle this exte
 
 ```csharp
 driver.LoadSizzle("1.11.1"); // load specific version from default CDN
-driver.LoadSizzle(new Uri("http://some.server/sizzle.js")); // load a library from other source
+driver.LoadSizzle(new Uri("https://some.server/sizzle.js")); // load a library from other source
 ```
 
 #### Sizzle context switch
