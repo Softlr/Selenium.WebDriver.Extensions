@@ -315,7 +315,7 @@ namespace Selenium.WebDriver.Extensions
 
         /// <inheritdoc />
         protected override JQuerySelector CreateContext(string contextSelector) =>
-            new JQuerySelector(contextSelector, null, Variable);
+            new(contextSelector, null, Variable);
 
         /// <inheritdoc />
         protected override void LoadExternalLibrary(IWebDriver driver) => driver.LoadJQuery();
@@ -333,12 +333,10 @@ namespace Selenium.WebDriver.Extensions
             selector == null ? string.Empty : noWrap ? selector.Trim() : $"'{selector.Trim().Replace('\'', '"')}'";
 
         private JQuerySelector Chain(string name, string selector = null, bool noWrap = false) =>
-            new JQuerySelector(
-                RawSelector, Context, Variable, $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
+            new(RawSelector, Context, Variable, $"{_chain}.{name}({GetSelectorString(selector, noWrap)})");
 
         [SuppressMessage(SONARQUBE, S3242)]
         private JQuerySelector ChainWithContext(string name, string selector, JQuerySelector context) =>
-            new JQuerySelector(
-                RawSelector, Context, Variable, $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
+            new(RawSelector, Context, Variable, $".{name}('{selector.Replace('\'', '"')}', {context.Selector})");
     }
 }

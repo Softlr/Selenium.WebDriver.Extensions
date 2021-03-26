@@ -1,14 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
-    <CodeAnalysisRuleSet>Selenium.WebDriver.Extensions.Tests.Shared.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\.sonarlint\selenium.webdriver.extensionscsharp.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
     <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="..\..\_analysis\stylecop.json" />
-  </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="..\..\.sonarlint\selenium.webdriver.extensions\CSharp\SonarLint.xml" Link="SonarLint.xml" />
   </ItemGroup>
@@ -18,11 +15,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Softlr.Suppress" Version="1.6.1" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.18.0.27296">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="StyleCop.Analyzers" Version="1.1.118">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.20.0.28934">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
