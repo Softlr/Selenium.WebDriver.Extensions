@@ -11,7 +11,7 @@ Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 * Support for nested selectors
 * Easy setup: install NuGet package and start using it with your existing Selenium solution
 * High quality ensured by continuous integration setup with Appveyor, unit and integration tests and high code coverage
-* Well documented code using [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details)
+* Well documented code using [GitBook](https://app.gitbook.com/@softlr/s/selenium-webdriver-extensions/)
 ## jQuery/Sizzle support
 * jQuery/Sizzle selectors support for Selenium WebDriver
 * jQuery/Sizzle auto-load on pages on sites that don't use jQuery
