@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<RuleSet Name="SonarQube - Selenium.WebDriver.Extensions Softlr" ToolsVersion="15.0">
-  <Include Path="..\..\.sonarlint\selenium.webdriver.extensionscsharp.ruleset" Action="Default" />
-  <Include Path="..\..\_analysis\swe.ruleset" Action="Default" />
-</RuleSet>
