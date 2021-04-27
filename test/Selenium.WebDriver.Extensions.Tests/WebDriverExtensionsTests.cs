@@ -22,11 +22,11 @@ namespace Selenium.WebDriver.Extensions.Tests
         private const string ScriptParam = "script";
         private const string UriParam = "uri";
         private const string VersionParam = "version";
-        private static readonly Fixture _fixture = new Fixture();
+        private static readonly Fixture _fixture = new();
         private static readonly IWebDriver _webDriver = new WebDriverBuilder().Build();
 
         public static TheoryData<Action, string> InvalidParameters =>
-            new TheoryData<Action, string>
+            new()
             {
                 // ExecuteScript
                 { () => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>()), DriverParam },
@@ -51,7 +51,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             };
 
         public static TheoryData<Action<IWebDriver, Uri, TimeSpan?>, Uri, TimeSpan?> Loaders =>
-            new TheoryData<Action<IWebDriver, Uri, TimeSpan?>, Uri, TimeSpan?>
+            new()
             {
                 // LoadJQuery
                 { WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), null },
