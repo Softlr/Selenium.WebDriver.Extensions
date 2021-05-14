@@ -17,10 +17,10 @@ namespace Selenium.WebDriver.Extensions.Tests
     [SuppressMessage(SONARQUBE, S3900)]
     public class JQuerySelectorTests
     {
-        private static readonly Fixture _fixture = new Fixture();
+        private static readonly Fixture _fixture = new();
 
         public static TheoryData<Action> SelectorArgumentExceptionTests =>
-            new TheoryData<Action>
+            new()
             {
                 () => JQuerySelector(_fixture.Create<string>()).AddBack(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Children(Empty),
@@ -44,7 +44,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [SuppressMessage(FXCOP, CA1806)]
         public static TheoryData<Action> SelectorNullArgumentExceptionTests =>
-            new TheoryData<Action>
+            new()
             {
                 () => JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null),
                 () => JQuerySelector(_fixture.Create<string>()).Add(Empty),

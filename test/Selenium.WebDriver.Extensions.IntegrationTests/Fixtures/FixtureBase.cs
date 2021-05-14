@@ -6,7 +6,6 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Hosting.Server.Features;
     using OpenQA.Selenium;
-    using static Softlr.Suppress;
 
     [ExcludeFromCodeCoverage]
     public class FixtureBase : IDisposable
