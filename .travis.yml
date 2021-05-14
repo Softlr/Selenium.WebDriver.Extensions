@@ -5,6 +5,6 @@ os:
   - osx
 dotnet: 5.0.102
 script:
-  - dotnet build
-  - dotnet pack -c Release --include-symbols --include-source --no-build
-  - dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
+  - dotnet restore
+  - dotnet build --no-restore
+  - dotnet test test/Selenium.WebDriver.Extensions.Tests --no-build
