@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     public class WebDriverExtensionsJQueryUnloadedSelectorEdgeTests : SelectorTests<JQuerySelector>
     {
         public WebDriverExtensionsJQueryUnloadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture, "/Unloaded", x => JQuerySelector(x))
+            : base(fixture, UnloadedPath, x => JQuerySelector(x))
         {
         }
     }

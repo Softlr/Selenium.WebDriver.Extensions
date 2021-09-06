@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     public class WebDriverExtensionsSizzleUnloadedSelectorFirefoxTests : SelectorTests<SizzleSelector>
     {
         public WebDriverExtensionsSizzleUnloadedSelectorFirefoxTests(FirefoxFixture fixture)
-            : base(fixture, "/Unloaded", x => SizzleSelector(x))
+            : base(fixture, UnloadedPath, x => SizzleSelector(x))
         {
         }
     }

@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.FirefoxTests
     public class WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests : SelectorTests<JQuerySelector>
     {
         public WebDriverExtensionsJQueryUnloadedSelectorFirefoxTests(FirefoxFixture fixture)
-            : base(fixture, "/Unloaded", x => JQuerySelector(x))
+            : base(fixture, UnloadedPath, x => JQuerySelector(x))
         {
         }
     }

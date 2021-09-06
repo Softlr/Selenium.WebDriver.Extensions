@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.EdgeTests
     public class WebDriverExtensionsSizzleUnloadedSelectorEdgeTests : SelectorTests<SizzleSelector>
     {
         public WebDriverExtensionsSizzleUnloadedSelectorEdgeTests(EdgeFixture fixture)
-            : base(fixture, "/Unloaded", x => SizzleSelector(x))
+            : base(fixture, UnloadedPath, x => SizzleSelector(x))
         {
         }
     }

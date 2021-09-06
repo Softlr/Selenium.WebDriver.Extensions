@@ -22,38 +22,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
             : base(fixture, path) => _selectorAccessor = selectorAccessor;
 
         [Fact]
-        public void GivenSelector_WhenExpectedConditions_ThenWaitExecuted()
-        {
-            var condition = ExpectedConditions.ElementIsVisible(
-                _selectorAccessor.Invoke("h1"));
-
-            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
-            wait.Until(condition);
-
-            var element = Browser.FindElement(_selectorAccessor.Invoke("h1"));
-            element.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void GivenSelector_WhenFindElement_ThenFound()
-        {
-            var sut = _selectorAccessor.Invoke("#id1");
-            var element = Browser.FindElement(sut);
-
-            element.Should().NotBeNull();
-        }
-
-        [Fact]
-        public void GivenSelector_WhenFindElements_ThenFound()
-        {
-            var sut = _selectorAccessor.Invoke("div.main");
-            var elements = Browser.FindElements(sut);
-
-            elements.Should().NotBeNull().And.HaveCount(2);
-        }
-
-        [Fact]
-        public void GivenSelector_WhenFindElementsThatDoesNotExist_ThenNotFound()
+        public void Driver_doesnt_find_elements_with_invalid_selector()
         {
             var sut = _selectorAccessor.Invoke("div.mainNot");
             var elements = Browser.FindElements(sut);
@@ -62,15 +31,16 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         }
 
         [Fact]
-        public void GivenSelector_WhenFindElementThatDoesNotExist_ThenException()
+        public void Driver_finds_element_with_selector()
         {
-            var sut = _selectorAccessor.Invoke("#id-not");
+            var sut = _selectorAccessor.Invoke("#id1");
+            var element = Browser.FindElement(sut);
 
-            FluentActions.Invoking(() => Browser.FindElement(sut)).Should().Throw<NoSuchElementException>();
+            element.Should().NotBeNull();
         }
 
         [Fact]
-        public void GivenSelector_WhenFindInnerElement_ThenFound()
+        public void Driver_finds_inner_element_with_selector()
         {
             var root = Browser.FindElement(CssSelector("body"));
             var sut = _selectorAccessor.Invoke("div");
@@ -80,13 +50,43 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
         }
 
         [Fact]
-        public void GivenSelector_WhenFindInnerElements_ThenFound()
+        public void Driver_finds_multiple_elements_with_selector()
+        {
+            var sut = _selectorAccessor.Invoke("div.main");
+            var elements = Browser.FindElements(sut);
+
+            elements.Should().NotBeNull().And.HaveCount(2);
+        }
+
+        [Fact]
+        public void Driver_finds_multiple_inner_elements_with_selector()
         {
             var root = Browser.FindElement(_selectorAccessor.Invoke("body"));
             var sut = _selectorAccessor.Invoke("div");
             var elements = root.FindElements(sut);
 
             elements.Should().NotBeNull().And.HaveCount(2);
+        }
+
+        [Fact]
+        public void Driver_throws_exception_finding_element_with_invalid_selector()
+        {
+            var sut = _selectorAccessor.Invoke("#id-not");
+
+            FluentActions.Invoking(() => Browser.FindElement(sut)).Should().Throw<NoSuchElementException>();
+        }
+
+        [Fact]
+        public void Driver_waits_until_expected_condition_is_met()
+        {
+            var condition = ExpectedConditions.ElementIsVisible(
+                _selectorAccessor.Invoke("h1"));
+
+            var wait = new WebDriverWait(Browser, TimeSpan.FromSeconds(3));
+            wait.Until(condition);
+
+            var element = Browser.FindElement(_selectorAccessor.Invoke("h1"));
+            element.Should().NotBeNull();
         }
     }
 }

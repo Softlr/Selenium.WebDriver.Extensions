@@ -13,7 +13,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.ChromeTests
     public class WebDriverExtensionsJQueryUnloadedSelectorChromeTests : SelectorTests<JQuerySelector>
     {
         public WebDriverExtensionsJQueryUnloadedSelectorChromeTests(ChromeFixture fixture)
-            : base(fixture, "/Unloaded", x => JQuerySelector(x))
+            : base(fixture, UnloadedPath, x => JQuerySelector(x))
         {
         }
     }

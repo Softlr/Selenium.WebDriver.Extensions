@@ -34,6 +34,6 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(CoreSelectors))]
-        public void ShouldCreateSelector(SeleniumBy sut) => sut.Should().NotBeNull();
+        public void Selector_creation_works(SeleniumBy sut) => sut.Should().NotBeNull();
     }
 }

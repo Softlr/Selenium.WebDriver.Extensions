@@ -191,14 +191,18 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Theory]
-        [MemberData(nameof(SelectorsTests))]
-        [SuppressMessage(SONARQUBE, S3242)]
-        public void ShouldCreateCorrectSelector(JQuerySelector sut, string expectedSelector) =>
-            sut.Selector.Should().Be(expectedSelector);
+        [AutoData]
+        public void Context_without_wrapped_driver_throws_exception(string rawSelector)
+        {
+            var element = new SearchContextBuilder().AsWebElement().Build();
+            var sut = JQuerySelector(rawSelector);
+
+            FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<InvalidCastException>();
+        }
 
         [Theory]
         [AutoData]
-        public void ShouldCreateJQuerySelector(string rawSelector)
+        public void Creating_selector_sets_correct_property_values(string rawSelector)
         {
             var sut = JQuerySelector(rawSelector);
 
@@ -208,7 +212,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldCreateJQuerySelectorWithContext(string contextRawSelector, string rawSelector)
+        public void Creating_selector_with_context_sets_correct_property_values(
+            string contextRawSelector, string rawSelector)
         {
             var sut = JQuerySelector(rawSelector, JQuerySelector(contextRawSelector));
 
@@ -219,7 +224,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldCreateJQuerySelectorWithJQueryVariable(string rawSelector, string variable)
+        public void Creating_selector_with_custom_variable_sets_correct_property_values(
+            string rawSelector, string variable)
         {
             var sut = JQuerySelector(rawSelector, variable: variable);
 
@@ -228,31 +234,35 @@ namespace Selenium.WebDriver.Extensions.Tests
             sut.Variable.Should().Be(variable);
         }
 
-        [Theory]
-        [AutoData]
-        public void ShouldFindElementByJQuerySelector(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector).Build();
-            var selector = JQuerySelector(rawSelector);
-            var sut = selector.FindElement(driver);
+        [Fact]
+        public void Creating_selector_with_empty_value_is_invalid() =>
+            FluentActions.Invoking(() => JQuerySelector(Empty)).Should().Throw<ArgumentException>().And.ParamName
+                .Should().Be("selector");
 
-            sut.Should().NotBeNull();
-        }
+        [Fact]
+        public void Creating_selector_with_null_value_is_invalid() =>
+            FluentActions.Invoking(() => JQuerySelector(null)).Should().Throw<ArgumentNullException>().And.ParamName
+                .Should().Be("selector");
 
-        [Theory]
-        [AutoData]
-        public void ShouldFindElementsByJQuerySelector(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementsLocatedByJQuery(rawSelector).Build();
-            var selector = JQuerySelector(rawSelector);
-            var sut = selector.FindElements(driver);
-
-            sut.Should().NotBeNull().And.HaveCount(2);
-        }
+        [Fact]
+        public void Creating_selector_with_whitespace_value_is_invalid() =>
+            FluentActions.Invoking(() => JQuerySelector(" ")).Should().Throw<ArgumentException>().And.ParamName
+                .Should().Be("selector");
 
         [Theory]
         [AutoData]
-        public void ShouldFindElementWithNestedJQuerySelector(string rawSelector)
+        public void Empty_variable_value_throws_exception(string rawSelector) =>
+            FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: Empty)).Should()
+                .Throw<ArgumentException>().And.ParamName.Should().Be("variable");
+
+        [Theory]
+        [MemberData(nameof(SelectorArgumentExceptionTests))]
+        public void Invalid_argument_throws_exception(Action sut) =>
+            FluentActions.Invoking(sut).Should().Throw<ArgumentException>();
+
+        [Theory]
+        [AutoData]
+        public void Nested_selector_finds_element(string rawSelector)
         {
             var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
                 .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector).Build();
@@ -265,7 +275,40 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldReturnEmptyResultWhenNoElementsAreFoundWithJQuerySelector(string rawSelector)
+        public void Non_web_element_throws_exception(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
+                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector).Build();
+            var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
+            var sut = JQuerySelector(rawSelector);
+
+            FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<NotSupportedException>();
+        }
+
+        [Theory]
+        [AutoData]
+        public void Not_found_element_throws_exception(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector).Build();
+            var sut = JQuerySelector(rawSelector);
+
+            FluentActions.Invoking(() => sut.FindElement(driver)).Should().Throw<NoSuchElementException>();
+        }
+
+        [Theory]
+        [MemberData(nameof(SelectorNullArgumentExceptionTests))]
+        public void Null_argument_throws_exception(Action sut) =>
+            FluentActions.Invoking(sut).Should().Throw<ArgumentNullException>();
+
+        [Theory]
+        [AutoData]
+        public void Null_variable_value_throws_exception(string rawSelector) =>
+            FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: null)).Should()
+                .Throw<ArgumentNullException>().And.ParamName.Should().Be("variable");
+
+        [Theory]
+        [AutoData]
+        public void Selector_does_not_find_non_matching_elements(string rawSelector)
         {
             var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector).Build();
             var selector = JQuerySelector(rawSelector);
@@ -275,79 +318,37 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Theory]
-        [MemberData(nameof(SelectorArgumentExceptionTests))]
-        public void ShouldThrowExceptionForInvalidArguments(Action sut) =>
-            FluentActions.Invoking(sut).Should().Throw<ArgumentException>();
+        [AutoData]
+        public void Selector_finds_element(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector).Build();
+            var selector = JQuerySelector(rawSelector);
+            var sut = selector.FindElement(driver);
 
-        [Theory]
-        [MemberData(nameof(SelectorNullArgumentExceptionTests))]
-        public void ShouldThrowExceptionForNullArguments(Action sut) =>
-            FluentActions.Invoking(sut).Should().Throw<ArgumentNullException>();
-
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyValue() =>
-            FluentActions.Invoking(() => JQuerySelector(Empty)).Should().Throw<ArgumentException>().And.ParamName
-                .Should().Be("selector");
+            sut.Should().NotBeNull();
+        }
 
         [Theory]
         [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithEmptyVariableValue(string rawSelector) =>
-            FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: Empty)).Should()
-                .Throw<ArgumentException>().And.ParamName.Should().Be("variable");
+        public void Selector_finds_elements(string rawSelector)
+        {
+            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementsLocatedByJQuery(rawSelector).Build();
+            var selector = JQuerySelector(rawSelector);
+            var sut = selector.FindElements(driver);
 
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullValue() =>
-            FluentActions.Invoking(() => JQuerySelector(null)).Should().Throw<ArgumentNullException>().And.ParamName
-                .Should().Be("selector");
+            sut.Should().NotBeNull().And.HaveCount(2);
+        }
+
+        [Theory]
+        [MemberData(nameof(SelectorsTests))]
+        [SuppressMessage(SONARQUBE, S3242)]
+        public void Selector_value_should_be_correct(JQuerySelector sut, string expectedSelector) =>
+            sut.Selector.Should().Be(expectedSelector);
 
         [Theory]
         [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithNullVariableValue(string rawSelector) =>
-            FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: null)).Should()
-                .Throw<ArgumentNullException>().And.ParamName.Should().Be("variable");
-
-        [Fact]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyValue() =>
-            FluentActions.Invoking(() => JQuerySelector(" ")).Should().Throw<ArgumentException>().And.ParamName
-                .Should().Be("selector");
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenCreatingJQuerySelectorWithWhiteSpaceOnlyVariableValue(
-            string rawSelector) =>
+        public void Whitespace_variable_value_throws_exception(string rawSelector) =>
             FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: " ")).Should()
                 .Throw<ArgumentException>().And.ParamName.Should().Be("variable");
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenElementIsNotFoundWithJQuerySelector(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithNoElementLocatedByJQuery(rawSelector).Build();
-            var sut = JQuerySelector(rawSelector);
-
-            FluentActions.Invoking(() => sut.FindElement(driver)).Should().Throw<NoSuchElementException>();
-        }
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenSearchContextDoesNotWrapDriver(string rawSelector)
-        {
-            var element = new SearchContextBuilder().AsWebElement().Build();
-            var sut = JQuerySelector(rawSelector);
-
-            FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<InvalidCastException>();
-        }
-
-        [Theory]
-        [AutoData]
-        public void ShouldThrowExceptionWhenSearchContextIsNotWebElement(string rawSelector)
-        {
-            var driver = new WebDriverBuilder().WithJQueryLoaded().WithElementLocatedByJQuery(rawSelector)
-                .WithElementLocatedByJQuery($"body > {rawSelector}").WithPathToElement(rawSelector).Build();
-            var element = new SearchContextBuilder().WithWrappedDriver(driver).Build();
-            var sut = JQuerySelector(rawSelector);
-
-            FluentActions.Invoking(() => sut.FindElement(element)).Should().Throw<NotSupportedException>();
-        }
     }
 }
