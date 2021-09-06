@@ -8,11 +8,13 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
     using Xunit;
     using static By;
+    using static Softlr.Suppress;
     using static Tests.Shared.Trait;
     using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
 
     [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S109)]
     public class SelectorTests<TSelector> : TestsBase
         where TSelector : By
     {

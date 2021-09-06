@@ -8,7 +8,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
 
     [SuppressMessage(SONARQUBE, S2339)]
     [ExcludeFromCodeCoverage]
-    public abstract class TestsBase
+    public class TestsBase
     {
         public const string JQueryTestPath = "/jQueryLoaded";
         public const string SizzleTestPath = "/SizzleLoaded";
