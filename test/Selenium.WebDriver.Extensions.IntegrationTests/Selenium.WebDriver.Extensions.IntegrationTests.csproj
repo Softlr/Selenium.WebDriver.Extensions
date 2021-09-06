@@ -29,7 +29,7 @@
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.150.1.2" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
     <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="90.0.818.66" Condition="'$(OS)' == 'Windows_NT'" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.26.0.34506">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.28.0.36354">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
