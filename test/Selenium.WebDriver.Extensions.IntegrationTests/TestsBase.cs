@@ -12,6 +12,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests
     {
         public const string JQueryTestPath = "/jQueryLoaded";
         public const string SizzleTestPath = "/SizzleLoaded";
+        public const string UnloadedPath = "/Unloaded";
 
         [SuppressMessage(SONARQUBE, S3900)]
         protected TestsBase(FixtureBase fixture, string path)

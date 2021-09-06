@@ -64,7 +64,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [AutoData]
-        public void ShouldExecuteScript(string scriptMethod)
+        public void Executing_script_works(string scriptMethod)
         {
             var script = $"{scriptMethod}();";
             var driver = new WebDriverBuilder().WithTestMethodDefined(scriptMethod).Build();
@@ -75,8 +75,13 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Theory]
+        [MemberData(nameof(InvalidParameters))]
+        public void Invalid_parameter_throws_exception(Action action, string parameter) =>
+            FluentActions.Invoking(action).Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
+
+        [Theory]
         [MemberData(nameof(Loaders))]
-        public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
+        public void Loading_library_works(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             var driver = new WebDriverBuilder().WithNoExternalLibraryLoaded().Build();
 
@@ -84,10 +89,5 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Any<string>());
         }
-
-        [Theory]
-        [MemberData(nameof(InvalidParameters))]
-        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
-            FluentActions.Invoking(action).Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
     }
 }

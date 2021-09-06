@@ -12,17 +12,17 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture.AutoNSubstitute" Version="4.17.0" />
     <PackageReference Include="AutoFixture.Xunit2" Version="4.17.0" />
-    <PackageReference Include="coverlet.msbuild" Version="3.0.3">
+    <PackageReference Include="coverlet.msbuild" Version="3.1.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="FluentAssertions" Version="5.10.3" />
+    <PackageReference Include="FluentAssertions" Version="6.1.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.10.0" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.26.0.34506">
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.28.0.36354">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
