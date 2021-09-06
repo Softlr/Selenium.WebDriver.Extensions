@@ -15,6 +15,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S109)]
     [SuppressMessage(SONARQUBE, S3900)]
     public class WebDriverExtensionsTests
     {

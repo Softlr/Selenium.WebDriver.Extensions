@@ -12,6 +12,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     public class Startup
     {
         [SuppressMessage(FXCOP, CA1822)]
+        [SuppressMessage(SONARQUBE, S1075)]
         [SuppressMessage(SONARQUBE, S2325)]
         public void Configure(IApplicationBuilder app) =>
             app.Run(async context =>

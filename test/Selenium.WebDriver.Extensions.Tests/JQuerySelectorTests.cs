@@ -14,6 +14,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S109)]
     [SuppressMessage(SONARQUBE, S3900)]
     public class JQuerySelectorTests
     {
@@ -28,17 +29,17 @@ namespace Selenium.WebDriver.Extensions.Tests
                 () => JQuerySelector(_fixture.Create<string>()).NextAll(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).NextUntil(Empty, _fixture.Create<string>()),
                 () => JQuerySelector(_fixture.Create<string>()).NextUntil(_fixture.Create<string>(), Empty),
-                () => JQuerySelector(_fixture.Create<string>()).NextUntil(null, Empty),
+                () => JQuerySelector(_fixture.Create<string>()).NextUntil(filter: Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Prev(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).PrevAll(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).PrevUntil(Empty, _fixture.Create<string>()),
                 () => JQuerySelector(_fixture.Create<string>()).PrevUntil(_fixture.Create<string>(), Empty),
-                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(null, Empty),
+                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(filter: Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Parent(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Parents(Empty),
                 () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(Empty, _fixture.Create<string>()),
                 () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(_fixture.Create<string>(), Empty),
-                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(null, Empty),
+                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(filter: Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Siblings(Empty),
             };
 
@@ -142,7 +143,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).NextAll(), $"jQuery('{tag}').nextAll()" },
                     { JQuerySelector(tag).NextAll(selector), $"jQuery('{tag}').nextAll('{selector}')" },
                     { JQuerySelector(tag).NextUntil(), $"jQuery('{tag}').nextUntil()" },
-                    { JQuerySelector(tag).NextUntil(null, filter), $"jQuery('{tag}').nextUntil('', '{filter}')" },
+                    { JQuerySelector(tag).NextUntil(filter: filter), $"jQuery('{tag}').nextUntil('', '{filter}')" },
                     { JQuerySelector(tag).NextUntil(selector), $"jQuery('{tag}').nextUntil('{selector}')" },
                     {
                         JQuerySelector(tag).NextUntil(selector, filter),
@@ -157,7 +158,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).Parents(selector), $"jQuery('{tag}').parents('{selector}')" },
                     { JQuerySelector(tag).ParentsUntil(), $"jQuery('{tag}').parentsUntil()" },
                     {
-                        JQuerySelector(tag).ParentsUntil(null, filter),
+                        JQuerySelector(tag).ParentsUntil(filter: filter),
                         $"jQuery('{tag}').parentsUntil('', '{filter}')"
                     },
                     { JQuerySelector(tag).ParentsUntil(selector), $"jQuery('{tag}').parentsUntil('{selector}')" },
@@ -170,7 +171,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).PrevAll(), $"jQuery('{tag}').prevAll()" },
                     { JQuerySelector(tag).PrevAll(selector), $"jQuery('{tag}').prevAll('{selector}')" },
                     { JQuerySelector(tag).PrevUntil(), $"jQuery('{tag}').prevUntil()" },
-                    { JQuerySelector(tag).PrevUntil(null, filter), $"jQuery('{tag}').prevUntil('', '{filter}')" },
+                    { JQuerySelector(tag).PrevUntil(filter: filter), $"jQuery('{tag}').prevUntil('', '{filter}')" },
                     { JQuerySelector(tag).PrevUntil(selector), $"jQuery('{tag}').prevUntil('{selector}')" },
                     {
                         JQuerySelector(tag).PrevUntil(selector, filter),
