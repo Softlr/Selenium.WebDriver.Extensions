@@ -8,7 +8,7 @@ skip_branch_with_pr: true
 skip_commits:
   message: /\[(skip ci|ci skip)\]/
 
-version: 3.3.0.{build}
+version: 3.4.0.{build}
 image: Visual Studio 2019
   
 install:
@@ -33,7 +33,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.3.0
+  - ps: dotnet pack -c Release --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.4.0
 
 test_script:
   - dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
@@ -55,7 +55,7 @@ deploy:
   - provider: GitHub
     on:
       branch: master
-    release: 3.3.0
+    release: 3.4.0
     artifact: /.*\.nupkg/
     auth_token:
       secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
