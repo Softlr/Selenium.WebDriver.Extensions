@@ -12,3 +12,4 @@ trim_trailing_whitespace = true
 
 [*.cs]
 indent_size = 4
+dotnet_remove_unnecessary_suppression_exclusions = all
