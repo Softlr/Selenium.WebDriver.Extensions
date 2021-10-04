@@ -22,7 +22,7 @@ environment:
   SonarCloudAccessToken:
     secure: hZ+EdDQLy/K+ngEIPrw7DM//Lft9RldmiOoGNhNz8m9iyfJ3ZJhylBm0FduR6fWT
   GitHubAccessToken:
-    secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+    secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
       
 build_script:
   - set JAVA_HOME=C:\Program Files\Java\jdk11
@@ -52,15 +52,15 @@ artifacts:
   - path: ./*.nupkg
 
 deploy:
-  - provider: NuGet
-    on:
-      branch: master
-    api_key:
-      secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
   - provider: GitHub
     on:
       branch: master
     release: 3.3.0
     artifact: /.*\.nupkg/
     auth_token:
-      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+      secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
+  - provider: NuGet
+    on:
+      branch: master
+    api_key:
+      secure: RoNu0KbJqWNledqfHkctON53FTzzgNGVj7U6bpzwrC1MlEr5INEsP7FyEpEZBX1D
