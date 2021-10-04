@@ -1,14 +1,15 @@
 {
-  "ServerUri": "https://sonarcloud.io",
+  "ServerUri": "https://sonarcloud.io/",
   "Organization": {
     "Key": "rayell-github",
     "Name": "Softlr"
   },
   "ProjectKey": "selenium.webdriver.extensions",
+  "ProjectName": "Selenium.WebDriver.Extensions",
   "Profiles": {
     "CSharp": {
       "ProfileKey": "AWETMlGEr86VThkHOK_x",
-      "ProfileTimestamp": "2018-09-06T11:06:47+02:00"
+      "ProfileTimestamp": "2021-05-05T07:40:17Z"
     }
   }
 }

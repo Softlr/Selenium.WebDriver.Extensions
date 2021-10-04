@@ -8,24 +8,20 @@ namespace Selenium.WebDriver.Extensions
     using OpenQA.Selenium;
     using OpenQA.Selenium.Internal;
     using Selenium.WebDriver.Extensions.Parsers;
-    using static Softlr.Suppress;
     using static System.String;
+    using static JavaScriptSnippets;
+    using static Softlr.Suppress;
     using static Validate;
     using SeleniumBy = OpenQA.Selenium.By;
 
-    /// <summary>
-    /// The selector base.
-    /// </summary>
+    /// <summary>The selector base.</summary>
     /// <typeparam name="TSelector">The type of the selector.</typeparam>
     /// <inheritdoc cref="ISelector" />
     public abstract class SelectorBase<TSelector> : SeleniumBy, ISelector
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SelectorBase{T}"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="SelectorBase{T}" /> class.</summary>
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">The context.</param>
-        [SuppressMessage("ReSharper", "InheritdocConsiderUsage")]
         protected SelectorBase(string selector, TSelector context)
         {
             Context = context;
@@ -37,39 +33,27 @@ namespace Selenium.WebDriver.Extensions
         /// <inheritdoc />
         public abstract string CheckScript { get; }
 
-        /// <summary>
-        /// Gets the context.
-        /// </summary>
+        /// <summary>Gets the context.</summary>
         public TSelector Context { get; private set; }
 
-        /// <summary>
-        /// Gets the query raw selector.
-        /// </summary>
+        /// <summary>Gets the query raw selector.</summary>
         public string RawSelector { get; }
 
-        /// <summary>
-        /// Gets the selector.
-        /// </summary>
+        /// <summary>Gets the selector.</summary>
         public abstract string Selector { get; }
 
-        /// <summary>
-        /// Gets the result resolver string.
-        /// </summary>
+        /// <summary>Gets the result resolver string.</summary>
         protected virtual string ResultResolver => Empty;
 
         [SuppressMessage(SONARQUBE, S4018)]
         internal static TResult ParseResult<TResult>(object result) => new ValueParser().Parse<TResult>(result);
 
-        /// <summary>
-        /// Creates the context.
-        /// </summary>
+        /// <summary>Creates the context.</summary>
         /// <param name="contextSelector">The context selector.</param>
         /// <returns>The context.</returns>
         protected abstract TSelector CreateContext(string contextSelector);
 
-        /// <summary>
-        /// Loads the external library.
-        /// </summary>
+        /// <summary>Loads the external library.</summary>
         /// <param name="driver">The web driver.</param>
         protected abstract void LoadExternalLibrary(IWebDriver driver);
 
@@ -89,8 +73,8 @@ namespace Selenium.WebDriver.Extensions
             var driver = ResolveDriver(searchContext);
 
             LoadExternalLibrary(driver);
-            var result = ParseResult<IEnumerable<IWebElement>>(driver.ExecuteScript<object>(
-                $"return {Selector}{ResultResolver};"));
+            var result = ParseResult<IEnumerable<IWebElement>>(
+                driver.ExecuteScript<object>($"return {Selector}{ResultResolver};"));
             return new ReadOnlyCollection<IWebElement>(result.ToList());
         }
 
@@ -101,15 +85,15 @@ namespace Selenium.WebDriver.Extensions
                 return driver;
             }
 
-            if (!(searchContext is IWebElement) || !(searchContext is IWrapsDriver driverWrapper))
+            if (!(searchContext is IWebElement) || searchContext is not IWrapsDriver driverWrapper)
             {
                 throw new NotSupportedException("Context is not a valid driver");
             }
 
             // nested query
             driver = driverWrapper.WrappedDriver;
-            var baseElementSelector = ((IJavaScriptExecutor)driver)
-                .ExecuteScript(JavaScriptSnippets.FindDomPathScript, driverWrapper) as string;
+            var baseElementSelector = ((IJavaScriptExecutor)driver).ExecuteScript(FindDomPathScript, driverWrapper)
+                as string;
             Context = CreateContext(baseElementSelector);
 
             return driver;

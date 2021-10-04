@@ -1,20 +1,15 @@
-# http://editorconfig.org
+# https://editorconfig.org
 
 root = true
 
 [*]
 charset = utf-8
 indent_style = space
-indent_size = 4
+indent_size = 2
 end_of_line = crlf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-[*.yml]
-indent_size = 2
-
-[*.config]
-indent_size = 2
-
-[*.nuspec]
-indent_size = 2
+[*.cs]
+indent_size = 4
+dotnet_remove_unnecessary_suppression_exclusions = all

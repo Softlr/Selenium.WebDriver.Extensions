@@ -1,113 +1,71 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
     using System;
-    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
     using AutoFixture;
     using AutoFixture.Xunit2;
     using FluentAssertions;
-    using JetBrains.Annotations;
     using NSubstitute;
     using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions;
-    using Selenium.WebDriver.Extensions.Tests.Shared;
     using Xunit;
-    using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
-    using static Softlr.Suppress;
     using static System.String;
+    using static NSubstitute.Arg;
+    using static Shared.Trait;
+    using static Softlr.Suppress;
 
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
+    [SuppressMessage(SONARQUBE, S109)]
     [SuppressMessage(SONARQUBE, S3900)]
     public class WebDriverExtensionsTests
     {
-        private static readonly Fixture _fixture = new Fixture();
+        private const string DriverParam = "driver";
+        private const string ScriptParam = "script";
+        private const string UriParam = "uri";
+        private const string VersionParam = "version";
+        private static readonly Fixture _fixture = new();
+        private static readonly IWebDriver _webDriver = new WebDriverBuilder().Build();
 
-        [PublicAPI]
-        public static IEnumerable<object[]> InvalidParameters
-        {
-            get
+        public static TheoryData<Action, string> InvalidParameters =>
+            new()
             {
-                var webDriver = new WebDriverBuilder().Build();
-                const string driverParam = "driver";
-                const string scriptParam = "script";
-                const string versionParam = "version";
-                const string uriParam = "uri";
-
                 // ExecuteScript
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>())),  driverParam
-                };
-                yield return new object[] { (Action)(() => webDriver.ExecuteScript(null)), scriptParam };
-                yield return new object[] { (Action)(() => webDriver.ExecuteScript(Empty)), scriptParam };
+                { () => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>()), DriverParam },
+                { () => _webDriver.ExecuteScript(null), ScriptParam },
+                { () => _webDriver.ExecuteScript(Empty), ScriptParam },
 
                 // LoadJQuery
-                yield return new object[] { (Action)(() => WebDriverExtensions.LoadJQuery(null)), driverParam };
-                yield return new object[] { (Action)(() => webDriver.LoadJQuery((string)null)), versionParam };
-                yield return new object[] { (Action)(() => webDriver.LoadJQuery(Empty)), versionParam };
-                yield return new object[]
-                {
-                    (Action)(() => webDriver.LoadJQuery(_fixture.Create<string>())), versionParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.LoadJQuery(null, _fixture.Create<Uri>())), driverParam
-                };
-                yield return new object[] { (Action)(() => webDriver.LoadJQuery((Uri)null)), uriParam };
+                { () => WebDriverExtensions.LoadJQuery(null), DriverParam },
+                { () => _webDriver.LoadJQuery((string)null), VersionParam },
+                { () => _webDriver.LoadJQuery(Empty), VersionParam },
+                { () => _webDriver.LoadJQuery(_fixture.Create<string>()), VersionParam },
+                { () => WebDriverExtensions.LoadJQuery(null, _fixture.Create<Uri>()), DriverParam },
+                { () => _webDriver.LoadJQuery((Uri)null), UriParam },
 
                 // LoadSizzle
-                yield return new object[] { (Action)(() => WebDriverExtensions.LoadSizzle(null)), driverParam };
-                yield return new object[] { (Action)(() => webDriver.LoadSizzle((string)null)), versionParam };
-                yield return new object[] { (Action)(() => webDriver.LoadSizzle(Empty)), versionParam };
-                yield return new object[]
-                {
-                    (Action)(() => webDriver.LoadSizzle(_fixture.Create<string>())), versionParam
-                };
-                yield return new object[]
-                {
-                    (Action)(() => WebDriverExtensions.LoadSizzle(null, _fixture.Create<Uri>())), driverParam
-                };
-                yield return new object[] { (Action)(() => webDriver.LoadSizzle((Uri)null)), uriParam };
-            }
-        }
+                { () => WebDriverExtensions.LoadSizzle(null), DriverParam },
+                { () => _webDriver.LoadSizzle((string)null), VersionParam },
+                { () => _webDriver.LoadSizzle(Empty), VersionParam },
+                { () => _webDriver.LoadSizzle(_fixture.Create<string>()), VersionParam },
+                { () => WebDriverExtensions.LoadSizzle(null, _fixture.Create<Uri>()), DriverParam },
+                { () => _webDriver.LoadSizzle((Uri)null), UriParam }
+            };
 
-        [PublicAPI]
-        public static IEnumerable<object[]> Loaders
-        {
-            get
+        public static TheoryData<Action<IWebDriver, Uri, TimeSpan?>, Uri, TimeSpan?> Loaders =>
+            new()
             {
-                var timeSpan = _fixture.Create<TimeSpan>();
-
                 // LoadJQuery
-                yield return new object[]
-                {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(),
-                    null
-                };
-                yield return new object[]
-                {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(),
-                    timeSpan
-                };
+                { WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), null },
+                { WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), _fixture.Create<TimeSpan>() },
 
                 // LoadSizzle
-                yield return new object[]
-                {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(),
-                    null
-                };
-                yield return new object[]
-                {
-                    (Action<IWebDriver, Uri, TimeSpan?>)WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(),
-                    timeSpan
-                };
-            }
-        }
+                { WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), null },
+                { WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), _fixture.Create<TimeSpan>() }
+            };
 
         [Theory]
         [AutoData]
-        public void ShouldExecuteScript(string scriptMethod)
+        public void Executing_script_works(string scriptMethod)
         {
             var script = $"{scriptMethod}();";
             var driver = new WebDriverBuilder().WithTestMethodDefined(scriptMethod).Build();
@@ -118,19 +76,19 @@ namespace Selenium.WebDriver.Extensions.Tests
         }
 
         [Theory]
+        [MemberData(nameof(InvalidParameters))]
+        public void Invalid_parameter_throws_exception(Action action, string parameter) =>
+            FluentActions.Invoking(action).Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
+
+        [Theory]
         [MemberData(nameof(Loaders))]
-        public void ShouldLoadLibrary(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
+        public void Loading_library_works(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
         {
             var driver = new WebDriverBuilder().WithNoExternalLibraryLoaded().Build();
 
             action.Invoke(driver, uri, timeSpan);
 
-            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
+            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Any<string>());
         }
-
-        [Theory]
-        [MemberData(nameof(InvalidParameters))]
-        public void ShouldThrowExceptionForInvalidParameters(Action action, string parameter) =>
-            action.Should().Throw<ArgumentException>().And.ParamName.Should().Be(parameter);
     }
 }

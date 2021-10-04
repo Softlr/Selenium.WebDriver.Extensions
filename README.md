@@ -11,7 +11,7 @@ Extensions for Selenium WebDriver including jQuery/Sizzle selector support.
 * Support for nested selectors
 * Easy setup: install NuGet package and start using it with your existing Selenium solution
 * High quality ensured by continuous integration setup with Appveyor, unit and integration tests and high code coverage
-* Well documented code using [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details)
+* Well documented code using [GitBook](https://app.gitbook.com/@softlr/s/selenium-webdriver-extensions/)
 ## jQuery/Sizzle support
 * jQuery/Sizzle selectors support for Selenium WebDriver
 * jQuery/Sizzle auto-load on pages on sites that don't use jQuery
@@ -26,7 +26,7 @@ Install-Package Selenium.WebDriver.Extensions
 ```
 
 # Documentation
-API documentation can be found on [GitBook](https://legacy.gitbook.com/book/softlr/selenium-webdriver-extensions/details) and user guide is on the [wiki](https://github.com/Softlr/Selenium.WebDriver.Extensions/wiki).
+API documentation can be found on [GitBook](https://app.gitbook.com/@softlr/s/selenium-webdriver-extensions/) and user guide is on the [wiki](https://github.com/Softlr/Selenium.WebDriver.Extensions/wiki).
 
 # Usage
 
@@ -52,11 +52,11 @@ driver.FindElement(selector);
 ```
 
 #### jQuery loading
-If the site that you are testing with Selenium does not include jQuery this extension will automatically load the latest version when you run any of the `Find*` methods. If you want you can choose to load a different version of jQuery. The library uses jQuery CDN by default, but if you want to use a completely different source, that's also supported
+If the site that you are testing with Selenium does not include jQuery this extension will automatically load the 3.5.1 version when you run any of the `Find*` methods. If you want you can choose to load a different version of jQuery. The library uses jQuery CDN by default, but if you want to use a completely different source, that's also supported
 
 ```csharp
 driver.LoadJQuery("1.11.0"); // load specific version from default CDN
-driver.LoadJQuery(new Uri("http://some.server/jquery.js")); // load a library from other source
+driver.LoadJQuery(new Uri("https://some.server/jquery.js")); // load a library from other source
 ```
 
 #### jQuery variable name
@@ -86,7 +86,7 @@ If the site that you are testing with Selenium does not include Sizzle this exte
 
 ```csharp
 driver.LoadSizzle("1.11.1"); // load specific version from default CDN
-driver.LoadSizzle(new Uri("http://some.server/sizzle.js")); // load a library from other source
+driver.LoadSizzle(new Uri("https://some.server/sizzle.js")); // load a library from other source
 ```
 
 #### Sizzle context switch

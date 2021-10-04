@@ -18,7 +18,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
         public override TResult Parse<TResult>(object rawResult) =>
             typeof(TResult) == typeof(IEnumerable<IWebElement>)
                 && rawResult.GetType() == typeof(ReadOnlyCollection<object>)
-            ? (TResult)((ReadOnlyCollection<object>)rawResult).Cast<IWebElement>()
-            : Successor.Parse<TResult>(rawResult);
+                ? (TResult)((ReadOnlyCollection<object>)rawResult).Cast<IWebElement>()
+                : Successor.Parse<TResult>(rawResult);
     }
 }

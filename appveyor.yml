@@ -8,57 +8,59 @@ skip_branch_with_pr: true
 skip_commits:
   message: /\[(skip ci|ci skip)\]/
 
-version: 3.3.0.{build}
-image: Visual Studio 2017
+version: 3.4.0.{build}
+image: Visual Studio 2019
   
 install:
-  - choco install msbuild-sonarqube-runner -y
   - choco install googlechrome -y --ignore-checksums
-  - choco install opencover.portable -y
   - choco install codecov -y
 
 nuget:
   disable_publish_on_pr: true
 
 environment:
-  SonarQubeAccessToken:
+  SonarCloudAccessToken:
     secure: hZ+EdDQLy/K+ngEIPrw7DM//Lft9RldmiOoGNhNz8m9iyfJ3ZJhylBm0FduR6fWT
   GitHubAccessToken:
-    secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+    secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
       
 build_script:
-  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:sonar.organization=rayell-github /d:sonar.login=$env:SonarQubeAccessToken /d:sonar.analysis.mode=preview /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
-  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { SonarScanner.MSBuild begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.0 /d:sonar.host.url=https://sonarqube.com /d:"sonar.organization=rayell-github" /d:"sonar.login=$env:SonarQubeAccessToken" /d:"sonar.cs.opencover.reportsPaths=coverage.xml" }
+  - set JAVA_HOME=C:\Program Files\Java\jdk11
+  - set PATH=%JAVA_HOME%\bin;%PATH%
+  - dotnet tool install --global dotnet-sonarscanner
+  - ps: if ($env:APPVEYOR_PULL_REQUEST_NUMBER) { dotnet sonarscanner begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.3 /d:sonar.host.url=https://sonarcloud.io /o:rayell-github /d:sonar.login=$env:SonarCloudAccessToken /d:sonar.github.pullRequest=$env:APPVEYOR_PULL_REQUEST_NUMBER /d:sonar.github.repository=Softlr/Selenium.WebDriver.Extensions /d:sonar.github.oauth=$env:GitHubAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
+  - ps: if (-Not $env:APPVEYOR_PULL_REQUEST_NUMBER) { dotnet sonarscanner begin /n:Selenium.WebDriver.Extensions /k:selenium.webdriver.extensions /v:3.3 /d:sonar.host.url=https://sonarcloud.io /o:rayell-github /d:sonar.login=$env:SonarCloudAccessToken /d:sonar.cs.opencover.reportsPaths=coverage.xml }
   - dotnet build -c Release
 
 after_build:
-  - ps: dotnet pack -c Release --include-symbols --include-source --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.3.0
+  - ps: dotnet pack -c Release --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=3.4.0
 
 test_script:
-  - dotnet test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build
-  - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
-  - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
-  - dotnet test test\Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
-  - OpenCover.Console -register:user -target:dotnet.exe -targetargs:"test test\Selenium.WebDriver.Extensions.Tests -c Release --no-build" -output:coverage.xml -filter:"+[Selenium.WebDriver.Extensions*]* -[*]*Exception* -[*Tests]* -[xunit*]*" -oldStyle
-  - ps: SonarScanner.MSBuild end /d:sonar.login=$env:SonarQubeAccessToken
+  - dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
+  - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Edge
+  - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
+  - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
+  - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Firefox
+  - ps: mv ./coverage.net5.0.xml ./coverage.xml
+  - ps: dotnet sonarscanner end /d:sonar.login=$env:SonarCloudAccessToken
 
 after_test:
   - codecov -f coverage.xml
 
 artifacts:
   - path: coverage.xml
-  - path: .\*.nupkg
+  - path: ./*.nupkg
 
 deploy:
+  - provider: GitHub
+    on:
+      branch: master
+    release: 3.4.0
+    artifact: /.*\.nupkg/
+    auth_token:
+      secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
   - provider: NuGet
     on:
       branch: master
     api_key:
-      secure: kvwvA4clT64FDfanLoNcTLWpQlMGQ311zUfwAEljDwHhjtmFCy4O+gSZ2YrGTUYb
-  - provider: GitHub
-    on:
-      branch: master
-    release: 3.3.0
-    artifact: /.*\.nupkg/
-    auth_token:
-      secure: r+IxpBcxWvxwGdiNvsHFEWa0wa8WPzw3uRi+1/ObwPoGS16bzG9FObtJIsFdmj0L
+      secure: RoNu0KbJqWNledqfHkctON53FTzzgNGVj7U6bpzwrC1MlEr5INEsP7FyEpEZBX1D
