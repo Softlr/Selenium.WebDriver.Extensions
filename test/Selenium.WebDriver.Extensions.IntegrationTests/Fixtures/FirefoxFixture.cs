@@ -8,9 +8,11 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     {
         public FirefoxFixture()
         {
+            var service = FirefoxDriverService.CreateDefaultService();
+            service.Host = "::1";
             var options = new FirefoxOptions();
             options.AddArguments("--headless");
-            Browser = new FirefoxDriver(options);
+            Browser = new FirefoxDriver(service, options);
         }
     }
 }
