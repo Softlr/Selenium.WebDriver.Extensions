@@ -10,9 +10,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         {
             var service = FirefoxDriverService.CreateDefaultService();
             service.Host = "::1";
-            var options = new FirefoxOptions();
-            options.AddArguments("--headless");
-            Browser = new FirefoxDriver(service, options);
+            Browser = new FirefoxDriver(service);
         }
     }
 }
