@@ -12,7 +12,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         {
             // .Net Core workaround #1: Slow Firefox webdriver
             string projectFolder = Directory.GetParent(Directory.GetCurrentDirectory()).FullName;
-            string geckoDriverDirectory = projectFolder + "\\netcoreapp3.1\\";
+            string geckoDriverDirectory = projectFolder + "\\net5.0\\";
             FirefoxDriverService geckoService =
             FirefoxDriverService.CreateDefaultService(geckoDriverDirectory);
             geckoService.Host = "::1";
