@@ -3,7 +3,6 @@ namespace Selenium.WebDriver.Extensions.Tests
     using System.Diagnostics.CodeAnalysis;
     using NSubstitute;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Internal;
     using static NSubstitute.Substitute;
 
     [ExcludeFromCodeCoverage]
