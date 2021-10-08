@@ -56,7 +56,7 @@ deploy:
     on:
       branch: master
     release: 4.0.0
-    artifact: /.*\.nupkg/
+    artifact: /.*(\.|\.s)nupkg/
     auth_token:
       secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
   - provider: NuGet
