@@ -33,7 +33,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - ps: dotnet pack -c Release --no-build -o $env:APPVEYOR_BUILD_FOLDER /p:Version=4.0.0
+  - ps: dotnet pack -c Release --no-build -o $env:APPVEYOR_BUILD_FOLDER -p:Version=4.0.0 -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
 
 test_script:
   - dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
