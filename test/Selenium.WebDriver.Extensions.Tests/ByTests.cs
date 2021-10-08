@@ -20,7 +20,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             {
                 return new TheoryData<SeleniumBy>
                 {
-                    ClassName(_fixture.Create<string>()),
+                    ClassName($"{nameof(ClassName)}{_fixture.Create<string>()}"),
                     CssSelector(_fixture.Create<string>()),
                     Id(_fixture.Create<string>()),
                     LinkText(_fixture.Create<string>()),
