@@ -50,17 +50,19 @@ after_test:
 artifacts:
   - path: coverage.xml
   - path: ./*.nupkg
+  - path: ./*.snupkg
 
 deploy:
   - provider: GitHub
     on:
       branch: master
     release: 4.0.0
-    artifact: /.*(\.|\.s)nupkg/
+    artifact: /.*\.nupkg/
     auth_token:
       secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
   - provider: NuGet
     on:
       branch: master
+    artifact: /.*(\.|\.s)nupkg/
     api_key:
       secure: RoNu0KbJqWNledqfHkctON53FTzzgNGVj7U6bpzwrC1MlEr5INEsP7FyEpEZBX1D
