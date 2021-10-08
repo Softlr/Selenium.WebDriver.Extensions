@@ -2,7 +2,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
     using System.Diagnostics.CodeAnalysis;
     using System.IO;
-    using Microsoft.Edge.SeleniumTools;
+    using OpenQA.Selenium.Edge;
 
     [ExcludeFromCodeCoverage]
     public class EdgeFixture : FixtureBase
