@@ -6,7 +6,6 @@ namespace Selenium.WebDriver.Extensions
     using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using OpenQA.Selenium;
-    using OpenQA.Selenium.Internal;
     using Selenium.WebDriver.Extensions.Parsers;
     using static System.String;
     using static JavaScriptSnippets;
@@ -60,12 +59,8 @@ namespace Selenium.WebDriver.Extensions
         private IWebElement FindElementBySelector(ISearchContext searchContext)
         {
             var results = FindElementsBySelector(searchContext);
-            if (results.Count > 0)
-            {
-                return results.First();
-            }
-
-            throw new NoSuchElementException($"No element found for selector: {RawSelector}");
+            return results.FirstOrDefault()
+                ?? throw new NoSuchElementException($"No element found for selector: {RawSelector}");
         }
 
         private ReadOnlyCollection<IWebElement> FindElementsBySelector(ISearchContext searchContext)
@@ -85,7 +80,7 @@ namespace Selenium.WebDriver.Extensions
                 return driver;
             }
 
-            if (!(searchContext is IWebElement) || searchContext is not IWrapsDriver driverWrapper)
+            if (searchContext is not IWebElement || searchContext is not IWrapsDriver driverWrapper)
             {
                 throw new NotSupportedException("Context is not a valid driver");
             }

@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFrameworks>net5.0</TargetFrameworks>
     <DebugType>full</DebugType>
-    <CodeAnalysisRuleSet>..\..\.sonarlint\selenium.webdriver.extensionscsharp.ruleset</CodeAnalysisRuleSet>
+    <CodeAnalysisRuleSet>..\..\.sonarlint\selenium.webdriver.extensionsCSharp.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
     <SonarQubeTestProject>false</SonarQubeTestProject>
   </PropertyGroup>
@@ -17,7 +17,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.Edge.SeleniumTools" Version="3.141.2" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
     <PackageReference Include="Selenium.WebDriver.ChromeDriver" Version="94.0.4606.6100" />
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.30.0" />
@@ -28,7 +27,6 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="System.ComponentModel.TypeConverter" Version="4.3.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.3">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
