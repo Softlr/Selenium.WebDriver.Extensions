@@ -98,9 +98,7 @@ namespace Selenium.WebDriver.Extensions
             NotNull(() => driver).LoadExternalLibrary(
                 SizzleSelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
-        private static bool CheckSelectorPrerequisites(
-            this IWebDriver driver,
-            ISelector selector) =>
+        private static bool CheckSelectorPrerequisites(this IWebDriver driver, ISelector selector) =>
             driver.ExecuteScript<bool?>($"return {selector.CheckScript};").Value;
 
         private static void LoadExternalLibrary(this IWebDriver driver, ISelector selector, Uri url, TimeSpan timeout)

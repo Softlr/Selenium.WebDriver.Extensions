@@ -10,13 +10,7 @@ namespace Selenium.WebDriver.Extensions
             where TType : class
         {
             var paramName = ((MemberExpression)memberExpression.Body).Member.Name;
-            var value = memberExpression.Compile().Invoke();
-            if (value == null)
-            {
-                throw new ArgumentNullException(paramName);
-            }
-
-            return value;
+            return memberExpression.Compile().Invoke() ?? throw new ArgumentNullException(paramName);
         }
 
         public static string NullOrNotEmpty(Expression<Func<string>> memberExpression)
