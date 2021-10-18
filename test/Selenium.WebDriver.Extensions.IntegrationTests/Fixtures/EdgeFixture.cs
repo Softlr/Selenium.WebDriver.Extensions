@@ -9,7 +9,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
     {
         public EdgeFixture()
         {
-            var options = new EdgeOptions { UseChromium = true };
+            var options = new EdgeOptions();
             options.AddArgument("headless");
             options.AddArgument("disable-gpu");
             Browser = new EdgeDriver(Path.GetDirectoryName(typeof(EdgeFixture).Assembly.Location), options);
