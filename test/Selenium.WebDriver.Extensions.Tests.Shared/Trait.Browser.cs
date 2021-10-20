@@ -11,5 +11,6 @@ namespace Selenium.WebDriver.Extensions.Tests.Shared
         public const string EDGE = "Edge";
         public const string FIREFOX = "Firefox";
         public const string INTERNET_EXPLORER = "InternetExplorer";
+        public const string OPERA = "Opera";
     }
 }

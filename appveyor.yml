@@ -14,6 +14,7 @@ image: Visual Studio 2019
 install:
   - choco install googlechrome -y --ignore-checksums
   - choco install codecov -y
+  - choco install opera
 
 nuget:
   disable_publish_on_pr: true
@@ -37,6 +38,7 @@ after_build:
 
 test_script:
   - dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
+  - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Opera
   - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Edge
   - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=Chrome
   - dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --no-build --filter Browser=InternetExplorer
