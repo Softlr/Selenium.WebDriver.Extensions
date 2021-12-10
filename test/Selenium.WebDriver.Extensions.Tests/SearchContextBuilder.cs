@@ -10,17 +10,17 @@ namespace Selenium.WebDriver.Extensions.Tests
     {
         private ISearchContext _searchContext;
 
-        public SearchContextBuilder() => _searchContext = For<ISearchContext, IWrapsDriver>();
+        internal SearchContextBuilder() => _searchContext = For<ISearchContext, IWrapsDriver>();
 
-        public SearchContextBuilder AsWebElement()
+        internal SearchContextBuilder AsWebElement()
         {
             _searchContext = For<ISearchContext, IWrapsDriver, IWebElement>();
             return this;
         }
 
-        public ISearchContext Build() => _searchContext;
+        internal ISearchContext Build() => _searchContext;
 
-        public SearchContextBuilder WithWrappedDriver(IWebDriver driver)
+        internal SearchContextBuilder WithWrappedDriver(IWebDriver driver)
         {
             ((IWrapsDriver)_searchContext).WrappedDriver.Returns(driver);
             return this;
