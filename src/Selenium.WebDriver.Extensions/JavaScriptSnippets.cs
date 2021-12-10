@@ -4,7 +4,7 @@ namespace Selenium.WebDriver.Extensions
 
     internal static class JavaScriptSnippets
     {
-        public const string FindDomPathScript =
+        internal const string FindDomPathScript =
             @"return (function(element) {
                 'use strict';
                 var stack = [], siblingsCount, siblingIndex, i, sibling;
@@ -33,13 +33,13 @@ namespace Selenium.WebDriver.Extensions
                 return stack.join(' > ');
             })(arguments[0]);";
 
-        public static string CheckScriptCode(string variable) =>
+        internal static string CheckScriptCode(string variable) =>
             $@"(function(value) {{
                 'use strict';
                 return typeof value === 'function';
             }})({variable})";
 
-        public static string LoadScriptCode(Uri url) =>
+        internal static string LoadScriptCode(Uri url) =>
             $@"(function(source) {{
                 'use strict';
                 var script = document.createElement('script');

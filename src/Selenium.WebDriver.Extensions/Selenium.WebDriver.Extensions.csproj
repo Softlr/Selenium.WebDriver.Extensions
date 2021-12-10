@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45;net46;net47;net48;netstandard2.0;netstandard2.1;net5.0</TargetFrameworks>
+    <TargetFrameworks>net45;net46;net47;net48;netstandard2.0;netstandard2.1;net5.0;net6.0</TargetFrameworks>
     <DebugType>full</DebugType>
     <DebugSymbols>True</DebugSymbols>
     <CodeAnalysisRuleSet>..\..\.sonarlint\selenium.webdriver.extensionsCSharp.ruleset</CodeAnalysisRuleSet>
@@ -16,21 +16,21 @@
     <AdditionalFiles Include="..\..\.sonarlint\selenium.webdriver.extensions\CSharp\SonarLint.xml" Link="SonarLint.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Selenium.Support" Version="4.0.0" />
-    <PackageReference Include="Softlr.Suppress" Version="1.7.1">
+    <PackageReference Include="Selenium.Support" Version="4.1.0" />
+    <PackageReference Include="Softlr.Suppress" Version="1.9.1">
         <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.30.0.37606">
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.33.0.40503">
         <PrivateAssets>all</PrivateAssets>
-        <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+        <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
   </ItemGroup>
 </Project>
