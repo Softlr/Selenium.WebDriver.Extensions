@@ -22,7 +22,7 @@
     <PackageReference Include="Selenium.WebDriver.GeckoDriver.Win64" Version="0.30.0.1" />
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="4.0.0" />
     <PackageReference Include="Selenium.WebDriver.MicrosoftWebDriver" Version="10.0.17134" />
-    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="96.0.1054.26" Condition="'$(OS)' == 'Windows_NT'" />
+    <PackageReference Include="Selenium.WebDriver.MSEdgeDriver" Version="95.0.1020.30" Condition="'$(OS)' == 'Windows_NT'" />
     <PackageReference Include="SonarAnalyzer.CSharp" Version="8.33.0.40503">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
