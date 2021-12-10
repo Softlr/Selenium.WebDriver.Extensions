@@ -6,14 +6,14 @@ namespace Selenium.WebDriver.Extensions
 
     internal static class Validate
     {
-        public static TType NotNull<TType>(Expression<Func<TType>> memberExpression)
+        internal static TType NotNull<TType>(Expression<Func<TType>> memberExpression)
             where TType : class
         {
             var paramName = ((MemberExpression)memberExpression.Body).Member.Name;
             return memberExpression.Compile().Invoke() ?? throw new ArgumentNullException(paramName);
         }
 
-        public static string NullOrNotEmpty(Expression<Func<string>> memberExpression)
+        internal static string NullOrNotEmpty(Expression<Func<string>> memberExpression)
         {
             var paramName = ((MemberExpression)memberExpression.Body).Member.Name;
             var value = memberExpression.Compile().Invoke();
@@ -22,7 +22,7 @@ namespace Selenium.WebDriver.Extensions
                 : throw new ArgumentException("Argument must be null or not-empty", paramName);
         }
 
-        public static string Required(Expression<Func<string>> memberExpression)
+        internal static string Required(Expression<Func<string>> memberExpression)
         {
             var paramName = ((MemberExpression)memberExpression.Body).Member.Name;
             var value = memberExpression.Compile().Invoke();
@@ -34,7 +34,7 @@ namespace Selenium.WebDriver.Extensions
             return value;
         }
 
-        public static string Version(Expression<Func<string>> memberExpression)
+        internal static string Version(Expression<Func<string>> memberExpression)
         {
             var paramName = ((MemberExpression)memberExpression.Body).Member.Name;
             var value = memberExpression.Compile().Invoke();
@@ -46,7 +46,7 @@ namespace Selenium.WebDriver.Extensions
             return value;
         }
 
-        public static string VersionOrLatest(Expression<Func<string>> memberExpression)
+        internal static string VersionOrLatest(Expression<Func<string>> memberExpression)
         {
             var paramName = ((MemberExpression)memberExpression.Body).Member.Name;
             var value = memberExpression.Compile().Invoke();
