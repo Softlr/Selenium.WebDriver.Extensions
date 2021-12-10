@@ -9,7 +9,7 @@ skip_commits:
   message: /\[(skip ci|ci skip)\]/
 
 version: 4.1.0.{build}
-image: Visual Studio 2019
+image: Visual Studio 2022
   
 install:
   - choco install googlechrome -y --ignore-checksums
