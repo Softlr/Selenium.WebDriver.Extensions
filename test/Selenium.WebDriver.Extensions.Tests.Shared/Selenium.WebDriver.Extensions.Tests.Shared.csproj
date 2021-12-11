@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net6.0</TargetFrameworks>
     <CodeAnalysisRuleSet>..\..\.sonarlint\selenium.webdriver.extensionsCSharp.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
     <IsPackable>false</IsPackable>
@@ -10,12 +10,12 @@
     <AdditionalFiles Include="..\..\.sonarlint\selenium.webdriver.extensions\CSharp\SonarLint.xml" Link="SonarLint.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="5.0.3">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="6.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Softlr.Suppress" Version="1.7.1" />
-    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.30.0.37606">
+    <PackageReference Include="Softlr.Suppress" Version="1.9.1" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.33.0.40503">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

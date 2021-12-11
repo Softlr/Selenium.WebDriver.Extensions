@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
     using OpenQA.Selenium;
     using static Softlr.Suppress;
 
+    [SuppressMessage(SONARQUBE, S3059)]
     internal class WebElementCollectionParser : ParserBase
     {
         public WebElementCollectionParser()

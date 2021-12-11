@@ -17,11 +17,11 @@ namespace Selenium.WebDriver.Extensions.Tests
         private readonly IWebDriver _driver;
         private readonly IFixture _fixture = new Fixture().Customize(new AutoNSubstituteCustomization());
 
-        public WebDriverBuilder() => _driver = For<IWebDriver, IJavaScriptExecutor>();
+        internal WebDriverBuilder() => _driver = For<IWebDriver, IJavaScriptExecutor>();
 
-        public IWebDriver Build() => _driver;
+        internal IWebDriver Build() => _driver;
 
-        public WebDriverBuilder WithElementLocatedByJQuery(string selector)
+        internal WebDriverBuilder WithElementLocatedByJQuery(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains($"jQuery('{selector}')")), Any<object[]>())
@@ -29,7 +29,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithElementLocatedBySizzle(string selector)
+        internal WebDriverBuilder WithElementLocatedBySizzle(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains($"Sizzle('{selector}')")), Any<object[]>())
@@ -37,7 +37,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithElementsLocatedByJQuery(string selector)
+        internal WebDriverBuilder WithElementsLocatedByJQuery(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains($"jQuery('{selector}')")), Any<object[]>())
@@ -45,7 +45,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithElementsLocatedBySizzle(string selector)
+        internal WebDriverBuilder WithElementsLocatedBySizzle(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains($"Sizzle('{selector}')")), Any<object[]>())
@@ -53,14 +53,14 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithJQueryLoaded()
+        internal WebDriverBuilder WithJQueryLoaded()
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains("window.jQuery")), Any<object[]>()).Returns(true);
             return this;
         }
 
-        public WebDriverBuilder WithNoElementLocatedByJQuery(string selector)
+        internal WebDriverBuilder WithNoElementLocatedByJQuery(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains($"jQuery('{selector}')")), Any<object[]>())
@@ -68,7 +68,7 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithNoElementLocatedBySizzle(string selector)
+        internal WebDriverBuilder WithNoElementLocatedBySizzle(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains($"Sizzle('{selector}')")), Any<object[]>())
@@ -76,13 +76,13 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithNoExternalLibraryLoaded()
+        internal WebDriverBuilder WithNoExternalLibraryLoaded()
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript(Any<string>()).Returns(false, null, true);
             return this;
         }
 
-        public WebDriverBuilder WithPathToElement(string selector)
+        internal WebDriverBuilder WithPathToElement(string selector)
         {
             ((IJavaScriptExecutor)_driver)
                 .ExecuteScript(Is<string>(s => s.Contains("function(element)")), Any<object[]>())
@@ -90,14 +90,14 @@ namespace Selenium.WebDriver.Extensions.Tests
             return this;
         }
 
-        public WebDriverBuilder WithSizzleLoaded()
+        internal WebDriverBuilder WithSizzleLoaded()
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript(Is<string>(s => s.Contains("window.Sizzle")), Any<object[]>())
                 .Returns(true);
             return this;
         }
 
-        public WebDriverBuilder WithTestMethodDefined(string methodName)
+        internal WebDriverBuilder WithTestMethodDefined(string methodName)
         {
             ((IJavaScriptExecutor)_driver).ExecuteScript($"{methodName}();").Returns("foo");
             return this;

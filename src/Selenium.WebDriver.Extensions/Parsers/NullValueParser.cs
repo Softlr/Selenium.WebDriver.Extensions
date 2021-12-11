@@ -3,6 +3,7 @@ namespace Selenium.WebDriver.Extensions.Parsers
     using System.Diagnostics.CodeAnalysis;
     using static Softlr.Suppress;
 
+    [SuppressMessage(SONARQUBE, S3059)]
     internal class NullValueParser : ParserBase
     {
         public NullValueParser()
