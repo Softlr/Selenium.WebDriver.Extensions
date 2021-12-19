@@ -1,7 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>net6.0</TargetFrameworks>
-    <DebugType>full</DebugType>
     <CodeAnalysisRuleSet>..\..\.sonarlint\selenium.webdriver.extensionsCSharp.ruleset</CodeAnalysisRuleSet>
     <LangVersion>latest</LangVersion>
     <SonarQubeTestProject>false</SonarQubeTestProject>

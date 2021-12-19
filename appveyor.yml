@@ -8,7 +8,7 @@ skip_branch_with_pr: true
 skip_commits:
   message: /\[(skip ci|ci skip)\]/
 
-version: 4.1.0.{build}
+version: 4.1.1.{build}
 image: Visual Studio 2022
   
 install:
@@ -33,7 +33,7 @@ build_script:
   - dotnet build -c Release
 
 after_build:
-  - ps: dotnet pack -c Release --no-build -o $env:APPVEYOR_BUILD_FOLDER -p:Version=4.1.0 -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
+  - ps: dotnet pack -c Release --no-build -o $env:APPVEYOR_BUILD_FOLDER -p:Version=4.1.1 -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg
 
 test_script:
   - dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --no-build /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=../../coverage.xml
@@ -56,7 +56,7 @@ deploy:
   - provider: GitHub
     on:
       branch: master
-    release: 4.1.0
+    release: 4.1.1
     artifact: /.*\.nupkg/
     auth_token:
       secure: 03TOIdkL4AV7WgYpsFpMzzamDxMjvs4qtox1v+DBL5jqG3vZTht65qHSWMwNPIq8
