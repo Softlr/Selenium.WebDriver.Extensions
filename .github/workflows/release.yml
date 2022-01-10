@@ -30,7 +30,7 @@ jobs:
       run: dotnet build -c Release -p:Version=${VERSION}
     
     - name: Test
-      run: dotnet test -c Release -p:Version=${VERSION}
+      run: dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release -p:Version=${VERSION}
     
     - name: Pack
       run: dotnet pack -c Release -p:Version=${VERSION} -p:IncludeSymbols=true -p:SymbolPackageFormat=snupkg --no-build -o .
