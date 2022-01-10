@@ -23,7 +23,7 @@ jobs:
       run: dotnet build -c Release
       
     - name: Test
-      run: dotnet test -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
+      run: dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release -p:CollectCoverage=true -p:CoverletOutputFormat=opencover
       
     - name: Codecov
       uses: codecov/codecov-action@v2
