@@ -1,5 +1,4 @@
 ![.NET](https://github.com/Softlr/Selenium.WebDriver.Extensions/actions/workflows/dotnet.yml/badge.svg)
-![SonarCloud](https://github.com/Softlr/Selenium.WebDriver.Extensions/actions/workflows/sonarcloud.yml/badge.svg)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=selenium.webdriver.extensions&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=selenium.webdriver.extensions)
 
 # Description
