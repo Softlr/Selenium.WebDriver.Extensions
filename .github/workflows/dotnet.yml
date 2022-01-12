@@ -87,7 +87,7 @@ jobs:
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
   integration-tests:
-    name: integration-tests-{{ maxtrix.browser }}
+    name: integration-tests-${{ maxtrix.browser }}
     runs-on: windows-latest
     strategy:
       matrix:
@@ -106,4 +106,4 @@ jobs:
       run: dotnet build -c Release
       
     - name: Test
-      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser={{ matrix.browser }}
+      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=${{ matrix.browser }}
