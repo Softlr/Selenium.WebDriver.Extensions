@@ -1,5 +1,6 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
+    using System;
     using System.Diagnostics.CodeAnalysis;
     using OpenQA.Selenium.Firefox;
 
@@ -10,7 +11,8 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         {
             var options = new FirefoxOptions();
             options.AddArguments("--headless");
-            Browser = new FirefoxDriver(options);
+            Browser = new FirefoxDriver(
+                FirefoxDriverService.CreateDefaultService(), options, TimeSpan.FromMinutes(3));
         }
     }
 }
