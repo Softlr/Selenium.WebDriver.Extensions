@@ -7,8 +7,12 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  build-and-test:
+    name: build-and-test-${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     
     steps:
     - name: Checkout
@@ -82,13 +86,17 @@ jobs:
         dotnet test test/Selenium.WebDriver.Extensions.Tests -c Release --logger trx -o ./TestResults/ -p:CollectCoverage=true -p:CoverletOutputFormat="json%2copencover" -p:CoverletOutput=./TestResults/ -p:MergeWith=./TestResults/coverage.json
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
-  chrome-tests:
+  integration-tests:
+    name: integration-tests-${{ matrix.browser }}
     runs-on: windows-latest
+    strategy:
+      matrix:
+        browser: [ Chrome, Firefox, Edge, InternetExplorer ]
     
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-      
+    
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
@@ -98,58 +106,4 @@ jobs:
       run: dotnet build -c Release
       
     - name: Test
-      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=Chrome
-
-  firefox-tests:
-    runs-on: windows-latest
-    
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
-      
-    - name: Build
-      run: dotnet build -c Release
-      
-    - name: Test
-      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=Firefox
-
-  edge-tests:
-    runs-on: windows-latest
-    
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
-      
-    - name: Build
-      run: dotnet build -c Release
-      
-    - name: Test
-      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=Edge
-
-  ie-tests:
-    runs-on: windows-latest
-    
-    steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 6.0.x
-      
-    - name: Build
-      run: dotnet build -c Release
-      
-    - name: Test
-      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=InternetExplorer
+      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=${{ matrix.browser }}
