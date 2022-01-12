@@ -87,7 +87,7 @@ jobs:
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
   integration-tests:
-    name: integration-tests-${{ maxtrix.browser }}
+    name: integration-tests-${{ matrix.browser }}
     runs-on: windows-latest
     strategy:
       matrix:
