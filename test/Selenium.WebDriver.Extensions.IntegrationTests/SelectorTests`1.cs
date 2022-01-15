@@ -1,22 +1,10 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using FluentAssertions;
-    using OpenQA.Selenium;
-    using OpenQA.Selenium.Support.UI;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using Xunit;
-    using static By;
-    using static Softlr.Suppress;
-    using static Tests.Shared.Trait;
-    using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
-
     [Trait(CATEGORY, INTEGRATION)]
     [ExcludeFromCodeCoverage]
     [SuppressMessage(SONARQUBE, S109)]
     public class SelectorTests<TSelector> : TestsBase
-        where TSelector : By
+        where TSelector : SeleniumBy
     {
         private readonly Func<string, TSelector> _selectorAccessor;
 

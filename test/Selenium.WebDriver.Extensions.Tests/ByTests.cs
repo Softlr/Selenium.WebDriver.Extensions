@@ -1,13 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System.Diagnostics.CodeAnalysis;
-    using AutoFixture;
-    using FluentAssertions;
-    using Xunit;
-    using static By;
-    using static Shared.Trait;
-    using SeleniumBy = OpenQA.Selenium.By;
-
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     public class ByTests

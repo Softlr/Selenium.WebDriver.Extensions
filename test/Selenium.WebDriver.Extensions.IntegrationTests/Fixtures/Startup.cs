@@ -1,13 +1,5 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using Microsoft.AspNetCore.Builder;
-    using Microsoft.AspNetCore.Http;
-    using static System.String;
-    using static Softlr.Suppress;
-    using static TestsBase;
-
     [ExcludeFromCodeCoverage]
     public class Startup
     {
@@ -37,7 +29,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
                 <h1 class=""main"">H1 Header</h1>
                 <div class=""main"" id=""id1"">Selector</div>
                 <div class=""main"">Selenium WebDriver Extensions</div>
-                {(uri == null ? Empty : $"<script src=\"{uri.AbsoluteUri}\" type=\"text/javascript\"></script>")}
+                {(uri == null ? string.Empty : $"<script src=\"{uri.AbsoluteUri}\" type=\"text/javascript\"></script>")}
             </body>
             </html>";
     }
