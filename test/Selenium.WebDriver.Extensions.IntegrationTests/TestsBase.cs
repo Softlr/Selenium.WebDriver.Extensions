@@ -1,11 +1,5 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using OpenQA.Selenium;
-    using Selenium.WebDriver.Extensions.IntegrationTests.Fixtures;
-    using static Softlr.Suppress;
-
     [SuppressMessage(SONARQUBE, S2339)]
     [ExcludeFromCodeCoverage]
     public class TestsBase

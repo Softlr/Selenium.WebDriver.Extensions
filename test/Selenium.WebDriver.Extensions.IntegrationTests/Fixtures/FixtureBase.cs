@@ -1,12 +1,5 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Linq;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.AspNetCore.Hosting.Server.Features;
-    using OpenQA.Selenium;
-
     [ExcludeFromCodeCoverage]
     public class FixtureBase : IDisposable
     {

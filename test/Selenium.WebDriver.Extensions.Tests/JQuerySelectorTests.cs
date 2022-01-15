@@ -1,17 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using AutoFixture;
-    using AutoFixture.Xunit2;
-    using FluentAssertions;
-    using OpenQA.Selenium;
-    using Xunit;
-    using static System.String;
-    using static By;
-    using static Shared.Trait;
-    using static Softlr.Suppress;
-
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     [SuppressMessage(SONARQUBE, S109)]
@@ -23,24 +11,24 @@ namespace Selenium.WebDriver.Extensions.Tests
         public static TheoryData<Action> SelectorArgumentExceptionTests =>
             new()
             {
-                () => JQuerySelector(_fixture.Create<string>()).AddBack(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Children(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Next(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).NextAll(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).NextUntil(Empty, _fixture.Create<string>()),
-                () => JQuerySelector(_fixture.Create<string>()).NextUntil(_fixture.Create<string>(), Empty),
-                () => JQuerySelector(_fixture.Create<string>()).NextUntil(filter: Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Prev(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).PrevAll(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(Empty, _fixture.Create<string>()),
-                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(_fixture.Create<string>(), Empty),
-                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(filter: Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Parent(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Parents(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(Empty, _fixture.Create<string>()),
-                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(_fixture.Create<string>(), Empty),
-                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(filter: Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Siblings(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).AddBack(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Children(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Next(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).NextAll(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).NextUntil(string.Empty, _fixture.Create<string>()),
+                () => JQuerySelector(_fixture.Create<string>()).NextUntil(_fixture.Create<string>(), string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).NextUntil(filter: string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Prev(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).PrevAll(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(string.Empty, _fixture.Create<string>()),
+                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(_fixture.Create<string>(), string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(filter: string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Parent(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Parents(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(string.Empty, _fixture.Create<string>()),
+                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(_fixture.Create<string>(), string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(filter: string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Siblings(string.Empty),
             };
 
         [SuppressMessage(FXCOP, CA1806)]
@@ -48,26 +36,26 @@ namespace Selenium.WebDriver.Extensions.Tests
             new()
             {
                 () => JQuerySelector(_fixture.Create<string>()).Add(_fixture.Create<string>(), null),
-                () => JQuerySelector(_fixture.Create<string>()).Add(Empty),
-                () => JQuerySelector(_fixture.Create<string>()).Add(Empty, JQuerySelector(_fixture.Create<string>())),
+                () => JQuerySelector(_fixture.Create<string>()).Add(string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Add(string.Empty, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Add(null),
                 () => JQuerySelector(_fixture.Create<string>()).Add(null, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Closest(_fixture.Create<string>(), null),
-                () => JQuerySelector(_fixture.Create<string>()).Closest(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Closest(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>())
-                    .Closest(Empty, JQuerySelector(_fixture.Create<string>())),
+                    .Closest(string.Empty, JQuerySelector(_fixture.Create<string>())),
                 () => JQuerySelector(_fixture.Create<string>()).Closest(null),
                 () => JQuerySelector(_fixture.Create<string>())
                     .Closest(null, JQuerySelector(_fixture.Create<string>())),
-                () => JQuerySelector(_fixture.Create<string>()).Filter(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Filter(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Filter(null),
-                () => JQuerySelector(_fixture.Create<string>()).Find(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Find(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Find(null),
-                () => JQuerySelector(_fixture.Create<string>()).Has(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Has(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Has(null),
-                () => JQuerySelector(_fixture.Create<string>()).Is(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Is(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Is(null),
-                () => JQuerySelector(_fixture.Create<string>()).Not(Empty),
+                () => JQuerySelector(_fixture.Create<string>()).Not(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Not(null),
                 () => new JQuerySelector(_fixture.Create<string>(), null, _fixture.Create<string>(), null)
             };
@@ -237,8 +225,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void Creating_selector_with_empty_value_is_invalid() =>
-            FluentActions.Invoking(() => JQuerySelector(Empty)).Should().Throw<ArgumentException>().And.ParamName
-                .Should().Be("selector");
+            FluentActions.Invoking(() => JQuerySelector(string.Empty)).Should().Throw<ArgumentException>().And
+                .ParamName.Should().Be("selector");
 
         [Fact]
         public void Creating_selector_with_null_value_is_invalid() =>
@@ -253,7 +241,7 @@ namespace Selenium.WebDriver.Extensions.Tests
         [Theory]
         [AutoData]
         public void Empty_variable_value_throws_exception(string rawSelector) =>
-            FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: Empty)).Should()
+            FluentActions.Invoking(() => JQuerySelector(rawSelector, variable: string.Empty)).Should()
                 .Throw<ArgumentException>().And.ParamName.Should().Be("variable");
 
         [Theory]

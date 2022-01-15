@@ -1,9 +1,5 @@
 namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
 {
-    using System.Diagnostics.CodeAnalysis;
-    using System.IO;
-    using OpenQA.Selenium.Edge;
-
     [ExcludeFromCodeCoverage]
     public class EdgeFixture : FixtureBase
     {

@@ -1,16 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using AutoFixture.Xunit2;
-    using FluentAssertions;
-    using OpenQA.Selenium;
-    using Xunit;
-    using static By;
-    using static Shared.Trait;
-    using static Softlr.Suppress;
-    using static System.String;
-
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     [SuppressMessage(SONARQUBE, S109)]
@@ -60,8 +49,8 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Fact]
         public void Creating_selector_with_empty_value_is_invalid() =>
-            FluentActions.Invoking(() => SizzleSelector(Empty)).Should().Throw<ArgumentException>().And.ParamName
-                .Should().Be("selector");
+            FluentActions.Invoking(() => SizzleSelector(string.Empty)).Should().Throw<ArgumentException>().And
+                .ParamName.Should().Be("selector");
 
         [Fact]
         public void Creating_selector_with_null_value_is_invalid() =>

@@ -1,18 +1,5 @@
 namespace Selenium.WebDriver.Extensions.Tests
 {
-    using System;
-    using System.Diagnostics.CodeAnalysis;
-    using AutoFixture;
-    using AutoFixture.Xunit2;
-    using FluentAssertions;
-    using NSubstitute;
-    using OpenQA.Selenium;
-    using Xunit;
-    using static System.String;
-    using static NSubstitute.Arg;
-    using static Shared.Trait;
-    using static Softlr.Suppress;
-
     [Trait(CATEGORY, UNIT)]
     [ExcludeFromCodeCoverage]
     [SuppressMessage(SONARQUBE, S109)]
@@ -32,12 +19,12 @@ namespace Selenium.WebDriver.Extensions.Tests
                 // ExecuteScript
                 { () => WebDriverExtensions.ExecuteScript(null, _fixture.Create<string>()), DriverParam },
                 { () => _webDriver.ExecuteScript(null), ScriptParam },
-                { () => _webDriver.ExecuteScript(Empty), ScriptParam },
+                { () => _webDriver.ExecuteScript(string.Empty), ScriptParam },
 
                 // LoadJQuery
                 { () => WebDriverExtensions.LoadJQuery(null), DriverParam },
                 { () => _webDriver.LoadJQuery((string)null), VersionParam },
-                { () => _webDriver.LoadJQuery(Empty), VersionParam },
+                { () => _webDriver.LoadJQuery(string.Empty), VersionParam },
                 { () => _webDriver.LoadJQuery(_fixture.Create<string>()), VersionParam },
                 { () => WebDriverExtensions.LoadJQuery(null, _fixture.Create<Uri>()), DriverParam },
                 { () => _webDriver.LoadJQuery((Uri)null), UriParam },
@@ -45,7 +32,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                 // LoadSizzle
                 { () => WebDriverExtensions.LoadSizzle(null), DriverParam },
                 { () => _webDriver.LoadSizzle((string)null), VersionParam },
-                { () => _webDriver.LoadSizzle(Empty), VersionParam },
+                { () => _webDriver.LoadSizzle(string.Empty), VersionParam },
                 { () => _webDriver.LoadSizzle(_fixture.Create<string>()), VersionParam },
                 { () => WebDriverExtensions.LoadSizzle(null, _fixture.Create<Uri>()), DriverParam },
                 { () => _webDriver.LoadSizzle((Uri)null), UriParam }
@@ -88,7 +75,7 @@ namespace Selenium.WebDriver.Extensions.Tests
 
             action.Invoke(driver, uri, timeSpan);
 
-            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Any<string>());
+            ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
         }
     }
 }
