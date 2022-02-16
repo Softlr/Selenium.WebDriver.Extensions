@@ -91,6 +91,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                         new JQuerySelector(tag, new JQuerySelector(parentTag), variable, chain),
                         $"{variable}('{tag}', jQuery('{parentTag}')){chain}"
                     },
+                    { new JQuerySelector(tag, variable), $"{variable}('{tag}'))" },
 
                     // escaping
                     { JQuerySelector($"[{attrName}=\"{attrValue}\"]"), $"jQuery('[{attrName}=\"{attrValue}\"]')" },
