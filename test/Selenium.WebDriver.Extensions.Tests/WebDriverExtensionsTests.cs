@@ -38,16 +38,18 @@ namespace Selenium.WebDriver.Extensions.Tests
                 { () => _webDriver.LoadSizzle((Uri)null), UriParam }
             };
 
-        public static TheoryData<Action<IWebDriver, Uri, TimeSpan?>, Uri, TimeSpan?> Loaders =>
+        public static TheoryData<Action<IWebDriver>> Loaders =>
             new()
             {
                 // LoadJQuery
-                { WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), null },
-                { WebDriverExtensions.LoadJQuery, _fixture.Create<Uri>(), _fixture.Create<TimeSpan>() },
+                { driver => driver.LoadJQuery(_fixture.Create<Uri>(), null) },
+                { driver => driver.LoadJQuery(_fixture.Create<Uri>(), _fixture.Create<TimeSpan>()) },
+                { driver => driver.LoadJQuery(_fixture.Create<TimeSpan>()) },
 
                 // LoadSizzle
-                { WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), null },
-                { WebDriverExtensions.LoadSizzle, _fixture.Create<Uri>(), _fixture.Create<TimeSpan>() }
+                { driver => driver.LoadSizzle(_fixture.Create<Uri>(), null) },
+                { driver => driver.LoadSizzle(_fixture.Create<Uri>(), _fixture.Create<TimeSpan>()) },
+                { driver => driver.LoadSizzle(_fixture.Create<TimeSpan>()) },
             };
 
         [Theory]
@@ -69,11 +71,11 @@ namespace Selenium.WebDriver.Extensions.Tests
 
         [Theory]
         [MemberData(nameof(Loaders))]
-        public void Loading_library_works(Action<IWebDriver, Uri, TimeSpan?> action, Uri uri, TimeSpan? timeSpan)
+        public void Loading_library_works(Action<IWebDriver> action)
         {
             var driver = new WebDriverBuilder().WithNoExternalLibraryLoaded().Build();
 
-            action.Invoke(driver, uri, timeSpan);
+            action.Invoke(driver);
 
             ((IJavaScriptExecutor)driver).Received(3).ExecuteScript(Arg.Any<string>());
         }
