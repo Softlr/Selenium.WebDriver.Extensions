@@ -84,6 +84,10 @@ namespace Selenium.WebDriver.Extensions.Tests
                     // constructor
                     { new JQuerySelector(tag), $"jQuery('{tag}')" },
                     {
+                        new JQuerySelector(tag, new JQuerySelector(parentTag)),
+                        $"jQuery('{tag}', jQuery('{parentTag}'))"
+                    },
+                    {
                         new JQuerySelector(tag, new JQuerySelector(parentTag), variable, chain),
                         $"{variable}('{tag}', jQuery('{parentTag}')){chain}"
                     },
