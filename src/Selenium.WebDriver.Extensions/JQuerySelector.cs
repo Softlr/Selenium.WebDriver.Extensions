@@ -23,7 +23,32 @@ namespace Selenium.WebDriver.Extensions
         /// constructor as it is resolved by reflection.
         /// </remarks>
         public JQuerySelector(string selector)
-            : this(selector, null)
+            : this(selector, null, "jQuery", string.Empty)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="JQuerySelector" /> class.</summary>
+        /// <param name="selector">A string containing a selector expression.</param>
+        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        public JQuerySelector(string selector, JQuerySelector context)
+            : this(selector, context, "jQuery", string.Empty)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="JQuerySelector" /> class.</summary>
+        /// <param name="selector">A string containing a selector expression.</param>
+        /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
+        /// <param name="variable">A variable that has been assigned to jQuery.</param>
+        public JQuerySelector(string selector, JQuerySelector context, string variable)
+            : this(selector, context, variable, string.Empty)
+        {
+        }
+
+        /// <summary>Initializes a new instance of the <see cref="JQuerySelector" /> class.</summary>
+        /// <param name="selector">A string containing a selector expression.</param>
+        /// <param name="variable">A variable that has been assigned to jQuery.</param>
+        public JQuerySelector(string selector, string variable)
+            : this(selector, null, variable, string.Empty)
         {
         }
 
@@ -32,7 +57,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         /// <param name="chain">The jQuery method chain.</param>
-        public JQuerySelector(string selector, JQuerySelector context, string variable = "jQuery", string chain = "")
+        public JQuerySelector(string selector, JQuerySelector context, string variable, string chain)
             : base(selector, context)
         {
             _chain = NotNull(() => chain);
@@ -77,11 +102,17 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Add the previous set of elements on the stack to the current set, optionally filtered by a selector.
         /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector AddBack() => AddBack(null);
+
+        /// <summary>
+        /// Add the previous set of elements on the stack to the current set, optionally filtered by a selector.
+        /// </summary>
         /// <param name="selector">
         /// A string containing a selector expression to match the current set of elements against.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector AddBack(string selector = null) => Chain("addBack", NullOrNotEmpty(() => selector));
+        public JQuerySelector AddBack(string selector) => Chain("addBack", NullOrNotEmpty(() => selector));
 
         /// <summary>Add the previous set of elements on the stack to the current set.</summary>
         /// <returns>The Selenium jQuery selector.</returns>
@@ -91,9 +122,15 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Get the children of each element in the set of matched elements, optionally filtered by a selector.
         /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Children() => Children(null);
+
+        /// <summary>
+        /// Get the children of each element in the set of matched elements, optionally filtered by a selector.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Children(string selector = null) => Chain("children", NullOrNotEmpty(() => selector));
+        public JQuerySelector Children(string selector) => Chain("children", NullOrNotEmpty(() => selector));
 
         /// <summary>
         /// For each element in the set, get the first element that matches the selector by testing the element itself
@@ -178,9 +215,23 @@ namespace Selenium.WebDriver.Extensions
         /// Get the immediately following sibling of each element in the set of matched elements. If a selector is
         /// provided, it retrieves the next sibling only if it matches that selector.
         /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Next() => Next(null);
+
+        /// <summary>
+        /// Get the immediately following sibling of each element in the set of matched elements. If a selector is
+        /// provided, it retrieves the next sibling only if it matches that selector.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Next(string selector = null) => Chain("next", NullOrNotEmpty(() => selector));
+        public JQuerySelector Next(string selector) => Chain("next", NullOrNotEmpty(() => selector));
+
+        /// <summary>
+        /// Get all following siblings of each element in the set of matched elements, optionally filtered by a
+        /// selector.
+        /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector NextAll() => NextAll(null);
 
         /// <summary>
         /// Get all following siblings of each element in the set of matched elements, optionally filtered by a
@@ -188,7 +239,24 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector NextAll(string selector = null) => Chain("nextAll", NullOrNotEmpty(() => selector));
+        public JQuerySelector NextAll(string selector) => Chain("nextAll", NullOrNotEmpty(() => selector));
+
+        /// <summary>
+        /// Get all following siblings of each element up to but not including the element matched by the selector,
+        /// DOM node, or jQuery object passed.
+        /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector NextUntil() => NextUntil(null, null);
+
+        /// <summary>
+        /// Get all following siblings of each element up to but not including the element matched by the selector,
+        /// DOM node, or jQuery object passed.
+        /// </summary>
+        /// <param name="selector">
+        /// A string containing a selector expression to indicate where to stop matching following sibling elements.
+        /// </param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector NextUntil(string selector) => NextUntil(selector, null);
 
         /// <summary>
         /// Get all following siblings of each element up to but not including the element matched by the selector,
@@ -199,7 +267,7 @@ namespace Selenium.WebDriver.Extensions
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector NextUntil(string selector = null, string filter = null)
+        public JQuerySelector NextUntil(string selector, string filter)
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
@@ -227,9 +295,22 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
         /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Parent() => Parent(null);
+
+        /// <summary>
+        /// Get the parent of each element in the current set of matched elements, optionally filtered by a selector.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Parent(string selector = null) => Chain("parent", NullOrNotEmpty(() => selector));
+        public JQuerySelector Parent(string selector) => Chain("parent", NullOrNotEmpty(() => selector));
+
+        /// <summary>
+        /// Get the ancestors of each element in the current set of matched elements, optionally filtered by a
+        /// selector.
+        /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Parents() => Parents(null);
 
         /// <summary>
         /// Get the ancestors of each element in the current set of matched elements, optionally filtered by a
@@ -237,7 +318,24 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Parents(string selector = null) => Chain("parents", NullOrNotEmpty(() => selector));
+        public JQuerySelector Parents(string selector) => Chain("parents", NullOrNotEmpty(() => selector));
+
+        /// <summary>
+        /// Get the ancestors of each element in the current set of matched elements, up to but not including the
+        /// element matched by the selector, DOM node, or jQuery object.
+        /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector ParentsUntil() => ParentsUntil(null, null);
+
+        /// <summary>
+        /// Get the ancestors of each element in the current set of matched elements, up to but not including the
+        /// element matched by the selector, DOM node, or jQuery object.
+        /// </summary>
+        /// <param name="selector">
+        /// A string containing a selector expression to indicate where to stop matching ancestor elements.
+        /// </param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector ParentsUntil(string selector) => ParentsUntil(selector, null);
 
         /// <summary>
         /// Get the ancestors of each element in the current set of matched elements, up to but not including the
@@ -248,7 +346,7 @@ namespace Selenium.WebDriver.Extensions
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector ParentsUntil(string selector = null, string filter = null)
+        public JQuerySelector ParentsUntil(string selector, string filter)
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
@@ -262,9 +360,23 @@ namespace Selenium.WebDriver.Extensions
         /// Get the immediately preceding sibling of each element in the set of matched elements, optionally filtered
         /// by a selector.
         /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Prev() => Prev(null);
+
+        /// <summary>
+        /// Get the immediately preceding sibling of each element in the set of matched elements, optionally filtered
+        /// by a selector.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Prev(string selector = null) => Chain("prev", NullOrNotEmpty(() => selector));
+        public JQuerySelector Prev(string selector) => Chain("prev", NullOrNotEmpty(() => selector));
+
+        /// <summary>
+        /// Get all preceding siblings of each element in the set of matched elements, optionally filtered by a
+        /// selector.
+        /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector PrevAll() => PrevAll(null);
 
         /// <summary>
         /// Get all preceding siblings of each element in the set of matched elements, optionally filtered by a
@@ -272,7 +384,24 @@ namespace Selenium.WebDriver.Extensions
         /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector PrevAll(string selector = null) => Chain("prevAll", NullOrNotEmpty(() => selector));
+        public JQuerySelector PrevAll(string selector) => Chain("prevAll", NullOrNotEmpty(() => selector));
+
+        /// <summary>
+        /// Get all preceding siblings of each element up to but not including the element matched by the selector,
+        /// DOM node, or jQuery object.
+        /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector PrevUntil() => PrevUntil(null, null);
+
+        /// <summary>
+        /// Get all preceding siblings of each element up to but not including the element matched by the selector,
+        /// DOM node, or jQuery object.
+        /// </summary>
+        /// <param name="selector">
+        /// A string containing a selector expression to indicate where to stop matching preceding sibling elements.
+        /// </param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector PrevUntil(string selector) => PrevUntil(selector, null);
 
         /// <summary>
         /// Get all preceding siblings of each element up to but not including the element matched by the selector,
@@ -283,7 +412,7 @@ namespace Selenium.WebDriver.Extensions
         /// </param>
         /// <param name="filter">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector PrevUntil(string selector = null, string filter = null)
+        public JQuerySelector PrevUntil(string selector, string filter)
         {
             var validatedSelector = NullOrNotEmpty(() => selector);
             var validatedFilter = NullOrNotEmpty(() => filter);
@@ -296,9 +425,23 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>
         /// Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
         /// </summary>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Siblings() => Siblings(null);
+
+        /// <summary>
+        /// Get the siblings of each element in the set of matched elements, optionally filtered by a selector.
+        /// </summary>
         /// <param name="selector">A string containing a selector expression to match elements against.</param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Siblings(string selector = null) => Chain("siblings", NullOrNotEmpty(() => selector));
+        public JQuerySelector Siblings(string selector) => Chain("siblings", NullOrNotEmpty(() => selector));
+
+        /// <summary>Reduce the set of matched elements to a subset specified by a range of indexes.</summary>
+        /// <param name="start">
+        /// An integer indicating the 0-based position at which the elements begin to be selected. If negative, it
+        /// indicates an offset from the end of the set.
+        /// </param>
+        /// <returns>The Selenium jQuery selector.</returns>
+        public JQuerySelector Slice(int start) => Slice(start, null);
 
         /// <summary>Reduce the set of matched elements to a subset specified by a range of indexes.</summary>
         /// <param name="start">
@@ -310,7 +453,7 @@ namespace Selenium.WebDriver.Extensions
         /// indicates an offset from the end of the set. If omitted, the range continues until the end of the set.
         /// </param>
         /// <returns>The Selenium jQuery selector.</returns>
-        public JQuerySelector Slice(int start, int? end = null) =>
+        public JQuerySelector Slice(int start, int? end) =>
             Chain("slice", end.HasValue ? $"{start}, {end}" : start.ToString(InvariantCulture), true);
 
         /// <inheritdoc />

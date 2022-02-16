@@ -39,6 +39,36 @@ namespace Selenium.WebDriver.Extensions
 
         /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadJQuery(this IWebDriver driver) => driver.LoadJQuery("3.5.1", null);
+
+        /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="version">
+        /// The version of jQuery to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://code.jquery.com/jquery" />.
+        /// </param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadJQuery(this IWebDriver driver, string version) => driver.LoadJQuery(version, null);
+
+        /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="timeout">The timeout value for the jQuery load.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadJQuery(this IWebDriver driver, TimeSpan timeout) =>
+            driver.LoadJQuery("3.5.1", timeout);
+
+        /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
         /// <param name="version">
         /// The version of jQuery to load if it's not already loaded on the tested page. It must be the full version
         /// number matching one of the versions at <see href="https://code.jquery.com/jquery" />.
@@ -48,11 +78,20 @@ namespace Selenium.WebDriver.Extensions
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadJQuery(this IWebDriver driver, string version = "3.5.1", TimeSpan? timeout = null)
+        public static void LoadJQuery(this IWebDriver driver, string version, TimeSpan? timeout)
         {
             var validatedVersion = VersionOrLatest(() => version);
             LoadJQuery(driver, new Uri($"https://code.jquery.com/jquery-{validatedVersion}.min.js"), timeout);
         }
+
+        /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="uri">The URI of jQuery to load if it's not already loaded on the tested page.</param>
+        /// <remarks>
+        /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadJQuery(this IWebDriver driver, Uri uri) => driver.LoadJQuery(uri, null);
 
         /// <summary>Checks if jQuery is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -62,9 +101,39 @@ namespace Selenium.WebDriver.Extensions
         /// If jQuery is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadJQuery(this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
+        public static void LoadJQuery(this IWebDriver driver, Uri uri, TimeSpan? timeout) =>
             NotNull(() => driver).LoadExternalLibrary(
                 JQuerySelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
+
+        /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver) => driver.LoadSizzle("2.0.0", null);
+
+        /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="version">
+        /// The version of Sizzle to load if it's not already loaded on the tested page. It must be the full version
+        /// number matching one of the versions at <see href="https://github.com/jquery/sizzle" />.
+        /// </param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver, string version) => driver.LoadSizzle(version, null);
+
+        /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="timeout">The timeout value for the Sizzle load.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver, TimeSpan timeout) =>
+            driver.LoadSizzle("2.0.0", timeout);
 
         /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
@@ -77,7 +146,7 @@ namespace Selenium.WebDriver.Extensions
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadSizzle(this IWebDriver driver, string version = "2.0.0", TimeSpan? timeout = null)
+        public static void LoadSizzle(this IWebDriver driver, string version, TimeSpan? timeout)
         {
             var validatedVersion = Version(() => version);
             LoadSizzle(
@@ -89,12 +158,21 @@ namespace Selenium.WebDriver.Extensions
         /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
         /// <param name="driver">The Selenium web driver.</param>
         /// <param name="uri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
+        /// <remarks>
+        /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
+        /// requested by invoking this method have different versions.
+        /// </remarks>
+        public static void LoadSizzle(this IWebDriver driver, Uri uri) => driver.LoadSizzle(uri, null);
+
+        /// <summary>Checks if Sizzle is loaded and loads it if needed.</summary>
+        /// <param name="driver">The Selenium web driver.</param>
+        /// <param name="uri">The URI of Sizzle to load if it's not already loaded on the tested page.</param>
         /// <param name="timeout">The timeout value for the Sizzle load.</param>
         /// <remarks>
         /// If Sizzle is already loaded on a page this method will do nothing, even if the loaded version and version
         /// requested by invoking this method have different versions.
         /// </remarks>
-        public static void LoadSizzle(this IWebDriver driver, Uri uri, TimeSpan? timeout = null) =>
+        public static void LoadSizzle(this IWebDriver driver, Uri uri, TimeSpan? timeout) =>
             NotNull(() => driver).LoadExternalLibrary(
                 SizzleSelector.Empty, NotNull(() => uri), timeout ?? _defaultTimeout);
 
