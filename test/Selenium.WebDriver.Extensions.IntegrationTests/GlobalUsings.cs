@@ -1,5 +1,3 @@
-#pragma warning disable S1128 // Unused "using" should be removed
-
 global using FluentAssertions;
 global using Microsoft.AspNetCore.Builder;
 global using Microsoft.AspNetCore.Hosting;
@@ -23,5 +21,3 @@ global using static Selenium.WebDriver.Extensions.Tests.Shared.Trait;
 global using static Softlr.Suppress;
 global using SeleniumBy = OpenQA.Selenium.By;
 global using ExpectedConditions = SeleniumExtras.WaitHelpers.ExpectedConditions;
-
-#pragma warning restore S1128 // Unused "using" should be removed
