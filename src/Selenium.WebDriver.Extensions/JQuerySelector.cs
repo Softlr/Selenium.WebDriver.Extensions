@@ -23,7 +23,7 @@ namespace Selenium.WebDriver.Extensions
         /// constructor as it is resolved by reflection.
         /// </remarks>
         public JQuerySelector(string selector)
-            : this(selector, null, "jQuery", "")
+            : this(selector, null, "jQuery", string.Empty)
         {
         }
 
@@ -31,7 +31,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         public JQuerySelector(string selector, JQuerySelector context)
-            : this(selector, context, "jQuery", "")
+            : this(selector, context, "jQuery", string.Empty)
         {
         }
 
@@ -40,7 +40,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="context">A DOM Element, Document, or jQuery to use as context.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         public JQuerySelector(string selector, JQuerySelector context, string variable)
-            : this(selector, context, variable, "")
+            : this(selector, context, variable, string.Empty)
         {
         }
 
@@ -48,7 +48,7 @@ namespace Selenium.WebDriver.Extensions
         /// <param name="selector">A string containing a selector expression.</param>
         /// <param name="variable">A variable that has been assigned to jQuery.</param>
         public JQuerySelector(string selector, string variable)
-            : this(selector, null, variable, "")
+            : this(selector, null, variable, string.Empty)
         {
         }
 
