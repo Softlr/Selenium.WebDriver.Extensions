@@ -17,17 +17,17 @@ namespace Selenium.WebDriver.Extensions.Tests
                 () => JQuerySelector(_fixture.Create<string>()).NextAll(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).NextUntil(string.Empty, _fixture.Create<string>()),
                 () => JQuerySelector(_fixture.Create<string>()).NextUntil(_fixture.Create<string>(), string.Empty),
-                () => JQuerySelector(_fixture.Create<string>()).NextUntil(filter: string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).NextUntil(null, string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Prev(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).PrevAll(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).PrevUntil(string.Empty, _fixture.Create<string>()),
                 () => JQuerySelector(_fixture.Create<string>()).PrevUntil(_fixture.Create<string>(), string.Empty),
-                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(filter: string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).PrevUntil(null, string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Parent(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Parents(string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(string.Empty, _fixture.Create<string>()),
                 () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(_fixture.Create<string>(), string.Empty),
-                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(filter: string.Empty),
+                () => JQuerySelector(_fixture.Create<string>()).ParentsUntil(null, string.Empty),
                 () => JQuerySelector(_fixture.Create<string>()).Siblings(string.Empty),
             };
 
@@ -131,7 +131,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).NextAll(), $"jQuery('{tag}').nextAll()" },
                     { JQuerySelector(tag).NextAll(selector), $"jQuery('{tag}').nextAll('{selector}')" },
                     { JQuerySelector(tag).NextUntil(), $"jQuery('{tag}').nextUntil()" },
-                    { JQuerySelector(tag).NextUntil(filter: filter), $"jQuery('{tag}').nextUntil('', '{filter}')" },
+                    { JQuerySelector(tag).NextUntil(null, filter), $"jQuery('{tag}').nextUntil('', '{filter}')" },
                     { JQuerySelector(tag).NextUntil(selector), $"jQuery('{tag}').nextUntil('{selector}')" },
                     {
                         JQuerySelector(tag).NextUntil(selector, filter),
@@ -146,7 +146,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).Parents(selector), $"jQuery('{tag}').parents('{selector}')" },
                     { JQuerySelector(tag).ParentsUntil(), $"jQuery('{tag}').parentsUntil()" },
                     {
-                        JQuerySelector(tag).ParentsUntil(filter: filter),
+                        JQuerySelector(tag).ParentsUntil(null, filter),
                         $"jQuery('{tag}').parentsUntil('', '{filter}')"
                     },
                     { JQuerySelector(tag).ParentsUntil(selector), $"jQuery('{tag}').parentsUntil('{selector}')" },
@@ -159,7 +159,7 @@ namespace Selenium.WebDriver.Extensions.Tests
                     { JQuerySelector(tag).PrevAll(), $"jQuery('{tag}').prevAll()" },
                     { JQuerySelector(tag).PrevAll(selector), $"jQuery('{tag}').prevAll('{selector}')" },
                     { JQuerySelector(tag).PrevUntil(), $"jQuery('{tag}').prevUntil()" },
-                    { JQuerySelector(tag).PrevUntil(filter: filter), $"jQuery('{tag}').prevUntil('', '{filter}')" },
+                    { JQuerySelector(tag).PrevUntil(null, filter), $"jQuery('{tag}').prevUntil('', '{filter}')" },
                     { JQuerySelector(tag).PrevUntil(selector), $"jQuery('{tag}').prevUntil('{selector}')" },
                     {
                         JQuerySelector(tag).PrevUntil(selector, filter),
