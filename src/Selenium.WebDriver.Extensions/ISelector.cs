@@ -1,12 +1,11 @@
-namespace Selenium.WebDriver.Extensions
+namespace Selenium.WebDriver.Extensions;
+
+/// <summary>The selector interface.</summary>
+public interface ISelector
 {
-    /// <summary>The selector interface.</summary>
-    public interface ISelector
-    {
-        /// <summary>
-        /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should
-        /// return <see langword="true" /> if the prerequisites are met; otherwise, <see langword="false" />.
-        /// </summary>
-        string CheckScript { get; }
-    }
+    /// <summary>
+    /// Gets the JavaScript to check if the prerequisites for the selector call have been met. The script should return
+    /// <see langword="true" /> if the prerequisites are met; otherwise, <see langword="false" />.
+    /// </summary>
+    string CheckScript { get; }
 }

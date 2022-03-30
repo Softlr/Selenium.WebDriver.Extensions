@@ -1,18 +1,14 @@
-namespace Selenium.WebDriver.Extensions.Parsers
+namespace Selenium.WebDriver.Extensions.Parsers;
+
+[SuppressMessage(SONARQUBE, S3059)]
+internal class LongParser : ParserBase
 {
-    using System.Diagnostics.CodeAnalysis;
-    using static Softlr.Suppress;
-
-    [SuppressMessage(SONARQUBE, S3059)]
-    internal class LongParser : ParserBase
+    public LongParser()
+        : base(new DirectCastParser())
     {
-        public LongParser()
-            : base(new DirectCastParser())
-        {
-        }
-
-        [SuppressMessage(SONARQUBE, S4018)]
-        public override TResult Parse<TResult>(object rawResult) =>
-            rawResult is double d ? (TResult)(object)(long?)d : Successor.Parse<TResult>(rawResult);
     }
+
+    [SuppressMessage(SONARQUBE, S4018)]
+    public override TResult Parse<TResult>(object rawResult) =>
+        rawResult is double d ? (TResult)(object)(long?)d : Successor.Parse<TResult>(rawResult);
 }

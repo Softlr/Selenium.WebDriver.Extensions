@@ -1,13 +1,9 @@
-namespace Selenium.WebDriver.Extensions.Parsers
+namespace Selenium.WebDriver.Extensions.Parsers;
+
+internal interface IParser
 {
-    using System.Diagnostics.CodeAnalysis;
-    using static Softlr.Suppress;
+    IParser Successor { get; }
 
-    internal interface IParser
-    {
-        IParser Successor { get; }
-
-        [SuppressMessage(SONARQUBE, S4018)]
-        TResult Parse<TResult>(object rawResult);
-    }
+    [SuppressMessage(SONARQUBE, S4018)]
+    TResult Parse<TResult>(object rawResult);
 }

@@ -1,11 +1,9 @@
-namespace Selenium.WebDriver.Extensions
-{
-    using System;
+namespace Selenium.WebDriver.Extensions;
 
-    internal static class JavaScriptSnippets
-    {
-        internal const string FindDomPathScript =
-            @"return (function(element) {
+internal static class JavaScriptSnippets
+{
+    internal const string FindDomPathScript =
+        @"return (function(element) {
                 'use strict';
                 var stack = [], siblingsCount, siblingIndex, i, sibling;
                 while (element.parentNode !== null) {
@@ -33,18 +31,17 @@ namespace Selenium.WebDriver.Extensions
                 return stack.join(' > ');
             })(arguments[0]);";
 
-        internal static string CheckScriptCode(string variable) =>
-            $@"(function(value) {{
+    internal static string CheckScriptCode(string variable) =>
+        $@"(function(value) {{
                 'use strict';
                 return typeof value === 'function';
             }})({variable})";
 
-        internal static string LoadScriptCode(Uri url) =>
-            $@"(function(source) {{
+    internal static string LoadScriptCode(Uri url) =>
+        $@"(function(source) {{
                 'use strict';
                 var script = document.createElement('script');
                 script.src = source;
                 document.getElementsByTagName('body')[0].appendChild(script);
             }})('{url}')";
-    }
 }

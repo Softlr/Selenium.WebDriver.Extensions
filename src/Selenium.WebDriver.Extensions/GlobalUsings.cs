@@ -1,0 +1,16 @@
+global using OpenQA.Selenium;
+global using OpenQA.Selenium.Support.UI;
+global using Selenium.WebDriver.Extensions.Parsers;
+global using System;
+global using System.Collections.Generic;
+global using System.Collections.ObjectModel;
+global using System.Diagnostics.CodeAnalysis;
+global using System.Linq;
+global using System.Linq.Expressions;
+global using System.Runtime.CompilerServices;
+global using static Selenium.WebDriver.Extensions.JavaScriptSnippets;
+global using static Selenium.WebDriver.Extensions.Validate;
+global using static Softlr.Suppress;
+global using static System.Globalization.CultureInfo;
+global using static System.String;
+global using SeleniumBy = OpenQA.Selenium.By;
