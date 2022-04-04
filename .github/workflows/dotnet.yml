@@ -103,13 +103,12 @@ jobs:
         dotnet-version: 6.0.x
 
     - name: Setup Chrome
-      uses: browser-actions/setup-chrome@latest
       if: matrix.browser == 'Chrome'
-      with:
-        chrome-version: stable
-        
-    - run: chrome --version
-      
+      run: |
+        sudo apt-get update
+        sudo apt-get --only-upgrade install google-chrome-stable
+        google-chrome --version
+          
     - name: Build
       run: dotnet build -c Release
       
