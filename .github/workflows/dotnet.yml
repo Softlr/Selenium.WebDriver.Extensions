@@ -107,6 +107,8 @@ jobs:
       if: matrix.browser == 'Chrome'
       with:
         chrome-version: stable
+        
+    - run: chrome --version
       
     - name: Build
       run: dotnet build -c Release
