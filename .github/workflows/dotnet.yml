@@ -104,7 +104,7 @@ jobs:
 
     - name: Setup Chrome
       uses: browser-actions/setup-chrome@latest
-      if: matrix.browser == "Chrome"
+      if: matrix.browser == 'Chrome'
       
     - name: Build
       run: dotnet build -c Release
