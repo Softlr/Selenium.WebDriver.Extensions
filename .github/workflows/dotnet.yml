@@ -101,6 +101,10 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
+
+    - name: Setup Chrome
+      uses: browser-actions/setup-chrome@latest
+      run: chrome --version
       
     - name: Build
       run: dotnet build -c Release
