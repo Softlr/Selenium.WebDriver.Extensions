@@ -87,11 +87,12 @@ jobs:
         .\.sonar\scanner\dotnet-sonarscanner end /d:sonar.login=${{ secrets.SONAR_TOKEN }}
 
   integration-tests:
-    name: integration-tests-${{ matrix.browser }}
-    runs-on: windows-2022
+    name: integration-tests-${{ matrix.os }}-${{ matrix.browser }}
+    runs-on: windows-latest
     strategy:
       matrix:
-        browser: [ Chrome, Firefox, Edge, InternetExplorer ]
+        browser: [ Chrome, Firefox ]
+        os: [ ubuntu-latest, windows-latest, macos-latest ]
     
     steps:
     - name: Checkout
@@ -101,7 +102,29 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
+        
+    - name: Build
+      run: dotnet build -c Release
       
+    - name: Test
+      run: dotnet test test/Selenium.WebDriver.Extensions.IntegrationTests -c Release --filter Browser=${{ matrix.browser }}
+  
+  integration-tests2:
+    name: integration-tests-${{ matrix.browser }}
+    runs-on: windows-latest
+    strategy:
+      matrix:
+        browser: [ Edge, InternetExplorer ]
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 6.0.x
+        
     - name: Build
       run: dotnet build -c Release
       
