@@ -7,6 +7,7 @@ namespace Selenium.WebDriver.Extensions.IntegrationTests.Fixtures
         {
             var options = new ChromeOptions();
             options.AddArgument("--headless");
+            options.AddArgument("--no-sandbox");
             Browser = new ChromeDriver(Path.GetDirectoryName(typeof(ChromeFixture).Assembly.Location), options);
         }
     }
