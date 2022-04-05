@@ -88,7 +88,7 @@ jobs:
 
   integration-tests:
     name: integration-tests-${{ matrix.browser }}
-    runs-on: windows-2022
+    runs-on: windows-latest
     strategy:
       matrix:
         browser: [ Chrome, Firefox, Edge, InternetExplorer ]
@@ -101,9 +101,9 @@ jobs:
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 6.0.x
-
+        
     - uses: browser-actions/setup-chrome@latest
-    - run: chrome --version
+    - run: C:\hostedtoolcache\windows\chromium\latest\x64\chrome.exe --version
           
     - name: Build
       run: dotnet build -c Release
